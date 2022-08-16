@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2021 JOML
+ * Copyright (c) 2021 DOML
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 //#ifdef __HAS_VECTOR_API__
-package org.joml.experimental;
+package org.DOML.experimental;
 
 import java.text.NumberFormat;
 
-import org.joml.Options;
-import org.joml.Runtime;
+import org.DOML.Options;
+import org.DOML.Runtime;
 
 import jdk.incubator.vector.FloatVector;
 

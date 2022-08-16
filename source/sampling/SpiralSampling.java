@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2016-2021 JOML
+ * Copyright (c) 2016-2021 DOML
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml.sampling;
+package org.DOML.sampling;
 
-import org.joml.Random;
+import org.DOML.Random;
 
 /**
  * Creates samples on a spiral around a center point.

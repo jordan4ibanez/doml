@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml;
+package org.DOML;
 
 //#ifndef __GWT__
 import java.lang.reflect.Field;
@@ -31,8 +31,8 @@ import java.nio.*;
 //#endif
 
 /**
- * Helper class to do efficient memory operations on all JOML objects, NIO buffers and primitive arrays.
- * This class is used internally throughout JOML, is undocumented and is subject to change.
+ * Helper class to do efficient memory operations on all DOML objects, NIO buffers and primitive arrays.
+ * This class is used internally throughout DOML, is undocumented and is subject to change.
  * Use with extreme caution!
  * 
  * @author The LWJGL authors
@@ -47,14 +47,14 @@ abstract class MemUtil {
 //#else
         try {
             if (Options.NO_UNSAFE && Options.FORCE_UNSAFE)
-                throw new ConfigurationException("Cannot enable both -Djoml.nounsafe and -Djoml.forceUnsafe", null);
+                throw new ConfigurationException("Cannot enable both -DDOML.nounsafe and -DDOML.forceUnsafe", null);
             else if (Options.NO_UNSAFE)
                 accessor = new MemUtilNIO();
             else
                 accessor = new MemUtilUnsafe();
         } catch (Throwable e) {
             if (Options.FORCE_UNSAFE)
-                throw new ConfigurationException("Unsafe is not supported but its use was forced via -Djoml.forceUnsafe", e);
+                throw new ConfigurationException("Unsafe is not supported but its use was forced via -DDOML.forceUnsafe", e);
             accessor = new MemUtilNIO();
         }
 //#endif

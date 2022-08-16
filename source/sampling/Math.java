@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2016-2021 JOML
+ * Copyright (c) 2016-2021 DOML
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml.sampling;
+package org.DOML.sampling;
 
 /**
  * Internal Math class used by the sampling package.
  * 
  * @author Kai Burjack
  */
-class Math extends org.joml.Math {
+class Math extends org.DOML.Math {
 
     static final double PI = java.lang.Math.PI;
     static final double PI2 = PI * 2.0;
@@ -42,7 +42,7 @@ class Math extends org.joml.Math {
 
     /**
      * Reference: <a href=
-     * "http://www.java-gaming.org/topics/joml-1-8-0-release/37491/msg/361815/view.html#msg361815">http://www.java-gaming.org/</a>
+     * "http://www.java-gaming.org/topics/DOML-1-8-0-release/37491/msg/361815/view.html#msg361815">http://www.java-gaming.org/</a>
      * 
      * @author roquendm
      */

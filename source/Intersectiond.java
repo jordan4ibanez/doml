@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml;
+package org.DOML;
 
 /**
  * Contains intersection and distance tests for some 2D and 3D geometric primitives.

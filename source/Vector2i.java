@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml;
+package org.DOML;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -438,7 +438,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * Set the values of this vector by reading 2 integer values from off-heap memory,
      * starting at the given address.
      * <p>
-     * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
+     * This method will throw an {@link UnsupportedOperationException} when DOML is used with `-DDOML.nounsafe`.
      * <p>
      * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
      * 
@@ -448,7 +448,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      */
     public Vector2i setFromAddress(long address) {
         if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using joml.nounsafe");
+            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
         MemUtil.MemUtilUnsafe.get(this, address);
         return this;
     }
@@ -514,7 +514,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
 //#ifdef __HAS_UNSAFE__
     public Vector2ic getToAddress(long address) {
         if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using joml.nounsafe");
+            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
         MemUtil.MemUtilUnsafe.put(this, address);
         return this;
     }

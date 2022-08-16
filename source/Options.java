@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2016-2021 JOML
+ * Copyright (c) 2016-2021 DOML
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml;
+package org.DOML;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -41,40 +41,40 @@ public final class Options {
      * Whether certain debugging checks should be made, such as that only direct NIO Buffers are used when Unsafe is active,
      * and a proxy should be created on calls to readOnlyView().
      */
-    public static final boolean DEBUG = hasOption(System.getProperty("joml.debug", "false"));
+    public static final boolean DEBUG = hasOption(System.getProperty("DOML.debug", "false"));
 
 //#ifdef __HAS_UNSAFE__
     /**
      * Whether <i>not</i> to use sun.misc.Unsafe when copying memory with MemUtil.
      */
-    public static final boolean NO_UNSAFE = hasOption(System.getProperty("joml.nounsafe", "false"));
+    public static final boolean NO_UNSAFE = hasOption(System.getProperty("DOML.nounsafe", "false"));
     /**
      * Whether to <i>force</i> the use of sun.misc.Unsafe when copying memory with MemUtil.
      */
-    public static final boolean FORCE_UNSAFE = hasOption(System.getProperty("joml.forceUnsafe", "false"));
+    public static final boolean FORCE_UNSAFE = hasOption(System.getProperty("DOML.forceUnsafe", "false"));
 //#endif
 
     /**
      * Whether fast approximations of some java.lang.Math operations should be used.
      */
-    public static final boolean FASTMATH = hasOption(System.getProperty("joml.fastmath", "false"));
+    public static final boolean FASTMATH = hasOption(System.getProperty("DOML.fastmath", "false"));
 
     /**
      * When {@link #FASTMATH} is <code>true</code>, whether to use a lookup table for sin/cos.
      */
-    public static final boolean SIN_LOOKUP = hasOption(System.getProperty("joml.sinLookup", "false"));
+    public static final boolean SIN_LOOKUP = hasOption(System.getProperty("DOML.sinLookup", "false"));
 
     /**
      * When {@link #SIN_LOOKUP} is <code>true</code>, this determines the table size.
      */
-    public static final int SIN_LOOKUP_BITS = Integer.parseInt(System.getProperty("joml.sinLookup.bits", "14"));
+    public static final int SIN_LOOKUP_BITS = Integer.parseInt(System.getProperty("DOML.sinLookup.bits", "14"));
 
 //#ifndef __GWT__
     /**
      * Whether to use a {@link NumberFormat} producing scientific notation output when formatting matrix,
      * vector and quaternion components to strings.
      */
-    public static final boolean useNumberFormat = hasOption(System.getProperty("joml.format", "true"));
+    public static final boolean useNumberFormat = hasOption(System.getProperty("DOML.format", "true"));
 //#endif
 
 //#ifdef __HAS_MATH_FMA__
@@ -83,7 +83,7 @@ public final class Options {
      * If the CPU does <i>not</i> support it, it will be a lot slower than `a*b+c` and potentially generate a lot of memory allocations
      * for the emulation with `java.util.BigDecimal`, though.
      */
-    public static final boolean USE_MATH_FMA = hasOption(System.getProperty("joml.useMathFma", "false"));
+    public static final boolean USE_MATH_FMA = hasOption(System.getProperty("DOML.useMathFma", "false"));
 //#endif
 
 //#ifndef __GWT__
@@ -96,10 +96,10 @@ public final class Options {
      * Determines the number of decimal digits produced in the formatted numbers.
      */
 //#endif
-    public static final int numberFormatDecimals = Integer.parseInt(System.getProperty("joml.format.decimals", "3"));
+    public static final int numberFormatDecimals = Integer.parseInt(System.getProperty("DOML.format.decimals", "3"));
 
     /**
-     * The {@link NumberFormat} used to format all numbers throughout all JOML classes.
+     * The {@link NumberFormat} used to format all numbers throughout all DOML classes.
      */
     public static final NumberFormat NUMBER_FORMAT = decimalFormat();
 

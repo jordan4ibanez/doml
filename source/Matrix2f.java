@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2020-2021 JOML
+ * Copyright (c) 2020-2021 DOML
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml;
+package org.DOML;
 
 //#ifdef __GWT__
 import com.google.gwt.typedarrays.shared.Float32Array;
@@ -592,7 +592,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc {
 //#ifdef __HAS_UNSAFE__
     public Matrix2fc getToAddress(long address) {
         if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using joml.nounsafe");
+            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
         MemUtil.MemUtilUnsafe.put(this, address);
         return this;
     }
@@ -686,7 +686,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc {
      * Set the values of this matrix by reading 4 float values from off-heap memory in column-major order,
      * starting at the given address.
      * <p>
-     * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
+     * This method will throw an {@link UnsupportedOperationException} when DOML is used with `-DDOML.nounsafe`.
      * <p>
      * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
      *
@@ -696,7 +696,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc {
      */
     public Matrix2f setFromAddress(long address) {
         if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using joml.nounsafe");
+            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
         MemUtil.MemUtilUnsafe.get(this, address);
         return this;
     }

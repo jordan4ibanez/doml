@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2015-2021 JOML
+ * Copyright (c) 2015-2021 DOML
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml;
+package org.DOML;
 
 /**
  * Contains fast approximations of some {@link java.lang.Math} operations.
  * <p>
- * By default, {@link java.lang.Math} methods will be used by all other JOML classes. In order to use the approximations in this class, start the JVM with the parameter <code>-Djoml.fastmath</code>.
+ * By default, {@link java.lang.Math} methods will be used by all other DOML classes. In order to use the approximations in this class, start the JVM with the parameter <code>-DDOML.fastmath</code>.
  * <p>
  * There are two algorithms for approximating sin/cos:
  * <ol>
- * <li>arithmetic <a href="http://www.java-gaming.org/topics/joml-1-8-0-release/37491/msg/361815/view.html#msg361815">polynomial approximation</a> contributed by roquendm 
+ * <li>arithmetic <a href="http://www.java-gaming.org/topics/DOML-1-8-0-release/37491/msg/361815/view.html#msg361815">polynomial approximation</a> contributed by roquendm 
  * <li>theagentd's <a href="http://www.java-gaming.org/topics/extremely-fast-sine-cosine/36469/msg/346213/view.html#msg346213">linear interpolation</a> variant of Riven's algorithm from
  * <a href="http://www.java-gaming.org/topics/extremely-fast-sine-cosine/36469/view.html">http://www.java-gaming.org/</a>
  * </ol>
- * By default, the first algorithm is being used. In order to use the second one, start the JVM with <code>-Djoml.sinLookup</code>. The lookup table bit length of the second algorithm can also be adjusted
- * for improved accuracy via <code>-Djoml.sinLookup.bits=&lt;n&gt;</code>, where &lt;n&gt; is the number of bits of the lookup table.
+ * By default, the first algorithm is being used. In order to use the second one, start the JVM with <code>-DDOML.sinLookup</code>. The lookup table bit length of the second algorithm can also be adjusted
+ * for improved accuracy via <code>-DDOML.sinLookup.bits=&lt;n&gt;</code>, where &lt;n&gt; is the number of bits of the lookup table.
  * 
  * @author Kai Burjack
  */
@@ -104,7 +104,7 @@ public class Math {
     }
 
     /**
-     * Reference: <a href="http://www.java-gaming.org/topics/joml-1-8-0-release/37491/msg/361718/view.html#msg361718">http://www.java-gaming.org/</a>
+     * Reference: <a href="http://www.java-gaming.org/topics/DOML-1-8-0-release/37491/msg/361718/view.html#msg361718">http://www.java-gaming.org/</a>
      */
     static double sin_roquen_arith(double x) {
         double xi = Math.floor((x + PI_4) * PI_INV);
@@ -143,7 +143,7 @@ public class Math {
     private static final double s1 = Double.longBitsToDouble(4607182418589157889L);
 
     /**
-     * Reference: <a href="http://www.java-gaming.org/topics/joml-1-8-0-release/37491/msg/361815/view.html#msg361815">http://www.java-gaming.org/</a>
+     * Reference: <a href="http://www.java-gaming.org/topics/DOML-1-8-0-release/37491/msg/361815/view.html#msg361815">http://www.java-gaming.org/</a>
      */
     static double sin_roquen_9(double v) {
       double i  = java.lang.Math.rint(v*PI_INV);
@@ -169,7 +169,7 @@ public class Math {
     private static final double k7 = Double.longBitsToDouble(-4798040743777455072L);
 
     /**
-     * Reference: <a href="http://www.java-gaming.org/topics/joml-1-8-0-release/37491/msg/361815/view.html#msg361815">http://www.java-gaming.org/</a>
+     * Reference: <a href="http://www.java-gaming.org/topics/DOML-1-8-0-release/37491/msg/361815/view.html#msg361815">http://www.java-gaming.org/</a>
      */
     static double sin_roquen_newk(double v) {
       double i  = java.lang.Math.rint(v*PI_INV);
