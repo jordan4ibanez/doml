@@ -1,0 +1,10 @@
+{
+	"authors": [
+		"httpdigest",
+        "jordan4ibanez"
+	],
+	"copyright": "Copyright © 2022, httpdigest",
+	"description": "A D math library for OpenGL rendering calculations",
+	"license": "MIT",
+	"name": "doml"
+}

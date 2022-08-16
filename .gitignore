@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/doml
+doml.so
+doml.dylib
+doml.dll
+doml.a
+doml.lib
+doml-test-*
+*.exe
+*.o
+*.obj
+*.lst
