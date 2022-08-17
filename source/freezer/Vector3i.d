@@ -1,4 +1,4 @@
-module Vector3i;
+module freezer.Vector3i;
 
 /*
  * The MIT License
