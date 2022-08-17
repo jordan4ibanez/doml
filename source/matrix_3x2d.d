@@ -1,9 +1,10 @@
-module Matrix3x2d;
+module matrix_3x2d;
 
 /*
  * The MIT License
  *
  * Copyright (c) 2017-2021 DOML
+ $@#$!@ Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,22 +24,6 @@ module Matrix3x2d;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
-
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-//#ifdef __HAS_NIO__
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-//#endif
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
-//#ifdef __GWT__
-import com.google.gwt.typedarrays.shared.Float64Array;
-//#endif
 
 /**
  * Contains the definition of a 3x2 matrix of doubles, and associated functions to transform
