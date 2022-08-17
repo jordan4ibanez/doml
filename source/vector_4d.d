@@ -1,9 +1,10 @@
-module Vector4d;
+module vector_4d;
 
 /*
  * The MIT License
  *
  * Copyright (c) 2015-2021 Richard Greenlees
+ ^%$^# Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +24,6 @@ module Vector4d;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
-
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-//#ifdef __HAS_NIO__
-import java.nio.*;
-//#endif
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Contains the definition of a Vector comprising 4 doubles and associated transformations.
@@ -42,33 +32,24 @@ import java.text.NumberFormat;
  * @author Kai Burjack
  * @author F. Neurath
  */
-public class Vector4d implements Externalizable, Cloneable, Vector4dc {
-
-    private static final long serialVersionUID = 1L;
+struct Vector4d {
 
     /**
      * The x component of the vector.
      */
-    public double x;
+    double x;
     /**
      * The y component of the vector.
      */
-    public double y;
+    double y;
     /**
      * The z component of the vector.
      */
-    public double z;
+    double z;
     /**
      * The w component of the vector.
      */
-    public double w;
-
-    /**
-     * Create a new {@link Vector4d} of <code>(0, 0, 0, 1)</code>.
-     */
-    public Vector4d() {
-        this.w = 1.0;
-    }
+    double w;
 
     /**
      * Create a new {@link Vector4d} with the same values as <code>v</code>.
@@ -76,7 +57,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param v
      *          the {@link Vector4dc} to copy the values from
      */
-    public Vector4d(Vector4dc v) {
+    this(Vector4dc v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -89,7 +70,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param v
      *          the {@link Vector4ic} to copy the values from
      */
-    public Vector4d(Vector4ic v) {
+    this(Vector4ic v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -105,7 +86,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param w
      *          the w component
      */
-    public Vector4d(Vector3dc v, double w) {
+    this(Vector3dc v, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -121,7 +102,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param w
      *          the w component
      */
-    public Vector4d(Vector3ic v, double w) {
+    this(Vector3ic v, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -139,7 +120,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param w
      *          the w component
      */
-    public Vector4d(Vector2dc v, double z, double w) {
+    this(Vector2dc v, double z, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -157,7 +138,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param w
      *          the w component
      */
-    public Vector4d(Vector2ic v, double z, double w) {
+    this(Vector2ic v, double z, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -170,7 +151,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param d
      *          the value of all four components
      */
-    public Vector4d(double d) {
+    this(double d) {
         this.x = d;
         this.y = d;
         this.z = d;
@@ -183,7 +164,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param v
      *          the {@link Vector4fc} to copy the values from
      */
-    public Vector4d(Vector4fc v) {
+    this(Vector4fc v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -199,7 +180,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param w
      *          the w component
      */
-    public Vector4d(Vector3fc v, double w) {
+    this(Vector3fc v, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -217,7 +198,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param w
      *          the w component
      */
-    public Vector4d(Vector2fc v, double z, double w) {
+    this(Vector2fc v, double z, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -236,7 +217,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param w
      *          the w component
      */
-    public Vector4d(double x, double y, double z, double w) {
+    this(double x, double y, double z, double w) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -250,7 +231,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param xyzw
      *          the array containing at least four elements
      */
-    public Vector4d(float[] xyzw) {
+    this(float[] xyzw) {
         this.x = xyzw[0];
         this.y = xyzw[1];
         this.z = xyzw[2];
@@ -264,7 +245,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param xyzw
      *          the array containing at least four elements
      */
-    public Vector4d(double[] xyzw) {
+    this(double[] xyzw) {
         this.x = xyzw[0];
         this.y = xyzw[1];
         this.z = xyzw[2];
@@ -286,7 +267,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      *          values will be read in <code>x, y, z, w</code> order
      * @see #Vector4d(int, ByteBuffer)
      */
-    public Vector4d(ByteBuffer buffer) {
+    this(ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
     }
 
@@ -299,7 +280,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param index  the absolute position into the ByteBuffer
      * @param buffer values will be read in <code>x, y, z, w</code> order
      */
-    public Vector4d(int index, ByteBuffer buffer) {
+    this(int index, ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
     }
 
@@ -316,7 +297,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param buffer values will be read in <code>x, y, z, w</code> order
      * @see #Vector4d(int, DoubleBuffer)
      */
-    public Vector4d(DoubleBuffer buffer) {
+    this(DoubleBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
     }
 
@@ -329,7 +310,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc {
      * @param index  the absolute position into the DoubleBuffer
      * @param buffer values will be read in <code>x, y, z, w</code> order
      */
-    public Vector4d(int index, DoubleBuffer buffer) {
+    this(int index, DoubleBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
     }
 //#endif
