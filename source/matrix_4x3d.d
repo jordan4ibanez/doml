@@ -3294,37 +3294,6 @@ struct Matrix4x3d {
         return translateLocal(x, y, z, this);
     }
 
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeDouble(m00);
-        out.writeDouble(m01);
-        out.writeDouble(m02);
-        out.writeDouble(m10);
-        out.writeDouble(m11);
-        out.writeDouble(m12);
-        out.writeDouble(m20);
-        out.writeDouble(m21);
-        out.writeDouble(m22);
-        out.writeDouble(m30);
-        out.writeDouble(m31);
-        out.writeDouble(m32);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException {
-        m00 = in.readDouble();
-        m01 = in.readDouble();
-        m02 = in.readDouble();
-        m10 = in.readDouble();
-        m11 = in.readDouble();
-        m12 = in.readDouble();
-        m20 = in.readDouble();
-        m21 = in.readDouble();
-        m22 = in.readDouble();
-        m30 = in.readDouble();
-        m31 = in.readDouble();
-        m32 = in.readDouble();
-        determineProperties();
-    }
-
     public Matrix4x3d rotateX(double ang, Matrix4x3d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationX(ang);
