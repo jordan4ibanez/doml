@@ -4,6 +4,7 @@ module rounding_mode;
  * The MIT License
  *
  * Copyright (c) 2020-2021 DOML
+ $@#$#@ Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,40 +24,39 @@ module rounding_mode;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
 
 /**
  * Rounding modes.
  * 
  * @author Kai Burjack
  */
-public class RoundingMode {
-    private RoundingMode() {}
+ 
+enum RoundingMode {
     /**
      * Discards the fractional part.
      */
-    public static final int TRUNCATE = 0;
+    TRUNCATE = 0,
     /**
      * Round towards positive infinity.
      */
-    public static final int CEILING = 1;
+    CEILING = 1,
     /**
      * Round towards negative infinity.
      */
-    public static final int FLOOR = 2;
+    FLOOR = 2,
     /**
      * Round towards the nearest neighbor. If both neighbors are equidistant, round
      * towards the even neighbor.
      */
-    public static final int HALF_EVEN = 3;
+    HALF_EVEN = 3,
     /**
      * Round towards the nearest neighbor. If both neighbors are equidistant, round
      * down.
      */
-    public static final int HALF_DOWN = 4;
+    HALF_DOWN = 4,
     /**
      * Round towards the nearest neighbor. If both neighbors are equidistant, round
      * up.
      */
-    public static final int HALF_UP = 5;
+    HALF_UP = 5
 }
