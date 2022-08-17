@@ -1063,7 +1063,7 @@ struct Matrix4x3d {
      *          the offset into the array
      * @return this
      */
-    public Matrix4x3d set(double m[], int off) {
+    public Matrix4x3d set(double[] m, int off) {
         m00 = m[off+0];
         m01 = m[off+1];
         m02 = m[off+2];
@@ -1094,7 +1094,7 @@ struct Matrix4x3d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix4x3d set(double m[]) {
+    public Matrix4x3d set(double[] m) {
         return set(m, 0);
     }
 
@@ -1115,7 +1115,7 @@ struct Matrix4x3d {
      *          the offset into the array
      * @return this
      */
-    public Matrix4x3d set(float m[], int off) {
+    public Matrix4x3d set(float[] m, int off) {
         m00 = m[off+0];
         m01 = m[off+1];
         m02 = m[off+2];
@@ -1146,7 +1146,7 @@ struct Matrix4x3d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix4x3d set(float m[]) {
+    public Matrix4x3d set(float[] m) {
         return set(m, 0);
     }
 
