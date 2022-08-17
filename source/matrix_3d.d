@@ -73,15 +73,6 @@ struct Matrix3d {
         set(mat);
     }
 
-    /**
-     * Create a new {@link Matrix3d} and make it a copy of the upper left 3x3 of the given {@link Matrix4fc}.
-     *
-     * @param mat
-     *          the {@link Matrix4fc} to copy the values from
-     */
-    public Matrix3d(Matrix4fc mat) {
-        set(mat);
-    }
 
     /**
      * Create a new {@link Matrix3d} and make it a copy of the upper left 3x3 of the given {@link Matrix4dc}.
@@ -89,7 +80,7 @@ struct Matrix3d {
      * @param mat
      *          the {@link Matrix4dc} to copy the values from
      */
-    public Matrix3d(Matrix4dc mat) {
+    this(Matrix4d mat) {
         set(mat);
     }
 
@@ -115,7 +106,7 @@ struct Matrix3d {
      * @param m22
      *          the value of m22
      */
-    public Matrix3d(double m00, double m01, double m02,
+    this(double m00, double m01, double m02,
                     double m10, double m11, double m12, 
                     double m20, double m21, double m22) {
         this.m00 = m00;
