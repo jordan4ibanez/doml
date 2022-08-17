@@ -142,38 +142,6 @@ struct Vector3i {
         this.y = Math.roundUsing(y, mode);
         this.z = Math.roundUsing(z, mode);
     }
-    
-    /**
-     * Create a new {@link Vector3i} with the first two components from the
-     * given <code>v</code> and the given <code>z</code> and round using the given {@link RoundingMode}.
-     *
-     * @param v
-     *          the {@link Vector2fc} to copy the values from
-     * @param z
-     *          the z component
-     * @param mode
-     *          the {@link RoundingMode} to use
-     */
-    this(Vector2fc v, float z, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
-        this.z = Math.roundUsing(z, mode);
-    }
-
-    /**
-     * Create a new {@link Vector3i} and initialize its components to the rounded value of
-     * the given vector.
-     *
-     * @param v
-     *          the {@link Vector3fc} to round and copy the values from
-     * @param mode
-     *          the {@link RoundingMode} to use
-     */
-    this(Vector3fc v, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
-        this.z = Math.roundUsing(v.z(), mode);
-    }
 
     /**
      * Create a new {@link Vector3i} with the first two components from the
@@ -356,24 +324,6 @@ struct Vector3i {
         return this;
     }
 
-    /**
-     * Set this {@link Vector3i} to the values of v using the given {@link RoundingMode}.
-     * <p>
-     * Note that due to the given vector <code>v</code> storing the components
-     * in double-precision, there is the possibility to lose precision.
-     *
-     * @param v
-     *          the vector to copy from
-     * @param mode
-     *          the {@link RoundingMode} to use
-     * @return this
-     */
-    public Vector3i set(Vector3fc v, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
-        this.z = Math.roundUsing(v.z(), mode);
-        return this;
-    }
 
     /**
      * Set the first two components from the given <code>v</code> and the z
