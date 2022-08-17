@@ -1,9 +1,10 @@
-module matrix_2d;
+module translation_vault.matrix_2d;
 
 /*
  * The MIT License
  *
  * Copyright (c) 2020-2021 DOML
+ %#$%$# Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,17 +49,15 @@ import java.text.NumberFormat;
  *
  * @author Joseph Burton
  */
-public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
+struct Matrix2d {
 
-    private static final long serialVersionUID = 1L;
-
-    public double m00, m01;
-    public double m10, m11;
+    public double m00, m01 = 0.0;
+    public double m10, m11 = 0.0;
 
     /**
      * Create a new {@link Matrix2d} and set it to {@link #identity() identity}.
      */
-    public Matrix2d() {
+    this() {
         m00 = 1.0;
         m11 = 1.0;
     }
@@ -67,14 +66,23 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Create a new {@link Matrix2d} and make it a copy of the given matrix.
      *
      * @param mat
+     *          the {@link Matrix2d} to copy the values from
+     */
+    this (Matrix2d mat) {
+        this.m00 = mat.m00;
+        this.m10 = mat.m10;
+        this.m01 = mat.m01;
+        this.m11 = mat.m11;
+    }
+
+    /**
+     * Create a new {@link Matrix2d} and make it a copy of the given matrix.
+     *
+     * @param mat
      *          the {@link Matrix2dc} to copy the values from
      */
-    public Matrix2d(Matrix2dc mat) {
-        if (mat instanceof Matrix2d) {
-            MemUtil.INSTANCE.copy((Matrix2d) mat, this);
-        } else {
-            setMatrix2dc(mat);
-        }
+    this(Matrix2dc mat) {
+        setMatrix2dc(mat);
     }
 
     /**
@@ -83,7 +91,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @param mat
      *          the matrix to initialize this matrix with
      */
-    public Matrix2d(Matrix2fc mat) {
+    this(Matrix2fc mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
@@ -94,14 +102,23 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3dc}.
      *
      * @param mat
+     *          the {@link Matrix3d} to copy the values from
+     */
+     this(Matrix3d mat) {
+        m00 = mat.m00();
+        m01 = mat.m01();
+        m10 = mat.m10();
+        m11 = mat.m11();
+     }
+
+    /**
+     * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3dc}.
+     *
+     * @param mat
      *          the {@link Matrix3dc} to copy the values from
      */
-    public Matrix2d(Matrix3dc mat) {
-        if (mat instanceof Matrix3d) {
-            MemUtil.INSTANCE.copy((Matrix3d) mat, this);
-        } else {
-            setMatrix3dc(mat);
-        }
+    this(Matrix3dc mat) {
+        setMatrix3dc(mat);
     }
 
     /**
@@ -110,7 +127,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @param mat
      *          the {@link Matrix3fc} to copy the values from
      */
-    public Matrix2d(Matrix3fc mat) {
+    this(Matrix3fc mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
@@ -130,8 +147,8 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @param m11
      *          the value of m11
      */
-    public Matrix2d(double m00, double m01,
-                    double m10, double m11) {
+    this(double m00, double m01,
+         double m10, double m11) {
         this.m00 = m00;
         this.m01 = m01;
         this.m10 = m10;
