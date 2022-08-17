@@ -7358,7 +7358,7 @@ struct Matrix4d {
         return rotate(angle, axis.x(), axis.y(), axis.z(), dest);
     }
 
-    public Vector4d getRow(int row, Vector4d dest) throws IndexOutOfBoundsException {
+    public Vector4d getRow(int row, Vector4d dest) {
         switch (row) {
         case 0:
             dest.x = m00;
@@ -7384,13 +7384,12 @@ struct Matrix4d {
             dest.z = m23;
             dest.w = m33;
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         return dest;
     }
 
-    public Vector3d getRow(int row, Vector3d dest) throws IndexOutOfBoundsException {
+    public Vector3d getRow(int row, Vector3d dest){
         switch (row) {
         case 0:
             dest.x = m00;
@@ -7412,8 +7411,7 @@ struct Matrix4d {
             dest.y = m13;
             dest.z = m23;
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         return dest;
     }
@@ -7428,7 +7426,7 @@ struct Matrix4d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..3]</code>
      */
-    public Matrix4d setRow(int row, Vector4d src) throws IndexOutOfBoundsException {
+    public Matrix4d setRow(int row, Vector4d src) {
         switch (row) {
         case 0:
             return _m00(src.x())._m10(src.y())._m20(src.z())._m30(src.w())._properties(0);
@@ -7438,12 +7436,11 @@ struct Matrix4d {
             return _m02(src.x())._m12(src.y())._m22(src.z())._m32(src.w())._properties(0);
         case 3:
             return _m03(src.x())._m13(src.y())._m23(src.z())._m33(src.w())._properties(0);
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
     }
 
-    public Vector4d getColumn(int column, Vector4d dest) throws IndexOutOfBoundsException {
+    public Vector4d getColumn(int column, Vector4d dest) {
         switch (column) {
         case 0:
             dest.x = m00;
@@ -7469,13 +7466,12 @@ struct Matrix4d {
             dest.z = m32;
             dest.w = m33;
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         return dest;
     }
 
-    public Vector3d getColumn(int column, Vector3d dest) throws IndexOutOfBoundsException {
+    public Vector3d getColumn(int column, Vector3d dest) {
         switch (column) {
         case 0:
             dest.x = m00;
@@ -7497,8 +7493,7 @@ struct Matrix4d {
             dest.y = m31;
             dest.z = m32;
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         return dest;
     }
@@ -7513,7 +7508,7 @@ struct Matrix4d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..3]</code>
      */
-    public Matrix4d setColumn(int column, Vector4d src) throws IndexOutOfBoundsException {
+    public Matrix4d setColumn(int column, Vector4d src) {
         switch (column) {
         case 0:
             return _m00(src.x())._m01(src.y())._m02(src.z())._m03(src.w())._properties(0);
@@ -7523,8 +7518,7 @@ struct Matrix4d {
             return _m20(src.x())._m21(src.y())._m22(src.z())._m23(src.w())._properties(0);
         case 3:
             return _m30(src.x())._m31(src.y())._m32(src.z())._m33(src.w())._properties(0);
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
     }
 
