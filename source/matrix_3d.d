@@ -2637,7 +2637,7 @@ struct Matrix3d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..2]</code>
      */
-    public Matrix3d setColumn(int column, double x, double y, double z) throws IndexOutOfBoundsException {
+    public Matrix3d setColumn(int column, double x, double y, double z) {
         switch (column) {
         case 0:
             this.m00 = x;
@@ -2654,8 +2654,7 @@ struct Matrix3d {
             this.m21 = y;
             this.m22 = z;
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         return this;
     }
@@ -2825,7 +2824,7 @@ struct Matrix3d {
      *            the direction of 'up'
      * @return this
      */
-    public Matrix3d lookAlong(Vector3dc dir, Vector3dc up) {
+    public Matrix3d lookAlong(Vector3d dir, Vector3d up) {
         return lookAlong(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z(), this);
     }
 
@@ -2852,7 +2851,7 @@ struct Matrix3d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3d lookAlong(Vector3dc dir, Vector3dc up, Matrix3d dest) {
+    public Matrix3d lookAlong(Vector3d dir, Vector3d up, Matrix3d dest) {
         return lookAlong(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z(), dest);
     }
 
@@ -2988,7 +2987,7 @@ struct Matrix3d {
      *            the direction of 'up'
      * @return this
      */
-    public Matrix3d setLookAlong(Vector3dc dir, Vector3dc up) {
+    public Matrix3d setLookAlong(Vector3d dir, Vector3d up) {
         return setLookAlong(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z());
     }
 
@@ -3105,23 +3104,23 @@ struct Matrix3d {
         int result = 1;
         long temp;
         temp = Double.doubleToLongBits(m00);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m01);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m02);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m10);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m11);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m12);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m20);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m21);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m22);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
     }
 
