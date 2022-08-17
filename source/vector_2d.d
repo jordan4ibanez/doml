@@ -83,7 +83,7 @@ struct Vector2d {
      * Create a new {@link Vector2d} and initialize its components to the one of the given vector.
      * 
      * @param v
-     *          the {@link Vector2ic} to copy the values from
+     *          the {@link Vector2i} to copy the values from
      */
     this(Vector2i v) {
         x = v.x();
@@ -151,7 +151,7 @@ struct Vector2d {
      *          the vector to copy from
      * @return this
      */
-    public Vector2d set(Vector2ic v) {
+    public Vector2d set(Vector2i v) {
         this.x = v.x();
         this.y = v.y();
         return this;
