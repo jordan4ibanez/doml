@@ -205,7 +205,7 @@ struct Matrix4d {
      * @return this
      */
     public Matrix4d assume(int properties) {
-        this.properties = (byte) properties;
+        this.properties = cast(byte) properties;
         return this;
     }
 
@@ -2133,7 +2133,7 @@ struct Matrix4d {
      *          the offset into the array
      * @return this
      */
-    public Matrix4d set(double m[], int off) {
+    public Matrix4d set(double[] m, int off) {
         return
         _m00(m[off+0]).
         _m01(m[off+1]).
@@ -2170,7 +2170,7 @@ struct Matrix4d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix4d set(double m[]) {
+    public Matrix4d set(double[] m) {
         return set(m, 0);
     }
 
@@ -2192,7 +2192,7 @@ struct Matrix4d {
      *          the offset into the array
      * @return this
      */
-    public Matrix4d set(float m[], int off) {
+    public Matrix4d set(float[] m, int off) {
         return
         _m00(m[off+0]).
         _m01(m[off+1]).
@@ -2229,7 +2229,7 @@ struct Matrix4d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix4d set(float m[]) {
+    public Matrix4d set(float[] m) {
         return set(m, 0);
     }
 
