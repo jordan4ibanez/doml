@@ -405,14 +405,13 @@ struct Vector2i {
     }
 //#endif
 
-    public int get(int component) throws IllegalArgumentException {
+    public int get(int component) {
         switch (component) {
         case 0:
             return x;
         case 1:
             return y;
-        default:
-            throw new IllegalArgumentException();
+        default: {}
         }
     }
 
@@ -426,7 +425,7 @@ struct Vector2i {
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..1]</code>
      */
-    public Vector2i setComponent(int component, int value) throws IllegalArgumentException {
+    public Vector2i setComponent(int component, int value) {
         switch (component) {
             case 0:
                 x = value;
@@ -434,8 +433,7 @@ struct Vector2i {
             case 1:
                 y = value;
                 break;
-            default:
-                throw new IllegalArgumentException();
+            default:{}
         }
         return this;
     }
@@ -723,15 +721,15 @@ struct Vector2i {
      */
     public Vector2i div(float scalar) {
         float invscalar = 1.0f / scalar;
-        this.x = (int) (x * invscalar);
-        this.y = (int) (y * invscalar);
+        this.x = cast(int) (x * invscalar);
+        this.y = cast(int) (y * invscalar);
         return this;
     }
 
     public Vector2i div(float scalar, Vector2i dest) {
         float invscalar = 1.0f / scalar;
-        dest.x = (int) (x * invscalar);
-        dest.y = (int) (y * invscalar);
+        dest.x = cast(int) (x * invscalar);
+        dest.y = cast(int) (y * invscalar);
         return dest;
     }
 
@@ -765,15 +763,6 @@ struct Vector2i {
         return this;
     }
 
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeInt(x);
-        out.writeInt(y);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        x = in.readInt();
-        y = in.readInt();
-    }
 
     /**
      * Negate this vector.
@@ -879,6 +868,5 @@ struct Vector2i {
             return false;
         return true;
     }
-
 
 }
