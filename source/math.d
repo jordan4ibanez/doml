@@ -102,6 +102,7 @@ private const int lookupTableSizeWithMargin = lookupTableSize + 1;
 private const float pi2OverLookupSize = PI2_f / lookupTableSize;
 private const float lookupSizeOverPi2 = lookupTableSize / PI2_f;
 private const float[] sinTable = {
+    // Thanks to brianush1 for teaching me inline compiled functions
     float[] tempTable;
     if (Options.FASTMATH && Options.SIN_LOOKUP) {
         for (int i = 0; i < lookupTableSizeWithMargin; i++) {
