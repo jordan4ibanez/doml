@@ -942,51 +942,6 @@ struct Matrix4d {
     }
 
     /**
-     * Set this matrix to be equivalent to the rotation specified by the given {@link AxisAngle4f}.
-     * 
-     * @param axisAngle
-     *          the {@link AxisAngle4f}
-     * @return this
-     */
-    public Matrix4d set(AxisAngle4f axisAngle) {
-        double x = axisAngle.x;
-        double y = axisAngle.y;
-        double z = axisAngle.z;
-        double angle = axisAngle.angle;
-        double invLength = Math.invsqrt(x*x + y*y + z*z);
-        x *= invLength;
-        y *= invLength;
-        z *= invLength;
-        double s = Math.sin(angle);
-        double c = Math.cosFromSin(s, angle);
-        double omc = 1.0 - c;
-        _m00(c + x*x*omc).
-        _m11(c + y*y*omc).
-        _m22(c + z*z*omc);
-        double tmp1 = x*y*omc;
-        double tmp2 = z*s;
-        _m10(tmp1 - tmp2).
-        _m01(tmp1 + tmp2);
-        tmp1 = x*z*omc;
-        tmp2 = y*s;
-        _m20(tmp1 + tmp2).
-        _m02(tmp1 - tmp2);
-        tmp1 = y*z*omc;
-        tmp2 = x*s;
-        _m21(tmp1 - tmp2).
-        _m12(tmp1 + tmp2).
-        _m03(0.0).
-        _m13(0.0).
-        _m23(0.0).
-        _m30(0.0).
-        _m31(0.0).
-        _m32(0.0).
-        _m33(1.0).
-        properties = PROPERTY_AFFINE | PROPERTY_ORTHONORMAL;
-        return this;
-    }
-
-    /**
      * Set this matrix to be equivalent to the rotation specified by the given {@link AxisAngle4d}.
      * 
      * @param axisAngle
@@ -3887,18 +3842,6 @@ struct Matrix4d {
                         m02 * x + m12 * y + m22 * z);
     }
 
-
-
-    public Vector3f transformDirection(double x, double y, double z, Vector3f dest) {
-        float rx = (float)(m00 * x + m10 * y + m20 * z);
-        float ry = (float)(m01 * x + m11 * y + m21 * z);
-        float rz = (float)(m02 * x + m12 * y + m22 * z);
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
-
     public Vector4d transformAffine(Vector4d dest) {
         return dest.mulAffine(this, dest);
     }
@@ -6313,31 +6256,6 @@ struct Matrix4d {
     }
 
     /**
-     * Set this matrix to a rotation transformation using the given {@link AxisAngle4f}.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional rotation.
-     * <p>
-     * In order to apply the rotation transformation to an existing transformation,
-     * use {@link #rotate(AxisAngle4f) rotate()} instead.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     *
-     * @see #rotate(AxisAngle4f)
-     * 
-     * @param angleAxis
-     *          the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
-     * @return this
-     */
-    public Matrix4d rotation(AxisAngle4f angleAxis) {
-        return rotation(angleAxis.angle, angleAxis.x, angleAxis.y, angleAxis.z);
-    }
-
-    /**
      * Set this matrix to a rotation transformation using the given {@link AxisAngle4d}.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
@@ -7358,68 +7276,6 @@ struct Matrix4d {
         return rotateLocal(quat, this);
     }
 
-
-    /**
-     * Apply a rotation transformation, rotating about the given {@link AxisAngle4f}, to this matrix.
-     * <p>
-     * The axis described by the <code>axis</code> vector needs to be a unit vector.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4f},
-     * then the new matrix will be <code>M * A</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the {@link AxisAngle4f} rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(AxisAngle4f)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(double, double, double, double)
-     * @see #rotation(AxisAngle4f)
-     * 
-     * @param axisAngle
-     *          the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
-     * @return this
-     */
-    public Matrix4d rotate(AxisAngle4f axisAngle) {
-        return rotate(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z);
-    }
-
-    /**
-     * Apply a rotation transformation, rotating about the given {@link AxisAngle4f} and store the result in <code>dest</code>.
-     * <p>
-     * The axis described by the <code>axis</code> vector needs to be a unit vector.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4f},
-     * then the new matrix will be <code>M * A</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the {@link AxisAngle4f} rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(AxisAngle4f)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(double, double, double, double)
-     * @see #rotation(AxisAngle4f)
-     * 
-     * @param axisAngle
-     *          the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix4d rotate(AxisAngle4f axisAngle, Matrix4d dest) {
-        return rotate(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z, dest);
-    }
 
     /**
      * Apply a rotation transformation, rotating about the given {@link AxisAngle4d}, to this matrix.
