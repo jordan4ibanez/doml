@@ -188,10 +188,10 @@ struct Vector4i {
      * @return this
      */
     public Vector4i set(Vector4d v) {
-        this.x = (int) v.x();
-        this.y = (int) v.y();
-        this.z = (int) v.z();
-        this.w = (int) v.w();
+        this.x = cast(int) v.x();
+        this.y = cast(int) v.y();
+        this.z = cast(int) v.z();
+        this.w = cast(int) v.w();
         return this;
     }
 
@@ -305,7 +305,7 @@ struct Vector4i {
         return this;
     }
 
-    public int get(int component) throws IllegalArgumentException {
+    public int get(int component) {
         switch (component) {
         case 0:
             return x;
@@ -315,8 +315,7 @@ struct Vector4i {
             return z;
         case 3:
             return w;
-        default:
-            throw new IllegalArgumentException();
+        default: {}
         }
     }
 
@@ -360,7 +359,7 @@ struct Vector4i {
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..3]</code>
      */
-    public Vector4i setComponent(int component, int value) throws IllegalArgumentException {
+    public Vector4i setComponent(int component, int value) {
         switch (component) {
             case 0:
                 x = value;
@@ -374,8 +373,7 @@ struct Vector4i {
             case 3:
                 w = value;
                 break;
-            default:
-                throw new IllegalArgumentException();
+            default: {}
         }
         return this;
     }
@@ -563,19 +561,19 @@ struct Vector4i {
      */
     public Vector4i div(float scalar) {
         float invscalar = 1.0f / scalar;
-        this.x = (int) (x * invscalar);
-        this.y = (int) (y * invscalar);
-        this.z = (int) (z * invscalar);
-        this.w = (int) (w * invscalar);
+        this.x = cast(int) (x * invscalar);
+        this.y = cast(int) (y * invscalar);
+        this.z = cast(int) (z * invscalar);
+        this.w = cast(int) (w * invscalar);
         return this;
     }
 
     public Vector4i div(float scalar, Vector4i dest) {
         float invscalar = 1.0f / scalar;
-        dest.x = (int) (x * invscalar);
-        dest.y = (int) (y * invscalar);
-        dest.z = (int) (z * invscalar);
-        dest.w = (int) (w * invscalar);
+        dest.x = cast(int) (x * invscalar);
+        dest.y = cast(int) (y * invscalar);
+        dest.z = cast(int) (z * invscalar);
+        dest.w = cast(int) (w * invscalar);
         return dest;
     }
 
@@ -775,42 +773,6 @@ struct Vector4i {
     }
 
     /**
-     * Return a string representation of this vector.
-     * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
-     * @return the string representation
-     */
-    public String toString() {
-        return Runtime.formatNumbers(toString(Options.NUMBER_FORMAT));
-    }
-
-    /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
-     * 
-     * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
-     * @return the string representation
-     */
-    public String toString(NumberFormat formatter) {
-        return "(" + formatter.format(x) + " " + formatter.format(y) + " " + formatter.format(z) + " " + formatter.format(w) + ")";
-    }
-
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeInt(x);
-        out.writeInt(y);
-        out.writeInt(z);
-        out.writeInt(w);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        x = in.readInt();
-        y = in.readInt();
-        z = in.readInt();
-        w = in.readInt();
-    }
-
-    /**
      * Set the components of this vector to be the component-wise minimum of this and the other vector.
      *
      * @param v
@@ -887,33 +849,7 @@ struct Vector4i {
         return result;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Vector4i other = (Vector4i) obj;
-        if (x != other.x) {
-            return false;
-        }
-        if (y != other.y) {
-            return false;
-        }
-        if (z != other.z) {
-            return false;
-        }
-        if (w != other.w) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean equals(int x, int y, int z, int w) {
+    public bool equals(int x, int y, int z, int w) {
         if (this.x != x)
             return false;
         if (this.y != y)
@@ -923,10 +859,6 @@ struct Vector4i {
         if (this.w != w)
             return false;
         return true;
-    }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 
 }
