@@ -301,7 +301,7 @@ struct Vector3d {
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..2]</code>
      */
-    public Vector3d setComponent(int component, double value) throws IllegalArgumentException {
+    public Vector3d setComponent(int component, double value){
         switch (component) {
             case 0:
                 x = value;
@@ -312,8 +312,7 @@ struct Vector3d {
             case 2:
                 z = value;
                 break;
-            default:
-                throw new IllegalArgumentException();
+            default: {}
         }
         return this;
     }
@@ -1434,41 +1433,6 @@ struct Vector3d {
         this.y = 0;
         this.z = 0;
         return this;
-    }
-
-    /**
-     * Return a string representation of this vector.
-     * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
-     * @return the string representation
-     */
-    public String toString() {
-        return Runtime.formatNumbers(toString(Options.NUMBER_FORMAT));
-    }
-
-    /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
-     * 
-     * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
-     * @return the string representation
-     */
-    public String toString(NumberFormat formatter) {
-        return "(" + Runtime.format(x, formatter) + " " + Runtime.format(y, formatter) + " " + Runtime.format(z, formatter) + ")";
-    }
-
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeDouble(x);
-        out.writeDouble(y);
-        out.writeDouble(z);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException {
-        x = in.readDouble();
-        y = in.readDouble();
-        z = in.readDouble();
     }
 
     /**
