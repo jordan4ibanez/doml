@@ -1953,17 +1953,17 @@ struct Matrix3x2d {
         int result = 1;
         long temp;
         temp = Double.doubleToLongBits(m00);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m01);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m10);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m11);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m20);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m21);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
     }
 
