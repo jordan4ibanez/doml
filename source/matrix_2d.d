@@ -1,5 +1,7 @@
 module translation_vault.matrix_2d;
 
+import std.conv: to;
+
 /*
  * The MIT License
  *
@@ -268,11 +270,7 @@ struct Matrix2d {
      * @return this
      */
     public Matrix2d set(Matrix2dc m) {
-        if (m instanceof Matrix2d) {
-            MemUtil.INSTANCE.copy((Matrix2d) m, this);
-        } else {
-            setMatrix2dc(m);
-        }
+        setMatrix2dc(m);
         return this;
     }
     private void setMatrix2dc(Matrix2dc mat) {
@@ -297,6 +295,14 @@ struct Matrix2d {
         return this;
     }
 
+    public Matrix2d set(Matrix3x2d m) {
+        m00 = m.m00();
+        m01 = m.m01();
+        m10 = m.m10();
+        m11 = m.m11();
+        return this;
+    }
+
     /**
      * Set the elements of this matrix to the left 2x2 submatrix of <code>m</code>.
      *
@@ -305,11 +311,7 @@ struct Matrix2d {
      * @return this
      */
     public Matrix2d set(Matrix3x2dc m) {
-        if (m instanceof Matrix3x2d) {
-            MemUtil.INSTANCE.copy((Matrix3x2d) m, this);
-        } else {
-            setMatrix3x2dc(m);
-        }
+        setMatrix3x2dc(m);
         return this;
     }
     private void setMatrix3x2dc(Matrix3x2dc mat) {
@@ -334,6 +336,13 @@ struct Matrix2d {
         return this;
     }
 
+    public Matrix2d set(Matrix3d m) {
+        m00 = m.m00();
+        m01 = m.m01();
+        m10 = m.m10();
+        m11 = m.m11();
+    }
+
     /**
      * Set the elements of this matrix to the upper left 2x2 of the given {@link Matrix3dc}.
      *
@@ -342,11 +351,7 @@ struct Matrix2d {
      * @return this
      */
     public Matrix2d set(Matrix3dc m) {
-        if (m instanceof Matrix3d) {
-            MemUtil.INSTANCE.copy((Matrix3d) m, this);
-        } else {
-            setMatrix3dc(m);
-        }
+        setMatrix3dc(m);
         return this;
     }
     private void setMatrix3dc(Matrix3dc mat) {
@@ -563,7 +568,7 @@ struct Matrix2d {
      * @return the string representation
      */
     public String toString() {
-        String str = toString(Options.NUMBER_FORMAT);
+        String str = to!string(Options.NUMBER_FORMAT);
         StringBuffer res = new StringBuffer();
         int eIndex = Integer.MIN_VALUE;
         for (int i = 0; i < str.length(); i++) {
@@ -620,7 +625,7 @@ struct Matrix2d {
     }
 
     public double getRotation() {
-        return (double) Math.atan2(m01, m11);
+        return cast(double) Math.atan2(m01, m11);
     }
 
     //#ifdef __GWT__
@@ -1025,20 +1030,6 @@ struct Matrix2d {
         dest.set(m00 * x + m01 * y,
                 m10 * x + m11 * y);
         return dest;
-    }
-
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeDouble(m00);
-        out.writeDouble(m01);
-        out.writeDouble(m10);
-        out.writeDouble(m11);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException {
-        m00 = in.readDouble();
-        m01 = in.readDouble();
-        m10 = in.readDouble();
-        m11 = in.readDouble();
     }
 
     /**
