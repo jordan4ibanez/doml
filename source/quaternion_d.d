@@ -1,4 +1,4 @@
-module Quaterniond;
+module quaternion_d;
 
 /*
  * The MIT License
@@ -23,14 +23,6 @@ module Quaterniond;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
-
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Quaternion of 4 double-precision floats which can represent rotation and uniform scaling.
@@ -38,34 +30,24 @@ import java.text.NumberFormat;
  * @author Richard Greenlees
  * @author Kai Burjack
  */
-public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
-
-    private static final long serialVersionUID = 1L;
+struct Quaterniond {
 
     /**
      * The first component of the vector part.
      */
-    public double x;
+    public double x = 0.0;
     /**
      * The second component of the vector part.
      */
-    public double y;
+    public double y = 0.0;
     /**
      * The third component of the vector part.
      */
-    public double z;
+    public double z = 0.0;
     /**
      * The real/scalar part of the quaternion.
      */
-    public double w;
-
-    /**
-     * Create a new {@link Quaterniond} and initialize it with <code>(x=0, y=0, z=0, w=1)</code>, 
-     * where <code>(x, y, z)</code> is the vector part of the quaternion and <code>w</code> is the real/scalar part.
-     */
-    public Quaterniond() {
-        this.w = 1.0;
-    }
+    public double w = 1.0;
 
     /**
      * Create a new {@link Quaterniond} and initialize its components to the given values.
@@ -79,7 +61,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @param w
      *          the real part
      */
-    public Quaterniond(double x, double y, double z, double w) {
+    this(double x, double y, double z, double w) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -92,7 +74,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @param source
      *          the {@link Quaterniondc} to take the component values from
      */
-    public Quaterniond(Quaterniondc source) {
+    this(Quaterniondc source) {
         x = source.x();
         y = source.y();
         z = source.z();
@@ -105,7 +87,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @param source
      *          the {@link Quaternionfc} to take the component values from
      */
-    public Quaterniond(Quaternionfc source) {
+    this(Quaternionfc source) {
         x = source.x();
         y = source.y();
         z = source.z();
@@ -118,7 +100,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @param axisAngle
      *          the axis-angle to initialize this quaternion with
      */
-    public Quaterniond(AxisAngle4f axisAngle) {
+    this(AxisAngle4f axisAngle) {
         double s = Math.sin(axisAngle.angle * 0.5);
         x = axisAngle.x * s;
         y = axisAngle.y * s;
@@ -132,7 +114,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @param axisAngle
      *          the axis-angle to initialize this quaternion with
      */
-    public Quaterniond(AxisAngle4d axisAngle) {
+    this(AxisAngle4d axisAngle) {
         double s = Math.sin(axisAngle.angle * 0.5);
         x = axisAngle.x * s;
         y = axisAngle.y * s;
