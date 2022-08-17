@@ -115,20 +115,6 @@ struct Vector2i {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector2fc} to round and copy the values from
-     * @param mode
-     *          the {@link RoundingMode} to use
-     */
-    this(Vector2fc v, int mode) {
-        x = Math.roundUsing(v.x(), mode);
-        y = Math.roundUsing(v.y(), mode);
-    }
-
-    /**
-     * Create a new {@link Vector2i} and initialize its components to the rounded value of
-     * the given vector.
-     *
-     * @param v
      *          the {@link Vector2dc} to round and copy the values from
      * @param mode
      *          the {@link RoundingMode} to use
@@ -302,24 +288,6 @@ struct Vector2i {
      * @return this
      */
     public Vector2i set(Vector2dc v, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
-        return this;
-    }
-
-    /**
-     * Set this {@link Vector2i} to the values of v using the given {@link RoundingMode}.
-     * <p>
-     * Note that due to the given vector <code>v</code> storing the components
-     * in double-precision, there is the possibility to lose precision.
-     *
-     * @param v
-     *          the vector to copy from
-     * @param mode
-     *          the {@link RoundingMode} to use
-     * @return this
-     */
-    public Vector2i set(Vector2fc v, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
         this.y = Math.roundUsing(v.y(), mode);
         return this;
