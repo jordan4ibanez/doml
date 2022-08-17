@@ -1,4 +1,4 @@
-module RoundingMode;
+module rounding_mode;
 
 /*
  * The MIT License
