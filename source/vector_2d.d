@@ -1,5 +1,9 @@
 module vector_2d;
 
+import vector_2i;
+import matrix_2d;
+import matrix_3x2d;
+
 /*
  * The MIT License
  *

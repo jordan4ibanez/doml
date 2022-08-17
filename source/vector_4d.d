@@ -1,5 +1,17 @@
 module vector_4d;
 
+
+import vector_4i;
+import vector_3d;
+import vector_3i;
+import vector_2d;
+import vector_2i;
+
+import matrix_4d;
+import matrix_4x3d;
+
+import quaternion_d;
+
 /*
  * The MIT License
  *
@@ -869,12 +881,12 @@ struct Vector4d {
      *          the quaternion to transform this vector
      * @return this
      */
-    public Vector4d rotate(Quaterniondc quat) {
+    public Vector4d rotate(Quaterniond quat) {
         quat.transform(this, this);
         return this;
     }
 
-    public Vector4d rotate(Quaterniondc quat, Vector4d dest) {
+    public Vector4d rotate(Quaterniond quat, Vector4d dest) {
         quat.transform(this, dest);
         return dest;
     }
@@ -1328,7 +1340,7 @@ struct Vector4d {
     }
 
 
-    public boolean equals(Vector4d v, double delta) {
+    public bool equals(Vector4d v, double delta) {
         if (this == v)
             return true;
         if (!Runtime.equals(x, v.x(), delta))
@@ -1342,7 +1354,7 @@ struct Vector4d {
         return true;
     }
 
-    public boolean equals(double x, double y, double z, double w) {
+    public bool equals(double x, double y, double z, double w) {
         if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(x))
             return false;
         if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(y))
@@ -1531,7 +1543,7 @@ struct Vector4d {
         return dest;
     }
 
-    public boolean isFinite() {
+    public bool isFinite() {
         return Math.isFinite(x) && Math.isFinite(y) && Math.isFinite(z) && Math.isFinite(w);
     }
 

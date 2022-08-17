@@ -1,5 +1,14 @@
 module matrix_4x3d;
 
+import matrix_3d;
+import matrix_4d;
+
+import vector_3d;
+import vector_4d;
+
+import axis_angle_4d;
+import quaternion_d;
+
 /*
  * The MIT License
  *
@@ -1557,7 +1566,7 @@ struct Matrix4x3d {
         m00 = x;
         m11 = y;
         m22 = z;
-        boolean one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
+        bool one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
         properties = one ? PROPERTY_ORTHONORMAL : 0;
         return this;
     }
@@ -2237,7 +2246,7 @@ struct Matrix4x3d {
         double nm30 = m00 * ox + m10 * oy + m20 * oz + m30;
         double nm31 = m01 * ox + m11 * oy + m21 * oz + m31;
         double nm32 = m02 * ox + m12 * oy + m22 * oz + m32;
-        boolean one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
+        bool one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
         return dest
         ._m00(m00 * sx)
         ._m01(m01 * sx)
@@ -5320,11 +5329,11 @@ struct Matrix4x3d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to an orthographic projection without post-multiplying it,
-     * use {@link #setOrtho(double, double, double, double, double, double, boolean) setOrtho()}.
+     * use {@link #setOrtho(double, double, double, double, double, double, bool) setOrtho()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrtho(double, double, double, double, double, double, boolean)
+     * @see #setOrtho(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -5345,7 +5354,7 @@ struct Matrix4x3d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4x3d ortho(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4x3d dest) {
+    public Matrix4x3d ortho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4x3d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / (right - left);
         double rm11 = 2.0 / (top - bottom);
@@ -5419,11 +5428,11 @@ struct Matrix4x3d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to an orthographic projection without post-multiplying it,
-     * use {@link #setOrtho(double, double, double, double, double, double, boolean) setOrtho()}.
+     * use {@link #setOrtho(double, double, double, double, double, double, bool) setOrtho()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrtho(double, double, double, double, double, double, boolean)
+     * @see #setOrtho(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -5442,7 +5451,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4x3d ortho(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4x3d ortho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         return ortho(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
     }
 
@@ -5490,11 +5499,11 @@ struct Matrix4x3d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to an orthographic projection without post-multiplying it,
-     * use {@link #setOrthoLH(double, double, double, double, double, double, boolean) setOrthoLH()}.
+     * use {@link #setOrthoLH(double, double, double, double, double, double, bool) setOrthoLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoLH(double, double, double, double, double, double, boolean)
+     * @see #setOrthoLH(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -5515,7 +5524,7 @@ struct Matrix4x3d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4x3d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4x3d dest) {
+    public Matrix4x3d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4x3d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / (right - left);
         double rm11 = 2.0 / (top - bottom);
@@ -5589,11 +5598,11 @@ struct Matrix4x3d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to an orthographic projection without post-multiplying it,
-     * use {@link #setOrthoLH(double, double, double, double, double, double, boolean) setOrthoLH()}.
+     * use {@link #setOrthoLH(double, double, double, double, double, double, bool) setOrthoLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoLH(double, double, double, double, double, double, boolean)
+     * @see #setOrthoLH(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -5612,7 +5621,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4x3d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4x3d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         return orthoLH(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
     }
 
@@ -5655,11 +5664,11 @@ struct Matrix4x3d {
      * using the given NDC z range.
      * <p>
      * In order to apply the orthographic projection to an already existing transformation,
-     * use {@link #ortho(double, double, double, double, double, double, boolean) ortho()}.
+     * use {@link #ortho(double, double, double, double, double, double, bool) ortho()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #ortho(double, double, double, double, double, double, boolean)
+     * @see #ortho(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -5678,7 +5687,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4x3d setOrtho(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4x3d setOrtho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         m00 = 2.0 / (right - left);
         m01 = 0.0;
         m02 = 0.0;
@@ -5729,11 +5738,11 @@ struct Matrix4x3d {
      * using the given NDC z range.
      * <p>
      * In order to apply the orthographic projection to an already existing transformation,
-     * use {@link #orthoLH(double, double, double, double, double, double, boolean) orthoLH()}.
+     * use {@link #orthoLH(double, double, double, double, double, double, bool) orthoLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #orthoLH(double, double, double, double, double, double, boolean)
+     * @see #orthoLH(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -5752,7 +5761,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4x3d setOrthoLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4x3d setOrthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         m00 = 2.0 / (right - left);
         m01 = 0.0;
         m02 = 0.0;
@@ -5802,7 +5811,7 @@ struct Matrix4x3d {
      * Apply a symmetric orthographic projection transformation for a right-handed coordinate system
      * using the given NDC z range to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, boolean, Matrix4x3d) ortho()} with
+     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, bool, Matrix4x3d) ortho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -5811,11 +5820,11 @@ struct Matrix4x3d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to a symmetric orthographic projection without post-multiplying it,
-     * use {@link #setOrthoSymmetric(double, double, double, double, boolean) setOrthoSymmetric()}.
+     * use {@link #setOrthoSymmetric(double, double, double, double, bool) setOrthoSymmetric()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoSymmetric(double, double, double, double, boolean)
+     * @see #setOrthoSymmetric(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -5832,7 +5841,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4x3d orthoSymmetric(double width, double height, double zNear, double zFar, boolean zZeroToOne, Matrix4x3d dest) {
+    public Matrix4x3d orthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4x3d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / width;
         double rm11 = 2.0 / height;
@@ -5897,7 +5906,7 @@ struct Matrix4x3d {
      * Apply a symmetric orthographic projection transformation for a right-handed coordinate system
      * using the given NDC z range to this matrix.
      * <p>
-     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, boolean) ortho()} with
+     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, bool) ortho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -5906,11 +5915,11 @@ struct Matrix4x3d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to a symmetric orthographic projection without post-multiplying it,
-     * use {@link #setOrthoSymmetric(double, double, double, double, boolean) setOrthoSymmetric()}.
+     * use {@link #setOrthoSymmetric(double, double, double, double, bool) setOrthoSymmetric()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoSymmetric(double, double, double, double, boolean)
+     * @see #setOrthoSymmetric(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -5925,7 +5934,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4x3d orthoSymmetric(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4x3d orthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         return orthoSymmetric(width, height, zNear, zFar, zZeroToOne, this);
     }
 
@@ -5966,7 +5975,7 @@ struct Matrix4x3d {
      * Apply a symmetric orthographic projection transformation for a left-handed coordinate system
      * using the given NDC z range to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, boolean, Matrix4x3d) orthoLH()} with
+     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, bool, Matrix4x3d) orthoLH()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -5975,11 +5984,11 @@ struct Matrix4x3d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to a symmetric orthographic projection without post-multiplying it,
-     * use {@link #setOrthoSymmetricLH(double, double, double, double, boolean) setOrthoSymmetricLH()}.
+     * use {@link #setOrthoSymmetricLH(double, double, double, double, bool) setOrthoSymmetricLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoSymmetricLH(double, double, double, double, boolean)
+     * @see #setOrthoSymmetricLH(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -5996,7 +6005,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4x3d orthoSymmetricLH(double width, double height, double zNear, double zFar, boolean zZeroToOne, Matrix4x3d dest) {
+    public Matrix4x3d orthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4x3d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / width;
         double rm11 = 2.0 / height;
@@ -6061,7 +6070,7 @@ struct Matrix4x3d {
      * Apply a symmetric orthographic projection transformation for a left-handed coordinate system
      * using the given NDC z range to this matrix.
      * <p>
-     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, boolean) orthoLH()} with
+     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, bool) orthoLH()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -6070,11 +6079,11 @@ struct Matrix4x3d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to a symmetric orthographic projection without post-multiplying it,
-     * use {@link #setOrthoSymmetricLH(double, double, double, double, boolean) setOrthoSymmetricLH()}.
+     * use {@link #setOrthoSymmetricLH(double, double, double, double, bool) setOrthoSymmetricLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoSymmetricLH(double, double, double, double, boolean)
+     * @see #setOrthoSymmetricLH(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -6089,7 +6098,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4x3d orthoSymmetricLH(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4x3d orthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         return orthoSymmetricLH(width, height, zNear, zFar, zZeroToOne, this);
     }
 
@@ -6130,15 +6139,15 @@ struct Matrix4x3d {
      * Set this matrix to be a symmetric orthographic projection transformation for a right-handed coordinate system
      * using the given NDC z range.
      * <p>
-     * This method is equivalent to calling {@link #setOrtho(double, double, double, double, double, double, boolean) setOrtho()} with
+     * This method is equivalent to calling {@link #setOrtho(double, double, double, double, double, double, bool) setOrtho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * In order to apply the symmetric orthographic projection to an already existing transformation,
-     * use {@link #orthoSymmetric(double, double, double, double, boolean) orthoSymmetric()}.
+     * use {@link #orthoSymmetric(double, double, double, double, bool) orthoSymmetric()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #orthoSymmetric(double, double, double, double, boolean)
+     * @see #orthoSymmetric(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -6153,7 +6162,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4x3d setOrthoSymmetric(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4x3d setOrthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         m00 = 2.0 / width;
         m01 = 0.0;
         m02 = 0.0;
@@ -6201,15 +6210,15 @@ struct Matrix4x3d {
     /**
      * Set this matrix to be a symmetric orthographic projection transformation for a left-handed coordinate system using the given NDC z range.
      * <p>
-     * This method is equivalent to calling {@link #setOrtho(double, double, double, double, double, double, boolean) setOrtho()} with
+     * This method is equivalent to calling {@link #setOrtho(double, double, double, double, double, double, bool) setOrtho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * In order to apply the symmetric orthographic projection to an already existing transformation,
-     * use {@link #orthoSymmetricLH(double, double, double, double, boolean) orthoSymmetricLH()}.
+     * use {@link #orthoSymmetricLH(double, double, double, double, bool) orthoSymmetricLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #orthoSymmetricLH(double, double, double, double, boolean)
+     * @see #orthoSymmetricLH(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -6224,7 +6233,7 @@ struct Matrix4x3d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4x3d setOrthoSymmetricLH(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4x3d setOrthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         m00 = 2.0 / width;
         m01 = 0.0;
         m02 = 0.0;
@@ -7907,7 +7916,7 @@ struct Matrix4x3d {
         return result;
     }
 
-    public boolean equals(Matrix4x3d m, double delta) {
+    public bool equals(Matrix4x3d m, double delta) {
         if (this == m)
             return true;
         if (!Runtime.equals(m00, m.m00(), delta))
@@ -9455,7 +9464,7 @@ struct Matrix4x3d {
         return dest._m00(m00)._m01(m01)._m02(m02)._m10(m10)._m11(m11)._m12(m12)._m20(-m20)._m21(-m21)._m22(-m22)._m30(m30)._m31(m31)._m32(m32)._properties(properties & PROPERTY_ORTHONORMAL);
     }
 
-    public boolean isFinite() {
+    public bool isFinite() {
         return Math.isFinite(m00) && Math.isFinite(m01) && Math.isFinite(m02) &&
                Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) &&
                Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22) &&

@@ -1,5 +1,10 @@
 module vector_4i;
 
+import vector_3i;
+import vector_2i;
+import vector_4d;
+
+
 /*
  * The MIT License
  *

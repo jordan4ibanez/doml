@@ -1,5 +1,8 @@
 module axis_angle_4d;
 
+import vector_3d;
+
+
 /*
  * The MIT License
  *

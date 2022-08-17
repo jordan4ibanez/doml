@@ -1,5 +1,8 @@
 module vector_3i;
 
+import vector_2i;
+import vector_2d;
+
 /*
  * The MIT License
  *

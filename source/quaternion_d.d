@@ -1,5 +1,12 @@
 module quaternion_d;
 
+import axis_angle_4d;
+import matrix_3d;
+import matrix_4d;
+import matrix_4x3d;
+import vector_3d;
+import vector_4d;
+
 /*
  * The MIT License
  *
@@ -1594,7 +1601,7 @@ struct Quaterniond {
         return result;
     }
 
-    public boolean equals(Quaterniond obj) {
+    public bool equals(Quaterniond obj) {
         if (this == obj)
             return true;
         if (Double.doubleToLongBits(w) != Double.doubleToLongBits(other.w))
@@ -2371,11 +2378,11 @@ struct Quaterniond {
                         Math.fma(qpw, qiw, Math.fma(-qpx, qix, Math.fma(-qpy, qiy, -qpz * qiz))));
     }
 
-    public boolean isFinite() {
+    public bool isFinite() {
         return Math.isFinite(x) && Math.isFinite(y) && Math.isFinite(z) && Math.isFinite(w);
     }
 
-    public boolean equals(Quaterniond q, double delta) {
+    public bool equals(Quaterniond q, double delta) {
         if (this == q)
             return true;
         if (!Runtime.equals(x, q.x(), delta))
@@ -2389,7 +2396,7 @@ struct Quaterniond {
         return true;
     }
 
-    public boolean equals(double x, double y, double z, double w) {
+    public bool equals(double x, double y, double z, double w) {
         if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(x))
             return false;
         if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(y))

@@ -1,5 +1,9 @@
 module matrix_3x2d;
 
+import matrix_2d;
+import vector_2d;
+import matrix_3d;
+
 /*
  * The MIT License
  *
@@ -34,7 +38,7 @@ module matrix_3x2d;
  * 
  * @author Kai Burjack
  */
-struct Matrix3x2d {
+public struct Matrix3x2d {
 
     double m00 = 1.0;
     double m01 = 0.0;

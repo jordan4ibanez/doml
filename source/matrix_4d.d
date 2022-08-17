@@ -1,5 +1,16 @@
 module matrix_4d;
 
+import matrix_3d;
+import matrix_4x3d;
+import matrix_3x2d;
+
+import vector_2d;
+import vector_3d;
+import vector_4d;
+
+import axis_angle_4d;
+import quaternion_d;
+
 /*
  * The MIT License
  $!#@$@ Translated by jordan4ibanez
@@ -2891,7 +2902,7 @@ struct Matrix4d {
     public Matrix4d scaling(double x, double y, double z) {
         if ((properties & PROPERTY_IDENTITY) == 0)
             identity();
-        boolean one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
+        bool one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
         _m00(x).
         _m11(y).
         _m22(z).
@@ -3576,7 +3587,7 @@ struct Matrix4d {
         return scaleGeneric(x, y, z, dest);
     }
     private Matrix4d scaleGeneric(double x, double y, double z, Matrix4d dest) {
-        boolean one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
+        bool one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
         dest._m00(m00 * x)
         ._m01(m01 * x)
         ._m02(m02 * x)
@@ -3668,7 +3679,7 @@ struct Matrix4d {
         double nm31 = m01 * ox + m11 * oy + m21 * oz + m31;
         double nm32 = m02 * ox + m12 * oy + m22 * oz + m32;
         double nm33 = m03 * ox + m13 * oy + m23 * oz + m33;
-        boolean one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
+        bool one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
         return dest
         ._m00(m00 * sx)
         ._m01(m01 * sx)
@@ -3766,7 +3777,7 @@ struct Matrix4d {
         double nm30 = x * m30;
         double nm31 = y * m31;
         double nm32 = z * m32;
-        boolean one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
+        bool one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
         dest._m00(nm00)
         ._m01(nm01)
         ._m02(nm02)
@@ -3830,7 +3841,7 @@ struct Matrix4d {
     }
 
     public Matrix4d scaleAroundLocal(double sx, double sy, double sz, double ox, double oy, double oz, Matrix4d dest) {
-        boolean one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
+        bool one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
         dest._m00(sx * (m00 - ox * m03) + ox * m03)
         ._m01(sy * (m01 - oy * m03) + oy * m03)
         ._m02(sz * (m02 - oz * m03) + oz * m03)
@@ -6009,7 +6020,7 @@ struct Matrix4d {
         double q12 = dqy * qz;
         double q13 = dqy * qw;
         double q23 = dqz * qw;
-        boolean one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
+        bool one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
         _m00(sx - (q11 + q22) * sx).
         _m01((q01 + q23) * sx).
         _m02((q02 - q13) * sx).
@@ -6172,7 +6183,7 @@ struct Matrix4d {
     public Matrix4d translationRotateScaleInvert(double tx, double ty, double tz, 
                                                  double qx, double qy, double qz, double qw, 
                                                  double sx, double sy, double sz) {
-        boolean one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
+        bool one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
         if (one)
             return translationRotateInvert(tx, ty, tz, qx, qy, qz, qw);
         double nqx = -qx, nqy = -qy, nqz = -qz;
@@ -6349,7 +6360,7 @@ struct Matrix4d {
         this.m30 = m30;
         this.m31 = m31;
         this.m33 = 1.0;
-        boolean one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
+        bool one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
         properties = PROPERTY_AFFINE | (one && (m.properties & PROPERTY_ORTHONORMAL) != 0 ? PROPERTY_ORTHONORMAL : 0);
         return this;
     }
@@ -7613,7 +7624,7 @@ struct Matrix4d {
         return this;
     }
 
-    public Matrix4d unprojectRay(Vector2dc winCoords, int[] viewport, Vector3d originDest, Vector3d dirDest) {
+    public Matrix4d unprojectRay(Vector2d winCoords, int[] viewport, Vector3d originDest, Vector3d dirDest) {
         return unprojectRay(winCoords.x(), winCoords.y(), viewport, originDest, dirDest);
     }
 
@@ -7648,7 +7659,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d unprojectInvRay(Vector2dc winCoords, int[] viewport, Vector3d originDest, Vector3d dirDest) {
+    public Matrix4d unprojectInvRay(Vector2d winCoords, int[] viewport, Vector3d originDest, Vector3d dirDest) {
         return unprojectInvRay(winCoords.x(), winCoords.y(), viewport, originDest, dirDest);
     }
 
@@ -8027,11 +8038,11 @@ struct Matrix4d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to an orthographic projection without post-multiplying it,
-     * use {@link #setOrtho(double, double, double, double, double, double, boolean) setOrtho()}.
+     * use {@link #setOrtho(double, double, double, double, double, double, bool) setOrtho()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrtho(double, double, double, double, double, double, boolean)
+     * @see #setOrtho(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -8052,12 +8063,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrtho(left, right, bottom, top, zNear, zFar, zZeroToOne);
         return orthoGeneric(left, right, bottom, top, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d orthoGeneric(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d orthoGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / (right - left);
         double rm11 = 2.0 / (top - bottom);
@@ -8133,11 +8144,11 @@ struct Matrix4d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to an orthographic projection without post-multiplying it,
-     * use {@link #setOrtho(double, double, double, double, double, double, boolean) setOrtho()}.
+     * use {@link #setOrtho(double, double, double, double, double, double, bool) setOrtho()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrtho(double, double, double, double, double, double, boolean)
+     * @see #setOrtho(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -8156,7 +8167,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         return ortho(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
     }
 
@@ -8204,11 +8215,11 @@ struct Matrix4d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to an orthographic projection without post-multiplying it,
-     * use {@link #setOrthoLH(double, double, double, double, double, double, boolean) setOrthoLH()}.
+     * use {@link #setOrthoLH(double, double, double, double, double, double, bool) setOrthoLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoLH(double, double, double, double, double, double, boolean)
+     * @see #setOrthoLH(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -8229,12 +8240,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrthoLH(left, right, bottom, top, zNear, zFar, zZeroToOne);
         return orthoLHGeneric(left, right, bottom, top, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d orthoLHGeneric(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d orthoLHGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / (right - left);
         double rm11 = 2.0 / (top - bottom);
@@ -8310,11 +8321,11 @@ struct Matrix4d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to an orthographic projection without post-multiplying it,
-     * use {@link #setOrthoLH(double, double, double, double, double, double, boolean) setOrthoLH()}.
+     * use {@link #setOrthoLH(double, double, double, double, double, double, bool) setOrthoLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoLH(double, double, double, double, double, double, boolean)
+     * @see #setOrthoLH(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -8333,7 +8344,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         return orthoLH(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
     }
 
@@ -8376,11 +8387,11 @@ struct Matrix4d {
      * using the given NDC z range.
      * <p>
      * In order to apply the orthographic projection to an already existing transformation,
-     * use {@link #ortho(double, double, double, double, double, double, boolean) ortho()}.
+     * use {@link #ortho(double, double, double, double, double, double, bool) ortho()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #ortho(double, double, double, double, double, double, boolean)
+     * @see #ortho(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -8399,7 +8410,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setOrtho(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setOrtho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / (right - left)).
@@ -8446,11 +8457,11 @@ struct Matrix4d {
      * using the given NDC z range.
      * <p>
      * In order to apply the orthographic projection to an already existing transformation,
-     * use {@link #orthoLH(double, double, double, double, double, double, boolean) orthoLH()}.
+     * use {@link #orthoLH(double, double, double, double, double, double, bool) orthoLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #orthoLH(double, double, double, double, double, double, boolean)
+     * @see #orthoLH(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance from the center to the left frustum edge
@@ -8469,7 +8480,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setOrthoLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setOrthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / (right - left)).
@@ -8515,7 +8526,7 @@ struct Matrix4d {
      * Apply a symmetric orthographic projection transformation for a right-handed coordinate system
      * using the given NDC z range to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, boolean, Matrix4d) ortho()} with
+     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, bool, Matrix4d) ortho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -8524,11 +8535,11 @@ struct Matrix4d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to a symmetric orthographic projection without post-multiplying it,
-     * use {@link #setOrthoSymmetric(double, double, double, double, boolean) setOrthoSymmetric()}.
+     * use {@link #setOrthoSymmetric(double, double, double, double, bool) setOrthoSymmetric()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoSymmetric(double, double, double, double, boolean)
+     * @see #setOrthoSymmetric(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -8545,12 +8556,12 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrthoSymmetric(width, height, zNear, zFar, zZeroToOne);
         return orthoSymmetricGeneric(width, height, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d orthoSymmetricGeneric(double width, double height, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d orthoSymmetricGeneric(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / width;
         double rm11 = 2.0 / height;
@@ -8617,7 +8628,7 @@ struct Matrix4d {
      * Apply a symmetric orthographic projection transformation for a right-handed coordinate system
      * using the given NDC z range to this matrix.
      * <p>
-     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, boolean) ortho()} with
+     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, bool) ortho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -8626,11 +8637,11 @@ struct Matrix4d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to a symmetric orthographic projection without post-multiplying it,
-     * use {@link #setOrthoSymmetric(double, double, double, double, boolean) setOrthoSymmetric()}.
+     * use {@link #setOrthoSymmetric(double, double, double, double, bool) setOrthoSymmetric()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoSymmetric(double, double, double, double, boolean)
+     * @see #setOrthoSymmetric(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -8645,7 +8656,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         return orthoSymmetric(width, height, zNear, zFar, zZeroToOne, this);
     }
 
@@ -8686,7 +8697,7 @@ struct Matrix4d {
      * Apply a symmetric orthographic projection transformation for a left-handed coordinate system
      * using the given NDC z range to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, boolean, Matrix4d) orthoLH()} with
+     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, bool, Matrix4d) orthoLH()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -8695,11 +8706,11 @@ struct Matrix4d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to a symmetric orthographic projection without post-multiplying it,
-     * use {@link #setOrthoSymmetricLH(double, double, double, double, boolean) setOrthoSymmetricLH()}.
+     * use {@link #setOrthoSymmetricLH(double, double, double, double, bool) setOrthoSymmetricLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoSymmetricLH(double, double, double, double, boolean)
+     * @see #setOrthoSymmetricLH(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -8716,12 +8727,12 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrthoSymmetricLH(width, height, zNear, zFar, zZeroToOne);
         return orthoSymmetricLHGeneric(width, height, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d orthoSymmetricLHGeneric(double width, double height, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d orthoSymmetricLHGeneric(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / width;
         double rm11 = 2.0 / height;
@@ -8788,7 +8799,7 @@ struct Matrix4d {
      * Apply a symmetric orthographic projection transformation for a left-handed coordinate system
      * using the given NDC z range to this matrix.
      * <p>
-     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, boolean) orthoLH()} with
+     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, bool) orthoLH()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -8797,11 +8808,11 @@ struct Matrix4d {
      * orthographic projection transformation will be applied first!
      * <p>
      * In order to set the matrix to a symmetric orthographic projection without post-multiplying it,
-     * use {@link #setOrthoSymmetricLH(double, double, double, double, boolean) setOrthoSymmetricLH()}.
+     * use {@link #setOrthoSymmetricLH(double, double, double, double, bool) setOrthoSymmetricLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #setOrthoSymmetricLH(double, double, double, double, boolean)
+     * @see #setOrthoSymmetricLH(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -8816,7 +8827,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         return orthoSymmetricLH(width, height, zNear, zFar, zZeroToOne, this);
     }
 
@@ -8857,15 +8868,15 @@ struct Matrix4d {
      * Set this matrix to be a symmetric orthographic projection transformation for a right-handed coordinate system
      * using the given NDC z range.
      * <p>
-     * This method is equivalent to calling {@link #setOrtho(double, double, double, double, double, double, boolean) setOrtho()} with
+     * This method is equivalent to calling {@link #setOrtho(double, double, double, double, double, double, bool) setOrtho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * In order to apply the symmetric orthographic projection to an already existing transformation,
-     * use {@link #orthoSymmetric(double, double, double, double, boolean) orthoSymmetric()}.
+     * use {@link #orthoSymmetric(double, double, double, double, bool) orthoSymmetric()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #orthoSymmetric(double, double, double, double, boolean)
+     * @see #orthoSymmetric(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -8880,7 +8891,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setOrthoSymmetric(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setOrthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / width).
@@ -8922,15 +8933,15 @@ struct Matrix4d {
     /**
      * Set this matrix to be a symmetric orthographic projection transformation for a left-handed coordinate system using the given NDC z range.
      * <p>
-     * This method is equivalent to calling {@link #setOrtho(double, double, double, double, double, double, boolean) setOrtho()} with
+     * This method is equivalent to calling {@link #setOrtho(double, double, double, double, double, double, bool) setOrtho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * In order to apply the symmetric orthographic projection to an already existing transformation,
-     * use {@link #orthoSymmetricLH(double, double, double, double, boolean) orthoSymmetricLH()}.
+     * use {@link #orthoSymmetricLH(double, double, double, double, bool) orthoSymmetricLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #orthoSymmetricLH(double, double, double, double, boolean)
+     * @see #orthoSymmetricLH(double, double, double, double, bool)
      * 
      * @param width
      *            the distance between the right and left frustum edges
@@ -8945,7 +8956,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setOrthoSymmetricLH(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setOrthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / width).
@@ -10447,9 +10458,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspective(double, double, double, double, boolean) setPerspective}.
+     * use {@link #setPerspective(double, double, double, double, bool) setPerspective}.
      * 
-     * @see #setPerspective(double, double, double, double, boolean)
+     * @see #setPerspective(double, double, double, double, bool)
      * 
      * @param fovy
      *            the vertical field of view in radians (must be greater than zero and less than {@link Math#PI PI})
@@ -10470,20 +10481,20 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setPerspective(fovy, aspect, zNear, zFar, zZeroToOne);
         return perspectiveGeneric(fovy, aspect, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d perspectiveGeneric(double fovy, double aspect, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d perspectiveGeneric(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         double h = Math.tan(fovy * 0.5);
         // calculate right matrix elements
         double rm00 = 1.0 / (h * aspect);
         double rm11 = 1.0 / h;
         double rm22;
         double rm32;
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -10566,9 +10577,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspective(double, double, double, double, boolean) setPerspective}.
+     * use {@link #setPerspective(double, double, double, double, bool) setPerspective}.
      * 
-     * @see #setPerspective(double, double, double, double, boolean)
+     * @see #setPerspective(double, double, double, double, bool)
      * 
      * @param fovy
      *            the vertical field of view in radians (must be greater than zero and less than {@link Math#PI PI})
@@ -10587,7 +10598,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) {
         return perspective(fovy, aspect, zNear, zFar, zZeroToOne, this);
     }
 
@@ -10633,9 +10644,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspectiveRect(double, double, double, double, boolean) setPerspectiveRect}.
+     * use {@link #setPerspectiveRect(double, double, double, double, bool) setPerspectiveRect}.
      * 
-     * @see #setPerspectiveRect(double, double, double, double, boolean)
+     * @see #setPerspectiveRect(double, double, double, double, bool)
      * 
      * @param width
      *            the width of the near frustum plane
@@ -10656,17 +10667,17 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setPerspectiveRect(width, height, zNear, zFar, zZeroToOne);
         return perspectiveRectGeneric(width, height, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d perspectiveRectGeneric(double width, double height, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d perspectiveRectGeneric(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         double rm00 = (zNear + zNear) / width;
         double rm11 = (zNear + zNear) / height;
         double rm22, rm32;
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6f;
@@ -10749,9 +10760,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspectiveRect(double, double, double, double, boolean) setPerspectiveRect}.
+     * use {@link #setPerspectiveRect(double, double, double, double, bool) setPerspectiveRect}.
      * 
-     * @see #setPerspectiveRect(double, double, double, double, boolean)
+     * @see #setPerspectiveRect(double, double, double, double, bool)
      * 
      * @param width
      *            the width of the near frustum plane
@@ -10770,7 +10781,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         return perspectiveRect(width, height, zNear, zFar, zZeroToOne, this);
     }
 
@@ -10821,9 +10832,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspectiveOffCenter(double, double, double, double, double, double, boolean) setPerspectiveOffCenter}.
+     * use {@link #setPerspectiveOffCenter(double, double, double, double, double, double, bool) setPerspectiveOffCenter}.
      * 
-     * @see #setPerspectiveOffCenter(double, double, double, double, double, double, boolean)
+     * @see #setPerspectiveOffCenter(double, double, double, double, double, double, bool)
      * 
      * @param fovy
      *            the vertical field of view in radians (must be greater than zero and less than {@link Math#PI PI})
@@ -10848,12 +10859,12 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setPerspectiveOffCenter(fovy, offAngleX, offAngleY, aspect, zNear, zFar, zZeroToOne);
         return perspectiveOffCenterGeneric(fovy, offAngleX, offAngleY, aspect, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d perspectiveOffCenterGeneric(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d perspectiveOffCenterGeneric(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         double h = Math.tan(fovy * 0.5);
         // calculate right matrix elements
         double xScale = 1.0 / (h * aspect);
@@ -10865,8 +10876,8 @@ struct Matrix4d {
         double rm21 = offY * yScale;
         double rm22;
         double rm32;
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -10964,9 +10975,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspectiveOffCenter(double, double, double, double, double, double, boolean) setPerspectiveOffCenter}.
+     * use {@link #setPerspectiveOffCenter(double, double, double, double, double, double, bool) setPerspectiveOffCenter}.
      * 
-     * @see #setPerspectiveOffCenter(double, double, double, double, double, double, boolean)
+     * @see #setPerspectiveOffCenter(double, double, double, double, double, double, bool)
      * 
      * @param fovy
      *            the vertical field of view in radians (must be greater than zero and less than {@link Math#PI PI})
@@ -10989,7 +11000,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, bool zZeroToOne) {
         return perspectiveOffCenter(fovy, offAngleX, offAngleY, aspect, zNear, zFar, zZeroToOne, this);
     }
 
@@ -11049,9 +11060,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspectiveOffCenterFov(double, double, double, double, double, double, boolean) setPerspectiveOffCenterFov}.
+     * use {@link #setPerspectiveOffCenterFov(double, double, double, double, double, double, bool) setPerspectiveOffCenterFov}.
      * 
-     * @see #setPerspectiveOffCenterFov(double, double, double, double, double, double, boolean)
+     * @see #setPerspectiveOffCenterFov(double, double, double, double, double, double, bool)
      * 
      * @param angleLeft
      *            the horizontal angle between left frustum plane and a line perpendicular to the near/far frustum planes.
@@ -11076,10 +11087,10 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
         return perspectiveOffCenterFov(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, zZeroToOne, this);
     }
-    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         return frustum(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne, dest);
     }
 
@@ -11144,9 +11155,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspectiveOffCenterFovLH(double, double, double, double, double, double, boolean) setPerspectiveOffCenterFovLH}.
+     * use {@link #setPerspectiveOffCenterFovLH(double, double, double, double, double, double, bool) setPerspectiveOffCenterFovLH}.
      * 
-     * @see #setPerspectiveOffCenterFovLH(double, double, double, double, double, double, boolean)
+     * @see #setPerspectiveOffCenterFovLH(double, double, double, double, double, double, bool)
      * 
      * @param angleLeft
      *            the horizontal angle between left frustum plane and a line perpendicular to the near/far frustum planes.
@@ -11171,10 +11182,10 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
         return perspectiveOffCenterFovLH(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, zZeroToOne, this);
     }
-    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         return frustumLH(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne, dest);
     }
 
@@ -11229,9 +11240,9 @@ struct Matrix4d {
      * using the given NDC z range.
      * <p>
      * In order to apply the perspective projection transformation to an existing transformation,
-     * use {@link #perspective(double, double, double, double, boolean) perspective()}.
+     * use {@link #perspective(double, double, double, double, bool) perspective()}.
      * 
-     * @see #perspective(double, double, double, double, boolean)
+     * @see #perspective(double, double, double, double, bool)
      * 
      * @param fovy
      *            the vertical field of view in radians (must be greater than zero and less than {@link Math#PI PI})
@@ -11250,7 +11261,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspective(double fovy, double aspect, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setPerspective(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) {
         double h = Math.tan(fovy * 0.5);
         _m00(1.0 / (h * aspect)).
         _m01(0.0).
@@ -11262,8 +11273,8 @@ struct Matrix4d {
         _m13(0.0).
         _m20(0.0).
         _m21(0.0);
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -11317,9 +11328,9 @@ struct Matrix4d {
      * using the given NDC z range.
      * <p>
      * In order to apply the perspective projection transformation to an existing transformation,
-     * use {@link #perspectiveRect(double, double, double, double, boolean) perspectiveRect()}.
+     * use {@link #perspectiveRect(double, double, double, double, bool) perspectiveRect()}.
      * 
-     * @see #perspectiveRect(double, double, double, double, boolean)
+     * @see #perspectiveRect(double, double, double, double, bool)
      * 
      * @param width
      *            the width of the near frustum plane
@@ -11338,12 +11349,12 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspectiveRect(double width, double height, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setPerspectiveRect(double width, double height, double zNear, double zFar, bool zZeroToOne) {
         this.zero();
         this._m00((zNear + zNear) / width);
         this._m11((zNear + zNear) / height);
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -11461,7 +11472,7 @@ struct Matrix4d {
      * @return this
      */
     public Matrix4d setPerspectiveOffCenter(double fovy, double offAngleX, double offAngleY,
-                                            double aspect, double zNear, double zFar, boolean zZeroToOne) {
+                                            double aspect, double zNear, double zFar, bool zZeroToOne) {
         this.zero();
         double h = Math.tan(fovy * 0.5);
         double xScale = 1.0 / (h * aspect), yScale = 1.0 / h;
@@ -11470,8 +11481,8 @@ struct Matrix4d {
         double offX = Math.tan(offAngleX), offY = Math.tan(offAngleY);
         _m20(offX * xScale).
         _m21(offY * yScale);
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -11540,9 +11551,9 @@ struct Matrix4d {
      * the bottom and top frustum planes, respectively, and a line perpendicular to the near and far frustum planes.
      * <p>
      * In order to apply the perspective projection transformation to an existing transformation,
-     * use {@link #perspectiveOffCenterFov(double, double, double, double, double, double, boolean) perspectiveOffCenterFov()}.
+     * use {@link #perspectiveOffCenterFov(double, double, double, double, double, double, bool) perspectiveOffCenterFov()}.
      * 
-     * @see #perspectiveOffCenterFov(double, double, double, double, double, double, boolean)
+     * @see #perspectiveOffCenterFov(double, double, double, double, double, double, bool)
      * 
      * @param angleLeft
      *            the horizontal angle between left frustum plane and a line perpendicular to the near/far frustum planes.
@@ -11567,7 +11578,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setPerspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
         return setFrustum(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne);
     }
 
@@ -11618,9 +11629,9 @@ struct Matrix4d {
      * the bottom and top frustum planes, respectively, and a line perpendicular to the near and far frustum planes.
      * <p>
      * In order to apply the perspective projection transformation to an existing transformation,
-     * use {@link #perspectiveOffCenterFovLH(double, double, double, double, double, double, boolean) perspectiveOffCenterFovLH()}.
+     * use {@link #perspectiveOffCenterFovLH(double, double, double, double, double, double, bool) perspectiveOffCenterFovLH()}.
      * 
-     * @see #perspectiveOffCenterFovLH(double, double, double, double, double, double, boolean)
+     * @see #perspectiveOffCenterFovLH(double, double, double, double, double, double, bool)
      * 
      * @param angleLeft
      *            the horizontal angle between left frustum plane and a line perpendicular to the near/far frustum planes.
@@ -11645,7 +11656,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setPerspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
         return setFrustumLH(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne);
     }
 
@@ -11659,9 +11670,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspectiveLH(double, double, double, double, boolean) setPerspectiveLH}.
+     * use {@link #setPerspectiveLH(double, double, double, double, bool) setPerspectiveLH}.
      * 
-     * @see #setPerspectiveLH(double, double, double, double, boolean)
+     * @see #setPerspectiveLH(double, double, double, double, bool)
      * 
      * @param fovy
      *            the vertical field of view in radians (must be greater than zero and less than {@link Math#PI PI})
@@ -11682,20 +11693,20 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setPerspectiveLH(fovy, aspect, zNear, zFar, zZeroToOne);
         return perspectiveLHGeneric(fovy, aspect, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d perspectiveLHGeneric(double fovy, double aspect, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d perspectiveLHGeneric(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         double h = Math.tan(fovy * 0.5);
         // calculate right matrix elements
         double rm00 = 1.0 / (h * aspect);
         double rm11 = 1.0 / h;
         double rm22;
         double rm32;
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -11744,9 +11755,9 @@ struct Matrix4d {
      * the perspective projection will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setPerspectiveLH(double, double, double, double, boolean) setPerspectiveLH}.
+     * use {@link #setPerspectiveLH(double, double, double, double, bool) setPerspectiveLH}.
      * 
-     * @see #setPerspectiveLH(double, double, double, double, boolean)
+     * @see #setPerspectiveLH(double, double, double, double, bool)
      * 
      * @param fovy
      *            the vertical field of view in radians (must be greater than zero and less than {@link Math#PI PI})
@@ -11765,7 +11776,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) {
         return perspectiveLH(fovy, aspect, zNear, zFar, zZeroToOne, this);
     }
 
@@ -11840,9 +11851,9 @@ struct Matrix4d {
      * using the given NDC z range of <code>[-1..+1]</code>.
      * <p>
      * In order to apply the perspective projection transformation to an existing transformation,
-     * use {@link #perspectiveLH(double, double, double, double, boolean) perspectiveLH()}.
+     * use {@link #perspectiveLH(double, double, double, double, bool) perspectiveLH()}.
      * 
-     * @see #perspectiveLH(double, double, double, double, boolean)
+     * @see #perspectiveLH(double, double, double, double, bool)
      * 
      * @param fovy
      *            the vertical field of view in radians (must be greater than zero and less than {@link Math#PI PI})
@@ -11861,7 +11872,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspectiveLH(double fovy, double aspect, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setPerspectiveLH(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) {
         double h = Math.tan(fovy * 0.5);
         _m00(1.0 / (h * aspect)).
         _m01(0.0).
@@ -11873,8 +11884,8 @@ struct Matrix4d {
         _m13(0.0).
         _m20(0.0).
         _m21(0.0);
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -11933,11 +11944,11 @@ struct Matrix4d {
      * the frustum transformation will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setFrustum(double, double, double, double, double, double, boolean) setFrustum()}.
+     * use {@link #setFrustum(double, double, double, double, double, double, bool) setFrustum()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#perspective">http://www.songho.ca</a>
      * 
-     * @see #setFrustum(double, double, double, double, double, double, boolean)
+     * @see #setFrustum(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance along the x-axis to the left frustum edge
@@ -11962,12 +11973,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setFrustum(left, right, bottom, top, zNear, zFar, zZeroToOne);
         return frustumGeneric(left, right, bottom, top, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d frustumGeneric(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d frustumGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = (zNear + zNear) / (right - left);
         double rm11 = (zNear + zNear) / (top - bottom);
@@ -11975,8 +11986,8 @@ struct Matrix4d {
         double rm21 = (top + bottom) / (top - bottom);
         double rm22;
         double rm32;
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -12065,11 +12076,11 @@ struct Matrix4d {
      * the frustum transformation will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setFrustum(double, double, double, double, double, double, boolean) setFrustum()}.
+     * use {@link #setFrustum(double, double, double, double, double, double, bool) setFrustum()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#perspective">http://www.songho.ca</a>
      * 
-     * @see #setFrustum(double, double, double, double, double, double, boolean)
+     * @see #setFrustum(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance along the x-axis to the left frustum edge
@@ -12092,7 +12103,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         return frustum(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
     }
 
@@ -12139,11 +12150,11 @@ struct Matrix4d {
      * using the given NDC z range.
      * <p>
      * In order to apply the perspective frustum transformation to an existing transformation,
-     * use {@link #frustum(double, double, double, double, double, double, boolean) frustum()}.
+     * use {@link #frustum(double, double, double, double, double, double, bool) frustum()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#perspective">http://www.songho.ca</a>
      * 
-     * @see #frustum(double, double, double, double, double, double, boolean)
+     * @see #frustum(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance along the x-axis to the left frustum edge
@@ -12166,15 +12177,15 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setFrustum(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setFrustum(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00((zNear + zNear) / (right - left)).
         _m11((zNear + zNear) / (top - bottom)).
         _m20((right + left) / (right - left)).
         _m21((top + bottom) / (top - bottom));
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -12237,11 +12248,11 @@ struct Matrix4d {
      * the frustum transformation will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setFrustumLH(double, double, double, double, double, double, boolean) setFrustumLH()}.
+     * use {@link #setFrustumLH(double, double, double, double, double, double, bool) setFrustumLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#perspective">http://www.songho.ca</a>
      * 
-     * @see #setFrustumLH(double, double, double, double, double, double, boolean)
+     * @see #setFrustumLH(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance along the x-axis to the left frustum edge
@@ -12266,12 +12277,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setFrustumLH(left, right, bottom, top, zNear, zFar, zZeroToOne);
         return frustumLHGeneric(left, right, bottom, top, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d frustumLHGeneric(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne, Matrix4d dest) {
+    private Matrix4d frustumLHGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = (zNear + zNear) / (right - left);
         double rm11 = (zNear + zNear) / (top - bottom);
@@ -12279,8 +12290,8 @@ struct Matrix4d {
         double rm21 = (top + bottom) / (top - bottom);
         double rm22;
         double rm32;
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -12329,11 +12340,11 @@ struct Matrix4d {
      * the frustum transformation will be applied first!
      * <p>
      * In order to set the matrix to a perspective frustum transformation without post-multiplying,
-     * use {@link #setFrustumLH(double, double, double, double, double, double, boolean) setFrustumLH()}.
+     * use {@link #setFrustumLH(double, double, double, double, double, double, bool) setFrustumLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#perspective">http://www.songho.ca</a>
      * 
-     * @see #setFrustumLH(double, double, double, double, double, double, boolean)
+     * @see #setFrustumLH(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance along the x-axis to the left frustum edge
@@ -12356,7 +12367,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         return frustumLH(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
     }
 
@@ -12443,11 +12454,11 @@ struct Matrix4d {
      * using OpenGL's NDC z range of <code>[-1..+1]</code>.
      * <p>
      * In order to apply the perspective frustum transformation to an existing transformation,
-     * use {@link #frustumLH(double, double, double, double, double, double, boolean) frustumLH()}.
+     * use {@link #frustumLH(double, double, double, double, double, double, bool) frustumLH()}.
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#perspective">http://www.songho.ca</a>
      * 
-     * @see #frustumLH(double, double, double, double, double, double, boolean)
+     * @see #frustumLH(double, double, double, double, double, double, bool)
      * 
      * @param left
      *            the distance along the x-axis to the left frustum edge
@@ -12470,15 +12481,15 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setFrustumLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne) {
+    public Matrix4d setFrustumLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00((zNear + zNear) / (right - left)).
         _m11((zNear + zNear) / (top - bottom)).
         _m20((right + left) / (right - left)).
         _m21((top + bottom) / (top - bottom));
-        boolean farInf = zFar > 0 && Double.isInfinite(zFar);
-        boolean nearInf = zNear > 0 && Double.isInfinite(zNear);
+        bool farInf = zFar > 0 && Double.isInfinite(zFar);
+        bool nearInf = zNear > 0 && Double.isInfinite(zNear);
         if (farInf) {
             // See: "Infinite Projection Matrix" (http://www.terathon.com/gdc07_lengyel.pdf)
             double e = 1E-6;
@@ -13252,7 +13263,7 @@ struct Matrix4d {
         return result;
     }
 
-    public boolean equals(Matrix4d m, double delta) {
+    public bool equals(Matrix4d m, double delta) {
         if (this == m)
             return true;
         if (!Runtime.equals(m00, m.m00(), delta))
@@ -13331,7 +13342,7 @@ struct Matrix4d {
         return pick(x, y, width, height, viewport, this);
     }
 
-    public boolean isAffine() {
+    public bool isAffine() {
         return m03 == 0.0 && m13 == 0.0 && m23 == 0.0 && m33 == 1.0;
     }
 
@@ -13509,7 +13520,7 @@ struct Matrix4d {
         // Compute intersection with frustum edges and plane
         double minX = Double.POSITIVE_INFINITY, minY = Double.POSITIVE_INFINITY;
         double maxX = Double.NEGATIVE_INFINITY, maxY = Double.NEGATIVE_INFINITY;
-        boolean intersection = false;
+        bool intersection = false;
         for (int t = 0; t < 3 * 4; t++) {
             double c0X, c0Y, c0Z;
             double c1X, c1Y, c1Z;
@@ -14219,7 +14230,7 @@ struct Matrix4d {
         return this;
     }
 
-    public boolean testPoint(double x, double y, double z) {
+    public bool testPoint(double x, double y, double z) {
         double nxX = m03 + m00, nxY = m13 + m10, nxZ = m23 + m20, nxW = m33 + m30;
         double pxX = m03 - m00, pxY = m13 - m10, pxZ = m23 - m20, pxW = m33 - m30;
         double nyX = m03 + m01, nyY = m13 + m11, nyZ = m23 + m21, nyW = m33 + m31;
@@ -14231,7 +14242,7 @@ struct Matrix4d {
                nzX * x + nzY * y + nzZ * z + nzW >= 0 && pzX * x + pzY * y + pzZ * z + pzW >= 0;
     }
 
-    public boolean testSphere(double x, double y, double z, double r) {
+    public bool testSphere(double x, double y, double z, double r) {
         double invl;
         double nxX = m03 + m00, nxY = m13 + m10, nxZ = m23 + m20, nxW = m33 + m30;
         invl = Math.invsqrt(nxX * nxX + nxY * nxY + nxZ * nxZ);
@@ -14256,7 +14267,7 @@ struct Matrix4d {
                nzX * x + nzY * y + nzZ * z + nzW >= -r && pzX * x + pzY * y + pzZ * z + pzW >= -r;
     }
 
-    public boolean testAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
+    public bool testAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         double nxX = m03 + m00, nxY = m13 + m10, nxZ = m23 + m20, nxW = m33 + m30;
         double pxX = m03 - m00, pxY = m13 - m10, pxZ = m23 - m20, pxW = m33 - m30;
         double nyX = m03 + m01, nyY = m13 + m11, nyZ = m23 + m21, nyW = m33 + m31;
@@ -14397,7 +14408,7 @@ struct Matrix4d {
      *          will hold the resulting view matrix
      */
     public static void projViewFromRectangle(
-            Vector3d eye, Vector3d p, Vector3d x, Vector3d y, double nearFarDist, boolean zeroToOne,
+            Vector3d eye, Vector3d p, Vector3d x, Vector3d y, double nearFarDist, bool zeroToOne,
             Matrix4d projDest, Matrix4d viewDest) {
         double zx = y.y * x.z - y.z * x.y, zy = y.z * x.x - y.x * x.z, zz = y.x * x.y - y.y * x.x;
         double zd = zx * (p.x - eye.x) + zy * (p.y - eye.y) + zz * (p.z - eye.z);
@@ -15344,7 +15355,7 @@ struct Matrix4d {
         return dest._m00(m00)._m01(m01)._m02(m02)._m03(m03)._m10(m10)._m11(m11)._m12(m12)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
 
-    public boolean isFinite() {
+    public bool isFinite() {
         return Math.isFinite(m00) && Math.isFinite(m01) && Math.isFinite(m02) && Math.isFinite(m03) &&
                Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) && Math.isFinite(m13) &&
                Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22) && Math.isFinite(m23) &&

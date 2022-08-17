@@ -1,5 +1,10 @@
 module matrix_3d;
 
+import matrix_2d;
+import matrix_4d;
+import vector_3d;
+
+
 /*
  * The MIT License
  *

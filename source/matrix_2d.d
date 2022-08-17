@@ -1,5 +1,8 @@
 module matrix_2d;
 
+import matrix_3x2d;
+
+
 /*
  * The MIT License
  *
@@ -35,7 +38,7 @@ module matrix_2d;
  *
  * @author Joseph Burton
  */
-struct Matrix2d {
+public struct Matrix2d {
 
     // Defaults to identity
     double m00 = 1.0;
