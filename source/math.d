@@ -2,7 +2,7 @@ module math;
 
 import options;
 
-import std.traits: Select;
+import std.traits: Select, isFloatingPoint, isIntegral;
 
 import std.math: 
 math_pi    = PI, 
@@ -29,7 +29,8 @@ math_max   = max;
 // I'm not indent matching this
 import std.random: 
 math_random = Random,
-math_unpredictableSeed = unpredictableSeed;
+math_unpredictableSeed = unpredictableSeed,
+math_uniform = uniform;
 
 import rounding_mode;
 
@@ -115,20 +116,20 @@ private float[] initThisThing() {
 
 // Credit: https://forum.dlang.org/post/bug-5900-3@http.d.puremagic.com%2Fissues%2F
 /// Converts from degrees to radians.
-@safe pure nothrow
+@safe pure nothrow  Select!(isFloatingPoint!T || isIntegral!T, T, double)
 radians(T)(in T x) {
     return x * (PI / 180);
 }
 
 /// Converts from radians to degrees.
-@safe pure nothrow
+@safe pure nothrow Select!(isFloatingPoint!T || isIntegral!T, T, double)
 degrees(T)(in T x) {
     return x / (PI / 180);
 }
 
-@safe pure nothrow Select!(isfloatingPoint!T || isComplex!T, T, double)
-signum(T)(in T x) {
-    return (T(0) < val) - (val < T(0));
+@safe pure nothrow Select!(isFloatingPoint!T || isIntegral!T, T, double)
+math_signum(T)(in T x) {
+    return (T(0) < x) - (x < T(0));
 }
 
 // Thanks to adr, a Java function in D
@@ -616,19 +617,20 @@ int roundHalfUp(double v) {
 }
 
 double random() {
-    return uniform(0.0, 1.0, Random(unpredictableSeed()));
+    math_random random = math_random(math_unpredictableSeed());
+    return math_uniform(0.0, 1.0, random);
 }
 
 double signum(double v) {
-    return signum(v);
+    return math_signum(v);
 }
 float signum(float v) {
-    return signum(v);
+    return math_signum(v);
 }
 int signum(int v) {
     int r;
 //#ifdef __HAS_INTEGER_SIGNUM__
-    r = Integer.signum(v);
+    r = math_signum(v);
 //#else
     // code from java.lang.Integer.signum(int)
     r = (v >> 31) | (-v >>> 31);
@@ -638,7 +640,7 @@ int signum(int v) {
 int signum(long v) {
     int r;
 //#ifdef __HAS_INTEGER_SIGNUM__
-    r = Long.signum(v);
+    r = cast(int)math_signum(v);
 //#else
     // code from java.lang.Long.signum(long)
     r = cast(int) ((v >> 63) | (-v >>> 63));
