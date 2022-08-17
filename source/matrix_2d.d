@@ -37,16 +37,12 @@ module matrix_2d;
  */
 struct Matrix2d {
 
-    double m00, m01 = 0.0;
-    double m10, m11 = 0.0;
+    // Defaults to identity
+    double m00 = 1.0;
+    double m01 = 0.0;
+    double m10 = 0.0;
+    double m11 = 1.0;
 
-    /**
-     * Create a new {@link Matrix2d} and set it to {@link #identity() identity}.
-     */
-    this() {
-        m00 = 1.0;
-        m11 = 1.0;
-    }
 
     /**
      * Create a new {@link Matrix2d} and make it a copy of the given matrix.
