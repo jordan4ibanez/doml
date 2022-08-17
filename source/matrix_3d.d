@@ -640,7 +640,7 @@ struct Matrix3d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix3d set(double m[]) {
+    public Matrix3d set(double[] m) {
         m00 = m[0];
         m01 = m[1];
         m02 = m[2];
