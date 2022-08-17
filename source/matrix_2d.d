@@ -216,35 +216,17 @@ struct Matrix2d {
      *          the matrix to copy the elements from
      * @return this
      */
-    public Matrix2d set(Matrix2dc m) {
-        if (m instanceof Matrix2d) {
-            MemUtil.INSTANCE.copy((Matrix2d) m, this);
-        } else {
-            setMatrix2dc(m);
-        }
+    public Matrix2d set(Matrix2d m) {
+        setMatrix2d(m);
         return this;
     }
-    private void setMatrix2dc(Matrix2dc mat) {
+    private void setMatrix2dc(Matrix2d mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
         m11 = mat.m11();
     }
 
-    /**
-     * Set the elements of this matrix to the ones in <code>m</code>.
-     *
-     * @param m
-     *          the matrix to copy the elements from
-     * @return this
-     */
-    public Matrix2d set(Matrix2fc m) {
-        m00 = m.m00();
-        m01 = m.m01();
-        m10 = m.m10();
-        m11 = m.m11();
-        return this;
-    }
 
     /**
      * Set the elements of this matrix to the left 2x2 submatrix of <code>m</code>.
@@ -253,52 +235,11 @@ struct Matrix2d {
      *          the matrix to copy the elements from
      * @return this
      */
-    public Matrix2d set(Matrix3x2dc m) {
-        if (m instanceof Matrix3x2d) {
-            MemUtil.INSTANCE.copy((Matrix3x2d) m, this);
-        } else {
-            setMatrix3x2dc(m);
-        }
+    public Matrix2d set(Matrix3x2d m) {
+        setMatrix3x2dc(m);
         return this;
     }
-    private void setMatrix3x2dc(Matrix3x2dc mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
-    }
-
-    /**
-     * Set the elements of this matrix to the left 2x2 submatrix of <code>m</code>.
-     *
-     * @param m
-     *          the matrix to copy the elements from
-     * @return this
-     */
-    public Matrix2d set(Matrix3x2fc m) {
-        m00 = m.m00();
-        m01 = m.m01();
-        m10 = m.m10();
-        m11 = m.m11();
-        return this;
-    }
-
-    /**
-     * Set the elements of this matrix to the upper left 2x2 of the given {@link Matrix3dc}.
-     *
-     * @param m
-     *          the {@link Matrix3dc} to copy the values from
-     * @return this
-     */
-    public Matrix2d set(Matrix3dc m) {
-        if (m instanceof Matrix3d) {
-            MemUtil.INSTANCE.copy((Matrix3d) m, this);
-        } else {
-            setMatrix3dc(m);
-        }
-        return this;
-    }
-    private void setMatrix3dc(Matrix3dc mat) {
+    private void setMatrix3x2d(Matrix3x2d mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
@@ -309,16 +250,20 @@ struct Matrix2d {
      * Set the elements of this matrix to the upper left 2x2 of the given {@link Matrix3dc}.
      *
      * @param m
-     *          the {@link Matrix3fc} to copy the values from
+     *          the {@link Matrix3dc} to copy the values from
      * @return this
      */
-    public Matrix2d set(Matrix3fc m) {
-        m00 = m.m00();
-        m01 = m.m01();
-        m10 = m.m10();
-        m11 = m.m11();
+    public Matrix2d set(Matrix3d m) {
+        setMatrix3d(m);
         return this;
     }
+    private void setMatrix3d(Matrix3d mat) {
+        m00 = mat.m00();
+        m01 = mat.m01();
+        m10 = mat.m10();
+        m11 = mat.m11();
+    }
+
 
     /**
      * Multiply this matrix by the supplied <code>right</code> matrix.
@@ -332,11 +277,11 @@ struct Matrix2d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    public Matrix2d mul(Matrix2dc right) {
+    public Matrix2d mul(Matrix2d right) {
         return mul(right, this);
     }
 
-    public Matrix2d mul(Matrix2dc right, Matrix2d dest) {
+    public Matrix2d mul(Matrix2d right, Matrix2d dest) {
         double nm00 = m00 * right.m00() + m10 * right.m01();
         double nm01 = m01 * right.m00() + m11 * right.m01();
         double nm10 = m00 * right.m10() + m10 * right.m11();
