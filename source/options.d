@@ -24,114 +24,109 @@ module options;
  * THE SOFTWARE.
  */
  
-package org.DOML;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Arrays;
+// import std.format: format;
 //#ifndef __GWT__
-import java.util.Locale;
 //#endif
 
 /**
- * Utility class for reading system properties.
- * 
- * @author Kai Burjack
- */
-public final class Options {
+* Utility class for reading system properties.
+* 
+* @author Kai Burjack
+*/
+
+public static struct Options {
+    /**
+    * Whether certain debugging checks should be made, such as that only direct NIO Buffers are used when Unsafe is active,
+    * and a proxy should be created on calls to readOnlyView().
+    */
+    public static const bool DEBUG = false;//hasOption(System.getProperty("DOML.debug", "false"));
+
+    //#ifdef __HAS_UNSAFE__
+    /**
+    * Whether <i>not</i> to use sun.misc.Unsafe when copying memory with MemUtil.
+    */
+    public static const bool NO_UNSAFE = false;//hasOption(System.getProperty("DOML.nounsafe", "false"));
+    /**
+    * Whether to <i>force</i> the use of sun.misc.Unsafe when copying memory with MemUtil.
+    */
+    public static const bool FORCE_UNSAFE = false; //hasOption(System.getProperty("DOML.forceUnsafe", "false"));
+    //#endif
 
     /**
-     * Whether certain debugging checks should be made, such as that only direct NIO Buffers are used when Unsafe is active,
-     * and a proxy should be created on calls to readOnlyView().
-     */
-    public static final boolean DEBUG = hasOption(System.getProperty("DOML.debug", "false"));
-
-//#ifdef __HAS_UNSAFE__
-    /**
-     * Whether <i>not</i> to use sun.misc.Unsafe when copying memory with MemUtil.
-     */
-    public static final boolean NO_UNSAFE = hasOption(System.getProperty("DOML.nounsafe", "false"));
-    /**
-     * Whether to <i>force</i> the use of sun.misc.Unsafe when copying memory with MemUtil.
-     */
-    public static final boolean FORCE_UNSAFE = hasOption(System.getProperty("DOML.forceUnsafe", "false"));
-//#endif
+    * Whether fast approximations of some java.lang.Math operations should be used.
+    */
+    public static const bool FASTMATH = false;//hasOption(System.getProperty("DOML.fastmath", "false"));
 
     /**
-     * Whether fast approximations of some java.lang.Math operations should be used.
-     */
-    public static final boolean FASTMATH = hasOption(System.getProperty("DOML.fastmath", "false"));
+    * When {@link #FASTMATH} is <code>true</code>, whether to use a lookup table for sin/cos.
+    */
+    public static const bool SIN_LOOKUP = false;//hasOption(System.getProperty("DOML.sinLookup", "false"));
 
     /**
-     * When {@link #FASTMATH} is <code>true</code>, whether to use a lookup table for sin/cos.
-     */
-    public static final boolean SIN_LOOKUP = hasOption(System.getProperty("DOML.sinLookup", "false"));
+    * When {@link #SIN_LOOKUP} is <code>true</code>, this determines the table size.
+    */
+    public static const int SIN_LOOKUP_BITS = 14;//Integer.parseInt(System.getProperty("DOML.sinLookup.bits", "14"));
+
+    //#ifndef __GWT__
+    /**
+    * Whether to use a {@link NumberFormat} producing scientific notation output when formatting matrix,
+    * vector and quaternion components to strings.
+    */
+    public static const bool useNumberFormat = true;// hasOption(System.getProperty("DOML.format", "true"));
+    //#endif
+
+    //#ifdef __HAS_MATH_FMA__
+    /**
+    * Whether to try using java.lang.Math.fma() in most matrix/vector/quaternion operations if it is available.
+    * If the CPU does <i>not</i> support it, it will be a lot slower than `a*b+c` and potentially generate a lot of memory allocations
+    * for the emulation with `java.util.BigDecimal`, though.
+    */
+    public static const bool USE_MATH_FMA = false;//hasOption(System.getProperty("DOML.useMathFma", "false"));
+    //#endif
+
+    //#ifndef __GWT__
+    /**
+    * When {@link #useNumberFormat} is <code>true</code> then this determines the number of decimal digits
+    * produced in the formatted numbers.
+    */
+    //#else
+    /**
+    * Determines the number of decimal digits produced in the formatted numbers.
+    */
+    //#endif
+    public static const int numberFormatDecimals = 3;//Integer.parseInt(System.getProperty("DOML.format.decimals", "3"));
 
     /**
-     * When {@link #SIN_LOOKUP} is <code>true</code>, this determines the table size.
-     */
-    public static final int SIN_LOOKUP_BITS = Integer.parseInt(System.getProperty("DOML.sinLookup.bits", "14"));
-
-//#ifndef __GWT__
-    /**
-     * Whether to use a {@link NumberFormat} producing scientific notation output when formatting matrix,
-     * vector and quaternion components to strings.
-     */
-    public static final boolean useNumberFormat = hasOption(System.getProperty("DOML.format", "true"));
-//#endif
-
-//#ifdef __HAS_MATH_FMA__
-    /**
-     * Whether to try using java.lang.Math.fma() in most matrix/vector/quaternion operations if it is available.
-     * If the CPU does <i>not</i> support it, it will be a lot slower than `a*b+c` and potentially generate a lot of memory allocations
-     * for the emulation with `java.util.BigDecimal`, though.
-     */
-    public static final boolean USE_MATH_FMA = hasOption(System.getProperty("DOML.useMathFma", "false"));
-//#endif
-
-//#ifndef __GWT__
-    /**
-     * When {@link #useNumberFormat} is <code>true</code> then this determines the number of decimal digits
-     * produced in the formatted numbers.
-     */
-//#else
-    /**
-     * Determines the number of decimal digits produced in the formatted numbers.
-     */
-//#endif
-    public static final int numberFormatDecimals = Integer.parseInt(System.getProperty("DOML.format.decimals", "3"));
-
-    /**
-     * The {@link NumberFormat} used to format all numbers throughout all DOML classes.
-     */
-    public static final NumberFormat NUMBER_FORMAT = decimalFormat();
-
-    private Options() {
+    * The {@link NumberFormat} used to format all numbers throughout all DOML classes.
+    */
+    // public const NumberFormat NUMBER_FORMAT = decimalFormat();
+    /*
+    private Options(){
     }
 
     private static NumberFormat decimalFormat() {
-        NumberFormat df;
-//#ifndef __GWT__
-        if (useNumberFormat) {
-//#endif
-            char[] prec = new char[numberFormatDecimals];
-            Arrays.fill(prec, '0');
-            df = new DecimalFormat(" 0." + new String(prec) + "E0;-");
-//#ifndef __GWT__
-        } else {
-            df = NumberFormat.getNumberInstance(Locale.ENGLISH);
-            df.setGroupingUsed(false);
-        }
-//#endif
-        return df;
+    NumberFormat df;
+    //#ifndef __GWT__
+    if (useNumberFormat) {
+    //#endif
+        char[] prec = new char[numberFormatDecimals];
+        Arrays.fill(prec, '0');
+        df = new DecimalFormat(" 0." + new String(prec) + "E0;-");
+    //#ifndef __GWT__
+    } else {
+        df = NumberFormat.getNumberInstance(Locale.ENGLISH);
+        df.setGroupingUsed(false);
+    }
+    //#endif
+    return df;
     }
 
     private static boolean hasOption(String v) {
-        if (v == null)
-            return false;
-        if (v.trim().length() == 0)
-            return true;
-        return Boolean.valueOf(v).booleanValue();
+    if (v == null)
+        return false;
+    if (v.trim().length() == 0)
+        return true;
+    return Boolean.valueOf(v).booleanValue();
     }
-
+    */
 }
