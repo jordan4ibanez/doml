@@ -110,7 +110,7 @@ struct Vector3d {
      * @param v
      *          provides the initial values for the new vector
      */
-    this(Vector3dc v) {
+    this(Vector3d v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -125,7 +125,7 @@ struct Vector3d {
      * @param z
      *          the z component
      */
-    this(Vector2dc v, double z) {
+    this(Vector2d v, double z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -176,7 +176,7 @@ struct Vector3d {
      *          the vector to set this vector's components from
      * @return this
      */
-    public Vector3d set(Vector3dc v) {
+    public Vector3d set(Vector3d v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -202,12 +202,12 @@ struct Vector3d {
      * and the z component from the given <code>z</code>
      *
      * @param v
-     *          the {@link Vector2dc} to copy the values from
+     *          the {@link Vector2d} to copy the values from
      * @param z
      *          the z component
      * @return this
      */
-    public Vector3d set(Vector2dc v, double z) {
+    public Vector3d set(Vector2d v, double z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -325,14 +325,14 @@ struct Vector3d {
      *          the vector to subtract from this
      * @return this
      */
-    public Vector3d sub(Vector3dc v) {
+    public Vector3d sub(Vector3d v) {
         this.x = x - v.x();
         this.y = y - v.y();
         this.z = z - v.z();
         return this;
     }
 
-    public Vector3d sub(Vector3dc v, Vector3d dest) {
+    public Vector3d sub(Vector3d v, Vector3d dest) {
         dest.x = x - v.x();
         dest.y = y - v.y();
         dest.z = z - v.z();
@@ -372,14 +372,14 @@ struct Vector3d {
      *          the vector to add
      * @return this
      */
-    public Vector3d add(Vector3dc v) {
+    public Vector3d add(Vector3d v) {
         this.x = x + v.x();
         this.y = y + v.y();
         this.z = z + v.z();
         return this;
     }
 
-    public Vector3d add(Vector3dc v, Vector3d dest) {
+    public Vector3d add(Vector3d v, Vector3d dest) {
         dest.x = x + v.x();
         dest.y = y + v.y();
         dest.z = z + v.z();
@@ -421,7 +421,7 @@ struct Vector3d {
      *          the second multiplicand
      * @return this
      */
-    public Vector3d fma(Vector3dc a, Vector3dc b) {
+    public Vector3d fma(Vector3d a, Vector3d b) {
         this.x = Math.fma(a.x(), b.x(), x);
         this.y = Math.fma(a.y(), b.y(), y);
         this.z = Math.fma(a.z(), b.z(), z);
@@ -437,21 +437,21 @@ struct Vector3d {
      *          the second multiplicand
      * @return this
      */
-    public Vector3d fma(double a, Vector3dc b) {
+    public Vector3d fma(double a, Vector3d b) {
         this.x = Math.fma(a, b.x(), x);
         this.y = Math.fma(a, b.y(), y);
         this.z = Math.fma(a, b.z(), z);
         return this;
     }
 
-    public Vector3d fma(Vector3dc a, Vector3dc b, Vector3d dest) {
+    public Vector3d fma(Vector3d a, Vector3d b, Vector3d dest) {
         dest.x = Math.fma(a.x(), b.x(), x);
         dest.y = Math.fma(a.y(), b.y(), y);
         dest.z = Math.fma(a.z(), b.z(), z);
         return dest;
     }
 
-    public Vector3d fma(double a, Vector3dc b, Vector3d dest) {
+    public Vector3d fma(double a, Vector3d b, Vector3d dest) {
         dest.x = Math.fma(a, b.x(), x);
         dest.y = Math.fma(a, b.y(), y);
         dest.z = Math.fma(a, b.z(), z);
@@ -468,7 +468,7 @@ struct Vector3d {
      *          the addend
      * @return this
      */
-    public Vector3d mulAdd(Vector3dc a, Vector3dc b) {
+    public Vector3d mulAdd(Vector3d a, Vector3d b) {
         this.x = Math.fma(x, a.x(), b.x());
         this.y = Math.fma(y, a.y(), b.y());
         this.z = Math.fma(z, a.z(), b.z());
@@ -485,21 +485,21 @@ struct Vector3d {
      *          the addend
      * @return this
      */
-    public Vector3d mulAdd(double a, Vector3dc b) {
+    public Vector3d mulAdd(double a, Vector3d b) {
         this.x = Math.fma(x, a, b.x());
         this.y = Math.fma(y, a, b.y());
         this.z = Math.fma(z, a, b.z());
         return this;
     }
 
-    public Vector3d mulAdd(Vector3dc a, Vector3dc b, Vector3d dest) {
+    public Vector3d mulAdd(Vector3d a, Vector3d b, Vector3d dest) {
         dest.x = Math.fma(x, a.x(), b.x());
         dest.y = Math.fma(y, a.y(), b.y());
         dest.z = Math.fma(z, a.z(), b.z());
         return dest;
     }
 
-    public Vector3d mulAdd(double a, Vector3dc b, Vector3d dest) {
+    public Vector3d mulAdd(double a, Vector3d b, Vector3d dest) {
         dest.x = Math.fma(x, a, b.x());
         dest.y = Math.fma(y, a, b.y());
         dest.z = Math.fma(z, a, b.z());
@@ -507,20 +507,20 @@ struct Vector3d {
     }
 
     /**
-     * Multiply this Vector3d component-wise by another Vector3dc.
+     * Multiply this Vector3d component-wise by another Vector3d.
      * 
      * @param v
      *          the vector to multiply by
      * @return this
      */
-    public Vector3d mul(Vector3dc v) {
+    public Vector3d mul(Vector3d v) {
         this.x = x * v.x();
         this.y = y * v.y();
         this.z = z * v.z();
         return this;
     }
 
-    public Vector3d mul(Vector3dc v, Vector3d dest) {
+    public Vector3d mul(Vector3d v, Vector3d dest) {
         dest.x = x * v.x();
         dest.y = y * v.y();
         dest.z = z * v.z();
@@ -528,7 +528,7 @@ struct Vector3d {
     }
 
     /**
-     * Divide this Vector3d component-wise by another Vector3dc.
+     * Divide this Vector3d component-wise by another Vector3d.
      * 
      * @param v
      *          the vector to divide by
@@ -542,14 +542,14 @@ struct Vector3d {
     }
 
 
-    public Vector3d div(Vector3dc v, Vector3d dest) {
+    public Vector3d div(Vector3d v, Vector3d dest) {
         dest.x = x / v.x();
         dest.y = y / v.y();
         dest.z = z / v.z();
         return dest;
     }
 
-    public Vector3d mulProject(Matrix4dc mat, double w, Vector3d dest) {
+    public Vector3d mulProject(Matrix4d mat, double w, Vector3d dest) {
         double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33() * w)));
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
@@ -560,7 +560,7 @@ struct Vector3d {
         return dest;
     }
 
-    public Vector3d mulProject(Matrix4dc mat, Vector3d dest) {
+    public Vector3d mulProject(Matrix4d mat, Vector3d dest) {
         double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30()))) * invW;
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31()))) * invW;
@@ -580,7 +580,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector3d mulProject(Matrix4dc mat) {
+    public Vector3d mulProject(Matrix4d mat) {
         double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30()))) * invW;
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31()))) * invW;
@@ -599,7 +599,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector3d mul(Matrix3dc mat) {
+    public Vector3d mul(Matrix3d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
@@ -609,7 +609,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d mul(Matrix3dc mat, Vector3d dest) {
+    public Vector3d mul(Matrix3d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
@@ -627,7 +627,7 @@ struct Vector3d {
      *          the matrix
      * @return this
      */
-    public Vector3d mul(Matrix3x2dc mat) {
+    public Vector3d mul(Matrix3x2d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         this.x = rx;
@@ -635,7 +635,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d mul(Matrix3x2dc mat, Vector3d dest) {
+    public Vector3d mul(Matrix3x2d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         dest.x = rx;
@@ -652,7 +652,7 @@ struct Vector3d {
      *          the matrix
      * @return this
      */
-    public Vector3d mulTranspose(Matrix3dc mat) {
+    public Vector3d mulTranspose(Matrix3d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
         double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
         double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, mat.m22() * z));
@@ -662,7 +662,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d mulTranspose(Matrix3dc mat, Vector3d dest) {
+    public Vector3d mulTranspose(Matrix3d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
         double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
         double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, mat.m22() * z));
@@ -681,7 +681,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector3d mulPosition(Matrix4dc mat) {
+    public Vector3d mulPosition(Matrix4d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
@@ -700,7 +700,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector3d mulPosition(Matrix4x3dc mat) {
+    public Vector3d mulPosition(Matrix4x3d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
@@ -711,7 +711,7 @@ struct Vector3d {
     }
 
 
-    public Vector3d mulPosition(Matrix4dc mat, Vector3d dest) {
+    public Vector3d mulPosition(Matrix4d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
@@ -721,7 +721,7 @@ struct Vector3d {
         return dest;
     }
 
-    public Vector3d mulPosition(Matrix4x3dc mat, Vector3d dest) {
+    public Vector3d mulPosition(Matrix4x3d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
@@ -740,7 +740,7 @@ struct Vector3d {
      *          the matrix whose transpose to multiply this vector by
      * @return this
      */
-    public Vector3d mulTransposePosition(Matrix4dc mat) {
+    public Vector3d mulTransposePosition(Matrix4d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, Math.fma(mat.m02(), z, mat.m03())));
         double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, Math.fma(mat.m12(), z, mat.m13())));
         double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, Math.fma(mat.m22(), z, mat.m23())));
@@ -750,7 +750,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d mulTransposePosition(Matrix4dc mat, Vector3d dest) {
+    public Vector3d mulTransposePosition(Matrix4d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, Math.fma(mat.m02(), z, mat.m03())));
         double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, Math.fma(mat.m12(), z, mat.m13())));
         double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, Math.fma(mat.m22(), z, mat.m23())));
@@ -773,7 +773,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return the <i>w</i> component of the resulting 4D vector after multiplication
      */
-    public double mulPositionW(Matrix4dc mat) {
+    public double mulPositionW(Matrix4d mat) {
         double w = Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
@@ -784,7 +784,7 @@ struct Vector3d {
         return w;
     }
 
-    public double mulPositionW(Matrix4dc mat, Vector3d dest) {
+    public double mulPositionW(Matrix4d mat, Vector3d dest) {
         double w = Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
@@ -805,7 +805,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector3d mulDirection(Matrix4dc mat) {
+    public Vector3d mulDirection(Matrix4d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
@@ -824,7 +824,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector3d mulDirection(Matrix4x3dc mat) {
+    public Vector3d mulDirection(Matrix4x3d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
@@ -835,7 +835,7 @@ struct Vector3d {
     }
 
 
-    public Vector3d mulDirection(Matrix4dc mat, Vector3d dest) {
+    public Vector3d mulDirection(Matrix4d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
@@ -845,7 +845,7 @@ struct Vector3d {
         return dest;
     }
 
-    public Vector3d mulDirection(Matrix4x3dc mat, Vector3d dest) {
+    public Vector3d mulDirection(Matrix4x3d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
@@ -865,7 +865,7 @@ struct Vector3d {
      *          the matrix whose transpose to multiply this vector by
      * @return this
      */
-    public Vector3d mulTransposeDirection(Matrix4dc mat) {
+    public Vector3d mulTransposeDirection(Matrix4d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
         double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
         double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, mat.m22() * z));
@@ -875,7 +875,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d mulTransposeDirection(Matrix4dc mat, Vector3d dest) {
+    public Vector3d mulTransposeDirection(Matrix4d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
         double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
         double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, mat.m22() * z));
@@ -940,15 +940,15 @@ struct Vector3d {
      *          the quaternion to rotate this vector
      * @return this
      */
-    public Vector3d rotate(Quaterniondc quat) {
+    public Vector3d rotate(Quaterniond quat) {
         return quat.transform(this, this);
     }
 
-    public Vector3d rotate(Quaterniondc quat, Vector3d dest) {
+    public Vector3d rotate(Quaterniond quat, Vector3d dest) {
         return quat.transform(this, dest);
     }
 
-    public Quaterniond rotationTo(Vector3dc toDir, Quaterniond dest) {
+    public Quaterniond rotationTo(Vector3d toDir, Quaterniond dest) {
         return dest.rotationTo(this, toDir);
     }
 
@@ -1220,7 +1220,7 @@ struct Vector3d {
      *          the other vector
      * @return this
      */
-    public Vector3d cross(Vector3dc v) {
+    public Vector3d cross(Vector3d v) {
         double rx = Math.fma(y, v.z(), -z * v.y());
         double ry = Math.fma(z, v.x(), -x * v.z());
         double rz = Math.fma(x, v.y(), -y * v.x());
@@ -1251,7 +1251,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d cross(Vector3dc v, Vector3d dest) {
+    public Vector3d cross(Vector3d v, Vector3d dest) {
         double rx = Math.fma(y, v.z(), -z * v.y());
         double ry = Math.fma(z, v.x(), -x * v.z());
         double rz = Math.fma(x, v.y(), -y * v.x());
@@ -1271,7 +1271,7 @@ struct Vector3d {
         return dest;
     }
 
-    public double distance(Vector3dc v) {
+    public double distance(Vector3d v) {
         double dx = this.x - v.x();
         double dy = this.y - v.y();
         double dz = this.z - v.z();
@@ -1285,7 +1285,7 @@ struct Vector3d {
         return Math.sqrt(Math.fma(dx, dx, Math.fma(dy, dy, dz * dz)));
     }
 
-    public double distanceSquared(Vector3dc v) {
+    public double distanceSquared(Vector3d v) {
         double dx = this.x - v.x();
         double dy = this.y - v.y();
         double dz = this.z - v.z();
@@ -1344,7 +1344,7 @@ struct Vector3d {
         return Math.fma(dx, dx, Math.fma(dy, dy, dz * dz));
     }
 
-    public double dot(Vector3dc v) {
+    public double dot(Vector3d v) {
         return Math.fma(this.x, v.x(), Math.fma(this.y, v.y(), this.z * v.z()));
     }
 
@@ -1352,14 +1352,14 @@ struct Vector3d {
         return Math.fma(this.x, x, Math.fma(this.y, y, this.z * z));
     }
 
-    public double angleCos(Vector3dc v) {
+    public double angleCos(Vector3d v) {
         double length1Squared = Math.fma(x, x, Math.fma(y, y, z * z));
         double length2Squared = Math.fma(v.x(), v.x(), Math.fma(v.y(), v.y(), v.z() * v.z()));
         double dot = Math.fma(x, v.x(), Math.fma(y, v.y(), z * v.z()));
         return dot / Math.sqrt(length1Squared * length2Squared);
     }
 
-    public double angle(Vector3dc v) {
+    public double angle(Vector3d v) {
         double cos = angleCos(v);
         // This is because sometimes cos goes above 1 or below -1 because of lost precision
         cos = cos < 1 ? cos : 1;
@@ -1367,7 +1367,7 @@ struct Vector3d {
         return Math.acos(cos);
     }
 
-    public double angleSigned(Vector3dc v, Vector3dc n) {
+    public double angleSigned(Vector3d v, Vector3d n) {
         double x = v.x();
         double y = v.y();
         double z = v.z();
@@ -1389,14 +1389,14 @@ struct Vector3d {
      *          the other vector
      * @return this
      */
-    public Vector3d min(Vector3dc v) {
+    public Vector3d min(Vector3d v) {
         this.x = x < v.x() ? x : v.x();
         this.y = y < v.y() ? y : v.y();
         this.z = z < v.z() ? z : v.z();
         return this;
     }
 
-    public Vector3d min(Vector3dc v, Vector3d dest) {
+    public Vector3d min(Vector3d v, Vector3d dest) {
         dest.x = x < v.x() ? x : v.x();
         dest.y = y < v.y() ? y : v.y();
         dest.z = z < v.z() ? z : v.z();
@@ -1410,14 +1410,14 @@ struct Vector3d {
      *          the other vector
      * @return this
      */
-    public Vector3d max(Vector3dc v) {
+    public Vector3d max(Vector3d v) {
         this.x = x > v.x() ? x : v.x();
         this.y = y > v.y() ? y : v.y();
         this.z = z > v.z() ? z : v.z();
         return this;
     }
 
-    public Vector3d max(Vector3dc v, Vector3d dest) {
+    public Vector3d max(Vector3d v, Vector3d dest) {
         dest.x = x > v.x() ? x : v.x();
         dest.y = y > v.y() ? y : v.y();
         dest.z = z > v.z() ? z : v.z();
@@ -1539,12 +1539,12 @@ struct Vector3d {
         return true;
     }
 
-    public boolean equals(Vector3dc v, double delta) {
+    public boolean equals(Vector3d v, double delta) {
         if (this == v)
             return true;
         if (v == null)
             return false;
-        if (!(v instanceof Vector3dc))
+        if (!(v instanceof Vector3d))
             return false;
         if (!Runtime.equals(x, v.x(), delta))
             return false;
@@ -1572,7 +1572,7 @@ struct Vector3d {
      *          the vector to reflect about
      * @return this
      */
-    public Vector3d reflect(Vector3dc normal) {
+    public Vector3d reflect(Vector3d normal) {
         double x = normal.x();
         double y = normal.y();
         double z = normal.z();
@@ -1602,7 +1602,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d reflect(Vector3dc normal, Vector3d dest) {
+    public Vector3d reflect(Vector3d normal, Vector3d dest) {
         double x = normal.x();
         double y = normal.y();
         double z = normal.z();
@@ -1628,7 +1628,7 @@ struct Vector3d {
      *          the other vector
      * @return this
      */
-    public Vector3d half(Vector3dc other) {
+    public Vector3d half(Vector3d other) {
         return this.set(this).add(other.x(), other.y(), other.z()).normalize();
     }
 
@@ -1647,7 +1647,7 @@ struct Vector3d {
         return this.set(this).add(x, y, z).normalize();
     }
 
-    public Vector3d half(Vector3dc other, Vector3d dest) {
+    public Vector3d half(Vector3d other, Vector3d dest) {
         return dest.set(this).add(other.x(), other.y(), other.z()).normalize();
     }
 
@@ -1655,7 +1655,7 @@ struct Vector3d {
         return dest.set(this).add(x, y, z).normalize();
     }
 
-    public Vector3d smoothStep(Vector3dc v, double t, Vector3d dest) {
+    public Vector3d smoothStep(Vector3d v, double t, Vector3d dest) {
         double t2 = t * t;
         double t3 = t2 * t;
         dest.x = (x + x - v.x() - v.x()) * t3 + (3.0 * v.x() - 3.0 * x) * t2 + x * t + x;
@@ -1664,7 +1664,7 @@ struct Vector3d {
         return dest;
     }
 
-    public Vector3d hermite(Vector3dc t0, Vector3dc v1, Vector3dc t1, double t, Vector3d dest) {
+    public Vector3d hermite(Vector3d t0, Vector3d v1, Vector3d t1, double t, Vector3d dest) {
         double t2 = t * t;
         double t3 = t2 * t;
         dest.x = (x + x - v1.x() - v1.x() + t1.x() + t0.x()) * t3 + (3.0 * v1.x() - 3.0 * x - t0.x() - t0.x() - t1.x()) * t2 + x * t + x;
@@ -1686,14 +1686,14 @@ struct Vector3d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    public Vector3d lerp(Vector3dc other, double t) {
+    public Vector3d lerp(Vector3d other, double t) {
         this.x = Math.fma(other.x() - x, t, x);
         this.y = Math.fma(other.y() - y, t, y);
         this.z = Math.fma(other.z() - z, t, z);
         return this;
     }
 
-    public Vector3d lerp(Vector3dc other, double t, Vector3d dest) {
+    public Vector3d lerp(Vector3d other, double t, Vector3d dest) {
         dest.x = Math.fma(other.x() - x, t, x);
         dest.y = Math.fma(other.y() - y, t, y);
         dest.z = Math.fma(other.z() - z, t, z);
@@ -1751,7 +1751,7 @@ struct Vector3d {
         return 2;
     }
 
-    public Vector3d orthogonalize(Vector3dc v, Vector3d dest) {
+    public Vector3d orthogonalize(Vector3d v, Vector3d dest) {
         /*
          * http://lolengine.net/blog/2013/09/21/picking-orthogonal-vector-combing-coconuts
          */
@@ -1781,11 +1781,11 @@ struct Vector3d {
      *          the reference vector which the result should be orthogonal to
      * @return this
      */
-    public Vector3d orthogonalize(Vector3dc v) {
+    public Vector3d orthogonalize(Vector3d v) {
         return orthogonalize(v, this);
     }
 
-    public Vector3d orthogonalizeUnit(Vector3dc v, Vector3d dest) {
+    public Vector3d orthogonalizeUnit(Vector3d v, Vector3d dest) {
         return orthogonalize(v, dest);
     }
 
@@ -1800,7 +1800,7 @@ struct Vector3d {
      *          the reference unit vector which the result should be orthogonal to
      * @return this
      */
-    public Vector3d orthogonalizeUnit(Vector3dc v) {
+    public Vector3d orthogonalizeUnit(Vector3d v) {
         return orthogonalizeUnit(v, this);
     }
 
