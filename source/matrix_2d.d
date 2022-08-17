@@ -37,8 +37,8 @@ module matrix_2d;
  */
 struct Matrix2d {
 
-    public double m00, m01 = 0.0;
-    public double m10, m11 = 0.0;
+    double m00, m01 = 0.0;
+    double m10, m11 = 0.0;
 
     /**
      * Create a new {@link Matrix2d} and set it to {@link #identity() identity}.
@@ -358,7 +358,7 @@ struct Matrix2d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix2d set(double m[]) {
+    public Matrix2d set(double[] m) {
         MemUtil.INSTANCE.copy(m, 0, this);
         return this;
     }
