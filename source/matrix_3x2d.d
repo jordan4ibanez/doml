@@ -34,7 +34,7 @@ module matrix_3x2d;
  * 
  * @author Kai Burjack
  */
-public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
+struct Matrix3x2d {
 
     private static final long serialVersionUID = 1L;
 
