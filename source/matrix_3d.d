@@ -69,17 +69,7 @@ struct Matrix3d {
      * @param mat
      *          the matrix to initialize this matrix with
      */
-    public Matrix3d(Matrix3dc mat) {
-        set(mat);
-    }
-
-    /**
-     * Create a new {@link Matrix3d} and initialize it with the values from the given matrix.
-     * 
-     * @param mat
-     *          the matrix to initialize this matrix with
-     */
-    public Matrix3d(Matrix3fc mat) {
+    this(Matrix3d mat) {
         set(mat);
     }
 
