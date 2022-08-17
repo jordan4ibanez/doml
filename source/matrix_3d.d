@@ -394,7 +394,7 @@ struct Matrix3d {
      *          the matrix to copy the elements from
      * @return this
      */
-    public Matrix3d set(Matrix4x3dc m) {
+    public Matrix3d set(Matrix4x3d m) {
         m00 = m.m00();
         m01 = m.m01();
         m02 = m.m02();
@@ -407,25 +407,6 @@ struct Matrix3d {
         return this;
     }
 
-    /**
-     * Set the elements of this matrix to the upper left 3x3 of the given {@link Matrix4fc}.
-     *
-     * @param mat
-     *          the {@link Matrix4fc} to copy the values from
-     * @return this
-     */
-    public Matrix3d set(Matrix4fc mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m02 = mat.m02();
-        m10 = mat.m10();
-        m11 = mat.m11();
-        m12 = mat.m12();
-        m20 = mat.m20();
-        m21 = mat.m21();
-        m22 = mat.m22();
-        return this;
-    }
 
     /**
      * Set the elements of this matrix to the upper left 3x3 of the given {@link Matrix4dc}.
@@ -434,7 +415,7 @@ struct Matrix3d {
      *          the {@link Matrix4dc} to copy the values from
      * @return this
      */
-    public Matrix3d set(Matrix4dc mat) {
+    public Matrix3d set(Matrix4d mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m02 = mat.m02();
@@ -447,28 +428,6 @@ struct Matrix3d {
         return this;
     }
 
-    /**
-     * Set the upper left 2x2 submatrix of this {@link Matrix3d} to the given {@link Matrix2fc}
-     * and the rest to identity.
-     *
-     * @see #Matrix3d(Matrix2fc)
-     *
-     * @param mat
-     *          the {@link Matrix2fc}
-     * @return this
-     */
-    public Matrix3d set(Matrix2fc mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m02 = 0.0;
-        m10 = mat.m10();
-        m11 = mat.m11();
-        m12 = 0.0;
-        m20 = 0.0;
-        m21 = 0.0;
-        m22 = 1.0;
-        return this;
-    }
 
     /**
      * Set the upper left 2x2 submatrix of this {@link Matrix3d} to the given {@link Matrix2dc}
@@ -480,7 +439,7 @@ struct Matrix3d {
      *          the {@link Matrix2dc}
      * @return this
      */
-    public Matrix3d set(Matrix2dc mat) {
+    public Matrix3d set(Matrix2d mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m02 = 0.0;
@@ -493,42 +452,6 @@ struct Matrix3d {
         return this;
     }
 
-    /**
-     * Set this matrix to be equivalent to the rotation specified by the given {@link AxisAngle4f}.
-     * 
-     * @param axisAngle
-     *          the {@link AxisAngle4f}
-     * @return this
-     */
-    public Matrix3d set(AxisAngle4f axisAngle) {
-        double x = axisAngle.x;
-        double y = axisAngle.y;
-        double z = axisAngle.z;
-        double angle = axisAngle.angle;
-        double invLength = Math.invsqrt(x*x + y*y + z*z);
-        x *= invLength;
-        y *= invLength;
-        z *= invLength;
-        double s = Math.sin(angle);
-        double c = Math.cosFromSin(s, angle);
-        double omc = 1.0 - c;
-        m00 = c + x*x*omc;
-        m11 = c + y*y*omc;
-        m22 = c + z*z*omc;
-        double tmp1 = x*y*omc;
-        double tmp2 = z*s;
-        m10 = tmp1 - tmp2;
-        m01 = tmp1 + tmp2;
-        tmp1 = x*z*omc;
-        tmp2 = y*s;
-        m20 = tmp1 + tmp2;
-        m02 = tmp1 - tmp2;
-        tmp1 = y*z*omc;
-        tmp2 = x*s;
-        m21 = tmp1 - tmp2;
-        m12 = tmp1 + tmp2;
-        return this;
-    }
     
     /**
      * Set this matrix to be equivalent to the rotation specified by the given {@link AxisAngle4d}.
@@ -574,30 +497,13 @@ struct Matrix3d {
      * <p>
      * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/">http://www.euclideanspace.com/</a>
      * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param q
-     *          the quaternion
-     * @return this
-     */
-    public Matrix3d set(Quaternionfc q) {
-        return rotation(q);
-    }
-
-    /**
-     * Set this matrix to a rotation - and possibly scaling - equivalent to the given quaternion.
-     * <p>
-     * This method is equivalent to calling: <code>rotation(q)</code>
-     * <p>
-     * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/">http://www.euclideanspace.com/</a>
-     * 
      * @see #rotation(Quaterniondc)
      * 
      * @param q
      *          the quaternion
      * @return this
      */
-    public Matrix3d set(Quaterniondc q) {
+    public Matrix3d set(Quaterniond q) {
         return rotation(q);
     }
 
@@ -614,11 +520,11 @@ struct Matrix3d {
      *          the right operand
      * @return this
      */
-    public Matrix3d mul(Matrix3dc right) {
+    public Matrix3d mul(Matrix3d right) {
         return mul(right, this);
     }
 
-    public Matrix3d mul(Matrix3dc right, Matrix3d dest) {
+    public Matrix3d mul(Matrix3d right, Matrix3d dest) {
         double nm00 = Math.fma(m00, right.m00(), Math.fma(m10, right.m01(), m20 * right.m02()));
         double nm01 = Math.fma(m01, right.m00(), Math.fma(m11, right.m01(), m21 * right.m02()));
         double nm02 = Math.fma(m02, right.m00(), Math.fma(m12, right.m01(), m22 * right.m02()));
@@ -652,11 +558,11 @@ struct Matrix3d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    public Matrix3d mulLocal(Matrix3dc left) {
+    public Matrix3d mulLocal(Matrix3d left) {
        return mulLocal(left, this);
     }
 
-    public Matrix3d mulLocal(Matrix3dc left, Matrix3d dest) {
+    public Matrix3d mulLocal(Matrix3d left, Matrix3d dest) {
         double nm00 = left.m00() * m00 + left.m10() * m01 + left.m20() * m02;
         double nm01 = left.m01() * m00 + left.m11() * m01 + left.m21() * m02;
         double nm02 = left.m02() * m00 + left.m12() * m01 + left.m22() * m02;
@@ -678,44 +584,6 @@ struct Matrix3d {
         return dest;
     }
 
-    /**
-     * Multiply this matrix by the supplied matrix.
-     * This matrix will be the left one.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the <code>right</code> matrix,
-     * then the new matrix will be <code>M * R</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the
-     * transformation of the right matrix will be applied first!
-     * 
-     * @param right
-     *          the right operand
-     * @return this
-     */
-    public Matrix3d mul(Matrix3fc right) {
-        return mul(right, this);
-    }
-
-    public Matrix3d mul(Matrix3fc right, Matrix3d dest) {
-        double nm00 = Math.fma(m00, right.m00(), Math.fma(m10, right.m01(), m20 * right.m02()));
-        double nm01 = Math.fma(m01, right.m00(), Math.fma(m11, right.m01(), m21 * right.m02()));
-        double nm02 = Math.fma(m02, right.m00(), Math.fma(m12, right.m01(), m22 * right.m02()));
-        double nm10 = Math.fma(m00, right.m10(), Math.fma(m10, right.m11(), m20 * right.m12()));
-        double nm11 = Math.fma(m01, right.m10(), Math.fma(m11, right.m11(), m21 * right.m12()));
-        double nm12 = Math.fma(m02, right.m10(), Math.fma(m12, right.m11(), m22 * right.m12()));
-        double nm20 = Math.fma(m00, right.m20(), Math.fma(m10, right.m21(), m20 * right.m22()));
-        double nm21 = Math.fma(m01, right.m20(), Math.fma(m11, right.m21(), m21 * right.m22()));
-        double nm22 = Math.fma(m02, right.m20(), Math.fma(m12, right.m21(), m22 * right.m22()));
-        dest.m00 = nm00;
-        dest.m01 = nm01;
-        dest.m02 = nm02;
-        dest.m10 = nm10;
-        dest.m11 = nm11;
-        dest.m12 = nm12;
-        dest.m20 = nm20;
-        dest.m21 = nm21;
-        dest.m22 = nm22;
-        return dest;
-    }
 
     /**
      * Set the values within this matrix to the supplied double values. The result looks like this:
