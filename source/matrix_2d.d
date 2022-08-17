@@ -24,21 +24,7 @@ module matrix_2d;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml;
 
-//#ifdef __GWT__
-import com.google.gwt.typedarrays.shared.Float64Array;
-//#endif
-//#ifdef __HAS_NIO__
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-//#endif
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Contains the definition of a 2x2 matrix of doubles, and associated functions to transform
@@ -49,17 +35,15 @@ import java.text.NumberFormat;
  *
  * @author Joseph Burton
  */
-public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
+struct Matrix2d {
 
-    private static final long serialVersionUID = 1L;
-
-    public double m00, m01;
-    public double m10, m11;
+    public double m00, m01 = 0.0;
+    public double m10, m11 = 0.0;
 
     /**
      * Create a new {@link Matrix2d} and set it to {@link #identity() identity}.
      */
-    public Matrix2d() {
+    this() {
         m00 = 1.0;
         m11 = 1.0;
     }
@@ -70,26 +54,10 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @param mat
      *          the {@link Matrix2dc} to copy the values from
      */
-    public Matrix2d(Matrix2dc mat) {
-        if (mat instanceof Matrix2d) {
-            MemUtil.INSTANCE.copy((Matrix2d) mat, this);
-        } else {
-            setMatrix2dc(mat);
-        }
+    this(Matrix2d mat) {
+        setMatrix2d(mat);
     }
 
-    /**
-     * Create a new {@link Matrix2d} and initialize it with the values from the given matrix.
-     *
-     * @param mat
-     *          the matrix to initialize this matrix with
-     */
-    public Matrix2d(Matrix2fc mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
-    }
 
     /**
      * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3dc}.
@@ -97,26 +65,10 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @param mat
      *          the {@link Matrix3dc} to copy the values from
      */
-    public Matrix2d(Matrix3dc mat) {
-        if (mat instanceof Matrix3d) {
-            MemUtil.INSTANCE.copy((Matrix3d) mat, this);
-        } else {
-            setMatrix3dc(mat);
-        }
+    this(Matrix3d mat) {
+        setMatrix3dc(mat);
     }
 
-    /**
-     * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3fc}.
-     *
-     * @param mat
-     *          the {@link Matrix3fc} to copy the values from
-     */
-    public Matrix2d(Matrix3fc mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
-    }
 
     /**
      * Create a new 2x2 matrix using the supplied double values. The order of the parameter is column-major,
@@ -131,30 +83,13 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @param m11
      *          the value of m11
      */
-    public Matrix2d(double m00, double m01,
+    this(double m00, double m01,
                     double m10, double m11) {
         this.m00 = m00;
         this.m01 = m01;
         this.m10 = m10;
         this.m11 = m11;
     }
-
-//#ifdef __HAS_NIO__
-    /**
-     * Create a new {@link Matrix2d} by reading its 4 double components from the given {@link DoubleBuffer}
-     * at the buffer's current position.
-     * <p>
-     * That DoubleBuffer is expected to hold the values in column-major order.
-     * <p>
-     * The buffer's position will not be changed by this method.
-     *
-     * @param buffer
-     *          the {@link DoubleBuffer} to read the matrix values from
-     */
-    public Matrix2d(DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-    }
-//#endif
 
     /**
      * Create a new {@link Matrix2d} and initialize its two columns using the supplied vectors.
@@ -164,7 +99,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @param col1
      *          the second column
      */
-    public Matrix2d(Vector2dc col0, Vector2dc col1) {
+    this(Vector2d col0, Vector2d col1) {
         m00 = col0.x();
         m01 = col0.y();
         m10 = col1.x();
