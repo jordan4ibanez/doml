@@ -1,4 +1,4 @@
-module Matrix3d;
+module matrix_3d;
 
 /*
  * The MIT License
