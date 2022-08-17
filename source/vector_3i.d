@@ -4,6 +4,7 @@ module vector_3i;
  * The MIT License
  *
  * Copyright (c) 2015-2021 Richard Greenlees
+ $&%$^$ Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,18 +24,7 @@ module vector_3i;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
 
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-//#ifdef __HAS_NIO__
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-//#endif
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Contains the definition of a Vector comprising 3 ints and associated
@@ -44,9 +34,7 @@ import java.text.NumberFormat;
  * @author Kai Burjack
  * @author Hans Uhlig
  */
-public class Vector3i implements Externalizable, Cloneable, Vector3ic {
-
-    private static final long serialVersionUID = 1L;
+struct Vector3i {
 
     /**
      * The x component of the vector.
@@ -62,19 +50,13 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
     public int z;
 
     /**
-     * Create a new {@link Vector3i} of <code>(0, 0, 0)</code>.
-     */
-    public Vector3i() {
-    }
-
-    /**
      * Create a new {@link Vector3i} and initialize all three components with
      * the given value.
      *
      * @param d
      *          the value of all three components
      */
-    public Vector3i(int d) {
+    this(int d) {
         this.x = d;
         this.y = d;
         this.z = d;
@@ -90,7 +72,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param z
      *          the value of z
      */
-    public Vector3i(int x, int y, int z) {
+    this(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -102,7 +84,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param v
      *          the {@link Vector3ic} to copy the values from
      */
-    public Vector3i(Vector3ic v) {
+    this(Vector3ic v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -117,7 +99,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param z
      *          the z component
      */
-    public Vector3i(Vector2ic v, int z) {
+    this(Vector2ic v, int z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -136,7 +118,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector3i(float x, float y, float z, int mode) {
+    this(float x, float y, float z, int mode) {
         this.x = Math.roundUsing(x, mode);
         this.y = Math.roundUsing(y, mode);
         this.z = Math.roundUsing(z, mode);
@@ -155,7 +137,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector3i(double x, double y, double z, int mode) {
+    this(double x, double y, double z, int mode) {
         this.x = Math.roundUsing(x, mode);
         this.y = Math.roundUsing(y, mode);
         this.z = Math.roundUsing(z, mode);
@@ -172,7 +154,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector3i(Vector2fc v, float z, int mode) {
+    this(Vector2fc v, float z, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
         this.y = Math.roundUsing(v.y(), mode);
         this.z = Math.roundUsing(z, mode);
@@ -187,7 +169,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector3i(Vector3fc v, int mode) {
+    this(Vector3fc v, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
         this.y = Math.roundUsing(v.y(), mode);
         this.z = Math.roundUsing(v.z(), mode);
@@ -204,7 +186,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector3i(Vector2dc v, float z, int mode) {
+    this(Vector2dc v, float z, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
         this.y = Math.roundUsing(v.y(), mode);
         this.z = Math.roundUsing(z, mode);
@@ -219,7 +201,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector3i(Vector3dc v, int mode) {
+    this(Vector3dc v, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
         this.y = Math.roundUsing(v.y(), mode);
         this.z = Math.roundUsing(v.z(), mode);
@@ -232,7 +214,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @param xyz
      *          the array containing at least three elements
      */
-    public Vector3i(int[] xyz) {
+    this(int[] xyz) {
         this.x = xyz[0];
         this.y = xyz[1];
         this.z = xyz[2];
