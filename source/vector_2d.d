@@ -102,14 +102,6 @@ struct Vector2d {
         this.y = xy[1];
     }
 
-    public double x() {
-        return this.x;
-    }
-
-    public double y() {
-        return this.y;
-    }
-
     /**
      * Set the x and y components to the supplied value.
      *
@@ -753,34 +745,15 @@ struct Vector2d {
         int result = 1;
         long temp;
         temp = Double.doubleToLongBits(x);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(y);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Vector2d other = (Vector2d) obj;
-        if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
-            return false;
-        if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
-            return false;
-        return true;
-    }
-
-    public boolean equals(Vector2d v, double delta) {
+    public bool equals(Vector2d v, double delta) {
         if (this == v)
             return true;
-        if (v == null)
-            return false;
-        if (!(v instanceof Vector2d))
-            return false;
         if (!Runtime.equals(x, v.x(), delta))
             return false;
         if (!Runtime.equals(y, v.y(), delta))
@@ -788,7 +761,7 @@ struct Vector2d {
         return true;
     }
 
-    public boolean equals(double x, double y) {
+    public bool equals(double x, double y) {
         if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(x))
             return false;
         if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(y))
@@ -970,7 +943,7 @@ struct Vector2d {
         return dest;
     }
 
-    public boolean isFinite() {
+    public bool isFinite() {
         return Math.isFinite(x) && Math.isFinite(y);
     }
 
@@ -989,10 +962,6 @@ struct Vector2d {
         dest.x = Math.abs(this.x);
         dest.y = Math.abs(this.y);
         return dest;
-    }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 
 }
