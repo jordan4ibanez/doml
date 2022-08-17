@@ -3100,22 +3100,22 @@ struct Matrix4d {
     }
 
     public float[] get(float[] dest, int offset) {
-        dest[offset+0]  = (float)m00;
-        dest[offset+1]  = (float)m01;
-        dest[offset+2]  = (float)m02;
-        dest[offset+3]  = (float)m03;
-        dest[offset+4]  = (float)m10;
-        dest[offset+5]  = (float)m11;
-        dest[offset+6]  = (float)m12;
-        dest[offset+7]  = (float)m13;
-        dest[offset+8]  = (float)m20;
-        dest[offset+9]  = (float)m21;
-        dest[offset+10] = (float)m22;
-        dest[offset+11] = (float)m23;
-        dest[offset+12] = (float)m30;
-        dest[offset+13] = (float)m31;
-        dest[offset+14] = (float)m32;
-        dest[offset+15] = (float)m33;
+        dest[offset+0]  = cast(float)m00;
+        dest[offset+1]  = cast(float)m01;
+        dest[offset+2]  = cast(float)m02;
+        dest[offset+3]  = cast(float)m03;
+        dest[offset+4]  = cast(float)m10;
+        dest[offset+5]  = cast(float)m11;
+        dest[offset+6]  = cast(float)m12;
+        dest[offset+7]  = cast(float)m13;
+        dest[offset+8]  = cast(float)m20;
+        dest[offset+9]  = cast(float)m21;
+        dest[offset+10] = cast(float)m22;
+        dest[offset+11] = cast(float)m23;
+        dest[offset+12] = cast(float)m30;
+        dest[offset+13] = cast(float)m31;
+        dest[offset+14] = cast(float)m32;
+        dest[offset+15] = cast(float)m33;
         return dest;
     }
 
