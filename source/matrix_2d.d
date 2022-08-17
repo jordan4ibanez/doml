@@ -106,19 +106,6 @@ struct Matrix2d {
         m11 = col1.y();
     }
 
-    public double m00() {
-        return m00;
-    }
-    public double m01() {
-        return m01;
-    }
-    public double m10() {
-        return m10;
-    }
-    public double m11() {
-        return m11;
-    }
-
     /**
      * Set the value of the matrix element at column 0 and row 0.
      *
