@@ -188,18 +188,6 @@ struct Vector3i {
         this.z = xyz[2];
     }
 
-    public int x() {
-        return this.x;
-    }
-
-    public int y() {
-        return this.y;
-    }
-
-    public int z() {
-        return this.z;
-    }
-
     /**
      * Set the x, y and z components to match the supplied vector.
      *
