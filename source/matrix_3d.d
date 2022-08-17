@@ -3124,42 +3124,9 @@ struct Matrix3d {
         return result;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Matrix3d other = (Matrix3d) obj;
-        if (Double.doubleToLongBits(m00) != Double.doubleToLongBits(other.m00))
-            return false;
-        if (Double.doubleToLongBits(m01) != Double.doubleToLongBits(other.m01))
-            return false;
-        if (Double.doubleToLongBits(m02) != Double.doubleToLongBits(other.m02))
-            return false;
-        if (Double.doubleToLongBits(m10) != Double.doubleToLongBits(other.m10))
-            return false;
-        if (Double.doubleToLongBits(m11) != Double.doubleToLongBits(other.m11))
-            return false;
-        if (Double.doubleToLongBits(m12) != Double.doubleToLongBits(other.m12))
-            return false;
-        if (Double.doubleToLongBits(m20) != Double.doubleToLongBits(other.m20))
-            return false;
-        if (Double.doubleToLongBits(m21) != Double.doubleToLongBits(other.m21))
-            return false;
-        if (Double.doubleToLongBits(m22) != Double.doubleToLongBits(other.m22))
-            return false;
-        return true;
-    }
-
-    public boolean equals(Matrix3dc m, double delta) {
+    public boolean equals(Matrix3d m, double delta) {
         if (this == m)
             return true;
-        if (m == null)
-            return false;
-        if (!(m instanceof Matrix3d))
-            return false;
         if (!Runtime.equals(m00, m.m00(), delta))
             return false;
         if (!Runtime.equals(m01, m.m01(), delta))
@@ -3209,11 +3176,11 @@ struct Matrix3d {
      *          the other addend 
      * @return this
      */
-    public Matrix3d add(Matrix3dc other) {
+    public Matrix3d add(Matrix3d other) {
         return add(other, this);
     }
 
-    public Matrix3d add(Matrix3dc other, Matrix3d dest) {
+    public Matrix3d add(Matrix3d other, Matrix3d dest) {
         dest.m00 = m00 + other.m00();
         dest.m01 = m01 + other.m01();
         dest.m02 = m02 + other.m02();
@@ -3233,11 +3200,11 @@ struct Matrix3d {
      *          the subtrahend
      * @return this
      */
-    public Matrix3d sub(Matrix3dc subtrahend) {
+    public Matrix3d sub(Matrix3d subtrahend) {
         return sub(subtrahend, this);
     }
 
-    public Matrix3d sub(Matrix3dc subtrahend, Matrix3d dest) {
+    public Matrix3d sub(Matrix3d subtrahend, Matrix3d dest) {
         dest.m00 = m00 - subtrahend.m00();
         dest.m01 = m01 - subtrahend.m01();
         dest.m02 = m02 - subtrahend.m02();
@@ -3257,11 +3224,11 @@ struct Matrix3d {
      *          the other matrix
      * @return this
      */
-    public Matrix3d mulComponentWise(Matrix3dc other) {
+    public Matrix3d mulComponentWise(Matrix3d other) {
         return mulComponentWise(other, this);
     }
 
-    public Matrix3d mulComponentWise(Matrix3dc other, Matrix3d dest) {
+    public Matrix3d mulComponentWise(Matrix3d other, Matrix3d dest) {
         dest.m00 = m00 * other.m00();
         dest.m01 = m01 * other.m01();
         dest.m02 = m02 * other.m02();
@@ -3316,11 +3283,11 @@ struct Matrix3d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    public Matrix3d lerp(Matrix3dc other, double t) {
+    public Matrix3d lerp(Matrix3d other, double t) {
         return lerp(other, t, this);
     }
 
-    public Matrix3d lerp(Matrix3dc other, double t, Matrix3d dest) {
+    public Matrix3d lerp(Matrix3d other, double t, Matrix3d dest) {
         dest.m00 = Math.fma(other.m00() - m00, t, m00);
         dest.m01 = Math.fma(other.m01() - m01, t, m01);
         dest.m02 = Math.fma(other.m02() - m02, t, m02);
@@ -3359,7 +3326,7 @@ struct Matrix3d {
      *              will hold the result
      * @return dest
      */
-    public Matrix3d rotateTowards(Vector3dc direction, Vector3dc up, Matrix3d dest) {
+    public Matrix3d rotateTowards(Vector3dc direction, Vector3d up, Matrix3d dest) {
         return rotateTowards(direction.x(), direction.y(), direction.z(), up.x(), up.y(), up.z(), dest);
     }
 
@@ -3386,7 +3353,7 @@ struct Matrix3d {
      *              the up vector
      * @return this
      */
-    public Matrix3d rotateTowards(Vector3dc direction, Vector3dc up) {
+    public Matrix3d rotateTowards(Vector3d direction, Vector3d up) {
         return rotateTowards(direction.x(), direction.y(), direction.z(), up.x(), up.y(), up.z(), this);
     }
 
@@ -3741,7 +3708,7 @@ struct Matrix3d {
      *          the plane normal
      * @return this
      */
-    public Matrix3d reflect(Vector3dc normal) {
+    public Matrix3d reflect(Vector3d normal) {
         return reflect(normal.x(), normal.y(), normal.z());
     }
 
@@ -3762,21 +3729,21 @@ struct Matrix3d {
      *          the plane orientation
      * @return this
      */
-    public Matrix3d reflect(Quaterniondc orientation) {
+    public Matrix3d reflect(Quaterniond orientation) {
         return reflect(orientation, this);
     }
 
-    public Matrix3d reflect(Quaterniondc orientation, Matrix3d dest) {
+    public Matrix3d reflect(Quaterniond orientation, Matrix3d dest) {
         double num1 = orientation.x() + orientation.x();
         double num2 = orientation.y() + orientation.y();
         double num3 = orientation.z() + orientation.z();
-        double normalX = (double) (orientation.x() * num3 + orientation.w() * num2);
-        double normalY = (double) (orientation.y() * num3 - orientation.w() * num1);
-        double normalZ = (double) (1.0 - (orientation.x() * num1 + orientation.y() * num2));
+        double normalX = cast(double) (orientation.x() * num3 + orientation.w() * num2);
+        double normalY = cast(double) (orientation.y() * num3 - orientation.w() * num1);
+        double normalZ = cast(double) (1.0 - (orientation.x() * num1 + orientation.y() * num2));
         return reflect(normalX, normalY, normalZ, dest);
     }
 
-    public Matrix3d reflect(Vector3dc normal, Matrix3d dest) {
+    public Matrix3d reflect(Vector3d normal, Matrix3d dest) {
         return reflect(normal.x(), normal.y(), normal.z(), dest);
     }
 
@@ -3814,7 +3781,7 @@ struct Matrix3d {
      *          the plane normal
      * @return this
      */
-    public Matrix3d reflection(Vector3dc normal) {
+    public Matrix3d reflection(Vector3d normal) {
         return reflection(normal.x(), normal.y(), normal.z());
     }
 
@@ -3830,7 +3797,7 @@ struct Matrix3d {
      *          the plane orientation
      * @return this
      */
-    public Matrix3d reflection(Quaterniondc orientation) {
+    public Matrix3d reflection(Quaterniond orientation) {
         double num1 = orientation.x() + orientation.x();
         double num2 = orientation.y() + orientation.y();
         double num3 = orientation.z() + orientation.z();
@@ -3853,11 +3820,7 @@ struct Matrix3d {
         return x * Axx + y * Axy + z * Axz; 
     }
 
-    public double quadraticFormProduct(Vector3dc v) {
-        return quadraticFormProduct(v.x(), v.y(), v.z()); 
-    }
-
-    public double quadraticFormProduct(Vector3fc v) {
+    public double quadraticFormProduct(Vector3d v) {
         return quadraticFormProduct(v.x(), v.y(), v.z()); 
     }
 
@@ -3875,8 +3838,8 @@ struct Matrix3d {
         return mapXZY(this);
     }
     public Matrix3d mapXZY(Matrix3d dest) {
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(m00)._m01(m01)._m02(m02)._m10(m20)._m11(m21)._m12(m22)._m20(m10)._m21(m11)._m22(m12);
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(m00)._m01(m01)._m02(m02)._m10(m20)._m11(m21)._m12(m22)._m20(__m10)._m21(__m11)._m22(__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -3892,8 +3855,8 @@ struct Matrix3d {
         return mapXZnY(this);
     }
     public Matrix3d mapXZnY(Matrix3d dest) {
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(m00)._m01(m01)._m02(m02)._m10(m20)._m11(m21)._m12(m22)._m20(-m10)._m21(-m11)._m22(-m12);
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(m00)._m01(m01)._m02(m02)._m10(m20)._m11(m21)._m12(m22)._m20(-__m10)._m21(-__m11)._m22(-__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -3925,8 +3888,8 @@ struct Matrix3d {
         return mapXnZY(this);
     }
     public Matrix3d mapXnZY(Matrix3d dest) {
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(m00)._m01(m01)._m02(m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(m10)._m21(m11)._m22(m12);
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(m00)._m01(m01)._m02(m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(__m10)._m21(__m11)._m22(__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -3942,8 +3905,8 @@ struct Matrix3d {
         return mapXnZnY(this);
     }
     public Matrix3d mapXnZnY(Matrix3d dest) {
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(m00)._m01(m01)._m02(m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-m10)._m21(-m11)._m22(-m12);
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(m00)._m01(m01)._m02(m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-__m10)._m21(-__m11)._m22(-__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -3959,8 +3922,8 @@ struct Matrix3d {
         return mapYXZ(this);
     }
     public Matrix3d mapYXZ(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m10)._m01(m11)._m02(m12)._m10(m00)._m11(m01)._m12(m02)._m20(m20)._m21(m21)._m22(m22);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m10)._m01(m11)._m02(m12)._m10(__m00)._m11(__m01)._m12(__m02)._m20(m20)._m21(m21)._m22(m22);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -3976,8 +3939,8 @@ struct Matrix3d {
         return mapYXnZ(this);
     }
     public Matrix3d mapYXnZ(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m10)._m01(m11)._m02(m12)._m10(m00)._m11(m01)._m12(m02)._m20(-m20)._m21(-m21)._m22(-m22);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m10)._m01(m11)._m02(m12)._m10(__m00)._m11(__m01)._m12(__m02)._m20(-m20)._m21(-m21)._m22(-m22);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -3993,8 +3956,8 @@ struct Matrix3d {
         return mapYZX(this);
     }
     public Matrix3d mapYZX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m10)._m01(m11)._m02(m12)._m10(m20)._m11(m21)._m12(m22)._m20(m00)._m21(m01)._m22(m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m10)._m01(m11)._m02(m12)._m10(m20)._m11(m21)._m12(m22)._m20(__m00)._m21(__m01)._m22(__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4010,8 +3973,8 @@ struct Matrix3d {
         return mapYZnX(this);
     }
     public Matrix3d mapYZnX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m10)._m01(m11)._m02(m12)._m10(m20)._m11(m21)._m12(m22)._m20(-m00)._m21(-m01)._m22(-m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m10)._m01(m11)._m02(m12)._m10(m20)._m11(m21)._m12(m22)._m20(-__m00)._m21(-__m01)._m22(-__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4027,8 +3990,8 @@ struct Matrix3d {
         return mapYnXZ(this);
     }
     public Matrix3d mapYnXZ(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m00)._m11(-m01)._m12(-m02)._m20(m20)._m21(m21)._m22(m22);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m10)._m01(m11)._m02(m12)._m10(-__m00)._m11(-__m01)._m12(-__m02)._m20(m20)._m21(m21)._m22(m22);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4044,8 +4007,8 @@ struct Matrix3d {
         return mapYnXnZ(this);
     }
     public Matrix3d mapYnXnZ(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m00)._m11(-m01)._m12(-m02)._m20(-m20)._m21(-m21)._m22(-m22);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m10)._m01(m11)._m02(m12)._m10(-__m00)._m11(-__m01)._m12(-__m02)._m20(-m20)._m21(-m21)._m22(-m22);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4061,8 +4024,8 @@ struct Matrix3d {
         return mapYnZX(this);
     }
     public Matrix3d mapYnZX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(m00)._m21(m01)._m22(m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(__m00)._m21(__m01)._m22(__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4078,8 +4041,8 @@ struct Matrix3d {
         return mapYnZnX(this);
     }
     public Matrix3d mapYnZnX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-m00)._m21(-m01)._m22(-m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-__m00)._m21(-__m01)._m22(-__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4095,9 +4058,9 @@ struct Matrix3d {
         return mapZXY(this);
     }
     public Matrix3d mapZXY(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(m20)._m01(m21)._m02(m22)._m10(m00)._m11(m01)._m12(m02)._m20(m10)._m21(m11)._m22(m12);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(m20)._m01(m21)._m02(m22)._m10(__m00)._m11(__m01)._m12(__m02)._m20(__m10)._m21(__m11)._m22(__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4113,9 +4076,9 @@ struct Matrix3d {
         return mapZXnY(this);
     }
     public Matrix3d mapZXnY(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(m20)._m01(m21)._m02(m22)._m10(m00)._m11(m01)._m12(m02)._m20(-m10)._m21(-m11)._m22(-m12);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(m20)._m01(m21)._m02(m22)._m10(__m00)._m11(__m01)._m12(__m02)._m20(-__m10)._m21(-__m11)._m22(-__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4131,8 +4094,8 @@ struct Matrix3d {
         return mapZYX(this);
     }
     public Matrix3d mapZYX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m20)._m01(m21)._m02(m22)._m10(m10)._m11(m11)._m12(m12)._m20(m00)._m21(m01)._m22(m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m20)._m01(m21)._m02(m22)._m10(m10)._m11(m11)._m12(m12)._m20(__m00)._m21(__m01)._m22(__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4148,8 +4111,8 @@ struct Matrix3d {
         return mapZYnX(this);
     }
     public Matrix3d mapZYnX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m20)._m01(m21)._m02(m22)._m10(m10)._m11(m11)._m12(m12)._m20(-m00)._m21(-m01)._m22(-m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m20)._m01(m21)._m02(m22)._m10(m10)._m11(m11)._m12(m12)._m20(-__m00)._m21(-__m01)._m22(-__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4165,9 +4128,9 @@ struct Matrix3d {
         return mapZnXY(this);
     }
     public Matrix3d mapZnXY(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m00)._m11(-m01)._m12(-m02)._m20(m10)._m21(m11)._m22(m12);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(m20)._m01(m21)._m02(m22)._m10(-__m00)._m11(-__m01)._m12(-__m02)._m20(__m10)._m21(__m11)._m22(__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4183,9 +4146,9 @@ struct Matrix3d {
         return mapZnXnY(this);
     }
     public Matrix3d mapZnXnY(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m00)._m11(-m01)._m12(-m02)._m20(-m10)._m21(-m11)._m22(-m12);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(m20)._m01(m21)._m02(m22)._m10(-__m00)._m11(-__m01)._m12(-__m02)._m20(-__m10)._m21(-__m11)._m22(-__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4201,8 +4164,8 @@ struct Matrix3d {
         return mapZnYX(this);
     }
     public Matrix3d mapZnYX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(m00)._m21(m01)._m22(m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(__m00)._m21(__m01)._m22(__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4218,8 +4181,8 @@ struct Matrix3d {
         return mapZnYnX(this);
     }
     public Matrix3d mapZnYnX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(-m00)._m21(-m01)._m22(-m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(-__m00)._m21(-__m01)._m22(-__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4251,8 +4214,8 @@ struct Matrix3d {
         return mapnXZY(this);
     }
     public Matrix3d mapnXZY(Matrix3d dest) {
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(m20)._m11(m21)._m12(m22)._m20(m10)._m21(m11)._m22(m12);
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(m20)._m11(m21)._m12(m22)._m20(__m10)._m21(__m11)._m22(__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4268,8 +4231,8 @@ struct Matrix3d {
         return mapnXZnY(this);
     }
     public Matrix3d mapnXZnY(Matrix3d dest) {
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(m20)._m11(m21)._m12(m22)._m20(-m10)._m21(-m11)._m22(-m12);
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(m20)._m11(m21)._m12(m22)._m20(-__m10)._m21(-__m11)._m22(-__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4317,8 +4280,8 @@ struct Matrix3d {
         return mapnXnZY(this);
     }
     public Matrix3d mapnXnZY(Matrix3d dest) {
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(m10)._m21(m11)._m22(m12);
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(__m10)._m21(__m11)._m22(__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4334,8 +4297,8 @@ struct Matrix3d {
         return mapnXnZnY(this);
     }
     public Matrix3d mapnXnZnY(Matrix3d dest) {
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-m10)._m21(-m11)._m22(-m12);
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-__m10)._m21(-__m11)._m22(-__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4351,8 +4314,8 @@ struct Matrix3d {
         return mapnYXZ(this);
     }
     public Matrix3d mapnYXZ(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m00)._m11(m01)._m12(m02)._m20(m20)._m21(m21)._m22(m22);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(__m00)._m11(__m01)._m12(__m02)._m20(m20)._m21(m21)._m22(m22);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4368,8 +4331,8 @@ struct Matrix3d {
         return mapnYXnZ(this);
     }
     public Matrix3d mapnYXnZ(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m00)._m11(m01)._m12(m02)._m20(-m20)._m21(-m21)._m22(-m22);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(__m00)._m11(__m01)._m12(__m02)._m20(-m20)._m21(-m21)._m22(-m22);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4385,8 +4348,8 @@ struct Matrix3d {
         return mapnYZX(this);
     }
     public Matrix3d mapnYZX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m20)._m11(m21)._m12(m22)._m20(m00)._m21(m01)._m22(m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m20)._m11(m21)._m12(m22)._m20(__m00)._m21(__m01)._m22(__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4402,8 +4365,8 @@ struct Matrix3d {
         return mapnYZnX(this);
     }
     public Matrix3d mapnYZnX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m20)._m11(m21)._m12(m22)._m20(-m00)._m21(-m01)._m22(-m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m20)._m11(m21)._m12(m22)._m20(-__m00)._m21(-__m01)._m22(-__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4419,8 +4382,8 @@ struct Matrix3d {
         return mapnYnXZ(this);
     }
     public Matrix3d mapnYnXZ(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m00)._m11(-m01)._m12(-m02)._m20(m20)._m21(m21)._m22(m22);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-__m00)._m11(-__m01)._m12(-__m02)._m20(m20)._m21(m21)._m22(m22);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4436,8 +4399,8 @@ struct Matrix3d {
         return mapnYnXnZ(this);
     }
     public Matrix3d mapnYnXnZ(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m00)._m11(-m01)._m12(-m02)._m20(-m20)._m21(-m21)._m22(-m22);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-__m00)._m11(-__m01)._m12(-__m02)._m20(-m20)._m21(-m21)._m22(-m22);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4453,8 +4416,8 @@ struct Matrix3d {
         return mapnYnZX(this);
     }
     public Matrix3d mapnYnZX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(m00)._m21(m01)._m22(m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(__m00)._m21(__m01)._m22(__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4470,8 +4433,8 @@ struct Matrix3d {
         return mapnYnZnX(this);
     }
     public Matrix3d mapnYnZnX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-m00)._m21(-m01)._m22(-m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-__m00)._m21(-__m01)._m22(-__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4487,9 +4450,9 @@ struct Matrix3d {
         return mapnZXY(this);
     }
     public Matrix3d mapnZXY(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m00)._m11(m01)._m12(m02)._m20(m10)._m21(m11)._m22(m12);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(__m00)._m11(__m01)._m12(__m02)._m20(__m10)._m21(__m11)._m22(__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4505,9 +4468,9 @@ struct Matrix3d {
         return mapnZXnY(this);
     }
     public Matrix3d mapnZXnY(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m00)._m11(m01)._m12(m02)._m20(-m10)._m21(-m11)._m22(-m12);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(__m00)._m11(__m01)._m12(__m02)._m20(-__m10)._m21(-__m11)._m22(-__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4523,8 +4486,8 @@ struct Matrix3d {
         return mapnZYX(this);
     }
     public Matrix3d mapnZYX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m10)._m11(m11)._m12(m12)._m20(m00)._m21(m01)._m22(m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m10)._m11(m11)._m12(m12)._m20(__m00)._m21(__m01)._m22(__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4540,8 +4503,8 @@ struct Matrix3d {
         return mapnZYnX(this);
     }
     public Matrix3d mapnZYnX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m10)._m11(m11)._m12(m12)._m20(-m00)._m21(-m01)._m22(-m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m10)._m11(m11)._m12(m12)._m20(-__m00)._m21(-__m01)._m22(-__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4557,9 +4520,9 @@ struct Matrix3d {
         return mapnZnXY(this);
     }
     public Matrix3d mapnZnXY(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m00)._m11(-m01)._m12(-m02)._m20(m10)._m21(m11)._m22(m12);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-__m00)._m11(-__m01)._m12(-__m02)._m20(__m10)._m21(__m11)._m22(__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4575,9 +4538,9 @@ struct Matrix3d {
         return mapnZnXnY(this);
     }
     public Matrix3d mapnZnXnY(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m00)._m11(-m01)._m12(-m02)._m20(-m10)._m21(-m11)._m22(-m12);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-__m00)._m11(-__m01)._m12(-__m02)._m20(-__m10)._m21(-__m11)._m22(-__m12);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4593,8 +4556,8 @@ struct Matrix3d {
         return mapnZnYX(this);
     }
     public Matrix3d mapnZnYX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(m00)._m21(m01)._m22(m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(__m00)._m21(__m01)._m22(__m02);
     }
     /**
      * Multiply <code>this</code> by the matrix
@@ -4610,8 +4573,8 @@ struct Matrix3d {
         return mapnZnYnX(this);
     }
     public Matrix3d mapnZnYnX(Matrix3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(-m00)._m21(-m01)._m22(-m02);
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(-__m00)._m21(-__m01)._m22(-__m02);
     }
 
     /**
@@ -4664,9 +4627,4 @@ struct Matrix3d {
     public Matrix3d negateZ(Matrix3d dest) {
         return dest._m00(m00)._m01(m01)._m02(m02)._m10(m10)._m11(m11)._m12(m12)._m20(-m20)._m21(-m21)._m22(-m22);
     }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
 }
