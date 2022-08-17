@@ -1,4 +1,4 @@
-module vector_2i;
+module freezer.vector_2i;
 
 /*
  * The MIT License

@@ -1,4 +1,4 @@
-module vector_3d;
+module freezer.vector_3d;
 
 /*
  * The MIT License

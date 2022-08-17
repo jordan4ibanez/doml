@@ -1,4 +1,4 @@
-module matrix_2d;
+module freezer.matrix_2d;
 
 /*
  * The MIT License
