@@ -83,7 +83,7 @@ struct Vector3d {
      * @param v
      *          provides the initial values for the new vector
      */
-    this(Vector3ic v) {
+    this(Vector3i v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -94,11 +94,11 @@ struct Vector3d {
      * given <code>v</code> and the given <code>z</code>
      *
      * @param v
-     *          the {@link Vector2ic} to copy the values from
+     *          the {@link Vector2i} to copy the values from
      * @param z
      *          the z component
      */
-    this(Vector2ic v, double z) {
+    this(Vector2i v, double z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -157,18 +157,6 @@ struct Vector3d {
         this.z = xyz[2];
     }
 
-    public double x() {
-        return this.x;
-    }
-
-    public double y() {
-        return this.y;
-    }
-
-    public double z() {
-        return this.z;
-    }
-
     /**
      * Set the x, y and z components to match the supplied vector.
      * 
@@ -190,7 +178,7 @@ struct Vector3d {
      *          the vector to set this vector's components from
      * @return this
      */
-    public Vector3d set(Vector3ic v) {
+    public Vector3d set(Vector3i v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -219,12 +207,12 @@ struct Vector3d {
      * and the z component from the given <code>z</code>
      *
      * @param v
-     *          the {@link Vector2ic} to copy the values from
+     *          the {@link Vector2i} to copy the values from
      * @param z
      *          the z component
      * @return this
      */
-    public Vector3d set(Vector2ic v, double z) {
+    public Vector3d set(Vector2i v, double z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -1478,38 +1466,18 @@ struct Vector3d {
         int result = 1;
         long temp;
         temp = Double.doubleToLongBits(x);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(y);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(z);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Vector3d other = (Vector3d) obj;
-        if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
-            return false;
-        if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
-            return false;
-        if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
-            return false;
-        return true;
-    }
 
     public boolean equals(Vector3d v, double delta) {
         if (this == v)
             return true;
-        if (v == null)
-            return false;
-        if (!(v instanceof Vector3d))
-            return false;
         if (!Runtime.equals(x, v.x(), delta))
             return false;
         if (!Runtime.equals(y, v.y(), delta))
@@ -1664,7 +1632,7 @@ struct Vector3d {
         return dest;
     }
 
-    public double get(int component) throws IllegalArgumentException {
+    public double get(int component) {
         switch (component) {
         case 0:
             return x;
@@ -1672,8 +1640,7 @@ struct Vector3d {
             return y;
         case 2:
             return z;
-        default:
-            throw new IllegalArgumentException();
+        default: {}
         }
     }
 
@@ -1833,9 +1800,4 @@ struct Vector3d {
     public boolean isFinite() {
         return Math.isFinite(x) && Math.isFinite(y) && Math.isFinite(z);
     }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
 }
