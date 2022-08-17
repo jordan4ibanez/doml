@@ -50,7 +50,7 @@ struct Vector2i {
      * @param s
      *          the value of both components
      */
-    public Vector2i(int s) {
+    this(int s) {
         this.x = s;
         this.y = s;
     }
@@ -63,7 +63,7 @@ struct Vector2i {
      * @param y
      *          the y component
      */
-    public Vector2i(int x, int y) {
+    this(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -78,7 +78,7 @@ struct Vector2i {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector2i(float x, float y, int mode) {
+    this(float x, float y, int mode) {
         this.x = Math.roundUsing(x, mode);
         this.y = Math.roundUsing(y, mode);
     }
@@ -93,7 +93,7 @@ struct Vector2i {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector2i(double x, double y, int mode) {
+    this(double x, double y, int mode) {
         this.x = Math.roundUsing(x, mode);
         this.y = Math.roundUsing(y, mode);
     }
@@ -105,7 +105,7 @@ struct Vector2i {
      * @param v
      *          the {@link Vector2ic} to copy the values from
      */
-    public Vector2i(Vector2ic v) {
+    this(Vector2ic v) {
         x = v.x();
         y = v.y();
     }
@@ -119,7 +119,7 @@ struct Vector2i {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector2i(Vector2fc v, int mode) {
+    this(Vector2fc v, int mode) {
         x = Math.roundUsing(v.x(), mode);
         y = Math.roundUsing(v.y(), mode);
     }
@@ -133,7 +133,7 @@ struct Vector2i {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector2i(Vector2dc v, int mode) {
+    this(Vector2dc v, int mode) {
         x = Math.roundUsing(v.x(), mode);
         y = Math.roundUsing(v.y(), mode);
     }
@@ -145,7 +145,7 @@ struct Vector2i {
      * @param xy
      *          the array containing at least three elements
      */
-    public Vector2i(int[] xy) {
+    this(int[] xy) {
         this.x = xy[0];
         this.y = xy[1];
     }
