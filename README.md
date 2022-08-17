@@ -9,4 +9,4 @@ JOML translated to D with a few changes:
 
 - Simplified using D's strengths
 
-Currently translating: Matrix3d
+Currently translating: Matrix3x2.d
