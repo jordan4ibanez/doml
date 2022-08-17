@@ -1406,24 +1406,6 @@ struct Matrix3x2d {
         return dest.set(m00 * x + m10 * y, m01 * x + m11 * y);
     }
 
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeDouble(m00);
-        out.writeDouble(m01);
-        out.writeDouble(m10);
-        out.writeDouble(m11);
-        out.writeDouble(m20);
-        out.writeDouble(m21);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException {
-        m00 = in.readDouble();
-        m01 = in.readDouble();
-        m10 = in.readDouble();
-        m11 = in.readDouble();
-        m20 = in.readDouble();
-        m21 = in.readDouble();
-    }
-
     /**
      * Apply a rotation transformation to this matrix by rotating the given amount of radians.
      * <p>
