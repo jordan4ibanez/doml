@@ -4,6 +4,7 @@ module vector_2i;
  * The MIT License
  *
  * Copyright (c) 2015-2021 Richard Greenlees
+ @#$@#!$ Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,18 +24,6 @@ module vector_2i;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
-
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-//#ifdef __HAS_NIO__
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-//#endif
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Represents a 2D vector with single-precision.
@@ -43,9 +32,7 @@ import java.text.NumberFormat;
  * @author Kai Burjack
  * @author Hans Uhlig
  */
-public class Vector2i implements Externalizable, Cloneable, Vector2ic {
-
-    private static final long serialVersionUID = 1L;
+struct Vector2i {
 
     /**
      * The x component of the vector.
@@ -55,12 +42,6 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * The y component of the vector.
      */
     public int y;
-
-    /**
-     * Create a new {@link Vector2i} and initialize its components to zero.
-     */
-    public Vector2i() {
-    }
 
     /**
      * Create a new {@link Vector2i} and initialize both of its components with
