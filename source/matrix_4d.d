@@ -13585,56 +13585,9 @@ struct Matrix4d {
         return result;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof Matrix4d))
-            return false;
-        Matrix4d other = (Matrix4d) obj;
-        if (Double.doubleToLongBits(m00) != Double.doubleToLongBits(other.m00))
-            return false;
-        if (Double.doubleToLongBits(m01) != Double.doubleToLongBits(other.m01))
-            return false;
-        if (Double.doubleToLongBits(m02) != Double.doubleToLongBits(other.m02))
-            return false;
-        if (Double.doubleToLongBits(m03) != Double.doubleToLongBits(other.m03))
-            return false;
-        if (Double.doubleToLongBits(m10) != Double.doubleToLongBits(other.m10))
-            return false;
-        if (Double.doubleToLongBits(m11) != Double.doubleToLongBits(other.m11))
-            return false;
-        if (Double.doubleToLongBits(m12) != Double.doubleToLongBits(other.m12))
-            return false;
-        if (Double.doubleToLongBits(m13) != Double.doubleToLongBits(other.m13))
-            return false;
-        if (Double.doubleToLongBits(m20) != Double.doubleToLongBits(other.m20))
-            return false;
-        if (Double.doubleToLongBits(m21) != Double.doubleToLongBits(other.m21))
-            return false;
-        if (Double.doubleToLongBits(m22) != Double.doubleToLongBits(other.m22))
-            return false;
-        if (Double.doubleToLongBits(m23) != Double.doubleToLongBits(other.m23))
-            return false;
-        if (Double.doubleToLongBits(m30) != Double.doubleToLongBits(other.m30))
-            return false;
-        if (Double.doubleToLongBits(m31) != Double.doubleToLongBits(other.m31))
-            return false;
-        if (Double.doubleToLongBits(m32) != Double.doubleToLongBits(other.m32))
-            return false;
-        if (Double.doubleToLongBits(m33) != Double.doubleToLongBits(other.m33))
-            return false;
-        return true;
-    }
-
     public boolean equals(Matrix4d m, double delta) {
         if (this == m)
             return true;
-        if (m == null)
-            return false;
-        if (!(m instanceof Matrix4d))
-            return false;
         if (!Runtime.equals(m00, m.m00(), delta))
             return false;
         if (!Runtime.equals(m01, m.m01(), delta))
@@ -15729,10 +15682,6 @@ struct Matrix4d {
                Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) && Math.isFinite(m13) &&
                Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22) && Math.isFinite(m23) &&
                Math.isFinite(m30) && Math.isFinite(m31) && Math.isFinite(m32) && Math.isFinite(m33);
-    }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 
 }
