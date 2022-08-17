@@ -939,19 +939,19 @@ struct Matrix4d {
 
 
     /**
-     * Set this matrix to be equivalent to the rotation - and possibly scaling - specified by the given {@link Quaterniondc}.
+     * Set this matrix to be equivalent to the rotation - and possibly scaling - specified by the given {@link Quaterniond}.
      * <p>
      * This method is equivalent to calling: <code>rotation(q)</code>
      * <p>
      * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/">http://www.euclideanspace.com/</a>
      * 
-     * @see #rotation(Quaterniondc)
+     * @see #rotation(Quaterniond)
      * 
      * @param q
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d set(Quaterniondc q) {
+    public Matrix4d set(Quaterniond q) {
         return rotation(q);
     }
 
@@ -2960,14 +2960,6 @@ struct Matrix4d {
         return dest.set(this);
     }
 
-    public Quaternionf getUnnormalizedRotation(Quaternionf dest) {
-        return dest.setFromUnnormalized(this);
-    }
-
-    public Quaternionf getNormalizedRotation(Quaternionf dest) {
-        return dest.setFromNormalized(this);
-    }
-
     public Quaterniond getUnnormalizedRotation(Quaterniond dest) {
         return dest.setFromUnnormalized(this);
     }
@@ -4499,7 +4491,7 @@ struct Matrix4d {
     }
 
     /**
-     * Apply the rotation transformation of the given {@link Quaterniondc} to this matrix while using <code>(ox, oy, oz)</code> as the rotation origin.
+     * Apply the rotation transformation of the given {@link Quaterniond} to this matrix while using <code>(ox, oy, oz)</code> as the rotation origin.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -4515,7 +4507,7 @@ struct Matrix4d {
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @param ox
      *          the x coordinate of the rotation origin
      * @param oy
@@ -4524,11 +4516,11 @@ struct Matrix4d {
      *          the z coordinate of the rotation origin
      * @return this
      */
-    public Matrix4d rotateAround(Quaterniondc quat, double ox, double oy, double oz) {
+    public Matrix4d rotateAround(Quaterniond quat, double ox, double oy, double oz) {
         return rotateAround(quat, ox, oy, oz, this);
     }
 
-    public Matrix4d rotateAroundAffine(Quaterniondc quat, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d rotateAroundAffine(Quaterniond quat, double ox, double oy, double oz, Matrix4d dest) {
         double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
         double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
@@ -4573,14 +4565,14 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d rotateAround(Quaterniondc quat, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d rotateAround(Quaterniond quat, double ox, double oy, double oz, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return rotationAround(quat, ox, oy, oz);
         else if ((properties & PROPERTY_AFFINE) != 0)
             return rotateAroundAffine(quat, ox, oy, oz, this);
         return rotateAroundGeneric(quat, ox, oy, oz, this);
     }
-    private Matrix4d rotateAroundGeneric(Quaterniondc quat, double ox, double oy, double oz, Matrix4d dest) {
+    private Matrix4d rotateAroundGeneric(Quaterniond quat, double ox, double oy, double oz, Matrix4d dest) {
         double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
         double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
@@ -4628,7 +4620,7 @@ struct Matrix4d {
     }
 
     /**
-     * Set this matrix to a transformation composed of a rotation of the specified {@link Quaterniondc} while using <code>(ox, oy, oz)</code> as the rotation origin.
+     * Set this matrix to a transformation composed of a rotation of the specified {@link Quaterniond} while using <code>(ox, oy, oz)</code> as the rotation origin.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -4639,7 +4631,7 @@ struct Matrix4d {
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @param ox
      *          the x coordinate of the rotation origin
      * @param oy
@@ -4648,7 +4640,7 @@ struct Matrix4d {
      *          the z coordinate of the rotation origin
      * @return this
      */
-    public Matrix4d rotationAround(Quaterniondc quat, double ox, double oy, double oz) {
+    public Matrix4d rotationAround(Quaterniond quat, double ox, double oy, double oz) {
         double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
         double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
@@ -4806,7 +4798,7 @@ struct Matrix4d {
         return rotateLocal(ang, x, y, z, this);
     }
 
-    public Matrix4d rotateAroundLocal(Quaterniondc quat, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d rotateAroundLocal(Quaterniond quat, double ox, double oy, double oz, Matrix4d dest) {
         double w2 = quat.w() * quat.w();
         double x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y();
@@ -4859,7 +4851,7 @@ struct Matrix4d {
     }
 
     /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix while using <code>(ox, oy, oz)</code>
+     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniond} to this matrix while using <code>(ox, oy, oz)</code>
      * as the rotation origin.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
@@ -4876,7 +4868,7 @@ struct Matrix4d {
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @param ox
      *          the x coordinate of the rotation origin
      * @param oy
@@ -4885,7 +4877,7 @@ struct Matrix4d {
      *          the z coordinate of the rotation origin
      * @return this
      */
-    public Matrix4d rotateAroundLocal(Quaterniondc quat, double ox, double oy, double oz) {
+    public Matrix4d rotateAroundLocal(Quaterniond quat, double ox, double oy, double oz) {
         return rotateAroundLocal(quat, ox, oy, oz, this);
     }
 
@@ -6193,7 +6185,7 @@ struct Matrix4d {
     }
 
     /**
-     * Set this matrix to the rotation - and possibly scaling - transformation of the given {@link Quaterniondc}.
+     * Set this matrix to the rotation - and possibly scaling - transformation of the given {@link Quaterniond}.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -6203,17 +6195,17 @@ struct Matrix4d {
      * matrix to obtain an additional rotation.
      * <p>
      * In order to apply the rotation transformation to an existing transformation,
-     * use {@link #rotate(Quaterniondc) rotate()} instead.
+     * use {@link #rotate(Quaterniond) rotate()} instead.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotate(Quaterniondc)
+     * @see #rotate(Quaterniond)
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d rotation(Quaterniondc quat) {
+    public Matrix4d rotation(Quaterniond quat) {
         double w2 = quat.w() * quat.w();
         double x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y();
@@ -6255,7 +6247,7 @@ struct Matrix4d {
      * This method is equivalent to calling: <code>translation(tx, ty, tz).rotate(quat).scale(sx, sy, sz)</code>
      * 
      * @see #translation(double, double, double)
-     * @see #rotate(Quaterniondc)
+     * @see #rotate(Quaterniond)
      * @see #scale(double, double, double)
      * 
      * @param tx
@@ -6329,7 +6321,7 @@ struct Matrix4d {
      * This method is equivalent to calling: <code>translation(translation).rotate(quat).scale(scale)</code>
      * 
      * @see #translation(Vector3d)
-     * @see #rotate(Quaterniondc)
+     * @see #rotate(Quaterniond)
      * @see #scale(Vector3d)
      * 
      * @param translation
@@ -6341,7 +6333,7 @@ struct Matrix4d {
      * @return this
      */
     public Matrix4d translationRotateScale(Vector3d translation, 
-                                           Quaterniondc quat, 
+                                           Quaterniond quat, 
                                            Vector3d scale) {
         return translationRotateScale(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale.x(), scale.y(), scale.z());
     }
@@ -6361,7 +6353,7 @@ struct Matrix4d {
      * This method is equivalent to calling: <code>translation(tx, ty, tz).rotate(quat).scale(scale)</code>
      * 
      * @see #translation(double, double, double)
-     * @see #rotate(Quaterniondc)
+     * @see #rotate(Quaterniond)
      * @see #scale(double)
      * 
      * @param tx
@@ -6403,7 +6395,7 @@ struct Matrix4d {
      * This method is equivalent to calling: <code>translation(translation).rotate(quat).scale(scale)</code>
      * 
      * @see #translation(Vector3d)
-     * @see #rotate(Quaterniondc)
+     * @see #rotate(Quaterniond)
      * @see #scale(double)
      * 
      * @param translation
@@ -6415,7 +6407,7 @@ struct Matrix4d {
      * @return this
      */
     public Matrix4d translationRotateScale(Vector3d translation, 
-                                           Quaterniondc quat, 
+                                           Quaterniond quat, 
                                            double scale) {
         return translationRotateScale(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale, scale, scale);
     }
@@ -6500,7 +6492,7 @@ struct Matrix4d {
      * <p>
      * This method is equivalent to calling: <code>translationRotateScale(...).invert()</code>
      * 
-     * @see #translationRotateScale(Vector3d, Quaterniondc, Vector3d)
+     * @see #translationRotateScale(Vector3d, Quaterniond, Vector3d)
      * @see #invert()
      * 
      * @param translation
@@ -6512,7 +6504,7 @@ struct Matrix4d {
      * @return this
      */
     public Matrix4d translationRotateScaleInvert(Vector3d translation, 
-                                                 Quaterniondc quat, 
+                                                 Quaterniond quat, 
                                                  Vector3d scale) {
         return translationRotateScaleInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale.x(), scale.y(), scale.z());
     }
@@ -6525,7 +6517,7 @@ struct Matrix4d {
      * <p>
      * This method is equivalent to calling: <code>translationRotateScale(...).invert()</code>
      * 
-     * @see #translationRotateScale(Vector3d, Quaterniondc, double)
+     * @see #translationRotateScale(Vector3d, Quaterniond, double)
      * @see #invert()
      * 
      * @param translation
@@ -6537,7 +6529,7 @@ struct Matrix4d {
      * @return this
      */
     public Matrix4d translationRotateScaleInvert(Vector3d translation, 
-                                                 Quaterniondc quat, 
+                                                 Quaterniond quat, 
                                                  double scale) {
         return translationRotateScaleInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale, scale, scale);
     }
@@ -6558,7 +6550,7 @@ struct Matrix4d {
      * This method is equivalent to calling: <code>translation(tx, ty, tz).rotate(quat).scale(sx, sy, sz).mulAffine(m)</code>
      * 
      * @see #translation(double, double, double)
-     * @see #rotate(Quaterniondc)
+     * @see #rotate(Quaterniond)
      * @see #scale(double, double, double)
      * @see #mulAffine(Matrix4d)
      * 
@@ -6653,7 +6645,7 @@ struct Matrix4d {
      * This method is equivalent to calling: <code>translation(tx, ty, tz).rotate(quat)</code>
      * 
      * @see #translation(double, double, double)
-     * @see #rotate(Quaterniondc)
+     * @see #rotate(Quaterniond)
      * 
      * @param tx
      *          the number of units by which to translate the x-component
@@ -6712,7 +6704,7 @@ struct Matrix4d {
      * This method is equivalent to calling: <code>translation(tx, ty, tz).rotate(quat)</code>
      * 
      * @see #translation(double, double, double)
-     * @see #rotate(Quaterniondc)
+     * @see #rotate(Quaterniond)
      * 
      * @param tx
      *          the number of units by which to translate the x-component
@@ -6724,7 +6716,7 @@ struct Matrix4d {
      *          the quaternion representing a rotation
      * @return this
      */
-    public Matrix4d translationRotate(double tx, double ty, double tz, Quaterniondc quat) {
+    public Matrix4d translationRotate(double tx, double ty, double tz, Quaterniond quat) {
         return translationRotate(tx, ty, tz, quat.x(), quat.y(), quat.z(), quat.w());
     }
 
@@ -6742,7 +6734,7 @@ struct Matrix4d {
      * This method is equivalent to calling: <code>translation(translation).rotate(quat)</code>
      * 
      * @see #translation(Vector3d)
-     * @see #rotate(Quaterniondc)
+     * @see #rotate(Quaterniond)
      * 
      * @param translation
      *          the translation
@@ -6751,7 +6743,7 @@ struct Matrix4d {
      * @return this
      */
     public Matrix4d translationRotate(Vector3d translation, 
-                                      Quaterniondc quat) {
+                                      Quaterniond quat) {
         return translationRotate(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w());
     }
 
@@ -6817,7 +6809,7 @@ struct Matrix4d {
     
 
     /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix and store
+     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniond} to this matrix and store
      * the result in <code>dest</code>.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
@@ -6830,19 +6822,19 @@ struct Matrix4d {
      * the quaternion rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaterniondc)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(Quaterniondc)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @param dest
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotate(Quaterniondc quat, Matrix4d dest) {
+    public Matrix4d rotate(Quaterniond quat, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotation(quat);
         else if ((properties & PROPERTY_TRANSLATION) != 0)
@@ -6851,7 +6843,7 @@ struct Matrix4d {
             return rotateAffine(quat, dest);
         return rotateGeneric(quat, dest);
     }
-    private Matrix4d rotateGeneric(Quaterniondc quat, Matrix4d dest) {
+    private Matrix4d rotateGeneric(Quaterniond quat, Matrix4d dest) {
         double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
         double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
@@ -6896,7 +6888,7 @@ struct Matrix4d {
 
 
     /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix.
+     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniond} to this matrix.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -6908,23 +6900,23 @@ struct Matrix4d {
      * the quaternion rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaterniondc)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(Quaterniondc)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d rotate(Quaterniondc quat) {
+    public Matrix4d rotate(Quaterniond quat) {
         return rotate(quat, this);
     }
 
 
     /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this {@link #isAffine() affine} matrix and store
+     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniond} to this {@link #isAffine() affine} matrix and store
      * the result in <code>dest</code>.
      * <p>
      * This method assumes <code>this</code> to be {@link #isAffine() affine}.
@@ -6939,19 +6931,19 @@ struct Matrix4d {
      * the quaternion rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaterniondc)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(Quaterniondc)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @param dest
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotateAffine(Quaterniondc quat, Matrix4d dest) {
+    public Matrix4d rotateAffine(Quaterniond quat, Matrix4d dest) {
         double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
         double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
@@ -6993,7 +6985,7 @@ struct Matrix4d {
     }
 
     /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix.
+     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniond} to this matrix.
      * <p>
      * This method assumes <code>this</code> to be {@link #isAffine() affine}.
      * <p>
@@ -7007,22 +6999,22 @@ struct Matrix4d {
      * the quaternion rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaterniondc)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(Quaterniondc)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d rotateAffine(Quaterniondc quat) {
+    public Matrix4d rotateAffine(Quaterniond quat) {
         return rotateAffine(quat, this);
     }
 
     /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix, which is assumed to only contain a translation, and store
+     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniond} to this matrix, which is assumed to only contain a translation, and store
      * the result in <code>dest</code>.
      * <p>
      * This method assumes <code>this</code> to only contain a translation.
@@ -7037,19 +7029,19 @@ struct Matrix4d {
      * the quaternion rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaterniondc)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(Quaterniondc)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @param dest
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotateTranslation(Quaterniondc quat, Matrix4d dest) {
+    public Matrix4d rotateTranslation(Quaterniond quat, Matrix4d dest) {
         double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
         double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
@@ -7086,7 +7078,7 @@ struct Matrix4d {
 
 
     /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix and store
+     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniond} to this matrix and store
      * the result in <code>dest</code>.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
@@ -7099,19 +7091,19 @@ struct Matrix4d {
      * the quaternion rotation will be applied last!
      * <p>
      * In order to set the matrix to a rotation transformation without pre-multiplying,
-     * use {@link #rotation(Quaterniondc)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(Quaterniondc)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @param dest
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotateLocal(Quaterniondc quat, Matrix4d dest) {
+    public Matrix4d rotateLocal(Quaterniond quat, Matrix4d dest) {
         double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
         double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
@@ -7162,7 +7154,7 @@ struct Matrix4d {
     }
 
     /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix.
+     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniond} to this matrix.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -7174,17 +7166,17 @@ struct Matrix4d {
      * the quaternion rotation will be applied last!
      * <p>
      * In order to set the matrix to a rotation transformation without pre-multiplying,
-     * use {@link #rotation(Quaterniondc)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(Quaterniondc)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
-     *          the {@link Quaterniondc}
+     *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d rotateLocal(Quaterniondc quat) {
+    public Matrix4d rotateLocal(Quaterniond quat) {
         return rotateLocal(quat, this);
     }
 
@@ -8164,7 +8156,7 @@ struct Matrix4d {
      * specified via the plane orientation and a point on the plane.
      * <p>
      * This method can be used to build a reflection transformation based on the orientation of a mirror object in the scene.
-     * It is assumed that the default mirror plane's normal is <code>(0, 0, 1)</code>. So, if the given {@link Quaterniondc} is
+     * It is assumed that the default mirror plane's normal is <code>(0, 0, 1)</code>. So, if the given {@link Quaterniond} is
      * the identity (does not apply any additional rotation), the reflection plane will be <code>z=0</code>, offset by the given <code>point</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>R</code> the reflection matrix,
@@ -8178,11 +8170,11 @@ struct Matrix4d {
      *          a point on the plane
      * @return this
      */
-    public Matrix4d reflect(Quaterniondc orientation, Vector3d point) {
+    public Matrix4d reflect(Quaterniond orientation, Vector3d point) {
         return reflect(orientation, point, this);
     }
 
-    public Matrix4d reflect(Quaterniondc orientation, Vector3d point, Matrix4d dest) {
+    public Matrix4d reflect(Quaterniond orientation, Vector3d point, Matrix4d dest) {
         double num1 = orientation.x() + orientation.x();
         double num2 = orientation.y() + orientation.y();
         double num3 = orientation.z() + orientation.z();
@@ -8282,7 +8274,7 @@ struct Matrix4d {
      * specified via the plane orientation and a point on the plane.
      * <p>
      * This method can be used to build a reflection transformation based on the orientation of a mirror object in the scene.
-     * It is assumed that the default mirror plane's normal is <code>(0, 0, 1)</code>. So, if the given {@link Quaterniondc} is
+     * It is assumed that the default mirror plane's normal is <code>(0, 0, 1)</code>. So, if the given {@link Quaterniond} is
      * the identity (does not apply any additional rotation), the reflection plane will be <code>z=0</code>, offset by the given <code>point</code>.
      * 
      * @param orientation
@@ -8291,7 +8283,7 @@ struct Matrix4d {
      *          a point on the plane
      * @return this
      */
-    public Matrix4d reflection(Quaterniondc orientation, Vector3d point) {
+    public Matrix4d reflection(Quaterniond orientation, Vector3d point) {
         double num1 = orientation.x() + orientation.x();
         double num2 = orientation.y() + orientation.y();
         double num3 = orientation.z() + orientation.z();
