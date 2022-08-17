@@ -24,21 +24,7 @@ module translation_vault.matrix_2d;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
 
-//#ifdef __GWT__
-import com.google.gwt.typedarrays.shared.Float64Array;
-//#endif
-//#ifdef __HAS_NIO__
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-//#endif
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Contains the definition of a 2x2 matrix of doubles, and associated functions to transform
@@ -164,7 +150,7 @@ struct Matrix2d {
      * @param col1
      *          the second column
      */
-    public Matrix2d(Vector2dc col0, Vector2dc col1) {
+    this(Vector2dc col0, Vector2dc col1) {
         m00 = col0.x();
         m01 = col0.y();
         m10 = col1.x();
