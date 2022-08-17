@@ -101,9 +101,7 @@ private const int lookupTableSizeMinus1 = lookupTableSize - 1;
 private const int lookupTableSizeWithMargin = lookupTableSize + 1;
 private const float pi2OverLookupSize = PI2_f / lookupTableSize;
 private const float lookupSizeOverPi2 = lookupTableSize / PI2_f;
-private const float[] sinTable = initThisThing();
-
-private float[] initThisThing() {
+private const float[] sinTable = {
     float[] tempTable;
     if (Options.FASTMATH && Options.SIN_LOOKUP) {
         for (int i = 0; i < lookupTableSizeWithMargin; i++) {
@@ -112,7 +110,7 @@ private float[] initThisThing() {
         }
     }
     return tempTable;
-}
+}();
 
 // Credit: https://forum.dlang.org/post/bug-5900-3@http.d.puremagic.com%2Fissues%2F
 /// Converts from degrees to radians.
