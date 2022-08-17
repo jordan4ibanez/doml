@@ -62,7 +62,7 @@ struct Matrix4x3d {
      * @param mat
      *          the {@link Matrix4x3d} to copy the values from
      */
-    public Matrix4x3d(Matrix4x3d mat) {
+    this(Matrix4x3d mat) {
         set(mat);
     }
 
@@ -74,7 +74,7 @@ struct Matrix4x3d {
      * @param mat
      *          the {@link Matrix3d}
      */
-    public Matrix4x3d(Matrix3d mat) {
+    this(Matrix3d mat) {
         set(mat);
     }
 
@@ -106,7 +106,7 @@ struct Matrix4x3d {
      * @param m32
      *          the value of m32
      */
-    public Matrix4x3d(double m00, double m01, double m02,
+    this(double m00, double m01, double m02,
                       double m10, double m11, double m12, 
                       double m20, double m21, double m22, 
                       double m30, double m31, double m32) {
@@ -137,7 +137,7 @@ struct Matrix4x3d {
      * @param buffer
      *          the {@link DoubleBuffer} to read the matrix values from
      */
-    public Matrix4x3d(DoubleBuffer buffer) {
+    this(DoubleBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
         determineProperties();
     }
