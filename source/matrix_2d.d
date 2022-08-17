@@ -66,7 +66,7 @@ struct Matrix2d {
      *          the {@link Matrix3dc} to copy the values from
      */
     this(Matrix3d mat) {
-        setMatrix3dc(mat);
+        setMatrix3d(mat);
     }
 
 
@@ -294,34 +294,6 @@ struct Matrix2d {
     }
 
     /**
-     * Multiply this matrix by the supplied <code>right</code> matrix.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the <code>right</code> matrix,
-     * then the new matrix will be <code>M * R</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the
-     * transformation of the right matrix will be applied first!
-     *
-     * @param right
-     *          the right operand of the matrix multiplication
-     * @return this
-     */
-    public Matrix2d mul(Matrix2fc right) {
-        return mul(right, this);
-    }
-
-    public Matrix2d mul(Matrix2fc right, Matrix2d dest) {
-        double nm00 = m00 * right.m00() + m10 * right.m01();
-        double nm01 = m01 * right.m00() + m11 * right.m01();
-        double nm10 = m00 * right.m10() + m10 * right.m11();
-        double nm11 = m01 * right.m10() + m11 * right.m11();
-        dest.m00 = nm00;
-        dest.m01 = nm01;
-        dest.m10 = nm10;
-        dest.m11 = nm11;
-        return dest;
-    }
-
-    /**
      * Pre-multiply this matrix by the supplied <code>left</code> matrix and store the result in <code>this</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>L</code> the <code>left</code> matrix,
@@ -333,11 +305,11 @@ struct Matrix2d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    public Matrix2d mulLocal(Matrix2dc left) {
+    public Matrix2d mulLocal(Matrix2d left) {
         return mulLocal(left, this);
     }
 
-    public Matrix2d mulLocal(Matrix2dc left, Matrix2d dest) {
+    public Matrix2d mulLocal(Matrix2d left, Matrix2d dest) {
         double nm00 = left.m00() * m00 + left.m10() * m01;
         double nm01 = left.m01() * m00 + left.m11() * m01;
         double nm10 = left.m00() * m10 + left.m10() * m11;
