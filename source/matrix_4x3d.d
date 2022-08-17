@@ -162,45 +162,8 @@ struct Matrix4x3d {
         return this;
     }
 
-    public int properties() {
+    public int getproperties() {
         return properties;
-    }
-
-    public double m00() {
-        return m00;
-    }
-    public double m01() {
-        return m01;
-    }
-    public double m02() {
-        return m02;
-    }
-    public double m10() {
-        return m10;
-    }
-    public double m11() {
-        return m11;
-    }
-    public double m12() {
-        return m12;
-    }
-    public double m20() {
-        return m20;
-    }
-    public double m21() {
-        return m21;
-    }
-    public double m22() {
-        return m22;
-    }
-    public double m30() {
-        return m30;
-    }
-    public double m31() {
-        return m31;
-    }
-    public double m32() {
-        return m32;
     }
 
     Matrix4x3d _properties(int properties) {
