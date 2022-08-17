@@ -1,4 +1,4 @@
-module Vector2d;
+module vector_2d;
 
 /*
  * The MIT License
