@@ -5446,45 +5446,6 @@ struct Matrix4d {
         return rotateLocalZ(ang, this);
     }
 
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeDouble(m00);
-        out.writeDouble(m01);
-        out.writeDouble(m02);
-        out.writeDouble(m03);
-        out.writeDouble(m10);
-        out.writeDouble(m11);
-        out.writeDouble(m12);
-        out.writeDouble(m13);
-        out.writeDouble(m20);
-        out.writeDouble(m21);
-        out.writeDouble(m22);
-        out.writeDouble(m23);
-        out.writeDouble(m30);
-        out.writeDouble(m31);
-        out.writeDouble(m32);
-        out.writeDouble(m33);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException {
-        _m00(in.readDouble()).
-        _m01(in.readDouble()).
-        _m02(in.readDouble()).
-        _m03(in.readDouble()).
-        _m10(in.readDouble()).
-        _m11(in.readDouble()).
-        _m12(in.readDouble()).
-        _m13(in.readDouble()).
-        _m20(in.readDouble()).
-        _m21(in.readDouble()).
-        _m22(in.readDouble()).
-        _m23(in.readDouble()).
-        _m30(in.readDouble()).
-        _m31(in.readDouble()).
-        _m32(in.readDouble()).
-        _m33(in.readDouble()).
-        determineProperties();
-    }
-
     public Matrix4d rotateX(double ang, Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationX(ang);
