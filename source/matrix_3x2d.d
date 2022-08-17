@@ -170,15 +170,11 @@ struct Matrix3x2d {
      *          the matrix to copy the elements from
      * @return this
      */
-    public Matrix3x2d set(Matrix3x2dc m) {
-        if (m instanceof Matrix3x2d) {
-            MemUtil.INSTANCE.copy((Matrix3x2d) m, this);
-        } else {
-            setMatrix3x2dc(m);
-        }
+    public Matrix3x2d set(Matrix3x2d m) {
+        setMatrix3x2d(m);
         return this;
     }
-    private void setMatrix3x2dc(Matrix3x2dc mat) {
+    private void setMatrix3x2dc(Matrix3x2d mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
@@ -1660,7 +1656,7 @@ struct Matrix3x2d {
      *          will contain the result
      * @return dest
      */
-    public Vector3d transform(Vector3dc v, Vector3d dest) {
+    public Vector3d transform(Vector3d v, Vector3d dest) {
         return v.mul(this, dest);
     }
 
@@ -1713,7 +1709,7 @@ struct Matrix3x2d {
      * In order to store the result in the same vector, use {@link #transformPosition(Vector2d)}.
      * 
      * @see #transformPosition(Vector2d)
-     * @see #transform(Vector3dc, Vector3d)
+     * @see #transform(Vector3d, Vector3d)
      * 
      * @param v
      *          the vector to transform
@@ -1737,7 +1733,7 @@ struct Matrix3x2d {
      * In order to store the result in the same vector, use {@link #transformPosition(Vector2d)}.
      * 
      * @see #transformPosition(Vector2d)
-     * @see #transform(Vector3dc, Vector3d)
+     * @see #transform(Vector3d, Vector3d)
      * 
      * @param x
      *          the x component of the vector to transform
