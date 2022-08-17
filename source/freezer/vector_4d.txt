@@ -37,19 +37,19 @@ struct Vector4d {
     /**
      * The x component of the vector.
      */
-    double x;
+    double x = 0.0;
     /**
      * The y component of the vector.
      */
-    double y;
+    double y = 0.0;
     /**
      * The z component of the vector.
      */
-    double z;
+    double z = 0.0;
     /**
      * The w component of the vector.
      */
-    double w;
+    double w = 1.0;
 
     /**
      * Create a new {@link Vector4d} with the same values as <code>v</code>.
