@@ -1,4 +1,4 @@
-module FrustumIntersection;
+module translation_vault.FrustumIntersection;
 
 /*
  * The MIT License

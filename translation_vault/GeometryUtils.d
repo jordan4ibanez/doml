@@ -1,4 +1,4 @@
-module GeometryUtils;
+module translation_vault.GeometryUtils;
 
 /*
  * The MIT License

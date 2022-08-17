@@ -1,4 +1,4 @@
-module FrustumRayBuilder;
+module translation_vault.FrustumRayBuilder;
 
 /*
  * The MIT License
