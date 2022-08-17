@@ -1967,36 +1967,9 @@ struct Matrix3x2d {
         return result;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Matrix3x2d other = (Matrix3x2d) obj;
-        if (Double.doubleToLongBits(m00) != Double.doubleToLongBits(other.m00))
-            return false;
-        if (Double.doubleToLongBits(m01) != Double.doubleToLongBits(other.m01))
-            return false;
-        if (Double.doubleToLongBits(m10) != Double.doubleToLongBits(other.m10))
-            return false;
-        if (Double.doubleToLongBits(m11) != Double.doubleToLongBits(other.m11))
-            return false;
-        if (Double.doubleToLongBits(m20) != Double.doubleToLongBits(other.m20))
-            return false;
-        if (Double.doubleToLongBits(m21) != Double.doubleToLongBits(other.m21))
-            return false;
-        return true;
-    }
-
     public boolean equals(Matrix3x2d m, double delta) {
         if (this == m)
             return true;
-        if (m == null)
-            return false;
-        if (!(m instanceof Matrix3x2d))
-            return false;
         if (!Runtime.equals(m00, m.m00(), delta))
             return false;
         if (!Runtime.equals(m01, m.m01(), delta))
@@ -2017,9 +1990,4 @@ struct Matrix3x2d {
                Math.isFinite(m10) && Math.isFinite(m11) &&
                Math.isFinite(m20) && Math.isFinite(m21);
     }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
 }
