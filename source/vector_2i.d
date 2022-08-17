@@ -196,8 +196,8 @@ struct Vector2i {
      * @return this
      */
     public Vector2i set(Vector2d v) {
-        this.x = (int) v.x();
-        this.y = (int) v.y();
+        this.x = cast(int) v.x();
+        this.y = cast(int) v.y();
         return this;
     }
 
