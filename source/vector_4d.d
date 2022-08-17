@@ -55,9 +55,9 @@ struct Vector4d {
      * Create a new {@link Vector4d} with the same values as <code>v</code>.
      * 
      * @param v
-     *          the {@link Vector4dc} to copy the values from
+     *          the {@link Vector4d} to copy the values from
      */
-    this(Vector4dc v) {
+    this(Vector4d v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -68,9 +68,9 @@ struct Vector4d {
      * Create a new {@link Vector4d} with the same values as <code>v</code>.
      * 
      * @param v
-     *          the {@link Vector4ic} to copy the values from
+     *          the {@link Vector4i} to copy the values from
      */
-    this(Vector4ic v) {
+    this(Vector4i v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -82,11 +82,11 @@ struct Vector4d {
      * given <code>v</code> and the given <code>w</code>.
      * 
      * @param v
-     *          the {@link Vector3dc}
+     *          the {@link Vector3d}
      * @param w
      *          the w component
      */
-    this(Vector3dc v, double w) {
+    this(Vector3d v, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -98,11 +98,11 @@ struct Vector4d {
      * given <code>v</code> and the given <code>w</code>.
      * 
      * @param v
-     *          the {@link Vector3ic}
+     *          the {@link Vector3i}
      * @param w
      *          the w component
      */
-    this(Vector3ic v, double w) {
+    this(Vector3i v, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -114,13 +114,13 @@ struct Vector4d {
      * given <code>v</code> and the given <code>z</code> and <code>w</code>.
      *
      * @param v
-     *          the {@link Vector2dc}
+     *          the {@link Vector2d}
      * @param z
      *          the z component
      * @param w
      *          the w component
      */
-    this(Vector2dc v, double z, double w) {
+    this(Vector2d v, double z, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -132,13 +132,13 @@ struct Vector4d {
      * given <code>v</code> and the given <code>z</code> and <code>w</code>.
      *
      * @param v
-     *          the {@link Vector2ic}
+     *          the {@link Vector2i}
      * @param z
      *          the z component
      * @param w
      *          the w component
      */
-    this(Vector2ic v, double z, double w) {
+    this(Vector2i v, double z, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -156,53 +156,6 @@ struct Vector4d {
         this.y = d;
         this.z = d;
         this.w = d; 
-    }
-
-    /**
-     * Create a new {@link Vector4d} with the same values as <code>v</code>.
-     * 
-     * @param v
-     *          the {@link Vector4fc} to copy the values from
-     */
-    this(Vector4fc v) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
-        this.w = v.w();
-    }
-
-    /**
-     * Create a new {@link Vector4d} with the x, y, and z components from the
-     * given <code>v</code> and the w component from the given <code>w</code>.
-     * 
-     * @param v
-     *          the {@link Vector3fc}
-     * @param w
-     *          the w component
-     */
-    this(Vector3fc v, double w) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
-        this.w = w;
-    }
-
-    /**
-     * Create a new {@link Vector4d} with the x and y components from the
-     * given <code>v</code> and the z and w components from the given <code>z</code> and <code>w</code>.
-     *
-     * @param v
-     *          the {@link Vector2fc}
-     * @param z
-     *          the z component
-     * @param w
-     *          the w component
-     */
-    this(Vector2fc v, double z, double w) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = z;
-        this.w = w;
     }
 
     /**
@@ -252,85 +205,6 @@ struct Vector4d {
         this.w = xyzw[3];
     }
 
-//#ifdef __HAS_NIO__
-    /**
-     * Create a new {@link Vector4d} and read this vector from the supplied {@link ByteBuffer}
-     * at the current buffer {@link ByteBuffer#position() position}.
-     * <p>
-     * This method will not increment the position of the given ByteBuffer.
-     * <p>
-     * In order to specify the offset into the ByteBuffer at which
-     * the vector is read, use {@link #Vector4d(int, ByteBuffer)}, taking
-     * the absolute position as parameter.
-     *
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     * @see #Vector4d(int, ByteBuffer)
-     */
-    this(ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-    }
-
-    /**
-     * Create a new {@link Vector4d} and read this vector from the supplied {@link ByteBuffer}
-     * starting at the specified absolute buffer position/index.
-     * <p>
-     * This method will not increment the position of the given ByteBuffer.
-     *
-     * @param index  the absolute position into the ByteBuffer
-     * @param buffer values will be read in <code>x, y, z, w</code> order
-     */
-    this(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-    }
-
-    /**
-     * Create a new {@link Vector4d} and read this vector from the supplied {@link DoubleBuffer}
-     * at the current buffer {@link DoubleBuffer#position() position}.
-     * <p>
-     * This method will not increment the position of the given DoubleBuffer.
-     * <p>
-     * In order to specify the offset into the DoubleBuffer at which
-     * the vector is read, use {@link #Vector4d(int, DoubleBuffer)}, taking
-     * the absolute position as parameter.
-     *
-     * @param buffer values will be read in <code>x, y, z, w</code> order
-     * @see #Vector4d(int, DoubleBuffer)
-     */
-    this(DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-    }
-
-    /**
-     * Create a new {@link Vector4d} and read this vector from the supplied {@link DoubleBuffer}
-     * starting at the specified absolute buffer position/index.
-     * <p>
-     * This method will not increment the position of the given DoubleBuffer.
-     *
-     * @param index  the absolute position into the DoubleBuffer
-     * @param buffer values will be read in <code>x, y, z, w</code> order
-     */
-    this(int index, DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-    }
-//#endif
-
-    public double x() {
-        return this.x;
-    }
-
-    public double y() {
-        return this.y;
-    }
-
-    public double z() {
-        return this.z;
-    }
-
-    public double w() {
-        return this.w;
-    }
-
     /**
      * Set this {@link Vector4d} to the values of the given <code>v</code>.
      * 
@@ -338,7 +212,7 @@ struct Vector4d {
      *          the vector whose values will be copied into this
      * @return this
      */
-    public Vector4d set(Vector4dc v) {
+    public Vector4d set(Vector4d v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -353,22 +227,7 @@ struct Vector4d {
      *          the vector whose values will be copied into this
      * @return this
      */
-    public Vector4d set(Vector4fc v) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
-        this.w = v.w();
-        return this;
-    }
-
-    /**
-     * Set this {@link Vector4d} to the values of the given <code>v</code>.
-     * 
-     * @param v
-     *          the vector whose values will be copied into this
-     * @return this
-     */
-    public Vector4d set(Vector4ic v) {
+    public Vector4d set(Vector4i v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -381,12 +240,12 @@ struct Vector4d {
      * <code>v</code> and the w component to <code>w</code>.
      * 
      * @param v
-     *          the {@link Vector3dc} to copy
+     *          the {@link Vector3d} to copy
      * @param w
      *          the w component
      * @return this
      */
-    public Vector4d set(Vector3dc v, double w) {
+    public Vector4d set(Vector3d v, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -399,12 +258,12 @@ struct Vector4d {
      * <code>v</code> and the w component to <code>w</code>.
      * 
      * @param v
-     *          the {@link Vector3ic} to copy
+     *          the {@link Vector3i} to copy
      * @param w
      *          the w component
      * @return this
      */
-    public Vector4d set(Vector3ic v, double w) {
+    public Vector4d set(Vector3i v, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -412,37 +271,20 @@ struct Vector4d {
         return this;
     }
 
-    /**
-     * Set the x, y, and z components of this to the components of
-     * <code>v</code> and the w component to <code>w</code>.
-     * 
-     * @param v
-     *          the {@link Vector3fc} to copy
-     * @param w
-     *          the w component
-     * @return this
-     */
-    public Vector4d set(Vector3fc v, double w) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
-        this.w = w;
-        return this;
-    }
 
     /**
      * Set the x and y components from the given <code>v</code>
      * and the z and w components to the given <code>z</code> and <code>w</code>.
      *
      * @param v
-     *          the {@link Vector2dc}
+     *          the {@link Vector2d}
      * @param z
      *          the z component
      * @param w
      *          the w component
      * @return this
      */
-    public Vector4d set(Vector2dc v, double z, double w) {
+    public Vector4d set(Vector2d v, double z, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -455,14 +297,14 @@ struct Vector4d {
      * and the z and w components to the given <code>z</code> and <code>w</code>.
      *
      * @param v
-     *          the {@link Vector2ic}
+     *          the {@link Vector2i}
      * @param z
      *          the z component
      * @param w
      *          the w component
      * @return this
      */
-    public Vector4d set(Vector2ic v, double z, double w) {
+    public Vector4d set(Vector2i v, double z, double w) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -482,26 +324,6 @@ struct Vector4d {
         this.y = d;
         this.z = d;
         this.w = d;
-        return this;
-    }
-
-    /**
-     * Set the x and y components from the given <code>v</code>
-     * and the z and w components to the given <code>z</code> and <code>w</code>.
-     *
-     * @param v
-     *          the {@link Vector2fc}
-     * @param z
-     *          the z components
-     * @param w
-     *          the w components
-     * @return this
-     */
-    public Vector4d set(Vector2fc v, double z, double w) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = z;
-        this.w = w;
         return this;
     }
 
@@ -574,103 +396,6 @@ struct Vector4d {
         return this;
     }
 
-//#ifdef __HAS_NIO__
-    /**
-     * Read this vector from the supplied {@link ByteBuffer} at the current
-     * buffer {@link ByteBuffer#position() position}.
-     * <p>
-     * This method will not increment the position of the given ByteBuffer.
-     * <p>
-     * In order to specify the offset into the ByteBuffer at which
-     * the vector is read, use {@link #set(int, ByteBuffer)}, taking
-     * the absolute position as parameter.
-     *
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     * @return this
-     * @see #set(int, ByteBuffer)
-     */
-    public Vector4d set(ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Read this vector from the supplied {@link ByteBuffer} starting at the specified
-     * absolute buffer position/index.
-     * <p>
-     * This method will not increment the position of the given ByteBuffer.
-     *
-     * @param index
-     *          the absolute position into the ByteBuffer
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     * @return this
-     */
-    public Vector4d set(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-        return this;
-    }
-
-    /**
-     * Read this vector from the supplied {@link DoubleBuffer} at the current
-     * buffer {@link DoubleBuffer#position() position}.
-     * <p>
-     * This method will not increment the position of the given DoubleBuffer.
-     * <p>
-     * In order to specify the offset into the DoubleBuffer at which
-     * the vector is read, use {@link #set(int, DoubleBuffer)}, taking
-     * the absolute position as parameter.
-     *
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     * @return this
-     * @see #set(int, DoubleBuffer)
-     */
-    public Vector4d set(DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Read this vector from the supplied {@link DoubleBuffer} starting at the specified
-     * absolute buffer position/index.
-     * <p>
-     * This method will not increment the position of the given DoubleBuffer.
-     *
-     * @param index
-     *          the absolute position into the DoubleBuffer
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     * @return this
-     */
-    public Vector4d set(int index, DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-        return this;
-    }
-//#endif
-
-//#ifdef __HAS_UNSAFE__
-    /**
-     * Set the values of this vector by reading 4 double values from off-heap memory,
-     * starting at the given address.
-     * <p>
-     * This method will throw an {@link UnsupportedOperationException} when DOML is used with `-DDOML.nounsafe`.
-     * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
-     * 
-     * @param address
-     *              the off-heap memory address to read the vector values from
-     * @return this
-     */
-    public Vector4d setFromAddress(long address) {
-        if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
-        MemUtil.MemUtilUnsafe.get(this, address);
-        return this;
-    }
-//#endif
-
     /**
      * Set the value of the specified component of this vector.
      *
@@ -681,7 +406,7 @@ struct Vector4d {
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..3]</code>
      */
-    public Vector4d setComponent(int component, double value) throws IllegalArgumentException {
+    public Vector4d setComponent(int component, double value) {
         switch (component) {
             case 0:
                 x = value;
@@ -695,63 +420,11 @@ struct Vector4d {
             case 3:
                 w = value;
                 break;
-            default:
-                throw new IllegalArgumentException();
+            default: {}
         }
         return this;
     }
 
-//#ifdef __HAS_NIO__
-    public ByteBuffer get(ByteBuffer buffer) {
-        MemUtil.INSTANCE.put(this, buffer.position(), buffer);
-        return buffer;
-    }
-
-    public ByteBuffer get(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.put(this, index, buffer);
-        return buffer;
-    }
-
-    public DoubleBuffer get(DoubleBuffer buffer) {
-        MemUtil.INSTANCE.put(this, buffer.position(), buffer);
-        return buffer;
-    }
-
-    public DoubleBuffer get(int index, DoubleBuffer buffer) {
-        MemUtil.INSTANCE.put(this, index, buffer);
-        return buffer;
-    }
-
-    public ByteBuffer getf(ByteBuffer buffer) {
-        MemUtil.INSTANCE.putf(this, buffer.position(), buffer);
-        return buffer;
-    }
-
-    public ByteBuffer getf(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.putf(this, index, buffer);
-        return buffer;
-    }
-
-    public FloatBuffer get(FloatBuffer buffer) {
-        MemUtil.INSTANCE.put(this, buffer.position(), buffer);
-        return buffer;
-    }
-
-    public FloatBuffer get(int index, FloatBuffer buffer) {
-        MemUtil.INSTANCE.put(this, index, buffer);
-        return buffer;
-    }
-//#endif
-
-//#ifdef __HAS_UNSAFE__
-    public Vector4dc getToAddress(long address) {
-        if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
-        MemUtil.MemUtilUnsafe.put(this, address);
-        return this;
-    }
-//#endif
-
     /**
      * Subtract the supplied vector from this one.
      * 
@@ -759,7 +432,7 @@ struct Vector4d {
      *          the vector to subtract
      * @return this
      */
-    public Vector4d sub(Vector4dc v) {
+    public Vector4d sub(Vector4d v) {
         this.x = x - v.x();
         this.y = y - v.y();
         this.z = z - v.z();
@@ -776,39 +449,7 @@ struct Vector4d {
      *          will hold the result
      * @return dest
      */
-    public Vector4d sub(Vector4dc v, Vector4d dest) {
-        dest.x = x - v.x();
-        dest.y = y - v.y();
-        dest.z = z - v.z();
-        dest.w = w - v.w();
-        return dest;
-    }
-
-    /**
-     * Subtract the supplied vector from this one.
-     * 
-     * @param v
-     *          the vector to subtract
-     * @return this
-     */
-    public Vector4d sub(Vector4fc v) {
-        this.x = x - v.x();
-        this.y = y - v.y();
-        this.z = z - v.z();
-        this.w = w - v.w();
-        return this;
-    }
-
-    /**
-     * Subtract the supplied vector from this one and store the result in <code>dest</code>.
-     * 
-     * @param v
-     *          the vector to subtract
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Vector4d sub(Vector4fc v, Vector4d dest) {
+    public Vector4d sub(Vector4d v, Vector4d dest) {
         dest.x = x - v.x();
         dest.y = y - v.y();
         dest.z = z - v.z();
@@ -852,7 +493,7 @@ struct Vector4d {
      *          the vector to add
      * @return this
      */
-    public Vector4d add(Vector4dc v) {
+    public Vector4d add(Vector4d v) {
         this.x = x + v.x();
         this.y = y + v.y();
         this.z = z + v.z();
@@ -860,15 +501,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d add(Vector4dc v, Vector4d dest) {
-        dest.x = x + v.x();
-        dest.y = y + v.y();
-        dest.z = z + v.z();
-        dest.w = w + v.w();
-        return dest;
-    }
-
-    public Vector4d add(Vector4fc v, Vector4d dest) {
+    public Vector4d add(Vector4d v, Vector4d dest) {
         dest.x = x + v.x();
         dest.y = y + v.y();
         dest.z = z + v.z();
@@ -906,21 +539,6 @@ struct Vector4d {
     }
 
     /**
-     * Add the supplied vector to this one.
-     * 
-     * @param v
-     *          the vector to add
-     * @return this
-     */
-    public Vector4d add(Vector4fc v) {
-        this.x = x + v.x();
-        this.y = y + v.y();
-        this.z = z + v.z();
-        this.w = w + v.w();
-        return this;
-    }
-
-    /**
      * Add the component-wise multiplication of <code>a * b</code> to this vector.
      * 
      * @param a
@@ -929,7 +547,7 @@ struct Vector4d {
      *          the second multiplicand
      * @return this
      */
-    public Vector4d fma(Vector4dc a, Vector4dc b) {
+    public Vector4d fma(Vector4d a, Vector4d b) {
         this.x = Math.fma(a.x(), b.x(), x);
         this.y = Math.fma(a.y(), b.y(), y);
         this.z = Math.fma(a.z(), b.z(), z);
@@ -946,7 +564,7 @@ struct Vector4d {
      *          the second multiplicand
      * @return this
      */
-    public Vector4d fma(double a, Vector4dc b) {
+    public Vector4d fma(double a, Vector4d b) {
         this.x = Math.fma(a, b.x(), x);
         this.y = Math.fma(a, b.y(), y);
         this.z = Math.fma(a, b.z(), z);
@@ -954,7 +572,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d fma(Vector4dc a, Vector4dc b, Vector4d dest) {
+    public Vector4d fma(Vector4d a, Vector4d b, Vector4d dest) {
         dest.x = Math.fma(a.x(), b.x(), x);
         dest.y = Math.fma(a.y(), b.y(), y);
         dest.z = Math.fma(a.z(), b.z(), z);
@@ -962,7 +580,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d fma(double a, Vector4dc b, Vector4d dest) {
+    public Vector4d fma(double a, Vector4d b, Vector4d dest) {
         dest.x = Math.fma(a, b.x(), x);
         dest.y = Math.fma(a, b.y(), y);
         dest.z = Math.fma(a, b.z(), z);
@@ -980,7 +598,7 @@ struct Vector4d {
      *          the addend
      * @return this
      */
-    public Vector4d mulAdd(Vector4dc a, Vector4dc b) {
+    public Vector4d mulAdd(Vector4d a, Vector4d b) {
         this.x = Math.fma(x, a.x(), b.x());
         this.y = Math.fma(y, a.y(), b.y());
         this.z = Math.fma(z, a.z(), b.z());
@@ -997,21 +615,21 @@ struct Vector4d {
      *          the addend
      * @return this
      */
-    public Vector4d mulAdd(double a, Vector4dc b) {
+    public Vector4d mulAdd(double a, Vector4d b) {
         this.x = Math.fma(x, a, b.x());
         this.y = Math.fma(y, a, b.y());
         this.z = Math.fma(z, a, b.z());
         return this;
     }
 
-    public Vector4d mulAdd(Vector4dc a, Vector4dc b, Vector4d dest) {
+    public Vector4d mulAdd(Vector4d a, Vector4d b, Vector4d dest) {
         dest.x = Math.fma(x, a.x(), b.x());
         dest.y = Math.fma(y, a.y(), b.y());
         dest.z = Math.fma(z, a.z(), b.z());
         return dest;
     }
 
-    public Vector4d mulAdd(double a, Vector4dc b, Vector4d dest) {
+    public Vector4d mulAdd(double a, Vector4d b, Vector4d dest) {
         dest.x = Math.fma(x, a, b.x());
         dest.y = Math.fma(y, a, b.y());
         dest.z = Math.fma(z, a, b.z());
@@ -1025,7 +643,7 @@ struct Vector4d {
      *          the vector to multiply by
      * @return this
      */
-    public Vector4d mul(Vector4dc v) {
+    public Vector4d mul(Vector4d v) {
         this.x = x * v.x();
         this.y = y * v.y();
         this.z = z * v.z();
@@ -1033,7 +651,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d mul(Vector4dc v, Vector4d dest) {
+    public Vector4d mul(Vector4d v, Vector4d dest) {
         dest.x = x * v.x();
         dest.y = y * v.y();
         dest.z = z * v.z();
@@ -1042,13 +660,13 @@ struct Vector4d {
     }
 
     /**
-     * Divide this {@link Vector4d} component-wise by the given {@link Vector4dc}.
+     * Divide this {@link Vector4d} component-wise by the given {@link Vector4d}.
      * 
      * @param v
      *          the vector to divide by
      * @return this
      */
-    public Vector4d div(Vector4dc v) {
+    public Vector4d div(Vector4d v) {
         this.x = x / v.x();
         this.y = y / v.y();
         this.z = z / v.z();
@@ -1056,54 +674,12 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d div(Vector4dc v, Vector4d dest) {
+    public Vector4d div(Vector4d v, Vector4d dest) {
         dest.x = x / v.x();
         dest.y = y / v.y();
         dest.z = z / v.z();
         dest.w = w / v.w();
         return dest;
-    }
-
-    /**
-     * Multiply this {@link Vector4d} component-wise by the given {@link Vector4fc}.
-     * 
-     * @param v
-     *          the vector to multiply by
-     * @return this
-     */
-    public Vector4d mul(Vector4fc v) {
-        this.x = x * v.x();
-        this.y = y * v.y();
-        this.z = z * v.z();
-        this.w = w * v.w();
-        return this;
-    }
-
-    public Vector4d mul(Vector4fc v, Vector4d dest) {
-        dest.x = x * v.x();
-        dest.y = y * v.y();
-        dest.z = z * v.z();
-        dest.w = w * v.w();
-        return dest;
-    }
-
-    /**
-     * Multiply the given matrix <code>mat</code> with this {@link Vector4d}.
-     * 
-     * @param mat
-     *          the matrix to multiply by
-     * @return this
-     */
-    public Vector4d mul(Matrix4dc mat) {
-        if ((mat.properties() & Matrix4fc.PROPERTY_AFFINE) != 0)
-            return mulAffine(mat, this);
-        return mulGeneric(mat, this);
-    }
-
-    public Vector4d mul(Matrix4dc mat, Vector4d dest) {
-        if ((mat.properties() & Matrix4fc.PROPERTY_AFFINE) != 0)
-            return mulAffine(mat, dest);
-        return mulGeneric(mat, dest);
     }
 
     /**
@@ -1114,18 +690,18 @@ struct Vector4d {
      *          the matrix whose transpose to multiply the vector with
      * @return this
      */
-    public Vector4d mulTranspose(Matrix4dc mat) {
-        if ((mat.properties() & Matrix4dc.PROPERTY_AFFINE) != 0)
+    public Vector4d mulTranspose(Matrix4d mat) {
+        if ((mat.properties() & Matrix4d.PROPERTY_AFFINE) != 0)
             return mulAffineTranspose(mat, this);
         return mulGenericTranspose(mat, this);
     }
-    public Vector4d mulTranspose(Matrix4dc mat, Vector4d dest) {
-        if ((mat.properties() & Matrix4dc.PROPERTY_AFFINE) != 0)
+    public Vector4d mulTranspose(Matrix4d mat, Vector4d dest) {
+        if ((mat.properties() & Matrix4d.PROPERTY_AFFINE) != 0)
             return mulAffineTranspose(mat, dest);
         return mulGenericTranspose(mat, dest);
     }
 
-    public Vector4d mulAffine(Matrix4dc mat, Vector4d dest) {
+    public Vector4d mulAffine(Matrix4d mat, Vector4d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w)));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w)));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w)));
@@ -1136,7 +712,7 @@ struct Vector4d {
         return dest;
     }
 
-    private Vector4d mulGeneric(Matrix4dc mat, Vector4d dest) {
+    private Vector4d mulGeneric(Matrix4d mat, Vector4d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w)));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w)));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w)));
@@ -1148,7 +724,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d mulAffineTranspose(Matrix4dc mat, Vector4d dest) {
+    public Vector4d mulAffineTranspose(Matrix4d mat, Vector4d dest) {
         double x = this.x, y = this.y, z = this.z, w = this.w;
         dest.x = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
         dest.y = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
@@ -1156,7 +732,7 @@ struct Vector4d {
         dest.w = Math.fma(mat.m30(), x, Math.fma(mat.m31(), y, mat.m32() * z + w));
         return dest;
     }
-    private Vector4d mulGenericTranspose(Matrix4dc mat, Vector4d dest) {
+    private Vector4d mulGenericTranspose(Matrix4d mat, Vector4d dest) {
         double x = this.x, y = this.y, z = this.z, w = this.w;
         dest.x = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, Math.fma(mat.m02(), z, mat.m03() * w)));
         dest.y = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, Math.fma(mat.m12(), z, mat.m13() * w)));
@@ -1173,7 +749,7 @@ struct Vector4d {
      *          the matrix to multiply the vector with
      * @return this
      */
-    public Vector4d mul(Matrix4x3dc mat) {
+    public Vector4d mul(Matrix4x3d mat) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w)));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w)));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w)));
@@ -1183,7 +759,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d mul(Matrix4x3dc mat, Vector4d dest) {
+    public Vector4d mul(Matrix4x3d mat, Vector4d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w)));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w)));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w)));
@@ -1194,76 +770,7 @@ struct Vector4d {
         return dest;
     }
 
-    /**
-     * Multiply the given matrix mat with this Vector4d and store the result in
-     * <code>this</code>.
-     * 
-     * @param mat
-     *          the matrix to multiply the vector with
-     * @return this
-     */
-    public Vector4d mul(Matrix4x3fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w)));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w)));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w)));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
-    }
-
-    public Vector4d mul(Matrix4x3fc mat, Vector4d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w)));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w)));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w)));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        dest.w = w;
-        return dest;
-    }
-
-    /**
-     * Multiply the given matrix <code>mat</code> with this {@link Vector4d}.
-     * 
-     * @param mat
-     *          the matrix to multiply by
-     * @return this
-     */
-    public Vector4d mul(Matrix4fc mat) {
-        if ((mat.properties() & Matrix4fc.PROPERTY_AFFINE) != 0)
-            return mulAffine(mat, this);
-        return mulGeneric(mat, this);
-    }
-
-    public Vector4d mul(Matrix4fc mat, Vector4d dest) {
-        if ((mat.properties() & Matrix4fc.PROPERTY_AFFINE) != 0)
-            return mulAffine(mat, dest);
-        return mulGeneric(mat, dest);
-    }
-    private Vector4d mulAffine(Matrix4fc mat, Vector4d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w)));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w)));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w)));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        dest.w = w;
-        return dest;
-    }
-    private Vector4d mulGeneric(Matrix4fc mat, Vector4d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w)));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w)));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w)));
-        double rw = Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33() * w)));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        dest.w = rw;
-        return dest;
-    }
-
-    public Vector4d mulProject(Matrix4dc mat, Vector4d dest) {
+    public Vector4d mulProject(Matrix4d mat, Vector4d dest) {
         double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33() * w)));
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
@@ -1282,7 +789,7 @@ struct Vector4d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector4d mulProject(Matrix4dc mat) {
+    public Vector4d mulProject(Matrix4d mat) {
         double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33() * w)));
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
@@ -1294,7 +801,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector3d mulProject(Matrix4dc mat, Vector3d dest) {
+    public Vector3d mulProject(Matrix4d mat, Vector3d dest) {
         double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33() * w)));
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
@@ -1612,7 +1119,7 @@ struct Vector4d {
         return dest;
     }
 
-    public double distance(Vector4dc v) {
+    public double distance(Vector4d v) {
         double dx = this.x - v.x();
         double dy = this.y - v.y();
         double dz = this.z - v.z();
@@ -1628,7 +1135,7 @@ struct Vector4d {
         return Math.sqrt(Math.fma(dx, dx, Math.fma(dy, dy, Math.fma(dz, dz, dw * dw))));
     }
 
-    public double distanceSquared(Vector4dc v) {
+    public double distanceSquared(Vector4d v) {
         double dx = this.x - v.x();
         double dy = this.y - v.y();
         double dz = this.z - v.z();
@@ -1702,7 +1209,7 @@ struct Vector4d {
         return Math.fma(dx, dx, Math.fma(dy, dy, Math.fma(dz, dz, dw * dw)));
     }
 
-    public double dot(Vector4dc v) {
+    public double dot(Vector4d v) {
         return Math.fma(this.x, v.x(), Math.fma(this.y, v.y(), Math.fma(this.z, v.z(), this.w * v.w())));
     }
 
@@ -1710,14 +1217,14 @@ struct Vector4d {
         return Math.fma(this.x, x, Math.fma(this.y, y, Math.fma(this.z, z, this.w * w)));
     }
 
-    public double angleCos(Vector4dc v) {
+    public double angleCos(Vector4d v) {
         double length1Squared = Math.fma(x, x, Math.fma(y, y, Math.fma(z, z, w * w)));
         double length2Squared = Math.fma(v.x(), v.x(), Math.fma(v.y(), v.y(), Math.fma(v.z(), v.z(), v.w() * v.w())));
         double dot = Math.fma(x, v.x(), Math.fma(y, v.y(), Math.fma(z, v.z(), w * v.w())));
         return dot / Math.sqrt(length1Squared * length2Squared);
     }
 
-    public double angle(Vector4dc v) {
+    public double angle(Vector4d v) {
         double cos = angleCos(v);
         // This is because sometimes cos goes above 1 or below -1 because of lost precision
         cos = cos < 1 ? cos : 1;
@@ -1766,7 +1273,7 @@ struct Vector4d {
      *          the other vector
      * @return this
      */
-    public Vector4d min(Vector4dc v) {
+    public Vector4d min(Vector4d v) {
         this.x = x < v.x() ? x : v.x();
         this.y = y < v.y() ? y : v.y();
         this.z = z < v.z() ? z : v.z();
@@ -1774,7 +1281,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d min(Vector4dc v, Vector4d dest) {
+    public Vector4d min(Vector4d v, Vector4d dest) {
         dest.x = x < v.x() ? x : v.x();
         dest.y = y < v.y() ? y : v.y();
         dest.z = z < v.z() ? z : v.z();
@@ -1789,7 +1296,7 @@ struct Vector4d {
      *          the other vector
      * @return this
      */
-    public Vector4d max(Vector4dc v) {
+    public Vector4d max(Vector4d v) {
         this.x = x > v.x() ? x : v.x();
         this.y = y > v.y() ? y : v.y();
         this.z = z > v.z() ? z : v.z();
@@ -1797,7 +1304,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d max(Vector4dc v, Vector4d dest) {
+    public Vector4d max(Vector4d v, Vector4d dest) {
         dest.x = x > v.x() ? x : v.x();
         dest.y = y > v.y() ? y : v.y();
         dest.z = z > v.z() ? z : v.z();
@@ -1805,84 +1312,25 @@ struct Vector4d {
         return dest;
     }
 
-    /**
-     * Return a string representation of this vector.
-     * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
-     * @return the string representation
-     */
-    public String toString() {
-        return Runtime.formatNumbers(toString(Options.NUMBER_FORMAT));
-    }
-
-    /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
-     * 
-     * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
-     * @return the string representation
-     */
-    public String toString(NumberFormat formatter) {
-        return "(" + Runtime.format(x, formatter) + " " + Runtime.format(y, formatter) + " " + Runtime.format(z, formatter) + " " + Runtime.format(w, formatter) + ")";
-    }
-
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeDouble(x);
-        out.writeDouble(y);
-        out.writeDouble(z);
-        out.writeDouble(w);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException {
-        x = in.readDouble();
-        y = in.readDouble();
-        z = in.readDouble();
-        w = in.readDouble();
-    }
-
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         long temp;
         temp = Double.doubleToLongBits(w);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(x);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(y);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(z);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Vector4d other = (Vector4d) obj;
-        if (Double.doubleToLongBits(w) != Double.doubleToLongBits(other.w))
-            return false;
-        if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
-            return false;
-        if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
-            return false;
-        if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
-            return false;
-        return true;
-    }
 
-    public boolean equals(Vector4dc v, double delta) {
+    public boolean equals(Vector4d v, double delta) {
         if (this == v)
             return true;
-        if (v == null)
-            return false;
-        if (!(v instanceof Vector4dc))
-            return false;
         if (!Runtime.equals(x, v.x(), delta))
             return false;
         if (!Runtime.equals(y, v.y(), delta))
@@ -1906,7 +1354,7 @@ struct Vector4d {
         return true;
     }
 
-    public Vector4d smoothStep(Vector4dc v, double t, Vector4d dest) {
+    public Vector4d smoothStep(Vector4d v, double t, Vector4d dest) {
         double t2 = t * t;
         double t3 = t2 * t;
         dest.x = (x + x - v.x() - v.x()) * t3 + (3.0 * v.x() - 3.0 * x) * t2 + x * t + x;
@@ -1916,7 +1364,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d hermite(Vector4dc t0, Vector4dc v1, Vector4dc t1, double t, Vector4d dest) {
+    public Vector4d hermite(Vector4d t0, Vector4d v1, Vector4d t1, double t, Vector4d dest) {
         double t2 = t * t;
         double t3 = t2 * t;
         dest.x = (x + x - v1.x() - v1.x() + t1.x() + t0.x()) * t3 + (3.0 * v1.x() - 3.0 * x - t0.x() - t0.x() - t1.x()) * t2 + x * t + x;
@@ -1939,7 +1387,7 @@ struct Vector4d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    public Vector4d lerp(Vector4dc other, double t) {
+    public Vector4d lerp(Vector4d other, double t) {
         this.x = Math.fma(other.x() - x, t, x);
         this.y = Math.fma(other.y() - y, t, y);
         this.z = Math.fma(other.z() - z, t, z);
@@ -1947,7 +1395,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d lerp(Vector4dc other, double t, Vector4d dest) {
+    public Vector4d lerp(Vector4d other, double t, Vector4d dest) {
         dest.x = Math.fma(other.x() - x, t, x);
         dest.y = Math.fma(other.y() - y, t, y);
         dest.z = Math.fma(other.z() - z, t, z);
@@ -1955,7 +1403,7 @@ struct Vector4d {
         return dest;
     }
 
-    public double get(int component) throws IllegalArgumentException {
+    public double get(int component) {
         switch (component) {
         case 0:
             return x;
@@ -1965,8 +1413,7 @@ struct Vector4d {
             return z;
         case 3:
             return w;
-        default:
-            throw new IllegalArgumentException();
+        default: {}
         }
     }
 
@@ -1975,14 +1422,6 @@ struct Vector4d {
         dest.y = Math.roundUsing(this.y(), mode);
         dest.z = Math.roundUsing(this.z(), mode);
         dest.w = Math.roundUsing(this.w(), mode);
-        return dest;
-    }
-
-    public Vector4f get(Vector4f dest) {
-        dest.x = (float) this.x();
-        dest.y = (float) this.y();
-        dest.z = (float) this.z();
-        dest.w = (float) this.w();
         return dest;
     }
 
@@ -2116,9 +1555,4 @@ struct Vector4d {
         dest.w = Math.abs(w);
         return dest;
     }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
 }
