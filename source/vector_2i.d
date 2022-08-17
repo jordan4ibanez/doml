@@ -136,14 +136,6 @@ struct Vector2i {
         this.y = xy[1];
     }
 
-    public int x() {
-        return this.x;
-    }
-
-    public int y() {
-        return this.y;
-    }
-
     /**
      * Set the x and y components to the supplied value.
      *
