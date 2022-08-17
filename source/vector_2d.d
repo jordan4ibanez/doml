@@ -4,6 +4,7 @@ module vector_2d;
  * The MIT License
  *
  * Copyright (c) 2015-2021 Richard Greenlees
+ $@#!$@# Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,18 +24,6 @@ module vector_2d;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
-
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-//#ifdef __HAS_NIO__
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-//#endif
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Represents a 2D vector with double-precision.
@@ -43,24 +32,17 @@ import java.text.NumberFormat;
  * @author Kai Burjack
  * @author F. Neurath
  */
-public class Vector2d implements Externalizable, Cloneable, Vector2dc {
+struct Vector2d {
 
-    private static final long serialVersionUID = 1L;
 
     /**
      * The x component of the vector.
      */
-    public double x;
+    double x = 0.0;
     /**
      * The y component of the vector.
      */
-    public double y;
-
-    /**
-     * Create a new {@link Vector2d} and initialize its components to zero.
-     */
-    public Vector2d() {
-    }
+    double y = 0.0;
 
     /**
      * Create a new {@link Vector2d} and initialize both of its components with the given value.
@@ -68,7 +50,7 @@ public class Vector2d implements Externalizable, Cloneable, Vector2dc {
      * @param d    
      *          the value of both components
      */
-    public Vector2d(double d) {
+    this(double d) {
         this.x = d;
         this.y = d;
     }
@@ -81,7 +63,7 @@ public class Vector2d implements Externalizable, Cloneable, Vector2dc {
      * @param y
      *          the y value
      */
-    public Vector2d(double x, double y) {
+    this(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -92,18 +74,7 @@ public class Vector2d implements Externalizable, Cloneable, Vector2dc {
      * @param v
      *          the {@link Vector2dc} to copy the values from
      */
-    public Vector2d(Vector2dc v) {
-        x = v.x();
-        y = v.y();
-    }
-
-    /**
-     * Create a new {@link Vector2d} and initialize its components to the one of the given vector.
-     * 
-     * @param v
-     *          the {@link Vector2fc} to copy the values from
-     */
-    public Vector2d(Vector2fc v) {
+    this(Vector2d v) {
         x = v.x();
         y = v.y();
     }
@@ -114,7 +85,7 @@ public class Vector2d implements Externalizable, Cloneable, Vector2dc {
      * @param v
      *          the {@link Vector2ic} to copy the values from
      */
-    public Vector2d(Vector2ic v) {
+    this(Vector2i v) {
         x = v.x();
         y = v.y();
     }
@@ -126,22 +97,11 @@ public class Vector2d implements Externalizable, Cloneable, Vector2dc {
      * @param xy
      *          the array containing at least three elements
      */
-    public Vector2d(double[] xy) {
+    this(double[] xy) {
         this.x = xy[0];
         this.y = xy[1];
     }
 
-    /**
-     * Create a new {@link Vector2d} and initialize its two components from the first
-     * two elements of the given array.
-     * 
-     * @param xy
-     *          the array containing at least two elements
-     */
-    public Vector2d(float[] xy) {
-        this.x = xy[0];
-        this.y = xy[1];
-    }
 
 //#ifdef __HAS_NIO__
     /**
