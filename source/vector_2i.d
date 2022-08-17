@@ -871,25 +871,6 @@ struct Vector2i {
         return result;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Vector2i other = (Vector2i) obj;
-        if (x != other.x) {
-            return false;
-        }
-        if (y != other.y) {
-            return false;
-        }
-        return true;
-    }
 
     public boolean equals(int x, int y) {
         if (this.x != x)
@@ -899,30 +880,5 @@ struct Vector2i {
         return true;
     }
 
-    /**
-     * Return a string representation of this vector.
-     * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
-     * @return the string representation
-     */
-    public String toString() {
-        return Runtime.formatNumbers(toString(Options.NUMBER_FORMAT));
-    }
-
-    /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
-     * 
-     * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
-     * @return the string representation
-     */
-    public String toString(NumberFormat formatter) {
-        return "(" + formatter.format(x) + " " + formatter.format(y) + ")";
-    }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
 }
