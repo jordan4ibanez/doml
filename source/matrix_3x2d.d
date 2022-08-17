@@ -174,7 +174,7 @@ struct Matrix3x2d {
         setMatrix3x2d(m);
         return this;
     }
-    private void setMatrix3x2dc(Matrix3x2d mat) {
+    private void setMatrix3x2d(Matrix3x2d mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
@@ -190,12 +190,8 @@ struct Matrix3x2d {
      *          the 2x2 matrix
      * @return this
      */
-    public Matrix3x2d set(Matrix2dc m) {
-        if (m instanceof Matrix2d) {
-            MemUtil.INSTANCE.copy((Matrix2d) m, this);
-        } else {
-            setMatrix2dc(m);
-        }
+    public Matrix3x2d set(Matrix2d m) {
+        setMatrix2d(m);
         return this;
     }
     private void setMatrix2dc(Matrix2dc mat) {
@@ -203,21 +199,6 @@ struct Matrix3x2d {
         m01 = mat.m01();
         m10 = mat.m10();
         m11 = mat.m11();
-    }
-
-    /**
-     * Set the left 2x2 submatrix of this {@link Matrix3x2d} to the given {@link Matrix2fc} and don't change the other elements.
-     *
-     * @param m
-     *          the 2x2 matrix
-     * @return this
-     */
-    public Matrix3x2d set(Matrix2fc m) {
-        m00 = m.m00();
-        m01 = m.m01();
-        m10 = m.m10();
-        m11 = m.m11();
-        return this;
     }
 
     /**
@@ -233,7 +214,7 @@ struct Matrix3x2d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    public Matrix3x2d mul(Matrix3x2dc right) {
+    public Matrix3x2d mul(Matrix3x2d right) {
         return mul(right, this);
     }
 
@@ -252,7 +233,7 @@ struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3x2d mul(Matrix3x2dc right, Matrix3x2d dest) {
+    public Matrix3x2d mul(Matrix3x2d right, Matrix3x2d dest) {
         double nm00 = m00 * right.m00() + m10 * right.m01();
         double nm01 = m01 * right.m00() + m11 * right.m01();
         double nm10 = m00 * right.m10() + m10 * right.m11();
@@ -280,11 +261,11 @@ struct Matrix3x2d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    public Matrix3x2d mulLocal(Matrix3x2dc left) {
+    public Matrix3x2d mulLocal(Matrix3x2d left) {
        return mulLocal(left, this);
     }
 
-    public Matrix3x2d mulLocal(Matrix3x2dc left, Matrix3x2d dest) {
+    public Matrix3x2d mulLocal(Matrix3x2d left, Matrix3x2d dest) {
         double nm00 = left.m00() * m00 + left.m10() * m01;
         double nm01 = left.m01() * m00 + left.m11() * m01;
         double nm10 = left.m00() * m10 + left.m10() * m11;
@@ -435,7 +416,7 @@ struct Matrix3x2d {
      *          the translation
      * @return this
      */
-    public Matrix3x2d translation(Vector2dc offset) {
+    public Matrix3x2d translation(Vector2d offset) {
         return translation(offset.x(), offset.y());
     }
 
@@ -473,7 +454,7 @@ struct Matrix3x2d {
      *          the new translation to set
      * @return this
      */
-    public Matrix3x2d setTranslation(Vector2dc offset) {
+    public Matrix3x2d setTranslation(Vector2d offset) {
         return setTranslation(offset.x(), offset.y());
     }
 
@@ -554,7 +535,7 @@ struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3x2d translate(Vector2dc offset, Matrix3x2d dest) {
+    public Matrix3x2d translate(Vector2d offset, Matrix3x2d dest) {
         return translate(offset.x(), offset.y(), dest);
     }
 
@@ -575,7 +556,7 @@ struct Matrix3x2d {
      *          the offset to translate
      * @return this
      */
-    public Matrix3x2d translate(Vector2dc offset) {
+    public Matrix3x2d translate(Vector2d offset) {
         return translate(offset.x(), offset.y(), this);
     }
 
@@ -621,7 +602,7 @@ struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3x2d translateLocal(Vector2dc offset, Matrix3x2d dest) {
+    public Matrix3x2d translateLocal(Vector2d offset, Matrix3x2d dest) {
         return translateLocal(offset.x(), offset.y(), dest);
     }
 
