@@ -1,7 +1,8 @@
-module Matrix4d;
+module matrix_4d;
 
 /*
  * The MIT License
+ $!#@$@ Translated by jordan4ibanez
  *
  * Copyright (c) 2015-2021 Richard Greenlees
  *
@@ -23,19 +24,6 @@ module Matrix4d;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
-
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-//#ifdef __HAS_NIO__
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-//#endif
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Contains the definition of a 4x4 Matrix of doubles, and associated functions to transform
