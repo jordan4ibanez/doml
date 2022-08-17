@@ -1,9 +1,10 @@
-module Vector4i;
+module vector_4i;
 
 /*
  * The MIT License
  *
  * Copyright (c) 2015-2021 Richard Greenlees
+ $@$ Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,18 +24,6 @@ module Vector4i;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
-
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-//#ifdef __HAS_NIO__
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-//#endif
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Contains the definition of a Vector comprising 4 ints and associated
@@ -44,33 +33,24 @@ import java.text.NumberFormat;
  * @author Kai Burjack
  * @author Hans Uhlig
  */
-public class Vector4i implements Externalizable, Cloneable, Vector4ic {
-
-    private static final long serialVersionUID = 1L;
+struct Vector4i {
 
     /**
      * The x component of the vector.
      */
-    public int x;
+    int x = 0;
     /**
      * The y component of the vector.
      */
-    public int y;
+    int y = 0;
     /**
      * The z component of the vector.
      */
-    public int z;
+    int z = 0;
     /**
      * The w component of the vector.
      */
-    public int w;
-
-    /**
-     * Create a new {@link Vector4i} of <code>(0, 0, 0, 1)</code>.
-     */
-    public Vector4i() {
-        this.w = 1;
-    }
+    int w = 1;
 
     /**
      * Create a new {@link Vector4i} with the same values as <code>v</code>.
@@ -215,80 +195,6 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
         this.z = xyzw[2];
         this.w = xyzw[3];
     }
-
-//#ifdef __HAS_NIO__
-    /**
-     * Create a new {@link Vector4i} and read this vector from the supplied
-     * {@link ByteBuffer} at the current buffer
-     * {@link ByteBuffer#position() position}.
-     * <p>
-     * This method will not increment the position of the given ByteBuffer.
-     * <p>
-     * In order to specify the offset into the ByteBuffer at which the vector is
-     * read, use {@link #Vector4i(int, ByteBuffer)}, taking the absolute
-     * position as parameter.
-     *
-     * @see #Vector4i(int, ByteBuffer)
-     * 
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     */
-    public Vector4i(ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-    }
-
-    /**
-     * Create a new {@link Vector4i} and read this vector from the supplied
-     * {@link ByteBuffer} starting at the specified absolute buffer
-     * position/index.
-     * <p>
-     * This method will not increment the position of the given ByteBuffer.
-     *
-     * @param index
-     *          the absolute position into the ByteBuffer
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     */
-    public Vector4i(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-    }
-
-    /**
-     * Create a new {@link Vector4i} and read this vector from the supplied
-     * {@link IntBuffer} at the current buffer
-     * {@link IntBuffer#position() position}.
-     * <p>
-     * This method will not increment the position of the given IntBuffer.
-     * <p>
-     * In order to specify the offset into the IntBuffer at which the vector is
-     * read, use {@link #Vector4i(int, IntBuffer)}, taking the absolute position
-     * as parameter.
-     *
-     * @see #Vector4i(int, IntBuffer)
-     *
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     */
-    public Vector4i(IntBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-    }
-
-    /**
-     * Create a new {@link Vector4i} and read this vector from the supplied
-     * {@link IntBuffer} starting at the specified absolute buffer
-     * position/index.
-     * <p>
-     * This method will not increment the position of the given IntBuffer.
-     *
-     * @param index
-     *          the absolute position into the IntBuffer
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     */
-    public Vector4i(int index, IntBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-    }
-//#endif
 
     public int x() {
         return this.x;
@@ -469,105 +375,6 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
         return this;
     }
 
-//#ifdef __HAS_NIO__
-    /**
-     * Read this vector from the supplied {@link ByteBuffer} at the current
-     * buffer {@link ByteBuffer#position() position}.
-     * <p>
-     * This method will not increment the position of the given ByteBuffer.
-     * <p>
-     * In order to specify the offset into the ByteBuffer at which the vector is
-     * read, use {@link #set(int, ByteBuffer)}, taking the absolute position as
-     * parameter.
-     *
-     * @see #set(int, ByteBuffer)
-     *
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     * @return this
-     */
-    public Vector4i set(ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Read this vector from the supplied {@link ByteBuffer} starting at the
-     * specified absolute buffer position/index.
-     * <p>
-     * This method will not increment the position of the given ByteBuffer.
-     *
-     * @param index
-     *          the absolute position into the ByteBuffer
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     * @return this
-     */
-    public Vector4i set(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-        return this;
-    }
-
-    /**
-     * Read this vector from the supplied {@link IntBuffer} at the current
-     * buffer {@link IntBuffer#position() position}.
-     * <p>
-     * This method will not increment the position of the given IntBuffer.
-     * <p>
-     * In order to specify the offset into the IntBuffer at which the vector is
-     * read, use {@link #set(int, IntBuffer)}, taking the absolute position as
-     * parameter.
-     *
-     * @see #set(int, IntBuffer)
-     *
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     * @return this
-     */
-    public Vector4i set(IntBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Read this vector from the supplied {@link IntBuffer} starting at the
-     * specified absolute buffer position/index.
-     * <p>
-     * This method will not increment the position of the given IntBuffer.
-     *
-     * @param index
-     *          the absolute position into the IntBuffer
-     * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
-     * @return this
-     */
-    public Vector4i set(int index, IntBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-        return this;
-    }
-//#endif
-
-//#ifdef __HAS_UNSAFE__
-    /**
-     * Set the values of this vector by reading 4 integer values from off-heap memory,
-     * starting at the given address.
-     * <p>
-     * This method will throw an {@link UnsupportedOperationException} when DOML is used with `-DDOML.nounsafe`.
-     * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
-     * 
-     * @param address
-     *              the off-heap memory address to read the vector values from
-     * @return this
-     */
-    public Vector4i setFromAddress(long address) {
-        if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
-        MemUtil.MemUtilUnsafe.get(this, address);
-        return this;
-    }
-//#endif
-
     public int get(int component) throws IllegalArgumentException {
         switch (component) {
         case 0:
@@ -642,37 +449,6 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
         }
         return this;
     }
-
-//#ifdef __HAS_NIO__
-    public IntBuffer get(IntBuffer buffer) {
-        MemUtil.INSTANCE.put(this, buffer.position(), buffer);
-        return buffer;
-    }
-
-    public IntBuffer get(int index, IntBuffer buffer) {
-        MemUtil.INSTANCE.put(this, index, buffer);
-        return buffer;
-    }
-
-    public ByteBuffer get(ByteBuffer buffer) {
-        MemUtil.INSTANCE.put(this, buffer.position(), buffer);
-        return buffer;
-    }
-
-    public ByteBuffer get(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.put(this, index, buffer);
-        return buffer;
-    }
-//#endif
-
-//#ifdef __HAS_UNSAFE__
-    public Vector4ic getToAddress(long address) {
-        if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
-        MemUtil.MemUtilUnsafe.put(this, address);
-        return this;
-    }
-//#endif
 
     /**
      * Subtract the supplied vector from this one.
