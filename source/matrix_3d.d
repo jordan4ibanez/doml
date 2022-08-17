@@ -342,7 +342,7 @@ struct Matrix3d {
      *          the matrix whose values will be copied
      * @return this
      */
-    public Matrix3d set(Matrix3dc m) {
+    public Matrix3d set(Matrix3d m) {
         m00 = m.m00();
         m01 = m.m01();
         m02 = m.m02();
@@ -362,33 +362,13 @@ struct Matrix3d {
      *          the matrix to copy the transposed values from
      * @return this
      */
-    public Matrix3d setTransposed(Matrix3dc m) {
+    public Matrix3d setTransposed(Matrix3d m) {
         double nm10 = m.m01(), nm12 = m.m21();
         double nm20 = m.m02(), nm21 = m.m12();
         return this
         ._m00(m.m00())._m01(m.m10())._m02(m.m20())
         ._m10(nm10)._m11(m.m11())._m12(nm12)
         ._m20(nm20)._m21(nm21)._m22(m.m22());
-    }
-
-    /**
-     * Set the values in this matrix to the ones in m.
-     * 
-     * @param m
-     *          the matrix whose values will be copied
-     * @return this
-     */
-    public Matrix3d set(Matrix3fc m) {
-        m00 = m.m00();
-        m01 = m.m01();
-        m02 = m.m02();
-        m10 = m.m10();
-        m11 = m.m11();
-        m12 = m.m12();
-        m20 = m.m20();
-        m21 = m.m21();
-        m22 = m.m22();
-        return this;
     }
 
     /**
