@@ -1,5 +1,9 @@
 module math;
 
+import options;
+
+import std.traits: Select;
+
 import std.math: 
 math_pi    = PI, 
 math_sin   = sin, 
@@ -94,39 +98,33 @@ private const int lookupTableSizeMinus1 = lookupTableSize - 1;
 private const int lookupTableSizeWithMargin = lookupTableSize + 1;
 private const float pi2OverLookupSize = PI2_f / lookupTableSize;
 private const float lookupSizeOverPi2 = lookupTableSize / PI2_f;
-private const float[] sinTable;
+private const float[] sinTable = initThisThing();
 
-/*
-if (Options.FASTMATH && Options.SIN_LOOKUP) {
-
-    sinTable = float[lookupTableSizeWithMargin];
-
-    for (int i = 0; i < lookupTableSizeWithMargin; i++) {
-
-        double d = i * pi2OverLookupSize;
-
-        sinTable[i] = cast(float) sin(d);
-
+private float[] initThisThing() {
+    float[] tempTable;
+    if (Options.FASTMATH && Options.SIN_LOOKUP) {
+        for (int i = 0; i < lookupTableSizeWithMargin; i++) {
+            double d = i * pi2OverLookupSize;
+            tempTable ~= cast(float) sin(d);
+        }
     }
-} else {
-    sinTable = null;
+    return tempTable;
 }
-*/
 
 // Credit: https://forum.dlang.org/post/bug-5900-3@http.d.puremagic.com%2Fissues%2F
 /// Converts from degrees to radians.
-@safe pure nothrow Select!(isFloatingPoint!T || isComplex!T, T, double)
+@safe pure nothrow
 radians(T)(in T x) {
     return x * (PI / 180);
 }
 
 /// Converts from radians to degrees.
-@safe pure nothrow Select!(isFloatingPoint!T || isComplex!T, T, double)
+@safe pure nothrow
 degrees(T)(in T x) {
     return x / (PI / 180);
 }
 
-@safe pure nothrow Select!(isFloatingPoint!T || isComplex!T, T, double)
+@safe pure nothrow Select!(isfloatingPoint!T || isComplex!T, T, double)
 signum(T)(in T x) {
     return (T(0) < val) - (val < T(0));
 }
@@ -134,6 +132,12 @@ signum(T)(in T x) {
 // Thanks to adr, a Java function in D
 double longbits(long a) {
     return *cast(double*) &a;
+}
+int floatToRawIntBits(float a) {
+    return *cast(int*) &a;
+}
+long doubleToRawLongBits(double a) {
+    return *cast(long*) &a;
 }
 
 
@@ -209,7 +213,7 @@ private const double s1 = longbits(4_607_182_418_589_157_889L);
 */
 double sin_roquen_9(double v) {
     double i  = math_rint(v*PI_INV);
-    double x  = v - i * Math.PI;
+    double x  = v - i * PI;
     double qs = 1-2*(cast(int)i & 1);
     double x2 = x*x;
     double r;
@@ -235,7 +239,7 @@ private const double k7 = longbits(-4_798_040_743_777_455_072L);
 */
 double sin_roquen_newk(double v) {
     double i  = math_rint(v*PI_INV);
-    double x  = v - i * Math.PI;
+    double x  = v - i * PI;
     double qs = 1-2*(cast(int)i & 1);
     double x2 = x*x;
     double r;
@@ -308,8 +312,9 @@ private float cosFromSinInternal(float sin, float angle) {
     return cos;
 }
 double cosFromSin(double sin, double angle) {
-    if (Options.FASTMATH)
-        return sin(angle + PIHalf);
+    if (Options.FASTMATH){
+        return math_sin(angle + PIHalf);
+    }
     // sin(x)^2 + cos(x)^2 = 1
     double cos = math_sqrt(1.0 - sin * sin);
     double a = angle + PIHalf;
@@ -353,7 +358,7 @@ double acos(double r) {
 
 float safeAcos(float v) {
     if (v < -1.0f)
-        return Math.PI_f;
+        return PI_f;
     else if (v > +1.0f)
         return 0.0f;
     else
@@ -361,7 +366,7 @@ float safeAcos(float v) {
 }
 double safeAcos(double v) {
     if (v < -1.0)
-        return Math.PI;
+        return PI;
     else if (v > +1.0)
         return 0.0;
     else
@@ -413,10 +418,10 @@ double abs(double r) {
 }
 
 bool absEqualsOne(float r) {
-    return (Float.floatToRawIntBits(r) & 0x7FFFFFFF) == 0x3F800000;
+    return (floatToRawIntBits(r) & 0x7FFFFFFF) == 0x3F800000;
 }
 bool absEqualsOne(double r) {
-    return (double.doubleToRawLongBits(r) & 0x7FFFFFFFFFFFFFFFL) == 0x3FF0000000000000L;
+    return (doubleToRawLongBits(r) & 0x7FFFFFFFFFFFFFFFL) == 0x3FF0000000000000L;
 }
 
 int abs(int r) {
@@ -483,11 +488,11 @@ float ceil(float v) {
 }
 
 long round(double v) {
-    return math_round(v);
+    return cast(long) math_round(v);
 }
 
 int round(float v) {
-    return math_round(v);
+    return cast(int) math_round(v);
 }
 
 double exp(double a) {
@@ -495,27 +500,19 @@ double exp(double a) {
 }
 
 bool isFinite(double d) {
-    return math_abs(d) <= double.MAX_VALUE;
+    return math_abs(d) <= double.max;
 }
 
 bool isFinite(float f) {
-    return math_abs(f) <= Float.MAX_VALUE;
+    return math_abs(f) <= float.max;
 }
 
 float fma(float a, float b, float c) {
-//#ifdef __HAS_MATH_FMA__
-    if (Runtime.HAS_Math_fma)
-        return math_fma(a, b, c);
-//#endif
-    return a * b + c;
+    return math_fma(a, b, c);
 }
 
 double fma(double a, double b, double c) {
-//#ifdef __HAS_MATH_FMA__
-    if (Runtime.HAS_Math_fma)
-        return math_fma(a, b, c);
-//#endif
-    return a * b + c;
+    return math_fma(a, b, c);
 }
 
 int roundUsing(float v, int mode) {
