@@ -220,18 +220,6 @@ struct Vector2d {
         return this;
     }
 
-    /**
-     * Set this {@link Vector2d} to be a clone of <code>v</code>.
-     * 
-     * @param v
-     *          the vector to copy from
-     * @return this
-     */
-    public Vector2d set(Vector2fc v) {
-        this.x = v.x();
-        this.y = v.y();
-        return this;
-    }
 
     /**
      * Set this {@link Vector2d} to be a clone of <code>v</code>.
@@ -386,12 +374,6 @@ struct Vector2d {
         return dest;
     }
 
-    public Vector2f get(Vector2f dest) {
-        dest.x = (float) this.x();
-        dest.y = (float) this.y();
-        return dest;
-    }
-
     public Vector2d get(Vector2d dest) {
         dest.x = this.x();
         dest.y = this.y();
@@ -499,18 +481,6 @@ struct Vector2d {
         return dest;
     }
 
-    /**
-     * Subtract <code>v</code> from this vector.
-     * 
-     * @param v
-     *          the vector to subtract
-     * @return this
-     */
-    public Vector2d sub(Vector2fc v) {
-        this.x = x - v.x();
-        this.y = y - v.y();
-        return this;
-    }
 
     public Vector2d sub(Vector2dc v, Vector2d dest) {
         dest.x = x - v.x();
@@ -518,11 +488,6 @@ struct Vector2d {
         return dest;
     }
 
-    public Vector2d sub(Vector2fc v, Vector2d dest) {
-        dest.x = x - v.x();
-        dest.y = y - v.y();
-        return dest;
-    }
 
     /**
      * Multiply the components of this vector by the given scalar.
@@ -638,44 +603,11 @@ struct Vector2d {
         return this;
     }
 
-    /**
-     * Divide this Vector3d component-wise by another Vector2fc.
-     * 
-     * @param v
-     *          the vector to divide by
-     * @return this
-     */
-    public Vector2d div(Vector2fc v) {
-        this.x = x / v.x();
-        this.y = y / v.y();
-        return this;
-    }
-
-    public Vector2d div(Vector2fc v, Vector2d dest) {
-        dest.x = x / v.x();
-        dest.y = y / v.y();
-        return dest;
-    }
 
     public Vector2d div(Vector2dc v, Vector2d dest) {
         dest.x = x / v.x();
         dest.y = y / v.y();
         return dest;
-    }
-
-    /**
-     * Multiply the given matrix <code>mat</code> with this Vector2d.
-     *
-     * @param mat
-     *          the matrix to multiply this vector by
-     * @return this
-     */
-    public Vector2d mul(Matrix2fc mat) {
-        double rx = mat.m00() * x + mat.m10() * y;
-        double ry = mat.m01() * x + mat.m11() * y;
-        this.x = rx;
-        this.y = ry;
-        return this;
     }
 
     /**
@@ -700,15 +632,6 @@ struct Vector2d {
         dest.y = ry;
         return dest;
     }
-
-    public Vector2d mul(Matrix2fc mat, Vector2d dest) {
-        double rx = mat.m00() * x + mat.m10() * y;
-        double ry = mat.m01() * x + mat.m11() * y;
-        dest.x = rx;
-        dest.y = ry;
-        return dest;
-    }
-
     /**
      * Multiply the transpose of the given matrix with this Vector2d and store the result in <code>this</code>.
      *
@@ -725,29 +648,6 @@ struct Vector2d {
     }
 
     public Vector2d mulTranspose(Matrix2dc mat, Vector2d dest) {
-        double rx = mat.m00() * x + mat.m01() * y;
-        double ry = mat.m10() * x + mat.m11() * y;
-        dest.x = rx;
-        dest.y = ry;
-        return dest;
-    }
-
-    /**
-     * Multiply the transpose of the given matrix with  this Vector2d and store the result in <code>this</code>.
-     *
-     * @param mat
-     *          the matrix
-     * @return this
-     */
-    public Vector2d mulTranspose(Matrix2fc mat) {
-        double rx = mat.m00() * x + mat.m01() * y;
-        double ry = mat.m10() * x + mat.m11() * y;
-        this.x = rx;
-        this.y = ry;
-        return this;
-    }
-
-    public Vector2d mulTranspose(Matrix2fc mat, Vector2d dest) {
         double rx = mat.m00() * x + mat.m01() * y;
         double ry = mat.m10() * x + mat.m11() * y;
         dest.x = rx;
@@ -858,18 +758,6 @@ struct Vector2d {
     }
 
     public double distanceSquared(Vector2dc v) {
-        double dx = this.x - v.x();
-        double dy = this.y - v.y();
-        return dx * dx + dy * dy;
-    }
-
-    public double distance(Vector2fc v) {
-        double dx = this.x - v.x();
-        double dy = this.y - v.y();
-        return Math.sqrt(dx * dx + dy * dy);
-    }
-
-    public double distanceSquared(Vector2fc v) {
         double dx = this.x - v.x();
         double dy = this.y - v.y();
         return dx * dx + dy * dy;
@@ -999,26 +887,8 @@ struct Vector2d {
         return dest;
     }
 
-    /**
-     * Add <code>v</code> to this vector.
-     * 
-     * @param v
-     *          the vector to add
-     * @return this
-     */
-    public Vector2d add(Vector2fc v) {
-        this.x = x + v.x();
-        this.y = y + v.y();
-        return this;
-    }
 
     public Vector2d add(Vector2dc v, Vector2d dest) {
-        dest.x = x + v.x();
-        dest.y = y + v.y();
-        return dest;
-    }
-
-    public Vector2d add(Vector2fc v, Vector2d dest) {
         dest.x = x + v.x();
         dest.y = y + v.y();
         return dest;
