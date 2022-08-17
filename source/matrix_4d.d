@@ -171,7 +171,7 @@ struct Matrix4d {
      * @param buffer
      *          the {@link DoubleBuffer} to read the matrix values from
      */
-    public Matrix4d(DoubleBuffer buffer) {
+    this(DoubleBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
         determineProperties();
     }
@@ -189,7 +189,7 @@ struct Matrix4d {
      * @param col3
      *          the fourth column
      */
-    public Matrix4d(Vector4d col0, Vector4d col1, Vector4d col2, Vector4d col3) {
+    this(Vector4d col0, Vector4d col1, Vector4d col2, Vector4d col3) {
         set(col0, col1, col2, col3);
     }
 
@@ -3040,47 +3040,6 @@ struct Matrix4d {
         dest.y = Math.sqrt(m10 * m10 + m11 * m11 + m12 * m12);
         dest.z = Math.sqrt(m20 * m20 + m21 * m21 + m22 * m22);
         return dest;
-    }
-
-    /**
-     * Return a string representation of this matrix.
-     * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
-     * @return the string representation
-     */
-    public String toString() {
-        String str = toString(Options.NUMBER_FORMAT);
-        StringBuffer res = new StringBuffer();
-        int eIndex = Integer.MIN_VALUE;
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (c == 'E') {
-                eIndex = i;
-            } else if (c == ' ' && eIndex == i - 1) {
-                // workaround Java 1.4 DecimalFormat bug
-                res.append('+');
-                continue;
-            } else if (Character.isDigit(c) && eIndex == i - 1) {
-                res.append('+');
-            }
-            res.append(c);
-        }
-        return res.toString();
-    }
-
-    /**
-     * Return a string representation of this matrix by formatting the matrix elements with the given {@link NumberFormat}.
-     * 
-     * @param formatter
-     *          the {@link NumberFormat} used to format the matrix values with
-     * @return the string representation
-     */
-    public String toString(NumberFormat formatter) {
-        return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " + Runtime.format(m20, formatter) + " " + Runtime.format(m30, formatter) + "\n"
-             + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + " " + Runtime.format(m31, formatter) + "\n"
-             + Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " + Runtime.format(m22, formatter) + " " + Runtime.format(m32, formatter) + "\n"
-             + Runtime.format(m03, formatter) + " " + Runtime.format(m13, formatter) + " " + Runtime.format(m23, formatter) + " " + Runtime.format(m33, formatter) + "\n";
     }
 
     public Matrix4d get(Matrix4d dest) {
