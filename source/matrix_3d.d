@@ -142,7 +142,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d m00(double m00) {
+    public Matrix3d setm00(double m00) {
         this.m00 = m00;
         return this;
     }
@@ -153,7 +153,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d m01(double m01) {
+    public Matrix3d setm01(double m01) {
         this.m01 = m01;
         return this;
     }
@@ -164,7 +164,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d m02(double m02) {
+    public Matrix3d setm02(double m02) {
         this.m02 = m02;
         return this;
     }
@@ -175,7 +175,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d m10(double m10) {
+    public Matrix3d setm10(double m10) {
         this.m10 = m10;
         return this;
     }
@@ -186,7 +186,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d m11(double m11) {
+    public Matrix3d setm11(double m11) {
         this.m11 = m11;
         return this;
     }
@@ -197,7 +197,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d m12(double m12) {
+    public Matrix3d setm12(double m12) {
         this.m12 = m12;
         return this;
     }
@@ -208,7 +208,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d m20(double m20) {
+    public Matrix3d setm20(double m20) {
         this.m20 = m20;
         return this;
     }
@@ -219,7 +219,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d m21(double m21) {
+    public Matrix3d setm21(double m21) {
         this.m21 = m21;
         return this;
     }
@@ -230,7 +230,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d m22(double m22) {
+    public Matrix3d setm22(double m22) {
         this.m22 = m22;
         return this;
     }
