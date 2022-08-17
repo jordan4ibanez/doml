@@ -82,9 +82,9 @@ struct Vector3i {
      * Create a new {@link Vector3i} with the same values as <code>v</code>.
      *
      * @param v
-     *          the {@link Vector3ic} to copy the values from
+     *          the {@link Vector3i} to copy the values from
      */
-    this(Vector3ic v) {
+    this(Vector3i v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -95,11 +95,11 @@ struct Vector3i {
      * given <code>v</code> and the given <code>z</code>
      *
      * @param v
-     *          the {@link Vector2ic} to copy the values from
+     *          the {@link Vector2i} to copy the values from
      * @param z
      *          the z component
      */
-    this(Vector2ic v, int z) {
+    this(Vector2i v, int z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -165,11 +165,11 @@ struct Vector3i {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector3dc} to round and copy the values from
+     *          the {@link Vector3d} to round and copy the values from
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    this(Vector3dc v, int mode) {
+    this(Vector3d v, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
         this.y = Math.roundUsing(v.y(), mode);
         this.z = Math.roundUsing(v.z(), mode);
@@ -281,7 +281,7 @@ struct Vector3i {
      *          contains the values of x, y and z to set
      * @return this
      */
-    public Vector3i set(Vector3ic v) {
+    public Vector3i set(Vector3i v) {
         x = v.x();
         y = v.y();
         z = v.z();
@@ -298,7 +298,7 @@ struct Vector3i {
      *          the vector to copy from
      * @return this
      */
-    public Vector3i set(Vector3dc v) {
+    public Vector3i set(Vector3d v) {
         this.x = (int) v.x();
         this.y = (int) v.y();
         this.z = (int) v.z();
@@ -317,7 +317,7 @@ struct Vector3i {
      *          the {@link RoundingMode} to use
      * @return this
      */
-    public Vector3i set(Vector3dc v, int mode) {
+    public Vector3i set(Vector3d v, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
         this.y = Math.roundUsing(v.y(), mode);
         this.z = Math.roundUsing(v.z(), mode);
@@ -330,12 +330,12 @@ struct Vector3i {
      * component from the given <code>z</code>
      *
      * @param v
-     *          the {@link Vector2ic} to copy the values from
+     *          the {@link Vector2i} to copy the values from
      * @param z
      *          the z component
      * @return this
      */
-    public Vector3i set(Vector2ic v, int z) {
+    public Vector3i set(Vector2i v, int z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -550,7 +550,7 @@ struct Vector3i {
 //#endif
 
 //#ifdef __HAS_UNSAFE__
-    public Vector3ic getToAddress(long address) {
+    public Vector3i getToAddress(long address) {
         if (Options.NO_UNSAFE)
             throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
         MemUtil.MemUtilUnsafe.put(this, address);
@@ -566,14 +566,14 @@ struct Vector3i {
      *          the vector to subtract
      * @return this
      */
-    public Vector3i sub(Vector3ic v) {
+    public Vector3i sub(Vector3i v) {
         this.x = this.x - v.x();
         this.y = this.y - v.y();
         this.z = this.z - v.z();
         return this;
     }
 
-    public Vector3i sub(Vector3ic v, Vector3i dest) {
+    public Vector3i sub(Vector3i v, Vector3i dest) {
         dest.x = x - v.x();
         dest.y = y - v.y();
         dest.z = z - v.z();
@@ -612,14 +612,14 @@ struct Vector3i {
      *          the vector to add
      * @return this
      */
-    public Vector3i add(Vector3ic v) {
+    public Vector3i add(Vector3i v) {
         this.x = this.x + v.x();
         this.y = this.y + v.y();
         this.z = this.z + v.z();
         return this;
     }
 
-    public Vector3i add(Vector3ic v, Vector3i dest) {
+    public Vector3i add(Vector3i v, Vector3i dest) {
         dest.x = x + v.x();
         dest.y = y + v.y();
         dest.z = z + v.z();
@@ -680,14 +680,14 @@ struct Vector3i {
      *          the vector to multiply
      * @return this
      */
-    public Vector3i mul(Vector3ic v) {
+    public Vector3i mul(Vector3i v) {
         this.x = this.x * v.x();
         this.y = this.y * v.y();
         this.z = this.z * v.z();
         return this;
     }
 
-    public Vector3i mul(Vector3ic v, Vector3i dest) {
+    public Vector3i mul(Vector3i v, Vector3i dest) {
         dest.x = x * v.x();
         dest.y = y * v.y();
         dest.z = z * v.z();
@@ -797,7 +797,7 @@ struct Vector3i {
         return Math.sqrt(x * x + y * y + z * z);
     }
 
-    public double distance(Vector3ic v) {
+    public double distance(Vector3i v) {
         int dx = this.x - v.x();
         int dy = this.y - v.y();
         int dz = this.z - v.z();
@@ -811,7 +811,7 @@ struct Vector3i {
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
-    public long gridDistance(Vector3ic v) {
+    public long gridDistance(Vector3i v) {
         return Math.abs(v.x() - x()) + Math.abs(v.y() - y())  + Math.abs(v.z() - z());
     }
 
@@ -819,7 +819,7 @@ struct Vector3i {
         return Math.abs(x - x()) + Math.abs(y - y()) + Math.abs(z - z());
     }
 
-    public long distanceSquared(Vector3ic v) {
+    public long distanceSquared(Vector3i v) {
         int dx = this.x - v.x();
         int dy = this.y - v.y();
         int dz = this.z - v.z();
@@ -950,14 +950,14 @@ struct Vector3i {
      *          the other vector
      * @return this
      */
-    public Vector3i min(Vector3ic v) {
+    public Vector3i min(Vector3i v) {
         this.x = x < v.x() ? x : v.x();
         this.y = y < v.y() ? y : v.y();
         this.z = z < v.z() ? z : v.z();
         return this;
     }
 
-    public Vector3i min(Vector3ic v, Vector3i dest) {
+    public Vector3i min(Vector3i v, Vector3i dest) {
         dest.x = x < v.x() ? x : v.x();
         dest.y = y < v.y() ? y : v.y();
         dest.z = z < v.z() ? z : v.z();
@@ -971,14 +971,14 @@ struct Vector3i {
      *          the other vector
      * @return this
      */
-    public Vector3i max(Vector3ic v) {
+    public Vector3i max(Vector3i v) {
         this.x = x > v.x() ? x : v.x();
         this.y = y > v.y() ? y : v.y();
         this.z = z > v.z() ? z : v.z();
         return this;
     }
 
-    public Vector3i max(Vector3ic v, Vector3i dest) {
+    public Vector3i max(Vector3i v, Vector3i dest) {
         dest.x = x > v.x() ? x : v.x();
         dest.y = y > v.y() ? y : v.y();
         dest.z = z > v.z() ? z : v.z();
