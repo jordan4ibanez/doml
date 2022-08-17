@@ -220,7 +220,7 @@ struct Matrix2d {
         setMatrix2d(m);
         return this;
     }
-    private void setMatrix2dc(Matrix2d mat) {
+    private void setMatrix2d(Matrix2d mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
@@ -236,7 +236,7 @@ struct Matrix2d {
      * @return this
      */
     public Matrix2d set(Matrix3x2d m) {
-        setMatrix3x2dc(m);
+        setMatrix3x2d(m);
         return this;
     }
     private void setMatrix3x2d(Matrix3x2d mat) {
@@ -372,7 +372,7 @@ struct Matrix2d {
      *          the second column
      * @return this
      */
-    public Matrix2d set(Vector2dc col0, Vector2dc col1) {
+    public Matrix2d set(Vector2d col0, Vector2d col1) {
         m00 = col0.x();
         m01 = col0.y();
         m10 = col1.x();
@@ -448,72 +448,9 @@ struct Matrix2d {
     }
 
     public double getRotation() {
-        return (double) Math.atan2(m01, m11);
+        return cast(double) Math.atan2(m01, m11);
     }
 
-    //#ifdef __GWT__
-    public Float64Array get(Float64Array buffer) {
-        buffer.set(0, m00);
-        buffer.set(1, m01);
-        buffer.set(2, m10);
-        buffer.set(3, m11);
-        return buffer;
-    }
-    public Float64Array get(int index, Float64Array buffer) {
-        buffer.set(index,   m00);
-        buffer.set(index+1, m01);
-        buffer.set(index+2, m10);
-        buffer.set(index+3, m11);
-        return buffer;
-    }
-//#endif
-
-    //#ifdef __HAS_NIO__
-    public DoubleBuffer get(DoubleBuffer buffer) {
-        return get(buffer.position(), buffer);
-    }
-
-    public DoubleBuffer get(int index, DoubleBuffer buffer) {
-        MemUtil.INSTANCE.put(this, index, buffer);
-        return buffer;
-    }
-
-    public ByteBuffer get(ByteBuffer buffer) {
-        return get(buffer.position(), buffer);
-    }
-
-    public ByteBuffer get(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.put(this, index, buffer);
-        return buffer;
-    }
-
-    public DoubleBuffer getTransposed(DoubleBuffer buffer) {
-        return get(buffer.position(), buffer);
-    }
-
-    public DoubleBuffer getTransposed(int index, DoubleBuffer buffer) {
-        MemUtil.INSTANCE.putTransposed(this, index, buffer);
-        return buffer;
-    }
-
-    public ByteBuffer getTransposed(ByteBuffer buffer) {
-        return get(buffer.position(), buffer);
-    }
-
-    public ByteBuffer getTransposed(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.putTransposed(this, index, buffer);
-        return buffer;
-    }
-//#endif
-
-//#ifdef __HAS_UNSAFE__
-    public Matrix2dc getToAddress(long address) {
-        if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using joml.nounsafe");
-        MemUtil.MemUtilUnsafe.put(this, address);
-        return this;
-    }
-//#endif
 
     public double[] get(double[] arr, int offset) {
         MemUtil.INSTANCE.copy(this, arr, offset);
@@ -523,100 +460,6 @@ struct Matrix2d {
     public double[] get(double[] arr) {
         return get(arr, 0);
     }
-
-//#ifdef __HAS_NIO__
-    /**
-     * Set the values of this matrix by reading 4 double values from the given {@link DoubleBuffer} in column-major order,
-     * starting at its current position.
-     * <p>
-     * The DoubleBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the DoubleBuffer will not be changed by this method.
-     *
-     * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix2d set(DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 4 double values from the given {@link ByteBuffer} in column-major order,
-     * starting at its current position.
-     * <p>
-     * The ByteBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the ByteBuffer will not be changed by this method.
-     *
-     * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix2d set(ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 4 double values from the given {@link DoubleBuffer} in column-major order,
-     * starting at the specified absolute buffer position/index.
-     * <p>
-     * The DoubleBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the DoubleBuffer will not be changed by this method.
-     * 
-     * @param index
-     *              the absolute position into the DoubleBuffer
-     * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix2d set(int index, DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 4 double values from the given {@link ByteBuffer} in column-major order,
-     * starting at the specified absolute buffer position/index.
-     * <p>
-     * The ByteBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the ByteBuffer will not be changed by this method.
-     * 
-     * @param index
-     *              the absolute position into the ByteBuffer
-     * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix2d set(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-        return this;
-    }
-//#endif
-//#ifdef __HAS_UNSAFE__
-    /**
-     * Set the values of this matrix by reading 4 double values from off-heap memory in column-major order,
-     * starting at the given address.
-     * <p>
-     * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
-     * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
-     *
-     * @param address
-     *              the off-heap memory address to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix2d setFromAddress(long address) {
-        if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using joml.nounsafe");
-        MemUtil.MemUtilUnsafe.get(this, address);
-        return this;
-    }
-//#endif
 
     /**
      * Set all values within this matrix to zero.
@@ -641,7 +484,7 @@ struct Matrix2d {
         return this;
     }
 
-    public Matrix2d scale(Vector2dc xy, Matrix2d dest) {
+    public Matrix2d scale(Vector2d xy, Matrix2d dest) {
         return scale(xy.x(), xy.y(), dest);
     }
 
@@ -658,7 +501,7 @@ struct Matrix2d {
      *            the factors of the x and y component, respectively
      * @return this
      */
-    public Matrix2d scale(Vector2dc xy) {
+    public Matrix2d scale(Vector2d xy) {
         return scale(xy.x(), xy.y(), this);
     }
 
@@ -794,7 +637,7 @@ struct Matrix2d {
      *             the scale in x and y respectively
      * @return this
      */
-    public Matrix2d scaling(Vector2dc xy) {
+    public Matrix2d scaling(Vector2d xy) {
         return scaling(xy.x(), xy.y());
     }
 
@@ -829,7 +672,7 @@ struct Matrix2d {
         return v.mul(this);
     }
 
-    public Vector2d transform(Vector2dc v, Vector2d dest) {
+    public Vector2d transform(Vector2d v, Vector2d dest) {
         v.mul(this, dest);
         return dest;
     }
@@ -844,7 +687,7 @@ struct Matrix2d {
         return v.mulTranspose(this);
     }
 
-    public Vector2d transformTranspose(Vector2dc v, Vector2d dest) {
+    public Vector2d transformTranspose(Vector2d v, Vector2d dest) {
         v.mulTranspose(this, dest);
         return dest;
     }
@@ -853,20 +696,6 @@ struct Matrix2d {
         dest.set(m00 * x + m01 * y,
                 m10 * x + m11 * y);
         return dest;
-    }
-
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeDouble(m00);
-        out.writeDouble(m01);
-        out.writeDouble(m10);
-        out.writeDouble(m11);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException {
-        m00 = in.readDouble();
-        m01 = in.readDouble();
-        m10 = in.readDouble();
-        m11 = in.readDouble();
     }
 
     /**
@@ -946,7 +775,7 @@ struct Matrix2d {
         return dest;
     }
 
-    public Vector2d getRow(int row, Vector2d dest) throws IndexOutOfBoundsException {
+    public Vector2d getRow(int row, Vector2d dest) {
         switch (row) {
             case 0:
                 dest.x = m00;
@@ -956,8 +785,7 @@ struct Matrix2d {
                 dest.x = m01;
                 dest.y = m11;
                 break;
-            default:
-                throw new IndexOutOfBoundsException();
+            default: {}
         }
         return dest;
     }
@@ -972,7 +800,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setRow(int row, Vector2dc src) throws IndexOutOfBoundsException {
+    public Matrix2d setRow(int row, Vector2dc src) {
         return setRow(row, src.x(), src.y());
     }
 
@@ -988,7 +816,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setRow(int row, double x, double y) throws IndexOutOfBoundsException {
+    public Matrix2d setRow(int row, double x, double y) {
         switch (row) {
             case 0:
                 this.m00 = x;
@@ -998,13 +826,12 @@ struct Matrix2d {
                 this.m01 = x;
                 this.m11 = y;
                 break;
-            default:
-                throw new IndexOutOfBoundsException();
+            default:{}
         }
         return this;
     }
 
-    public Vector2d getColumn(int column, Vector2d dest) throws IndexOutOfBoundsException {
+    public Vector2d getColumn(int column, Vector2d dest){
         switch (column) {
             case 0:
                 dest.x = m00;
@@ -1014,8 +841,7 @@ struct Matrix2d {
                 dest.x = m10;
                 dest.y = m11;
                 break;
-            default:
-                throw new IndexOutOfBoundsException();
+            default:{}
         }
         return dest;
     }
@@ -1030,7 +856,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setColumn(int column, Vector2dc src) throws IndexOutOfBoundsException {
+    public Matrix2d setColumn(int column, Vector2d src) {
         return setColumn(column, src.x(), src.y());
     }
 
@@ -1046,7 +872,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setColumn(int column, double x, double y) throws IndexOutOfBoundsException {
+    public Matrix2d setColumn(int column, double x, double y) {
         switch (column) {
             case 0:
                 this.m00 = x;
@@ -1056,8 +882,7 @@ struct Matrix2d {
                 this.m10 = x;
                 this.m11 = y;
                 break;
-            default:
-                throw new IndexOutOfBoundsException();
+            default: {}
         }
         return this;
     }
@@ -1084,10 +909,8 @@ struct Matrix2d {
                         break;
                 }
                 break;
-            default:
-                break;
+            default:{}
         }
-        throw new IndexOutOfBoundsException();
     }
 
     /**
@@ -1127,10 +950,8 @@ struct Matrix2d {
                         break;
                 }
                 break;
-            default:
-                break;
+            default:{}
         }
-        throw new IndexOutOfBoundsException();
     }
 
     /**
@@ -1231,42 +1052,19 @@ struct Matrix2d {
         int result = 1;
         long temp;
         temp = Double.doubleToLongBits(m00);
-        result = prime * result + (int) ((temp >>> 32) ^ temp);
+        result = prime * result + cast(int) ((temp >>> 32) ^ temp);
         temp = Double.doubleToLongBits(m01);
-        result = prime * result + (int) ((temp >>> 32) ^ temp);
+        result = prime * result + cast(int) ((temp >>> 32) ^ temp);
         temp = Double.doubleToLongBits(m10);
-        result = prime * result + (int) ((temp >>> 32) ^ temp);
+        result = prime * result + cast(int) ((temp >>> 32) ^ temp);
         temp = Double.doubleToLongBits(m11);
-        result = prime * result + (int) ((temp >>> 32) ^ temp);
+        result = prime * result + cast(int) ((temp >>> 32) ^ temp);
         return result;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Matrix2d other = (Matrix2d) obj;
-        if (Double.doubleToLongBits(m00) != Double.doubleToLongBits(other.m00))
-            return false;
-        if (Double.doubleToLongBits(m01) != Double.doubleToLongBits(other.m01))
-            return false;
-        if (Double.doubleToLongBits(m10) != Double.doubleToLongBits(other.m10))
-            return false;
-        if (Double.doubleToLongBits(m11) != Double.doubleToLongBits(other.m11))
-            return false;
-        return true;
-    }
-
-    public boolean equals(Matrix2dc m, double delta) {
+    public boolean equals(Matrix2d m, double delta) {
         if (this == m)
             return true;
-        if (m == null)
-            return false;
-        if (!(m instanceof Matrix2d))
-            return false;
         if (!Runtime.equals(m00, m.m00(), delta))
             return false;
         if (!Runtime.equals(m01, m.m01(), delta))
@@ -1297,11 +1095,11 @@ struct Matrix2d {
      *          the other addend
      * @return this
      */
-    public Matrix2d add(Matrix2dc other) {
+    public Matrix2d add(Matrix2d other) {
         return add(other, this);
     }
 
-    public Matrix2d add(Matrix2dc other, Matrix2d dest) {
+    public Matrix2d add(Matrix2d other, Matrix2d dest) {
         dest.m00 = m00 + other.m00();
         dest.m01 = m01 + other.m01();
         dest.m10 = m10 + other.m10();
@@ -1316,11 +1114,11 @@ struct Matrix2d {
      *          the subtrahend
      * @return this
      */
-    public Matrix2d sub(Matrix2dc subtrahend) {
+    public Matrix2d sub(Matrix2d subtrahend) {
         return sub(subtrahend, this);
     }
 
-    public Matrix2d sub(Matrix2dc other, Matrix2d dest) {
+    public Matrix2d sub(Matrix2d other, Matrix2d dest) {
         dest.m00 = m00 - other.m00();
         dest.m01 = m01 - other.m01();
         dest.m10 = m10 - other.m10();
@@ -1335,11 +1133,11 @@ struct Matrix2d {
      *          the other matrix
      * @return this
      */
-    public Matrix2d mulComponentWise(Matrix2dc other) {
+    public Matrix2d mulComponentWise(Matrix2d other) {
         return sub(other, this);
     }
 
-    public Matrix2d mulComponentWise(Matrix2dc other, Matrix2d dest) {
+    public Matrix2d mulComponentWise(Matrix2d other, Matrix2d dest) {
         dest.m00 = m00 * other.m00();
         dest.m01 = m01 * other.m01();
         dest.m10 = m10 * other.m10();
@@ -1360,11 +1158,11 @@ struct Matrix2d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    public Matrix2d lerp(Matrix2dc other, double t) {
+    public Matrix2d lerp(Matrix2d other, double t) {
         return lerp(other, t, this);
     }
 
-    public Matrix2d lerp(Matrix2dc other, double t, Matrix2d dest) {
+    public Matrix2d lerp(Matrix2d other, double t, Matrix2d dest) {
         dest.m00 = Math.fma(other.m00() - m00, t, m00);
         dest.m01 = Math.fma(other.m01() - m01, t, m01);
         dest.m10 = Math.fma(other.m10() - m10, t, m10);
@@ -1376,9 +1174,4 @@ struct Matrix2d {
         return Math.isFinite(m00) && Math.isFinite(m01) &&
                Math.isFinite(m10) && Math.isFinite(m11);
     }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
 }
