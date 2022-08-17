@@ -56,9 +56,9 @@ struct Vector4i {
      * Create a new {@link Vector4i} with the same values as <code>v</code>.
      *
      * @param v
-     *          the {@link Vector4ic} to copy the values from
+     *          the {@link Vector4i} to copy the values from
      */
-    public Vector4i(Vector4ic v) {
+    this(Vector4i v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -70,11 +70,11 @@ struct Vector4i {
      * given <code>v</code> and the given <code>w</code>.
      *
      * @param v
-     *          the {@link Vector3ic}
+     *          the {@link Vector3i}
      * @param w
      *          the w component
      */
-    public Vector4i(Vector3ic v, int w) {
+    this(Vector3i v, int w) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -86,13 +86,13 @@ struct Vector4i {
      * given <code>v</code> and the given <code>z</code>, and <code>w</code>.
      *
      * @param v
-     *          the {@link Vector2ic}
+     *          the {@link Vector2i}
      * @param z
      *          the z component
      * @param w
      *          the w component
      */
-    public Vector4i(Vector2ic v, int z, int w) {
+    this(Vector2i v, int z, int w) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -100,49 +100,15 @@ struct Vector4i {
     }
 
     /**
-     * Create a new {@link Vector4i} with the first three components from the
-     * given <code>v</code> and the given <code>w</code> and round using the given {@link RoundingMode}.
-     *
-     * @param v
-     *          the {@link Vector3fc} to copy the values from
-     * @param w
-     *          the w component
-     * @param mode
-     *          the {@link RoundingMode} to use
-     */
-    public Vector4i(Vector3fc v, float w, int mode) {
-        x = Math.roundUsing(v.x(), mode);
-        y = Math.roundUsing(v.y(), mode);
-        z = Math.roundUsing(v.z(), mode);
-        w = Math.roundUsing(w, mode);
-    }
-
-    /**
      * Create a new {@link Vector4i} and initialize its components to the rounded value of
      * the given vector.
      *
      * @param v
-     *          the {@link Vector4fc} to round and copy the values from
+     *          the {@link Vector4d} to round and copy the values from
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    public Vector4i(Vector4fc v, int mode) {
-        x = Math.roundUsing(v.x(), mode);
-        y = Math.roundUsing(v.y(), mode);
-        z = Math.roundUsing(v.z(), mode);
-        w = Math.roundUsing(v.w(), mode);
-    }
-
-    /**
-     * Create a new {@link Vector4i} and initialize its components to the rounded value of
-     * the given vector.
-     *
-     * @param v
-     *          the {@link Vector4dc} to round and copy the values from
-     * @param mode
-     *          the {@link RoundingMode} to use
-     */
-    public Vector4i(Vector4dc v, int mode) {
+    this(Vector4d v, int mode) {
         x = Math.roundUsing(v.x(), mode);
         y = Math.roundUsing(v.y(), mode);
         z = Math.roundUsing(v.z(), mode);
@@ -156,7 +122,7 @@ struct Vector4i {
      * @param s
      *          scalar value of all four components
      */
-    public Vector4i(int s) {
+    this(int s) {
         this.x = s;
         this.y = s;
         this.z = s;
@@ -175,7 +141,7 @@ struct Vector4i {
      * @param w
      *          the w component
      */
-    public Vector4i(int x, int y, int z, int w) {
+    this(int x, int y, int z, int w) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -189,27 +155,11 @@ struct Vector4i {
      * @param xyzw
      *          the array containing at least four elements
      */
-    public Vector4i(int[] xyzw) {
+    this(int[] xyzw) {
         this.x = xyzw[0];
         this.y = xyzw[1];
         this.z = xyzw[2];
         this.w = xyzw[3];
-    }
-
-    public int x() {
-        return this.x;
-    }
-
-    public int y() {
-        return this.y;
-    }
-
-    public int z() {
-        return this.z;
-    }
-
-    public int w() {
-        return this.w;
     }
 
     /**
@@ -219,7 +169,7 @@ struct Vector4i {
      *          the vector whose values will be copied into this
      * @return this
      */
-    public Vector4i set(Vector4ic v) {
+    public Vector4i set(Vector4i v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -237,7 +187,7 @@ struct Vector4i {
      *          the vector to copy from
      * @return this
      */
-    public Vector4i set(Vector4dc v) {
+    public Vector4i set(Vector4d v) {
         this.x = (int) v.x();
         this.y = (int) v.y();
         this.z = (int) v.z();
@@ -257,27 +207,7 @@ struct Vector4i {
      *          the {@link RoundingMode} to use
      * @return this
      */
-    public Vector4i set(Vector4dc v, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
-        this.z = Math.roundUsing(v.z(), mode);
-        this.w = Math.roundUsing(v.w(), mode);
-        return this;
-    }
-
-    /**
-     * Set this {@link Vector4i} to the values of v using the given {@link RoundingMode}.
-     * <p>
-     * Note that due to the given vector <code>v</code> storing the components
-     * in double-precision, there is the possibility to lose precision.
-     *
-     * @param v
-     *          the vector to copy from
-     * @param mode
-     *          the {@link RoundingMode} to use
-     * @return this
-     */
-    public Vector4i set(Vector4fc v, int mode) {
+    public Vector4i set(Vector4d v, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
         this.y = Math.roundUsing(v.y(), mode);
         this.z = Math.roundUsing(v.z(), mode);
@@ -290,12 +220,12 @@ struct Vector4i {
      * <code>v</code> and the last component to <code>w</code>.
      *
      * @param v
-     *          the {@link Vector3ic} to copy
+     *          the {@link Vector3i} to copy
      * @param w
      *          the w component
      * @return this
      */
-    public Vector4i set(Vector3ic v, int w) {
+    public Vector4i set(Vector3i v, int w) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -309,14 +239,14 @@ struct Vector4i {
      * <code>w</code>.
      *
      * @param v
-     *          the {@link Vector2ic}
+     *          the {@link Vector2i}
      * @param z
      *          the z component
      * @param w
      *          the w component
      * @return this
      */
-    public Vector4i set(Vector2ic v, int z, int w) {
+    public Vector4i set(Vector2i v, int z, int w) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -457,7 +387,7 @@ struct Vector4i {
      *          the vector to subtract
      * @return this
      */
-    public Vector4i sub(Vector4ic v) {
+    public Vector4i sub(Vector4i v) {
         this.x = this.x - v.x();
         this.y = this.y - v.y();
         this.z = this.z - v.z();
@@ -486,7 +416,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i sub(Vector4ic v, Vector4i dest) {
+    public Vector4i sub(Vector4i v, Vector4i dest) {
         dest.x = this.x - v.x();
         dest.y = this.y - v.y();
         dest.z = this.z - v.z();
@@ -509,7 +439,7 @@ struct Vector4i {
      *          the vector to add
      * @return this
      */
-    public Vector4i add(Vector4ic v) {
+    public Vector4i add(Vector4i v) {
         this.x = this.x + v.x();
         this.y = this.y + v.y();
         this.z = this.z + v.z();
@@ -517,7 +447,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i add(Vector4ic v, Vector4i dest) {
+    public Vector4i add(Vector4i v, Vector4i dest) {
         dest.x = this.x + v.x();
         dest.y = this.y + v.y();
         dest.z = this.z + v.z();
@@ -561,7 +491,7 @@ struct Vector4i {
      *          the other vector
      * @return this
      */
-    public Vector4i mul(Vector4ic v) {
+    public Vector4i mul(Vector4i v) {
         this.x = x * v.x();
         this.y = y * v.y();
         this.z = z * v.z();
@@ -569,7 +499,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i mul(Vector4ic v, Vector4i dest) {
+    public Vector4i mul(Vector4i v, Vector4i dest) {
         dest.x = x * v.x();
         dest.y = y * v.y();
         dest.z = z * v.z();
@@ -584,7 +514,7 @@ struct Vector4i {
      *          the vector to divide by
      * @return this
      */
-    public Vector4i div(Vector4ic v) {
+    public Vector4i div(Vector4i v) {
         this.x = x / v.x();
         this.y = y / v.y();
         this.z = z / v.z();
@@ -592,7 +522,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i div(Vector4ic v, Vector4i dest) {
+    public Vector4i div(Vector4i v, Vector4i dest) {
         dest.x = x / v.x();
         dest.y = y / v.y();
         dest.z = z / v.z();
@@ -708,7 +638,7 @@ struct Vector4i {
         return Math.sqrt(x * x + y * y + z * z + w * w);
     }
 
-    public double distance(Vector4ic v) {
+    public double distance(Vector4i v) {
         int dx = this.x - v.x();
         int dy = this.y - v.y();
         int dz = this.z - v.z();
@@ -724,7 +654,7 @@ struct Vector4i {
         return Math.sqrt(Math.fma(dx, dx, Math.fma(dy, dy, Math.fma(dz, dz, dw * dw))));
     }
 
-    public long gridDistance(Vector4ic v) {
+    public long gridDistance(Vector4i v) {
         return Math.abs(v.x() - x()) + Math.abs(v.y() - y())  + Math.abs(v.z() - z())  + Math.abs(v.w() - w());
     }
 
@@ -732,7 +662,7 @@ struct Vector4i {
         return Math.abs(x - x()) + Math.abs(y - y()) + Math.abs(z - z()) + Math.abs(w - w());
     }
 
-    public int distanceSquared(Vector4ic v) {
+    public int distanceSquared(Vector4i v) {
         int dx = this.x - v.x();
         int dy = this.y - v.y();
         int dz = this.z - v.z();
@@ -806,7 +736,7 @@ struct Vector4i {
         return dx * dx + dy * dy + dz * dz + dw * dw;
     }
 
-    public int dot(Vector4ic v) {
+    public int dot(Vector4i v) {
         return x * v.x() + y * v.y() + z * v.z() + w * v.w();
     }
 
@@ -887,7 +817,7 @@ struct Vector4i {
      *          the other vector
      * @return this
      */
-    public Vector4i min(Vector4ic v) {
+    public Vector4i min(Vector4i v) {
         this.x = x < v.x() ? x : v.x();
         this.y = y < v.y() ? y : v.y();
         this.z = z < v.z() ? z : v.z();
@@ -895,7 +825,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i min(Vector4ic v, Vector4i dest) {
+    public Vector4i min(Vector4i v, Vector4i dest) {
         dest.x = x < v.x() ? x : v.x();
         dest.y = y < v.y() ? y : v.y();
         dest.z = z < v.z() ? z : v.z();
@@ -910,7 +840,7 @@ struct Vector4i {
      *          the other vector
      * @return this
      */
-    public Vector4i max(Vector4ic v) {
+    public Vector4i max(Vector4i v) {
         this.x = x > v.x() ? x : v.x();
         this.y = y > v.y() ? y : v.y();
         this.z = z > v.z() ? z : v.z();
@@ -918,7 +848,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i max(Vector4ic v, Vector4i dest) {
+    public Vector4i max(Vector4i v, Vector4i dest) {
         dest.x = x > v.x() ? x : v.x();
         dest.y = y > v.y() ? y : v.y();
         dest.z = z > v.z() ? z : v.z();
