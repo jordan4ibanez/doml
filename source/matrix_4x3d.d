@@ -4736,7 +4736,7 @@ struct Matrix4x3d {
     }
 
 
-    public Vector4d getRow(int row, Vector4d dest) throws IndexOutOfBoundsException {
+    public Vector4d getRow(int row, Vector4d dest) {
         switch (row) {
         case 0:
             dest.x = m00;
@@ -4756,8 +4756,7 @@ struct Matrix4x3d {
             dest.z = m22;
             dest.w = m32;
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         return dest;
     }
@@ -4772,7 +4771,7 @@ struct Matrix4x3d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..2]</code>
      */
-    public Matrix4x3d setRow(int row, Vector4d src) throws IndexOutOfBoundsException {
+    public Matrix4x3d setRow(int row, Vector4d src) {
         switch (row) {
         case 0:
             this.m00 = src.x();
@@ -4792,14 +4791,13 @@ struct Matrix4x3d {
             this.m22 = src.z();
             this.m32 = src.w();
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         properties = 0;
         return this;
     }
 
-    public Vector3d getColumn(int column, Vector3d dest) throws IndexOutOfBoundsException {
+    public Vector3d getColumn(int column, Vector3d dest) {
         switch (column) {
         case 0:
             dest.x = m00;
@@ -4821,8 +4819,7 @@ struct Matrix4x3d {
             dest.y = m31;
             dest.z = m32;
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         return dest;
     }
@@ -4837,7 +4834,7 @@ struct Matrix4x3d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..3]</code>
      */
-    public Matrix4x3d setColumn(int column, Vector3d src) throws IndexOutOfBoundsException {
+    public Matrix4x3d setColumn(int column, Vector3d src) {
         switch (column) {
         case 0:
             this.m00 = src.x();
@@ -4859,8 +4856,7 @@ struct Matrix4x3d {
             this.m31 = src.y();
             this.m32 = src.z();
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         properties = 0;
         return this;
@@ -7921,74 +7917,35 @@ struct Matrix4x3d {
         int result = 1;
         long temp;
         temp = Double.doubleToLongBits(m00);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m01);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m02);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m10);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m11);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m12);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m20);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m21);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m22);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m30);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m31);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(m32);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
-    }
-
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof Matrix4x3d))
-            return false;
-        Matrix4x3d other = (Matrix4x3d) obj;
-        if (Double.doubleToLongBits(m00) != Double.doubleToLongBits(other.m00))
-            return false;
-        if (Double.doubleToLongBits(m01) != Double.doubleToLongBits(other.m01))
-            return false;
-        if (Double.doubleToLongBits(m02) != Double.doubleToLongBits(other.m02))
-            return false;
-        if (Double.doubleToLongBits(m10) != Double.doubleToLongBits(other.m10))
-            return false;
-        if (Double.doubleToLongBits(m11) != Double.doubleToLongBits(other.m11))
-            return false;
-        if (Double.doubleToLongBits(m12) != Double.doubleToLongBits(other.m12))
-            return false;
-        if (Double.doubleToLongBits(m20) != Double.doubleToLongBits(other.m20))
-            return false;
-        if (Double.doubleToLongBits(m21) != Double.doubleToLongBits(other.m21))
-            return false;
-        if (Double.doubleToLongBits(m22) != Double.doubleToLongBits(other.m22))
-            return false;
-        if (Double.doubleToLongBits(m30) != Double.doubleToLongBits(other.m30))
-            return false;
-        if (Double.doubleToLongBits(m31) != Double.doubleToLongBits(other.m31))
-            return false;
-        if (Double.doubleToLongBits(m32) != Double.doubleToLongBits(other.m32))
-            return false;
-        return true;
     }
 
     public boolean equals(Matrix4x3d m, double delta) {
         if (this == m)
             return true;
-        if (m == null)
-            return false;
-        if (!(m instanceof Matrix4x3d))
-            return false;
         if (!Runtime.equals(m00, m.m00(), delta))
             return false;
         if (!Runtime.equals(m01, m.m01(), delta))
