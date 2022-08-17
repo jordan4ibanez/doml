@@ -216,15 +216,15 @@ struct Matrix4d {
      * @return this
      */
     public Matrix4d determineProperties() {
-        int properties = 0;
+        int __properties = 0;
         if (m03 == 0.0 && m13 == 0.0) {
             if (m23 == 0.0 && m33 == 1.0) {
-                properties |= PROPERTY_AFFINE;
+                __properties |= PROPERTY_AFFINE;
                 if (m00 == 1.0 && m01 == 0.0 && m02 == 0.0 && m10 == 0.0 && m11 == 1.0 && m12 == 0.0 && m20 == 0.0
                         && m21 == 0.0 && m22 == 1.0) {
-                    properties |= PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL;
+                    __properties |= PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL;
                     if (m30 == 0.0 && m31 == 0.0 && m32 == 0.0)
-                        properties |= PROPERTY_IDENTITY;
+                        __properties |= PROPERTY_IDENTITY;
                 }
                 /* 
                  * We do not determine orthogonality, since it would require arbitrary epsilons
@@ -232,15 +232,15 @@ struct Matrix4d {
                  */
             } else if (m01 == 0.0 && m02 == 0.0 && m10 == 0.0 && m12 == 0.0 && m20 == 0.0 && m21 == 0.0 && m30 == 0.0
                     && m31 == 0.0 && m33 == 0.0) {
-                properties |= PROPERTY_PERSPECTIVE;
+                __properties |= PROPERTY_PERSPECTIVE;
             }
         }
-        this.properties = properties;
+        this.properties = __properties;
         return this;
     }
 
-    public int properties() {
-        return properties;
+    public int getProperties() {
+        return this.properties;
     }
 
     public double m00() {
