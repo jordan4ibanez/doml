@@ -191,14 +191,13 @@ struct Vector2d {
         return this;
     }
 
-    public double get(int component) throws IllegalArgumentException {
+    public double get(int component) {
         switch (component) {
         case 0:
             return x;
         case 1:
             return y;
-        default:
-            throw new IllegalArgumentException();
+        default: {}
         }
     }
 
@@ -224,7 +223,7 @@ struct Vector2d {
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..1]</code>
      */
-    public Vector2d setComponent(int component, double value) throws IllegalArgumentException {
+    public Vector2d setComponent(int component, double value) {
         switch (component) {
             case 0:
                 x = value;
@@ -232,8 +231,7 @@ struct Vector2d {
             case 1:
                 y = value;
                 break;
-            default:
-                throw new IllegalArgumentException();
+            default: {}
         }
         return this;
     }
@@ -706,17 +704,6 @@ struct Vector2d {
         this.x = 0;
         this.y = 0;
         return this;
-    }
-
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeDouble(x);
-        out.writeDouble(y);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException {
-        x = in.readDouble();
-        y = in.readDouble();
     }
 
     /**
