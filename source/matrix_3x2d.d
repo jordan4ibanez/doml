@@ -36,8 +36,6 @@ module matrix_3x2d;
  */
 struct Matrix3x2d {
 
-    private static final long serialVersionUID = 1L;
-
     double m00 = 1.0;
     double m01 = 0.0;
     double m10 = 0.0;
