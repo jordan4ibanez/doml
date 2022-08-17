@@ -58,20 +58,10 @@ struct Matrix3d {
      * @param mat
      *          the {@link Matrix2dc}
      */
-    public Matrix3d(Matrix2dc mat) {
+    this(Matrix2d mat) {
         set(mat);
     }
 
-    /**
-     * Create a new {@link Matrix3d} by setting its uppper left 2x2 submatrix to the values of the given {@link Matrix2fc}
-     * and the rest to identity.
-     *
-     * @param mat
-     *          the {@link Matrix2fc}
-     */
-    public Matrix3d(Matrix2fc mat) {
-        set(mat);
-    }
 
     /**
      * Create a new {@link Matrix3d} and initialize it with the values from the given matrix.
