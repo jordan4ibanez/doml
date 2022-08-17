@@ -155,22 +155,6 @@ struct Matrix2d {
         this.m11 = m11;
     }
 
-//#ifdef __HAS_NIO__
-    /**
-     * Create a new {@link Matrix2d} by reading its 4 double components from the given {@link DoubleBuffer}
-     * at the buffer's current position.
-     * <p>
-     * That DoubleBuffer is expected to hold the values in column-major order.
-     * <p>
-     * The buffer's position will not be changed by this method.
-     *
-     * @param buffer
-     *          the {@link DoubleBuffer} to read the matrix values from
-     */
-    public Matrix2d(DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-    }
-//#endif
 
     /**
      * Create a new {@link Matrix2d} and initialize its two columns using the supplied vectors.
