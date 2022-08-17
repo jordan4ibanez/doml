@@ -39,11 +39,17 @@ module matrix_3d;
  */
 struct Matrix3d {
 
-    private static final long serialVersionUID = 1L;
+    double m00 = 0.0;
+    double m01 = 0.0;
+    double m02 = 0.0;
 
-    public double m00, m01, m02;
-    public double m10, m11, m12;
-    public double m20, m21, m22;
+    double m10 = 0.0;
+    double m11 = 0.0;
+    double m12 = 0.0;
+
+    double m20 = 0.0;
+    double m21 = 0.0;
+    double m22 = 0.0;
 
     /**
      * Create a new {@link Matrix3d} and initialize it to {@link #identity() identity}.
