@@ -729,26 +729,26 @@ struct Matrix4x3d {
         return mulGeneric(right, dest);
     }
     private Matrix4x3d mulGeneric(Matrix4x3d right, Matrix4x3d dest) {
-        double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-        double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-        double m20 = this.m20, m21 = this.m21, m22 = this.m22;
+        double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
+        double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
+        double __m20 = this.m20, __m21 = this.m21, __m22 = this.m22;
         double rm00 = right.m00(), rm01 = right.m01(), rm02 = right.m02();
         double rm10 = right.m10(), rm11 = right.m11(), rm12 = right.m12();
         double rm20 = right.m20(), rm21 = right.m21(), rm22 = right.m22();
         double rm30 = right.m30(), rm31 = right.m31(), rm32 = right.m32();
         return dest
-        ._m00(Math.fma(m00, rm00, Math.fma(m10, rm01, m20 * rm02)))
-        ._m01(Math.fma(m01, rm00, Math.fma(m11, rm01, m21 * rm02)))
-        ._m02(Math.fma(m02, rm00, Math.fma(m12, rm01, m22 * rm02)))
-        ._m10(Math.fma(m00, rm10, Math.fma(m10, rm11, m20 * rm12)))
-        ._m11(Math.fma(m01, rm10, Math.fma(m11, rm11, m21 * rm12)))
-        ._m12(Math.fma(m02, rm10, Math.fma(m12, rm11, m22 * rm12)))
-        ._m20(Math.fma(m00, rm20, Math.fma(m10, rm21, m20 * rm22)))
-        ._m21(Math.fma(m01, rm20, Math.fma(m11, rm21, m21 * rm22)))
-        ._m22(Math.fma(m02, rm20, Math.fma(m12, rm21, m22 * rm22)))
-        ._m30(Math.fma(m00, rm30, Math.fma(m10, rm31, Math.fma(m20, rm32, m30))))
-        ._m31(Math.fma(m01, rm30, Math.fma(m11, rm31, Math.fma(m21, rm32, m31))))
-        ._m32(Math.fma(m02, rm30, Math.fma(m12, rm31, Math.fma(m22, rm32, m32))))
+        ._m00(Math.fma(__m00, rm00, Math.fma(__m10, rm01, __m20 * rm02)))
+        ._m01(Math.fma(__m01, rm00, Math.fma(__m11, rm01, __m21 * rm02)))
+        ._m02(Math.fma(__m02, rm00, Math.fma(__m12, rm01, __m22 * rm02)))
+        ._m10(Math.fma(__m00, rm10, Math.fma(__m10, rm11, __m20 * rm12)))
+        ._m11(Math.fma(__m01, rm10, Math.fma(__m11, rm11, __m21 * rm12)))
+        ._m12(Math.fma(__m02, rm10, Math.fma(__m12, rm11, __m22 * rm12)))
+        ._m20(Math.fma(__m00, rm20, Math.fma(__m10, rm21, __m20 * rm22)))
+        ._m21(Math.fma(__m01, rm20, Math.fma(__m11, rm21, __m21 * rm22)))
+        ._m22(Math.fma(__m02, rm20, Math.fma(__m12, rm21, __m22 * rm22)))
+        ._m30(Math.fma(__m00, rm30, Math.fma(__m10, rm31, Math.fma(__m20, rm32, m30))))
+        ._m31(Math.fma(__m01, rm30, Math.fma(__m11, rm31, Math.fma(__m21, rm32, m31))))
+        ._m32(Math.fma(__m02, rm30, Math.fma(__m12, rm31, Math.fma(__m22, rm32, m32))))
         ._properties(properties & right.properties() & PROPERTY_ORTHONORMAL);
     }
 
@@ -3909,7 +3909,8 @@ struct Matrix4x3d {
     public Matrix4x3d translationRotateScale(Vector3d translation, 
                                            Quaterniond quat, 
                                            Vector3d scale) {
-        return translationRotateScale(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale.x(), scale.y(), scale.z());
+        return translationRotateScale(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), 
+        quat.w(), scale.x(), scale.y(), scale.z());
     }
 
     /**
@@ -3981,26 +3982,26 @@ struct Matrix4x3d {
         double nm20 = (q02 + q13) * sz;
         double nm21 = (q12 - q03) * sz;
         double nm22 = sz - (q11 + q00) * sz;
-        double m00 = nm00 * m.m00() + nm10 * m.m01() + nm20 * m.m02();
-        double m01 = nm01 * m.m00() + nm11 * m.m01() + nm21 * m.m02();
+        double __m00 = nm00 * m.m00() + nm10 * m.m01() + nm20 * m.m02();
+        double __m01 = nm01 * m.m00() + nm11 * m.m01() + nm21 * m.m02();
         m02 = nm02 * m.m00() + nm12 * m.m01() + nm22 * m.m02();
-        this.m00 = m00;
-        this.m01 = m01;
-        double m10 = nm00 * m.m10() + nm10 * m.m11() + nm20 * m.m12();
-        double m11 = nm01 * m.m10() + nm11 * m.m11() + nm21 * m.m12();
+        this.m00 = __m00;
+        this.m01 = __m01;
+        double __m10 = nm00 * m.m10() + nm10 * m.m11() + nm20 * m.m12();
+        double __m11 = nm01 * m.m10() + nm11 * m.m11() + nm21 * m.m12();
         m12 = nm02 * m.m10() + nm12 * m.m11() + nm22 * m.m12();
-        this.m10 = m10;
-        this.m11 = m11;
-        double m20 = nm00 * m.m20() + nm10 * m.m21() + nm20 * m.m22();
-        double m21 = nm01 * m.m20() + nm11 * m.m21() + nm21 * m.m22();
+        this.m10 = __m10;
+        this.m11 = __m11;
+        double __m20 = nm00 * m.m20() + nm10 * m.m21() + nm20 * m.m22();
+        double __m21 = nm01 * m.m20() + nm11 * m.m21() + nm21 * m.m22();
         m22 = nm02 * m.m20() + nm12 * m.m21() + nm22 * m.m22();
-        this.m20 = m20;
-        this.m21 = m21;
-        double m30 = nm00 * m.m30() + nm10 * m.m31() + nm20 * m.m32() + tx;
-        double m31 = nm01 * m.m30() + nm11 * m.m31() + nm21 * m.m32() + ty;
+        this.m20 = __m20;
+        this.m21 = __m21;
+        double __m30 = nm00 * m.m30() + nm10 * m.m31() + nm20 * m.m32() + tx;
+        double __m31 = nm01 * m.m30() + nm11 * m.m31() + nm21 * m.m32() + ty;
         m32 = nm02 * m.m30() + nm12 * m.m31() + nm22 * m.m32() + tz;
-        this.m30 = m30;
-        this.m31 = m31;
+        this.m30 = __m30;
+        this.m31 = __m31;
         properties = 0;
         return this;
     }
@@ -4034,7 +4035,8 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d translationRotateScaleMul(Vector3d translation, Quaterniond quat, Vector3d scale, Matrix4x3d m) {
-        return translationRotateScaleMul(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale.x(), scale.y(), scale.z(), m);
+        return translationRotateScaleMul(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z()
+        , quat.w(), scale.x(), scale.y(), scale.z(), m);
     }
 
     /**
@@ -4270,7 +4272,8 @@ struct Matrix4x3d {
      *          the scalar part of the quaternion
      * @return this
      */
-    public Matrix4x3d translationRotateInvert(double tx, double ty, double tz, double qx, double qy, double qz, double qw) {
+    public Matrix4x3d translationRotateInvert(double tx, double ty, double tz, double qx, double qy, double qz, 
+    double qw) {
         double nqx = -qx, nqy = -qy, nqz = -qz;
         double dqx = nqx + nqx;
         double dqy = nqy + nqy;
@@ -4317,7 +4320,8 @@ struct Matrix4x3d {
      */
     public Matrix4x3d translationRotateInvert(Vector3d translation, 
                                               Quaterniond quat) {
-        return translationRotateInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w());
+        return translationRotateInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(),
+         quat.w());
     }
 
     /**
