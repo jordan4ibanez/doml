@@ -103,9 +103,9 @@ struct Vector2i {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector2ic} to copy the values from
+     *          the {@link Vector2i} to copy the values from
      */
-    this(Vector2ic v) {
+    this(Vector2i v) {
         x = v.x();
         y = v.y();
     }
@@ -253,7 +253,7 @@ struct Vector2i {
      *          the vector to copy from
      * @return this
      */
-    public Vector2i set(Vector2ic v) {
+    public Vector2i set(Vector2i v) {
         this.x = v.x();
         this.y = v.y();
         return this;
@@ -463,7 +463,7 @@ struct Vector2i {
 //#endif
 
 //#ifdef __HAS_UNSAFE__
-    public Vector2ic getToAddress(long address) {
+    public Vector2i getToAddress(long address) {
         if (Options.NO_UNSAFE)
             throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
         MemUtil.MemUtilUnsafe.put(this, address);
@@ -479,13 +479,13 @@ struct Vector2i {
      *          the vector to subtract
      * @return this
      */
-    public Vector2i sub(Vector2ic v) {
+    public Vector2i sub(Vector2i v) {
         this.x = x - v.x();
         this.y = y - v.y();
         return this;
     }
 
-    public Vector2i sub(Vector2ic v, Vector2i dest) {
+    public Vector2i sub(Vector2i v, Vector2i dest) {
         dest.x = x - v.x();
         dest.y = y - v.y();
         return dest;
@@ -544,7 +544,7 @@ struct Vector2i {
         return Math.sqrt(x * x + y * y);
     }
 
-    public double distance(Vector2ic v) {
+    public double distance(Vector2i v) {
         int dx = this.x - v.x();
         int dy = this.y - v.y();
         return Math.sqrt(dx * dx + dy * dy);
@@ -556,7 +556,7 @@ struct Vector2i {
         return Math.sqrt(dx * dx + dy * dy);
     }
 
-    public long distanceSquared(Vector2ic v) {
+    public long distanceSquared(Vector2i v) {
         int dx = this.x - v.x();
         int dy = this.y - v.y();
         return dx * dx + dy * dy;
@@ -568,7 +568,7 @@ struct Vector2i {
         return dx * dx + dy * dy;
     }
 
-    public long gridDistance(Vector2ic v) {
+    public long gridDistance(Vector2i v) {
         return Math.abs(v.x() - x()) + Math.abs(v.y() - y());
     }
 
@@ -621,13 +621,13 @@ struct Vector2i {
      *          the vector to add
      * @return this
      */
-    public Vector2i add(Vector2ic v) {
+    public Vector2i add(Vector2i v) {
         this.x = x + v.x();
         this.y = y + v.y();
         return this;
     }
 
-    public Vector2i add(Vector2ic v, Vector2i dest) {
+    public Vector2i add(Vector2i v, Vector2i dest) {
         dest.x = x + v.x();
         dest.y = y + v.y();
         return dest;
@@ -681,13 +681,13 @@ struct Vector2i {
      *          the vector to multiply
      * @return this
      */
-    public Vector2i mul(Vector2ic v) {
+    public Vector2i mul(Vector2i v) {
         this.x = x * v.x();
         this.y = y * v.y();
         return this;
     }
 
-    public Vector2i mul(Vector2ic v, Vector2i dest) {
+    public Vector2i mul(Vector2i v, Vector2i dest) {
         dest.x = x * v.x();
         dest.y = y * v.y();
         return dest;
@@ -799,13 +799,13 @@ struct Vector2i {
      *          the other vector
      * @return this
      */
-    public Vector2i min(Vector2ic v) {
+    public Vector2i min(Vector2i v) {
         this.x = x < v.x() ? x : v.x();
         this.y = y < v.y() ? y : v.y();
         return this;
     }
 
-    public Vector2i min(Vector2ic v, Vector2i dest) {
+    public Vector2i min(Vector2i v, Vector2i dest) {
         dest.x = x < v.x() ? x : v.x();
         dest.y = y < v.y() ? y : v.y();
         return dest;
@@ -818,13 +818,13 @@ struct Vector2i {
      *          the other vector
      * @return this
      */
-    public Vector2i max(Vector2ic v) {
+    public Vector2i max(Vector2i v) {
         this.x = x > v.x() ? x : v.x();
         this.y = y > v.y() ? y : v.y();
         return this;
     }
 
-    public Vector2i max(Vector2ic v, Vector2i dest) {
+    public Vector2i max(Vector2i v, Vector2i dest) {
         dest.x = x > v.x() ? x : v.x();
         dest.y = y > v.y() ? y : v.y();
         return dest;
