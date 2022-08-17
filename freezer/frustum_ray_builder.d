@@ -1,4 +1,4 @@
-module translation_vault.FrustumRayBuilder;
+module freezer.frustum_ray_builder;
 
 /*
  * The MIT License
@@ -23,19 +23,18 @@ module translation_vault.FrustumRayBuilder;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
 
 /**
- * Provides methods to compute rays through an arbitrary perspective transformation defined by a {@link Matrix4fc}.
+ * Provides methods to compute rays through an arbitrary perspective transformation defined by a {@link Matrix4d}.
  * <p>
  * This can be used to compute the eye-rays in simple software-based raycasting/raytracing.
  * <p>
- * To obtain the origin of the rays call {@link #origin(Vector3f)}.
- * Then to compute the directions of subsequent rays use {@link #dir(float, float, Vector3f)}.
+ * To obtain the origin of the rays call {@link #origin(Vector3d)}.
+ * Then to compute the directions of subsequent rays use {@link #dir(float, float, Vector3d)}.
  * 
  * @author Kai Burjack
  */
-public class FrustumRayBuilder {
+struct FrustumRayBuilder {
 
     private float nxnyX, nxnyY, nxnyZ;
     private float pxnyX, pxnyY, pxnyZ;
@@ -44,25 +43,17 @@ public class FrustumRayBuilder {
     private float cx, cy, cz;
 
     /**
-     * Create a new {@link FrustumRayBuilder} with an undefined frustum.
-     * <p>
-     * Before obtaining ray directions, make sure to define the frustum using {@link #set(Matrix4fc)}.
-     */
-    public FrustumRayBuilder() {
-    }
-
-    /**
-     * Create a new {@link FrustumRayBuilder} from the given {@link Matrix4fc matrix} by extracing the matrix's frustum.
+     * Create a new {@link FrustumRayBuilder} from the given {@link Matrix4d matrix} by extracing the matrix's frustum.
      * 
      * @param m
-     *          the {@link Matrix4fc} to create the frustum from
+     *          the {@link Matrix4d} to create the frustum from
      */
-    public FrustumRayBuilder(Matrix4fc m) {
+    this(Matrix4d m) {
         set(m);
     }
 
     /**
-     * Update the stored frustum corner rays and origin of <code>this</code> {@link FrustumRayBuilder} with the given {@link Matrix4fc matrix}.
+     * Update the stored frustum corner rays and origin of <code>this</code> {@link FrustumRayBuilder} with the given {@link Matrix4d matrix}.
      * <p>
      * Reference: <a href="http://gamedevs.org/uploads/fast-extraction-viewing-frustum-planes-from-world-view-projection-matrix.pdf">
      * Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix</a>
@@ -70,10 +61,10 @@ public class FrustumRayBuilder {
      * Reference: <a href="http://geomalgorithms.com/a05-_intersect-1.html">http://geomalgorithms.com</a>
      * 
      * @param m
-     *          the {@link Matrix4fc matrix} to update the frustum corner rays and origin with
+     *          the {@link Matrix4d matrix} to update the frustum corner rays and origin with
      * @return this
      */
-    public FrustumRayBuilder set(Matrix4fc m) {
+    public FrustumRayBuilder set(Matrix4d m) {
         float nxX = m.m03() + m.m00(), nxY = m.m13() + m.m10(), nxZ = m.m23() + m.m20(), d1 = m.m33() + m.m30();
         float pxX = m.m03() - m.m00(), pxY = m.m13() - m.m10(), pxZ = m.m23() - m.m20(), d2 = m.m33() - m.m30();
         float nyX = m.m03() + m.m01(), nyY = m.m13() + m.m11(), nyZ = m.m23() + m.m21();
@@ -113,7 +104,7 @@ public class FrustumRayBuilder {
      *          will hold the perspective origin
      * @return the <code>origin</code> vector
      */
-    public Vector3fc origin(Vector3f origin) {
+    public Vector3d origin(Vector3d origin) {
         origin.x = cx;
         origin.y = cy;
         origin.z = cz;
@@ -135,7 +126,7 @@ public class FrustumRayBuilder {
      *          will hold the normalized ray direction
      * @return the <code>dir</code> vector
      */
-    public Vector3fc dir(float x, float y, Vector3f dir) {
+    public Vector3d dir(float x, float y, Vector3d dir) {
         float y1x = nxnyX + (nxpyX - nxnyX) * y;
         float y1y = nxnyY + (nxpyY - nxnyY) * y;
         float y1z = nxnyZ + (nxpyZ - nxnyZ) * y;
