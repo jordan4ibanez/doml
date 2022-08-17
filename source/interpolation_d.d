@@ -1,4 +1,4 @@
-module freezer.interpolation_d;
+module interpolation_d;
 
 /*
  * The MIT License

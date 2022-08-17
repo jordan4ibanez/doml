@@ -1,4 +1,4 @@
-module freezer.frustum_ray_builder;
+module frustum_ray_builder;
 
 /*
  * The MIT License

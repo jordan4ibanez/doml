@@ -1,4 +1,4 @@
-module freezer.matrix_4x3d;
+module matrix_4x3d;
 
 /*
  * The MIT License

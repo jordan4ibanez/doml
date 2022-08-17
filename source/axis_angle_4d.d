@@ -1,4 +1,4 @@
-module freezer.axis_angle_4d;
+module axis_angle_4d;
 
 /*
  * The MIT License

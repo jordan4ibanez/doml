@@ -1,4 +1,4 @@
-module freezer.quaternion_d_interpolator;
+module quaternion_d_interpolator;
 
 /*
 * The MIT License
@@ -39,9 +39,9 @@ module freezer.quaternion_d_interpolator;
 * 
 * @author Kai Burjack
 */
-private final double rv1[] = new double[3];
-private final double w[] = new double[3];
-private final double v[] = new double[9];
+private const double[3] rv1;
+private const double[3] w;
+private const double[9] v;
 
 private double SIGN(double a, double b) {
     return (b) >= 0.0 ? Math.abs(a) : -Math.abs(a);
@@ -283,8 +283,6 @@ private static double PYTHAG(double a, double b) {
 private const SvdDecomposition3d svdDecomposition3d = new SvdDecomposition3d();
 private const double[] m = new double[9];
 private const Matrix3d u = new Matrix3d();
-private const Matrix3d v = new Matrix3d();
-
 /**
     * Compute the weighted average of all of the quaternions given in <code>qs</code> using the specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
     * 

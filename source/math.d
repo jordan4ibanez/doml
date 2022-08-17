@@ -1,4 +1,4 @@
-module freezer.math;
+module math;
 
 import options;
 

@@ -1,4 +1,4 @@
-module freezer.frustum_intersection;
+module frustum_intersection;
 
 /*
  * The MIT License

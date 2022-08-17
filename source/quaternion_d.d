@@ -1,4 +1,4 @@
-module freezer.quaternion_d;
+module quaternion_d;
 
 /*
  * The MIT License

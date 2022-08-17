@@ -1,4 +1,4 @@
-module freezer.intersection_d;
+module intersection_d;
 
 /*
 * The MIT License
