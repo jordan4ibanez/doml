@@ -1,12 +1,10 @@
-module translation_vault.matrix_2d;
-
-import std.conv: to;
+module matrix_2d;
 
 /*
  * The MIT License
  *
- * Copyright (c) 2020-2021 DOML
- %#$%$# Translated by jordan4ibanez
+ * Copyright (c) 2020-2021 JOML
+ %%$%# translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +24,21 @@ import std.conv: to;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package org.joml;
 
+//#ifdef __GWT__
+import com.google.gwt.typedarrays.shared.Float64Array;
+//#endif
+//#ifdef __HAS_NIO__
+import java.nio.ByteBuffer;
+import java.nio.DoubleBuffer;
+//#endif
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 /**
  * Contains the definition of a 2x2 matrix of doubles, and associated functions to transform
@@ -37,15 +49,17 @@ import std.conv: to;
  *
  * @author Joseph Burton
  */
-struct Matrix2d {
+public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
 
-    public double m00, m01 = 0.0;
-    public double m10, m11 = 0.0;
+    private static final long serialVersionUID = 1L;
+
+    public double m00, m01;
+    public double m10, m11;
 
     /**
      * Create a new {@link Matrix2d} and set it to {@link #identity() identity}.
      */
-    this() {
+    public Matrix2d() {
         m00 = 1.0;
         m11 = 1.0;
     }
@@ -54,23 +68,14 @@ struct Matrix2d {
      * Create a new {@link Matrix2d} and make it a copy of the given matrix.
      *
      * @param mat
-     *          the {@link Matrix2d} to copy the values from
-     */
-    this (Matrix2d mat) {
-        this.m00 = mat.m00;
-        this.m10 = mat.m10;
-        this.m01 = mat.m01;
-        this.m11 = mat.m11;
-    }
-
-    /**
-     * Create a new {@link Matrix2d} and make it a copy of the given matrix.
-     *
-     * @param mat
      *          the {@link Matrix2dc} to copy the values from
      */
-    this(Matrix2dc mat) {
-        setMatrix2dc(mat);
+    public Matrix2d(Matrix2dc mat) {
+        if (mat instanceof Matrix2d) {
+            MemUtil.INSTANCE.copy((Matrix2d) mat, this);
+        } else {
+            setMatrix2dc(mat);
+        }
     }
 
     /**
@@ -79,7 +84,7 @@ struct Matrix2d {
      * @param mat
      *          the matrix to initialize this matrix with
      */
-    this(Matrix2fc mat) {
+    public Matrix2d(Matrix2fc mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
@@ -90,23 +95,14 @@ struct Matrix2d {
      * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3dc}.
      *
      * @param mat
-     *          the {@link Matrix3d} to copy the values from
-     */
-     this(Matrix3d mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
-     }
-
-    /**
-     * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3dc}.
-     *
-     * @param mat
      *          the {@link Matrix3dc} to copy the values from
      */
-    this(Matrix3dc mat) {
-        setMatrix3dc(mat);
+    public Matrix2d(Matrix3dc mat) {
+        if (mat instanceof Matrix3d) {
+            MemUtil.INSTANCE.copy((Matrix3d) mat, this);
+        } else {
+            setMatrix3dc(mat);
+        }
     }
 
     /**
@@ -115,7 +111,7 @@ struct Matrix2d {
      * @param mat
      *          the {@link Matrix3fc} to copy the values from
      */
-    this(Matrix3fc mat) {
+    public Matrix2d(Matrix3fc mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
@@ -135,14 +131,30 @@ struct Matrix2d {
      * @param m11
      *          the value of m11
      */
-    this(double m00, double m01,
-         double m10, double m11) {
+    public Matrix2d(double m00, double m01,
+                    double m10, double m11) {
         this.m00 = m00;
         this.m01 = m01;
         this.m10 = m10;
         this.m11 = m11;
     }
 
+//#ifdef __HAS_NIO__
+    /**
+     * Create a new {@link Matrix2d} by reading its 4 double components from the given {@link DoubleBuffer}
+     * at the buffer's current position.
+     * <p>
+     * That DoubleBuffer is expected to hold the values in column-major order.
+     * <p>
+     * The buffer's position will not be changed by this method.
+     *
+     * @param buffer
+     *          the {@link DoubleBuffer} to read the matrix values from
+     */
+    public Matrix2d(DoubleBuffer buffer) {
+        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
+    }
+//#endif
 
     /**
      * Create a new {@link Matrix2d} and initialize its two columns using the supplied vectors.
@@ -152,7 +164,7 @@ struct Matrix2d {
      * @param col1
      *          the second column
      */
-    this(Vector2dc col0, Vector2dc col1) {
+    public Matrix2d(Vector2dc col0, Vector2dc col1) {
         m00 = col0.x();
         m01 = col0.y();
         m10 = col1.x();
@@ -270,7 +282,11 @@ struct Matrix2d {
      * @return this
      */
     public Matrix2d set(Matrix2dc m) {
-        setMatrix2dc(m);
+        if (m instanceof Matrix2d) {
+            MemUtil.INSTANCE.copy((Matrix2d) m, this);
+        } else {
+            setMatrix2dc(m);
+        }
         return this;
     }
     private void setMatrix2dc(Matrix2dc mat) {
@@ -295,14 +311,6 @@ struct Matrix2d {
         return this;
     }
 
-    public Matrix2d set(Matrix3x2d m) {
-        m00 = m.m00();
-        m01 = m.m01();
-        m10 = m.m10();
-        m11 = m.m11();
-        return this;
-    }
-
     /**
      * Set the elements of this matrix to the left 2x2 submatrix of <code>m</code>.
      *
@@ -311,7 +319,11 @@ struct Matrix2d {
      * @return this
      */
     public Matrix2d set(Matrix3x2dc m) {
-        setMatrix3x2dc(m);
+        if (m instanceof Matrix3x2d) {
+            MemUtil.INSTANCE.copy((Matrix3x2d) m, this);
+        } else {
+            setMatrix3x2dc(m);
+        }
         return this;
     }
     private void setMatrix3x2dc(Matrix3x2dc mat) {
@@ -336,13 +348,6 @@ struct Matrix2d {
         return this;
     }
 
-    public Matrix2d set(Matrix3d m) {
-        m00 = m.m00();
-        m01 = m.m01();
-        m10 = m.m10();
-        m11 = m.m11();
-    }
-
     /**
      * Set the elements of this matrix to the upper left 2x2 of the given {@link Matrix3dc}.
      *
@@ -351,7 +356,11 @@ struct Matrix2d {
      * @return this
      */
     public Matrix2d set(Matrix3dc m) {
-        setMatrix3dc(m);
+        if (m instanceof Matrix3d) {
+            MemUtil.INSTANCE.copy((Matrix3d) m, this);
+        } else {
+            setMatrix3dc(m);
+        }
         return this;
     }
     private void setMatrix3dc(Matrix3dc mat) {
@@ -568,7 +577,7 @@ struct Matrix2d {
      * @return the string representation
      */
     public String toString() {
-        String str = to!string(Options.NUMBER_FORMAT);
+        String str = toString(Options.NUMBER_FORMAT);
         StringBuffer res = new StringBuffer();
         int eIndex = Integer.MIN_VALUE;
         for (int i = 0; i < str.length(); i++) {
@@ -625,7 +634,7 @@ struct Matrix2d {
     }
 
     public double getRotation() {
-        return cast(double) Math.atan2(m01, m11);
+        return (double) Math.atan2(m01, m11);
     }
 
     //#ifdef __GWT__
@@ -686,7 +695,7 @@ struct Matrix2d {
 //#ifdef __HAS_UNSAFE__
     public Matrix2dc getToAddress(long address) {
         if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
+            throw new UnsupportedOperationException("Not supported when using joml.nounsafe");
         MemUtil.MemUtilUnsafe.put(this, address);
         return this;
     }
@@ -779,7 +788,7 @@ struct Matrix2d {
      * Set the values of this matrix by reading 4 double values from off-heap memory in column-major order,
      * starting at the given address.
      * <p>
-     * This method will throw an {@link UnsupportedOperationException} when DOML is used with `-DDOML.nounsafe`.
+     * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
      * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
      *
@@ -789,7 +798,7 @@ struct Matrix2d {
      */
     public Matrix2d setFromAddress(long address) {
         if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
+            throw new UnsupportedOperationException("Not supported when using joml.nounsafe");
         MemUtil.MemUtilUnsafe.get(this, address);
         return this;
     }
@@ -1032,6 +1041,20 @@ struct Matrix2d {
         return dest;
     }
 
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeDouble(m00);
+        out.writeDouble(m01);
+        out.writeDouble(m10);
+        out.writeDouble(m11);
+    }
+
+    public void readExternal(ObjectInput in) throws IOException {
+        m00 = in.readDouble();
+        m01 = in.readDouble();
+        m10 = in.readDouble();
+        m11 = in.readDouble();
+    }
+
     /**
      * Apply rotation about the origin to this matrix by rotating the given amount of radians.
      * <p>
@@ -1109,7 +1132,7 @@ struct Matrix2d {
         return dest;
     }
 
-    public Vector2d getRow(int row, Vector2d dest) {
+    public Vector2d getRow(int row, Vector2d dest) throws IndexOutOfBoundsException {
         switch (row) {
             case 0:
                 dest.x = m00;
@@ -1135,7 +1158,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setRow(int row, Vector2dc src) {
+    public Matrix2d setRow(int row, Vector2dc src) throws IndexOutOfBoundsException {
         return setRow(row, src.x(), src.y());
     }
 
@@ -1151,7 +1174,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setRow(int row, double x, double y) {
+    public Matrix2d setRow(int row, double x, double y) throws IndexOutOfBoundsException {
         switch (row) {
             case 0:
                 this.m00 = x;
@@ -1167,7 +1190,7 @@ struct Matrix2d {
         return this;
     }
 
-    public Vector2d getColumn(int column, Vector2d dest) {
+    public Vector2d getColumn(int column, Vector2d dest) throws IndexOutOfBoundsException {
         switch (column) {
             case 0:
                 dest.x = m00;
@@ -1193,7 +1216,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setColumn(int column, Vector2dc src) {
+    public Matrix2d setColumn(int column, Vector2dc src) throws IndexOutOfBoundsException {
         return setColumn(column, src.x(), src.y());
     }
 
@@ -1209,7 +1232,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setColumn(int column, double x, double y) {
+    public Matrix2d setColumn(int column, double x, double y) throws IndexOutOfBoundsException {
         switch (column) {
             case 0:
                 this.m00 = x;
@@ -1539,4 +1562,9 @@ struct Matrix2d {
         return Math.isFinite(m00) && Math.isFinite(m01) &&
                Math.isFinite(m10) && Math.isFinite(m11);
     }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
 }
