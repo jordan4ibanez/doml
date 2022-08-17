@@ -53,27 +53,10 @@ struct Matrix3x2d {
      * @param mat
      *          the {@link Matrix2dc}
      */
-    public Matrix3x2d(Matrix2dc mat) {
-        if (mat instanceof Matrix2d) {
-            MemUtil.INSTANCE.copy((Matrix2d) mat, this);
-        } else {
-            setMatrix2dc(mat);
-        }
+    this(Matrix2d mat) {
+        setMatrix2d(mat);
     }
 
-    /**
-     * Create a new {@link Matrix3x2d} by setting its left 2x2 submatrix to the values of the given {@link Matrix2fc}
-     * and the rest to identity.
-     *
-     * @param mat
-     *          the {@link Matrix2fc}
-     */
-    public Matrix3x2d(Matrix2fc mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
-    }
 
     /**
      * Create a new {@link Matrix3x2d} and make it a copy of the given matrix.
@@ -81,12 +64,8 @@ struct Matrix3x2d {
      * @param mat
      *          the {@link Matrix3x2dc} to copy the values from
      */
-    public Matrix3x2d(Matrix3x2dc mat) {
-        if (mat instanceof Matrix3x2d) {
-            MemUtil.INSTANCE.copy((Matrix3x2d) mat, this);
-        } else {
-            setMatrix3x2dc(mat);
-        }
+    this(Matrix3x2d mat) {
+        setMatrix3x2d(mat);
     }
 
     /**
@@ -106,7 +85,7 @@ struct Matrix3x2d {
      * @param m21
      *          the value of m21
      */
-    public Matrix3x2d(double m00, double m01,
+    this(double m00, double m01,
                       double m10, double m11,
                       double m20, double m21) {
         this.m00 = m00;
@@ -116,23 +95,6 @@ struct Matrix3x2d {
         this.m20 = m20;
         this.m21 = m21;
     }
-
-//#ifdef __HAS_NIO__
-    /**
-     * Create a new {@link Matrix3x2d} by reading its 6 double components from the given {@link DoubleBuffer}
-     * at the buffer's current position.
-     * <p>
-     * That DoubleBuffer is expected to hold the values in column-major order.
-     * <p>
-     * The buffer's position will not be changed by this method.
-     * 
-     * @param buffer
-     *          the {@link DoubleBuffer} to read the matrix values from
-     */
-    public Matrix3x2d(DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-    }
-//#endif
 
     public double m00() {
         return m00;
