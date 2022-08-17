@@ -120,22 +120,6 @@ struct Matrix3d {
         this.m22 = m22;
     }
 
-//#ifdef __HAS_NIO__
-    /**
-     * Create a new {@link Matrix3d} by reading its 9 double components from the given {@link DoubleBuffer}
-     * at the buffer's current position.
-     * <p>
-     * That DoubleBuffer is expected to hold the values in column-major order.
-     * <p>
-     * The buffer's position will not be changed by this method.
-     * 
-     * @param buffer
-     *          the {@link DoubleBuffer} to read the matrix values from
-     */
-    public Matrix3d(DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-    }
-//#endif
 
     /**
      * Create a new {@link Matrix3d} and initialize its three columns using the supplied vectors.
