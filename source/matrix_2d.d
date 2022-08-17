@@ -113,7 +113,7 @@ struct Matrix2d {
      *          the new value
      * @return this
      */
-    public Matrix2d m00(double m00) {
+    public Matrix2d setm00(double m00) {
         this.m00 = m00;
         return this;
     }
@@ -124,7 +124,7 @@ struct Matrix2d {
      *          the new value
      * @return this
      */
-    public Matrix2d m01(double m01) {
+    public Matrix2d setm01(double m01) {
         this.m01 = m01;
         return this;
     }
@@ -135,7 +135,7 @@ struct Matrix2d {
      *          the new value
      * @return this
      */
-    public Matrix2d m10(double m10) {
+    public Matrix2d setm10(double m10) {
         this.m10 = m10;
         return this;
     }
@@ -146,7 +146,7 @@ struct Matrix2d {
      *          the new value
      * @return this
      */
-    public Matrix2d m11(double m11) {
+    public Matrix2d setm11(double m11) {
         this.m11 = m11;
         return this;
     }
