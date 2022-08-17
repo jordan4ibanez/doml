@@ -1109,7 +1109,7 @@ struct Matrix2d {
         return dest;
     }
 
-    public Vector2d getRow(int row, Vector2d dest) throws IndexOutOfBoundsException {
+    public Vector2d getRow(int row, Vector2d dest) {
         switch (row) {
             case 0:
                 dest.x = m00;
@@ -1135,7 +1135,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setRow(int row, Vector2dc src) throws IndexOutOfBoundsException {
+    public Matrix2d setRow(int row, Vector2dc src) {
         return setRow(row, src.x(), src.y());
     }
 
@@ -1151,7 +1151,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setRow(int row, double x, double y) throws IndexOutOfBoundsException {
+    public Matrix2d setRow(int row, double x, double y) {
         switch (row) {
             case 0:
                 this.m00 = x;
@@ -1167,7 +1167,7 @@ struct Matrix2d {
         return this;
     }
 
-    public Vector2d getColumn(int column, Vector2d dest) throws IndexOutOfBoundsException {
+    public Vector2d getColumn(int column, Vector2d dest) {
         switch (column) {
             case 0:
                 dest.x = m00;
@@ -1193,7 +1193,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setColumn(int column, Vector2dc src) throws IndexOutOfBoundsException {
+    public Matrix2d setColumn(int column, Vector2dc src) {
         return setColumn(column, src.x(), src.y());
     }
 
@@ -1209,7 +1209,7 @@ struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setColumn(int column, double x, double y) throws IndexOutOfBoundsException {
+    public Matrix2d setColumn(int column, double x, double y) {
         switch (column) {
             case 0:
                 this.m00 = x;
@@ -1539,9 +1539,4 @@ struct Matrix2d {
         return Math.isFinite(m00) && Math.isFinite(m01) &&
                Math.isFinite(m10) && Math.isFinite(m11);
     }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
 }
