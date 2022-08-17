@@ -72,7 +72,7 @@ struct Vector2d {
      * Create a new {@link Vector2d} and initialize its components to the one of the given vector.
      * 
      * @param v
-     *          the {@link Vector2dc} to copy the values from
+     *          the {@link Vector2d} to copy the values from
      */
     this(Vector2d v) {
         x = v.x();
@@ -214,7 +214,7 @@ struct Vector2d {
      *          the vector to copy from
      * @return this
      */
-    public Vector2d set(Vector2dc v) {
+    public Vector2d set(Vector2d v) {
         this.x = v.x();
         this.y = v.y();
         return this;
@@ -427,7 +427,7 @@ struct Vector2d {
 //#endif
 
 //#ifdef __HAS_UNSAFE__
-    public Vector2dc getToAddress(long address) {
+    public Vector2d getToAddress(long address) {
         if (Options.NO_UNSAFE)
             throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
         MemUtil.MemUtilUnsafe.put(this, address);
@@ -454,7 +454,7 @@ struct Vector2d {
      *          the vector to subtract
      * @return this
      */
-    public Vector2d sub(Vector2dc v) {
+    public Vector2d sub(Vector2d v) {
         this.x = x - v.x();
         this.y = y - v.y();
         return this;
@@ -482,7 +482,7 @@ struct Vector2d {
     }
 
 
-    public Vector2d sub(Vector2dc v, Vector2d dest) {
+    public Vector2d sub(Vector2d v, Vector2d dest) {
         dest.x = x - v.x();
         dest.y = y - v.y();
         return dest;
@@ -536,13 +536,13 @@ struct Vector2d {
      *          the vector to multiply by
      * @return this
      */
-    public Vector2d mul(Vector2dc v) {
+    public Vector2d mul(Vector2d v) {
         this.x = x * v.x();
         this.y = y * v.y();
         return this;
     }
 
-    public Vector2d mul(Vector2dc v, Vector2d dest) {
+    public Vector2d mul(Vector2d v, Vector2d dest) {
         dest.x = x * v.x();
         dest.y = y * v.y();
         return dest;
@@ -591,7 +591,7 @@ struct Vector2d {
     }
 
     /**
-     * Divide this Vector2d component-wise by another Vector2dc.
+     * Divide this Vector2d component-wise by another Vector2d.
      * 
      * @param v
      *          the vector to divide by
@@ -604,7 +604,7 @@ struct Vector2d {
     }
 
 
-    public Vector2d div(Vector2dc v, Vector2d dest) {
+    public Vector2d div(Vector2d v, Vector2d dest) {
         dest.x = x / v.x();
         dest.y = y / v.y();
         return dest;
@@ -617,7 +617,7 @@ struct Vector2d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector2d mul(Matrix2dc mat) {
+    public Vector2d mul(Matrix2d mat) {
         double rx = mat.m00() * x + mat.m10() * y;
         double ry = mat.m01() * x + mat.m11() * y;
         this.x = rx;
@@ -625,7 +625,7 @@ struct Vector2d {
         return this;
     }
 
-    public Vector2d mul(Matrix2dc mat, Vector2d dest) {
+    public Vector2d mul(Matrix2d mat, Vector2d dest) {
         double rx = mat.m00() * x + mat.m10() * y;
         double ry = mat.m01() * x + mat.m11() * y;
         dest.x = rx;
@@ -639,7 +639,7 @@ struct Vector2d {
      *          the matrix
      * @return this
      */
-    public Vector2d mulTranspose(Matrix2dc mat) {
+    public Vector2d mulTranspose(Matrix2d mat) {
         double rx = mat.m00() * x + mat.m01() * y;
         double ry = mat.m10() * x + mat.m11() * y;
         this.x = rx;
@@ -647,7 +647,7 @@ struct Vector2d {
         return this;
     }
 
-    public Vector2d mulTranspose(Matrix2dc mat, Vector2d dest) {
+    public Vector2d mulTranspose(Matrix2d mat, Vector2d dest) {
         double rx = mat.m00() * x + mat.m01() * y;
         double ry = mat.m10() * x + mat.m11() * y;
         dest.x = rx;
@@ -664,7 +664,7 @@ struct Vector2d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector2d mulPosition(Matrix3x2dc mat) {
+    public Vector2d mulPosition(Matrix3x2d mat) {
         double rx = mat.m00() * x + mat.m10() * y + mat.m20();
         double ry = mat.m01() * x + mat.m11() * y + mat.m21();
         this.x = rx;
@@ -672,7 +672,7 @@ struct Vector2d {
         return this;
     }
 
-    public Vector2d mulPosition(Matrix3x2dc mat, Vector2d dest) {
+    public Vector2d mulPosition(Matrix3x2d mat, Vector2d dest) {
         double rx = mat.m00() * x + mat.m10() * y + mat.m20();
         double ry = mat.m01() * x + mat.m11() * y + mat.m21();
         dest.x = rx;
@@ -689,7 +689,7 @@ struct Vector2d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector2d mulDirection(Matrix3x2dc mat) {
+    public Vector2d mulDirection(Matrix3x2d mat) {
         double rx = mat.m00() * x + mat.m10() * y;
         double ry = mat.m01() * x + mat.m11() * y;
         this.x = rx;
@@ -697,7 +697,7 @@ struct Vector2d {
         return this;
     }
 
-    public Vector2d mulDirection(Matrix3x2dc mat, Vector2d dest) {
+    public Vector2d mulDirection(Matrix3x2d mat, Vector2d dest) {
         double rx = mat.m00() * x + mat.m10() * y;
         double ry = mat.m01() * x + mat.m11() * y;
         dest.x = rx;
@@ -705,11 +705,11 @@ struct Vector2d {
         return dest;
     }
 
-    public double dot(Vector2dc v) {
+    public double dot(Vector2d v) {
         return x * v.x() + y * v.y();
     }
 
-    public double angle(Vector2dc v) {
+    public double angle(Vector2d v) {
         double dot = x*v.x() + y*v.y();
         double det = x*v.y() - y*v.x();
         return Math.atan2(det, dot);
@@ -751,13 +751,13 @@ struct Vector2d {
         return Math.sqrt(x * x + y * y);
     }
 
-    public double distance(Vector2dc v) {
+    public double distance(Vector2d v) {
         double dx = this.x - v.x();
         double dy = this.y - v.y();
         return Math.sqrt(dx * dx + dy * dy);
     }
 
-    public double distanceSquared(Vector2dc v) {
+    public double distanceSquared(Vector2d v) {
         double dx = this.x - v.x();
         double dy = this.y - v.y();
         return dx * dx + dy * dy;
@@ -860,7 +860,7 @@ struct Vector2d {
      *          the vector to add
      * @return this
      */
-    public Vector2d add(Vector2dc v) {
+    public Vector2d add(Vector2d v) {
         this.x = x + v.x();
         this.y = y + v.y();
         return this;
@@ -888,7 +888,7 @@ struct Vector2d {
     }
 
 
-    public Vector2d add(Vector2dc v, Vector2d dest) {
+    public Vector2d add(Vector2d v, Vector2d dest) {
         dest.x = x + v.x();
         dest.y = y + v.y();
         return dest;
@@ -946,13 +946,13 @@ struct Vector2d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    public Vector2d lerp(Vector2dc other, double t) {
+    public Vector2d lerp(Vector2d other, double t) {
         this.x = x + (other.x() - x) * t;
         this.y = y + (other.y() - y) * t;
         return this;
     }
 
-    public Vector2d lerp(Vector2dc other, double t, Vector2d dest) {
+    public Vector2d lerp(Vector2d other, double t, Vector2d dest) {
         dest.x = x + (other.x() - x) * t;
         dest.y = y + (other.y() - y) * t;
         return dest;
@@ -984,12 +984,12 @@ struct Vector2d {
         return true;
     }
 
-    public boolean equals(Vector2dc v, double delta) {
+    public boolean equals(Vector2d v, double delta) {
         if (this == v)
             return true;
         if (v == null)
             return false;
-        if (!(v instanceof Vector2dc))
+        if (!(v instanceof Vector2d))
             return false;
         if (!Runtime.equals(x, v.x(), delta))
             return false;
@@ -1037,7 +1037,7 @@ struct Vector2d {
      *          the second multiplicand
      * @return this
      */
-    public Vector2d fma(Vector2dc a, Vector2dc b) {
+    public Vector2d fma(Vector2d a, Vector2d b) {
         this.x = x + a.x() * b.x();
         this.y = y + a.y() * b.y();
         return this;
@@ -1052,19 +1052,19 @@ struct Vector2d {
      *          the second multiplicand
      * @return this
      */
-    public Vector2d fma(double a, Vector2dc b) {
+    public Vector2d fma(double a, Vector2d b) {
         this.x = x + a * b.x();
         this.y = y + a * b.y();
         return this;
     }
 
-    public Vector2d fma(Vector2dc a, Vector2dc b, Vector2d dest) {
+    public Vector2d fma(Vector2d a, Vector2d b, Vector2d dest) {
         dest.x = x + a.x() * b.x();
         dest.y = y + a.y() * b.y();
         return dest;
     }
 
-    public Vector2d fma(double a, Vector2dc b, Vector2d dest) {
+    public Vector2d fma(double a, Vector2d b, Vector2d dest) {
         dest.x = x + a * b.x();
         dest.y = y + a * b.y();
         return dest;
@@ -1077,13 +1077,13 @@ struct Vector2d {
      *          the other vector
      * @return this
      */
-    public Vector2d min(Vector2dc v) {
+    public Vector2d min(Vector2d v) {
         this.x = x < v.x() ? x : v.x();
         this.y = y < v.y() ? y : v.y();
         return this;
     }
 
-    public Vector2d min(Vector2dc v, Vector2d dest) {
+    public Vector2d min(Vector2d v, Vector2d dest) {
         dest.x = x < v.x() ? x : v.x();
         dest.y = y < v.y() ? y : v.y();
         return dest;
@@ -1096,13 +1096,13 @@ struct Vector2d {
      *          the other vector
      * @return this
      */
-    public Vector2d max(Vector2dc v) {
+    public Vector2d max(Vector2d v) {
         this.x = x > v.x() ? x : v.x();
         this.y = y > v.y() ? y : v.y();
         return this;
     }
 
-    public Vector2d max(Vector2dc v, Vector2d dest) {
+    public Vector2d max(Vector2d v, Vector2d dest) {
         dest.x = x > v.x() ? x : v.x();
         dest.y = y > v.y() ? y : v.y();
         return dest;
