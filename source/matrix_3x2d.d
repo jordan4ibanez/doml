@@ -47,11 +47,11 @@ struct Matrix3x2d {
     double m21 = 0.0;
 
     /**
-     * Create a new {@link Matrix3x2d} by setting its left 2x2 submatrix to the values of the given {@link Matrix2dc}
+     * Create a new {@link Matrix3x2d} by setting its left 2x2 submatrix to the values of the given {@link Matrix2d}
      * and the rest to identity.
      *
      * @param mat
-     *          the {@link Matrix2dc}
+     *          the {@link Matrix2d}
      */
     this(Matrix2d mat) {
         setMatrix2d(mat);
@@ -62,7 +62,7 @@ struct Matrix3x2d {
      * Create a new {@link Matrix3x2d} and make it a copy of the given matrix.
      * 
      * @param mat
-     *          the {@link Matrix3x2dc} to copy the values from
+     *          the {@link Matrix3x2d} to copy the values from
      */
     this(Matrix3x2d mat) {
         setMatrix3x2d(mat);
@@ -184,7 +184,7 @@ struct Matrix3x2d {
     }
 
     /**
-     * Set the left 2x2 submatrix of this {@link Matrix3x2d} to the given {@link Matrix2dc} and don't change the other elements.
+     * Set the left 2x2 submatrix of this {@link Matrix3x2d} to the given {@link Matrix2d} and don't change the other elements.
      *
      * @param m
      *          the 2x2 matrix
@@ -194,7 +194,7 @@ struct Matrix3x2d {
         setMatrix2d(m);
         return this;
     }
-    private void setMatrix2dc(Matrix2dc mat) {
+    private void setMatrix2d(Matrix2d mat) {
         m00 = mat.m00();
         m01 = mat.m01();
         m10 = mat.m10();
@@ -408,9 +408,9 @@ struct Matrix3x2d {
      * matrix to obtain an additional translation.
      * <p>
      * In order to apply a translation via to an already existing transformation
-     * matrix, use {@link #translate(Vector2dc) translate()} instead.
+     * matrix, use {@link #translate(Vector2d) translate()} instead.
      * 
-     * @see #translate(Vector2dc)
+     * @see #translate(Vector2d)
      * 
      * @param offset
      *          the translation
@@ -444,11 +444,11 @@ struct Matrix3x2d {
     /**
      * Set only the translation components of this matrix <code>(m20, m21)</code> to the given values <code>(offset.x, offset.y)</code>.
      * <p>
-     * To build a translation matrix instead, use {@link #translation(Vector2dc)}.
-     * To apply a translation to another matrix, use {@link #translate(Vector2dc)}.
+     * To build a translation matrix instead, use {@link #translation(Vector2d)}.
+     * To apply a translation to another matrix, use {@link #translate(Vector2d)}.
      * 
-     * @see #translation(Vector2dc)
-     * @see #translate(Vector2dc)
+     * @see #translation(Vector2d)
+     * @see #translate(Vector2d)
      * 
      * @param offset
      *          the new translation to set
@@ -525,9 +525,9 @@ struct Matrix3x2d {
      * <code>M * T * v</code>, the translation will be applied first!
      * <p>
      * In order to set the matrix to a translation transformation without post-multiplying
-     * it, use {@link #translation(Vector2dc)}.
+     * it, use {@link #translation(Vector2d)}.
      * 
-     * @see #translation(Vector2dc)
+     * @see #translation(Vector2d)
      * 
      * @param offset
      *          the offset to translate
@@ -548,9 +548,9 @@ struct Matrix3x2d {
      * <code>M * T * v</code>, the translation will be applied first!
      * <p>
      * In order to set the matrix to a translation transformation without post-multiplying
-     * it, use {@link #translation(Vector2dc)}.
+     * it, use {@link #translation(Vector2d)}.
      * 
-     * @see #translation(Vector2dc)
+     * @see #translation(Vector2d)
      * 
      * @param offset
      *          the offset to translate
@@ -570,15 +570,15 @@ struct Matrix3x2d {
      * <code>T * M * v</code>, the translation will be applied last!
      * <p>
      * In order to set the matrix to a translation transformation without pre-multiplying
-     * it, use {@link #translation(Vector2dc)}.
+     * it, use {@link #translation(Vector2d)}.
      * 
-     * @see #translation(Vector2dc)
+     * @see #translation(Vector2d)
      * 
      * @param offset
      *          the number of units in x and y by which to translate
      * @return this
      */
-    public Matrix3x2d translateLocal(Vector2dc offset) {
+    public Matrix3x2d translateLocal(Vector2d offset) {
         return translateLocal(offset.x(), offset.y());
     }
 
@@ -592,9 +592,9 @@ struct Matrix3x2d {
      * <code>T * M * v</code>, the translation will be applied last!
      * <p>
      * In order to set the matrix to a translation transformation without pre-multiplying
-     * it, use {@link #translation(Vector2dc)}.
+     * it, use {@link #translation(Vector2d)}.
      * 
-     * @see #translation(Vector2dc)
+     * @see #translation(Vector2d)
      * 
      * @param offset
      *          the number of units in x and y by which to translate
@@ -666,10 +666,10 @@ struct Matrix3x2d {
      * Get the current values of <code>this</code> matrix and store them into
      * <code>dest</code>.
      * <p>
-     * This is the reverse method of {@link #set(Matrix3x2dc)} and allows to obtain
+     * This is the reverse method of {@link #set(Matrix3x2d)} and allows to obtain
      * intermediate calculation results when chaining multiple transformations.
      * 
-     * @see #set(Matrix3x2dc)
+     * @see #set(Matrix3x2d)
      * 
      * @param dest
      *          the destination matrix
@@ -928,14 +928,7 @@ struct Matrix3x2d {
     }
 //#endif
 
-//#ifdef __HAS_UNSAFE__
-    public Matrix3x2dc getToAddress(long address) {
-        if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
-        MemUtil.MemUtilUnsafe.put(this, address);
-        return this;
-    }
-//#endif
+
 
     /**
      * Store this matrix into the supplied double array in column-major order at the given offset.
@@ -1193,7 +1186,7 @@ struct Matrix3x2d {
      *            the factors of the x and y component, respectively
      * @return this
      */
-    public Matrix3x2d scale(Vector2dc xy) {
+    public Matrix3x2d scale(Vector2d xy) {
         return scale(xy.x(), xy.y(), this);
     }
 
@@ -1211,7 +1204,7 @@ struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d scale(Vector2dc xy, Matrix3x2d dest) {
+    public Matrix3x2d scale(Vector2d xy, Matrix3x2d dest) {
         return scale(xy.x(), xy.y(), dest);
     }
 
@@ -1576,7 +1569,7 @@ struct Matrix3x2d {
      * Transform/multiply the given vector by this matrix by assuming a third row in this matrix of <code>(0, 0, 1)</code>
      * and store the result in that vector.
      * 
-     * @see Vector3d#mul(Matrix3x2dc)
+     * @see Vector3d#mul(Matrix3x2d)
      * 
      * @param v
      *          the vector to transform and to hold the final result
@@ -1590,7 +1583,7 @@ struct Matrix3x2d {
      * Transform/multiply the given vector by this matrix by assuming a third row in this matrix of <code>(0, 0, 1)</code>
      * and store the result in <code>dest</code>.
      * 
-     * @see Vector3d#mul(Matrix3x2dc, Vector3d)
+     * @see Vector3d#mul(Matrix3x2d, Vector3d)
      * 
      * @param v
      *          the vector to transform
@@ -1626,9 +1619,9 @@ struct Matrix3x2d {
      * The given 2D-vector is treated as a 3D-vector with its z-component being 1.0, so it
      * will represent a position/location in 2D-space rather than a direction.
      * <p>
-     * In order to store the result in another vector, use {@link #transformPosition(Vector2dc, Vector2d)}.
+     * In order to store the result in another vector, use {@link #transformPosition(Vector2d, Vector2d)}.
      * 
-     * @see #transformPosition(Vector2dc, Vector2d)
+     * @see #transformPosition(Vector2d, Vector2d)
      * @see #transform(Vector3d)
      * 
      * @param v
@@ -1659,7 +1652,7 @@ struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Vector2d transformPosition(Vector2dc v, Vector2d dest) {
+    public Vector2d transformPosition(Vector2d v, Vector2d dest) {
         dest.set(m00 * v.x() + m10 * v.y() + m20,
                  m01 * v.x() + m11 * v.y() + m21);
         return dest;
@@ -1697,9 +1690,9 @@ struct Matrix3x2d {
      * will represent a direction in 2D-space rather than a position. This method will therefore
      * not take the translation part of the matrix into account.
      * <p>
-     * In order to store the result in another vector, use {@link #transformDirection(Vector2dc, Vector2d)}.
+     * In order to store the result in another vector, use {@link #transformDirection(Vector2d, Vector2d)}.
      * 
-     * @see #transformDirection(Vector2dc, Vector2d)
+     * @see #transformDirection(Vector2d, Vector2d)
      * 
      * @param v
      *          the vector to transform and to hold the final result
@@ -1729,7 +1722,7 @@ struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Vector2d transformDirection(Vector2dc v, Vector2d dest) {
+    public Vector2d transformDirection(Vector2d v, Vector2d dest) {
         dest.set(m00 * v.x() + m10 * v.y(),
                  m01 * v.x() + m11 * v.y());
         return dest;
@@ -1966,7 +1959,7 @@ struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d rotateTo(Vector2dc fromDir, Vector2dc toDir, Matrix3x2d dest) {
+    public Matrix3x2d rotateTo(Vector2d fromDir, Vector2d toDir, Matrix3x2d dest) {
         double dot = fromDir.x() * toDir.x() + fromDir.y() * toDir.y();
         double det = fromDir.x() * toDir.y() - fromDir.y() * toDir.x();
         double rm00 = dot;
@@ -1998,7 +1991,7 @@ struct Matrix3x2d {
      *            the normalized destination direction
      * @return this
      */
-    public Matrix3x2d rotateTo(Vector2dc fromDir, Vector2dc toDir) {
+    public Matrix3x2d rotateTo(Vector2d fromDir, Vector2d toDir) {
         return rotateTo(fromDir, toDir, this);
     }
 
@@ -2361,7 +2354,7 @@ struct Matrix3x2d {
         return true;
     }
 
-    public boolean equals(Matrix3x2dc m, double delta) {
+    public boolean equals(Matrix3x2d m, double delta) {
         if (this == m)
             return true;
         if (m == null)
