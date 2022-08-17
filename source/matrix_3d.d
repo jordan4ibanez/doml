@@ -4,6 +4,7 @@ module matrix_3d;
  * The MIT License
  *
  * Copyright (c) 2015-2021 Richard Greenlees
+ #$@$!$ Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,19 +24,7 @@ module matrix_3d;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
 
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-//#ifdef __HAS_NIO__
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-//#endif
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Contains the definition of a 3x3 matrix of doubles, and associated functions to transform
@@ -48,7 +37,7 @@ import java.text.NumberFormat;
  * @author Richard Greenlees
  * @author Kai Burjack
  */
-public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
+struct Matrix3d {
 
     private static final long serialVersionUID = 1L;
 
