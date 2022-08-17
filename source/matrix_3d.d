@@ -782,15 +782,15 @@ struct Matrix3d {
     }
 
     public float[] get(float[] arr, int offset) {
-        arr[offset+0] = (float)m00;
-        arr[offset+1] = (float)m01;
-        arr[offset+2] = (float)m02;
-        arr[offset+3] = (float)m10;
-        arr[offset+4] = (float)m11;
-        arr[offset+5] = (float)m12;
-        arr[offset+6] = (float)m20;
-        arr[offset+7] = (float)m21;
-        arr[offset+8] = (float)m22;
+        arr[offset+0] = cast(float)m00;
+        arr[offset+1] = cast(float)m01;
+        arr[offset+2] = cast(float)m02;
+        arr[offset+3] = cast(float)m10;
+        arr[offset+4] = cast(float)m11;
+        arr[offset+5] = cast(float)m12;
+        arr[offset+6] = cast(float)m20;
+        arr[offset+7] = cast(float)m21;
+        arr[offset+8] = cast(float)m22;
         return arr;
     }
 
