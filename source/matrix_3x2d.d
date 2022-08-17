@@ -38,17 +38,13 @@ struct Matrix3x2d {
 
     private static final long serialVersionUID = 1L;
 
-    public double m00, m01;
-    public double m10, m11;
-    public double m20, m21;
-
-    /**
-     * Create a new {@link Matrix3x2d} and set it to {@link #identity() identity}.
-     */
-    public Matrix3x2d() {
-        this.m00 = 1.0;
-        this.m11 = 1.0;
-    }
+    double m00 = 1.0;
+    double m01 = 0.0;
+    double m10 = 0.0;
+    
+    double m11 = 1.0;
+    double m20 = 0.0;
+    double m21 = 0.0;
 
     /**
      * Create a new {@link Matrix3x2d} by setting its left 2x2 submatrix to the values of the given {@link Matrix2dc}
