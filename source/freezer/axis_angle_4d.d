@@ -4,6 +4,7 @@ module freezer.axis_angle_4d;
  * The MIT License
  *
  * Copyright (c) 2015-2021 Kai Burjack
+ %$%@^ Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,14 +24,6 @@ module freezer.axis_angle_4d;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
-
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Represents a 3D rotation of a given radians about an axis represented as an
@@ -40,41 +33,30 @@ import java.text.NumberFormat;
  * 
  * @author Kai Burjack
  */
-public class AxisAngle4d implements Externalizable, Cloneable {
-
-    private static final long serialVersionUID = 1L;
-
+struct AxisAngle4d {
     /**
      * The angle in radians.
      */
-    public double angle;
+    double angle = 0.0;
     /**
      * The x-component of the rotation axis.
      */
-    public double x;
+    double x = 0.0;
     /**
      * The y-component of the rotation axis.
      */
-    public double y;
+    double y = 0.0;
     /**
      * The z-component of the rotation axis.
      */
-    public double z;
-
-    /**
-     * Create a new {@link AxisAngle4d} with zero rotation about <code>(0, 0, 1)</code>.
-     */
-    public AxisAngle4d() {
-        z = 1.0;
-    }
-
+    double z = 1.0;
     /**
      * Create a new {@link AxisAngle4d} with the same values of <code>a</code>.
      * 
      * @param a
      *            the AngleAxis4d to copy the values from
      */
-    public AxisAngle4d(AxisAngle4d a) {
+    this(AxisAngle4d a) {
         x = a.x;
         y = a.y;
         z = a.z;
@@ -87,7 +69,7 @@ public class AxisAngle4d implements Externalizable, Cloneable {
      * @param a
      *            the AngleAxis4f to copy the values from
      */
-    public AxisAngle4d(AxisAngle4f a) {
+    this(AxisAngle4f a) {
         x = a.x;
         y = a.y;
         z = a.z;
@@ -104,7 +86,7 @@ public class AxisAngle4d implements Externalizable, Cloneable {
      * @param q
      *            the quaternion from which to create the new AngleAxis4f
      */
-    public AxisAngle4d(Quaternionfc q) {
+    this(Quaternionfc q) {
         float acos = Math.safeAcos(q.w());
         float invSqrt = Math.invsqrt(1.0f - q.w() * q.w());
         if (Float.isInfinite(invSqrt)) {
@@ -129,7 +111,7 @@ public class AxisAngle4d implements Externalizable, Cloneable {
      * @param q
      *            the quaternion from which to create the new AngleAxis4d
      */
-    public AxisAngle4d(Quaterniondc q) {
+    this(Quaterniondc q) {
         double acos = Math.safeAcos(q.w());
         double invSqrt = Math.invsqrt(1.0 - q.w() * q.w());
         if (Double.isInfinite(invSqrt)) {
@@ -156,7 +138,7 @@ public class AxisAngle4d implements Externalizable, Cloneable {
      * @param z
      *            the z-coordinate of the rotation axis
      */
-    public AxisAngle4d(double angle, double x, double y, double z) {
+    this(double angle, double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -169,7 +151,7 @@ public class AxisAngle4d implements Externalizable, Cloneable {
      * @param angle the angle in radians
      * @param v     the rotation axis as a {@link Vector3dc}
      */
-    public AxisAngle4d(double angle, Vector3dc v) {
+    this(double angle, Vector3dc v) {
         this(angle, v.x(), v.y(), v.z());
     }
 
@@ -179,7 +161,7 @@ public class AxisAngle4d implements Externalizable, Cloneable {
      * @param angle the angle in radians
      * @param v     the rotation axis as a {@link Vector3f}
      */
-    public AxisAngle4d(double angle, Vector3f v) {
+    this(double angle, Vector3f v) {
         this(angle, v.x, v.y, v.z);
     }
 
