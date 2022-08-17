@@ -1,4 +1,4 @@
-module geometry_utils;
+module freezer.geometry_utils;
 
 /*
  * The MIT License
