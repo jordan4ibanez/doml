@@ -1,4 +1,4 @@
-module Matrix2d;
+module matrix_2d;
 
 /*
  * The MIT License
