@@ -1,4 +1,4 @@
-module Vector2i;
+module vector_2i;
 
 /*
  * The MIT License
