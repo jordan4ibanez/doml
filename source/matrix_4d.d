@@ -37,27 +37,30 @@ module matrix_4d;
  * @author Richard Greenlees
  * @author Kai Burjack
  */
-public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
+struct Matrix4d {
 
-    private static final long serialVersionUID = 1L;
+    double m00 = 1.0;
+    double m01 = 0.0;
+    double m02 = 0.0;
+    double m03 = 0.0;
 
-    double m00, m01, m02, m03;
-    double m10, m11, m12, m13;
-    double m20, m21, m22, m23;
-    double m30, m31, m32, m33;
+    double m10 = 0.0;
+    double m11 = 1.0;
+    double m12 = 0.0;
+    double m13 = 0.0;
+
+    double m20 = 0.0;
+    double m21 = 0.0;
+    double m22 = 1.0;
+    double m23 = 0.0;
+
+    double m30 = 0.0;
+    double m31 = 0.0;
+    double m32 = 0.0;
+    double m33 = 1.0;
+
 
     int properties;
-
-    /**
-     * Create a new {@link Matrix4d} and set it to {@link #identity() identity}.
-     */
-    public Matrix4d() {
-        _m00(1.0).
-        _m11(1.0).
-        _m22(1.0).
-        _m33(1.0).
-        properties = PROPERTY_IDENTITY | PROPERTY_AFFINE | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL;
-    }
 
     /**
      * Create a new {@link Matrix4d} and make it a copy of the given matrix.
@@ -65,17 +68,7 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
      * @param mat
      *          the {@link Matrix4dc} to copy the values from
      */
-    public Matrix4d(Matrix4dc mat) {
-        set(mat);
-    }
-
-    /**
-     * Create a new {@link Matrix4d} and make it a copy of the given matrix.
-     * 
-     * @param mat
-     *          the {@link Matrix4fc} to copy the values from
-     */
-    public Matrix4d(Matrix4fc mat) {
+    this(Matrix4d mat) {
         set(mat);
     }
 
@@ -86,18 +79,7 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
      * @param mat
      *          the {@link Matrix4x3dc} to copy the values from
      */
-    public Matrix4d(Matrix4x3dc mat) {
-        set(mat);
-    }
-
-    /**
-     * Create a new {@link Matrix4d} and set its upper 4x3 submatrix to the given matrix <code>mat</code>
-     * and all other elements to identity.
-     * 
-     * @param mat
-     *          the {@link Matrix4x3fc} to copy the values from
-     */
-    public Matrix4d(Matrix4x3fc mat) {
+    this(Matrix4x3d mat) {
         set(mat);
     }
 
@@ -796,35 +778,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         _properties(m.properties());
     }
 
-    /**
-     * Store the values of the given matrix <code>m</code> into <code>this</code> matrix.
-     * 
-     * @see #Matrix4d(Matrix4fc)
-     * 
-     * @param m
-     *          the matrix to copy the values from
-     * @return this
-     */
-    public Matrix4d set(Matrix4fc m) {
-        return
-        _m00(m.m00()).
-        _m01(m.m01()).
-        _m02(m.m02()).
-        _m03(m.m03()).
-        _m10(m.m10()).
-        _m11(m.m11()).
-        _m12(m.m12()).
-        _m13(m.m13()).
-        _m20(m.m20()).
-        _m21(m.m21()).
-        _m22(m.m22()).
-        _m23(m.m23()).
-        _m30(m.m30()).
-        _m31(m.m31()).
-        _m32(m.m32()).
-        _m33(m.m33()).
-        _properties(m.properties());
-    }
 
     /**
      * Store the values of the transpose of the given matrix <code>m</code> into <code>this</code> matrix.
@@ -881,37 +834,7 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         _properties(m.properties() | PROPERTY_AFFINE);
     }
 
-    /**
-     * Store the values of the given matrix <code>m</code> into <code>this</code> matrix
-     * and set the other matrix elements to identity.
-     * 
-     * @see #Matrix4d(Matrix4x3fc)
-     * 
-     * @param m
-     *          the matrix to copy the values from
-     * @return this
-     */
-    public Matrix4d set(Matrix4x3fc m) {
-        return
-        _m00(m.m00()).
-        _m01(m.m01()).
-        _m02(m.m02()).
-        _m03(0.0).
-        _m10(m.m10()).
-        _m11(m.m11()).
-        _m12(m.m12()).
-        _m13(0.0).
-        _m20(m.m20()).
-        _m21(m.m21()).
-        _m22(m.m22()).
-        _m23(0.0).
-        _m30(m.m30()).
-        _m31(m.m31()).
-        _m32(m.m32()).
-        _m33(1.0).
-        _properties(m.properties() | PROPERTY_AFFINE);
-    }
-
+   
     /**
      * Set the upper left 3x3 submatrix of this {@link Matrix4d} to the given {@link Matrix3dc} 
      * and the rest to identity.
@@ -992,32 +915,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         _properties(properties & mat.properties() & ~(PROPERTY_PERSPECTIVE));
     }
 
-    /**
-     * Set the upper 4x3 submatrix of this {@link Matrix4d} to the given {@link Matrix4x3fc} 
-     * and don't change the other elements.
-     * 
-     * @see Matrix4x3fc#get(Matrix4d)
-     * 
-     * @param mat
-     *          the {@link Matrix4x3fc}
-     * @return this
-     */
-    public Matrix4d set4x3(Matrix4x3fc mat) {
-        return
-        _m00(mat.m00()).
-        _m01(mat.m01()).
-        _m02(mat.m02()).
-        _m10(mat.m10()).
-        _m11(mat.m11()).
-        _m12(mat.m12()).
-        _m20(mat.m20()).
-        _m21(mat.m21()).
-        _m22(mat.m22()).
-        _m30(mat.m30()).
-        _m31(mat.m31()).
-        _m32(mat.m32()).
-        _properties(properties & mat.properties() & ~(PROPERTY_PERSPECTIVE));
-    }
 
     /**
      * Set the upper 4x3 submatrix of this {@link Matrix4d} to the upper 4x3 submatrix of the given {@link Matrix4dc} 
@@ -1134,22 +1031,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return this;
     }
 
-    /**
-     * Set this matrix to be equivalent to the rotation - and possibly scaling - specified by the given {@link Quaternionfc}.
-     * <p>
-     * This method is equivalent to calling: <code>rotation(q)</code>
-     * <p>
-     * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/">http://www.euclideanspace.com/</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param q
-     *          the {@link Quaternionfc}
-     * @return this
-     */
-    public Matrix4d set(Quaternionfc q) {
-        return rotation(q);
-    }
 
     /**
      * Set this matrix to be equivalent to the rotation - and possibly scaling - specified by the given {@link Quaterniondc}.
@@ -1723,49 +1604,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return dest;
     }
 
-    public Matrix4d mul(Matrix4x3fc right, Matrix4d dest) {
-        if ((properties & PROPERTY_IDENTITY) != 0)
-            return dest.set(right);
-        else if ((right.properties() & PROPERTY_IDENTITY) != 0)
-            return dest.set(this);
-        return mulGeneric(right, dest);
-    }
-    private Matrix4d mulGeneric(Matrix4x3fc right, Matrix4d dest) {
-        double nm00 = Math.fma(m00, right.m00(), Math.fma(m10, right.m01(), m20 * right.m02()));
-        double nm01 = Math.fma(m01, right.m00(), Math.fma(m11, right.m01(), m21 * right.m02()));
-        double nm02 = Math.fma(m02, right.m00(), Math.fma(m12, right.m01(), m22 * right.m02()));
-        double nm03 = Math.fma(m03, right.m00(), Math.fma(m13, right.m01(), m23 * right.m02()));
-        double nm10 = Math.fma(m00, right.m10(), Math.fma(m10, right.m11(), m20 * right.m12()));
-        double nm11 = Math.fma(m01, right.m10(), Math.fma(m11, right.m11(), m21 * right.m12()));
-        double nm12 = Math.fma(m02, right.m10(), Math.fma(m12, right.m11(), m22 * right.m12()));
-        double nm13 = Math.fma(m03, right.m10(), Math.fma(m13, right.m11(), m23 * right.m12()));
-        double nm20 = Math.fma(m00, right.m20(), Math.fma(m10, right.m21(), m20 * right.m22()));
-        double nm21 = Math.fma(m01, right.m20(), Math.fma(m11, right.m21(), m21 * right.m22()));
-        double nm22 = Math.fma(m02, right.m20(), Math.fma(m12, right.m21(), m22 * right.m22()));
-        double nm23 = Math.fma(m03, right.m20(), Math.fma(m13, right.m21(), m23 * right.m22()));
-        double nm30 = Math.fma(m00, right.m30(), Math.fma(m10, right.m31(), Math.fma(m20, right.m32(), m30)));
-        double nm31 = Math.fma(m01, right.m30(), Math.fma(m11, right.m31(), Math.fma(m21, right.m32(), m31)));
-        double nm32 = Math.fma(m02, right.m30(), Math.fma(m12, right.m31(), Math.fma(m22, right.m32(), m32)));
-        double nm33 = Math.fma(m03, right.m30(), Math.fma(m13, right.m31(), Math.fma(m23, right.m32(), m33)));
-        dest._m00(nm00)
-        ._m01(nm01)
-        ._m02(nm02)
-        ._m03(nm03)
-        ._m10(nm10)
-        ._m11(nm11)
-        ._m12(nm12)
-        ._m13(nm13)
-        ._m20(nm20)
-        ._m21(nm21)
-        ._m22(nm22)
-        ._m23(nm23)
-        ._m30(nm30)
-        ._m31(nm31)
-        ._m32(nm32)
-        ._m33(nm33)
-        ._properties(properties & ~(PROPERTY_IDENTITY | PROPERTY_PERSPECTIVE | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL));
-        return dest;
-    }
 
     /**
      * Multiply this matrix by the supplied <code>right</code> matrix and store the result in <code>this</code>.
@@ -1816,114 +1654,8 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return dest;
     }
 
-    /**
-     * Multiply this matrix by the supplied <code>right</code> matrix and store the result in <code>this</code>.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the <code>right</code> matrix,
-     * then the new matrix will be <code>M * R</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the
-     * transformation of the right matrix will be applied first!
-     *
-     * @param right
-     *          the right operand of the matrix multiplication
-     * @return this
-     */
-    public Matrix4d mul(Matrix3x2fc right) {
-        return mul(right, this);
-    }
 
-    public Matrix4d mul(Matrix3x2fc right, Matrix4d dest) {
-        double nm00 = m00 * right.m00() + m10 * right.m01();
-        double nm01 = m01 * right.m00() + m11 * right.m01();
-        double nm02 = m02 * right.m00() + m12 * right.m01();
-        double nm03 = m03 * right.m00() + m13 * right.m01();
-        double nm10 = m00 * right.m10() + m10 * right.m11();
-        double nm11 = m01 * right.m10() + m11 * right.m11();
-        double nm12 = m02 * right.m10() + m12 * right.m11();
-        double nm13 = m03 * right.m10() + m13 * right.m11();
-        double nm30 = m00 * right.m20() + m10 * right.m21() + m30;
-        double nm31 = m01 * right.m20() + m11 * right.m21() + m31;
-        double nm32 = m02 * right.m20() + m12 * right.m21() + m32;
-        double nm33 = m03 * right.m20() + m13 * right.m21() + m33;
-        dest._m00(nm00)
-        ._m01(nm01)
-        ._m02(nm02)
-        ._m03(nm03)
-        ._m10(nm10)
-        ._m11(nm11)
-        ._m12(nm12)
-        ._m13(nm13)
-        ._m20(m20)
-        ._m21(m21)
-        ._m22(m22)
-        ._m23(m23)
-        ._m30(nm30)
-        ._m31(nm31)
-        ._m32(nm32)
-        ._m33(nm33)
-        ._properties(properties & ~(PROPERTY_IDENTITY | PROPERTY_PERSPECTIVE | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL));
-        return dest;
-    }
 
-    /**
-     * Multiply this matrix by the supplied parameter matrix.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the <code>right</code> matrix,
-     * then the new matrix will be <code>M * R</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the
-     * transformation of the right matrix will be applied first!
-     * 
-     * @param right
-     *          the right operand of the multiplication
-     * @return this
-     */
-    public Matrix4d mul(Matrix4f right) {
-        return mul(right, this);
-    }
-
-    public Matrix4d mul(Matrix4fc right, Matrix4d dest) {
-        if ((properties & PROPERTY_IDENTITY) != 0)
-            return dest.set(right);
-        else if ((right.properties() & PROPERTY_IDENTITY) != 0)
-            return dest.set(this);
-        return mulGeneric(right, dest);
-    }
-    private Matrix4d mulGeneric(Matrix4fc right, Matrix4d dest) {
-        double nm00 = m00 * right.m00() + m10 * right.m01() + m20 * right.m02() + m30 * right.m03();
-        double nm01 = m01 * right.m00() + m11 * right.m01() + m21 * right.m02() + m31 * right.m03();
-        double nm02 = m02 * right.m00() + m12 * right.m01() + m22 * right.m02() + m32 * right.m03();
-        double nm03 = m03 * right.m00() + m13 * right.m01() + m23 * right.m02() + m33 * right.m03();
-        double nm10 = m00 * right.m10() + m10 * right.m11() + m20 * right.m12() + m30 * right.m13();
-        double nm11 = m01 * right.m10() + m11 * right.m11() + m21 * right.m12() + m31 * right.m13();
-        double nm12 = m02 * right.m10() + m12 * right.m11() + m22 * right.m12() + m32 * right.m13();
-        double nm13 = m03 * right.m10() + m13 * right.m11() + m23 * right.m12() + m33 * right.m13();
-        double nm20 = m00 * right.m20() + m10 * right.m21() + m20 * right.m22() + m30 * right.m23();
-        double nm21 = m01 * right.m20() + m11 * right.m21() + m21 * right.m22() + m31 * right.m23();
-        double nm22 = m02 * right.m20() + m12 * right.m21() + m22 * right.m22() + m32 * right.m23();
-        double nm23 = m03 * right.m20() + m13 * right.m21() + m23 * right.m22() + m33 * right.m23();
-        double nm30 = m00 * right.m30() + m10 * right.m31() + m20 * right.m32() + m30 * right.m33();
-        double nm31 = m01 * right.m30() + m11 * right.m31() + m21 * right.m32() + m31 * right.m33();
-        double nm32 = m02 * right.m30() + m12 * right.m31() + m22 * right.m32() + m32 * right.m33();
-        double nm33 = m03 * right.m30() + m13 * right.m31() + m23 * right.m32() + m33 * right.m33();
-        dest._m00(nm00)
-        ._m01(nm01)
-        ._m02(nm02)
-        ._m03(nm03)
-        ._m10(nm10)
-        ._m11(nm11)
-        ._m12(nm12)
-        ._m13(nm13)
-        ._m20(nm20)
-        ._m21(nm21)
-        ._m22(nm22)
-        ._m23(nm23)
-        ._m30(nm30)
-        ._m31(nm31)
-        ._m32(nm32)
-        ._m33(nm33)
-        ._properties(0);
-        return dest;
-    }
 
     /**
      * Multiply <code>this</code> symmetric perspective projection matrix by the supplied {@link #isAffine() affine} <code>view</code> matrix.
@@ -2280,38 +2012,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
     }
 
     public Matrix4d add4x3(Matrix4dc other, Matrix4d dest) {
-        dest._m00(m00 + other.m00())
-        ._m01(m01 + other.m01())
-        ._m02(m02 + other.m02())
-        ._m03(m03)
-        ._m10(m10 + other.m10())
-        ._m11(m11 + other.m11())
-        ._m12(m12 + other.m12())
-        ._m13(m13)
-        ._m20(m20 + other.m20())
-        ._m21(m21 + other.m21())
-        ._m22(m22 + other.m22())
-        ._m23(m23)
-        ._m30(m30 + other.m30())
-        ._m31(m31 + other.m31())
-        ._m32(m32 + other.m32())
-        ._m33(m33)
-        ._properties(0);
-        return dest;
-    }
-
-    /**
-     * Component-wise add the upper 4x3 submatrices of <code>this</code> and <code>other</code>.
-     * 
-     * @param other
-     *          the other addend
-     * @return this
-     */
-    public Matrix4d add4x3(Matrix4fc other) {
-        return add4x3(other, this);
-    }
-
-    public Matrix4d add4x3(Matrix4fc other, Matrix4d dest) {
         dest._m00(m00 + other.m00())
         ._m01(m01 + other.m01())
         ._m02(m02 + other.m02())
@@ -3271,19 +2971,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         _properties(PROPERTY_AFFINE | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
     }
 
-    /**
-     * Set this matrix to be a simple translation matrix.
-     * <p>
-     * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional translation.
-     * 
-     * @param offset
-     *              the offsets in x, y and z to translate
-     * @return this
-     */
-    public Matrix4d translation(Vector3fc offset) {
-        return translation(offset.x(), offset.y(), offset.z());
-    }
 
     /**
      * Set this matrix to be a simple translation matrix.
@@ -4139,24 +3826,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return rotation(angle, axis.x(), axis.y(), axis.z());
     }
 
-    /**
-     * Set this matrix to a rotation matrix which rotates the given radians about a given axis.
-     * <p>
-     * The axis described by the <code>axis</code> vector needs to be a unit vector.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * 
-     * @param angle
-     *          the angle in radians
-     * @param axis
-     *          the axis to rotate about
-     * @return this
-     */
-    public Matrix4d rotation(double angle, Vector3fc axis) {
-        return rotation(angle, axis.x(), axis.y(), axis.z());
-    }
 
     public Vector4d transform(Vector4d v) {
         return v.mul(this);
@@ -4259,13 +3928,7 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
                         m02 * x + m12 * y + m22 * z);
     }
 
-    public Vector3f transformDirection(Vector3f dest) {
-        return dest.mulDirection(this);
-    }
 
-    public Vector3f transformDirection(Vector3fc v, Vector3f dest) {
-        return v.mulDirection(this, dest);
-    }
 
     public Vector3f transformDirection(double x, double y, double z, Vector3f dest) {
         float rx = (float)(m00 * x + m10 * y + m20 * z);
@@ -5419,51 +5082,7 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return translate(offset.x(), offset.y(), offset.z(), dest);
     }
 
-    /**
-     * Apply a translation to this matrix by translating by the given number of
-     * units in x, y and z.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>T</code> the translation
-     * matrix, then the new matrix will be <code>M * T</code>. So when
-     * transforming a vector <code>v</code> with the new matrix by using
-     * <code>M * T * v</code>, the translation will be applied first!
-     * <p>
-     * In order to set the matrix to a translation transformation without post-multiplying
-     * it, use {@link #translation(Vector3fc)}.
-     * 
-     * @see #translation(Vector3fc)
-     * 
-     * @param offset
-     *          the number of units in x, y and z by which to translate
-     * @return this
-     */
-    public Matrix4d translate(Vector3fc offset) {
-        return translate(offset.x(), offset.y(), offset.z());
-    }
 
-    /**
-     * Apply a translation to this matrix by translating by the given number of
-     * units in x, y and z and store the result in <code>dest</code>.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>T</code> the translation
-     * matrix, then the new matrix will be <code>M * T</code>. So when
-     * transforming a vector <code>v</code> with the new matrix by using
-     * <code>M * T * v</code>, the translation will be applied first!
-     * <p>
-     * In order to set the matrix to a translation transformation without post-multiplying
-     * it, use {@link #translation(Vector3fc)}.
-     * 
-     * @see #translation(Vector3fc)
-     * 
-     * @param offset
-     *          the number of units in x, y and z by which to translate
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix4d translate(Vector3fc offset, Matrix4d dest) {
-        return translate(offset.x(), offset.y(), offset.z(), dest);
-    }
 
     /**
      * Apply a translation to this matrix by translating by the given number of
@@ -5546,52 +5165,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         this._m33(Math.fma(m03, x, Math.fma(m13, y, Math.fma(m23, z, m33))));
         this.properties &= ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY);
         return this;
-    }
-
-    /**
-     * Pre-multiply a translation to this matrix by translating by the given number of
-     * units in x, y and z.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>T</code> the translation
-     * matrix, then the new matrix will be <code>T * M</code>. So when
-     * transforming a vector <code>v</code> with the new matrix by using
-     * <code>T * M * v</code>, the translation will be applied last!
-     * <p>
-     * In order to set the matrix to a translation transformation without pre-multiplying
-     * it, use {@link #translation(Vector3fc)}.
-     * 
-     * @see #translation(Vector3fc)
-     * 
-     * @param offset
-     *          the number of units in x, y and z by which to translate
-     * @return this
-     */
-    public Matrix4d translateLocal(Vector3fc offset) {
-        return translateLocal(offset.x(), offset.y(), offset.z());
-    }
-
-    /**
-     * Pre-multiply a translation to this matrix by translating by the given number of
-     * units in x, y and z and store the result in <code>dest</code>.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>T</code> the translation
-     * matrix, then the new matrix will be <code>T * M</code>. So when
-     * transforming a vector <code>v</code> with the new matrix by using
-     * <code>T * M * v</code>, the translation will be applied last!
-     * <p>
-     * In order to set the matrix to a translation transformation without pre-multiplying
-     * it, use {@link #translation(Vector3fc)}.
-     * 
-     * @see #translation(Vector3fc)
-     * 
-     * @param offset
-     *          the number of units in x, y and z by which to translate
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix4d translateLocal(Vector3fc offset, Matrix4d dest) {
-        return translateLocal(offset.x(), offset.y(), offset.z(), dest);
     }
 
     /**
@@ -6877,52 +6450,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return this;
     }
 
-    /**
-     * Set this matrix to the rotation - and possibly scaling - transformation of the given {@link Quaternionfc}.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional rotation.
-     * <p>
-     * In order to apply the rotation transformation to an existing transformation,
-     * use {@link #rotate(Quaternionfc) rotate()} instead.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @return this
-     */
-    public Matrix4d rotation(Quaternionfc quat) {
-        double w2 = quat.w() * quat.w();
-        double x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y();
-        double z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw;
-        double xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz;
-        double yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz;
-        double xw = quat.x() * quat.w(), dxw = xw + xw;
-        if ((properties & PROPERTY_IDENTITY) == 0)
-            this._identity();
-        _m00(w2 + x2 - z2 - y2).
-        _m01(dxy + dzw).
-        _m02(dxz - dyw).
-        _m10(-dzw + dxy).
-        _m11(y2 - z2 + w2 - x2).
-        _m12(dyz + dxw).
-        _m20(dyw + dxz).
-        _m21(dyz - dxw).
-        _m22(z2 - y2 - x2 + w2).
-        _properties(PROPERTY_AFFINE | PROPERTY_ORTHONORMAL);
-        return this;
-    }
 
     /**
      * Set <code>this</code> matrix to <code>T * R * S</code>, where <code>T</code> is a translation by the given <code>(tx, ty, tz)</code>,
@@ -6996,37 +6523,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         _m33(1.0).
         properties = PROPERTY_AFFINE | (one ? PROPERTY_ORTHONORMAL : 0);
         return this;
-    }
-
-    /**
-     * Set <code>this</code> matrix to <code>T * R * S</code>, where <code>T</code> is the given <code>translation</code>,
-     * <code>R</code> is a rotation transformation specified by the given quaternion, and <code>S</code> is a scaling transformation
-     * which scales the axes by <code>scale</code>.
-     * <p>
-     * When transforming a vector by the resulting matrix the scaling transformation will be applied first, then the rotation and
-     * at last the translation.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * This method is equivalent to calling: <code>translation(translation).rotate(quat).scale(scale)</code>
-     * 
-     * @see #translation(Vector3fc)
-     * @see #rotate(Quaternionfc)
-     * 
-     * @param translation
-     *          the translation
-     * @param quat
-     *          the quaternion representing a rotation
-     * @param scale
-     *          the scaling factors
-     * @return this
-     */
-    public Matrix4d translationRotateScale(Vector3fc translation, 
-                                           Quaternionfc quat, 
-                                           Vector3fc scale) {
-        return translationRotateScale(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale.x(), scale.y(), scale.z());
     }
 
     /**
@@ -7135,37 +6631,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return translationRotateScale(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale, scale, scale);
     }
 
-    /**
-     * Set <code>this</code> matrix to <code>T * R * S</code>, where <code>T</code> is the given <code>translation</code>,
-     * <code>R</code> is a rotation transformation specified by the given quaternion, and <code>S</code> is a scaling transformation
-     * which scales all three axes by <code>scale</code>.
-     * <p>
-     * When transforming a vector by the resulting matrix the scaling transformation will be applied first, then the rotation and
-     * at last the translation.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * This method is equivalent to calling: <code>translation(translation).rotate(quat).scale(scale)</code>
-     * 
-     * @see #translation(Vector3fc)
-     * @see #rotate(Quaternionfc)
-     * @see #scale(double)
-     * 
-     * @param translation
-     *          the translation
-     * @param quat
-     *          the quaternion representing a rotation
-     * @param scale
-     *          the scaling factors
-     * @return this
-     */
-    public Matrix4d translationRotateScale(Vector3fc translation, 
-                                           Quaternionfc quat, 
-                                           double scale) {
-        return translationRotateScale(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale, scale, scale);
-    }
 
     /**
      * Set <code>this</code> matrix to <code>(T * R * S)<sup>-1</sup></code>, where <code>T</code> is a translation by the given <code>(tx, ty, tz)</code>,
@@ -7263,30 +6728,7 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return translationRotateScaleInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale.x(), scale.y(), scale.z());
     }
 
-    /**
-     * Set <code>this</code> matrix to <code>(T * R * S)<sup>-1</sup></code>, where <code>T</code> is the given <code>translation</code>,
-     * <code>R</code> is a rotation transformation specified by the given quaternion, and <code>S</code> is a scaling transformation
-     * which scales the axes by <code>scale</code>.
-     * <p>
-     * This method is equivalent to calling: <code>translationRotateScale(...).invert()</code>
-     * 
-     * @see #translationRotateScale(Vector3fc, Quaternionfc, Vector3fc)
-     * @see #invert()
-     * 
-     * @param translation
-     *          the translation
-     * @param quat
-     *          the quaternion representing a rotation
-     * @param scale
-     *          the scaling factors
-     * @return this
-     */
-    public Matrix4d translationRotateScaleInvert(Vector3fc translation, 
-                                                 Quaternionfc quat, 
-                                                 Vector3fc scale) {
-        return translationRotateScaleInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale.x(), scale.y(), scale.z());
-    }
-
+    
     /**
      * Set <code>this</code> matrix to <code>(T * R * S)<sup>-1</sup></code>, where <code>T</code> is the given <code>translation</code>,
      * <code>R</code> is a rotation transformation specified by the given quaternion, and <code>S</code> is a scaling transformation
@@ -7311,29 +6753,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return translationRotateScaleInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale, scale, scale);
     }
 
-    /**
-     * Set <code>this</code> matrix to <code>(T * R * S)<sup>-1</sup></code>, where <code>T</code> is the given <code>translation</code>,
-     * <code>R</code> is a rotation transformation specified by the given quaternion, and <code>S</code> is a scaling transformation
-     * which scales all three axes by <code>scale</code>.
-     * <p>
-     * This method is equivalent to calling: <code>translationRotateScale(...).invert()</code>
-     * 
-     * @see #translationRotateScale(Vector3fc, Quaternionfc, double)
-     * @see #invert()
-     * 
-     * @param translation
-     *          the translation
-     * @param quat
-     *          the quaternion representing a rotation
-     * @param scale
-     *          the scaling factors
-     * @return this
-     */
-    public Matrix4d translationRotateScaleInvert(Vector3fc translation, 
-                                                 Quaternionfc quat, 
-                                                 double scale) {
-        return translationRotateScaleInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale, scale, scale);
-    }
 
     /**
      * Set <code>this</code> matrix to <code>T * R * S * M</code>, where <code>T</code> is a translation by the given <code>(tx, ty, tz)</code>,
@@ -7430,40 +6849,7 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return this;
     }
 
-    /**
-     * Set <code>this</code> matrix to <code>T * R * S * M</code>, where <code>T</code> is the given <code>translation</code>,
-     * <code>R</code> is a rotation - and possibly scaling - transformation specified by the given quaternion, <code>S</code> is a scaling transformation
-     * which scales the axes by <code>scale</code> and <code>M</code> is an {@link #isAffine() affine} matrix.
-     * <p>
-     * When transforming a vector by the resulting matrix the transformation described by <code>M</code> will be applied first, then the scaling, then rotation and
-     * at last the translation.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * This method is equivalent to calling: <code>translation(translation).rotate(quat).scale(scale).mulAffine(m)</code>
-     * 
-     * @see #translation(Vector3fc)
-     * @see #rotate(Quaterniondc)
-     * @see #mulAffine(Matrix4dc)
-     * 
-     * @param translation
-     *          the translation
-     * @param quat
-     *          the quaternion representing a rotation
-     * @param scale
-     *          the scaling factors
-     * @param m
-     *          the {@link #isAffine() affine} matrix to multiply by
-     * @return this
-     */
-    public Matrix4d translationRotateScaleMulAffine(Vector3fc translation, 
-                                                    Quaterniondc quat, 
-                                                    Vector3fc scale,
-                                                    Matrix4d m) {
-        return translationRotateScaleMulAffine(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w(), scale.x(), scale.y(), scale.z(), m);
-    }
+   
 
     /**
      * Set <code>this</code> matrix to <code>T * R</code>, where <code>T</code> is a translation by the given <code>(tx, ty, tz)</code> and
@@ -7639,25 +7025,7 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         ._properties(PROPERTY_AFFINE | PROPERTY_ORTHONORMAL);
     }
 
-    /**
-     * Set <code>this</code> matrix to <code>(T * R)<sup>-1</sup></code>, where <code>T</code> is the given <code>translation</code> and
-     * <code>R</code> is a rotation transformation specified by the given quaternion.
-     * <p>
-     * This method is equivalent to calling: <code>translationRotate(...).invert()</code>
-     * 
-     * @see #translationRotate(Vector3dc, Quaterniondc)
-     * @see #invert()
-     * 
-     * @param translation
-     *          the translation
-     * @param quat
-     *          the quaternion representing a rotation
-     * @return this
-     */
-    public Matrix4d translationRotateInvert(Vector3fc translation, 
-                                            Quaternionfc quat) {
-        return translationRotateInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w());
-    }
+    
 
     /**
      * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix and store
@@ -7737,88 +7105,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return dest;
     }
 
-    /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix and store
-     * the result in <code>dest</code>.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>M * Q</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
-     * the quaternion rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix4d rotate(Quaternionfc quat, Matrix4d dest) {
-        if ((properties & PROPERTY_IDENTITY) != 0)
-            return dest.rotation(quat);
-        else if ((properties & PROPERTY_TRANSLATION) != 0)
-            return rotateTranslation(quat, dest);
-        else if ((properties & PROPERTY_AFFINE) != 0)
-            return rotateAffine(quat, dest);
-        return rotateGeneric(quat, dest);
-    }
-    private Matrix4d rotateGeneric(Quaternionfc quat, Matrix4d dest) {
-        double w2 = quat.w() * quat.w();
-        double x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y();
-        double z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w();
-        double xy = quat.x() * quat.y();
-        double xz = quat.x() * quat.z();
-        double yw = quat.y() * quat.w();
-        double yz = quat.y() * quat.z();
-        double xw = quat.x() * quat.w();
-        double rm00 = w2 + x2 - z2 - y2;
-        double rm01 = xy + zw + zw + xy;
-        double rm02 = xz - yw + xz - yw;
-        double rm10 = -zw + xy - zw + xy;
-        double rm11 = y2 - z2 + w2 - x2;
-        double rm12 = yz + yz + xw + xw;
-        double rm20 = yw + xz + xz + yw;
-        double rm21 = yz + yz - xw - xw;
-        double rm22 = z2 - y2 - x2 + w2;
-        double nm00 = m00 * rm00 + m10 * rm01 + m20 * rm02;
-        double nm01 = m01 * rm00 + m11 * rm01 + m21 * rm02;
-        double nm02 = m02 * rm00 + m12 * rm01 + m22 * rm02;
-        double nm03 = m03 * rm00 + m13 * rm01 + m23 * rm02;
-        double nm10 = m00 * rm10 + m10 * rm11 + m20 * rm12;
-        double nm11 = m01 * rm10 + m11 * rm11 + m21 * rm12;
-        double nm12 = m02 * rm10 + m12 * rm11 + m22 * rm12;
-        double nm13 = m03 * rm10 + m13 * rm11 + m23 * rm12;
-        dest._m20(m00 * rm20 + m10 * rm21 + m20 * rm22)
-        ._m21(m01 * rm20 + m11 * rm21 + m21 * rm22)
-        ._m22(m02 * rm20 + m12 * rm21 + m22 * rm22)
-        ._m23(m03 * rm20 + m13 * rm21 + m23 * rm22)
-        ._m00(nm00)
-        ._m01(nm01)
-        ._m02(nm02)
-        ._m03(nm03)
-        ._m10(nm10)
-        ._m11(nm11)
-        ._m12(nm12)
-        ._m13(nm13)
-        ._m30(m30)
-        ._m31(m31)
-        ._m32(m32)
-        ._m33(m33)
-        ._properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION));
-        return dest;
-    }
 
     /**
      * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix.
@@ -7847,32 +7133,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return rotate(quat, this);
     }
 
-    /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>M * Q</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
-     * the quaternion rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @return this
-     */
-    public Matrix4d rotate(Quaternionfc quat) {
-        return rotate(quat, this);
-    }
 
     /**
      * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this {@link #isAffine() affine} matrix and store
@@ -8035,79 +7295,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return dest;
     }
 
-    /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix, which is assumed to only contain a translation, and store
-     * the result in <code>dest</code>.
-     * <p>
-     * This method assumes <code>this</code> to only contain a translation.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>M * Q</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
-     * the quaternion rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix4d rotateTranslation(Quaternionfc quat, Matrix4d dest) {
-        double w2 = quat.w() * quat.w();
-        double x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y();
-        double z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w();
-        double xy = quat.x() * quat.y();
-        double xz = quat.x() * quat.z();
-        double yw = quat.y() * quat.w();
-        double yz = quat.y() * quat.z();
-        double xw = quat.x() * quat.w();
-        double rm00 = w2 + x2 - z2 - y2;
-        double rm01 = xy + zw + zw + xy;
-        double rm02 = xz - yw + xz - yw;
-        double rm10 = -zw + xy - zw + xy;
-        double rm11 = y2 - z2 + w2 - x2;
-        double rm12 = yz + yz + xw + xw;
-        double rm20 = yw + xz + xz + yw;
-        double rm21 = yz + yz - xw - xw;
-        double rm22 = z2 - y2 - x2 + w2;
-        double nm00 = rm00;
-        double nm01 = rm01;
-        double nm02 = rm02;
-        double nm10 = rm10;
-        double nm11 = rm11;
-        double nm12 = rm12;
-        dest._m20(rm20)
-        ._m21(rm21)
-        ._m22(rm22)
-        ._m23(0.0)
-        ._m00(nm00)
-        ._m01(nm01)
-        ._m02(nm02)
-        ._m03(0.0)
-        ._m10(nm10)
-        ._m11(nm11)
-        ._m12(nm12)
-        ._m13(0.0)
-        ._m30(m30)
-        ._m31(m31)
-        ._m32(m32)
-        ._m33(1.0)
-        ._properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION));
-        return dest;
-    }
 
     /**
      * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix and store
@@ -8212,216 +7399,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
         return rotateLocal(quat, this);
     }
 
-    /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this {@link #isAffine() affine} matrix and store
-     * the result in <code>dest</code>.
-     * <p>
-     * This method assumes <code>this</code> to be {@link #isAffine() affine}.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>M * Q</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
-     * the quaternion rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix4d rotateAffine(Quaternionfc quat, Matrix4d dest) {
-        double w2 = quat.w() * quat.w();
-        double x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y();
-        double z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w();
-        double xy = quat.x() * quat.y();
-        double xz = quat.x() * quat.z();
-        double yw = quat.y() * quat.w();
-        double yz = quat.y() * quat.z();
-        double xw = quat.x() * quat.w();
-        double rm00 = w2 + x2 - z2 - y2;
-        double rm01 = xy + zw + zw + xy;
-        double rm02 = xz - yw + xz - yw;
-        double rm10 = -zw + xy - zw + xy;
-        double rm11 = y2 - z2 + w2 - x2;
-        double rm12 = yz + yz + xw + xw;
-        double rm20 = yw + xz + xz + yw;
-        double rm21 = yz + yz - xw - xw;
-        double rm22 = z2 - y2 - x2 + w2;
-        double nm00 = m00 * rm00 + m10 * rm01 + m20 * rm02;
-        double nm01 = m01 * rm00 + m11 * rm01 + m21 * rm02;
-        double nm02 = m02 * rm00 + m12 * rm01 + m22 * rm02;
-        double nm10 = m00 * rm10 + m10 * rm11 + m20 * rm12;
-        double nm11 = m01 * rm10 + m11 * rm11 + m21 * rm12;
-        double nm12 = m02 * rm10 + m12 * rm11 + m22 * rm12;
-        dest._m20(m00 * rm20 + m10 * rm21 + m20 * rm22)
-        ._m21(m01 * rm20 + m11 * rm21 + m21 * rm22)
-        ._m22(m02 * rm20 + m12 * rm21 + m22 * rm22)
-        ._m23(0.0)
-        ._m00(nm00)
-        ._m01(nm01)
-        ._m02(nm02)
-        ._m03(0.0)
-        ._m10(nm10)
-        ._m11(nm11)
-        ._m12(nm12)
-        ._m13(0.0)
-        ._m30(m30)
-        ._m31(m31)
-        ._m32(m32)
-        ._m33(m33)
-        ._properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION));
-        return dest;
-    }
-
-    /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix.
-     * <p>
-     * This method assumes <code>this</code> to be {@link #isAffine() affine}.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>M * Q</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
-     * the quaternion rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @return this
-     */
-    public Matrix4d rotateAffine(Quaternionfc quat) {
-        return rotateAffine(quat, this);
-    }
-
-    /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix and store
-     * the result in <code>dest</code>.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>Q * M</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
-     * the quaternion rotation will be applied last!
-     * <p>
-     * In order to set the matrix to a rotation transformation without pre-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix4d rotateLocal(Quaternionfc quat, Matrix4d dest) {
-        double w2 = quat.w() * quat.w();
-        double x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y();
-        double z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w();
-        double xy = quat.x() * quat.y();
-        double xz = quat.x() * quat.z();
-        double yw = quat.y() * quat.w();
-        double yz = quat.y() * quat.z();
-        double xw = quat.x() * quat.w();
-        double lm00 = w2 + x2 - z2 - y2;
-        double lm01 = xy + zw + zw + xy;
-        double lm02 = xz - yw + xz - yw;
-        double lm10 = -zw + xy - zw + xy;
-        double lm11 = y2 - z2 + w2 - x2;
-        double lm12 = yz + yz + xw + xw;
-        double lm20 = yw + xz + xz + yw;
-        double lm21 = yz + yz - xw - xw;
-        double lm22 = z2 - y2 - x2 + w2;
-        double nm00 = lm00 * m00 + lm10 * m01 + lm20 * m02;
-        double nm01 = lm01 * m00 + lm11 * m01 + lm21 * m02;
-        double nm02 = lm02 * m00 + lm12 * m01 + lm22 * m02;
-        double nm03 = m03;
-        double nm10 = lm00 * m10 + lm10 * m11 + lm20 * m12;
-        double nm11 = lm01 * m10 + lm11 * m11 + lm21 * m12;
-        double nm12 = lm02 * m10 + lm12 * m11 + lm22 * m12;
-        double nm13 = m13;
-        double nm20 = lm00 * m20 + lm10 * m21 + lm20 * m22;
-        double nm21 = lm01 * m20 + lm11 * m21 + lm21 * m22;
-        double nm22 = lm02 * m20 + lm12 * m21 + lm22 * m22;
-        double nm23 = m23;
-        double nm30 = lm00 * m30 + lm10 * m31 + lm20 * m32;
-        double nm31 = lm01 * m30 + lm11 * m31 + lm21 * m32;
-        double nm32 = lm02 * m30 + lm12 * m31 + lm22 * m32;
-        dest._m00(nm00)
-        ._m01(nm01)
-        ._m02(nm02)
-        ._m03(nm03)
-        ._m10(nm10)
-        ._m11(nm11)
-        ._m12(nm12)
-        ._m13(nm13)
-        ._m20(nm20)
-        ._m21(nm21)
-        ._m22(nm22)
-        ._m23(nm23)
-        ._m30(nm30)
-        ._m31(nm31)
-        ._m32(nm32)
-        ._m33(m33)
-        ._properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION));
-        return dest;
-    }
-
-    /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>Q * M</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
-     * the quaternion rotation will be applied last!
-     * <p>
-     * In order to set the matrix to a rotation transformation without pre-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @return this
-     */
-    public Matrix4d rotateLocal(Quaternionfc quat) {
-        return rotateLocal(quat, this);
-    }
 
     /**
      * Apply a rotation transformation, rotating about the given {@link AxisAngle4f}, to this matrix.
@@ -8602,68 +7579,6 @@ public class Matrix4d implements Externalizable, Cloneable, Matrix4dc {
      * @return dest
      */
     public Matrix4d rotate(double angle, Vector3dc axis, Matrix4d dest) {
-        return rotate(angle, axis.x(), axis.y(), axis.z(), dest);
-    }
-
-    /**
-     * Apply a rotation transformation, rotating the given radians about the specified axis, to this matrix.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given angle and axis,
-     * then the new matrix will be <code>M * A</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the axis-angle rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(double, Vector3fc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(double, double, double, double)
-     * @see #rotation(double, Vector3fc)
-     * 
-     * @param angle
-     *          the angle in radians
-     * @param axis
-     *          the rotation axis (needs to be {@link Vector3f#normalize() normalized})
-     * @return this
-     */
-    public Matrix4d rotate(double angle, Vector3fc axis) {
-        return rotate(angle, axis.x(), axis.y(), axis.z());
-    }
-
-    /**
-     * Apply a rotation transformation, rotating the given radians about the specified axis and store the result in <code>dest</code>.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given angle and axis,
-     * then the new matrix will be <code>M * A</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the axis-angle rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(double, Vector3fc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(double, double, double, double)
-     * @see #rotation(double, Vector3fc)
-     * 
-     * @param angle
-     *          the angle in radians
-     * @param axis
-     *          the rotation axis (needs to be {@link Vector3f#normalize() normalized})
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix4d rotate(double angle, Vector3fc axis, Matrix4d dest) {
         return rotate(angle, axis.x(), axis.y(), axis.z(), dest);
     }
 
