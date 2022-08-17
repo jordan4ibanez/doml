@@ -24,17 +24,6 @@ module vector_3d;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.DOML;
-
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-//#ifdef __HAS_NIO__
-import java.nio.*;
-//#endif
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * Contains the definition of a Vector comprising 3 doubles and associated
@@ -44,9 +33,7 @@ import java.text.NumberFormat;
  * @author Kai Burjack
  * @author F. Neurath
  */
-public class Vector3d implements Externalizable, Cloneable, Vector3dc {
-
-    private static final long serialVersionUID = 1L;
+struct Vector3d {
 
     /**
      * The x component of the vector.
@@ -62,18 +49,12 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
     public double z;
 
     /**
-     * Create a new {@link Vector3d} with all components set to zero.
-     */
-    public Vector3d() {
-    }
-
-    /**
      * Create a new {@link Vector3d} and initialize all three components with the given value.
      *
      * @param d
      *          the value of all three components
      */
-    public Vector3d(double d) {
+    this(double d) {
         this.x = d;
         this.y = d;
         this.z = d;
@@ -89,7 +70,7 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
      * @param z
      *          the value of z
      */
-    public Vector3d(double x, double y, double z) {
+    this(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -101,7 +82,7 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
      * @param v
      *          provides the initial values for the new vector
      */
-    public Vector3d(Vector3fc v) {
+    this(Vector3fc v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -113,7 +94,7 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
      * @param v
      *          provides the initial values for the new vector
      */
-    public Vector3d(Vector3ic v) {
+    this(Vector3ic v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -128,7 +109,7 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
      * @param z
      *          the z component
      */
-    public Vector3d(Vector2fc v, double z) {
+    this(Vector2fc v, double z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -143,7 +124,7 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
      * @param z
      *          the z component
      */
-    public Vector3d(Vector2ic v, double z) {
+    this(Vector2ic v, double z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -155,7 +136,7 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
      * @param v
      *          provides the initial values for the new vector
      */
-    public Vector3d(Vector3dc v) {
+    this(Vector3dc v) {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
@@ -170,7 +151,7 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
      * @param z
      *          the z component
      */
-    public Vector3d(Vector2dc v, double z) {
+    this(Vector2dc v, double z) {
         this.x = v.x();
         this.y = v.y();
         this.z = z;
@@ -183,7 +164,7 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
      * @param xyz
      *          the array containing at least three elements
      */
-    public Vector3d(double[] xyz) {
+    this(double[] xyz) {
         this.x = xyz[0];
         this.y = xyz[1];
         this.z = xyz[2];
@@ -196,7 +177,7 @@ public class Vector3d implements Externalizable, Cloneable, Vector3dc {
      * @param xyz
      *          the array containing at least three elements
      */
-    public Vector3d(float[] xyz) {
+    this(float[] xyz) {
         this.x = xyz[0];
         this.y = xyz[1];
         this.z = xyz[2];
