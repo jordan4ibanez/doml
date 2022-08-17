@@ -131,7 +131,7 @@ struct Matrix3d {
      * @param col2
      *          the third column
      */
-    public Matrix3d(Vector3dc col0, Vector3dc col1, Vector3dc col2) {
+    this(Vector3d col0, Vector3d col1, Vector3d col2) {
         set(col0, col1, col2);
     }
 
