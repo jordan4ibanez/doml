@@ -135,34 +135,6 @@ struct Matrix3d {
         set(col0, col1, col2);
     }
 
-    public double m00() {
-        return m00;
-    }
-    public double m01() {
-        return m01;
-    }
-    public double m02() {
-        return m02;
-    }
-    public double m10() {
-        return m10;
-    }
-    public double m11() {
-        return m11;
-    }
-    public double m12() {
-        return m12;
-    }
-    public double m20() {
-        return m20;
-    }
-    public double m21() {
-        return m21;
-    }
-    public double m22() {
-        return m22;
-    }
-
     /**
      * Set the value of the matrix element at column 0 and row 0.
      * 
