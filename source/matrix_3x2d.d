@@ -325,7 +325,7 @@ struct Matrix3x2d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix3x2d set(double m[]) {
+    public Matrix3x2d set(double[] m) {
         MemUtil.INSTANCE.copy(m, 0, this);
         return this;
     }
