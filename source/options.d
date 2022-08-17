@@ -1,4 +1,4 @@
-module Options;
+module options;
 
 /*
  * The MIT License
