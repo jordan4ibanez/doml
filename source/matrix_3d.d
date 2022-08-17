@@ -2575,7 +2575,7 @@ struct Matrix3d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..2]</code>
      */
-    public Matrix3d setRow(int row, double x, double y, double z) throws IndexOutOfBoundsException {
+    public Matrix3d setRow(int row, double x, double y, double z) {
         switch (row) {
         case 0:
             this.m00 = x;
@@ -2592,13 +2592,12 @@ struct Matrix3d {
             this.m12 = y;
             this.m22 = z;
             break;
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
         return this;
     }
 
-    public Vector3d getColumn(int column, Vector3d dest) throws IndexOutOfBoundsException {
+    public Vector3d getColumn(int column, Vector3d dest){
         switch (column) {
         case 0:
             return dest.set(m00, m01, m02);
@@ -2606,8 +2605,7 @@ struct Matrix3d {
             return dest.set(m10, m11, m12);
         case 2:
             return dest.set(m20, m21, m22);
-        default:
-            throw new IndexOutOfBoundsException();
+        default: {}
         }
     }
 
@@ -2621,7 +2619,7 @@ struct Matrix3d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..2]</code>
      */
-    public Matrix3d setColumn(int column, Vector3dc src) throws IndexOutOfBoundsException {
+    public Matrix3d setColumn(int column, Vector3d src) {
         return setColumn(column, src.x(), src.y(), src.z());
     }
 
