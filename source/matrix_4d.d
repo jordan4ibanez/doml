@@ -243,55 +243,6 @@ struct Matrix4d {
         return this.properties;
     }
 
-    public double m00() {
-        return m00;
-    }
-    public double m01() {
-        return m01;
-    }
-    public double m02() {
-        return m02;
-    }
-    public double m03() {
-        return m03;
-    }
-    public double m10() {
-        return m10;
-    }
-    public double m11() {
-        return m11;
-    }
-    public double m12() {
-        return m12;
-    }
-    public double m13() {
-        return m13;
-    }
-    public double m20() {
-        return m20;
-    }
-    public double m21() {
-        return m21;
-    }
-    public double m22() {
-        return m22;
-    }
-    public double m23() {
-        return m23;
-    }
-    public double m30() {
-        return m30;
-    }
-    public double m31() {
-        return m31;
-    }
-    public double m32() {
-        return m32;
-    }
-    public double m33() {
-        return m33;
-    }
-
     /**
      * Set the value of the matrix element at column 0 and row 0.
      * 
