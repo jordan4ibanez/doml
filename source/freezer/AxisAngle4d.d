@@ -1,4 +1,4 @@
-module AxisAngle4d;
+module freezer.AxisAngle4d;
 
 /*
  * The MIT License
