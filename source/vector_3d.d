@@ -76,17 +76,6 @@ struct Vector3d {
         this.z = z;
     }
 
-    /**
-     * Create a new {@link Vector3d} whose values will be copied from the given vector.
-     * 
-     * @param v
-     *          provides the initial values for the new vector
-     */
-    this(Vector3fc v) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
-    }
 
     /**
      * Create a new {@link Vector3d} whose values will be copied from the given vector.
@@ -98,21 +87,6 @@ struct Vector3d {
         this.x = v.x();
         this.y = v.y();
         this.z = v.z();
-    }
-
-    /**
-     * Create a new {@link Vector3d} with the first two components from the
-     * given <code>v</code> and the given <code>z</code>
-     *
-     * @param v
-     *          the {@link Vector2fc} to copy the values from
-     * @param z
-     *          the z component
-     */
-    this(Vector2fc v, double z) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = z;
     }
 
     /**
@@ -258,37 +232,6 @@ struct Vector3d {
     }
 
     /**
-     * Set the x, y and z components to match the supplied vector.
-     * 
-     * @param v
-     *          the vector to set this vector's components from
-     * @return this
-     */
-    public Vector3d set(Vector3fc v) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
-        return this;
-    }
-
-    /**
-     * Set the first two components from the given <code>v</code>
-     * and the z component from the given <code>z</code>
-     *
-     * @param v
-     *          the {@link Vector2fc} to copy the values from
-     * @param z
-     *          the z component
-     * @return this
-     */
-    public Vector3d set(Vector2fc v, double z) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = z;
-        return this;
-    }
-
-    /**
      * Set the x, y, and z components to the supplied value.
      *
      * @param d
@@ -396,26 +339,6 @@ struct Vector3d {
         return dest;
     }
 
-    /**
-     * Subtract the supplied vector from this one.
-     * 
-     * @param v
-     *          the vector to subtract from this
-     * @return this
-     */
-    public Vector3d sub(Vector3fc v) {
-        this.x = x - v.x();
-        this.y = y - v.y();
-        this.z = z - v.z();
-        return this;
-    }
-
-    public Vector3d sub(Vector3fc v, Vector3d dest) {
-        dest.x = x - v.x();
-        dest.y = y - v.y();
-        dest.z = z - v.z();
-        return dest;
-    }
 
     /**
      * Subtract <code>(x, y, z)</code> from this vector.
@@ -463,26 +386,6 @@ struct Vector3d {
         return dest;
     }
 
-    /**
-     * Add the supplied vector to this one.
-     * 
-     * @param v
-     *          the vector to add
-     * @return this
-     */
-    public Vector3d add(Vector3fc v) {
-        this.x = x + v.x();
-        this.y = y + v.y();
-        this.z = z + v.z();
-        return this;
-    }
-
-    public Vector3d add(Vector3fc v, Vector3d dest) {
-        dest.x = x + v.x();
-        dest.y = y + v.y();
-        dest.z = z + v.z();
-        return dest;
-    }
 
     /**
      * Increment the components of this vector by the given values.
@@ -541,45 +444,6 @@ struct Vector3d {
         return this;
     }
 
-    /**
-     * Add the component-wise multiplication of <code>a * b</code> to this vector.
-     * 
-     * @param a
-     *          the first multiplicand
-     * @param b
-     *          the second multiplicand
-     * @return this
-     */
-    public Vector3d fma(Vector3fc a, Vector3fc b) {
-        this.x = Math.fma(a.x(), b.x(), x);
-        this.y = Math.fma(a.y(), b.y(), y);
-        this.z = Math.fma(a.z(), b.z(), z);
-        return this;
-    }
-
-    public Vector3d fma(Vector3fc a, Vector3fc b, Vector3d dest) {
-        dest.x = Math.fma(a.x(), b.x(), x);
-        dest.y = Math.fma(a.y(), b.y(), y);
-        dest.z = Math.fma(a.z(), b.z(), z);
-        return dest;
-    }
-
-    /**
-     * Add the component-wise multiplication of <code>a * b</code> to this vector.
-     * 
-     * @param a
-     *          the first multiplicand
-     * @param b
-     *          the second multiplicand
-     * @return this
-     */
-    public Vector3d fma(double a, Vector3fc b) {
-        this.x = Math.fma(a, b.x(), x);
-        this.y = Math.fma(a, b.y(), y);
-        this.z = Math.fma(a, b.z(), z);
-        return this;
-    }
-
     public Vector3d fma(Vector3dc a, Vector3dc b, Vector3d dest) {
         dest.x = Math.fma(a.x(), b.x(), x);
         dest.y = Math.fma(a.y(), b.y(), y);
@@ -588,20 +452,6 @@ struct Vector3d {
     }
 
     public Vector3d fma(double a, Vector3dc b, Vector3d dest) {
-        dest.x = Math.fma(a, b.x(), x);
-        dest.y = Math.fma(a, b.y(), y);
-        dest.z = Math.fma(a, b.z(), z);
-        return dest;
-    }
-
-    public Vector3d fma(Vector3dc a, Vector3fc b, Vector3d dest) {
-        dest.x = Math.fma(a.x(), b.x(), x);
-        dest.y = Math.fma(a.y(), b.y(), y);
-        dest.z = Math.fma(a.z(), b.z(), z);
-        return dest;
-    }
-
-    public Vector3d fma(double a, Vector3fc b, Vector3d dest) {
         dest.x = Math.fma(a, b.x(), x);
         dest.y = Math.fma(a, b.y(), y);
         dest.z = Math.fma(a, b.z(), z);
@@ -656,13 +506,6 @@ struct Vector3d {
         return dest;
     }
 
-    public Vector3d mulAdd(Vector3fc a, Vector3dc b, Vector3d dest) {
-        dest.x = Math.fma(x, a.x(), b.x());
-        dest.y = Math.fma(y, a.y(), b.y());
-        dest.z = Math.fma(z, a.z(), b.z());
-        return dest;
-    }
-
     /**
      * Multiply this Vector3d component-wise by another Vector3dc.
      * 
@@ -675,27 +518,6 @@ struct Vector3d {
         this.y = y * v.y();
         this.z = z * v.z();
         return this;
-    }
-
-    /**
-     * Multiply this Vector3d component-wise by another Vector3fc.
-     * 
-     * @param v
-     *          the vector to multiply by
-     * @return this
-     */
-    public Vector3d mul(Vector3fc v) {
-        this.x = x * v.x();
-        this.y = y * v.y();
-        this.z = z * v.z();
-        return this;
-    }
-
-    public Vector3d mul(Vector3fc v, Vector3d dest) {
-        dest.x = x * v.x();
-        dest.y = y * v.y();
-        dest.z = z * v.z();
-        return dest;
     }
 
     public Vector3d mul(Vector3dc v, Vector3d dest) {
@@ -719,26 +541,6 @@ struct Vector3d {
         return this;
     }
 
-    /**
-     * Divide this Vector3d component-wise by another Vector3fc.
-     * 
-     * @param v
-     *          the vector to divide by
-     * @return this
-     */
-    public Vector3d div(Vector3fc v) {
-        this.x = x / v.x();
-        this.y = y / v.y();
-        this.z = z / v.z();
-        return this;
-    }
-
-    public Vector3d div(Vector3fc v, Vector3d dest) {
-        dest.x = x / v.x();
-        dest.y = y / v.y();
-        dest.z = z / v.z();
-        return dest;
-    }
 
     public Vector3d div(Vector3dc v, Vector3d dest) {
         dest.x = x / v.x();
@@ -789,53 +591,6 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d mulProject(Matrix4fc mat, Vector3d dest) {
-        double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
-        double rx = (mat.m00() * x + mat.m10() * y + mat.m20() * z + mat.m30()) * invW;
-        double ry = (mat.m01() * x + mat.m11() * y + mat.m21() * z + mat.m31()) * invW;
-        double rz = (mat.m02() * x + mat.m12() * y + mat.m22() * z + mat.m32()) * invW;
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
-
-    /**
-     * Multiply the given matrix <code>mat</code> with this Vector3d, perform perspective division.
-     * <p>
-     * This method uses <code>w=1.0</code> as the fourth vector component.
-     * 
-     * @param mat
-     *          the matrix to multiply this vector by
-     * @return this
-     */
-    public Vector3d mulProject(Matrix4fc mat) {
-        double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
-        double rx = (mat.m00() * x + mat.m10() * y + mat.m20() * z + mat.m30()) * invW;
-        double ry = (mat.m01() * x + mat.m11() * y + mat.m21() * z + mat.m31()) * invW;
-        double rz = (mat.m02() * x + mat.m12() * y + mat.m22() * z + mat.m32()) * invW;
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
-    }
-
-    /**
-     * Multiply the given matrix <code>mat</code> with this Vector3d.
-     * 
-     * @param mat
-     *          the matrix to multiply this vector by
-     * @return this
-     */
-    public Vector3d mul(Matrix3fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
-    }
 
     /**
      * Multiply the given matrix <code>mat</code> with this Vector3d.
@@ -855,26 +610,6 @@ struct Vector3d {
     }
 
     public Vector3d mul(Matrix3dc mat, Vector3d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
-
-    public Vector3f mul(Matrix3dc mat, Vector3f dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
-        dest.x = (float) rx;
-        dest.y = (float) ry;
-        dest.z = (float) rz;
-        return dest;
-    }
-
-    public Vector3d mul(Matrix3fc mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
@@ -909,30 +644,6 @@ struct Vector3d {
         return dest;
     }
 
-    /**
-     * Multiply the given matrix with this Vector3d by assuming a third row in the matrix of <code>(0, 0, 1)</code>
-     * and store the result in <code>this</code>.
-     * 
-     * @param mat
-     *          the matrix
-     * @return this
-     */
-    public Vector3d mul(Matrix3x2fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
-        this.x = rx;
-        this.y = ry;
-        return this;
-    }
-
-    public Vector3d mul(Matrix3x2fc mat, Vector3d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = z;
-        return dest;
-    }
 
     /**
      * Multiply the transpose of the given matrix with this Vector3d and store the result in <code>this</code>.
@@ -959,52 +670,6 @@ struct Vector3d {
         dest.y = ry;
         dest.z = rz;
         return dest;
-    }
-
-    /**
-     * Multiply the transpose of the given matrix with  this Vector3d and store the result in <code>this</code>.
-     * 
-     * @param mat
-     *          the matrix
-     * @return this
-     */
-    public Vector3d mulTranspose(Matrix3fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
-        double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
-        double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, mat.m22() * z));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
-    }
-
-    public Vector3d mulTranspose(Matrix3fc mat, Vector3d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
-        double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
-        double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, mat.m22() * z));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
-
-    /**
-     * Multiply the given 4x4 matrix <code>mat</code> with <code>this</code>.
-     * <p>
-     * This method assumes the <code>w</code> component of <code>this</code> to be <code>1.0</code>.
-     * 
-     * @param mat
-     *          the matrix to multiply this vector by
-     * @return this
-     */
-    public Vector3d mulPosition(Matrix4fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
     }
 
     /**
@@ -1045,24 +710,6 @@ struct Vector3d {
         return this;
     }
 
-    /**
-     * Multiply the given 4x3 matrix <code>mat</code> with <code>this</code>.
-     * <p>
-     * This method assumes the <code>w</code> component of <code>this</code> to be <code>1.0</code>.
-     * 
-     * @param mat
-     *          the matrix to multiply this vector by
-     * @return this
-     */
-    public Vector3d mulPosition(Matrix4x3fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
-    }
 
     public Vector3d mulPosition(Matrix4dc mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
@@ -1074,27 +721,7 @@ struct Vector3d {
         return dest;
     }
 
-    public Vector3d mulPosition(Matrix4fc mat, Vector3d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
-
     public Vector3d mulPosition(Matrix4x3dc mat, Vector3d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
-
-    public Vector3d mulPosition(Matrix4x3fc mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
@@ -1133,66 +760,8 @@ struct Vector3d {
         return dest;
     }
 
-    /**
-     * Multiply the transpose of the given 4x4 matrix <code>mat</code> with <code>this</code>.
-     * <p>
-     * This method assumes the <code>w</code> component of <code>this</code> to be <code>1.0</code>.
-     * 
-     * @param mat
-     *          the matrix whose transpose to multiply this vector by
-     * @return this
-     */
-    public Vector3d mulTransposePosition(Matrix4fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, Math.fma(mat.m02(), z, mat.m03())));
-        double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, Math.fma(mat.m12(), z, mat.m13())));
-        double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, Math.fma(mat.m22(), z, mat.m23())));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
-    }
 
-    public Vector3d mulTransposePosition(Matrix4fc mat, Vector3d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, Math.fma(mat.m02(), z, mat.m03())));
-        double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, Math.fma(mat.m12(), z, mat.m13())));
-        double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, Math.fma(mat.m22(), z, mat.m23())));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
 
-    /**
-     * Multiply the given 4x4 matrix <code>mat</code> with <code>this</code> and return the <i>w</i> component
-     * of the resulting 4D vector.
-     * <p>
-     * This method assumes the <code>w</code> component of <code>this</code> to be <code>1.0</code>.
-     * 
-     * @param mat
-     *          the matrix to multiply this vector by
-     * @return the <i>w</i> component of the resulting 4D vector after multiplication
-     */
-    public double mulPositionW(Matrix4fc mat) {
-        double w = Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return w;
-    }
-
-    public double mulPositionW(Matrix4fc mat, Vector3d dest) {
-        double w = Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30())));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31())));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32())));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return w;
-    }
 
     /**
      * Multiply the given 4x4 matrix <code>mat</code> with <code>this</code> and return the <i>w</i> component
@@ -1226,24 +795,6 @@ struct Vector3d {
         return w;
     }
 
-    /**
-     * Multiply the given 4x4 matrix <code>mat</code> with <code>this</code>.
-     * <p>
-     * This method assumes the <code>w</code> component of <code>this</code> to be <code>0.0</code>.
-     * 
-     * @param mat
-     *          the matrix to multiply this vector by
-     * @return this
-     */
-    public Vector3d mulDirection(Matrix4fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
-    }
 
     /**
      * Multiply the given 4x4 matrix <code>mat</code> with <code>this</code>.
@@ -1283,36 +834,8 @@ struct Vector3d {
         return this;
     }
 
-    /**
-     * Multiply the given 4x3 matrix <code>mat</code> with <code>this</code>.
-     * <p>
-     * This method assumes the <code>w</code> component of <code>this</code> to be <code>0.0</code>.
-     * 
-     * @param mat
-     *          the matrix to multiply this vector by
-     * @return this
-     */
-    public Vector3d mulDirection(Matrix4x3fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
-    }
 
     public Vector3d mulDirection(Matrix4dc mat, Vector3d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
-
-    public Vector3d mulDirection(Matrix4fc mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
         double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
         double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
@@ -1332,15 +855,6 @@ struct Vector3d {
         return dest;
     }
 
-    public Vector3d mulDirection(Matrix4x3fc mat, Vector3d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, mat.m20() * z));
-        double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, mat.m21() * z));
-        double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, mat.m22() * z));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
 
     /**
      * Multiply the transpose of the given 4x4 matrix <code>mat</code> with <code>this</code>.
@@ -1362,35 +876,6 @@ struct Vector3d {
     }
 
     public Vector3d mulTransposeDirection(Matrix4dc mat, Vector3d dest) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
-        double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
-        double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, mat.m22() * z));
-        dest.x = rx;
-        dest.y = ry;
-        dest.z = rz;
-        return dest;
-    }
-
-    /**
-     * Multiply the transpose of the given 4x4 matrix <code>mat</code> with <code>this</code>.
-     * <p>
-     * This method assumes the <code>w</code> component of <code>this</code> to be <code>0.0</code>.
-     * 
-     * @param mat
-     *          the matrix whose transpose to multiply this vector by
-     * @return this
-     */
-    public Vector3d mulTransposeDirection(Matrix4fc mat) {
-        double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
-        double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
-        double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, mat.m22() * z));
-        this.x = rx;
-        this.y = ry;
-        this.z = rz;
-        return this;
-    }
-
-    public Vector3d mulTransposeDirection(Matrix4fc mat, Vector3d dest) {
         double rx = Math.fma(mat.m00(), x, Math.fma(mat.m01(), y, mat.m02() * z));
         double ry = Math.fma(mat.m10(), x, Math.fma(mat.m11(), y, mat.m12() * z));
         double rz = Math.fma(mat.m20(), x, Math.fma(mat.m21(), y, mat.m22() * z));
@@ -2232,13 +1717,6 @@ struct Vector3d {
         dest.x = Math.roundUsing(this.x(), mode);
         dest.y = Math.roundUsing(this.y(), mode);
         dest.z = Math.roundUsing(this.z(), mode);
-        return dest;
-    }
-
-    public Vector3f get(Vector3f dest) {
-        dest.x = (float) this.x();
-        dest.y = (float) this.y();
-        dest.z = (float) this.z();
         return dest;
     }
 
