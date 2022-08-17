@@ -798,171 +798,6 @@ struct Matrix3d {
         return get(arr, 0);
     }
 
-//#ifdef __HAS_NIO__
-    /**
-     * Set the values of this matrix by reading 9 double values from the given {@link DoubleBuffer} in column-major order,
-     * starting at its current position.
-     * <p>
-     * The DoubleBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the DoubleBuffer will not be changed by this method.
-     * 
-     * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix3d set(DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 9 float values from the given {@link FloatBuffer} in column-major order,
-     * starting at its current position.
-     * <p>
-     * The FloatBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the FloatBuffer will not be changed by this method.
-     * 
-     * @param buffer
-     *              the FloatBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix3d set(FloatBuffer buffer) {
-        MemUtil.INSTANCE.getf(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 9 double values from the given {@link ByteBuffer} in column-major order,
-     * starting at its current position.
-     * <p>
-     * The ByteBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the ByteBuffer will not be changed by this method.
-     * 
-     * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix3d set(ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 9 float values from the given {@link ByteBuffer} in column-major order,
-     * starting at its current position.
-     * <p>
-     * The ByteBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the ByteBuffer will not be changed by this method.
-     * 
-     * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix3d setFloats(ByteBuffer buffer) {
-        MemUtil.INSTANCE.getf(this, buffer.position(), buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 9 double values from the given {@link DoubleBuffer} in column-major order,
-     * starting at the specified absolute buffer position/index.
-     * <p>
-     * The DoubleBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the DoubleBuffer will not be changed by this method.
-     * 
-     * @param index
-     *              the absolute position into the DoubleBuffer
-     * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix3d set(int index, DoubleBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 9 float values from the given {@link FloatBuffer} in column-major order,
-     * starting at the specified absolute buffer position/index.
-     * <p>
-     * The FloatBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the FloatBuffer will not be changed by this method.
-     * 
-     * @param index
-     *              the absolute position into the FloatBuffer
-     * @param buffer
-     *              the FloatBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix3d set(int index, FloatBuffer buffer) {
-        MemUtil.INSTANCE.getf(this, index, buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 9 double values from the given {@link ByteBuffer} in column-major order,
-     * starting at the specified absolute buffer position/index.
-     * <p>
-     * The ByteBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the ByteBuffer will not be changed by this method.
-     * 
-     * @param index
-     *              the absolute position into the ByteBuffer
-     * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix3d set(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.get(this, index, buffer);
-        return this;
-    }
-
-    /**
-     * Set the values of this matrix by reading 9 float values from the given {@link ByteBuffer} in column-major order,
-     * starting at the specified absolute buffer position/index.
-     * <p>
-     * The ByteBuffer is expected to contain the values in column-major order.
-     * <p>
-     * The position of the ByteBuffer will not be changed by this method.
-     * 
-     * @param index
-     *              the absolute position into the ByteBuffer
-     * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix3d setFloats(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.getf(this, index, buffer);
-        return this;
-    }
-//#endif
-//#ifdef __HAS_UNSAFE__
-    /**
-     * Set the values of this matrix by reading 9 double values from off-heap memory in column-major order,
-     * starting at the given address.
-     * <p>
-     * This method will throw an {@link UnsupportedOperationException} when DOML is used with `-DDOML.nounsafe`.
-     * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
-     * 
-     * @param address
-     *              the off-heap memory address to read the matrix values from in column-major order
-     * @return this
-     */
-    public Matrix3d setFromAddress(long address) {
-        if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
-        MemUtil.MemUtilUnsafe.get(this, address);
-        return this;
-    }
-//#endif
 
     /**
      * Set the three columns of this matrix to the supplied vectors, respectively.
@@ -975,9 +810,9 @@ struct Matrix3d {
      *          the third column
      * @return this
      */
-    public Matrix3d set(Vector3dc col0,
-                        Vector3dc col1, 
-                        Vector3dc col2) {
+    public Matrix3d set(Vector3d col0,
+                        Vector3d col1, 
+                        Vector3d col2) {
         this.m00 = col0.x();
         this.m01 = col0.y();
         this.m02 = col0.z();
@@ -1093,7 +928,7 @@ struct Matrix3d {
      *             the scale in x, y and z respectively
      * @return this
      */
-    public Matrix3d scaling(Vector3dc xyz) {
+    public Matrix3d scaling(Vector3d xyz) {
         m00 = xyz.x();
         m01 = 0.0;
         m02 = 0.0;
@@ -1106,7 +941,7 @@ struct Matrix3d {
         return this;
     }
 
-    public Matrix3d scale(Vector3dc xyz, Matrix3d dest) {
+    public Matrix3d scale(Vector3d xyz, Matrix3d dest) {
         return scale(xyz.x(), xyz.y(), xyz.z(), dest);
     }
 
@@ -1123,7 +958,7 @@ struct Matrix3d {
      *            the factors of the x, y and z component, respectively
      * @return this
      */
-    public Matrix3d scale(Vector3dc xyz) {
+    public Matrix3d scale(Vector3d xyz) {
         return scale(xyz.x(), xyz.y(), xyz.z(), this);
     }
 
@@ -1250,59 +1085,11 @@ struct Matrix3d {
      *          the axis to rotate about (needs to be {@link Vector3d#normalize() normalized})
      * @return this
      */
-    public Matrix3d rotation(double angle, Vector3dc axis) {
+    public Matrix3d rotation(double angle, Vector3d axis) {
         return rotation(angle, axis.x(), axis.y(), axis.z());
     }
 
-    /**
-     * Set this matrix to a rotation matrix which rotates the given radians about a given axis.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional rotation.
-     * <p>
-     * In order to post-multiply a rotation transformation directly to a
-     * matrix, use {@link #rotate(double, Vector3fc) rotate()} instead.
-     * 
-     * @see #rotate(double, Vector3fc)
-     * 
-     * @param angle
-     *          the angle in radians
-     * @param axis
-     *          the axis to rotate about (needs to be {@link Vector3f#normalize() normalized})
-     * @return this
-     */
-    public Matrix3d rotation(double angle, Vector3fc axis) {
-        return rotation(angle, axis.x(), axis.y(), axis.z());
-    }
 
-    /**
-     * Set this matrix to a rotation transformation using the given {@link AxisAngle4f}.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional rotation.
-     * <p>
-     * In order to apply the rotation transformation to an existing transformation,
-     * use {@link #rotate(AxisAngle4f) rotate()} instead.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     *
-     * @see #rotate(AxisAngle4f)
-     * 
-     * @param axisAngle
-     *          the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
-     * @return this
-     */
-    public Matrix3d rotation(AxisAngle4f axisAngle) {
-        return rotation(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z);
-    }
 
     /**
      * Set this matrix to a rotation transformation using the given {@link AxisAngle4d}.
@@ -1636,7 +1423,7 @@ struct Matrix3d {
      *          the {@link Quaterniondc}
      * @return this
      */
-    public Matrix3d rotation(Quaterniondc quat) {
+    public Matrix3d rotation(Quaterniond quat) {
         double w2 = quat.w() * quat.w();
         double x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y();
@@ -1659,66 +1446,16 @@ struct Matrix3d {
         return this;
     }
 
-    /**
-     * Set this matrix to the rotation - and possibly scaling - transformation of the given {@link Quaternionfc}.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional rotation.
-     * <p>
-     * In order to apply the rotation transformation to an existing transformation,
-     * use {@link #rotate(Quaternionfc) rotate()} instead.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @return this
-     */
-    public Matrix3d rotation(Quaternionfc quat) {
-        double w2 = quat.w() * quat.w();
-        double x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y();
-        double z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw;
-        double xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz;
-        double yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz;
-        double xw = quat.x() * quat.w(), dxw = xw + xw;
-        m00 = w2 + x2 - z2 - y2;
-        m01 = dxy + dzw;
-        m02 = dxz - dyw;
-        m10 = -dzw + dxy;
-        m11 = y2 - z2 + w2 - x2;
-        m12 = dyz + dxw;
-        m20 = dyw + dxz;
-        m21 = dyz - dxw;
-        m22 = z2 - y2 - x2 + w2;
-        return this;
-    }
 
     public Vector3d transform(Vector3d v) {
         return v.mul(this);
     }
 
-    public Vector3d transform(Vector3dc v, Vector3d dest) {
+    public Vector3d transform(Vector3d v, Vector3d dest) {
         v.mul(this, dest);
         return dest;
     }
 
-    public Vector3f transform(Vector3f v) {
-        return v.mul(this);
-    }
-
-    public Vector3f transform(Vector3fc v, Vector3f dest) {
-        return v.mul(this, dest);
-    }
 
     public Vector3d transform(double x, double y, double z, Vector3d dest) {
         return dest.set(Math.fma(m00, x, Math.fma(m10, y, m20 * z)),
@@ -1730,7 +1467,7 @@ struct Matrix3d {
         return v.mulTranspose(this);
     }
 
-    public Vector3d transformTranspose(Vector3dc v, Vector3d dest) {
+    public Vector3d transformTranspose(Vector3d v, Vector3d dest) {
         return v.mulTranspose(this, dest);
     }
 
@@ -1740,29 +1477,6 @@ struct Matrix3d {
                         Math.fma(m20, x, Math.fma(m21, y, m22 * z)));
     }
 
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeDouble(m00);
-        out.writeDouble(m01);
-        out.writeDouble(m02);
-        out.writeDouble(m10);
-        out.writeDouble(m11);
-        out.writeDouble(m12);
-        out.writeDouble(m20);
-        out.writeDouble(m21);
-        out.writeDouble(m22);
-    }
-
-    public void readExternal(ObjectInput in) throws IOException {
-        m00 = in.readDouble();
-        m01 = in.readDouble();
-        m02 = in.readDouble();
-        m10 = in.readDouble();
-        m11 = in.readDouble();
-        m12 = in.readDouble();
-        m20 = in.readDouble();
-        m21 = in.readDouble();
-        m22 = in.readDouble();
-    }
 
     public Matrix3d rotateX(double ang, Matrix3d dest) {
         double sin, cos;
@@ -2547,7 +2261,7 @@ struct Matrix3d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3d rotateLocal(Quaterniondc quat, Matrix3d dest) {
+    public Matrix3d rotateLocal(Quaterniond quat, Matrix3d dest) {
         double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
         double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
@@ -2606,98 +2320,10 @@ struct Matrix3d {
      *          the {@link Quaterniondc}
      * @return this
      */
-    public Matrix3d rotateLocal(Quaterniondc quat) {
+    public Matrix3d rotateLocal(Quaterniond quat) {
         return rotateLocal(quat, this);
     }
 
-    /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix and store
-     * the result in <code>dest</code>.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>Q * M</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
-     * the quaternion rotation will be applied last!
-     * <p>
-     * In order to set the matrix to a rotation transformation without pre-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix3d rotateLocal(Quaternionfc quat, Matrix3d dest) {
-        double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
-        double lm00 = w2 + x2 - z2 - y2;
-        double lm01 = dxy + dzw;
-        double lm02 = dxz - dyw;
-        double lm10 = dxy - dzw;
-        double lm11 = y2 - z2 + w2 - x2;
-        double lm12 = dyz + dxw;
-        double lm20 = dyw + dxz;
-        double lm21 = dyz - dxw;
-        double lm22 = z2 - y2 - x2 + w2;
-        double nm00 = lm00 * m00 + lm10 * m01 + lm20 * m02;
-        double nm01 = lm01 * m00 + lm11 * m01 + lm21 * m02;
-        double nm02 = lm02 * m00 + lm12 * m01 + lm22 * m02;
-        double nm10 = lm00 * m10 + lm10 * m11 + lm20 * m12;
-        double nm11 = lm01 * m10 + lm11 * m11 + lm21 * m12;
-        double nm12 = lm02 * m10 + lm12 * m11 + lm22 * m12;
-        double nm20 = lm00 * m20 + lm10 * m21 + lm20 * m22;
-        double nm21 = lm01 * m20 + lm11 * m21 + lm21 * m22;
-        double nm22 = lm02 * m20 + lm12 * m21 + lm22 * m22;
-        dest.m00 = nm00;
-        dest.m01 = nm01;
-        dest.m02 = nm02;
-        dest.m10 = nm10;
-        dest.m11 = nm11;
-        dest.m12 = nm12;
-        dest.m20 = nm20;
-        dest.m21 = nm21;
-        dest.m22 = nm22;
-        return dest;
-    }
-
-    /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>Q * M</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
-     * the quaternion rotation will be applied last!
-     * <p>
-     * In order to set the matrix to a rotation transformation without pre-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @return this
-     */
-    public Matrix3d rotateLocal(Quaternionfc quat) {
-        return rotateLocal(quat, this);
-    }
 
     /**
      * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix.
@@ -2722,7 +2348,7 @@ struct Matrix3d {
      *          the {@link Quaterniondc}
      * @return this
      */
-    public Matrix3d rotate(Quaterniondc quat) {
+    public Matrix3d rotate(Quaterniond quat) {
         return rotate(quat, this);
     }
 
@@ -2752,7 +2378,7 @@ struct Matrix3d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3d rotate(Quaterniondc quat, Matrix3d dest) {
+    public Matrix3d rotate(Quaterniond quat, Matrix3d dest) {
         double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
         double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
         double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
@@ -2783,150 +2409,6 @@ struct Matrix3d {
         dest.m11 = nm11;
         dest.m12 = nm12;
         return dest;
-    }
-
-    /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>M * Q</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
-     * the quaternion rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @return this
-     */
-    public Matrix3d rotate(Quaternionfc quat) {
-        return rotate(quat, this);
-    }
-
-    /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix and store
-     * the result in <code>dest</code>.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
-     * then the new matrix will be <code>M * Q</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
-     * the quaternion rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(Quaternionfc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
-     * 
-     * @see #rotation(Quaternionfc)
-     * 
-     * @param quat
-     *          the {@link Quaternionfc}
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix3d rotate(Quaternionfc quat, Matrix3d dest) {
-        double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
-        double rm00 = w2 + x2 - z2 - y2;
-        double rm01 = dxy + dzw;
-        double rm02 = dxz - dyw;
-        double rm10 = dxy - dzw;
-        double rm11 = y2 - z2 + w2 - x2;
-        double rm12 = dyz + dxw;
-        double rm20 = dyw + dxz;
-        double rm21 = dyz - dxw;
-        double rm22 = z2 - y2 - x2 + w2;
-        double nm00 = m00 * rm00 + m10 * rm01 + m20 * rm02;
-        double nm01 = m01 * rm00 + m11 * rm01 + m21 * rm02;
-        double nm02 = m02 * rm00 + m12 * rm01 + m22 * rm02;
-        double nm10 = m00 * rm10 + m10 * rm11 + m20 * rm12;
-        double nm11 = m01 * rm10 + m11 * rm11 + m21 * rm12;
-        double nm12 = m02 * rm10 + m12 * rm11 + m22 * rm12;
-        dest.m20 = m00 * rm20 + m10 * rm21 + m20 * rm22;
-        dest.m21 = m01 * rm20 + m11 * rm21 + m21 * rm22;
-        dest.m22 = m02 * rm20 + m12 * rm21 + m22 * rm22;
-        dest.m00 = nm00;
-        dest.m01 = nm01;
-        dest.m02 = nm02;
-        dest.m10 = nm10;
-        dest.m11 = nm11;
-        dest.m12 = nm12;
-        return dest;
-    }
-
-    /**
-     * Apply a rotation transformation, rotating about the given {@link AxisAngle4f}, to this matrix.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4f},
-     * then the new matrix will be <code>M * A</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the {@link AxisAngle4f} rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(AxisAngle4f)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(double, double, double, double)
-     * @see #rotation(AxisAngle4f)
-     * 
-     * @param axisAngle
-     *          the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
-     * @return this
-     */
-    public Matrix3d rotate(AxisAngle4f axisAngle) {
-        return rotate(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z);
-    }
-
-    /**
-     * Apply a rotation transformation, rotating about the given {@link AxisAngle4f} and store the result in <code>dest</code>.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4f},
-     * then the new matrix will be <code>M * A</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the {@link AxisAngle4f} rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(AxisAngle4f)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(double, double, double, double)
-     * @see #rotation(AxisAngle4f)
-     * 
-     * @param axisAngle
-     *          the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix3d rotate(AxisAngle4f axisAngle, Matrix3d dest) {
-        return rotate(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z, dest);
     }
 
     /**
@@ -3015,7 +2497,7 @@ struct Matrix3d {
      *          the rotation axis (needs to be {@link Vector3d#normalize() normalized})
      * @return this
      */
-    public Matrix3d rotate(double angle, Vector3dc axis) {
+    public Matrix3d rotate(double angle, Vector3d axis) {
         return rotate(angle, axis.x(), axis.y(), axis.z());
     }
 
@@ -3049,77 +2531,11 @@ struct Matrix3d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3d rotate(double angle, Vector3dc axis, Matrix3d dest) {
+    public Matrix3d rotate(double angle, Vector3d axis, Matrix3d dest) {
         return rotate(angle, axis.x(), axis.y(), axis.z(), dest);
     }
 
-    /**
-     * Apply a rotation transformation, rotating the given radians about the specified axis, to this matrix.
-     * <p>
-     * The axis described by the <code>axis</code> vector needs to be a unit vector.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given angle and axis,
-     * then the new matrix will be <code>M * A</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the axis-angle rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(double, Vector3fc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(double, double, double, double)
-     * @see #rotation(double, Vector3fc)
-     * 
-     * @param angle
-     *          the angle in radians
-     * @param axis
-     *          the rotation axis (needs to be {@link Vector3f#normalize() normalized})
-     * @return this
-     */
-    public Matrix3d rotate(double angle, Vector3fc axis) {
-        return rotate(angle, axis.x(), axis.y(), axis.z());
-    }
-
-    /**
-     * Apply a rotation transformation, rotating the given radians about the specified axis and store the result in <code>dest</code>.
-     * <p>
-     * The axis described by the <code>axis</code> vector needs to be a unit vector.
-     * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate a vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
-     * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given axis and angle,
-     * then the new matrix will be <code>M * A</code>. So when transforming a
-     * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the axis-angle rotation will be applied first!
-     * <p>
-     * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(double, Vector3fc)}.
-     * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
-     * 
-     * @see #rotate(double, double, double, double)
-     * @see #rotation(double, Vector3fc)
-     * 
-     * @param angle
-     *          the angle in radians
-     * @param axis
-     *          the rotation axis (needs to be {@link Vector3f#normalize() normalized})
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Matrix3d rotate(double angle, Vector3fc axis, Matrix3d dest) {
-        return rotate(angle, axis.x(), axis.y(), axis.z(), dest);
-    }
-
-    public Vector3d getRow(int row, Vector3d dest) throws IndexOutOfBoundsException {
+    public Vector3d getRow(int row, Vector3d dest) {
         switch (row) {
         case 0:
             return dest.set(m00, m10, m20);
@@ -3127,8 +2543,7 @@ struct Matrix3d {
             return dest.set(m01, m11, m21);
         case 2:
             return dest.set(m02, m12, m22);
-        default:
-            throw new IndexOutOfBoundsException();
+        default:{}
         }
     }
 
@@ -3142,7 +2557,7 @@ struct Matrix3d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..2]</code>
      */
-    public Matrix3d setRow(int row, Vector3dc src) throws IndexOutOfBoundsException {
+    public Matrix3d setRow(int row, Vector3d src) {
         return setRow(row, src.x(), src.y(), src.z());
     }
 
