@@ -666,7 +666,7 @@ struct Matrix3d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix3d set(float m[]) {
+    public Matrix3d set(float[] m) {
         m00 = m[0];
         m01 = m[1];
         m02 = m[2];
@@ -737,45 +737,6 @@ struct Matrix3d {
         return dest;
     }
 
-    /**
-     * Return a string representation of this matrix.
-     * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
-     * @return the string representation
-     */
-    public String toString() {
-        String str = toString(Options.NUMBER_FORMAT);
-        StringBuffer res = new StringBuffer();
-        int eIndex = Integer.MIN_VALUE;
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (c == 'E') {
-                eIndex = i;
-            } else if (c == ' ' && eIndex == i - 1) {
-                // workaround Java 1.4 DecimalFormat bug
-                res.append('+');
-                continue;
-            } else if (Character.isDigit(c) && eIndex == i - 1) {
-                res.append('+');
-            }
-            res.append(c);
-        }
-        return res.toString();
-    }
-
-    /**
-     * Return a string representation of this matrix by formatting the matrix elements with the given {@link NumberFormat}.
-     * 
-     * @param formatter
-     *          the {@link NumberFormat} used to format the matrix values with
-     * @return the string representation
-     */
-    public String toString(NumberFormat formatter) {
-        return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " + Runtime.format(m20, formatter) + "\n"
-             + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n"
-             + Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " + Runtime.format(m22, formatter) + "\n";
-    }
 
     /**
      * Get the current values of <code>this</code> matrix and store them into
@@ -794,18 +755,6 @@ struct Matrix3d {
         return dest.set(this);
     }
 
-    public AxisAngle4f getRotation(AxisAngle4f dest) {
-        return dest.set(this);
-    }
-
-    public Quaternionf getUnnormalizedRotation(Quaternionf dest) {
-        return dest.setFromUnnormalized(this);
-    }
-
-    public Quaternionf getNormalizedRotation(Quaternionf dest) {
-        return dest.setFromNormalized(this);
-    }
-
     public Quaterniond getUnnormalizedRotation(Quaterniond dest) {
         return dest.setFromUnnormalized(this);
     }
@@ -814,52 +763,6 @@ struct Matrix3d {
         return dest.setFromNormalized(this);
     }
 
-//#ifdef __HAS_NIO__
-    public DoubleBuffer get(DoubleBuffer buffer) {
-        return get(buffer.position(), buffer);
-    }
-
-    public DoubleBuffer get(int index, DoubleBuffer buffer) {
-        MemUtil.INSTANCE.put(this, index, buffer);
-        return buffer;
-    }
-
-    public FloatBuffer get(FloatBuffer buffer) {
-        return get(buffer.position(), buffer);
-    }
-
-    public FloatBuffer get(int index, FloatBuffer buffer) {
-        MemUtil.INSTANCE.putf(this, index, buffer);
-        return buffer;
-    }
-
-    public ByteBuffer get(ByteBuffer buffer) {
-        return get(buffer.position(), buffer);
-    }
-
-    public ByteBuffer get(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.put(this, index, buffer);
-        return buffer;
-    }
-
-    public ByteBuffer getFloats(ByteBuffer buffer) {
-        return getFloats(buffer.position(), buffer);
-    }
-
-    public ByteBuffer getFloats(int index, ByteBuffer buffer) {
-        MemUtil.INSTANCE.putf(this, index, buffer);
-        return buffer;
-    }
-//#endif
-
-//#ifdef __HAS_UNSAFE__
-    public Matrix3dc getToAddress(long address) {
-        if (Options.NO_UNSAFE)
-            throw new UnsupportedOperationException("Not supported when using DOML.nounsafe");
-        MemUtil.MemUtilUnsafe.put(this, address);
-        return this;
-    }
-//#endif
 
     public double[] get(double[] arr, int offset) {
         arr[offset+0] = m00;
