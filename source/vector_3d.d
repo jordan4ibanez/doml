@@ -52,15 +52,15 @@ struct Vector3d {
     /**
      * The x component of the vector.
      */
-    public double x;
+    public double x = 0.0;
     /**
      * The y component of the vector.
      */
-    public double y;
+    public double y = 0.0;
     /**
      * The z component of the vector.
      */
-    public double z;
+    public double z = 0.0;
 
     /**
      * Create a new {@link Vector3d} and initialize all three components with the given value.
