@@ -123,13 +123,17 @@ public Matrix4d set(Matrix4d m, int column, int row, double value) {
     case 0:
         switch (row) {
         case 0:
-            return m.m00;
+            m.m00 = value;
+            break;
         case 1:
-            return m.m01;
+            m.m01 = value;
+            break;
         case 2:
-            return m.m02;
+            m.m02 = value;
+            break;
         case 3:
-            return m.m03;
+            m.m03 = value;
+            break;
         default:
             break;
         }
@@ -137,13 +141,17 @@ public Matrix4d set(Matrix4d m, int column, int row, double value) {
     case 1:
         switch (row) {
         case 0:
-            return m.m10;
+            m.m10 = value;
+            break;
         case 1:
-            return m.m11;
+            m.m11 = value;
+            break;
         case 2:
-            return m.m12;
+            m.m12 = value;
+            break;
         case 3:
-            return m.m13;
+            m.m13 = value;
+            break;
         default:
             break;
         }
@@ -151,13 +159,17 @@ public Matrix4d set(Matrix4d m, int column, int row, double value) {
     case 2:
         switch (row) {
         case 0:
-            return m.m20;
+            m.m20 = value;
+            break;
         case 1:
-            return m.m21;
+            m.m21 = value;
+            break;
         case 2:
-            return m.m22;
+            m.m22 = value;
+            break;
         case 3:
-            return m.m23;
+            m.m23 = value;
+            break;
         default:
             break;
         }
@@ -165,13 +177,17 @@ public Matrix4d set(Matrix4d m, int column, int row, double value) {
     case 3:
         switch (row) {
         case 0:
-            return m.m30;
+            m.m30 = value;
+            break;
         case 1:
-            return m.m31;
+            m.m31 = value;
+            break;
         case 2:
-            return m.m32;
+            m.m32 = value;
+            break;
         case 3:
-            return m.m33;
+            m.m33 = value;
+            break;
         default:
             break;
         }
@@ -180,7 +196,7 @@ public Matrix4d set(Matrix4d m, int column, int row, double value) {
         break;
     }
     
-    return 0;
+    return m;
 }
 
 
@@ -234,11 +250,14 @@ public Matrix3d set(Matrix3d m, int column, int row, double value) {
     case 0:
         switch (row) {
         case 0:
-            return m.m00;
+            m.m00 = value;
+            break;
         case 1:
-            return m.m01;
+            m.m01 = value;
+            break;
         case 2:
-            return m.m02;
+            m.m02 = value;
+            break;
         default:
             break;
         }
@@ -246,11 +265,14 @@ public Matrix3d set(Matrix3d m, int column, int row, double value) {
     case 1:
         switch (row) {
         case 0:
-            return m.m10;
+            m.m10 = value;
+            break;
         case 1:
-            return m.m11;
+            m.m11 = value;
+            break;
         case 2:
-            return m.m12;
+            m.m12 = value;
+            break;
         default:
             break;
         }
@@ -258,11 +280,14 @@ public Matrix3d set(Matrix3d m, int column, int row, double value) {
     case 2:
         switch (row) {
         case 0:
-            return m.m20;
+            m.m20 = value;
+            break;
         case 1:
-            return m.m21;
+            m.m21 = value;
+            break;
         case 2:
-            return m.m22;
+            m.m22 = value;
+            break;
         default:
             break;
         }
@@ -271,7 +296,7 @@ public Matrix3d set(Matrix3d m, int column, int row, double value) {
         break;
     }
     
-    return 0;
+    return m;
 }
 
 
