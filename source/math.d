@@ -564,25 +564,7 @@ double fma(double a, int b, int c) {
     return math_fma(a, b, c);
 }
 
-int roundUsing(float v, int mode) {
-    switch (mode) {
-        case RoundingMode.TRUNCATE:
-            return cast(int) v;
-        case RoundingMode.CEILING:
-            return cast(int) math_ceil(v);
-        case RoundingMode.FLOOR:
-            return cast(int) math_floor(v);
-        case RoundingMode.HALF_DOWN:
-            return roundHalfDown(v);
-        case RoundingMode.HALF_UP:
-            return roundHalfUp(v);
-        case RoundingMode.HALF_EVEN:
-            return roundHalfEven(v);
-        default: {
-            return 0;
-        }
-    }
-}
+
 int roundUsing(double v, int mode) {
     switch (mode) {
         case RoundingMode.TRUNCATE:
