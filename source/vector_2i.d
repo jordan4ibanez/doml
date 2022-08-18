@@ -83,21 +83,6 @@ struct Vector2i {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    this(float x, float y, int mode) {
-        this.x = Math.roundUsing(x, mode);
-        this.y = Math.roundUsing(y, mode);
-    }
-
-    /**
-     * Create a new {@link Vector2i} and initialize its component values and
-     * round using the given {@link RoundingMode}.
-     * @param x
-     *          the x component
-     * @param y
-     *          the y component
-     * @param mode
-     *          the {@link RoundingMode} to use
-     */
     this(double x, double y, int mode) {
         this.x = Math.roundUsing(x, mode);
         this.y = Math.roundUsing(y, mode);
@@ -659,6 +644,14 @@ struct Vector2i {
         if (this.x != x)
             return false;
         if (this.y != y)
+            return false;
+        return true;
+    }
+
+    public bool equals(Vector2i other) {
+        if (this.x != other.x)
+            return false;
+        if (this.y != other.y)
             return false;
         return true;
     }
