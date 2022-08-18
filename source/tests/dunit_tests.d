@@ -38,6 +38,18 @@ void assertEquals(Vector3i a, Vector3i b) {
         writeln("X1 = ", a.x, " | X2 = ", b.x);
         writeln("Y1 = ", a.y, " | Y2 = ", b.y);
         writeln("Z1 = ", a.z, " | Z2 = ", b.z);
+        writeln("");
+    }
+    assert(a.equals(b));
+}
+
+void assertEquals(Vector4d a, Vector4d b) {
+    if (verbose) {
+        writeln("X1 = ", a.x, " | X2 = ", b.x);
+        writeln("Y1 = ", a.y, " | Y2 = ", b.y);
+        writeln("Z1 = ", a.z, " | Z2 = ", b.z);
+        writeln("W1 = ", a.z, " | W2 = ", b.z);
+        writeln("");
     }
     assert(a.equals(b));
 }
