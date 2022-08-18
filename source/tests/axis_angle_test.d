@@ -58,8 +58,8 @@ void testAxisAngle() {
     a2 = AxisAngle4d( Math.toRadians(-380.0), 1.0, 0.0, 0.0);
     assertEquals(a1.angle, a2.angle, 100_000); // 0.00001 (1E-5f)
 
-    a1 = AxisAngle4d( Math.toRadians(-20.0f) * 10.0, 1.0, 0.0, 0.0);
-    a2 = AxisAngle4d( Math.toRadians(-380.0f) * 10.0, 1.0, 0.0, 0.0);
+    a1 = AxisAngle4d( Math.toRadians(-20.0) * 10.0, 1.0, 0.0, 0.0);
+    a2 = AxisAngle4d( Math.toRadians(-380.0) * 10.0, 1.0, 0.0, 0.0);
 
     assertEquals(a1.angle, a2.angle, 100_000); // 0.00001 (1E-5f)
     writeln("PASSED!");
