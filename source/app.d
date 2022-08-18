@@ -16,6 +16,7 @@ import tests.axis_angle_test;
 import tests.vector_2d_test;
 import tests.vector_2i_test;
 import tests.vector_3d_test;
+import tests.vector_3i_test;
 
 
 
@@ -29,5 +30,6 @@ void main()
     testVector2d();
     testVector2i();
     testVector3d();
+    testVector3i();
 
 }
