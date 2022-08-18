@@ -483,9 +483,6 @@ int clamp(int a, int b, int val) {
     return max(a, math_min(b, val));
 }
 
-float toRadians(float angles) {
-    return cast(float) radians(angles);
-}
 double toRadians(double angles) {
     return radians(angles);
 }
