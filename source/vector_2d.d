@@ -509,7 +509,7 @@ struct Vector2d {
         return x * v.x + y * v.y;
     }
 
-    public double angle(Vector2d v) {
+    public double angle(ref Vector2d v) {
         double dot = x*v.x + y*v.y;
         double det = x*v.y - y*v.x;
         return Math.atan2(det, dot);
@@ -716,7 +716,7 @@ struct Vector2d {
         return this;
     }
 
-    public Vector2d negate(Vector2d dest) {
+    public Vector2d negate(ref Vector2d dest) {
         dest.x = -x;
         dest.y = -y;
         return dest;
