@@ -362,7 +362,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i sub(Vector3i v, Vector3i dest) {
+    public Vector3i sub(Vector3i v, ref Vector3i dest) {
         dest.x = x - v.x;
         dest.y = y - v.y;
         dest.z = z - v.z;
@@ -387,7 +387,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i sub(int x, int y, int z, Vector3i dest) {
+    public Vector3i sub(int x, int y, int z, ref Vector3i dest) {
         dest.x = this.x - x;
         dest.y = this.y - y;
         dest.z = this.z - z;
@@ -408,7 +408,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i add(Vector3i v, Vector3i dest) {
+    public Vector3i add(Vector3i v, ref Vector3i dest) {
         dest.x = x + v.x;
         dest.y = y + v.y;
         dest.z = z + v.z;
@@ -433,7 +433,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i add(int x, int y, int z, Vector3i dest) {
+    public Vector3i add(int x, int y, int z, ref Vector3i dest) {
         dest.x = this.x + x;
         dest.y = this.y + y;
         dest.z = this.z + z;
@@ -455,7 +455,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i mul(int scalar, Vector3i dest) {
+    public Vector3i mul(int scalar, ref Vector3i dest) {
         dest.x = x * scalar;
         dest.y = y * scalar;
         dest.z = z * scalar;
@@ -476,7 +476,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i mul(Vector3i v, Vector3i dest) {
+    public Vector3i mul(Vector3i v, ref Vector3i dest) {
         dest.x = x * v.x;
         dest.y = y * v.y;
         dest.z = z * v.z;
@@ -501,7 +501,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i mul(int x, int y, int z, Vector3i dest) {
+    public Vector3i mul(int x, int y, int z, ref Vector3i dest) {
         dest.x = this.x * x;
         dest.y = this.y * y;
         dest.z = this.z * z;
@@ -523,7 +523,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i div(float scalar, Vector3i dest) {
+    public Vector3i div(float scalar, ref Vector3i dest) {
         float invscalar = 1.0f / scalar;
         dest.x = cast(int) (x * invscalar);
         dest.y = cast(int) (y * invscalar);
@@ -545,7 +545,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i div(int scalar, Vector3i dest) {
+    public Vector3i div(int scalar, ref Vector3i dest) {
         dest.x = x / scalar;
         dest.y = y / scalar;
         dest.z = z / scalar;
@@ -691,7 +691,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i negate(Vector3i dest) {
+    public Vector3i negate(ref Vector3i dest) {
         dest.x = -x;
         dest.y = -y;
         dest.z = -z;
@@ -712,7 +712,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i min(Vector3i v, Vector3i dest) {
+    public Vector3i min(Vector3i v, ref Vector3i dest) {
         dest.x = x < v.x ? x : v.x;
         dest.y = y < v.y ? y : v.y;
         dest.z = z < v.z ? z : v.z;
@@ -733,7 +733,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i max(Vector3i v, Vector3i dest) {
+    public Vector3i max(Vector3i v, ref Vector3i dest) {
         dest.x = x > v.x ? x : v.x;
         dest.y = y > v.y ? y : v.y;
         dest.z = z > v.z ? z : v.z;
@@ -776,7 +776,7 @@ struct Vector3i {
         return this;
     }
 
-    public Vector3i absolute(Vector3i dest) {
+    public Vector3i absolute(ref Vector3i dest) {
         dest.x = Math.abs(this.x);
         dest.y = Math.abs(this.y);
         dest.z = Math.abs(this.z);
