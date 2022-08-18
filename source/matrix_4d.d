@@ -253,22 +253,22 @@ struct Matrix4d {
                     double m10, double m11, double m12, double m13, 
                     double m20, double m21, double m22, double m23, 
                     double m30, double m31, double m32, double m33) {
-        this.m00 = m00;
-        this.m01 = m01;
-        this.m02 = m02;
-        this.m03 = m03;
-        this.m10 = m10;
-        this.m11 = m11;
-        this.m12 = m12;
-        this.m13 = m13;
-        this.m20 = m20;
-        this.m21 = m21;
-        this.m22 = m22;
-        this.m23 = m23;
-        this.m30 = m30;
-        this.m31 = m31;
-        this.m32 = m32;
-        this.m33 = m33;
+        setm00(m00);
+        setm01(m01);
+        setm02(m02);
+        setm03(m03);
+        setm10(m10);
+        setm11(m11);
+        setm12(m12);
+        setm13(m13);
+        setm20(m20);
+        setm21(m21);
+        setm22(m22);
+        setm23(m23);
+        setm30(m30);
+        setm31(m31);
+        setm32(m32);
+        setm33(m33);
         determineProperties();
     }
 
@@ -571,7 +571,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m00(double m00) {
-        this.m00 = m00;
+        setm00(m00);
         return this;
     }
     /**
@@ -582,7 +582,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m01(double m01) {
-        this.m01 = m01;
+        setm01(m01);
         return this;
     }
     /**
@@ -593,7 +593,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m02(double m02) {
-        this.m02 = m02;
+        setm02(m02);
         return this;
     }
     /**
@@ -604,7 +604,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m03(double m03) {
-        this.m03 = m03;
+        setm03(m03);
         return this;
     }
     /**
@@ -615,7 +615,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m10(double m10) {
-        this.m10 = m10;
+        setm10(m10);
         return this;
     }
     /**
@@ -626,7 +626,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m11(double m11) {
-        this.m11 = m11;
+        setm11(m11);
         return this;
     }
     /**
@@ -637,7 +637,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m12(double m12) {
-        this.m12 = m12;
+        setm12(m12);
         return this;
     }
     /**
@@ -648,7 +648,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m13(double m13) {
-        this.m13 = m13;
+        setm13(m13);
         return this;
     }
     /**
@@ -659,7 +659,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m20(double m20) {
-        this.m20 = m20;
+        setm20(m20);
         return this;
     }
     /**
@@ -670,7 +670,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m21(double m21) {
-        this.m21 = m21;
+        setm21(m21);
         return this;
     }
     /**
@@ -681,7 +681,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m22(double m22) {
-        this.m22 = m22;
+        setm22(m22);
         return this;
     }
     /**
@@ -692,7 +692,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m23(double m23) {
-        this.m23 = m23;
+        setm23(m23);
         return this;
     }
     /**
@@ -703,7 +703,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m30(double m30) {
-        this.m30 = m30;
+        setm30(m30);
         return this;
     }
     /**
@@ -714,7 +714,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m31(double m31) {
-        this.m31 = m31;
+        setm31(m31);
         return this;
     }
     /**
@@ -725,7 +725,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m32(double m32) {
-        this.m32 = m32;
+        setm32(m32);
         return this;
     }
     /**
@@ -736,7 +736,7 @@ struct Matrix4d {
      * @return this
      */
     Matrix4d _m33(double m33) {
-        this.m33 = m33;
+        setm33(m33);
         return this;
     }
 
@@ -2142,22 +2142,22 @@ struct Matrix4d {
                         double m10, double m11, double m12, double m13,
                         double m20, double m21, double m22, double m23, 
                         double m30, double m31, double m32, double m33) {
-        this.m00 = m00;
-        this.m10 = m10;
-        this.m20 = m20;
-        this.m30 = m30;
-        this.m01 = m01;
-        this.m11 = m11;
-        this.m21 = m21;
-        this.m31 = m31;
-        this.m02 = m02;
-        this.m12 = m12;
-        this.m22 = m22;
-        this.m32 = m32;
-        this.m03 = m03;
-        this.m13 = m13;
-        this.m23 = m23;
-        this.m33 = m33;
+        setm00(m00);
+        setm10(m10);
+        setm20(m20);
+        setm30(m30);
+        setm01(m01);
+        setm11(m11);
+        setm21(m21);
+        setm31(m31);
+        setm02(m02);
+        setm12(m12);
+        setm22(m22);
+        setm32(m32);
+        setm03(m03);
+        setm13(m13);
+        setm23(m23);
+        setm33(m33);
         return determineProperties();
     }
 
@@ -3175,10 +3175,10 @@ struct Matrix4d {
     public Matrix4d rotationTowardsXY(double dirX, double dirY) {
         if ((properties & PROPERTY_IDENTITY) == 0)
             this._identity();
-        this.m00 = dirY;
-        this.m01 = dirX;
-        this.m10 = -dirX;
-        this.m11 = dirY;
+        setm00(dirY);
+        setm01(dirX);
+        setm10(-dirX);
+        setm11(dirY);
         properties = PROPERTY_AFFINE | PROPERTY_ORTHONORMAL;
         return this;
     }
@@ -6440,28 +6440,28 @@ struct Matrix4d {
         double nm22 = z2 - y2 - x2 + w2;
         double m00 = nm00 * m.m00 + nm10 * m.m01 + nm20 * m.m02;
         double m01 = nm01 * m.m00 + nm11 * m.m01 + nm21 * m.m02;
-        this.m02 = nm02 * m.m00 + nm12 * m.m01 + nm22 * m.m02;
-        this.m00 = m00;
-        this.m01 = m01;
-        this.m03 = 0.0;
+        setm02(nm02 * m.m00 + nm12 * m.m01 + nm22 * m.m02);
+        setm00(m00);
+        setm01(m01);
+        setm03(0.0);
         double m10 = nm00 * m.m10 + nm10 * m.m11 + nm20 * m.m12;
         double m11 = nm01 * m.m10 + nm11 * m.m11 + nm21 * m.m12;
-        this.m12 = nm02 * m.m10 + nm12 * m.m11 + nm22 * m.m12;
-        this.m10 = m10;
-        this.m11 = m11;
-        this.m13 = 0.0;
+        setm12(nm02 * m.m10 + nm12 * m.m11 + nm22 * m.m12);
+        setm10(m10);
+        setm11(m11);
+        setm13(0.0);
         double m20 = nm00 * m.m20 + nm10 * m.m21 + nm20 * m.m22;
         double m21 = nm01 * m.m20 + nm11 * m.m21 + nm21 * m.m22;
-        this.m22 = nm02 * m.m20 + nm12 * m.m21 + nm22 * m.m22;
-        this.m20 = m20;
-        this.m21 = m21;
-        this.m23 = 0.0;
+        setm22(nm02 * m.m20 + nm12 * m.m21 + nm22 * m.m22);
+        setm20(m20);
+        setm21(m21);
+        setm23(0.0);
         double m30 = nm00 * m.m30 + nm10 * m.m31 + nm20 * m.m32 + tx;
         double m31 = nm01 * m.m30 + nm11 * m.m31 + nm21 * m.m32 + ty;
-        this.m32 = nm02 * m.m30 + nm12 * m.m31 + nm22 * m.m32 + tz;
-        this.m30 = m30;
-        this.m31 = m31;
-        this.m33 = 1.0;
+        setm32(nm02 * m.m30 + nm12 * m.m31 + nm22 * m.m32 + tz);
+        setm30(m30);
+        setm31(m31);
+        setm33(1.0);
         bool one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
         properties = PROPERTY_AFFINE | (one && (m.properties & PROPERTY_ORTHONORMAL) != 0 ? PROPERTY_ORTHONORMAL : 0);
         return this;
@@ -6511,19 +6511,19 @@ struct Matrix4d {
         double yw = qy * qw;
         double yz = qy * qz;
         double xw = qx * qw;
-        this.m00 = w2 + x2 - z2 - y2;
-        this.m01 = xy + zw + zw + xy;
-        this.m02 = xz - yw + xz - yw;
-        this.m10 = -zw + xy - zw + xy;
-        this.m11 = y2 - z2 + w2 - x2;
-        this.m12 = yz + yz + xw + xw;
-        this.m20 = yw + xz + xz + yw;
-        this.m21 = yz + yz - xw - xw;
-        this.m22 = z2 - y2 - x2 + w2;
-        this.m30 = tx;
-        this.m31 = ty;
-        this.m32 = tz;
-        this.m33 = 1.0;
+        setm00(w2 + x2 - z2 - y2);
+        setm01(xy + zw + zw + xy);
+        setm02(xz - yw + xz - yw);
+        setm10(-zw + xy - zw + xy);
+        setm11(y2 - z2 + w2 - x2);
+        setm12(yz + yz + xw + xw);
+        setm20(yw + xz + xz + yw);
+        setm21(yz + yz - xw - xw);
+        setm22(z2 - y2 - x2 + w2);
+        setm30(tx);
+        setm31(ty);
+        setm32(tz);
+        setm33(1.0);
         this.properties = PROPERTY_AFFINE | PROPERTY_ORTHONORMAL;
         return this;
     }
@@ -12686,22 +12686,22 @@ struct Matrix4d {
         double l00 = 2.0 / imgWidth;
         double l11 = 2.0 / imgHeight;
         double l22 = 2.0 / (near - far);
-        this.m00 = l00 * alphaX;
-        this.m01 = 0.0;
-        this.m02 = 0.0;
-        this.m03 = 0.0;
-        this.m10 = l00 * gamma;
-        this.m11 = l11 * alphaY;
-        this.m12 = 0.0;
-        this.m13 = 0.0;
-        this.m20 = l00 * u0 - 1.0;
-        this.m21 = l11 * v0 - 1.0;
-        this.m22 = l22 * -(near + far) + (far + near) / (near - far);
-        this.m23 = -1.0;
-        this.m30 = 0.0;
-        this.m31 = 0.0;
-        this.m32 = l22 * -near * far;
-        this.m33 = 0.0;
+        setm00(l00 * alphaX);
+        setm01(0.0);
+        setm02(0.0);
+        setm03(0.0);
+        setm10(l00 * gamma);
+        setm11(l11 * alphaY);
+        setm12(0.0);
+        setm13(0.0);
+        setm20(l00 * u0 - 1.0);
+        setm21(l11 * v0 - 1.0);
+        setm22(l22 * -(near + far) + (far + near) / (near - far));
+        setm23(-1.0);
+        setm30(0.0);
+        setm31(0.0);
+        setm32(l22 * -near * far);
+        setm33(0.0);
         this.properties = PROPERTY_PERSPECTIVE;
         return this;
     }
@@ -14182,15 +14182,15 @@ struct Matrix4d {
         double upnZ = ndirX * leftY - ndirY * leftX;
         if ((properties & PROPERTY_IDENTITY) == 0)
             this._identity();
-        this.m00 = leftX;
-        this.m01 = leftY;
-        this.m02 = leftZ;
-        this.m10 = upnX;
-        this.m11 = upnY;
-        this.m12 = upnZ;
-        this.m20 = ndirX;
-        this.m21 = ndirY;
-        this.m22 = ndirZ;
+        setm00(leftX);
+        setm01(leftY);
+        setm02(leftZ);
+        setm10(upnX);
+        setm11(upnY);
+        setm12(upnZ);
+        setm20(ndirX);
+        setm21(ndirY);
+        setm22(ndirZ);
         properties = PROPERTY_AFFINE | PROPERTY_ORTHONORMAL;
         return this;
     }
@@ -14267,22 +14267,22 @@ struct Matrix4d {
         double upnX = ndirY * leftZ - ndirZ * leftY;
         double upnY = ndirZ * leftX - ndirX * leftZ;
         double upnZ = ndirX * leftY - ndirY * leftX;
-        this.m00 = leftX;
-        this.m01 = leftY;
-        this.m02 = leftZ;
-        this.m03 = 0.0;
-        this.m10 = upnX;
-        this.m11 = upnY;
-        this.m12 = upnZ;
-        this.m13 = 0.0;
-        this.m20 = ndirX;
-        this.m21 = ndirY;
-        this.m22 = ndirZ;
-        this.m23 = 0.0;
-        this.m30 = posX;
-        this.m31 = posY;
-        this.m32 = posZ;
-        this.m33 = 1.0;
+        setm00(leftX);
+        setm01(leftY);
+        setm02(leftZ);
+        setm03(0.0);
+        setm10(upnX);
+        setm11(upnY);
+        setm12(upnZ);
+        setm13(0.0);
+        setm20(ndirX);
+        setm21(ndirY);
+        setm22(ndirZ);
+        setm23(0.0);
+        setm30(posX);
+        setm31(posY);
+        setm32(posZ);
+        setm33(1.0);
         properties = PROPERTY_AFFINE | PROPERTY_ORTHONORMAL;
         return this;
     }
@@ -14428,9 +14428,9 @@ struct Matrix4d {
      * @return this
      */
     public Matrix4d obliqueZ(double a, double b) {
-        this.m20 = m00 * a + m10 * b + m20;
-        this.m21 = m01 * a + m11 * b + m21;
-        this.m22 = m02 * a + m12 * b + m22;
+        setm20(m00 * a + m10 * b + m20);
+        setm21(m01 * a + m11 * b + m21);
+        setm22(m02 * a + m12 * b + m22);
         this.properties &= PROPERTY_AFFINE;
         return this;
     }
