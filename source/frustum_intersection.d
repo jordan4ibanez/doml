@@ -156,7 +156,7 @@ struct FrustumIntersection {
     private float pzW = 0.0;
 
     private Vector4d[] planes = {
-        Vector4d[] temp = new Vector4d[6];
+        Vector4d[6] temp;
         for (int i = 0; i < 6; i++) {
             temp[i] = Vector4d();
         }
@@ -310,7 +310,7 @@ struct FrustumIntersection {
      * @return <code>true</code> if the given sphere is partly or completely inside the frustum;
      *         <code>false</code> otherwise
      */
-    public bool testSphere(Vector3d center, float radius) {
+    public bool testSphere(Vector3d center, double radius) {
         return testSphere(center.x, center.y, center.z, radius);
     }
 
@@ -332,7 +332,7 @@ struct FrustumIntersection {
      * @return <code>true</code> if the given sphere is partly or completely inside the frustum;
      *         <code>false</code> otherwise
      */
-    public bool testSphere(float x, float y, float z, float r) {
+    public bool testSphere(double x, double y, double z, double r) {
         return nxX * x + nxY * y + nxZ * z + nxW >= -r &&
                pxX * x + pxY * y + pxZ * z + pxW >= -r &&
                nyX * x + nyY * y + nyZ * z + nyW >= -r &&
