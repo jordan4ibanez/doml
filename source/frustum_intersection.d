@@ -1,5 +1,6 @@
 module frustum_intersection;
 
+import Math = math;
 
 import matrix_4d;
 
@@ -154,7 +155,7 @@ struct FrustumIntersection {
     private float pzZ = 0.0;
     private float pzW = 0.0;
 
-    private const Vector4d[] planes = {
+    private Vector4d[] planes = {
         Vector4d[] temp = new Vector4d[6];
         for (int i = 0; i < 6; i++) {
             temp[i] = Vector4d();
@@ -225,37 +226,37 @@ struct FrustumIntersection {
      */
     public FrustumIntersection set(Matrix4d m, bool allowTestSpheres) {
         float invl;
-        nxX = m.m03() + m.m00(); nxY = m.m13() + m.m10(); nxZ = m.m23() + m.m20(); nxW = m.m33() + m.m30();
+        nxX = m.m03 + m.m00; nxY = m.m13 + m.m10; nxZ = m.m23 + m.m20; nxW = m.m33 + m.m30;
         if (allowTestSpheres) {
             invl = Math.invsqrt(nxX * nxX + nxY * nxY + nxZ * nxZ);
             nxX *= invl; nxY *= invl; nxZ *= invl; nxW *= invl;
         }
         planes[0].set(nxX, nxY, nxZ, nxW);
-        pxX = m.m03() - m.m00(); pxY = m.m13() - m.m10(); pxZ = m.m23() - m.m20(); pxW = m.m33() - m.m30();
+        pxX = m.m03 - m.m00; pxY = m.m13 - m.m10; pxZ = m.m23 - m.m20; pxW = m.m33 - m.m30;
         if (allowTestSpheres) {
             invl = Math.invsqrt(pxX * pxX + pxY * pxY + pxZ * pxZ);
             pxX *= invl; pxY *= invl; pxZ *= invl; pxW *= invl;
         }
         planes[1].set(pxX, pxY, pxZ, pxW);
-        nyX = m.m03() + m.m01(); nyY = m.m13() + m.m11(); nyZ = m.m23() + m.m21(); nyW = m.m33() + m.m31();
+        nyX = m.m03 + m.m01; nyY = m.m13 + m.m11; nyZ = m.m23 + m.m21; nyW = m.m33 + m.m31;
         if (allowTestSpheres) {
             invl = Math.invsqrt(nyX * nyX + nyY * nyY + nyZ * nyZ);
             nyX *= invl; nyY *= invl; nyZ *= invl; nyW *= invl;
         }
         planes[2].set(nyX, nyY, nyZ, nyW);
-        pyX = m.m03() - m.m01(); pyY = m.m13() - m.m11(); pyZ = m.m23() - m.m21(); pyW = m.m33() - m.m31();
+        pyX = m.m03 - m.m01; pyY = m.m13 - m.m11; pyZ = m.m23 - m.m21; pyW = m.m33 - m.m31;
         if (allowTestSpheres) {
             invl = Math.invsqrt(pyX * pyX + pyY * pyY + pyZ * pyZ);
             pyX *= invl; pyY *= invl; pyZ *= invl; pyW *= invl;
         }
         planes[3].set(pyX, pyY, pyZ, pyW);
-        nzX = m.m03() + m.m02(); nzY = m.m13() + m.m12(); nzZ = m.m23() + m.m22(); nzW = m.m33() + m.m32();
+        nzX = m.m03 + m.m02; nzY = m.m13 + m.m12; nzZ = m.m23 + m.m22; nzW = m.m33 + m.m32;
         if (allowTestSpheres) {
             invl = Math.invsqrt(nzX * nzX + nzY * nzY + nzZ * nzZ);
             nzX *= invl; nzY *= invl; nzZ *= invl; nzW *= invl;
         }
         planes[4].set(nzX, nzY, nzZ, nzW);
-        pzX = m.m03() - m.m02(); pzY = m.m13() - m.m12(); pzZ = m.m23() - m.m22(); pzW = m.m33() - m.m32();
+        pzX = m.m03 - m.m02; pzY = m.m13 - m.m12; pzZ = m.m23 - m.m22; pzW = m.m33 - m.m32;
         if (allowTestSpheres) {
             invl = Math.invsqrt(pzX * pzX + pzY * pzY + pzZ * pzZ);
             pzX *= invl; pzY *= invl; pzZ *= invl; pzW *= invl;
@@ -272,7 +273,7 @@ struct FrustumIntersection {
      * @return <code>true</code> if the given point is inside the frustum; <code>false</code> otherwise
      */
     public bool testPoint(Vector3d point) {
-        return testPoint(point.x(), point.y(), point.z());
+        return testPoint(point.x, point.y, point.z);
     }
 
     /**
@@ -310,7 +311,7 @@ struct FrustumIntersection {
      *         <code>false</code> otherwise
      */
     public bool testSphere(Vector3d center, float radius) {
-        return testSphere(center.x(), center.y(), center.z(), radius);
+        return testSphere(center.x, center.y, center.z, radius);
     }
 
     /**
@@ -355,7 +356,7 @@ struct FrustumIntersection {
      *         the frustum, or {@link #OUTSIDE} if the sphere is outside of the frustum
      */
     public int intersectSphere(Vector3d center, float radius) {
-        return intersectSphere(center.x(), center.y(), center.z(), radius);
+        return intersectSphere(center.x, center.y, center.z, radius);
     }
 
     /**
@@ -422,7 +423,7 @@ struct FrustumIntersection {
      * @return <code>true</code> if the axis-aligned box is completely or partly inside of the frustum; <code>false</code> otherwise
      */
     public bool testAab(Vector3d min, Vector3d max) {
-        return testAab(min.x(), min.y(), min.z(), max.x(), max.y(), max.z());
+        return testAab(min.x, min.y, min.z, max.x, max.y, max.z);
     }
 
     /**
@@ -477,7 +478,7 @@ struct FrustumIntersection {
      * @return <code>true</code> if the XY-plane is completely or partly inside of the frustum; <code>false</code> otherwise
      */
     public bool testPlaneXY(Vector2d min, Vector2d max) {
-        return testPlaneXY(min.x(), min.y(), max.x(), max.y());
+        return testPlaneXY(min.x, min.y, max.x, max.y);
     }
 
     /**
@@ -564,7 +565,7 @@ struct FrustumIntersection {
      *         The plane index is one of {@link #PLANE_NX}, {@link #PLANE_PX}, {@link #PLANE_NY}, {@link #PLANE_PY}, {@link #PLANE_NZ} and {@link #PLANE_PZ}
      */
     public int intersectAab(Vector3d min, Vector3d max) {
-        return intersectAab(min.x(), min.y(), min.z(), max.x(), max.y(), max.z());
+        return intersectAab(min.x, min.y, min.z, max.x, max.y, max.z);
     }
 
     /**
@@ -685,7 +686,7 @@ struct FrustumIntersection {
      *         The plane index is one of {@link #PLANE_NX}, {@link #PLANE_PX}, {@link #PLANE_NY}, {@link #PLANE_PY}, {@link #PLANE_NZ} and {@link #PLANE_PZ}
      */
     public int intersectAab(Vector3d min, Vector3d max, int mask) {
-        return intersectAab(min.x(), min.y(), min.z(), max.x(), max.y(), max.z(), mask);
+        return intersectAab(min.x, min.y, min.z, max.x, max.y, max.z, mask);
     }
 
     /**
@@ -798,7 +799,7 @@ struct FrustumIntersection {
      *         The plane index is one of {@link #PLANE_NX}, {@link #PLANE_PX}, {@link #PLANE_NY}, {@link #PLANE_PY}, {@link #PLANE_NZ} and {@link #PLANE_PZ}
      */
     public int intersectAab(Vector3d min, Vector3d max, int mask, int startPlane) {
-        return intersectAab(min.x(), min.y(), min.z(), max.x(), max.y(), max.z(), mask, startPlane);
+        return intersectAab(min.x, min.y, min.z, max.x, max.y, max.z, mask, startPlane);
     }
 
     /**
@@ -855,7 +856,7 @@ struct FrustumIntersection {
          */
         int plane = startPlane;
         bool inside = true;
-        Vector4f p = planes[startPlane];
+        Vector4d p = planes[startPlane];
         if ((mask & 1<<startPlane) != 0 && p.x * (p.x < 0 ? minX : maxX) + p.y * (p.y < 0 ? minY : maxY) + p.z * (p.z < 0 ? minZ : maxZ) < -p.w) {
             return plane;
         }
@@ -898,7 +899,7 @@ struct FrustumIntersection {
      *         <code>false</code> otherwise
      */
     public bool testLineSegment(Vector3d a, Vector3d b) {
-        return testLineSegment(a.x(), a.y(), a.z(), b.x(), b.y(), b.z());
+        return testLineSegment(a.x, a.y, a.z, b.x, b.y, b.z);
     }
 
     /**
