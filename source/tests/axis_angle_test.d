@@ -40,7 +40,7 @@ void testAxisAngle() {
     writeln("\nBEGIN AXIS ANGLE\n");
 
     
-    writeln("TESTING ANGLE IDETINTY QUATERNION");
+    writeln("TESTING ANGLE IDENTITY QUATERNION");
 
     AxisAngle4d a = AxisAngle4d().set(Quaterniond());
     assertEquals(AxisAngle4d(0, 0, 0, 1), a);
