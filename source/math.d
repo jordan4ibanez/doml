@@ -139,7 +139,7 @@ double longbits(long a) {
 int floatToRawIntBits(float a) {
     return *cast(int*) &a;
 }
-long doubleToRawLongBits(double a) {
+long doubleToLongBits(double a) {
     return *cast(long*) &a;
 }
 
