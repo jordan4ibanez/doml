@@ -18,6 +18,7 @@ import tests.vector_2i_test;
 import tests.vector_3d_test;
 import tests.vector_3i_test;
 import tests.vector_4d_test;
+import tests.vector_4i_test;
 
 
 
@@ -33,5 +34,6 @@ void main()
     testVector3d();
     testVector3i();
     testVector4d();
+    testVector4i();
 
 }
