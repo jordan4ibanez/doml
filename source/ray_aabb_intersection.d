@@ -1,5 +1,7 @@
 module ray_aabb_intersection;
 
+import Math = math;
+
 import std.math.traits: isNaN;
 
 /*
@@ -98,11 +100,6 @@ struct RayAabIntersection {
         this.dirZ = dirZ;
         precomputeSlope();
     }
-
-    private static int signum(float f) {
-        return (f == 0.0f || isNaN(f)) ? 0 : ((1 - floatToIntBits(f) >>> 31) << 1) - 1;
-    }
-
     /**
      * Precompute the values necessary for the ray slope algorithm.
      */
@@ -122,9 +119,9 @@ struct RayAabIntersection {
         c_yz = originZ - s_yz * originY;
         c_xz = originZ - s_xz * originX; // <- original paper had a bug here. It switched originZ/originX
         c_zx = originX - s_zx * originZ; // <- original paper had a bug here. It switched originZ/originX
-        int sgnX = signum(dirX);
-        int sgnY = signum(dirY);
-        int sgnZ = signum(dirZ);
+        int sgnX = cast(int)Math.math_signum(dirX);
+        int sgnY = cast(int)Math.math_signum(dirY);
+        int sgnZ = cast(int)Math.math_signum(dirZ);
         classification = cast(byte) ((sgnZ+1) << 4 | (sgnY+1) << 2 | (sgnX+1));
     }
 
