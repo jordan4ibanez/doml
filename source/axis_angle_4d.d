@@ -1,7 +1,13 @@
 module axis_angle_4d;
 
-import vector_3d;
+import matrix_3d;
+import matrix_4d;
 
+
+import vector_3d;
+import vector_4d;
+
+import quaternion_d;
 
 /*
  * The MIT License
@@ -455,7 +461,7 @@ struct AxisAngle4d {
         return result;
     }
 
-    public boolean equals(AxisAngle4d obj) {
+    public bool equals(AxisAngle4d obj) {
         if (this == obj)
             return true;
         if (Double.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI)) != 

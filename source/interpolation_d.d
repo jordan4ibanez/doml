@@ -1,5 +1,8 @@
 module interpolation_d;
 
+import vector_2d;
+import vector_3d;
+
 /*
  * The MIT License
  *

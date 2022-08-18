@@ -1,10 +1,18 @@
 module vector_3d;
 
 
+import vector_2i;
+import vector_2d;
 import vector_3i;
+import vector_3d;
+
 import matrix_4d;
 import matrix_3d;
 import matrix_3x2d;
+import matrix_4x3d;
+
+import axis_angle_4d;
+import quaternion_d;
 /*
  * The MIT License
  *
@@ -1480,7 +1488,7 @@ struct Vector3d {
     }
 
 
-    public boolean equals(Vector3d v, double delta) {
+    public bool equals(Vector3d v, double delta) {
         if (this == v)
             return true;
         if (!Runtime.equals(x, v.x(), delta))
@@ -1492,7 +1500,7 @@ struct Vector3d {
         return true;
     }
 
-    public boolean equals(double x, double y, double z) {
+    public bool equals(double x, double y, double z) {
         if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(x))
             return false;
         if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(y))
@@ -1802,7 +1810,7 @@ struct Vector3d {
         return dest;
     }
 
-    public boolean isFinite() {
+    public bool isFinite() {
         return Math.isFinite(x) && Math.isFinite(y) && Math.isFinite(z);
     }
 }

@@ -2,6 +2,7 @@ module vector_3i;
 
 import vector_2i;
 import vector_2d;
+import vector_3d;
 
 /*
  * The MIT License

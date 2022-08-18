@@ -1,6 +1,10 @@
 module matrix_2d;
 
+
+import matrix_3d;
 import matrix_3x2d;
+
+import vector_2d;
 
 
 /*
@@ -51,7 +55,7 @@ public struct Matrix2d {
      * Create a new {@link Matrix2d} and make it a copy of the given matrix.
      *
      * @param mat
-     *          the {@link Matrix2dc} to copy the values from
+     *          the {@link Matrix2d} to copy the values from
      */
     this(Matrix2d mat) {
         setMatrix2d(mat);
@@ -59,10 +63,10 @@ public struct Matrix2d {
 
 
     /**
-     * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3dc}.
+     * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3d}.
      *
      * @param mat
-     *          the {@link Matrix3dc} to copy the values from
+     *          the {@link Matrix3d} to copy the values from
      */
     this(Matrix3d mat) {
         setMatrix3d(mat);
@@ -233,10 +237,10 @@ public struct Matrix2d {
     }
 
     /**
-     * Set the elements of this matrix to the upper left 2x2 of the given {@link Matrix3dc}.
+     * Set the elements of this matrix to the upper left 2x2 of the given {@link Matrix3d}.
      *
      * @param m
-     *          the {@link Matrix3dc} to copy the values from
+     *          the {@link Matrix3d} to copy the values from
      * @return this
      */
     public Matrix2d set(Matrix3d m) {
@@ -412,10 +416,10 @@ public struct Matrix2d {
      * Get the current values of <code>this</code> matrix and store them into
      * <code>dest</code>.
      * <p>
-     * This is the reverse method of {@link #set(Matrix2dc)} and allows to obtain
+     * This is the reverse method of {@link #set(Matrix2d)} and allows to obtain
      * intermediate calculation results when chaining multiple transformations.
      *
-     * @see #set(Matrix2dc)
+     * @see #set(Matrix2d)
      *
      * @param dest
      *          the destination matrix
@@ -615,9 +619,9 @@ public struct Matrix2d {
      * matrix to obtain an additional scaling.
      * <p>
      * In order to post-multiply a scaling transformation directly to a
-     * matrix use {@link #scale(Vector2dc) scale()} instead.
+     * matrix use {@link #scale(Vector2d) scale()} instead.
      *
-     * @see #scale(Vector2dc)
+     * @see #scale(Vector2d)
      *
      * @param xy
      *             the scale in x and y respectively
@@ -786,7 +790,7 @@ public struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setRow(int row, Vector2dc src) {
+    public Matrix2d setRow(int row, Vector2d src) {
         return setRow(row, src.x(), src.y());
     }
 
@@ -945,9 +949,9 @@ public struct Matrix2d {
      * <p>
      * Please note that, if <code>this</code> is an orthogonal matrix or a matrix whose columns are orthogonal vectors,
      * then this method <i>need not</i> be invoked, since in that case <code>this</code> itself is its normal matrix.
-     * In this case, use {@link #set(Matrix2dc)} to set a given Matrix2d to this matrix.
+     * In this case, use {@link #set(Matrix2d)} to set a given Matrix2d to this matrix.
      *
-     * @see #set(Matrix2dc)
+     * @see #set(Matrix2d)
      *
      * @return this
      */
@@ -960,9 +964,9 @@ public struct Matrix2d {
      * <p>
      * Please note that, if <code>this</code> is an orthogonal matrix or a matrix whose columns are orthogonal vectors,
      * then this method <i>need not</i> be invoked, since in that case <code>this</code> itself is its normal matrix.
-     * In this case, use {@link #set(Matrix2dc)} to set a given Matrix2d to this matrix.
+     * In this case, use {@link #set(Matrix2d)} to set a given Matrix2d to this matrix.
      *
-     * @see #set(Matrix2dc)
+     * @see #set(Matrix2d)
      *
      * @param dest
      *             will hold the result
@@ -1048,7 +1052,7 @@ public struct Matrix2d {
         return result;
     }
 
-    public boolean equals(Matrix2d m, double delta) {
+    public bool equals(Matrix2d m, double delta) {
         if (this == m)
             return true;
         if (!Runtime.equals(m00, m.m00(), delta))
@@ -1156,7 +1160,7 @@ public struct Matrix2d {
         return dest;
     }
 
-    public boolean isFinite() {
+    public bool isFinite() {
         return Math.isFinite(m00) && Math.isFinite(m01) &&
                Math.isFinite(m10) && Math.isFinite(m11);
     }

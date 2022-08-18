@@ -1,5 +1,9 @@
 module intersection_d;
 
+import vector_2d;
+import vector_3d;
+import vector_4d;
+
 /*
 * The MIT License
 *

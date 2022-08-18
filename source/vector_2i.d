@@ -652,7 +652,7 @@ struct Vector2i {
     }
 
 
-    public boolean equals(int x, int y) {
+    public bool equals(int x, int y) {
         if (this.x != x)
             return false;
         if (this.y != y)

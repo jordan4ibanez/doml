@@ -1,5 +1,12 @@
 module frustum_intersection;
 
+
+import matrix_4d;
+
+import vector_2d;
+import vector_3d;
+import vector_4d;
+
 /*
  * The MIT License
  *

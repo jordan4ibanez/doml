@@ -1,5 +1,8 @@
 module geometry_utils;
 
+import vector_2d;
+import vector_3d;
+
 /*
  * The MIT License
  *
@@ -50,7 +53,7 @@ module geometry_utils;
     * @param dest2
     *            will hold the second perpendicular vector
     */
-public static void perpendicular(float x, float y, float z, Vector3f dest1, Vector3f dest2) {
+public static void perpendicular(float x, float y, float z, Vector3d dest1, Vector3d dest2) {
     float magX = z * z + y * y;
     float magY = z * z + x * x;
     float magZ = y * y + x * x;
@@ -88,13 +91,13 @@ public static void perpendicular(float x, float y, float z, Vector3f dest1, Vect
     * <code>dest2</code> form an orthonormal basis.
     * 
     * @param v
-    *            the {@link Vector3f#normalize() normalized} input vector
+    *            the {@link Vector3d#normalize() normalized} input vector
     * @param dest1
     *            will hold the first perpendicular vector
     * @param dest2
     *            will hold the second perpendicular vector
     */
-public static void perpendicular(Vector3fc v, Vector3f dest1, Vector3f dest2) {
+public static void perpendicular(Vector3d v, Vector3d dest1, Vector3d dest2) {
     perpendicular(v.x(), v.y(), v.z(), dest1, dest2);
 }
 
@@ -110,7 +113,7 @@ public static void perpendicular(Vector3fc v, Vector3f dest1, Vector3f dest2) {
     * @param dest
     *            will hold the result
     */
-public static void normal(Vector3fc v0, Vector3fc v1, Vector3fc v2, Vector3f dest) {
+public static void normal(Vector3d v0, Vector3d v1, Vector3d v2, Vector3d dest) {
     normal(v0.x(), v0.y(), v0.z(), v1.x(), v1.y(), v1.z(), v2.x(), v2.y(), v2.z(), dest);
 }
 
@@ -139,7 +142,7 @@ public static void normal(Vector3fc v0, Vector3fc v1, Vector3fc v2, Vector3f des
     * @param dest
     *            will hold the result
     */
-public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y, float v1Z, float v2X, float v2Y, float v2Z, Vector3f dest) {
+public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y, float v1Z, float v2X, float v2Y, float v2Z, Vector3d dest) {
     dest.x = ((v1Y - v0Y) * (v2Z - v0Z)) - ((v1Z - v0Z) * (v2Y - v0Y));
     dest.y = ((v1Z - v0Z) * (v2X - v0X)) - ((v1X - v0X) * (v2Z - v0Z));
     dest.z = ((v1X - v0X) * (v2Y - v0Y)) - ((v1Y - v0Y) * (v2X - v0X));
@@ -164,7 +167,7 @@ public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y,
     * @param dest
     *            the tangent will be stored here
     */
-public static void tangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc uv2, Vector3fc v3, Vector2fc uv3, Vector3f dest) {
+public static void tangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2, Vector3d v3, Vector2d uv3, Vector3d dest) {
     float DeltaV1 = uv2.y() - uv1.y();
     float DeltaV2 = uv3.y() - uv1.y();
 
@@ -194,7 +197,7 @@ public static void tangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc 
     * @param dest
     *            the binormal will be stored here
     */
-public static void bitangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc uv2, Vector3fc v3, Vector2fc uv3, Vector3f dest) {
+public static void bitangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2, Vector3d v3, Vector2d uv3, Vector3d dest) {
     float DeltaU1 = uv2.x() - uv1.x();
     float DeltaU2 = uv3.x() - uv1.x();
 
@@ -226,7 +229,7 @@ public static void bitangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2f
     * @param destBitangent
     *            the bitangent will be stored here
     */
-public static void tangentBitangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc uv2, Vector3fc v3, Vector2fc uv3, Vector3f destTangent, Vector3f destBitangent) {
+public static void tangentBitangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2, Vector3d v3, Vector2d uv3, Vector3d destTangent, Vector3d destBitangent) {
     float DeltaV1 = uv2.y() - uv1.y();
     float DeltaV2 = uv3.y() - uv1.y();
     float DeltaU1 = uv2.x() - uv1.x();

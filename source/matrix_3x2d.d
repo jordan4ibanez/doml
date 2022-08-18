@@ -1,8 +1,10 @@
 module matrix_3x2d;
 
 import matrix_2d;
-import vector_2d;
 import matrix_3d;
+
+import vector_2d;
+import vector_3d;
 
 /*
  * The MIT License
@@ -1875,7 +1877,7 @@ public struct Matrix3x2d {
         return this;
     }
 
-    public boolean testPoint(double x, double y) {
+    public bool testPoint(double x, double y) {
         double nxX = +m00, nxY = +m10, nxW = 1.0f + m20;
         double pxX = -m00, pxY = -m10, pxW = 1.0f - m20;
         double nyX = +m01, nyY = +m11, nyW = 1.0f + m21;
@@ -1884,7 +1886,7 @@ public struct Matrix3x2d {
                nyX * x + nyY * y + nyW >= 0 && pyX * x + pyY * y + pyW >= 0;
     }
 
-    public boolean testCircle(double x, double y, double r) {
+    public bool testCircle(double x, double y, double r) {
         double invl;
         double nxX = +m00, nxY = +m10, nxW = 1.0f + m20;
         invl = Math.invsqrt(nxX * nxX + nxY * nxY);
@@ -1902,7 +1904,7 @@ public struct Matrix3x2d {
                nyX * x + nyY * y + nyW >= -r && pyX * x + pyY * y + pyW >= -r;
     }
 
-    public boolean testAar(double minX, double minY, double maxX, double maxY) {
+    public bool testAar(double minX, double minY, double maxX, double maxY) {
         double nxX = +m00, nxY = +m10, nxW = 1.0f + m20;
         double pxX = -m00, pxY = -m10, pxW = 1.0f - m20;
         double nyX = +m01, nyY = +m11, nyW = 1.0f + m21;
@@ -1936,7 +1938,7 @@ public struct Matrix3x2d {
         return result;
     }
 
-    public boolean equals(Matrix3x2d m, double delta) {
+    public bool equals(Matrix3x2d m, double delta) {
         if (this == m)
             return true;
         if (!Runtime.equals(m00, m.m00(), delta))
@@ -1954,7 +1956,7 @@ public struct Matrix3x2d {
         return true;
     }
 
-    public boolean isFinite() {
+    public bool isFinite() {
         return Math.isFinite(m00) && Math.isFinite(m01) &&
                Math.isFinite(m10) && Math.isFinite(m11) &&
                Math.isFinite(m20) && Math.isFinite(m21);

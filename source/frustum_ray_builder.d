@@ -1,5 +1,9 @@
 module frustum_ray_builder;
 
+import matrix_4d;
+
+import vector_3d;
+
 /*
  * The MIT License
  *
