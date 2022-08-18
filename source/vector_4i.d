@@ -1,5 +1,7 @@
 module vector_4i;
 
+import Math = math;
+
 import vector_3i;
 import vector_2i;
 import vector_4d;
@@ -64,10 +66,10 @@ struct Vector4i {
      *          the {@link Vector4i} to copy the values from
      */
     this(Vector4i v) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
-        this.w = v.w();
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+        this.w = v.w;
     }
 
     /**
@@ -80,9 +82,9 @@ struct Vector4i {
      *          the w component
      */
     this(Vector3i v, int w) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
         this.w = w;
     }
 
@@ -98,8 +100,8 @@ struct Vector4i {
      *          the w component
      */
     this(Vector2i v, int z, int w) {
-        this.x = v.x();
-        this.y = v.y();
+        this.x = v.x;
+        this.y = v.y;
         this.z = z;
         this.w = w;
     }
@@ -114,10 +116,10 @@ struct Vector4i {
      *          the {@link RoundingMode} to use
      */
     this(Vector4d v, int mode) {
-        x = Math.roundUsing(v.x(), mode);
-        y = Math.roundUsing(v.y(), mode);
-        z = Math.roundUsing(v.z(), mode);
-        w = Math.roundUsing(v.w(), mode);
+        x = Math.roundUsing(v.x, mode);
+        y = Math.roundUsing(v.y, mode);
+        z = Math.roundUsing(v.z, mode);
+        w = Math.roundUsing(v.w, mode);
     }
 
     /**
@@ -175,10 +177,10 @@ struct Vector4i {
      * @return this
      */
     public Vector4i set(Vector4i v) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
-        this.w = v.w();
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+        this.w = v.w;
         return this;
     }
 
@@ -193,10 +195,10 @@ struct Vector4i {
      * @return this
      */
     public Vector4i set(Vector4d v) {
-        this.x = cast(int) v.x();
-        this.y = cast(int) v.y();
-        this.z = cast(int) v.z();
-        this.w = cast(int) v.w();
+        this.x = cast(int) v.x;
+        this.y = cast(int) v.y;
+        this.z = cast(int) v.z;
+        this.w = cast(int) v.w;
         return this;
     }
 
@@ -213,10 +215,10 @@ struct Vector4i {
      * @return this
      */
     public Vector4i set(Vector4d v, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
-        this.z = Math.roundUsing(v.z(), mode);
-        this.w = Math.roundUsing(v.w(), mode);
+        this.x = Math.roundUsing(v.x, mode);
+        this.y = Math.roundUsing(v.y, mode);
+        this.z = Math.roundUsing(v.z, mode);
+        this.w = Math.roundUsing(v.w, mode);
         return this;
     }
 
@@ -231,9 +233,9 @@ struct Vector4i {
      * @return this
      */
     public Vector4i set(Vector3i v, int w) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
         this.w = w;
         return this;
     }
@@ -252,8 +254,8 @@ struct Vector4i {
      * @return this
      */
     public Vector4i set(Vector2i v, int z, int w) {
-        this.x = v.x();
-        this.y = v.y();
+        this.x = v.x;
+        this.y = v.y;
         this.z = z;
         this.w = w;
         return this;
@@ -320,7 +322,8 @@ struct Vector4i {
             return z;
         case 3:
             return w;
-        default: {}
+        default:
+            return 0; // do nothing
         }
     }
 
@@ -391,10 +394,10 @@ struct Vector4i {
      * @return this
      */
     public Vector4i sub(Vector4i v) {
-        this.x = this.x - v.x();
-        this.y = this.y - v.y();
-        this.z = this.z - v.z();
-        this.w = this.w - v.w();
+        this.x = this.x - v.x;
+        this.y = this.y - v.y;
+        this.z = this.z - v.z;
+        this.w = this.w - v.w;
         return this;
     }
 
@@ -420,10 +423,10 @@ struct Vector4i {
     }
 
     public Vector4i sub(Vector4i v, Vector4i dest) {
-        dest.x = this.x - v.x();
-        dest.y = this.y - v.y();
-        dest.z = this.z - v.z();
-        dest.w = this.w - v.w();
+        dest.x = this.x - v.x;
+        dest.y = this.y - v.y;
+        dest.z = this.z - v.z;
+        dest.w = this.w - v.w;
         return dest;
     }
 
@@ -443,18 +446,18 @@ struct Vector4i {
      * @return this
      */
     public Vector4i add(Vector4i v) {
-        this.x = this.x + v.x();
-        this.y = this.y + v.y();
-        this.z = this.z + v.z();
-        this.w = this.w + v.w();
+        this.x = this.x + v.x;
+        this.y = this.y + v.y;
+        this.z = this.z + v.z;
+        this.w = this.w + v.w;
         return this;
     }
 
     public Vector4i add(Vector4i v, Vector4i dest) {
-        dest.x = this.x + v.x();
-        dest.y = this.y + v.y();
-        dest.z = this.z + v.z();
-        dest.w = this.w + v.w();
+        dest.x = this.x + v.x;
+        dest.y = this.y + v.y;
+        dest.z = this.z + v.z;
+        dest.w = this.w + v.w;
         return dest;
     }
 
@@ -495,18 +498,18 @@ struct Vector4i {
      * @return this
      */
     public Vector4i mul(Vector4i v) {
-        this.x = x * v.x();
-        this.y = y * v.y();
-        this.z = z * v.z();
-        this.w = w * v.w();
+        this.x = x * v.x;
+        this.y = y * v.y;
+        this.z = z * v.z;
+        this.w = w * v.w;
         return this;
     }
 
     public Vector4i mul(Vector4i v, Vector4i dest) {
-        dest.x = x * v.x();
-        dest.y = y * v.y();
-        dest.z = z * v.z();
-        dest.w = w * v.w();
+        dest.x = x * v.x;
+        dest.y = y * v.y;
+        dest.z = z * v.z;
+        dest.w = w * v.w;
         return dest;
     }
 
@@ -518,18 +521,18 @@ struct Vector4i {
      * @return this
      */
     public Vector4i div(Vector4i v) {
-        this.x = x / v.x();
-        this.y = y / v.y();
-        this.z = z / v.z();
-        this.w = w / v.w();
+        this.x = x / v.x;
+        this.y = y / v.y;
+        this.z = z / v.z;
+        this.w = w / v.w;
         return this;
     }
 
     public Vector4i div(Vector4i v, Vector4i dest) {
-        dest.x = x / v.x();
-        dest.y = y / v.y();
-        dest.z = z / v.z();
-        dest.w = w / v.w();
+        dest.x = x / v.x;
+        dest.y = y / v.y;
+        dest.z = z / v.z;
+        dest.w = w / v.w;
         return dest;
     }
 
@@ -642,10 +645,10 @@ struct Vector4i {
     }
 
     public double distance(Vector4i v) {
-        int dx = this.x - v.x();
-        int dy = this.y - v.y();
-        int dz = this.z - v.z();
-        int dw = this.w - v.w();
+        int dx = this.x - v.x;
+        int dy = this.y - v.y;
+        int dz = this.z - v.z;
+        int dw = this.w - v.w;
         return Math.sqrt(Math.fma(dx, dx, Math.fma(dy, dy, Math.fma(dz, dz, dw * dw))));
     }
 
@@ -658,18 +661,18 @@ struct Vector4i {
     }
 
     public long gridDistance(Vector4i v) {
-        return Math.abs(v.x() - x()) + Math.abs(v.y() - y())  + Math.abs(v.z() - z())  + Math.abs(v.w() - w());
+        return Math.abs(v.x - this.x) + Math.abs(v.y - this.y)  + Math.abs(v.z - this.z)  + Math.abs(v.w - this.w);
     }
 
     public long gridDistance(int x, int y, int z, int w) {
-        return Math.abs(x - x()) + Math.abs(y - y()) + Math.abs(z - z()) + Math.abs(w - w());
+        return Math.abs(x - this.x) + Math.abs(y - this.y) + Math.abs(z - this.z) + Math.abs(w - this.w);
     }
 
     public int distanceSquared(Vector4i v) {
-        int dx = this.x - v.x();
-        int dy = this.y - v.y();
-        int dz = this.z - v.z();
-        int dw = this.w - v.w();
+        int dx = this.x - v.x;
+        int dy = this.y - v.y;
+        int dz = this.z - v.z;
+        int dw = this.w - v.w;
         return dx * dx + dy * dy + dz * dz + dw * dw;
     }
 
@@ -740,7 +743,7 @@ struct Vector4i {
     }
 
     public int dot(Vector4i v) {
-        return x * v.x() + y * v.y() + z * v.z() + w * v.w();
+        return x * v.x + y * v.y + z * v.z + w * v.w;
     }
 
     /**
@@ -785,18 +788,18 @@ struct Vector4i {
      * @return this
      */
     public Vector4i min(Vector4i v) {
-        this.x = x < v.x() ? x : v.x();
-        this.y = y < v.y() ? y : v.y();
-        this.z = z < v.z() ? z : v.z();
-        this.w = w < v.w() ? w : v.w();
+        this.x = x < v.x ? x : v.x;
+        this.y = y < v.y ? y : v.y;
+        this.z = z < v.z ? z : v.z;
+        this.w = w < v.w ? w : v.w;
         return this;
     }
 
     public Vector4i min(Vector4i v, Vector4i dest) {
-        dest.x = x < v.x() ? x : v.x();
-        dest.y = y < v.y() ? y : v.y();
-        dest.z = z < v.z() ? z : v.z();
-        dest.w = w < v.w() ? w : v.w();
+        dest.x = x < v.x ? x : v.x;
+        dest.y = y < v.y ? y : v.y;
+        dest.z = z < v.z ? z : v.z;
+        dest.w = w < v.w ? w : v.w;
         return dest;
     }
 
@@ -808,18 +811,18 @@ struct Vector4i {
      * @return this
      */
     public Vector4i max(Vector4i v) {
-        this.x = x > v.x() ? x : v.x();
-        this.y = y > v.y() ? y : v.y();
-        this.z = z > v.z() ? z : v.z();
-        this.w = w > v.w() ? w : v.w();
+        this.x = x > v.x ? x : v.x;
+        this.y = y > v.y ? y : v.y;
+        this.z = z > v.z ? z : v.z;
+        this.w = w > v.w ? w : v.w;
         return this;
     }
 
     public Vector4i max(Vector4i v, Vector4i dest) {
-        dest.x = x > v.x() ? x : v.x();
-        dest.y = y > v.y() ? y : v.y();
-        dest.z = z > v.z() ? z : v.z();
-        dest.w = w > v.w() ? w : v.w();
+        dest.x = x > v.x ? x : v.x;
+        dest.y = y > v.y ? y : v.y;
+        dest.z = z > v.z ? z : v.z;
+        dest.w = w > v.w ? w : v.w;
         return dest;
     }
 
@@ -845,7 +848,7 @@ struct Vector4i {
     }
 
     public int hashCode() {
-        final int prime = 31;
+        immutable int prime = 31;
         int result = 1;
         result = prime * result + x;
         result = prime * result + y;
