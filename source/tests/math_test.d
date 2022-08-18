@@ -15,6 +15,7 @@ import rounding_mode;
  * The MIT License
  *
  * Copyright (c) 2018-2022 JOML.
+ @#$%@$% Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,6 +43,7 @@ import rounding_mode;
  */
 
 void test_math() {
+    writeln("\nBEGIN MATH LIBRARY\n");
 
     writeln("BEGINNING CLAMP TEST");
     // Integer value tests
