@@ -1,5 +1,6 @@
 module matrix_2d;
 
+import Math = math;
 
 import matrix_3d;
 import matrix_3x2d;
@@ -335,24 +336,6 @@ public struct Matrix2d {
         this.m11 = m11;
         return this;
     }
-
-    /**
-     * Set the values in this matrix based on the supplied double array. The result looks like this:
-     * <p>
-     * 0, 2<br>
-     * 1, 3<br>
-     *
-     * This method only uses the first 4 values, all others are ignored.
-     *
-     * @param m
-     *          the array to read the matrix values from
-     * @return this
-     */
-    public Matrix2d set(double[] m) {
-        MemUtil.INSTANCE.copy(m, 0, this);
-        return this;
-    }
-
     /**
      * Set the two columns of this matrix to the supplied vectors, respectively.
      *
@@ -363,10 +346,10 @@ public struct Matrix2d {
      * @return this
      */
     public Matrix2d set(Vector2d col0, Vector2d col1) {
-        m00 = col0.x();
-        m01 = col0.y();
-        m10 = col1.x();
-        m11 = col1.y();
+        m00 = col0.x;
+        m01 = col0.y;
+        m10 = col1.x;
+        m11 = col1.y;
         return this;
     }
 
@@ -440,17 +423,7 @@ public struct Matrix2d {
     public double getRotation() {
         return cast(double) Math.atan2(m01, m11);
     }
-
-
-    public double[] get(double[] arr, int offset) {
-        MemUtil.INSTANCE.copy(this, arr, offset);
-        return arr;
-    }
-
-    public double[] get(double[] arr) {
-        return get(arr, 0);
-    }
-
+    
     /**
      * Set all values within this matrix to zero.
      *
@@ -475,7 +448,7 @@ public struct Matrix2d {
     }
 
     public Matrix2d scale(Vector2d xy, Matrix2d dest) {
-        return scale(xy.x(), xy.y(), dest);
+        return scale(xy.x, xy.y, dest);
     }
 
     /**
@@ -492,7 +465,7 @@ public struct Matrix2d {
      * @return this
      */
     public Matrix2d scale(Vector2d xy) {
-        return scale(xy.x(), xy.y(), this);
+        return scale(xy.x, xy.y, this);
     }
 
     public Matrix2d scale(double x, double y, Matrix2d dest) {
@@ -628,7 +601,7 @@ public struct Matrix2d {
      * @return this
      */
     public Matrix2d scaling(Vector2d xy) {
-        return scaling(xy.x(), xy.y());
+        return scaling(xy.x, xy.y);
     }
 
     /**
@@ -791,7 +764,7 @@ public struct Matrix2d {
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
     public Matrix2d setRow(int row, Vector2d src) {
-        return setRow(row, src.x(), src.y());
+        return setRow(row, src.x, src.y);
     }
 
     /**
@@ -847,7 +820,7 @@ public struct Matrix2d {
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
     public Matrix2d setColumn(int column, Vector2d src) {
-        return setColumn(column, src.x(), src.y());
+        return setColumn(column, src.x, src.y);
     }
 
     /**
