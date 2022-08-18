@@ -1,8 +1,9 @@
 module app;
 
 import std.stdio;
+import tests.math_test;
 
 void main()
 {
-	writeln("Edit source/app.d to start your project.");
+	test_math();
 }
