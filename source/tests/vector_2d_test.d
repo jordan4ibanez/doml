@@ -39,7 +39,7 @@ void testVector2d() {
 
     writeln("\nBEGINNING VECTOR2D\n");
 
-    writeln("TESETING ANGLE VECTOR2D TO VECTOR2D");
+    writeln("TESTING ANGLE VECTOR2D TO VECTOR2D");
     {
         Vector2d testVec1 = Vector2d(-9.37, 5.892);
         Vector2d testVec2 = Vector2d();
