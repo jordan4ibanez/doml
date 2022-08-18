@@ -10,6 +10,10 @@ void assertEquals(double a, double b, int precision) {
     assert(c == d);
 }
 
+void assertEquals(double a, double b) {
+    assert(a == b);
+}
+
 void assertFalse(bool value) {
     assert(value == false);
 }
