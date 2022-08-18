@@ -103,10 +103,10 @@ public struct Matrix2d {
      *          the second column
      */
     this(Vector2d col0, Vector2d col1) {
-        m00 = col0.x();
-        m01 = col0.y();
-        m10 = col1.x();
-        m11 = col1.y();
+        m00 = col0.x;
+        m01 = col0.y;
+        m10 = col1.x;
+        m11 = col1.y;
     }
 
     /**
@@ -211,10 +211,10 @@ public struct Matrix2d {
         return this;
     }
     private void setMatrix2d(Matrix2d mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
+        m00 = mat.m00;
+        m01 = mat.m01;
+        m10 = mat.m10;
+        m11 = mat.m11;
     }
 
 
@@ -230,10 +230,10 @@ public struct Matrix2d {
         return this;
     }
     private void setMatrix3x2d(Matrix3x2d mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
+        m00 = mat.m00;
+        m01 = mat.m01;
+        m10 = mat.m10;
+        m11 = mat.m11;
     }
 
     /**
@@ -248,10 +248,10 @@ public struct Matrix2d {
         return this;
     }
     private void setMatrix3d(Matrix3d mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
+        m00 = mat.m00;
+        m01 = mat.m01;
+        m10 = mat.m10;
+        m11 = mat.m11;
     }
 
 
@@ -272,10 +272,10 @@ public struct Matrix2d {
     }
 
     public Matrix2d mul(Matrix2d right, Matrix2d dest) {
-        double nm00 = m00 * right.m00() + m10 * right.m01();
-        double nm01 = m01 * right.m00() + m11 * right.m01();
-        double nm10 = m00 * right.m10() + m10 * right.m11();
-        double nm11 = m01 * right.m10() + m11 * right.m11();
+        double nm00 = m00 * right.m00 + m10 * right.m01;
+        double nm01 = m01 * right.m00 + m11 * right.m01;
+        double nm10 = m00 * right.m10 + m10 * right.m11;
+        double nm11 = m01 * right.m10 + m11 * right.m11;
         dest.m00 = nm00;
         dest.m01 = nm01;
         dest.m10 = nm10;
@@ -300,10 +300,10 @@ public struct Matrix2d {
     }
 
     public Matrix2d mulLocal(Matrix2d left, Matrix2d dest) {
-        double nm00 = left.m00() * m00 + left.m10() * m01;
-        double nm01 = left.m01() * m00 + left.m11() * m01;
-        double nm10 = left.m00() * m10 + left.m10() * m11;
-        double nm11 = left.m01() * m10 + left.m11() * m11;
+        double nm00 = left.m00 * m00 + left.m10 * m01;
+        double nm01 = left.m01 * m00 + left.m11 * m01;
+        double nm10 = left.m00 * m10 + left.m10 * m11;
+        double nm11 = left.m01 * m10 + left.m11 * m11;
         dest.m00 = nm00;
         dest.m01 = nm01;
         dest.m10 = nm10;
@@ -1055,13 +1055,13 @@ public struct Matrix2d {
     public bool equals(Matrix2d m, double delta) {
         if (this == m)
             return true;
-        if (!Runtime.equals(m00, m.m00(), delta))
+        if (!Runtime.equals(m00, m.m00, delta))
             return false;
-        if (!Runtime.equals(m01, m.m01(), delta))
+        if (!Runtime.equals(m01, m.m01, delta))
             return false;
-        if (!Runtime.equals(m10, m.m10(), delta))
+        if (!Runtime.equals(m10, m.m10, delta))
             return false;
-        if (!Runtime.equals(m11, m.m11(), delta))
+        if (!Runtime.equals(m11, m.m11, delta))
             return false;
         return true;
     }
@@ -1090,10 +1090,10 @@ public struct Matrix2d {
     }
 
     public Matrix2d add(Matrix2d other, Matrix2d dest) {
-        dest.m00 = m00 + other.m00();
-        dest.m01 = m01 + other.m01();
-        dest.m10 = m10 + other.m10();
-        dest.m11 = m11 + other.m11();
+        dest.m00 = m00 + other.m00;
+        dest.m01 = m01 + other.m01;
+        dest.m10 = m10 + other.m10;
+        dest.m11 = m11 + other.m11;
         return dest;
     }
 
@@ -1109,10 +1109,10 @@ public struct Matrix2d {
     }
 
     public Matrix2d sub(Matrix2d other, Matrix2d dest) {
-        dest.m00 = m00 - other.m00();
-        dest.m01 = m01 - other.m01();
-        dest.m10 = m10 - other.m10();
-        dest.m11 = m11 - other.m11();
+        dest.m00 = m00 - other.m00;
+        dest.m01 = m01 - other.m01;
+        dest.m10 = m10 - other.m10;
+        dest.m11 = m11 - other.m11;
         return dest;
     }
 
@@ -1128,10 +1128,10 @@ public struct Matrix2d {
     }
 
     public Matrix2d mulComponentWise(Matrix2d other, Matrix2d dest) {
-        dest.m00 = m00 * other.m00();
-        dest.m01 = m01 * other.m01();
-        dest.m10 = m10 * other.m10();
-        dest.m11 = m11 * other.m11();
+        dest.m00 = m00 * other.m00;
+        dest.m01 = m01 * other.m01;
+        dest.m10 = m10 * other.m10;
+        dest.m11 = m11 * other.m11;
         return dest;
     }
 
@@ -1153,10 +1153,10 @@ public struct Matrix2d {
     }
 
     public Matrix2d lerp(Matrix2d other, double t, Matrix2d dest) {
-        dest.m00 = Math.fma(other.m00() - m00, t, m00);
-        dest.m01 = Math.fma(other.m01() - m01, t, m01);
-        dest.m10 = Math.fma(other.m10() - m10, t, m10);
-        dest.m11 = Math.fma(other.m11() - m11, t, m11);
+        dest.m00 = Math.fma(other.m00 - m00, t, m00);
+        dest.m01 = Math.fma(other.m01 - m01, t, m01);
+        dest.m10 = Math.fma(other.m10 - m10, t, m10);
+        dest.m11 = Math.fma(other.m11 - m11, t, m11);
         return dest;
     }
 
