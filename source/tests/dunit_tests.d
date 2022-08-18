@@ -1,4 +1,4 @@
-module tests.custom_assertion;
+module tests.dunit_tests;
 
 import std.stdio;
 
