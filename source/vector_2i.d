@@ -1,5 +1,7 @@
 module vector_2i;
 
+import Math = math;
+
 import vector_2d;
 
 
@@ -109,8 +111,8 @@ struct Vector2i {
      *          the {@link Vector2i} to copy the values from
      */
     this(Vector2i v) {
-        x = v.x();
-        y = v.y();
+        x = v.x;
+        y = v.y;
     }
 
     /**
@@ -123,8 +125,8 @@ struct Vector2i {
      *          the {@link RoundingMode} to use
      */
     this(Vector2d v, int mode) {
-        x = Math.roundUsing(v.x(), mode);
-        y = Math.roundUsing(v.y(), mode);
+        x = Math.roundUsing(v.x, mode);
+        y = Math.roundUsing(v.y, mode);
     }
 
     /**
@@ -175,8 +177,8 @@ struct Vector2i {
      * @return this
      */
     public Vector2i set(Vector2i v) {
-        this.x = v.x();
-        this.y = v.y();
+        this.x = v.x;
+        this.y = v.y;
         return this;
     }
 
@@ -191,8 +193,8 @@ struct Vector2i {
      * @return this
      */
     public Vector2i set(Vector2d v) {
-        this.x = cast(int) v.x();
-        this.y = cast(int) v.y();
+        this.x = cast(int) v.x;
+        this.y = cast(int) v.y;
         return this;
     }
 
@@ -209,8 +211,8 @@ struct Vector2i {
      * @return this
      */
     public Vector2i set(Vector2d v, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
+        this.x = Math.roundUsing(v.x, mode);
+        this.y = Math.roundUsing(v.y, mode);
         return this;
     }
 
@@ -233,7 +235,8 @@ struct Vector2i {
             return x;
         case 1:
             return y;
-        default: {}
+        default:
+            return 0; // do nothing
         }
     }
 
@@ -269,14 +272,14 @@ struct Vector2i {
      * @return this
      */
     public Vector2i sub(Vector2i v) {
-        this.x = x - v.x();
-        this.y = y - v.y();
+        this.x = x - v.x;
+        this.y = y - v.y;
         return this;
     }
 
     public Vector2i sub(Vector2i v, Vector2i dest) {
-        dest.x = x - v.x();
-        dest.y = y - v.y();
+        dest.x = x - v.x;
+        dest.y = y - v.y;
         return dest;
     }
 
@@ -334,8 +337,8 @@ struct Vector2i {
     }
 
     public double distance(Vector2i v) {
-        int dx = this.x - v.x();
-        int dy = this.y - v.y();
+        int dx = this.x - v.x;
+        int dy = this.y - v.y;
         return Math.sqrt(dx * dx + dy * dy);
     }
 
@@ -346,8 +349,8 @@ struct Vector2i {
     }
 
     public long distanceSquared(Vector2i v) {
-        int dx = this.x - v.x();
-        int dy = this.y - v.y();
+        int dx = this.x - v.x;
+        int dy = this.y - v.y;
         return dx * dx + dy * dy;
     }
 
@@ -358,11 +361,11 @@ struct Vector2i {
     }
 
     public long gridDistance(Vector2i v) {
-        return Math.abs(v.x() - x()) + Math.abs(v.y() - y());
+        return Math.abs(v.x - x) + Math.abs(v.y - y);
     }
 
     public long gridDistance(int x, int y) {
-        return Math.abs(x - x()) + Math.abs(y - y());
+        return Math.abs(x - this.x) + Math.abs(y - this.y);
     }
 
     /**
@@ -411,14 +414,14 @@ struct Vector2i {
      * @return this
      */
     public Vector2i add(Vector2i v) {
-        this.x = x + v.x();
-        this.y = y + v.y();
+        this.x = x + v.x;
+        this.y = y + v.y;
         return this;
     }
 
     public Vector2i add(Vector2i v, Vector2i dest) {
-        dest.x = x + v.x();
-        dest.y = y + v.y();
+        dest.x = x + v.x;
+        dest.y = y + v.y;
         return dest;
     }
 
@@ -471,14 +474,14 @@ struct Vector2i {
      * @return this
      */
     public Vector2i mul(Vector2i v) {
-        this.x = x * v.x();
-        this.y = y * v.y();
+        this.x = x * v.x;
+        this.y = y * v.y;
         return this;
     }
 
     public Vector2i mul(Vector2i v, Vector2i dest) {
-        dest.x = x * v.x();
-        dest.y = y * v.y();
+        dest.x = x * v.x;
+        dest.y = y * v.y;
         return dest;
     }
 
@@ -580,14 +583,14 @@ struct Vector2i {
      * @return this
      */
     public Vector2i min(Vector2i v) {
-        this.x = x < v.x() ? x : v.x();
-        this.y = y < v.y() ? y : v.y();
+        this.x = x < v.x ? x : v.x;
+        this.y = y < v.y ? y : v.y;
         return this;
     }
 
     public Vector2i min(Vector2i v, Vector2i dest) {
-        dest.x = x < v.x() ? x : v.x();
-        dest.y = y < v.y() ? y : v.y();
+        dest.x = x < v.x ? x : v.x;
+        dest.y = y < v.y ? y : v.y;
         return dest;
     }
 
@@ -599,14 +602,14 @@ struct Vector2i {
      * @return this
      */
     public Vector2i max(Vector2i v) {
-        this.x = x > v.x() ? x : v.x();
-        this.y = y > v.y() ? y : v.y();
+        this.x = x > v.x ? x : v.x;
+        this.y = y > v.y ? y : v.y;
         return this;
     }
 
     public Vector2i max(Vector2i v, Vector2i dest) {
-        dest.x = x > v.x() ? x : v.x();
-        dest.y = y > v.y() ? y : v.y();
+        dest.x = x > v.x ? x : v.x;
+        dest.y = y > v.y ? y : v.y;
         return dest;
     }
 
@@ -644,7 +647,7 @@ struct Vector2i {
     }
 
     public int hashCode() {
-        final int prime = 31;
+        immutable int prime = 31;
         int result = 1;
         result = prime * result + x;
         result = prime * result + y;
