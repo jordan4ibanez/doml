@@ -13683,7 +13683,7 @@ struct Matrix4d {
             }
         }
         if (!intersection)
-            return null; // <- projected grid is not visible
+            return dest; // <- projected grid is not visible
         dest.set(maxX - minX, 0, 0, 0, 0, maxY - minY, 0, 0, 0, 0, 1, 0, minX, minY, 0, 1)
         ._properties(PROPERTY_AFFINE);
         return dest;
