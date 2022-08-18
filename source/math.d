@@ -342,6 +342,10 @@ double sqrt(double r) {
     return math_sqrt(r);
 }
 
+int sqrt(int r) {
+    return cast(int)math_sqrt(cast(double)r);
+}
+
 float invsqrt(float r) {
     return 1.0f / cast(float) math_sqrt(r);
 }
