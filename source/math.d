@@ -551,6 +551,15 @@ double fma(int a, double b, int c) {
     return math_fma(a, b, c);
 }
 
+double fma(int a, int b, int c) {
+    return math_fma(a, b, c);
+}
+
+double fma(int a, int b, double c) {
+    return math_fma(a, b, c);
+}
+
+
 
 double fma(double a, int b, int c) {
     return math_fma(a, b, c);
