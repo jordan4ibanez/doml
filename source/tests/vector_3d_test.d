@@ -49,4 +49,6 @@ void testVector3d() {
     testVec1.negate(testVec2);
     angle = testVec1.angle(testVec2);
     assertEquals(Math.PI, angle, MANY_OPS_AROUND_ZERO_PRECISION_DOUBLE);
+
+    writeln("PASSED!");
 }
