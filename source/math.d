@@ -19,7 +19,8 @@ math_abs   = abs,
 math_ceil  = ceil, 
 math_round = round, 
 math_exp   = exp, 
-math_fma   = fma;
+math_fma   = fma,
+math_isInfinite = isInfinity;
 
 // These aren't math library but oh well
 import std.algorithm: 
@@ -140,6 +141,10 @@ int floatToRawIntBits(float a) {
 }
 long doubleToRawLongBits(double a) {
     return *cast(long*) &a;
+}
+
+bool isInfinite(double value) {
+    return math_isInfinite(value);
 }
 
 
