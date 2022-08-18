@@ -1,5 +1,7 @@
 module quaternion_d;
 
+import Math = math;
+
 import axis_angle_4d;
 import matrix_3d;
 import matrix_4d;
@@ -82,10 +84,10 @@ struct Quaterniond {
      *          the {@link Quaterniond} to take the component values from
      */
     this(Quaterniond source) {
-        x = source.x();
-        y = source.y();
-        z = source.z();
-        w = source.w();
+        x = source.x;
+        y = source.y;
+        z = source.z;
+        w = source.w;
     }
 
     /**
@@ -158,23 +160,23 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond add(Quaterniond q2) {
-        x += q2.x();
-        y += q2.y();
-        z += q2.z();
-        w += q2.w();
+        x += q2.x;
+        y += q2.y;
+        z += q2.z;
+        w += q2.w;
         return this;
     }
 
     public Quaterniond add(Quaterniond q2, Quaterniond dest) {
-        dest.x = x + q2.x();
-        dest.y = y + q2.y();
-        dest.z = z + q2.z();
-        dest.w = w + q2.w();
+        dest.x = x + q2.x;
+        dest.y = y + q2.y;
+        dest.z = z + q2.z;
+        dest.w = w + q2.w;
         return dest;
     }
 
     public double dot(Quaterniond otherQuat) {
-        return this.x * otherQuat.x() + this.y * otherQuat.y() + this.z * otherQuat.z() + this.w * otherQuat.w();
+        return this.x * otherQuat.x + this.y * otherQuat.y + this.z * otherQuat.z + this.w * otherQuat.w;
     }
 
     public double angle() {
@@ -260,10 +262,10 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond set(Quaterniond q) {
-        x = q.x();
-        y = q.y();
-        z = q.z();
-        w = q.w();
+        x = q.x;
+        y = q.y;
+        z = q.z;
+        w = q.w;
         return this;
     }
 
@@ -315,7 +317,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond setAngleAxis(double angle, Vector3d axis) {
-        return setAngleAxis(angle, axis.x(), axis.y(), axis.z());
+        return setAngleAxis(angle, axis.x, axis.y, axis.z);
     }
 
     private void setFromUnnormalized(double m00, double m01, double m02, double m10, double m11, double m12, double m20, double m21, double m22) {
@@ -378,7 +380,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond setFromUnnormalized(Matrix4x3d mat) {
-        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromUnnormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
 
@@ -393,7 +395,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond setFromNormalized(Matrix4x3d mat) {
-        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromNormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
 
@@ -407,7 +409,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond setFromUnnormalized(Matrix4d mat) {
-        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromUnnormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
 
@@ -421,7 +423,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond setFromNormalized(Matrix4d mat) {
-        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromNormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
 
@@ -437,7 +439,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond setFromUnnormalized(Matrix3d mat) {
-        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromUnnormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
 
@@ -449,7 +451,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond setFromNormalized(Matrix3d mat) {
-        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromNormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
 
@@ -464,7 +466,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond fromAxisAngleRad(Vector3d axis, double angle) {
-        return fromAxisAngleRad(axis.x(), axis.y(), axis.z(), angle);
+        return fromAxisAngleRad(axis.x, axis.y, axis.z, angle);
     }
 
     /**
@@ -503,7 +505,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond fromAxisAngleDeg(Vector3d axis, double angle) {
-        return fromAxisAngleRad(axis.x(), axis.y(), axis.z(), Math.toRadians(angle));
+        return fromAxisAngleRad(axis.x, axis.y, axis.z, Math.toRadians(angle));
     }
 
     /**
@@ -544,7 +546,7 @@ struct Quaterniond {
     }
 
     public Quaterniond mul(Quaterniond q, Quaterniond dest) {
-        return mul(q.x(), q.y(), q.z(), q.w(), dest);
+        return mul(q.x, q.y, q.z, q.w, dest);
     }
 
     /**
@@ -597,7 +599,7 @@ struct Quaterniond {
     }
 
     public Quaterniond premul(Quaterniond q, Quaterniond dest) {
-        return premul(q.x(), q.y(), q.z(), q.w(), dest);
+        return premul(q.x, q.y, q.z, q.w, dest);
     }
 
     /**
@@ -823,11 +825,11 @@ struct Quaterniond {
     }
 
     public Vector3d transform(Vector3d vec, Vector3d dest) {
-        return transform(vec.x(), vec.y(), vec.z(), dest);
+        return transform(vec.x, vec.y, vec.z, dest);
     }
 
     public Vector3d transformInverse(Vector3d vec, Vector3d dest) {
-        return transformInverse(vec.x(), vec.y(), vec.z(), dest);
+        return transformInverse(vec.x, vec.y, vec.z, dest);
     }
 
     public Vector3d transform(double x, double y, double z, Vector3d dest) {
@@ -851,11 +853,11 @@ struct Quaterniond {
     }
 
     public Vector4d transform(Vector4d vec, Vector4d dest) {
-        return transform(vec.x(), vec.y(), vec.z(), dest);
+        return transform(vec.x, vec.y, vec.z, dest);
     }
 
     public Vector4d transformInverse(Vector4d vec, Vector4d dest) {
-        return transformInverse(vec.x(), vec.y(), vec.z(), dest);
+        return transformInverse(vec.x, vec.y, vec.z, dest);
     }
 
     public Vector4d transform(double x, double y, double z, Vector4d dest) {
@@ -887,11 +889,11 @@ struct Quaterniond {
     }
 
     public Vector3d transformUnit(Vector3d vec, Vector3d dest) {
-        return transformUnit(vec.x(), vec.y(), vec.z(), dest);
+        return transformUnit(vec.x, vec.y, vec.z, dest);
     }
 
     public Vector3d transformInverseUnit(Vector3d vec, Vector3d dest) {
-        return transformInverseUnit(vec.x(), vec.y(), vec.z(), dest);
+        return transformInverseUnit(vec.x, vec.y, vec.z, dest);
     }
 
     public Vector3d transformUnit(double x, double y, double z, Vector3d dest) {
@@ -913,11 +915,11 @@ struct Quaterniond {
     }
 
     public Vector4d transformUnit(Vector4d vec, Vector4d dest) {
-        return transformUnit(vec.x(), vec.y(), vec.z(), dest);
+        return transformUnit(vec.x, vec.y, vec.z, dest);
     }
 
     public Vector4d transformInverseUnit(Vector4d vec, Vector4d dest) {
-        return transformInverseUnit(vec.x(), vec.y(), vec.z(), dest);
+        return transformInverseUnit(vec.x, vec.y, vec.z, dest);
     }
 
     public Vector4d transformUnit(double x, double y, double z, Vector4d dest) {
@@ -964,11 +966,11 @@ struct Quaterniond {
     }
 
     public Quaterniond div(Quaterniond b, Quaterniond dest) {
-        double invNorm = 1.0 / Math.fma(b.x(), b.x(), Math.fma(b.y(), b.y(), Math.fma(b.z(), b.z(), b.w() * b.w())));
-        double x = -b.x() * invNorm;
-        double y = -b.y() * invNorm;
-        double z = -b.z() * invNorm;
-        double w = b.w() * invNorm;
+        double invNorm = 1.0 / Math.fma(b.x, b.x, Math.fma(b.y, b.y, Math.fma(b.z, b.z, b.w * b.w)));
+        double x = -b.x * invNorm;
+        double y = -b.y * invNorm;
+        double z = -b.z * invNorm;
+        double w = b.w * invNorm;
         return dest.set(Math.fma(this.w, x, Math.fma(this.x, w, Math.fma(this.y, z, -this.z * y))),
                         Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
                         Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
@@ -1150,7 +1152,7 @@ struct Quaterniond {
     }
 
     public Quaterniond slerp(Quaterniond target, double alpha, Quaterniond dest) {
-        double cosom = Math.fma(x, target.x(), Math.fma(y, target.y(), Math.fma(z, target.z(), w * target.w())));
+        double cosom = Math.fma(x, target.x, Math.fma(y, target.y, Math.fma(z, target.z, w * target.w)));
         double absCosom = Math.abs(cosom);
         double scale0, scale1;
         if (1.0 - absCosom > 1E-6) {
@@ -1164,10 +1166,10 @@ struct Quaterniond {
             scale1 = alpha;
         }
         scale1 = cosom >= 0.0 ? scale1 : -scale1;
-        dest.x = Math.fma(scale0, x, scale1 * target.x());
-        dest.y = Math.fma(scale0, y, scale1 * target.y());
-        dest.z = Math.fma(scale0, z, scale1 * target.z());
-        dest.w = Math.fma(scale0, w, scale1 * target.w());
+        dest.x = Math.fma(scale0, x, scale1 * target.x);
+        dest.y = Math.fma(scale0, y, scale1 * target.y);
+        dest.z = Math.fma(scale0, z, scale1 * target.z);
+        dest.w = Math.fma(scale0, w, scale1 * target.w);
         return dest;
     }
 
@@ -1306,13 +1308,13 @@ struct Quaterniond {
     }
 
     public Quaterniond nlerp(Quaterniond q, double factor, Quaterniond dest) {
-        double cosom = Math.fma(x, q.x(), Math.fma(y, q.y(), Math.fma(z, q.z(), w * q.w())));
+        double cosom = Math.fma(x, q.x, Math.fma(y, q.y, Math.fma(z, q.z, w * q.w)));
         double scale0 = 1.0 - factor;
         double scale1 = (cosom >= 0.0) ? factor : -factor;
-        dest.x = Math.fma(scale0, x, scale1 * q.x());
-        dest.y = Math.fma(scale0, y, scale1 * q.y());
-        dest.z = Math.fma(scale0, z, scale1 * q.z());
-        dest.w = Math.fma(scale0, w, scale1 * q.w());
+        dest.x = Math.fma(scale0, x, scale1 * q.x);
+        dest.y = Math.fma(scale0, y, scale1 * q.y);
+        dest.z = Math.fma(scale0, z, scale1 * q.z);
+        dest.w = Math.fma(scale0, w, scale1 * q.w);
         double s = Math.invsqrt(Math.fma(dest.x, dest.x, Math.fma(dest.y, dest.y, Math.fma(dest.z, dest.z, dest.w * dest.w))));
         dest.x *= s;
         dest.y *= s;
@@ -1353,7 +1355,7 @@ struct Quaterniond {
 
     public Quaterniond nlerpIterative(Quaterniond q, double alpha, double dotThreshold, Quaterniond dest) {
         double q1x = x, q1y = y, q1z = z, q1w = w;
-        double q2x = q.x(), q2y = q.y(), q2z = q.z(), q2w = q.w();
+        double q2x = q.x, q2y = q.y, q2z = q.z, q2w = q.w;
         double dot = Math.fma(q1x, q2x, Math.fma(q1y, q2y, Math.fma(q1z, q2z, q1w * q2w)));
         double absDot = Math.abs(dot);
         if (1.0 - 1E-6 < absDot) {
@@ -1483,11 +1485,11 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond lookAlong(Vector3d dir, Vector3d up) {
-        return lookAlong(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z(), this);
+        return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
     }
 
     public Quaterniond lookAlong(Vector3d dir, Vector3d up, Quaterniond dest) {
-        return lookAlong(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z(), dest);
+        return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, dest);
     }
 
     /**
@@ -1587,30 +1589,30 @@ struct Quaterniond {
     }
 
     public int hashCode() {
-        final int prime = 31;
+        immutable int prime = 31;
         int result = 1;
         long temp;
-        temp = Double.doubleToLongBits(w);
+        temp = Math.doubleToLongBits(w);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(x);
+        temp = Math.doubleToLongBits(x);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(y);
+        temp = Math.doubleToLongBits(y);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(z);
+        temp = Math.doubleToLongBits(z);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
     }
 
-    public bool equals(Quaterniond obj) {
-        if (this == obj)
+    public bool equals(Quaterniond other) {
+        if (this == other)
             return true;
-        if (Double.doubleToLongBits(w) != Double.doubleToLongBits(other.w))
+        if (Math.doubleToLongBits(w) != Math.doubleToLongBits(other.w))
             return false;
-        if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
+        if (Math.doubleToLongBits(x) != Math.doubleToLongBits(other.x))
             return false;
-        if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+        if (Math.doubleToLongBits(y) != Math.doubleToLongBits(other.y))
             return false;
-        if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
+        if (Math.doubleToLongBits(z) != Math.doubleToLongBits(other.z))
             return false;
         return true;
     }
@@ -1641,10 +1643,10 @@ struct Quaterniond {
         double y = -this.y * invNorm;
         double z = -this.z * invNorm;
         double w = this.w * invNorm;
-        dest.set(Math.fma(w, other.x(), Math.fma(x, other.w(), Math.fma(y, other.z(), -z * other.y()))),
-                 Math.fma(w, other.y(), Math.fma(-x, other.z(), Math.fma(y, other.w(), z * other.x()))),
-                 Math.fma(w, other.z(), Math.fma(x, other.y(), Math.fma(-y, other.x(), z * other.w()))),
-                 Math.fma(w, other.w(), Math.fma(-x, other.x(), Math.fma(-y, other.y(), -z * other.z()))));
+        dest.set(Math.fma(w, other.x, Math.fma(x, other.w, Math.fma(y, other.z, -z * other.y))),
+                 Math.fma(w, other.y, Math.fma(-x, other.z, Math.fma(y, other.w, z * other.x))),
+                 Math.fma(w, other.z, Math.fma(x, other.y, Math.fma(-y, other.x, z * other.w))),
+                 Math.fma(w, other.w, Math.fma(-x, other.x, Math.fma(-y, other.y, -z * other.z))));
         return dest;
     }
 
@@ -1724,7 +1726,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond rotationTo(Vector3d fromDir, Vector3d toDir) {
-        return rotationTo(fromDir.x(), fromDir.y(), fromDir.z(), toDir.x(), toDir.y(), toDir.z());
+        return rotationTo(fromDir.x, fromDir.y, fromDir.z, toDir.x, toDir.y, toDir.z);
     }
 
     public Quaterniond rotateTo(double fromDirX, double fromDirY, double fromDirZ,
@@ -1862,7 +1864,7 @@ struct Quaterniond {
     }
 
     public Quaterniond rotateTo(Vector3d fromDir, Vector3d toDir, Quaterniond dest) {
-        return rotateTo(fromDir.x(), fromDir.y(), fromDir.z(), toDir.x(), toDir.y(), toDir.z(), dest);
+        return rotateTo(fromDir.x, fromDir.y, fromDir.z, toDir.x, toDir.y, toDir.z, dest);
     }
 
     /**
@@ -1884,7 +1886,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond rotateTo(Vector3d fromDir, Vector3d toDir) {
-        return rotateTo(fromDir.x(), fromDir.y(), fromDir.z(), toDir.x(), toDir.y(), toDir.z(), this);
+        return rotateTo(fromDir.x, fromDir.y, fromDir.z, toDir.x, toDir.y, toDir.z, this);
     }
 
     /**
@@ -2224,7 +2226,7 @@ struct Quaterniond {
     }
 
     public Quaterniond rotateAxis(double angle, Vector3d axis, Quaterniond dest) {
-        return rotateAxis(angle, axis.x(), axis.y(), axis.z(), dest);
+        return rotateAxis(angle, axis.x, axis.y, axis.z, dest);
     }
 
     /**
@@ -2244,7 +2246,7 @@ struct Quaterniond {
      * @return this
      */
     public Quaterniond rotateAxis(double angle, Vector3d axis) {
-        return rotateAxis(angle, axis.x(), axis.y(), axis.z(), this);
+        return rotateAxis(angle, axis.x, axis.y, axis.z, this);
     }
 
     /**
@@ -2367,11 +2369,11 @@ struct Quaterniond {
      */
     public Quaterniond conjugateBy(Quaterniond q, Quaterniond dest) {
         double invNorm = 1.0 / q.lengthSquared();
-        double qix = -q.x() * invNorm, qiy = -q.y() * invNorm, qiz = -q.z() * invNorm, qiw = q.w() * invNorm;
-        double qpx = Math.fma(q.w(), x, Math.fma(q.x(), w, Math.fma(q.y(), z, -q.z() * y)));
-        double qpy = Math.fma(q.w(), y, Math.fma(-q.x(), z, Math.fma(q.y(), w, q.z() * x)));
-        double qpz = Math.fma(q.w(), z, Math.fma(q.x(), y, Math.fma(-q.y(), x, q.z() * w)));
-        double qpw = Math.fma(q.w(), w, Math.fma(-q.x(), x, Math.fma(-q.y(), y, -q.z() * z)));
+        double qix = -q.x * invNorm, qiy = -q.y * invNorm, qiz = -q.z * invNorm, qiw = q.w * invNorm;
+        double qpx = Math.fma(q.w, x, Math.fma(q.x, w, Math.fma(q.y, z, -q.z * y)));
+        double qpy = Math.fma(q.w, y, Math.fma(-q.x, z, Math.fma(q.y, w, q.z * x)));
+        double qpz = Math.fma(q.w, z, Math.fma(q.x, y, Math.fma(-q.y, x, q.z * w)));
+        double qpw = Math.fma(q.w, w, Math.fma(-q.x, x, Math.fma(-q.y, y, -q.z * z)));
         return dest.set(Math.fma(qpw, qix, Math.fma(qpx, qiw, Math.fma(qpy, qiz, -qpz * qiy))),
                         Math.fma(qpw, qiy, Math.fma(-qpx, qiz, Math.fma(qpy, qiw, qpz * qix))),
                         Math.fma(qpw, qiz, Math.fma(qpx, qiy, Math.fma(-qpy, qix, qpz * qiw))),
@@ -2385,25 +2387,25 @@ struct Quaterniond {
     public bool equals(Quaterniond q, double delta) {
         if (this == q)
             return true;
-        if (!Runtime.equals(x, q.x(), delta))
+        if (!Math.equals(x, q.x, delta))
             return false;
-        if (!Runtime.equals(y, q.y(), delta))
+        if (!Math.equals(y, q.y, delta))
             return false;
-        if (!Runtime.equals(z, q.z(), delta))
+        if (!Math.equals(z, q.z, delta))
             return false;
-        if (!Runtime.equals(w, q.w(), delta))
+        if (!Math.equals(w, q.w, delta))
             return false;
         return true;
     }
 
     public bool equals(double x, double y, double z, double w) {
-        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(x))
+        if (Math.doubleToLongBits(this.x) != Math.doubleToLongBits(x))
             return false;
-        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(y))
+        if (Math.doubleToLongBits(this.y) != Math.doubleToLongBits(y))
             return false;
-        if (Double.doubleToLongBits(this.z) != Double.doubleToLongBits(z))
+        if (Math.doubleToLongBits(this.z) != Math.doubleToLongBits(z))
             return false;
-        if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(w))
+        if (Math.doubleToLongBits(this.w) != Math.doubleToLongBits(w))
             return false;
         return true;
     }
