@@ -1,5 +1,7 @@
 module frustum_ray_builder;
 
+import Math = math;
+
 import matrix_4d;
 
 import vector_3d;
