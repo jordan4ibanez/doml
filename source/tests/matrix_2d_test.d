@@ -35,7 +35,7 @@ void testMatrix2d() {
 
     // This is going to be lumped in to one thing, assert tells you what line anyways
 
-    writeln("\nBEGINNING VECTOR2D TESTING\n");
+    writeln("\nBEGINNING MATRIX2D TESTING\n");
     
     // test mul
     {
