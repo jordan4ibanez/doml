@@ -341,6 +341,10 @@ float sqrt(float r) {
 double sqrt(double r) {
     return math_sqrt(r);
 }
+double sqrt(long r) {
+    return math_sqrt(cast(double)r);
+}
+
 
 int sqrt(int r) {
     return cast(int)math_sqrt(cast(double)r);
