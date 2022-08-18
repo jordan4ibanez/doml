@@ -9,4 +9,4 @@ JOML translated to D with a few changes:
 
 - Simplified using D's strengths
 
-Currently Translating: Vector2d test's logic error
+Currently Translating: Vector2i test
