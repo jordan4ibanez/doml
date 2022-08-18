@@ -428,7 +428,7 @@ bool absEqualsOne(float r) {
     return (floatToRawIntBits(r) & 0x7FFFFFFF) == 0x3F800000;
 }
 bool absEqualsOne(double r) {
-    return (doubleToRawLongBits(r) & 0x7FFFFFFFFFFFFFFFL) == 0x3FF0000000000000L;
+    return (doubleToLongBits(r) & 0x7FFFFFFFFFFFFFFFL) == 0x3FF0000000000000L;
 }
 
 int abs(int r) {
@@ -454,6 +454,10 @@ float max(float a, float b) {
     return a > b ? a : b;
 }
 double max(double a, double b) {
+    return a > b ? a : b;
+}
+
+ulong max(ulong a, ulong b) {
     return a > b ? a : b;
 }
 
