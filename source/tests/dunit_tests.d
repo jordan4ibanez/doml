@@ -54,6 +54,17 @@ void assertEquals(Vector4d a, Vector4d b) {
     assert(a.equals(b));
 }
 
+void assertEquals(Vector4i a, Vector4i b) {
+    if (verbose) {
+        writeln("X1 = ", a.x, " | X2 = ", b.x);
+        writeln("Y1 = ", a.y, " | Y2 = ", b.y);
+        writeln("Z1 = ", a.z, " | Z2 = ", b.z);
+        writeln("W1 = ", a.z, " | W2 = ", b.z);
+        writeln("");
+    }
+    assert(a.equals(b));
+}
+
 
 void assertEquals(double a, double b, long precision) {
     long c = cast(long)(a * precision);
