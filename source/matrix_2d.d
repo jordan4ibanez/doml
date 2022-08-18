@@ -1031,13 +1031,13 @@ public struct Matrix2d {
     public bool equals(Matrix2d m, double delta) {
         if (this == m)
             return true;
-        if (!Runtime.equals(m00, m.m00, delta))
+        if (!Math.equals(m00, m.m00, delta))
             return false;
-        if (!Runtime.equals(m01, m.m01, delta))
+        if (!Math.equals(m01, m.m01, delta))
             return false;
-        if (!Runtime.equals(m10, m.m10, delta))
+        if (!Math.equals(m10, m.m10, delta))
             return false;
-        if (!Runtime.equals(m11, m.m11, delta))
+        if (!Math.equals(m11, m.m11, delta))
             return false;
         return true;
     }
@@ -1050,7 +1050,7 @@ public struct Matrix2d {
      * @return this
      */
     public Matrix2d swap(Matrix2d other) {
-        MemUtil.INSTANCE.swap(this, other);
+        MemUtil.swap(this, other);
         return this;
     }
 
