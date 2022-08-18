@@ -1,5 +1,7 @@
 module quaternion_d_interpolator;
 
+import Math = math;
+
 import matrix_3d;
 
 import quaternion_d;
@@ -45,9 +47,9 @@ import quaternion_d;
      * @author Kai Burjack
      */
 private static struct SvdDecomposition3d {
-    private const double[3] rv1;
-    private const double[3] w;
-    private const double[9] v;
+    private double[3] rv1;
+    private double[3] w;
+    private double[9] v;
 
     private double SIGN(double a, double b) {
         return (b) >= 0.0 ? Math.abs(a) : -Math.abs(a);
@@ -212,7 +214,7 @@ private static struct SvdDecomposition3d {
                     break;
                 }
                 if (its == maxIterations - 1) {
-                    throw new RuntimeException("No convergence after " + maxIterations + " iterations");
+                    return; // Do nothing
                 }
 
                 /* shift from bottom 2 x 2 minor */
@@ -290,10 +292,10 @@ private static struct SvdDecomposition3d {
 
 struct QuaterniondInterpolator {
 
-    private const SvdDecomposition3d svdDecomposition3d = SvdDecomposition3d();
-    private const double[9] m;
-    private const Matrix3d u = Matrix3d();
-    private const Matrix3d v = Matrix3d();
+    private SvdDecomposition3d svdDecomposition3d = SvdDecomposition3d();
+    private double[9] m;
+    private Matrix3d u = Matrix3d();
+    private Matrix3d v = Matrix3d();
 
     /**
      * Compute the weighted average of all of the quaternions given in <code>qs</code> using the specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
