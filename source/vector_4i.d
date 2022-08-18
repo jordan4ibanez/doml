@@ -422,7 +422,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i sub(Vector4i v, Vector4i dest) {
+    public Vector4i sub(Vector4i v, ref Vector4i dest) {
         dest.x = this.x - v.x;
         dest.y = this.y - v.y;
         dest.z = this.z - v.z;
@@ -430,7 +430,7 @@ struct Vector4i {
         return dest;
     }
 
-    public Vector4i sub(int x, int y, int z, int w, Vector4i dest) {
+    public Vector4i sub(int x, int y, int z, int w, ref Vector4i dest) {
         dest.x = this.x - x;
         dest.y = this.y - y;
         dest.z = this.z - z;
@@ -453,7 +453,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i add(Vector4i v, Vector4i dest) {
+    public Vector4i add(Vector4i v, ref Vector4i dest) {
         dest.x = this.x + v.x;
         dest.y = this.y + v.y;
         dest.z = this.z + v.z;
@@ -482,7 +482,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i add(int x, int y, int z, int w, Vector4i dest) {
+    public Vector4i add(int x, int y, int z, int w, ref Vector4i dest) {
         dest.x = this.x + x;
         dest.y = this.y + y;
         dest.z = this.z + z;
@@ -505,7 +505,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i mul(Vector4i v, Vector4i dest) {
+    public Vector4i mul(Vector4i v, ref Vector4i dest) {
         dest.x = x * v.x;
         dest.y = y * v.y;
         dest.z = z * v.z;
@@ -528,7 +528,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i div(Vector4i v, Vector4i dest) {
+    public Vector4i div(Vector4i v, ref Vector4i dest) {
         dest.x = x / v.x;
         dest.y = y / v.y;
         dest.z = z / v.z;
@@ -552,7 +552,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i mul(int scalar, Vector4i dest) {
+    public Vector4i mul(int scalar, ref Vector4i dest) {
         dest.x = x * scalar;
         dest.y = y * scalar;
         dest.z = z * scalar;
@@ -576,7 +576,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i div(float scalar, Vector4i dest) {
+    public Vector4i div(float scalar, ref Vector4i dest) {
         float invscalar = 1.0f / scalar;
         dest.x = cast(int) (x * invscalar);
         dest.y = cast(int) (y * invscalar);
@@ -600,7 +600,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i div(int scalar, Vector4i dest) {
+    public Vector4i div(int scalar, ref Vector4i dest) {
         dest.x = x / scalar;
         dest.y = y / scalar;
         dest.z = z / scalar;
@@ -772,7 +772,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i negate(Vector4i dest) {
+    public Vector4i negate(ref Vector4i dest) {
         dest.x = -x;
         dest.y = -y;
         dest.z = -z;
@@ -795,7 +795,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i min(Vector4i v, Vector4i dest) {
+    public Vector4i min(Vector4i v, ref Vector4i dest) {
         dest.x = x < v.x ? x : v.x;
         dest.y = y < v.y ? y : v.y;
         dest.z = z < v.z ? z : v.z;
@@ -818,7 +818,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i max(Vector4i v, Vector4i dest) {
+    public Vector4i max(Vector4i v, ref Vector4i dest) {
         dest.x = x > v.x ? x : v.x;
         dest.y = y > v.y ? y : v.y;
         dest.z = z > v.z ? z : v.z;
@@ -839,7 +839,7 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i absolute(Vector4i dest) {
+    public Vector4i absolute(ref Vector4i dest) {
         dest.x = Math.abs(x);
         dest.y = Math.abs(y);
         dest.z = Math.abs(z);
