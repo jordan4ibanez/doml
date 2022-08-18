@@ -527,7 +527,19 @@ float fma(float a, float b, float c) {
     return math_fma(a, b, c);
 }
 
+float fma(double a, float b, double c) {
+    return math_fma(a, b, c);
+}
+
+float fma(double a, float b, float c) {
+    return math_fma(a, b, c);
+}
+
 double fma(double a, double b, double c) {
+    return math_fma(a, b, c);
+}
+
+double fma(double a, int b, int c) {
     return math_fma(a, b, c);
 }
 
