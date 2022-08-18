@@ -273,7 +273,7 @@ public struct Matrix2d {
         return mul(right, this);
     }
 
-    public Matrix2d mul(Matrix2d right, Matrix2d dest) {
+    public Matrix2d mul(Matrix2d right, ref Matrix2d dest) {
         double nm00 = m00 * right.m00 + m10 * right.m01;
         double nm01 = m01 * right.m00 + m11 * right.m01;
         double nm10 = m00 * right.m10 + m10 * right.m11;
@@ -301,7 +301,7 @@ public struct Matrix2d {
         return mulLocal(left, this);
     }
 
-    public Matrix2d mulLocal(Matrix2d left, Matrix2d dest) {
+    public Matrix2d mulLocal(Matrix2d left, ref Matrix2d dest) {
         double nm00 = left.m00 * m00 + left.m10 * m01;
         double nm01 = left.m01 * m00 + left.m11 * m01;
         double nm10 = left.m00 * m10 + left.m10 * m11;
@@ -367,7 +367,7 @@ public struct Matrix2d {
         return invert(this);
     }
 
-    public Matrix2d invert(Matrix2d dest) {
+    public Matrix2d invert(ref Matrix2d dest) {
         double s = 1.0 / determinant();
         double nm00 = m11 * s;
         double nm01 = -m01 * s;
@@ -389,7 +389,7 @@ public struct Matrix2d {
         return transpose(this);
     }
 
-    public Matrix2d transpose(Matrix2d dest) {
+    public Matrix2d transpose(ref Matrix2d dest) {
         dest.set(m00, m10,
                 m01, m11);
         return dest;
@@ -409,15 +409,15 @@ public struct Matrix2d {
      *          the destination matrix
      * @return the passed in destination
      */
-    public Matrix2d get(Matrix2d dest) {
+    public Matrix2d get(ref Matrix2d dest) {
         return dest.set(this);
     }
 
-    public Matrix3x2d get(Matrix3x2d dest) {
+    public Matrix3x2d get(ref Matrix3x2d dest) {
         return dest.set(this);
     }
 
-    public Matrix3d get(Matrix3d dest) {
+    public Matrix3d get(ref Matrix3d dest) {
         return dest.set(this);
     }
 
@@ -448,7 +448,7 @@ public struct Matrix2d {
         return this;
     }
 
-    public Matrix2d scale(Vector2d xy, Matrix2d dest) {
+    public Matrix2d scale(Vector2d xy, ref Matrix2d dest) {
         return scale(xy.x, xy.y, dest);
     }
 
@@ -469,7 +469,7 @@ public struct Matrix2d {
         return scale(xy.x, xy.y, this);
     }
 
-    public Matrix2d scale(double x, double y, Matrix2d dest) {
+    public Matrix2d scale(double x, double y, ref Matrix2d dest) {
         // scale matrix elements:
         // m00 = x, m11 = y
         // all others = 0
@@ -499,7 +499,7 @@ public struct Matrix2d {
         return scale(x, y, this);
     }
 
-    public Matrix2d scale(double xy, Matrix2d dest) {
+    public Matrix2d scale(double xy, ref Matrix2d dest) {
         return scale(xy, xy, dest);
     }
 
@@ -521,7 +521,7 @@ public struct Matrix2d {
         return scale(xy, xy);
     }
 
-    public Matrix2d scaleLocal(double x, double y, Matrix2d dest) {
+    public Matrix2d scaleLocal(double x, double y, ref Matrix2d dest) {
         dest.m00 = x * m00;
         dest.m01 = y * m01;
         dest.m10 = x * m10;
@@ -636,12 +636,12 @@ public struct Matrix2d {
         return v.mul(this);
     }
 
-    public Vector2d transform(Vector2d v, Vector2d dest) {
+    public Vector2d transform(Vector2d v, ref Vector2d dest) {
         v.mul(this, dest);
         return dest;
     }
 
-    public Vector2d transform(double x, double y, Vector2d dest) {
+    public Vector2d transform(double x, double y, ref Vector2d dest) {
         dest.set(m00 * x + m10 * y,
                 m01 * x + m11 * y);
         return dest;
@@ -651,12 +651,12 @@ public struct Matrix2d {
         return v.mulTranspose(this);
     }
 
-    public Vector2d transformTranspose(Vector2d v, Vector2d dest) {
+    public Vector2d transformTranspose(Vector2d v, ref Vector2d dest) {
         v.mulTranspose(this, dest);
         return dest;
     }
 
-    public Vector2d transformTranspose(double x, double y, Vector2d dest) {
+    public Vector2d transformTranspose(double x, double y, ref Vector2d dest) {
         dest.set(m00 * x + m01 * y,
                 m10 * x + m11 * y);
         return dest;
@@ -682,7 +682,7 @@ public struct Matrix2d {
         return rotate(angle, this);
     }
 
-    public Matrix2d rotate(double angle, Matrix2d dest) {
+    public Matrix2d rotate(double angle, ref Matrix2d dest) {
         double s = Math.sin(angle);
         double c = Math.cosFromSin(s, angle);
         // rotation matrix elements:
@@ -723,7 +723,7 @@ public struct Matrix2d {
         return rotateLocal(angle, this);
     }
 
-    public Matrix2d rotateLocal(double angle, Matrix2d dest) {
+    public Matrix2d rotateLocal(double angle, ref Matrix2d dest) {
         double s = Math.sin(angle);
         double c = Math.cosFromSin(s, angle);
         // rotation matrix elements:
@@ -739,7 +739,7 @@ public struct Matrix2d {
         return dest;
     }
 
-    public Vector2d getRow(int row, Vector2d dest) {
+    public Vector2d getRow(int row, ref Vector2d dest) {
         switch (row) {
             case 0:
                 dest.x = m00;
@@ -795,7 +795,7 @@ public struct Matrix2d {
         return this;
     }
 
-    public Vector2d getColumn(int column, Vector2d dest){
+    public Vector2d getColumn(int column, ref Vector2d dest){
         switch (column) {
             case 0:
                 dest.x = m00;
@@ -948,7 +948,7 @@ public struct Matrix2d {
      *             will hold the result
      * @return dest
      */
-    public Matrix2d normal(Matrix2d dest) {
+    public Matrix2d normal(ref Matrix2d dest) {
         double det = m00 * m11 - m10 * m01;
         double s = 1.0 / det;
         /* Invert and transpose in one go */
@@ -963,7 +963,7 @@ public struct Matrix2d {
         return dest;
     }
 
-    public Vector2d getScale(Vector2d dest) {
+    public Vector2d getScale(ref Vector2d dest) {
         dest.x = Math.sqrt(m00 * m00 + m01 * m01);
         dest.y = Math.sqrt(m10 * m10 + m11 * m11);
         return dest;
@@ -1065,7 +1065,7 @@ public struct Matrix2d {
         return add(other, this);
     }
 
-    public Matrix2d add(Matrix2d other, Matrix2d dest) {
+    public Matrix2d add(Matrix2d other, ref Matrix2d dest) {
         dest.m00 = m00 + other.m00;
         dest.m01 = m01 + other.m01;
         dest.m10 = m10 + other.m10;
@@ -1084,7 +1084,7 @@ public struct Matrix2d {
         return sub(subtrahend, this);
     }
 
-    public Matrix2d sub(Matrix2d other, Matrix2d dest) {
+    public Matrix2d sub(Matrix2d other, ref Matrix2d dest) {
         dest.m00 = m00 - other.m00;
         dest.m01 = m01 - other.m01;
         dest.m10 = m10 - other.m10;
@@ -1103,7 +1103,7 @@ public struct Matrix2d {
         return sub(other, this);
     }
 
-    public Matrix2d mulComponentWise(Matrix2d other, Matrix2d dest) {
+    public Matrix2d mulComponentWise(Matrix2d other, ref Matrix2d dest) {
         dest.m00 = m00 * other.m00;
         dest.m01 = m01 * other.m01;
         dest.m10 = m10 * other.m10;
@@ -1128,7 +1128,7 @@ public struct Matrix2d {
         return lerp(other, t, this);
     }
 
-    public Matrix2d lerp(Matrix2d other, double t, Matrix2d dest) {
+    public Matrix2d lerp(Matrix2d other, double t, ref Matrix2d dest) {
         dest.m00 = Math.fma(other.m00 - m00, t, m00);
         dest.m01 = Math.fma(other.m01 - m01, t, m01);
         dest.m10 = Math.fma(other.m10 - m10, t, m10);
