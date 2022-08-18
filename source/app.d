@@ -1,11 +1,16 @@
 module app;
 
 import std.stdio;
+
+import tests.dunit_tests;
+
 import tests.math_test;
-import tests.custom_assertion;
+import tests.axis_angle_test;
+
 
 void main()
 {
     setTestVerbose(false);
-	test_math();
+	testMath();
+    testAxisAngle();
 }
