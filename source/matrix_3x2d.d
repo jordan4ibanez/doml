@@ -1,5 +1,8 @@
 module matrix_3x2d;
 
+import Math = math;
+import MemUtil = mem_util;
+
 import matrix_2d;
 import matrix_3d;
 
@@ -179,12 +182,12 @@ public struct Matrix3x2d {
         return this;
     }
     private void setMatrix3x2d(Matrix3x2d mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
-        m20 = mat.m20();
-        m21 = mat.m21();
+        m00 = mat.m00;
+        m01 = mat.m01;
+        m10 = mat.m10;
+        m11 = mat.m11;
+        m20 = mat.m20;
+        m21 = mat.m21;
     }
 
     /**
@@ -199,10 +202,10 @@ public struct Matrix3x2d {
         return this;
     }
     private void setMatrix2d(Matrix2d mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m10 = mat.m10();
-        m11 = mat.m11();
+        m00 = mat.m00;
+        m01 = mat.m01;
+        m10 = mat.m10;
+        m11 = mat.m11;
     }
 
     /**
@@ -238,12 +241,12 @@ public struct Matrix3x2d {
      * @return dest
      */
     public Matrix3x2d mul(Matrix3x2d right, Matrix3x2d dest) {
-        double nm00 = m00 * right.m00() + m10 * right.m01();
-        double nm01 = m01 * right.m00() + m11 * right.m01();
-        double nm10 = m00 * right.m10() + m10 * right.m11();
-        double nm11 = m01 * right.m10() + m11 * right.m11();
-        double nm20 = m00 * right.m20() + m10 * right.m21() + m20;
-        double nm21 = m01 * right.m20() + m11 * right.m21() + m21;
+        double nm00 = m00 * right.m00 + m10 * right.m01;
+        double nm01 = m01 * right.m00 + m11 * right.m01;
+        double nm10 = m00 * right.m10 + m10 * right.m11;
+        double nm11 = m01 * right.m10 + m11 * right.m11;
+        double nm20 = m00 * right.m20 + m10 * right.m21 + m20;
+        double nm21 = m01 * right.m20 + m11 * right.m21 + m21;
         dest.m00 = nm00;
         dest.m01 = nm01;
         dest.m10 = nm10;
@@ -270,12 +273,12 @@ public struct Matrix3x2d {
     }
 
     public Matrix3x2d mulLocal(Matrix3x2d left, Matrix3x2d dest) {
-        double nm00 = left.m00() * m00 + left.m10() * m01;
-        double nm01 = left.m01() * m00 + left.m11() * m01;
-        double nm10 = left.m00() * m10 + left.m10() * m11;
-        double nm11 = left.m01() * m10 + left.m11() * m11;
-        double nm20 = left.m00() * m20 + left.m10() * m21 + left.m20();
-        double nm21 = left.m01() * m20 + left.m11() * m21 + left.m21();
+        double nm00 = left.m00 * m00 + left.m10 * m01;
+        double nm01 = left.m01 * m00 + left.m11 * m01;
+        double nm10 = left.m00 * m10 + left.m10 * m11;
+        double nm11 = left.m01 * m10 + left.m11 * m11;
+        double nm20 = left.m00 * m20 + left.m10 * m21 + left.m20;
+        double nm21 = left.m01 * m20 + left.m11 * m21 + left.m21;
         dest.m00 = nm00;
         dest.m01 = nm01;
         dest.m10 = nm10;
@@ -330,7 +333,7 @@ public struct Matrix3x2d {
      * @return this
      */
     public Matrix3x2d set(double[] m) {
-        MemUtil.INSTANCE.copy(m, 0, this);
+        MemUtil.copy(m, 0, this);
         return this;
     }
 
@@ -421,7 +424,7 @@ public struct Matrix3x2d {
      * @return this
      */
     public Matrix3x2d translation(Vector2d offset) {
-        return translation(offset.x(), offset.y());
+        return translation(offset.x, offset.y);
     }
 
     /**
@@ -459,7 +462,7 @@ public struct Matrix3x2d {
      * @return this
      */
     public Matrix3x2d setTranslation(Vector2d offset) {
-        return setTranslation(offset.x(), offset.y());
+        return setTranslation(offset.x, offset.y);
     }
 
     /**
@@ -540,7 +543,7 @@ public struct Matrix3x2d {
      * @return dest
      */
     public Matrix3x2d translate(Vector2d offset, Matrix3x2d dest) {
-        return translate(offset.x(), offset.y(), dest);
+        return translate(offset.x, offset.y, dest);
     }
 
     /**
@@ -561,7 +564,7 @@ public struct Matrix3x2d {
      * @return this
      */
     public Matrix3x2d translate(Vector2d offset) {
-        return translate(offset.x(), offset.y(), this);
+        return translate(offset.x, offset.y, this);
     }
 
     /**
@@ -583,7 +586,7 @@ public struct Matrix3x2d {
      * @return this
      */
     public Matrix3x2d translateLocal(Vector2d offset) {
-        return translateLocal(offset.x(), offset.y());
+        return translateLocal(offset.x, offset.y);
     }
 
     /**
@@ -607,7 +610,7 @@ public struct Matrix3x2d {
      * @return dest
      */
     public Matrix3x2d translateLocal(Vector2d offset, Matrix3x2d dest) {
-        return translateLocal(offset.x(), offset.y(), dest);
+        return translateLocal(offset.x, offset.y, dest);
     }
 
     /**
@@ -694,7 +697,7 @@ public struct Matrix3x2d {
      * @return the passed in array
      */
     public double[] get(double[] arr, int offset) {
-        MemUtil.INSTANCE.copy(this, arr, offset);
+        MemUtil.copy(this, arr, offset);
         return arr;
     }
 
@@ -723,7 +726,7 @@ public struct Matrix3x2d {
      * @return the passed in array
      */
     public double[] get3x3(double[] arr, int offset) {
-        MemUtil.INSTANCE.copy3x3(this, arr, offset);
+        MemUtil.copy3x3(this, arr, offset);
         return arr;
     }
 
@@ -752,7 +755,7 @@ public struct Matrix3x2d {
      * @return the passed in array
      */
     public double[] get4x4(double[] arr, int offset) {
-        MemUtil.INSTANCE.copy4x4(this, arr, offset);
+        MemUtil.copy4x4(this, arr, offset);
         return arr;
     }
 
@@ -777,7 +780,7 @@ public struct Matrix3x2d {
      * @return this
      */
     public Matrix3x2d zero() {
-        MemUtil.INSTANCE.zero(this);
+        MemUtil.zero(this);
         return this;
     }
 
@@ -787,7 +790,7 @@ public struct Matrix3x2d {
      * @return this
      */
     public Matrix3x2d identity() {
-        MemUtil.INSTANCE.identity(this);
+        MemUtil.identity(this);
         return this;
     }
 
@@ -845,7 +848,7 @@ public struct Matrix3x2d {
      * @return this
      */
     public Matrix3x2d scale(Vector2d xy) {
-        return scale(xy.x(), xy.y(), this);
+        return scale(xy.x, xy.y, this);
     }
 
     /**
@@ -863,7 +866,7 @@ public struct Matrix3x2d {
      * @return dest
      */
     public Matrix3x2d scale(Vector2d xy, Matrix3x2d dest) {
-        return scale(xy.x(), xy.y(), dest);
+        return scale(xy.x, xy.y, dest);
     }
 
     /**
@@ -1278,8 +1281,8 @@ public struct Matrix3x2d {
      * @return dest
      */
     public Vector2d transformPosition(Vector2d v, Vector2d dest) {
-        dest.set(m00 * v.x() + m10 * v.y() + m20,
-                 m01 * v.x() + m11 * v.y() + m21);
+        dest.set(m00 * v.x + m10 * v.y + m20,
+                 m01 * v.x + m11 * v.y + m21);
         return dest;
     }
 
@@ -1348,8 +1351,8 @@ public struct Matrix3x2d {
      * @return dest
      */
     public Vector2d transformDirection(Vector2d v, Vector2d dest) {
-        dest.set(m00 * v.x() + m10 * v.y(),
-                 m01 * v.x() + m11 * v.y());
+        dest.set(m00 * v.x + m10 * v.y,
+                 m01 * v.x + m11 * v.y);
         return dest;
     }
 
@@ -1567,8 +1570,8 @@ public struct Matrix3x2d {
      * @return dest
      */
     public Matrix3x2d rotateTo(Vector2d fromDir, Vector2d toDir, Matrix3x2d dest) {
-        double dot = fromDir.x() * toDir.x() + fromDir.y() * toDir.y();
-        double det = fromDir.x() * toDir.y() - fromDir.y() * toDir.x();
+        double dot = fromDir.x * toDir.x + fromDir.y * toDir.y;
+        double det = fromDir.x * toDir.y - fromDir.y * toDir.x;
         double rm00 = dot;
         double rm01 = det;
         double rm10 = -det;
@@ -1920,20 +1923,20 @@ public struct Matrix3x2d {
     }
 
     public int hashCode() {
-        final int prime = 31;
+        immutable int prime = 31;
         int result = 1;
         long temp;
-        temp = Double.doubleToLongBits(m00);
+        temp = Math.doubleToLongBits(m00);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m01);
+        temp = Math.doubleToLongBits(m01);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m10);
+        temp = Math.doubleToLongBits(m10);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m11);
+        temp = Math.doubleToLongBits(m11);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m20);
+        temp = Math.doubleToLongBits(m20);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m21);
+        temp = Math.doubleToLongBits(m21);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
     }
@@ -1941,17 +1944,17 @@ public struct Matrix3x2d {
     public bool equals(Matrix3x2d m, double delta) {
         if (this == m)
             return true;
-        if (!Runtime.equals(m00, m.m00(), delta))
+        if (!Math.equals(m00, m.m00, delta))
             return false;
-        if (!Runtime.equals(m01, m.m01(), delta))
+        if (!Math.equals(m01, m.m01, delta))
             return false;
-        if (!Runtime.equals(m10, m.m10(), delta))
+        if (!Math.equals(m10, m.m10, delta))
             return false;
-        if (!Runtime.equals(m11, m.m11(), delta))
+        if (!Math.equals(m11, m.m11, delta))
             return false;
-        if (!Runtime.equals(m20, m.m20(), delta))
+        if (!Math.equals(m20, m.m20, delta))
             return false;
-        if (!Runtime.equals(m21, m.m21(), delta))
+        if (!Math.equals(m21, m.m21, delta))
             return false;
         return true;
     }
