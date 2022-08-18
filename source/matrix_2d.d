@@ -1,6 +1,7 @@
 module matrix_2d;
 
 import Math = math;
+import MemUtil = mem_util;
 
 import matrix_3d;
 import matrix_3x2d;
@@ -423,14 +424,14 @@ public struct Matrix2d {
     public double getRotation() {
         return cast(double) Math.atan2(m01, m11);
     }
-    
+
     /**
      * Set all values within this matrix to zero.
      *
      * @return this
      */
     public Matrix2d zero() {
-        MemUtil.INSTANCE.zero(this);
+        MemUtil.zero(this);
         return this;
     }
 
@@ -563,7 +564,7 @@ public struct Matrix2d {
      * @return this
      */
     public Matrix2d scaling(double factor) {
-        MemUtil.INSTANCE.zero(this);
+        MemUtil.zero(this);
         m00 = factor;
         m11 = factor;
         return this;
@@ -579,7 +580,7 @@ public struct Matrix2d {
      * @return this
      */
     public Matrix2d scaling(double x, double y) {
-        MemUtil.INSTANCE.zero(this);
+        MemUtil.zero(this);
         m00 = x;
         m11 = y;
         return this;
@@ -874,6 +875,7 @@ public struct Matrix2d {
                 break;
             default:{}
         }
+        return 0;
     }
 
     /**
@@ -915,6 +917,7 @@ public struct Matrix2d {
                 break;
             default:{}
         }
+        return this;
     }
 
     /**
@@ -1011,16 +1014,16 @@ public struct Matrix2d {
     }
 
     public int hashCode() {
-        final int prime = 31;
+        immutable int prime = 31;
         int result = 1;
         long temp;
-        temp = Double.doubleToLongBits(m00);
+        temp = Math.doubleToLongBits(m00);
         result = prime * result + cast(int) ((temp >>> 32) ^ temp);
-        temp = Double.doubleToLongBits(m01);
+        temp = Math.doubleToLongBits(m01);
         result = prime * result + cast(int) ((temp >>> 32) ^ temp);
-        temp = Double.doubleToLongBits(m10);
+        temp = Math.doubleToLongBits(m10);
         result = prime * result + cast(int) ((temp >>> 32) ^ temp);
-        temp = Double.doubleToLongBits(m11);
+        temp = Math.doubleToLongBits(m11);
         result = prime * result + cast(int) ((temp >>> 32) ^ temp);
         return result;
     }
