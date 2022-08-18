@@ -2,6 +2,8 @@ module tests.dunit_tests;
 
 import std.stdio;
 
+import axis_angle_4d;
+
 // This was written SPECIFICALLY to get the precision capabilities of JUNIT
 
 // I'll call it, DUNIT-mini
@@ -11,6 +13,11 @@ private bool verbose = false;
 void setTestVerbose(bool newValue) {
     verbose = newValue;
 }
+
+void assertEquals(AxisAngle4d a, AxisAngle4d b) {
+    a.equals(b);
+}
+
 
 void assertEquals(double a, double b, int precision) {
     int c = cast(int)(a * precision);
