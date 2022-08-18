@@ -9,12 +9,16 @@ import tests.axis_angle_test;
 // import tests.frustum_intersect;
 // import tests.matrix_4d_test;
 
-import tests.vector_2d_test;
-import tests.vector_2i_test;
-
 // These tests need to be redone
 // testFrustumIntersect();
 // testMatrix4D();
+
+import tests.vector_2d_test;
+import tests.vector_2i_test;
+import tests.vector_3d_test;
+
+
+
 
 
 void main()
@@ -24,5 +28,6 @@ void main()
     testAxisAngle();
     testVector2d();
     testVector2i();
+    testVector3d();
 
 }

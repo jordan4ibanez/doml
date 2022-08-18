@@ -1,6 +1,9 @@
 module tests.vector_3d_test;
 
+import std.stdio;
 import vector_3d;
+import tests.dunit_tests;
+import Math = math;
 
 /*
  * The MIT License
@@ -32,17 +35,18 @@ import vector_3d;
  * @author Sebastian Fellner
  */
 void testVector3d() {
-    public static void testAngleVector3dVector3d() {
-        Vector3d testVec1 = new Vector3d(2, -9.37, 5.892);
-        Vector3d testVec2 = new Vector3d();
-        
-        // angle(v, v) should give 0
-        double angle = testVec1.angle(testVec1);
-        assertEquals(0, angle, TestUtil.MANY_OPS_AROUND_ZERO_PRECISION_DOUBLE);
-        
-        // angle(v, -v) should give Math.PI
-        testVec1.negate(testVec2);
-        angle = testVec1.angle(testVec2);
-        assertEquals(java.lang.Math.PI, angle, TestUtil.MANY_OPS_AROUND_ZERO_PRECISION_DOUBLE);
-    }
+
+    writeln("\nBEGIN GENERAL VECTOR3D TEST\n");
+
+    Vector3d testVec1 = Vector3d(2, -9.37, 5.892);
+    Vector3d testVec2 = Vector3d();
+    
+    // angle(v, v) should give 0
+    double angle = testVec1.angle(testVec1);
+    assertEquals(0, angle, MANY_OPS_AROUND_ZERO_PRECISION_DOUBLE);
+    
+    // angle(v, -v) should give Math.PI
+    testVec1.negate(testVec2);
+    angle = testVec1.angle(testVec2);
+    assertEquals(Math.PI, angle, MANY_OPS_AROUND_ZERO_PRECISION_DOUBLE);
 }
