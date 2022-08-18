@@ -20,6 +20,8 @@ import tests.vector_3i_test;
 import tests.vector_4d_test;
 import tests.vector_4i_test;
 
+import tests.matrix_2d_test;
+
 
 
 
@@ -27,8 +29,11 @@ import tests.vector_4i_test;
 void main()
 {
     setTestVerbose(true);
+
 	testMath();
     testAxisAngle();
+
+    // Vector
     testVector2d();
     testVector2i();
     testVector3d();
@@ -36,4 +41,6 @@ void main()
     testVector4d();
     testVector4i();
 
+    // Matrix
+    testMatrix2d();
 }
