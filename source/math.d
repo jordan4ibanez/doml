@@ -424,6 +424,11 @@ double abs(double r) {
     return math_abs(r);
 }
 
+// Taken from runtime
+bool equals(double a, double b, double delta) {
+    return doubleToLongBits(a) == doubleToLongBits(b) || abs(a - b) <= delta;
+}
+
 bool absEqualsOne(float r) {
     return (floatToRawIntBits(r) & 0x7FFFFFFF) == 0x3F800000;
 }
