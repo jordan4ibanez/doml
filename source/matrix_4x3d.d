@@ -1,5 +1,8 @@
 module matrix_4x3d;
 
+import Math = math;
+import MemUtil = mem_util;
+
 import matrix_3d;
 import matrix_4d;
 
@@ -575,19 +578,19 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d set(Matrix4x3d m) {
-        m00 = m.m00();
-        m01 = m.m01();
-        m02 = m.m02();
-        m10 = m.m10();
-        m11 = m.m11();
-        m12 = m.m12();
-        m20 = m.m20();
-        m21 = m.m21();
-        m22 = m.m22();
-        m30 = m.m30();
-        m31 = m.m31();
-        m32 = m.m32();
-        properties = m.properties();
+        m00 = m.m00;
+        m01 = m.m01;
+        m02 = m.m02;
+        m10 = m.m10;
+        m11 = m.m11;
+        m12 = m.m12;
+        m20 = m.m20;
+        m21 = m.m21;
+        m22 = m.m22;
+        m30 = m.m30;
+        m31 = m.m31;
+        m32 = m.m32;
+        properties = m.properties;
         return this;
     }
 
@@ -602,19 +605,19 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d set(Matrix4d m) {
-        m00 = m.m00();
-        m01 = m.m01();
-        m02 = m.m02();
-        m10 = m.m10();
-        m11 = m.m11();
-        m12 = m.m12();
-        m20 = m.m20();
-        m21 = m.m21();
-        m22 = m.m22();
-        m30 = m.m30();
-        m31 = m.m31();
-        m32 = m.m32();
-        properties = m.properties() & (PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
+        m00 = m.m00;
+        m01 = m.m01;
+        m02 = m.m02;
+        m10 = m.m10;
+        m11 = m.m11;
+        m12 = m.m12;
+        m20 = m.m20;
+        m21 = m.m21;
+        m22 = m.m22;
+        m30 = m.m30;
+        m31 = m.m31;
+        m32 = m.m32;
+        properties = m.properties & (PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
         return this;
     }
 
@@ -633,15 +636,15 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d set(Matrix3d mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m02 = mat.m02();
-        m10 = mat.m10();
-        m11 = mat.m11();
-        m12 = mat.m12();
-        m20 = mat.m20();
-        m21 = mat.m21();
-        m22 = mat.m22();
+        m00 = mat.m00;
+        m01 = mat.m01;
+        m02 = mat.m02;
+        m10 = mat.m10;
+        m11 = mat.m11;
+        m12 = mat.m12;
+        m20 = mat.m20;
+        m21 = mat.m21;
+        m22 = mat.m22;
         m30 = 0.0;
         m31 = 0.0;
         m32 = 0.0;
@@ -666,18 +669,18 @@ struct Matrix4x3d {
                           Vector3d col1, 
                           Vector3d col2,
                           Vector3d col3) {
-        this.m00 = col0.x();
-        this.m01 = col0.y();
-        this.m02 = col0.z();
-        this.m10 = col1.x();
-        this.m11 = col1.y();
-        this.m12 = col1.z();
-        this.m20 = col2.x();
-        this.m21 = col2.y();
-        this.m22 = col2.z();
-        this.m30 = col3.x();
-        this.m31 = col3.y();
-        this.m32 = col3.z();
+        this.m00 = col0.x;
+        this.m01 = col0.y;
+        this.m02 = col0.z;
+        this.m10 = col1.x;
+        this.m11 = col1.y;
+        this.m12 = col1.z;
+        this.m20 = col2.x;
+        this.m21 = col2.y;
+        this.m22 = col2.z;
+        this.m30 = col3.x;
+        this.m31 = col3.y;
+        this.m32 = col3.z;
         return determineProperties();
     }
 
@@ -690,16 +693,16 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d set3x3(Matrix4x3d mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m02 = mat.m02();
-        m10 = mat.m10();
-        m11 = mat.m11();
-        m12 = mat.m12();
-        m20 = mat.m20();
-        m21 = mat.m21();
-        m22 = mat.m22();
-        properties &= mat.properties();
+        m00 = mat.m00;
+        m01 = mat.m01;
+        m02 = mat.m02;
+        m10 = mat.m10;
+        m11 = mat.m11;
+        m12 = mat.m12;
+        m20 = mat.m20;
+        m21 = mat.m21;
+        m22 = mat.m22;
+        properties &= mat.properties;
         return this;
     }
 
@@ -777,7 +780,7 @@ struct Matrix4x3d {
     public Matrix4x3d mul(Matrix4x3d right, Matrix4x3d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.set(right);
-        else if ((right.properties() & PROPERTY_IDENTITY) != 0)
+        else if ((right.properties & PROPERTY_IDENTITY) != 0)
             return dest.set(this);
         else if ((properties & PROPERTY_TRANSLATION) != 0)
             return mulTranslation(right, dest);
@@ -787,10 +790,10 @@ struct Matrix4x3d {
         double __m00 = this.m00, __m01 = this.m01, __m02 = this.m02;
         double __m10 = this.m10, __m11 = this.m11, __m12 = this.m12;
         double __m20 = this.m20, __m21 = this.m21, __m22 = this.m22;
-        double rm00 = right.m00(), rm01 = right.m01(), rm02 = right.m02();
-        double rm10 = right.m10(), rm11 = right.m11(), rm12 = right.m12();
-        double rm20 = right.m20(), rm21 = right.m21(), rm22 = right.m22();
-        double rm30 = right.m30(), rm31 = right.m31(), rm32 = right.m32();
+        double rm00 = right.m00, rm01 = right.m01, rm02 = right.m02;
+        double rm10 = right.m10, rm11 = right.m11, rm12 = right.m12;
+        double rm20 = right.m20, rm21 = right.m21, rm22 = right.m22;
+        double rm30 = right.m30, rm31 = right.m31, rm32 = right.m32;
         return dest
         ._m00(Math.fma(__m00, rm00, Math.fma(__m10, rm01, __m20 * rm02)))
         ._m01(Math.fma(__m01, rm00, Math.fma(__m11, rm01, __m21 * rm02)))
@@ -804,25 +807,25 @@ struct Matrix4x3d {
         ._m30(Math.fma(__m00, rm30, Math.fma(__m10, rm31, Math.fma(__m20, rm32, m30))))
         ._m31(Math.fma(__m01, rm30, Math.fma(__m11, rm31, Math.fma(__m21, rm32, m31))))
         ._m32(Math.fma(__m02, rm30, Math.fma(__m12, rm31, Math.fma(__m22, rm32, m32))))
-        ._properties(properties & right.properties() & PROPERTY_ORTHONORMAL);
+        ._properties(properties & right.properties & PROPERTY_ORTHONORMAL);
     }
 
 
     public Matrix4x3d mulTranslation(Matrix4x3d right, Matrix4x3d dest) {
         return dest
-        ._m00(right.m00())
-        ._m01(right.m01())
-        ._m02(right.m02())
-        ._m10(right.m10())
-        ._m11(right.m11())
-        ._m12(right.m12())
-        ._m20(right.m20())
-        ._m21(right.m21())
-        ._m22(right.m22())
-        ._m30(right.m30() + m30)
-        ._m31(right.m31() + m31)
-        ._m32(right.m32() + m32)
-        ._properties(right.properties() & PROPERTY_ORTHONORMAL);
+        ._m00(right.m00)
+        ._m01(right.m01)
+        ._m02(right.m02)
+        ._m10(right.m10)
+        ._m11(right.m11)
+        ._m12(right.m12)
+        ._m20(right.m20)
+        ._m21(right.m21)
+        ._m22(right.m22)
+        ._m30(right.m30 + m30)
+        ._m31(right.m31 + m31)
+        ._m32(right.m32 + m32)
+        ._properties(right.properties & PROPERTY_ORTHONORMAL);
     }
 
     /**
@@ -842,18 +845,18 @@ struct Matrix4x3d {
     }
 
     public Matrix4x3d mulOrtho(Matrix4x3d view, Matrix4x3d dest) {
-        double nm00 = m00 * view.m00();
-        double nm01 = m11 * view.m01();
-        double nm02 = m22 * view.m02();
-        double nm10 = m00 * view.m10();
-        double nm11 = m11 * view.m11();
-        double nm12 = m22 * view.m12();
-        double nm20 = m00 * view.m20();
-        double nm21 = m11 * view.m21();
-        double nm22 = m22 * view.m22();
-        double nm30 = m00 * view.m30() + m30;
-        double nm31 = m11 * view.m31() + m31;
-        double nm32 = m22 * view.m32() + m32;
+        double nm00 = m00 * view.m00;
+        double nm01 = m11 * view.m01;
+        double nm02 = m22 * view.m02;
+        double nm10 = m00 * view.m10;
+        double nm11 = m11 * view.m11;
+        double nm12 = m22 * view.m12;
+        double nm20 = m00 * view.m20;
+        double nm21 = m11 * view.m21;
+        double nm22 = m22 * view.m22;
+        double nm30 = m00 * view.m30 + m30;
+        double nm31 = m11 * view.m31 + m31;
+        double nm32 = m22 * view.m32 + m32;
         dest.m00 = nm00;
         dest.m01 = nm01;
         dest.m02 = nm02;
@@ -866,7 +869,7 @@ struct Matrix4x3d {
         dest.m30 = nm30;
         dest.m31 = nm31;
         dest.m32 = nm32;
-        dest.properties = (this.properties & view.properties() & PROPERTY_ORTHONORMAL);
+        dest.properties = (this.properties & view.properties & PROPERTY_ORTHONORMAL);
         return dest;
     }
 
@@ -948,18 +951,18 @@ struct Matrix4x3d {
 
     public Matrix4x3d fma(Matrix4x3d other, double otherFactor, Matrix4x3d dest) {
         dest
-        ._m00(Math.fma(other.m00(), otherFactor, m00))
-        ._m01(Math.fma(other.m01(), otherFactor, m01))
-        ._m02(Math.fma(other.m02(), otherFactor, m02))
-        ._m10(Math.fma(other.m10(), otherFactor, m10))
-        ._m11(Math.fma(other.m11(), otherFactor, m11))
-        ._m12(Math.fma(other.m12(), otherFactor, m12))
-        ._m20(Math.fma(other.m20(), otherFactor, m20))
-        ._m21(Math.fma(other.m21(), otherFactor, m21))
-        ._m22(Math.fma(other.m22(), otherFactor, m22))
-        ._m30(Math.fma(other.m30(), otherFactor, m30))
-        ._m31(Math.fma(other.m31(), otherFactor, m31))
-        ._m32(Math.fma(other.m32(), otherFactor, m32))
+        ._m00(Math.fma(other.m00, otherFactor, m00))
+        ._m01(Math.fma(other.m01, otherFactor, m01))
+        ._m02(Math.fma(other.m02, otherFactor, m02))
+        ._m10(Math.fma(other.m10, otherFactor, m10))
+        ._m11(Math.fma(other.m11, otherFactor, m11))
+        ._m12(Math.fma(other.m12, otherFactor, m12))
+        ._m20(Math.fma(other.m20, otherFactor, m20))
+        ._m21(Math.fma(other.m21, otherFactor, m21))
+        ._m22(Math.fma(other.m22, otherFactor, m22))
+        ._m30(Math.fma(other.m30, otherFactor, m30))
+        ._m31(Math.fma(other.m31, otherFactor, m31))
+        ._m32(Math.fma(other.m32, otherFactor, m32))
         ._properties(0);
         return dest;
     }
@@ -976,18 +979,18 @@ struct Matrix4x3d {
     }
 
     public Matrix4x3d add(Matrix4x3d other, Matrix4x3d dest) {
-        dest.m00 = m00 + other.m00();
-        dest.m01 = m01 + other.m01();
-        dest.m02 = m02 + other.m02();
-        dest.m10 = m10 + other.m10();
-        dest.m11 = m11 + other.m11();
-        dest.m12 = m12 + other.m12();
-        dest.m20 = m20 + other.m20();
-        dest.m21 = m21 + other.m21();
-        dest.m22 = m22 + other.m22();
-        dest.m30 = m30 + other.m30();
-        dest.m31 = m31 + other.m31();
-        dest.m32 = m32 + other.m32();
+        dest.m00 = m00 + other.m00;
+        dest.m01 = m01 + other.m01;
+        dest.m02 = m02 + other.m02;
+        dest.m10 = m10 + other.m10;
+        dest.m11 = m11 + other.m11;
+        dest.m12 = m12 + other.m12;
+        dest.m20 = m20 + other.m20;
+        dest.m21 = m21 + other.m21;
+        dest.m22 = m22 + other.m22;
+        dest.m30 = m30 + other.m30;
+        dest.m31 = m31 + other.m31;
+        dest.m32 = m32 + other.m32;
         dest.properties = 0;
         return dest;
     }
@@ -1005,18 +1008,18 @@ struct Matrix4x3d {
     }
 
     public Matrix4x3d sub(Matrix4x3d subtrahend, Matrix4x3d dest) {
-        dest.m00 = m00 - subtrahend.m00();
-        dest.m01 = m01 - subtrahend.m01();
-        dest.m02 = m02 - subtrahend.m02();
-        dest.m10 = m10 - subtrahend.m10();
-        dest.m11 = m11 - subtrahend.m11();
-        dest.m12 = m12 - subtrahend.m12();
-        dest.m20 = m20 - subtrahend.m20();
-        dest.m21 = m21 - subtrahend.m21();
-        dest.m22 = m22 - subtrahend.m22();
-        dest.m30 = m30 - subtrahend.m30();
-        dest.m31 = m31 - subtrahend.m31();
-        dest.m32 = m32 - subtrahend.m32();
+        dest.m00 = m00 - subtrahend.m00;
+        dest.m01 = m01 - subtrahend.m01;
+        dest.m02 = m02 - subtrahend.m02;
+        dest.m10 = m10 - subtrahend.m10;
+        dest.m11 = m11 - subtrahend.m11;
+        dest.m12 = m12 - subtrahend.m12;
+        dest.m20 = m20 - subtrahend.m20;
+        dest.m21 = m21 - subtrahend.m21;
+        dest.m22 = m22 - subtrahend.m22;
+        dest.m30 = m30 - subtrahend.m30;
+        dest.m31 = m31 - subtrahend.m31;
+        dest.m32 = m32 - subtrahend.m32;
         dest.properties = 0;
         return dest;
     }
@@ -1033,18 +1036,18 @@ struct Matrix4x3d {
     }
 
     public Matrix4x3d mulComponentWise(Matrix4x3d other, Matrix4x3d dest) {
-        dest.m00 = m00 * other.m00();
-        dest.m01 = m01 * other.m01();
-        dest.m02 = m02 * other.m02();
-        dest.m10 = m10 * other.m10();
-        dest.m11 = m11 * other.m11();
-        dest.m12 = m12 * other.m12();
-        dest.m20 = m20 * other.m20();
-        dest.m21 = m21 * other.m21();
-        dest.m22 = m22 * other.m22();
-        dest.m30 = m30 * other.m30();
-        dest.m31 = m31 * other.m31();
-        dest.m32 = m32 * other.m32();
+        dest.m00 = m00 * other.m00;
+        dest.m01 = m01 * other.m01;
+        dest.m02 = m02 * other.m02;
+        dest.m10 = m10 * other.m10;
+        dest.m11 = m11 * other.m11;
+        dest.m12 = m12 * other.m12;
+        dest.m20 = m20 * other.m20;
+        dest.m21 = m21 * other.m21;
+        dest.m22 = m22 * other.m22;
+        dest.m30 = m30 * other.m30;
+        dest.m31 = m31 * other.m31;
+        dest.m32 = m32 * other.m32;
         dest.properties = 0;
         return dest;
     }
@@ -1343,15 +1346,15 @@ struct Matrix4x3d {
     }
 
     public Matrix3d transpose3x3(Matrix3d dest) {
-        dest.m00(m00);
-        dest.m01(m10);
-        dest.m02(m20);
-        dest.m10(m01);
-        dest.m11(m11);
-        dest.m12(m21);
-        dest.m20(m02);
-        dest.m21(m12);
-        dest.m22(m22);
+        dest.m00 = (m00);
+        dest.m01 = (m10);
+        dest.m02 = (m20);
+        dest.m10 = (m01);
+        dest.m11 = (m11);
+        dest.m12 = (m21);
+        dest.m20 = (m02);
+        dest.m21 = (m12);
+        dest.m22 = (m22);
         return dest;
     }
 
@@ -1391,7 +1394,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d translation(Vector3d offset) {
-        return translation(offset.x(), offset.y(), offset.z());
+        return translation(offset.x, offset.y, offset.z);
     }
 
     /**
@@ -1433,7 +1436,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d setTranslation(Vector3d xyz) {
-        return setTranslation(xyz.x(), xyz.y(), xyz.z());
+        return setTranslation(xyz.x, xyz.y, xyz.z);
     }
 
     public Vector3d getTranslation(Vector3d dest) {
@@ -1515,17 +1518,9 @@ struct Matrix4x3d {
         return get(arr, 0);
     }
 
-    public float[] get4x4(float[] arr, int offset) {
-        MemUtil.INSTANCE.copy4x4(this, arr, offset);
-        return arr;
-    }
-
-    public float[] get4x4(float[] arr) {
-        return get4x4(arr, 0);
-    }
 
     public double[] get4x4(double[] arr, int offset) {
-        MemUtil.INSTANCE.copy4x4(this, arr, offset);
+        MemUtil.copy4x4(this, arr, offset);
         return arr;
     }
 
@@ -1634,7 +1629,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d scaling(Vector3d xyz) {
-        return scaling(xyz.x(), xyz.y(), xyz.z());
+        return scaling(xyz.x, xyz.y, xyz.z);
     }
 
     /**
@@ -2119,7 +2114,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d rotation(double angle, Vector3d axis) {
-        return rotation(angle, axis.x(), axis.y(), axis.z());
+        return rotation(angle, axis.x, axis.y, axis.z);
     }
 
     public Vector4d transform(Vector4d v) {
@@ -2138,9 +2133,9 @@ struct Matrix4x3d {
     }
 
     public Vector3d transformPosition(Vector3d v, Vector3d dest) {
-        dest.set(m00 * v.x() + m10 * v.y() + m20 * v.z() + m30,
-                 m01 * v.x() + m11 * v.y() + m21 * v.z() + m31,
-                 m02 * v.x() + m12 * v.y() + m22 * v.z() + m32);
+        dest.set(m00 * v.x + m10 * v.y + m20 * v.z + m30,
+                 m01 * v.x + m11 * v.y + m21 * v.z + m31,
+                 m02 * v.x + m12 * v.y + m22 * v.z + m32);
         return dest;
     }
 
@@ -2152,9 +2147,9 @@ struct Matrix4x3d {
     }
 
     public Vector3d transformDirection(Vector3d v, Vector3d dest) {
-        dest.set(m00 * v.x() + m10 * v.y() + m20 * v.z(),
-                 m01 * v.x() + m11 * v.y() + m21 * v.z(),
-                 m02 * v.x() + m12 * v.y() + m22 * v.z());
+        dest.set(m00 * v.x + m10 * v.y + m20 * v.z,
+                 m01 * v.x + m11 * v.y + m21 * v.z,
+                 m02 * v.x + m12 * v.y + m22 * v.z);
         return dest;
     }
 
@@ -2166,22 +2161,22 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d set3x3(Matrix3d mat) {
-        m00 = mat.m00();
-        m01 = mat.m01();
-        m02 = mat.m02();
-        m10 = mat.m10();
-        m11 = mat.m11();
-        m12 = mat.m12();
-        m20 = mat.m20();
-        m21 = mat.m21();
-        m22 = mat.m22();
+        m00 = mat.m00;
+        m01 = mat.m01;
+        m02 = mat.m02;
+        m10 = mat.m10;
+        m11 = mat.m11;
+        m12 = mat.m12;
+        m20 = mat.m20;
+        m21 = mat.m21;
+        m22 = mat.m22;
         properties = 0;
         return this;
     }
 
 
     public Matrix4x3d scale(Vector3d xyz, Matrix4x3d dest) {
-        return scale(xyz.x(), xyz.y(), xyz.z(), dest);
+        return scale(xyz.x, xyz.y, xyz.z, dest);
     }
 
     /**
@@ -2198,7 +2193,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d scale(Vector3d xyz) {
-        return scale(xyz.x(), xyz.y(), xyz.z(), this);
+        return scale(xyz.x, xyz.y, xyz.z, this);
     }
 
     public Matrix4x3d scale(double x, double y, double z, Matrix4x3d dest) {
@@ -2618,11 +2613,11 @@ struct Matrix4x3d {
     }
 
     private Matrix4x3d rotateAroundAffine(Quaterniond quat, double ox, double oy, double oz, Matrix4x3d dest) {
-        double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+        double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
+        double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
+        double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
+        double xz = quat.x * quat.z, dxz = xz + xz, yw = quat.y * quat.w, dyw = yw + yw;
+        double yz = quat.y * quat.z, dyz = yz + yz, xw = quat.x * quat.w, dxw = xw + xw;
         double rm00 = w2 + x2 - z2 - y2;
         double rm01 = dxy + dzw;
         double rm02 = dxz - dyw;
@@ -2686,11 +2681,11 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d rotationAround(Quaterniond quat, double ox, double oy, double oz) {
-        double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+        double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
+        double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
+        double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
+        double xz = quat.x * quat.z, dxz = xz + xz, yw = quat.y * quat.w, dyw = yw + yw;
+        double yz = quat.y * quat.z, dyz = yz + yz, xw = quat.x * quat.w, dxw = xw + xw;
         this._m20(dyw + dxz);
         this._m21(dyz - dxw);
         this._m22(z2 - y2 - x2 + w2);
@@ -3089,7 +3084,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d translate(Vector3d offset) {
-        return translate(offset.x(), offset.y(), offset.z());
+        return translate(offset.x, offset.y, offset.z);
     }
 
     /**
@@ -3113,7 +3108,7 @@ struct Matrix4x3d {
      * @return dest
      */
     public Matrix4x3d translate(Vector3d offset, Matrix4x3d dest) {
-        return translate(offset.x(), offset.y(), offset.z(), dest);
+        return translate(offset.x, offset.y, offset.z, dest);
     }
 
     /**
@@ -3215,7 +3210,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d translateLocal(Vector3d offset) {
-        return translateLocal(offset.x(), offset.y(), offset.z());
+        return translateLocal(offset.x, offset.y, offset.z);
     }
 
     /**
@@ -3239,7 +3234,7 @@ struct Matrix4x3d {
      * @return dest
      */
     public Matrix4x3d translateLocal(Vector3d offset, Matrix4x3d dest) {
-        return translateLocal(offset.x(), offset.y(), offset.z(), dest);
+        return translateLocal(offset.x, offset.y, offset.z, dest);
     }
 
     /**
@@ -3840,16 +3835,16 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d rotation(Quaterniond quat) {
-        double w2 = quat.w() * quat.w();
-        double x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y();
-        double z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw;
-        double xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz;
-        double yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz;
-        double xw = quat.x() * quat.w(), dxw = xw + xw;
+        double w2 = quat.w * quat.w;
+        double x2 = quat.x * quat.x;
+        double y2 = quat.y * quat.y;
+        double z2 = quat.z * quat.z;
+        double zw = quat.z * quat.w, dzw = zw + zw;
+        double xy = quat.x * quat.y, dxy = xy + xy;
+        double xz = quat.x * quat.z, dxz = xz + xz;
+        double yw = quat.y * quat.w, dyw = yw + yw;
+        double yz = quat.y * quat.z, dyz = yz + yz;
+        double xw = quat.x * quat.w, dxw = xw + xw;
         _m00(w2 + x2 - z2 - y2);
         _m01(dxy + dzw);
         _m02(dxz - dyw);
@@ -3964,8 +3959,8 @@ struct Matrix4x3d {
     public Matrix4x3d translationRotateScale(Vector3d translation, 
                                            Quaterniond quat, 
                                            Vector3d scale) {
-        return translationRotateScale(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), 
-        quat.w(), scale.x(), scale.y(), scale.z());
+        return translationRotateScale(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z, 
+        quat.w, scale.x, scale.y, scale.z);
     }
 
     /**
@@ -4037,24 +4032,24 @@ struct Matrix4x3d {
         double nm20 = (q02 + q13) * sz;
         double nm21 = (q12 - q03) * sz;
         double nm22 = sz - (q11 + q00) * sz;
-        double __m00 = nm00 * m.m00() + nm10 * m.m01() + nm20 * m.m02();
-        double __m01 = nm01 * m.m00() + nm11 * m.m01() + nm21 * m.m02();
-        m02 = nm02 * m.m00() + nm12 * m.m01() + nm22 * m.m02();
+        double __m00 = nm00 * m.m00 + nm10 * m.m01 + nm20 * m.m02;
+        double __m01 = nm01 * m.m00 + nm11 * m.m01 + nm21 * m.m02;
+        m02 = nm02 * m.m00 + nm12 * m.m01 + nm22 * m.m02;
         this.m00 = __m00;
         this.m01 = __m01;
-        double __m10 = nm00 * m.m10() + nm10 * m.m11() + nm20 * m.m12();
-        double __m11 = nm01 * m.m10() + nm11 * m.m11() + nm21 * m.m12();
-        m12 = nm02 * m.m10() + nm12 * m.m11() + nm22 * m.m12();
+        double __m10 = nm00 * m.m10 + nm10 * m.m11 + nm20 * m.m12;
+        double __m11 = nm01 * m.m10 + nm11 * m.m11 + nm21 * m.m12;
+        m12 = nm02 * m.m10 + nm12 * m.m11 + nm22 * m.m12;
         this.m10 = __m10;
         this.m11 = __m11;
-        double __m20 = nm00 * m.m20() + nm10 * m.m21() + nm20 * m.m22();
-        double __m21 = nm01 * m.m20() + nm11 * m.m21() + nm21 * m.m22();
-        m22 = nm02 * m.m20() + nm12 * m.m21() + nm22 * m.m22();
+        double __m20 = nm00 * m.m20 + nm10 * m.m21 + nm20 * m.m22;
+        double __m21 = nm01 * m.m20 + nm11 * m.m21 + nm21 * m.m22;
+        m22 = nm02 * m.m20 + nm12 * m.m21 + nm22 * m.m22;
         this.m20 = __m20;
         this.m21 = __m21;
-        double __m30 = nm00 * m.m30() + nm10 * m.m31() + nm20 * m.m32() + tx;
-        double __m31 = nm01 * m.m30() + nm11 * m.m31() + nm21 * m.m32() + ty;
-        m32 = nm02 * m.m30() + nm12 * m.m31() + nm22 * m.m32() + tz;
+        double __m30 = nm00 * m.m30 + nm10 * m.m31 + nm20 * m.m32 + tx;
+        double __m31 = nm01 * m.m30 + nm11 * m.m31 + nm21 * m.m32 + ty;
+        m32 = nm02 * m.m30 + nm12 * m.m31 + nm22 * m.m32 + tz;
         this.m30 = __m30;
         this.m31 = __m31;
         properties = 0;
@@ -4090,8 +4085,8 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d translationRotateScaleMul(Vector3d translation, Quaterniond quat, Vector3d scale, Matrix4x3d m) {
-        return translationRotateScaleMul(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z()
-        , quat.w(), scale.x(), scale.y(), scale.z(), m);
+        return translationRotateScaleMul(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z
+        , quat.w, scale.x, scale.y, scale.z, m);
     }
 
     /**
@@ -4120,16 +4115,16 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d translationRotate(double tx, double ty, double tz, Quaterniond quat) {
-        double dqx = quat.x() + quat.x(), dqy = quat.y() + quat.y(), dqz = quat.z() + quat.z();
-        double q00 = dqx * quat.x();
-        double q11 = dqy * quat.y();
-        double q22 = dqz * quat.z();
-        double q01 = dqx * quat.y();
-        double q02 = dqx * quat.z();
-        double q03 = dqx * quat.w();
-        double q12 = dqy * quat.z();
-        double q13 = dqy * quat.w();
-        double q23 = dqz * quat.w();
+        double dqx = quat.x + quat.x, dqy = quat.y + quat.y, dqz = quat.z + quat.z;
+        double q00 = dqx * quat.x;
+        double q11 = dqy * quat.y;
+        double q22 = dqz * quat.z;
+        double q01 = dqx * quat.y;
+        double q02 = dqx * quat.z;
+        double q03 = dqx * quat.w;
+        double q12 = dqy * quat.z;
+        double q13 = dqy * quat.w;
+        double q23 = dqz * quat.w;
         m00 = 1.0 - (q11 + q22);
         m01 = q01 + q23;
         m02 = q02 - q13;
@@ -4228,7 +4223,7 @@ struct Matrix4x3d {
      */
     public Matrix4x3d translationRotate(Vector3d translation, 
                                         Quaterniond quat) {
-        return translationRotate(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(), quat.w());
+        return translationRotate(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z, quat.w);
     }
 
     /**
@@ -4286,18 +4281,18 @@ struct Matrix4x3d {
         double nm20 = yw + xz + xz + yw;
         double nm21 = yz + yz - xw - xw;
         double nm22 = z2 - y2 - x2 + w2;
-        m00 = nm00 * mat.m00() + nm10 * mat.m01() + nm20 * mat.m02();
-        m01 = nm01 * mat.m00() + nm11 * mat.m01() + nm21 * mat.m02();
-        m02 = nm02 * mat.m00() + nm12 * mat.m01() + nm22 * mat.m02();
-        m10 = nm00 * mat.m10() + nm10 * mat.m11() + nm20 * mat.m12();
-        m11 = nm01 * mat.m10() + nm11 * mat.m11() + nm21 * mat.m12();
-        m12 = nm02 * mat.m10() + nm12 * mat.m11() + nm22 * mat.m12();
-        m20 = nm00 * mat.m20() + nm10 * mat.m21() + nm20 * mat.m22();
-        m21 = nm01 * mat.m20() + nm11 * mat.m21() + nm21 * mat.m22();
-        m22 = nm02 * mat.m20() + nm12 * mat.m21() + nm22 * mat.m22();
-        m30 = nm00 * mat.m30() + nm10 * mat.m31() + nm20 * mat.m32() + tx;
-        m31 = nm01 * mat.m30() + nm11 * mat.m31() + nm21 * mat.m32() + ty;
-        m32 = nm02 * mat.m30() + nm12 * mat.m31() + nm22 * mat.m32() + tz;
+        m00 = nm00 * mat.m00 + nm10 * mat.m01 + nm20 * mat.m02;
+        m01 = nm01 * mat.m00 + nm11 * mat.m01 + nm21 * mat.m02;
+        m02 = nm02 * mat.m00 + nm12 * mat.m01 + nm22 * mat.m02;
+        m10 = nm00 * mat.m10 + nm10 * mat.m11 + nm20 * mat.m12;
+        m11 = nm01 * mat.m10 + nm11 * mat.m11 + nm21 * mat.m12;
+        m12 = nm02 * mat.m10 + nm12 * mat.m11 + nm22 * mat.m12;
+        m20 = nm00 * mat.m20 + nm10 * mat.m21 + nm20 * mat.m22;
+        m21 = nm01 * mat.m20 + nm11 * mat.m21 + nm21 * mat.m22;
+        m22 = nm02 * mat.m20 + nm12 * mat.m21 + nm22 * mat.m22;
+        m30 = nm00 * mat.m30 + nm10 * mat.m31 + nm20 * mat.m32 + tx;
+        m31 = nm01 * mat.m30 + nm11 * mat.m31 + nm21 * mat.m32 + ty;
+        m32 = nm02 * mat.m30 + nm12 * mat.m31 + nm22 * mat.m32 + tz;
         this.properties = 0;
         return this;
     }
@@ -4375,8 +4370,8 @@ struct Matrix4x3d {
      */
     public Matrix4x3d translationRotateInvert(Vector3d translation, 
                                               Quaterniond quat) {
-        return translationRotateInvert(translation.x(), translation.y(), translation.z(), quat.x(), quat.y(), quat.z(),
-         quat.w());
+        return translationRotateInvert(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z,
+         quat.w);
     }
 
     /**
@@ -4413,11 +4408,11 @@ struct Matrix4x3d {
         return rotateGeneric(quat, dest);
     }
     private Matrix4x3d rotateGeneric(Quaterniond quat, Matrix4x3d dest) {
-        double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+        double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
+        double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
+        double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
+        double xz = quat.x * quat.z, dxz = xz + xz, yw = quat.y * quat.w, dyw = yw + yw;
+        double yz = quat.y * quat.z, dyz = yz + yz, xw = quat.x * quat.w, dxw = xw + xw;
         double rm00 = w2 + x2 - z2 - y2;
         double rm01 = dxy + dzw;
         double rm02 = dxz - dyw;
@@ -4507,11 +4502,11 @@ struct Matrix4x3d {
      * @return dest
      */
     public Matrix4x3d rotateTranslation(Quaterniond quat, Matrix4x3d dest) {
-        double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+        double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
+        double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
+        double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
+        double xz = quat.x * quat.z, dxz = xz + xz, yw = quat.y * quat.w, dyw = yw + yw;
+        double yz = quat.y * quat.z, dyz = yz + yz, xw = quat.x * quat.w, dxw = xw + xw;
         double rm00 = w2 + x2 - z2 - y2;
         double rm01 = dxy + dzw;
         double rm02 = dxz - dyw;
@@ -4565,11 +4560,11 @@ struct Matrix4x3d {
      * @return dest
      */
     public Matrix4x3d rotateLocal(Quaterniond quat, Matrix4x3d dest) {
-        double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-        double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-        double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-        double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-        double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+        double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
+        double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
+        double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
+        double xz = quat.x * quat.z, dxz = xz + xz, yw = quat.y * quat.w, dyw = yw + yw;
+        double yz = quat.y * quat.z, dyz = yz + yz, xw = quat.x * quat.w, dxw = xw + xw;
         double lm00 = w2 + x2 - z2 - y2;
         double lm01 = dxy + dzw;
         double lm02 = dxz - dyw;
@@ -4719,7 +4714,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d rotate(double angle, Vector3d axis) {
-        return rotate(angle, axis.x(), axis.y(), axis.z());
+        return rotate(angle, axis.x, axis.y, axis.z);
     }
 
     /**
@@ -4751,7 +4746,7 @@ struct Matrix4x3d {
      * @return dest
      */
     public Matrix4x3d rotate(double angle, Vector3d axis, Matrix4x3d dest) {
-        return rotate(angle, axis.x(), axis.y(), axis.z(), dest);
+        return rotate(angle, axis.x, axis.y, axis.z, dest);
     }
 
 
@@ -4793,22 +4788,22 @@ struct Matrix4x3d {
     public Matrix4x3d setRow(int row, Vector4d src) {
         switch (row) {
         case 0:
-            this.m00 = src.x();
-            this.m10 = src.y();
-            this.m20 = src.z();
-            this.m30 = src.w();
+            this.m00 = src.x;
+            this.m10 = src.y;
+            this.m20 = src.z;
+            this.m30 = src.w;
             break;
         case 1:
-            this.m01 = src.x();
-            this.m11 = src.y();
-            this.m21 = src.z();
-            this.m31 = src.w();
+            this.m01 = src.x;
+            this.m11 = src.y;
+            this.m21 = src.z;
+            this.m31 = src.w;
             break;
         case 2:
-            this.m02 = src.x();
-            this.m12 = src.y();
-            this.m22 = src.z();
-            this.m32 = src.w();
+            this.m02 = src.x;
+            this.m12 = src.y;
+            this.m22 = src.z;
+            this.m32 = src.w;
             break;
         default: {}
         }
@@ -4856,24 +4851,24 @@ struct Matrix4x3d {
     public Matrix4x3d setColumn(int column, Vector3d src) {
         switch (column) {
         case 0:
-            this.m00 = src.x();
-            this.m01 = src.y();
-            this.m02 = src.z();
+            this.m00 = src.x;
+            this.m01 = src.y;
+            this.m02 = src.z;
             break;
         case 1:
-            this.m10 = src.x();
-            this.m11 = src.y();
-            this.m12 = src.z();
+            this.m10 = src.x;
+            this.m11 = src.y;
+            this.m12 = src.z;
             break;
         case 2:
-            this.m20 = src.x();
-            this.m21 = src.y();
-            this.m22 = src.z();
+            this.m20 = src.x;
+            this.m21 = src.y;
+            this.m22 = src.z;
             break;
         case 3:
-            this.m30 = src.x();
-            this.m31 = src.y();
-            this.m32 = src.z();
+            this.m30 = src.x;
+            this.m31 = src.y;
+            this.m32 = src.z;
             break;
         default: {}
         }
@@ -4984,15 +4979,15 @@ struct Matrix4x3d {
         double det = (m00m11 - m01m10) * m22 + (m02m10 - m00m12) * m21 + (m01m12 - m02m11) * m20;
         double s = 1.0 / det;
         /* Invert and transpose in one go */
-        dest.m00((m11 * m22 - m21 * m12) * s);
-        dest.m01((m20 * m12 - m10 * m22) * s);
-        dest.m02((m10 * m21 - m20 * m11) * s);
-        dest.m10((m21 * m02 - m01 * m22) * s);
-        dest.m11((m00 * m22 - m20 * m02) * s);
-        dest.m12((m20 * m01 - m00 * m21) * s);
-        dest.m20((m01m12 - m02m11) * s);
-        dest.m21((m02m10 - m00m12) * s);
-        dest.m22((m00m11 - m01m10) * s);
+        dest.m00 = ((m11 * m22 - m21 * m12) * s);
+        dest.m01 = ((m20 * m12 - m10 * m22) * s);
+        dest.m02 = ((m10 * m21 - m20 * m11) * s);
+        dest.m10 = ((m21 * m02 - m01 * m22) * s);
+        dest.m11 = ((m00 * m22 - m20 * m02) * s);
+        dest.m12 = ((m20 * m01 - m00 * m21) * s);
+        dest.m20 = ((m01m12 - m02m11) * s);
+        dest.m21 = ((m02m10 - m00m12) * s);
+        dest.m22 = ((m00m11 - m01m10) * s);
         return dest;
     }
 
@@ -5097,9 +5092,9 @@ struct Matrix4x3d {
         double invXlen = Math.invsqrt(m00 * m00 + m01 * m01 + m02 * m02);
         double invYlen = Math.invsqrt(m10 * m10 + m11 * m11 + m12 * m12);
         double invZlen = Math.invsqrt(m20 * m20 + m21 * m21 + m22 * m22);
-        dest.m00(m00 * invXlen); dest.m01(m01 * invXlen); dest.m02(m02 * invXlen);
-        dest.m10(m10 * invYlen); dest.m11(m11 * invYlen); dest.m12(m12 * invYlen);
-        dest.m20(m20 * invZlen); dest.m21(m21 * invZlen); dest.m22(m22 * invZlen);
+        dest.m00 = (m00 * invXlen); dest.m01 = (m01 * invXlen); dest.m02 = (m02 * invXlen);
+        dest.m10 = (m10 * invYlen); dest.m11 = (m11 * invYlen); dest.m12 = (m12 * invYlen);
+        dest.m20 = (m20 * invZlen); dest.m21 = (m21 * invZlen); dest.m22 = (m22 * invZlen);
         return dest;
     }
 
@@ -5224,7 +5219,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d reflect(Vector3d normal, Vector3d point) {
-        return reflect(normal.x(), normal.y(), normal.z(), point.x(), point.y(), point.z());
+        return reflect(normal.x, normal.y, normal.z, point.x, point.y, point.z);
     }
 
     /**
@@ -5251,17 +5246,17 @@ struct Matrix4x3d {
     }
 
     public Matrix4x3d reflect(Quaterniond orientation, Vector3d point, Matrix4x3d dest) {
-        double num1 = orientation.x() + orientation.x();
-        double num2 = orientation.y() + orientation.y();
-        double num3 = orientation.z() + orientation.z();
-        double normalX = orientation.x() * num3 + orientation.w() * num2;
-        double normalY = orientation.y() * num3 - orientation.w() * num1;
-        double normalZ = 1.0 - (orientation.x() * num1 + orientation.y() * num2);
-        return reflect(normalX, normalY, normalZ, point.x(), point.y(), point.z(), dest);
+        double num1 = orientation.x + orientation.x;
+        double num2 = orientation.y + orientation.y;
+        double num3 = orientation.z + orientation.z;
+        double normalX = orientation.x * num3 + orientation.w * num2;
+        double normalY = orientation.y * num3 - orientation.w * num1;
+        double normalZ = 1.0 - (orientation.x * num1 + orientation.y * num2);
+        return reflect(normalX, normalY, normalZ, point.x, point.y, point.z, dest);
     }
 
     public Matrix4x3d reflect(Vector3d normal, Vector3d point, Matrix4x3d dest) {
-        return reflect(normal.x(), normal.y(), normal.z(), point.x(), point.y(), point.z(), dest);
+        return reflect(normal.x, normal.y, normal.z, point.x, point.y, point.z, dest);
     }
 
     /**
@@ -5338,7 +5333,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d reflection(Vector3d normal, Vector3d point) {
-        return reflection(normal.x(), normal.y(), normal.z(), point.x(), point.y(), point.z());
+        return reflection(normal.x, normal.y, normal.z, point.x, point.y, point.z);
     }
 
     /**
@@ -5356,13 +5351,13 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d reflection(Quaterniond orientation, Vector3d point) {
-        double num1 = orientation.x() + orientation.x();
-        double num2 = orientation.y() + orientation.y();
-        double num3 = orientation.z() + orientation.z();
-        double normalX = orientation.x() * num3 + orientation.w() * num2;
-        double normalY = orientation.y() * num3 - orientation.w() * num1;
-        double normalZ = 1.0 - (orientation.x() * num1 + orientation.y() * num2);
-        return reflection(normalX, normalY, normalZ, point.x(), point.y(), point.z());
+        double num1 = orientation.x + orientation.x;
+        double num2 = orientation.y + orientation.y;
+        double num3 = orientation.z + orientation.z;
+        double normalX = orientation.x * num3 + orientation.w * num2;
+        double normalY = orientation.y * num3 - orientation.w * num1;
+        double normalZ = 1.0 - (orientation.x * num1 + orientation.y * num2);
+        return reflection(normalX, normalY, normalZ, point.x, point.y, point.z);
     }
 
     /**
@@ -6613,7 +6608,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d lookAlong(Vector3d dir, Vector3d up) {
-        return lookAlong(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z(), this);
+        return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
     }
 
     /**
@@ -6645,7 +6640,7 @@ struct Matrix4x3d {
      * @return dest
      */
     public Matrix4x3d lookAlong(Vector3d dir, Vector3d up, Matrix4x3d dest) {
-        return lookAlong(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z(), dest);
+        return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, dest);
     }
 
     /**
@@ -6803,7 +6798,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d setLookAlong(Vector3d dir, Vector3d up) {
-        return setLookAlong(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z());
+        return setLookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
     /**
@@ -6896,7 +6891,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d setLookAt(Vector3d eye, Vector3d center, Vector3d up) {
-        return setLookAt(eye.x(), eye.y(), eye.z(), center.x(), center.y(), center.z(), up.x(), up.y(), up.z());
+        return setLookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
     }
 
     /**
@@ -7000,7 +6995,7 @@ struct Matrix4x3d {
      * @return dest
      */
     public Matrix4x3d lookAt(Vector3d eye, Vector3d center, Vector3d up, Matrix4x3d dest) {
-        return lookAt(eye.x(), eye.y(), eye.z(), center.x(), center.y(), center.z(), up.x(), up.y(), up.z(), dest);
+        return lookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, dest);
     }
 
     /**
@@ -7027,7 +7022,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d lookAt(Vector3d eye, Vector3d center, Vector3d up) {
-        return lookAt(eye.x(), eye.y(), eye.z(), center.x(), center.y(), center.z(), up.x(), up.y(), up.z(), this);
+        return lookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, this);
     }
 
     /**
@@ -7207,7 +7202,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d setLookAtLH(Vector3d eye, Vector3d center, Vector3d up) {
-        return setLookAtLH(eye.x(), eye.y(), eye.z(), center.x(), center.y(), center.z(), up.x(), up.y(), up.z());
+        return setLookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
     }
 
     /**
@@ -7310,7 +7305,7 @@ struct Matrix4x3d {
      * @return dest
      */
     public Matrix4x3d lookAtLH(Vector3d eye, Vector3d center, Vector3d up, Matrix4x3d dest) {
-        return lookAtLH(eye.x(), eye.y(), eye.z(), center.x(), center.y(), center.z(), up.x(), up.y(), up.z(), dest);
+        return lookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, dest);
     }
 
     /**
@@ -7336,7 +7331,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d lookAtLH(Vector3d eye, Vector3d center, Vector3d up) {
-        return lookAtLH(eye.x(), eye.y(), eye.z(), center.x(), center.y(), center.z(), up.x(), up.y(), up.z(), this);
+        return lookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, this);
     }
 
     /**
@@ -7514,7 +7509,7 @@ struct Matrix4x3d {
             dest.set(-m02, -m12, -m22, 1.0 - m32).normalize();
             break;
         default:
-            throw new IllegalArgumentException("which"); //$NON-NLS-1$
+            // do nothing
         }
         return dest;
     }
@@ -7600,11 +7595,11 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d shadow(Vector4d light, double a, double b, double c, double d) {
-        return shadow(light.x(), light.y(), light.z(), light.w(), a, b, c, d, this);
+        return shadow(light.x, light.y, light.z, light.w, a, b, c, d, this);
     }
 
     public Matrix4x3d shadow(Vector4d light, double a, double b, double c, double d, Matrix4x3d dest) {
-        return shadow(light.x(), light.y(), light.z(), light.w(), a, b, c, d, dest);
+        return shadow(light.x, light.y, light.z, light.w, a, b, c, d, dest);
     }
 
     /**
@@ -7699,11 +7694,11 @@ struct Matrix4x3d {
 
     public Matrix4x3d shadow(Vector4d light, Matrix4x3d planeTransform, Matrix4x3d dest) {
         // compute plane equation by transforming (y = 0)
-        double a = planeTransform.m10();
-        double b = planeTransform.m11();
-        double c = planeTransform.m12();
-        double d = -a * planeTransform.m30() - b * planeTransform.m31() - c * planeTransform.m32();
-        return shadow(light.x(), light.y(), light.z(), light.w(), a, b, c, d, dest);
+        double a = planeTransform.m10;
+        double b = planeTransform.m11;
+        double c = planeTransform.m12;
+        double d = -a * planeTransform.m30 - b * planeTransform.m31 - c * planeTransform.m32;
+        return shadow(light.x, light.y, light.z, light.w, a, b, c, d, dest);
     }
 
     /**
@@ -7731,10 +7726,10 @@ struct Matrix4x3d {
 
     public Matrix4x3d shadow(double lightX, double lightY, double lightZ, double lightW, Matrix4x3d planeTransform, Matrix4x3d dest) {
         // compute plane equation by transforming (y = 0)
-        double a = planeTransform.m10();
-        double b = planeTransform.m11();
-        double c = planeTransform.m12();
-        double d = -a * planeTransform.m30() - b * planeTransform.m31() - c * planeTransform.m32();
+        double a = planeTransform.m10;
+        double b = planeTransform.m11;
+        double c = planeTransform.m12;
+        double d = -a * planeTransform.m30 - b * planeTransform.m31 - c * planeTransform.m32;
         return shadow(lightX, lightY, lightZ, lightW, a, b, c, d, dest);
     }
 
@@ -7783,13 +7778,13 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d billboardCylindrical(Vector3d objPos, Vector3d targetPos, Vector3d up) {
-        double dirX = targetPos.x() - objPos.x();
-        double dirY = targetPos.y() - objPos.y();
-        double dirZ = targetPos.z() - objPos.z();
+        double dirX = targetPos.x - objPos.x;
+        double dirY = targetPos.y - objPos.y;
+        double dirZ = targetPos.z - objPos.z;
         // left = up x dir
-        double leftX = up.y() * dirZ - up.z() * dirY;
-        double leftY = up.z() * dirX - up.x() * dirZ;
-        double leftZ = up.x() * dirY - up.y() * dirX;
+        double leftX = up.y * dirZ - up.z * dirY;
+        double leftY = up.z * dirX - up.x * dirZ;
+        double leftZ = up.x * dirY - up.y * dirX;
         // normalize left
         double invLeftLen = Math.invsqrt(leftX * leftX + leftY * leftY + leftZ * leftZ);
         leftX *= invLeftLen;
@@ -7797,9 +7792,9 @@ struct Matrix4x3d {
         leftZ *= invLeftLen;
         // recompute dir by constraining rotation around 'up'
         // dir = left x up
-        dirX = leftY * up.z() - leftZ * up.y();
-        dirY = leftZ * up.x() - leftX * up.z();
-        dirZ = leftX * up.y() - leftY * up.x();
+        dirX = leftY * up.z - leftZ * up.y;
+        dirY = leftZ * up.x - leftX * up.z;
+        dirZ = leftX * up.y - leftY * up.x;
         // normalize dir
         double invDirLen = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
         dirX *= invDirLen;
@@ -7809,15 +7804,15 @@ struct Matrix4x3d {
         m00 = leftX;
         m01 = leftY;
         m02 = leftZ;
-        m10 = up.x();
-        m11 = up.y();
-        m12 = up.z();
+        m10 = up.x;
+        m11 = up.y;
+        m12 = up.z;
         m20 = dirX;
         m21 = dirY;
         m22 = dirZ;
-        m30 = objPos.x();
-        m31 = objPos.y();
-        m32 = objPos.z();
+        m30 = objPos.x;
+        m31 = objPos.y;
+        m32 = objPos.z;
         properties = PROPERTY_ORTHONORMAL;
         return this;
     }
@@ -7843,18 +7838,18 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d billboardSpherical(Vector3d objPos, Vector3d targetPos, Vector3d up) {
-        double dirX = targetPos.x() - objPos.x();
-        double dirY = targetPos.y() - objPos.y();
-        double dirZ = targetPos.z() - objPos.z();
+        double dirX = targetPos.x - objPos.x;
+        double dirY = targetPos.y - objPos.y;
+        double dirZ = targetPos.z - objPos.z;
         // normalize dir
         double invDirLen = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
         dirX *= invDirLen;
         dirY *= invDirLen;
         dirZ *= invDirLen;
         // left = up x dir
-        double leftX = up.y() * dirZ - up.z() * dirY;
-        double leftY = up.z() * dirX - up.x() * dirZ;
-        double leftZ = up.x() * dirY - up.y() * dirX;
+        double leftX = up.y * dirZ - up.z * dirY;
+        double leftY = up.z * dirX - up.x * dirZ;
+        double leftZ = up.x * dirY - up.y * dirX;
         // normalize left
         double invLeftLen = Math.invsqrt(leftX * leftX + leftY * leftY + leftZ * leftZ);
         leftX *= invLeftLen;
@@ -7874,9 +7869,9 @@ struct Matrix4x3d {
         m20 = dirX;
         m21 = dirY;
         m22 = dirZ;
-        m30 = objPos.x();
-        m31 = objPos.y();
-        m32 = objPos.z();
+        m30 = objPos.x;
+        m31 = objPos.y;
+        m32 = objPos.z;
         properties = PROPERTY_ORTHONORMAL;
         return this;
     }
@@ -7900,9 +7895,9 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d billboardSpherical(Vector3d objPos, Vector3d targetPos) {
-        double toDirX = targetPos.x() - objPos.x();
-        double toDirY = targetPos.y() - objPos.y();
-        double toDirZ = targetPos.z() - objPos.z();
+        double toDirX = targetPos.x - objPos.x;
+        double toDirY = targetPos.y - objPos.y;
+        double toDirZ = targetPos.z - objPos.z;
         double x = -toDirY;
         double y = toDirX;
         double w = Math.sqrt(toDirX * toDirX + toDirY * toDirY + toDirZ * toDirZ) + toDirZ;
@@ -7924,40 +7919,40 @@ struct Matrix4x3d {
         m20 = q13;
         m21 = -q03;
         m22 = 1.0 - q11 - q00;
-        m30 = objPos.x();
-        m31 = objPos.y();
-        m32 = objPos.z();
+        m30 = objPos.x;
+        m31 = objPos.y;
+        m32 = objPos.z;
         properties = PROPERTY_ORTHONORMAL;
         return this;
     }
 
     public int hashCode() {
-        final int prime = 31;
+        immutable int prime = 31;
         int result = 1;
         long temp;
-        temp = Double.doubleToLongBits(m00);
+        temp = Math.doubleToLongBits(m00);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m01);
+        temp = Math.doubleToLongBits(m01);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m02);
+        temp = Math.doubleToLongBits(m02);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m10);
+        temp = Math.doubleToLongBits(m10);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m11);
+        temp = Math.doubleToLongBits(m11);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m12);
+        temp = Math.doubleToLongBits(m12);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m20);
+        temp = Math.doubleToLongBits(m20);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m21);
+        temp = Math.doubleToLongBits(m21);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m22);
+        temp = Math.doubleToLongBits(m22);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m30);
+        temp = Math.doubleToLongBits(m30);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m31);
+        temp = Math.doubleToLongBits(m31);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(m32);
+        temp = Math.doubleToLongBits(m32);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
     }
@@ -7965,29 +7960,29 @@ struct Matrix4x3d {
     public bool equals(Matrix4x3d m, double delta) {
         if (this == m)
             return true;
-        if (!Runtime.equals(m00, m.m00(), delta))
+        if (!Math.equals(m00, m.m00, delta))
             return false;
-        if (!Runtime.equals(m01, m.m01(), delta))
+        if (!Math.equals(m01, m.m01, delta))
             return false;
-        if (!Runtime.equals(m02, m.m02(), delta))
+        if (!Math.equals(m02, m.m02, delta))
             return false;
-        if (!Runtime.equals(m10, m.m10(), delta))
+        if (!Math.equals(m10, m.m10, delta))
             return false;
-        if (!Runtime.equals(m11, m.m11(), delta))
+        if (!Math.equals(m11, m.m11, delta))
             return false;
-        if (!Runtime.equals(m12, m.m12(), delta))
+        if (!Math.equals(m12, m.m12, delta))
             return false;
-        if (!Runtime.equals(m20, m.m20(), delta))
+        if (!Math.equals(m20, m.m20, delta))
             return false;
-        if (!Runtime.equals(m21, m.m21(), delta))
+        if (!Math.equals(m21, m.m21, delta))
             return false;
-        if (!Runtime.equals(m22, m.m22(), delta))
+        if (!Math.equals(m22, m.m22, delta))
             return false;
-        if (!Runtime.equals(m30, m.m30(), delta))
+        if (!Math.equals(m30, m.m30, delta))
             return false;
-        if (!Runtime.equals(m31, m.m31(), delta))
+        if (!Math.equals(m31, m.m31, delta))
             return false;
-        if (!Runtime.equals(m32, m.m32(), delta))
+        if (!Math.equals(m32, m.m32, delta))
             return false;
         return true;
     }
@@ -8094,7 +8089,7 @@ struct Matrix4x3d {
     }
 
     public Matrix4x3d arcball(double radius, Vector3d center, double angleX, double angleY, Matrix4x3d dest) {
-        return arcball(radius, center.x(), center.y(), center.z(), angleX, angleY, dest);
+        return arcball(radius, center.x, center.y, center.z, angleX, angleY, dest);
     }
 
     /**
@@ -8138,7 +8133,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d arcball(double radius, Vector3d center, double angleX, double angleY) {
-        return arcball(radius, center.x(), center.y(), center.z(), angleX, angleY, this);
+        return arcball(radius, center.x, center.y, center.z, angleX, angleY, this);
     }
 
     public Matrix4x3d transformAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Vector3d outMin, Vector3d outMax) {
@@ -8223,7 +8218,7 @@ struct Matrix4x3d {
     }
 
     public Matrix4x3d transformAab(Vector3d min, Vector3d max, Vector3d outMin, Vector3d outMax) {
-        return transformAab(min.x(), min.y(), min.z(), max.x(), max.y(), max.z(), outMin, outMax);
+        return transformAab(min.x, min.y, min.z, max.x, max.y, max.z, outMin, outMax);
     }
 
     /**
@@ -8244,19 +8239,19 @@ struct Matrix4x3d {
     }
 
     public Matrix4x3d lerp(Matrix4x3d other, double t, Matrix4x3d dest) {
-        dest.m00 = Math.fma(other.m00() - m00, t, m00);
-        dest.m01 = Math.fma(other.m01() - m01, t, m01);
-        dest.m02 = Math.fma(other.m02() - m02, t, m02);
-        dest.m10 = Math.fma(other.m10() - m10, t, m10);
-        dest.m11 = Math.fma(other.m11() - m11, t, m11);
-        dest.m12 = Math.fma(other.m12() - m12, t, m12);
-        dest.m20 = Math.fma(other.m20() - m20, t, m20);
-        dest.m21 = Math.fma(other.m21() - m21, t, m21);
-        dest.m22 = Math.fma(other.m22() - m22, t, m22);
-        dest.m30 = Math.fma(other.m30() - m30, t, m30);
-        dest.m31 = Math.fma(other.m31() - m31, t, m31);
-        dest.m32 = Math.fma(other.m32() - m32, t, m32);
-        dest.properties = properties & other.properties();
+        dest.m00 = Math.fma(other.m00 - m00, t, m00);
+        dest.m01 = Math.fma(other.m01 - m01, t, m01);
+        dest.m02 = Math.fma(other.m02 - m02, t, m02);
+        dest.m10 = Math.fma(other.m10 - m10, t, m10);
+        dest.m11 = Math.fma(other.m11 - m11, t, m11);
+        dest.m12 = Math.fma(other.m12 - m12, t, m12);
+        dest.m20 = Math.fma(other.m20 - m20, t, m20);
+        dest.m21 = Math.fma(other.m21 - m21, t, m21);
+        dest.m22 = Math.fma(other.m22 - m22, t, m22);
+        dest.m30 = Math.fma(other.m30 - m30, t, m30);
+        dest.m31 = Math.fma(other.m31 - m31, t, m31);
+        dest.m32 = Math.fma(other.m32 - m32, t, m32);
+        dest.properties = properties & other.properties;
         return dest;
     }
 
@@ -8287,7 +8282,7 @@ struct Matrix4x3d {
      * @return dest
      */
     public Matrix4x3d rotateTowards(Vector3d dir, Vector3d up, Matrix4x3d dest) {
-        return rotateTowards(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z(), dest);
+        return rotateTowards(dir.x, dir.y, dir.z, up.x, up.y, up.z, dest);
     }
 
     /**
@@ -8314,7 +8309,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d rotateTowards(Vector3d dir, Vector3d up) {
-        return rotateTowards(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z(), this);
+        return rotateTowards(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
     }
 
     /**
@@ -8456,7 +8451,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d rotationTowards(Vector3d dir, Vector3d up) {
-        return rotationTowards(dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z());
+        return rotationTowards(dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
     /**
@@ -8540,7 +8535,7 @@ struct Matrix4x3d {
      * @return this
      */
     public Matrix4x3d translationRotateTowards(Vector3d pos, Vector3d dir, Vector3d up) {
-        return translationRotateTowards(pos.x(), pos.y(), pos.z(), dir.x(), dir.y(), dir.z(), up.x(), up.y(), up.z());
+        return translationRotateTowards(pos.x, pos.y, pos.z, dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
     /**
