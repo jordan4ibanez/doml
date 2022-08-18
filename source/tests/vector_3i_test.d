@@ -45,17 +45,17 @@ void testVector3i() {
     writeln("TESTING VECTOR3I ROUNDING");
 
     {
-        Vector3i v1 = Vector3i(0.0f, .6f, .7f, RoundingMode.FLOOR);
-        Vector3i v2 = Vector3i(9.5f, 1.6f, 5.0f, RoundingMode.FLOOR);
+        Vector3i v1 = Vector3i(0.0, .6, .7, RoundingMode.FLOOR);
+        Vector3i v2 = Vector3i(9.5, 1.6, 5.0, RoundingMode.FLOOR);
 
-        Vector3i v3 = Vector3i(Vector3d(0.0f, .6f, .7f), RoundingMode.FLOOR);
-        Vector3i v4 = Vector3i(Vector3d(9.5f, 1.6f, 5.0f), RoundingMode.FLOOR);
+        Vector3i v3 = Vector3i(Vector3d(0.0, .6, .7), RoundingMode.FLOOR);
+        Vector3i v4 = Vector3i(Vector3d(9.5, 1.6, 5.0), RoundingMode.FLOOR);
 
-        Vector3i v5 = Vector3i(0.0f, .6f, .7f, RoundingMode.CEILING);
-        Vector3i v6 = Vector3i(9.5f, 1.6f, 5.0f, RoundingMode.CEILING);
+        Vector3i v5 = Vector3i(0.0, .6, .7, RoundingMode.CEILING);
+        Vector3i v6 = Vector3i(9.5, 1.6, 5.0, RoundingMode.CEILING);
 
-        Vector3i v7 = Vector3i(Vector3d(0.0f, .6f, .7f), RoundingMode.CEILING);
-        Vector3i v8 = Vector3i(Vector3d(9.5f, 1.6f, 5.0f), RoundingMode.CEILING);
+        Vector3i v7 = Vector3i(Vector3d(0.0, .6, .7), RoundingMode.CEILING);
+        Vector3i v8 = Vector3i(Vector3d(9.5, 1.6, 5.0), RoundingMode.CEILING);
 
 
         assertEquals(v1, Vector3i(0, 0, 0));
@@ -76,14 +76,14 @@ void testVector3i() {
     writeln("TESTING VECTOR3I ROUNDING VECTOR2D");
 
     {
-        Vector3i v1 = Vector3i(Vector2d(0.0f, .6f), .7f, RoundingMode.FLOOR);
-        Vector3i v2 = Vector3i(Vector2d(9.5f, 1.6f), 5.0f, RoundingMode.FLOOR);
+        Vector3i v1 = Vector3i(Vector2d(0.0, .6), .7, RoundingMode.FLOOR);
+        Vector3i v2 = Vector3i(Vector2d(9.5, 1.6), 5.0, RoundingMode.FLOOR);
 
-        Vector3i v3 = Vector3i(Vector2d(0.0f, .6f), .7f, RoundingMode.FLOOR);
-        Vector3i v4 = Vector3i(Vector2d(9.5f, 1.6f), 5.0f, RoundingMode.FLOOR);
+        Vector3i v3 = Vector3i(Vector2d(0.0, .6), .7, RoundingMode.FLOOR);
+        Vector3i v4 = Vector3i(Vector2d(9.5, 1.6), 5.0, RoundingMode.FLOOR);
 
-        Vector3i v5 = Vector3i(Vector2d(0.0f, .6f), .7f, RoundingMode.CEILING);
-        Vector3i v6 = Vector3i(Vector2d(9.5f, 1.6f), 5.0f, RoundingMode.CEILING);
+        Vector3i v5 = Vector3i(Vector2d(0.0, .6), .7, RoundingMode.CEILING);
+        Vector3i v6 = Vector3i(Vector2d(9.5, 1.6), 5.0, RoundingMode.CEILING);
 
 
         assertEquals(v1, Vector3i(0, 0, 0));
@@ -121,7 +121,7 @@ void testVector3i() {
 
     writeln("PASSED!");
 
-    writeln("INITIALIZING SCOPED TEST VARIABLES");
+    writeln("\nINITIALIZING SCOPED TEST VARIABLES\n");
 
     Vector3i v1 = Vector3i(1, 3, 7);
     Vector3i v2 = Vector3i(2, 6, 14);
