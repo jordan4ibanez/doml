@@ -3,7 +3,7 @@ module tests.math_test;
 import Math = math;
 import std.stdio;
 import rounding_mode;
-import tests.custom_assertion;
+import tests.dunit_tests;
 
 import vector_2d;
 import vector_3d;
