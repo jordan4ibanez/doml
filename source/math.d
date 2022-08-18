@@ -402,9 +402,9 @@ private double fastAtan2(double y, double x) {
     return y >= 0 ? r : -r;
 }
 
-float atan2(float y, float x) {
-    return cast(float) math_atan2(y, x);
-}
+// float atan2(float y, float x) {
+    // return cast(float) math_atan2(y, x);
+// }
 double atan2(double y, double x) {
     if (Options.FASTMATH)
         return fastAtan2(y, x);
