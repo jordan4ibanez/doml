@@ -7,7 +7,9 @@ import tests.dunit_tests;
 import tests.math_test;
 import tests.axis_angle_test;
 // import tests.frustum_intersect;
-import tests.matrix_4d_test;
+// import tests.matrix_4d_test;
+
+import tests.vector_2d_test;
 
 
 void main()
@@ -16,5 +18,8 @@ void main()
 	testMath();
     testAxisAngle();
     // testFrustumIntersect();
-    testMatrix4D();
+    // testMatrix4D();
+
+    testVector2d();
+
 }
