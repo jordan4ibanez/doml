@@ -235,6 +235,14 @@ public static void assertMatrix4dEquals(Matrix4d m1, Matrix4d m2, double delta) 
     assertEquals(m1.m33, m2.m33, delta);
 }
 
+void assertEquals(Vector2i a, Vector2i b) {
+    if (verbose) {
+        writeln("X1 = ", a.x, " | X2 = ", b.x);
+        writeln("Y1 = ", a.y, " | Y2 = ", b.y);
+        writeln("");
+    }
+    assert(a.equals(b));
+}
 
 
 /**
