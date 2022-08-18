@@ -462,7 +462,7 @@ struct Vector4d {
      *          will hold the result
      * @return dest
      */
-    public Vector4d sub(Vector4d v, Vector4d dest) {
+    public Vector4d sub(Vector4d v, ref Vector4d dest) {
         dest.x = x - v.x;
         dest.y = y - v.y;
         dest.z = z - v.z;
@@ -491,7 +491,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d sub(double x, double y, double z, double w, Vector4d dest) {
+    public Vector4d sub(double x, double y, double z, double w, ref Vector4d dest) {
         dest.x = this.x - x;
         dest.y = this.y - y;
         dest.z = this.z - z;
@@ -514,7 +514,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d add(Vector4d v, Vector4d dest) {
+    public Vector4d add(Vector4d v, ref Vector4d dest) {
         dest.x = x + v.x;
         dest.y = y + v.y;
         dest.z = z + v.z;
@@ -543,7 +543,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d add(double x, double y, double z, double w, Vector4d dest) {
+    public Vector4d add(double x, double y, double z, double w, ref Vector4d dest) {
         dest.x = this.x + x;
         dest.y = this.y + y;
         dest.z = this.z + z;
@@ -585,7 +585,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d fma(Vector4d a, Vector4d b, Vector4d dest) {
+    public Vector4d fma(Vector4d a, Vector4d b, ref Vector4d dest) {
         dest.x = Math.fma(a.x, b.x, x);
         dest.y = Math.fma(a.y, b.y, y);
         dest.z = Math.fma(a.z, b.z, z);
@@ -593,7 +593,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d fma(double a, Vector4d b, Vector4d dest) {
+    public Vector4d fma(double a, Vector4d b, ref Vector4d dest) {
         dest.x = Math.fma(a, b.x, x);
         dest.y = Math.fma(a, b.y, y);
         dest.z = Math.fma(a, b.z, z);
@@ -635,14 +635,14 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d mulAdd(Vector4d a, Vector4d b, Vector4d dest) {
+    public Vector4d mulAdd(Vector4d a, Vector4d b, ref Vector4d dest) {
         dest.x = Math.fma(x, a.x, b.x);
         dest.y = Math.fma(y, a.y, b.y);
         dest.z = Math.fma(z, a.z, b.z);
         return dest;
     }
 
-    public Vector4d mulAdd(double a, Vector4d b, Vector4d dest) {
+    public Vector4d mulAdd(double a, Vector4d b, ref Vector4d dest) {
         dest.x = Math.fma(x, a, b.x);
         dest.y = Math.fma(y, a, b.y);
         dest.z = Math.fma(z, a, b.z);
@@ -664,7 +664,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d mul(Vector4d v, Vector4d dest) {
+    public Vector4d mul(Vector4d v, ref Vector4d dest) {
         dest.x = x * v.x;
         dest.y = y * v.y;
         dest.z = z * v.z;
@@ -687,7 +687,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d div(Vector4d v, Vector4d dest) {
+    public Vector4d div(Vector4d v, ref Vector4d dest) {
         dest.x = x / v.x;
         dest.y = y / v.y;
         dest.z = z / v.z;
@@ -708,7 +708,7 @@ struct Vector4d {
         return mulGeneric(mat, this);
     }
 
-    public Vector4d mul(Matrix4d mat, Vector4d dest) {
+    public Vector4d mul(Matrix4d mat, ref Vector4d dest) {
         if ((mat.properties & Matrix4d.PROPERTY_AFFINE) != 0)
             return mulAffine(mat, dest);
         return mulGeneric(mat, dest);
@@ -727,13 +727,13 @@ struct Vector4d {
             return mulAffineTranspose(mat, this);
         return mulGenericTranspose(mat, this);
     }
-    public Vector4d mulTranspose(Matrix4d mat, Vector4d dest) {
+    public Vector4d mulTranspose(Matrix4d mat, ref Vector4d dest) {
         if ((mat.properties & Matrix4d.PROPERTY_AFFINE) != 0)
             return mulAffineTranspose(mat, dest);
         return mulGenericTranspose(mat, dest);
     }
 
-    public Vector4d mulAffine(Matrix4d mat, Vector4d dest) {
+    public Vector4d mulAffine(Matrix4d mat, ref Vector4d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w)));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, Math.fma(mat.m22, z, mat.m32 * w)));
@@ -744,7 +744,7 @@ struct Vector4d {
         return dest;
     }
 
-    private Vector4d mulGeneric(Matrix4d mat, Vector4d dest) {
+    private Vector4d mulGeneric(Matrix4d mat, ref Vector4d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w)));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, Math.fma(mat.m22, z, mat.m32 * w)));
@@ -756,7 +756,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d mulAffineTranspose(Matrix4d mat, Vector4d dest) {
+    public Vector4d mulAffineTranspose(Matrix4d mat, ref Vector4d dest) {
         double x = this.x, y = this.y, z = this.z, w = this.w;
         dest.x = Math.fma(mat.m00, x, Math.fma(mat.m01, y, mat.m02 * z));
         dest.y = Math.fma(mat.m10, x, Math.fma(mat.m11, y, mat.m12 * z));
@@ -764,7 +764,7 @@ struct Vector4d {
         dest.w = Math.fma(mat.m30, x, Math.fma(mat.m31, y, mat.m32 * z + w));
         return dest;
     }
-    private Vector4d mulGenericTranspose(Matrix4d mat, Vector4d dest) {
+    private Vector4d mulGenericTranspose(Matrix4d mat, ref Vector4d dest) {
         double x = this.x, y = this.y, z = this.z, w = this.w;
         dest.x = Math.fma(mat.m00, x, Math.fma(mat.m01, y, Math.fma(mat.m02, z, mat.m03 * w)));
         dest.y = Math.fma(mat.m10, x, Math.fma(mat.m11, y, Math.fma(mat.m12, z, mat.m13 * w)));
@@ -791,7 +791,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d mul(Matrix4x3d mat, Vector4d dest) {
+    public Vector4d mul(Matrix4x3d mat, ref Vector4d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w)));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, Math.fma(mat.m22, z, mat.m32 * w)));
@@ -802,7 +802,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d mulProject(Matrix4d mat, Vector4d dest) {
+    public Vector4d mulProject(Matrix4d mat, ref Vector4d dest) {
         double invW = 1.0 / Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33 * w)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w))) * invW;
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w))) * invW;
@@ -833,7 +833,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector3d mulProject(Matrix4d mat, Vector3d dest) {
+    public Vector3d mulProject(Matrix4d mat, ref Vector3d dest) {
         double invW = 1.0 / Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33 * w)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w))) * invW;
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w))) * invW;
@@ -859,7 +859,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d mul(double scalar, Vector4d dest) {
+    public Vector4d mul(double scalar, ref Vector4d dest) {
         dest.x = x * scalar;
         dest.y = y * scalar;
         dest.z = z * scalar;
@@ -883,7 +883,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d div(double scalar, Vector4d dest) {
+    public Vector4d div(double scalar, ref Vector4d dest) {
         double inv = 1.0 / scalar;
         dest.x = x * inv;
         dest.y = y * inv;
@@ -906,7 +906,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d rotate(Quaterniond quat, Vector4d dest) {
+    public Vector4d rotate(Quaterniond quat, ref Vector4d dest) {
         quat.transform(this, dest);
         return dest;
     }
@@ -934,7 +934,7 @@ struct Vector4d {
         return rotateAxisInternal(angle, x, y, z, this);
     }
 
-    public Vector4d rotateAxis(double angle, double aX, double aY, double aZ, Vector4d dest) {
+    public Vector4d rotateAxis(double angle, double aX, double aY, double aZ, ref Vector4d dest) {
         if (aY == 0.0 && aZ == 0.0 && Math.absEqualsOne(aX))
             return rotateX(aX * angle, dest);
         else if (aX == 0.0 && aZ == 0.0 && Math.absEqualsOne(aY))
@@ -943,7 +943,7 @@ struct Vector4d {
             return rotateZ(aZ * angle, dest);
         return rotateAxisInternal(angle, aX, aY, aZ, dest);
     }
-    private Vector4d rotateAxisInternal(double angle, double aX, double aY, double aZ, Vector4d dest) {
+    private Vector4d rotateAxisInternal(double angle, double aX, double aY, double aZ, ref Vector4d dest) {
         double hangle = angle * 0.5;
         double sinAngle = Math.sin(hangle);
         double qx = aX * sinAngle, qy = aY * sinAngle, qz = aZ * sinAngle;
@@ -975,7 +975,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d rotateX(double angle, Vector4d dest) {
+    public Vector4d rotateX(double angle, ref Vector4d dest) {
         double sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
         double y = this.y * cos - this.z * sin;
         double z = this.y * sin + this.z * cos;
@@ -1002,7 +1002,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d rotateY(double angle, Vector4d dest) {
+    public Vector4d rotateY(double angle, ref Vector4d dest) {
         double sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
         double x =  this.x * cos + this.z * sin;
         double z = -this.x * sin + this.z * cos;
@@ -1029,7 +1029,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d rotateZ(double angle, Vector4d dest) {
+    public Vector4d rotateZ(double angle, ref Vector4d dest) {
         double sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
         double x = this.x * cos - this.y * sin;
         double y = this.x * sin + this.y * cos;
@@ -1094,7 +1094,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d normalize(Vector4d dest) {
+    public Vector4d normalize(ref Vector4d dest) {
         double invLength = 1.0 / length();
         dest.x = x * invLength;
         dest.y = y * invLength;
@@ -1119,7 +1119,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d normalize(double length, Vector4d dest) {
+    public Vector4d normalize(double length, ref Vector4d dest) {
         double invLength = 1.0 / this.length * length;
         dest.x = x * invLength;
         dest.y = y * invLength;
@@ -1142,7 +1142,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d normalize3(Vector4d dest) {
+    public Vector4d normalize3(ref Vector4d dest) {
         double invLength = Math.invsqrt(Math.fma(x, x, Math.fma(y, y, z * z)));
         dest.x = x * invLength;
         dest.y = y * invLength;
@@ -1290,7 +1290,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d negate(Vector4d dest) {
+    public Vector4d negate(ref Vector4d dest) {
         dest.x = -x;
         dest.y = -y;
         dest.z = -z;
@@ -1313,7 +1313,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d min(Vector4d v, Vector4d dest) {
+    public Vector4d min(Vector4d v, ref Vector4d dest) {
         dest.x = x < v.x ? x : v.x;
         dest.y = y < v.y ? y : v.y;
         dest.z = z < v.z ? z : v.z;
@@ -1336,7 +1336,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d max(Vector4d v, Vector4d dest) {
+    public Vector4d max(Vector4d v, ref Vector4d dest) {
         dest.x = x > v.x ? x : v.x;
         dest.y = y > v.y ? y : v.y;
         dest.z = z > v.z ? z : v.z;
@@ -1386,7 +1386,7 @@ struct Vector4d {
         return true;
     }
 
-    public Vector4d smoothStep(Vector4d v, double t, Vector4d dest) {
+    public Vector4d smoothStep(Vector4d v, double t, ref Vector4d dest) {
         double t2 = t * t;
         double t3 = t2 * t;
         dest.x = (x + x - v.x - v.x) * t3 + (3.0 * v.x - 3.0 * x) * t2 + x * t + x;
@@ -1396,7 +1396,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d hermite(Vector4d t0, Vector4d v1, Vector4d t1, double t, Vector4d dest) {
+    public Vector4d hermite(Vector4d t0, Vector4d v1, Vector4d t1, double t, ref Vector4d dest) {
         double t2 = t * t;
         double t3 = t2 * t;
         dest.x = (x + x - v1.x - v1.x + t1.x + t0.x) * t3 + (3.0 * v1.x - 3.0 * x - t0.x - t0.x - t1.x) * t2 + x * t + x;
@@ -1427,7 +1427,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d lerp(Vector4d other, double t, Vector4d dest) {
+    public Vector4d lerp(Vector4d other, double t, ref Vector4d dest) {
         dest.x = Math.fma(other.x - x, t, x);
         dest.y = Math.fma(other.y - y, t, y);
         dest.z = Math.fma(other.z - z, t, z);
@@ -1450,7 +1450,7 @@ struct Vector4d {
         }
     }
 
-    public Vector4i get(int mode, Vector4i dest) {
+    public Vector4i get(int mode, ref Vector4i dest) {
         dest.x = Math.roundUsing(this.x, mode);
         dest.y = Math.roundUsing(this.y, mode);
         dest.z = Math.roundUsing(this.z, mode);
@@ -1458,7 +1458,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d get(Vector4d dest) {
+    public Vector4d get(ref Vector4d dest) {
         dest.x = this.x;
         dest.y = this.y;
         dest.z = this.z;
@@ -1511,7 +1511,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d floor(Vector4d dest) {
+    public Vector4d floor(ref Vector4d dest) {
         dest.x = Math.floor(x);
         dest.y = Math.floor(y);
         dest.z = Math.floor(z);
@@ -1534,7 +1534,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d ceil(Vector4d dest) {
+    public Vector4d ceil(ref Vector4d dest) {
         dest.x = Math.ceil(x);
         dest.y = Math.ceil(y);
         dest.z = Math.ceil(z);
@@ -1556,7 +1556,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d round(Vector4d dest) {
+    public Vector4d round(ref Vector4d dest) {
         dest.x = Math.round(x);
         dest.y = Math.round(y);
         dest.z = Math.round(z);
@@ -1581,7 +1581,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d absolute(Vector4d dest) {
+    public Vector4d absolute(ref Vector4d dest) {
         dest.x = Math.abs(x);
         dest.y = Math.abs(y);
         dest.z = Math.abs(z);
