@@ -277,7 +277,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i sub(Vector2i v, Vector2i dest) {
+    public Vector2i sub(Vector2i v, ref Vector2i dest) {
         dest.x = x - v.x;
         dest.y = y - v.y;
         return dest;
@@ -298,7 +298,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i sub(int x, int y, Vector2i dest) {
+    public Vector2i sub(int x, int y, ref Vector2i dest) {
         dest.x = this.x - x;
         dest.y = this.y - y;
         return dest;
@@ -419,7 +419,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i add(Vector2i v, Vector2i dest) {
+    public Vector2i add(Vector2i v, ref Vector2i dest) {
         dest.x = x + v.x;
         dest.y = y + v.y;
         return dest;
@@ -440,7 +440,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i add(int x, int y, Vector2i dest) {
+    public Vector2i add(int x, int y, ref Vector2i dest) {
         dest.x = this.x + x;
         dest.y = this.y + y;
         return dest;
@@ -460,7 +460,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i mul(int scalar, Vector2i dest) {
+    public Vector2i mul(int scalar, ref Vector2i dest) {
         dest.x = x * scalar;
         dest.y = y * scalar;
         return dest;
@@ -479,7 +479,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i mul(Vector2i v, Vector2i dest) {
+    public Vector2i mul(Vector2i v, ref Vector2i dest) {
         dest.x = x * v.x;
         dest.y = y * v.y;
         return dest;
@@ -500,7 +500,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i mul(int x, int y, Vector2i dest) {
+    public Vector2i mul(int x, int y, ref Vector2i dest) {
         dest.x = this.x * x;
         dest.y = this.y * y;
         return dest;
@@ -520,7 +520,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i div(float scalar, Vector2i dest) {
+    public Vector2i div(float scalar, ref Vector2i dest) {
         float invscalar = 1.0f / scalar;
         dest.x = cast(int) (x * invscalar);
         dest.y = cast(int) (y * invscalar);
@@ -540,7 +540,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i div(int scalar, Vector2i dest) {
+    public Vector2i div(int scalar, ref Vector2i dest) {
         dest.x = x / scalar;
         dest.y = y / scalar;
         return dest;
@@ -569,7 +569,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i negate(Vector2i dest) {
+    public Vector2i negate(ref Vector2i dest) {
         dest.x = -x;
         dest.y = -y;
         return dest;
@@ -588,7 +588,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i min(Vector2i v, Vector2i dest) {
+    public Vector2i min(Vector2i v, ref Vector2i dest) {
         dest.x = x < v.x ? x : v.x;
         dest.y = y < v.y ? y : v.y;
         return dest;
@@ -607,7 +607,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i max(Vector2i v, Vector2i dest) {
+    public Vector2i max(Vector2i v, ref Vector2i dest) {
         dest.x = x > v.x ? x : v.x;
         dest.y = y > v.y ? y : v.y;
         return dest;
@@ -640,7 +640,7 @@ struct Vector2i {
         return this;
     }
 
-    public Vector2i absolute(Vector2i dest) {
+    public Vector2i absolute(ref Vector2i dest) {
         dest.x = Math.abs(this.x);
         dest.y = Math.abs(this.y);
         return dest;
