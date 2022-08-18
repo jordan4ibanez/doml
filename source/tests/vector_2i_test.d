@@ -1,13 +1,16 @@
-module tests.matrix_2i_test;
+module tests.vector_2i_test;
 
+import std.stdio;
 import tests.dunit_tests;
 import vector_2i;
+import vector_2d;
 import rounding_mode;
 
 /*
  * The MIT License
  *
  * Copyright (c) 2015-2021 JOML.
+ ^%$^%$^ Translated by jordan4ibanez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,17 +36,19 @@ import rounding_mode;
  */
 void testVector2i() {
 
-    Vector2i v1 = Vector2i(0.0f,.6f, RoundingMode.FLOOR);
-    Vector2i v2 = Vector2i(9.5f,1.6f, RoundingMode.FLOOR);
+    writeln("\nBEGINNING GENERAL VECTOR2I TEST\n");
 
-    Vector2i v3 = Vector2i(Vector2f(0.0f,.6f), RoundingMode.FLOOR);
-    Vector2i v4 = Vector2i(Vector2d(9.5f,1.6f), RoundingMode.FLOOR);
+    Vector2i v1 = Vector2i(0.0,.6, RoundingMode.FLOOR);
+    Vector2i v2 = Vector2i(9.5,1.6, RoundingMode.FLOOR);
 
-    Vector2i v5 = Vector2i(0.0f,.6f, RoundingMode.CEILING);
-    Vector2i v6 = Vector2i(9.5f,1.6f, RoundingMode.CEILING);
+    Vector2i v3 = Vector2i(Vector2d(0.0,.6), RoundingMode.FLOOR);
+    Vector2i v4 = Vector2i(Vector2d(9.5,1.6), RoundingMode.FLOOR);
 
-    Vector2i v7 = Vector2i(Vector2f(0.0f,.6f), RoundingMode.CEILING);
-    Vector2i v8 = Vector2i(Vector2d(9.5f,1.6f), RoundingMode.CEILING);
+    Vector2i v5 = Vector2i(0.0,.6, RoundingMode.CEILING);
+    Vector2i v6 = Vector2i(9.5,1.6, RoundingMode.CEILING);
+
+    Vector2i v7 = Vector2i(Vector2d(0.0,.6), RoundingMode.CEILING);
+    Vector2i v8 = Vector2i(Vector2d(9.5,1.6), RoundingMode.CEILING);
 
     assertEquals(v1, Vector2i(0,0));
     assertEquals(v2, Vector2i(9,1));
@@ -57,4 +62,5 @@ void testVector2i() {
     assertEquals(v7, Vector2i(0,1));
     assertEquals(v8, Vector2i(10,2));
 
+    writeln("PASSED!");
 }
