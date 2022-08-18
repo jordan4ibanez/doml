@@ -1,5 +1,7 @@
 module geometry_utils;
 
+import Math = math;
+
 import vector_2d;
 import vector_3d;
 
@@ -98,7 +100,7 @@ public static void perpendicular(float x, float y, float z, Vector3d dest1, Vect
     *            will hold the second perpendicular vector
     */
 public static void perpendicular(Vector3d v, Vector3d dest1, Vector3d dest2) {
-    perpendicular(v.x(), v.y(), v.z(), dest1, dest2);
+    perpendicular(v.x, v.y, v.z, dest1, dest2);
 }
 
 /**
@@ -114,7 +116,7 @@ public static void perpendicular(Vector3d v, Vector3d dest1, Vector3d dest2) {
     *            will hold the result
     */
 public static void normal(Vector3d v0, Vector3d v1, Vector3d v2, Vector3d dest) {
-    normal(v0.x(), v0.y(), v0.z(), v1.x(), v1.y(), v1.z(), v2.x(), v2.y(), v2.z(), dest);
+    normal(v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, dest);
 }
 
 /**
@@ -168,14 +170,14 @@ public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y,
     *            the tangent will be stored here
     */
 public static void tangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2, Vector3d v3, Vector2d uv3, Vector3d dest) {
-    float DeltaV1 = uv2.y() - uv1.y();
-    float DeltaV2 = uv3.y() - uv1.y();
+    float DeltaV1 = uv2.y - uv1.y;
+    float DeltaV2 = uv3.y - uv1.y;
 
-    float f = 1.0f / ((uv2.x() - uv1.x()) * DeltaV2 - (uv3.x() - uv1.x()) * DeltaV1);
+    float f = 1.0f / ((uv2.x - uv1.x) * DeltaV2 - (uv3.x - uv1.x) * DeltaV1);
 
-    dest.x = f * (DeltaV2 * (v2.x() - v1.x()) - DeltaV1 * (v3.x() - v1.x()));
-    dest.y = f * (DeltaV2 * (v2.y() - v1.y()) - DeltaV1 * (v3.y() - v1.y()));
-    dest.z = f * (DeltaV2 * (v2.z() - v1.z()) - DeltaV1 * (v3.z() - v1.z()));
+    dest.x = f * (DeltaV2 * (v2.x - v1.x) - DeltaV1 * (v3.x - v1.x));
+    dest.y = f * (DeltaV2 * (v2.y - v1.y) - DeltaV1 * (v3.y - v1.y));
+    dest.z = f * (DeltaV2 * (v2.z - v1.z) - DeltaV1 * (v3.z - v1.z));
     dest.normalize();
 }
 
@@ -198,14 +200,14 @@ public static void tangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2,
     *            the binormal will be stored here
     */
 public static void bitangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2, Vector3d v3, Vector2d uv3, Vector3d dest) {
-    float DeltaU1 = uv2.x() - uv1.x();
-    float DeltaU2 = uv3.x() - uv1.x();
+    float DeltaU1 = uv2.x - uv1.x;
+    float DeltaU2 = uv3.x - uv1.x;
 
-    float f = 1.0f / (DeltaU1 * (uv3.y() - uv1.y()) - DeltaU2 * (uv2.y() - uv1.y()));
+    float f = 1.0f / (DeltaU1 * (uv3.y - uv1.y) - DeltaU2 * (uv2.y - uv1.y));
 
-    dest.x = f * (-DeltaU2 * (v2.x() - v1.x()) + DeltaU1 * (v3.x() - v1.x()));
-    dest.y = f * (-DeltaU2 * (v2.y() - v1.y()) + DeltaU1 * (v3.y() - v1.y()));
-    dest.z = f * (-DeltaU2 * (v2.z() - v1.z()) + DeltaU1 * (v3.z() - v1.z()));
+    dest.x = f * (-DeltaU2 * (v2.x - v1.x) + DeltaU1 * (v3.x - v1.x));
+    dest.y = f * (-DeltaU2 * (v2.y - v1.y) + DeltaU1 * (v3.y - v1.y));
+    dest.z = f * (-DeltaU2 * (v2.z - v1.z) + DeltaU1 * (v3.z - v1.z));
     dest.normalize();
 }
 
@@ -230,20 +232,20 @@ public static void bitangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv
     *            the bitangent will be stored here
     */
 public static void tangentBitangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2, Vector3d v3, Vector2d uv3, Vector3d destTangent, Vector3d destBitangent) {
-    float DeltaV1 = uv2.y() - uv1.y();
-    float DeltaV2 = uv3.y() - uv1.y();
-    float DeltaU1 = uv2.x() - uv1.x();
-    float DeltaU2 = uv3.x() - uv1.x();
+    float DeltaV1 = uv2.y - uv1.y;
+    float DeltaV2 = uv3.y - uv1.y;
+    float DeltaU1 = uv2.x - uv1.x;
+    float DeltaU2 = uv3.x - uv1.x;
 
     float f = 1.0f / (DeltaU1 * DeltaV2 - DeltaU2 * DeltaV1);
 
-    destTangent.x = f * (DeltaV2 * (v2.x() - v1.x()) - DeltaV1 * (v3.x() - v1.x()));
-    destTangent.y = f * (DeltaV2 * (v2.y() - v1.y()) - DeltaV1 * (v3.y() - v1.y()));
-    destTangent.z = f * (DeltaV2 * (v2.z() - v1.z()) - DeltaV1 * (v3.z() - v1.z()));
+    destTangent.x = f * (DeltaV2 * (v2.x - v1.x) - DeltaV1 * (v3.x - v1.x));
+    destTangent.y = f * (DeltaV2 * (v2.y - v1.y) - DeltaV1 * (v3.y - v1.y));
+    destTangent.z = f * (DeltaV2 * (v2.z - v1.z) - DeltaV1 * (v3.z - v1.z));
     destTangent.normalize();
 
-    destBitangent.x = f * (-DeltaU2 * (v2.x() - v1.x()) + DeltaU1 * (v3.x() - v1.x()));
-    destBitangent.y = f * (-DeltaU2 * (v2.y() - v1.y()) + DeltaU1 * (v3.y() - v1.y()));
-    destBitangent.z = f * (-DeltaU2 * (v2.z() - v1.z()) + DeltaU1 * (v3.z() - v1.z()));
+    destBitangent.x = f * (-DeltaU2 * (v2.x - v1.x) + DeltaU1 * (v3.x - v1.x));
+    destBitangent.y = f * (-DeltaU2 * (v2.y - v1.y) + DeltaU1 * (v3.y - v1.y));
+    destBitangent.z = f * (-DeltaU2 * (v2.z - v1.z) + DeltaU1 * (v3.z - v1.z));
     destBitangent.normalize();
 }
