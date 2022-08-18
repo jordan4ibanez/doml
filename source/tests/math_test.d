@@ -51,15 +51,10 @@ void testMath() {
     assert(Math.clamp(10,20,12) == 12);
     assert(Math.clamp(10,20,30) == 20);
 
-    // float value tests
-    assertEquals(Math.clamp(10f,20f,0f),10f, 1000); // .0001f 10000
-    assertEquals(Math.clamp(10f,20f,12f),12f, 1000); // .0001f
-    assertEquals(Math.clamp(10f,20f,30f),20f, 1000); // .0001f
-
     // double value tests
-    assertEquals(Math.clamp(10.0,20.0,0.0),10.0, 1000);
-    assertEquals(Math.clamp(10.0,20.0,12.0),12.0, 1000);
-    assertEquals(Math.clamp(10.0,20.0,30.0),20.0, 1000);
+    assertEquals(Math.clamp(10.0,20.0,0.0),10.0, 1000);  // .0001f 10000
+    assertEquals(Math.clamp(10.0,20.0,12.0),12.0, 1000); // .0001f 10000
+    assertEquals(Math.clamp(10.0,20.0,30.0),20.0, 1000); // .0001f 10000
     writeln("PASSED!");
 
     
@@ -77,14 +72,6 @@ void testMath() {
     writeln("PASSED!");
     writeln("BEGINNING VECTOR INFINITE TEST");
 
-    
-    // floating point value tests
-    assertFalse(Math.isFinite(float.nan));
-    assertTrue(Math.isFinite(1.0f));
-    assertTrue(Math.isFinite(-1.0f));
-    assertFalse(Math.isFinite(float.infinity));
-    assertFalse(Math.isFinite(-float.infinity));
-
     // double point value tests
     assertFalse(Math.isFinite(double.nan));
     assertTrue(Math.isFinite(1.0));
@@ -96,58 +83,58 @@ void testMath() {
     writeln("BEGINNING ROUNDING TEST");
     
     // TRUNCATE
-    assertEquals(0, Math.roundUsing(0.2f, RoundingMode.TRUNCATE));
-    assertEquals(0, Math.roundUsing(0.5f, RoundingMode.TRUNCATE));
-    assertEquals(0, Math.roundUsing(0.9f, RoundingMode.TRUNCATE));
-    assertEquals(1, Math.roundUsing(1.0f, RoundingMode.TRUNCATE));
-    assertEquals(0, Math.roundUsing(-0.2f, RoundingMode.TRUNCATE));
-    assertEquals(0, Math.roundUsing(-0.5f, RoundingMode.TRUNCATE));
-    assertEquals(0, Math.roundUsing(-0.9f, RoundingMode.TRUNCATE));
-    assertEquals(-1, Math.roundUsing(-1.0f, RoundingMode.TRUNCATE));
+    assertEquals(0, Math.roundUsing(0.2, RoundingMode.TRUNCATE));
+    assertEquals(0, Math.roundUsing(0.5, RoundingMode.TRUNCATE));
+    assertEquals(0, Math.roundUsing(0.9, RoundingMode.TRUNCATE));
+    assertEquals(1, Math.roundUsing(1.0, RoundingMode.TRUNCATE));
+    assertEquals(0, Math.roundUsing(-0.2, RoundingMode.TRUNCATE));
+    assertEquals(0, Math.roundUsing(-0.5, RoundingMode.TRUNCATE));
+    assertEquals(0, Math.roundUsing(-0.9, RoundingMode.TRUNCATE));
+    assertEquals(-1, Math.roundUsing(-1.0, RoundingMode.TRUNCATE));
     // CEILING
-    assertEquals(1, Math.roundUsing(0.2f, RoundingMode.CEILING));
-    assertEquals(1, Math.roundUsing(0.5f, RoundingMode.CEILING));
-    assertEquals(1, Math.roundUsing(0.9f, RoundingMode.CEILING));
-    assertEquals(1, Math.roundUsing(1.0f, RoundingMode.CEILING));
-    assertEquals(0, Math.roundUsing(-0.2f, RoundingMode.CEILING));
-    assertEquals(0, Math.roundUsing(-0.5f, RoundingMode.CEILING));
-    assertEquals(0, Math.roundUsing(-0.9f, RoundingMode.CEILING));
-    assertEquals(-1, Math.roundUsing(-1.0f, RoundingMode.CEILING));
+    assertEquals(1, Math.roundUsing(0.2, RoundingMode.CEILING));
+    assertEquals(1, Math.roundUsing(0.5, RoundingMode.CEILING));
+    assertEquals(1, Math.roundUsing(0.9, RoundingMode.CEILING));
+    assertEquals(1, Math.roundUsing(1.0, RoundingMode.CEILING));
+    assertEquals(0, Math.roundUsing(-0.2, RoundingMode.CEILING));
+    assertEquals(0, Math.roundUsing(-0.5, RoundingMode.CEILING));
+    assertEquals(0, Math.roundUsing(-0.9, RoundingMode.CEILING));
+    assertEquals(-1, Math.roundUsing(-1.0, RoundingMode.CEILING));
     // FLOOR
-    assertEquals(0, Math.roundUsing(0.2f, RoundingMode.FLOOR));
-    assertEquals(0, Math.roundUsing(0.5f, RoundingMode.FLOOR));
-    assertEquals(0, Math.roundUsing(0.9f, RoundingMode.FLOOR));
-    assertEquals(1, Math.roundUsing(1.0f, RoundingMode.FLOOR));
-    assertEquals(-1, Math.roundUsing(-0.2f, RoundingMode.FLOOR));
-    assertEquals(-1, Math.roundUsing(-0.5f, RoundingMode.FLOOR));
-    assertEquals(-1, Math.roundUsing(-0.9f, RoundingMode.FLOOR));
-    assertEquals(-1, Math.roundUsing(-1.0f, RoundingMode.FLOOR));
+    assertEquals(0, Math.roundUsing(0.2, RoundingMode.FLOOR));
+    assertEquals(0, Math.roundUsing(0.5, RoundingMode.FLOOR));
+    assertEquals(0, Math.roundUsing(0.9, RoundingMode.FLOOR));
+    assertEquals(1, Math.roundUsing(1.0, RoundingMode.FLOOR));
+    assertEquals(-1, Math.roundUsing(-0.2, RoundingMode.FLOOR));
+    assertEquals(-1, Math.roundUsing(-0.5, RoundingMode.FLOOR));
+    assertEquals(-1, Math.roundUsing(-0.9, RoundingMode.FLOOR));
+    assertEquals(-1, Math.roundUsing(-1.0, RoundingMode.FLOOR));
     // HALF_DOWN
-    assertEquals(0, Math.roundUsing(0.2f, RoundingMode.HALF_DOWN));
-    assertEquals(0, Math.roundUsing(0.5f, RoundingMode.HALF_DOWN));
-    assertEquals(1, Math.roundUsing(0.9f, RoundingMode.HALF_DOWN));
-    assertEquals(1, Math.roundUsing(1.0f, RoundingMode.HALF_DOWN));
-    assertEquals(0, Math.roundUsing(-0.2f, RoundingMode.HALF_DOWN));
-    assertEquals(0, Math.roundUsing(-0.5f, RoundingMode.HALF_DOWN));
-    assertEquals(-1, Math.roundUsing(-0.9f, RoundingMode.HALF_DOWN));
-    assertEquals(-1, Math.roundUsing(-1.0f, RoundingMode.HALF_DOWN));
+    assertEquals(0, Math.roundUsing(0.2, RoundingMode.HALF_DOWN));
+    assertEquals(0, Math.roundUsing(0.5, RoundingMode.HALF_DOWN));
+    assertEquals(1, Math.roundUsing(0.9, RoundingMode.HALF_DOWN));
+    assertEquals(1, Math.roundUsing(1.0, RoundingMode.HALF_DOWN));
+    assertEquals(0, Math.roundUsing(-0.2, RoundingMode.HALF_DOWN));
+    assertEquals(0, Math.roundUsing(-0.5, RoundingMode.HALF_DOWN));
+    assertEquals(-1, Math.roundUsing(-0.9, RoundingMode.HALF_DOWN));
+    assertEquals(-1, Math.roundUsing(-1.0, RoundingMode.HALF_DOWN));
     // HALF_UP
-    assertEquals(0, Math.roundUsing(0.2f, RoundingMode.HALF_UP));
-    assertEquals(1, Math.roundUsing(0.5f, RoundingMode.HALF_UP));
-    assertEquals(1, Math.roundUsing(0.9f, RoundingMode.HALF_UP));
-    assertEquals(1, Math.roundUsing(1.0f, RoundingMode.HALF_UP));
-    assertEquals(0, Math.roundUsing(-0.2f, RoundingMode.HALF_UP));
-    assertEquals(-1, Math.roundUsing(-0.5f, RoundingMode.HALF_UP));
-    assertEquals(-1, Math.roundUsing(-0.9f, RoundingMode.HALF_UP));
-    assertEquals(-1, Math.roundUsing(-1.0f, RoundingMode.HALF_UP));
+    assertEquals(0, Math.roundUsing(0.2, RoundingMode.HALF_UP));
+    assertEquals(1, Math.roundUsing(0.5, RoundingMode.HALF_UP));
+    assertEquals(1, Math.roundUsing(0.9, RoundingMode.HALF_UP));
+    assertEquals(1, Math.roundUsing(1.0, RoundingMode.HALF_UP));
+    assertEquals(0, Math.roundUsing(-0.2, RoundingMode.HALF_UP));
+    assertEquals(-1, Math.roundUsing(-0.5, RoundingMode.HALF_UP));
+    assertEquals(-1, Math.roundUsing(-0.9, RoundingMode.HALF_UP));
+    assertEquals(-1, Math.roundUsing(-1.0, RoundingMode.HALF_UP));
     // HALF_EVEN
-    assertEquals(0, Math.roundUsing(0.2f, RoundingMode.HALF_EVEN));
-    assertEquals(0, Math.roundUsing(0.5f, RoundingMode.HALF_EVEN));
-    assertEquals(1, Math.roundUsing(0.9f, RoundingMode.HALF_EVEN));
-    assertEquals(1, Math.roundUsing(1.0f, RoundingMode.HALF_EVEN));
-    assertEquals(0, Math.roundUsing(-0.2f, RoundingMode.HALF_EVEN));
-    assertEquals(0, Math.roundUsing(-0.5f, RoundingMode.HALF_EVEN));
-    assertEquals(-1, Math.roundUsing(-0.9f, RoundingMode.HALF_EVEN));
-    assertEquals(-1, Math.roundUsing(-1.0f, RoundingMode.HALF_EVEN));
+    assertEquals(0, Math.roundUsing(0.2, RoundingMode.HALF_EVEN));
+    assertEquals(0, Math.roundUsing(0.5, RoundingMode.HALF_EVEN));
+    assertEquals(1, Math.roundUsing(0.9, RoundingMode.HALF_EVEN));
+    assertEquals(1, Math.roundUsing(1.0, RoundingMode.HALF_EVEN));
+    assertEquals(0, Math.roundUsing(-0.2, RoundingMode.HALF_EVEN));
+    assertEquals(0, Math.roundUsing(-0.5, RoundingMode.HALF_EVEN));
+    assertEquals(-1, Math.roundUsing(-0.9, RoundingMode.HALF_EVEN));
+    assertEquals(-1, Math.roundUsing(-1.0, RoundingMode.HALF_EVEN));
     writeln("PASSED!");
 }
