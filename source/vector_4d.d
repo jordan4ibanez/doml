@@ -695,6 +695,25 @@ struct Vector4d {
     }
 
     /**
+     * Multiply the given matrix <code>mat</code> with this {@link Vector4d}.
+     * 
+     * @param mat
+     *          the matrix to multiply by
+     * @return this
+     */
+    public Vector4d mul(Matrix4d mat) {
+        if ((mat.properties & Matrix4f.PROPERTY_AFFINE) != 0)
+            return mulAffine(mat, this);
+        return mulGeneric(mat, this);
+    }
+
+    public Vector4d mul(Matrix4d mat, Vector4d dest) {
+        if ((mat.properties() & Matrix4d.PROPERTY_AFFINE) != 0)
+            return mulAffine(mat, dest);
+        return mulGeneric(mat, dest);
+    }
+
+    /**
      * Multiply the transpose of the given matrix <code>mat</code> with this Vector4f and store the result in
      * <code>this</code>.
      * 
