@@ -10,3 +10,5 @@ JOML translated to D with a few changes:
 - Simplified using D's strengths
 
 Currently Translating: Vector_2i
+
+## If you find anything wrong in any of the translations, open a commit or a problem :)
