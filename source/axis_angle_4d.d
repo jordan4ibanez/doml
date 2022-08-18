@@ -1,5 +1,7 @@
 module axis_angle_4d;
 
+import Math = math;
+
 import matrix_3d;
 import matrix_4d;
 
