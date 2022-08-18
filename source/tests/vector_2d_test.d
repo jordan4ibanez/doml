@@ -54,10 +54,12 @@ void testVector2d() {
         assertEquals(Math.PI, angle, MANY_OPS_AROUND_ZERO_PRECISION_DOUBLE);
     }
 
-    /*
-    public static void testPerpendicular(){
-        Vector2d testVec1 = new Vector2d(-9.37, 5.892);
-        TestUtil.assertVector2dEquals(new Vector2d(testVec1).perpendicular(),new Vector2d(5.892,9.37),0.000001);
+    writeln("PASSED!");
+
+    writeln("BEGIN PERPINDICULAR");
+    {
+        Vector2d testVec1 = Vector2d(-9.37, 5.892);
+        assertVector2dEquals(Vector2d(testVec1).perpendicular(),Vector2d(5.892,9.37),0.000001);
     }
-    */
+    writeln("PASSED!");
 }
