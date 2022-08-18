@@ -1,5 +1,7 @@
 module vector_3i;
 
+import Math = math;
+
 import vector_2i;
 import vector_2d;
 import vector_3d;
@@ -89,9 +91,9 @@ struct Vector3i {
      *          the {@link Vector3i} to copy the values from
      */
     this(Vector3i v) {
-        this.x = v.x();
-        this.y = v.y();
-        this.z = v.z();
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
     }
 
     /**
@@ -104,8 +106,8 @@ struct Vector3i {
      *          the z component
      */
     this(Vector2i v, int z) {
-        this.x = v.x();
-        this.y = v.y();
+        this.x = v.x;
+        this.y = v.y;
         this.z = z;
     }
 
@@ -159,8 +161,8 @@ struct Vector3i {
      *          the {@link RoundingMode} to use
      */
     this(Vector2d v, float z, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
+        this.x = Math.roundUsing(v.x, mode);
+        this.y = Math.roundUsing(v.y, mode);
         this.z = Math.roundUsing(z, mode);
     }
 
@@ -174,9 +176,9 @@ struct Vector3i {
      *          the {@link RoundingMode} to use
      */
     this(Vector3d v, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
-        this.z = Math.roundUsing(v.z(), mode);
+        this.x = Math.roundUsing(v.x, mode);
+        this.y = Math.roundUsing(v.y, mode);
+        this.z = Math.roundUsing(v.z, mode);
     }
 
     /**
@@ -200,9 +202,9 @@ struct Vector3i {
      * @return this
      */
     public Vector3i set(Vector3i v) {
-        x = v.x();
-        y = v.y();
-        z = v.z();
+        x = v.x;
+        y = v.y;
+        z = v.z;
         return this;
     }
 
@@ -217,9 +219,9 @@ struct Vector3i {
      * @return this
      */
     public Vector3i set(Vector3d v) {
-        this.x = cast(int) v.x();
-        this.y = cast(int) v.y();
-        this.z = cast(int) v.z();
+        this.x = cast(int) v.x;
+        this.y = cast(int) v.y;
+        this.z = cast(int) v.z;
         return this;
     }
 
@@ -236,9 +238,9 @@ struct Vector3i {
      * @return this
      */
     public Vector3i set(Vector3d v, int mode) {
-        this.x = Math.roundUsing(v.x(), mode);
-        this.y = Math.roundUsing(v.y(), mode);
-        this.z = Math.roundUsing(v.z(), mode);
+        this.x = Math.roundUsing(v.x, mode);
+        this.y = Math.roundUsing(v.y, mode);
+        this.z = Math.roundUsing(v.z, mode);
         return this;
     }
 
@@ -254,8 +256,8 @@ struct Vector3i {
      * @return this
      */
     public Vector3i set(Vector2i v, int z) {
-        this.x = v.x();
-        this.y = v.y();
+        this.x = v.x;
+        this.y = v.y;
         this.z = z;
         return this;
     }
@@ -314,7 +316,8 @@ struct Vector3i {
             return y;
         case 2:
             return z;
-        default: {}
+        default:
+            return 0; // do nothing
         }
     }
 
@@ -353,16 +356,16 @@ struct Vector3i {
      * @return this
      */
     public Vector3i sub(Vector3i v) {
-        this.x = this.x - v.x();
-        this.y = this.y - v.y();
-        this.z = this.z - v.z();
+        this.x = this.x - v.x;
+        this.y = this.y - v.y;
+        this.z = this.z - v.z;
         return this;
     }
 
     public Vector3i sub(Vector3i v, Vector3i dest) {
-        dest.x = x - v.x();
-        dest.y = y - v.y();
-        dest.z = z - v.z();
+        dest.x = x - v.x;
+        dest.y = y - v.y;
+        dest.z = z - v.z;
         return dest;
     }
 
@@ -399,16 +402,16 @@ struct Vector3i {
      * @return this
      */
     public Vector3i add(Vector3i v) {
-        this.x = this.x + v.x();
-        this.y = this.y + v.y();
-        this.z = this.z + v.z();
+        this.x = this.x + v.x;
+        this.y = this.y + v.y;
+        this.z = this.z + v.z;
         return this;
     }
 
     public Vector3i add(Vector3i v, Vector3i dest) {
-        dest.x = x + v.x();
-        dest.y = y + v.y();
-        dest.z = z + v.z();
+        dest.x = x + v.x;
+        dest.y = y + v.y;
+        dest.z = z + v.z;
         return dest;
     }
 
@@ -467,16 +470,16 @@ struct Vector3i {
      * @return this
      */
     public Vector3i mul(Vector3i v) {
-        this.x = this.x * v.x();
-        this.y = this.y * v.y();
-        this.z = this.z * v.z();
+        this.x = this.x * v.x;
+        this.y = this.y * v.y;
+        this.z = this.z * v.z;
         return this;
     }
 
     public Vector3i mul(Vector3i v, Vector3i dest) {
-        dest.x = x * v.x();
-        dest.y = y * v.y();
-        dest.z = z * v.z();
+        dest.x = x * v.x;
+        dest.y = y * v.y;
+        dest.z = z * v.z;
         return dest;
     }
 
@@ -584,9 +587,9 @@ struct Vector3i {
     }
 
     public double distance(Vector3i v) {
-        int dx = this.x - v.x();
-        int dy = this.y - v.y();
-        int dz = this.z - v.z();
+        int dx = this.x - v.x;
+        int dy = this.y - v.y;
+        int dz = this.z - v.z;
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
@@ -598,17 +601,17 @@ struct Vector3i {
     }
 
     public long gridDistance(Vector3i v) {
-        return Math.abs(v.x() - x()) + Math.abs(v.y() - y())  + Math.abs(v.z() - z());
+        return Math.abs(v.x - this.x) + Math.abs(v.y - this.y)  + Math.abs(v.z - this.z);
     }
 
     public long gridDistance(int x, int y, int z) {
-        return Math.abs(x - x()) + Math.abs(y - y()) + Math.abs(z - z());
+        return Math.abs(x - this.x) + Math.abs(y - this.y) + Math.abs(z - this.z);
     }
 
     public long distanceSquared(Vector3i v) {
-        int dx = this.x - v.x();
-        int dy = this.y - v.y();
-        int dz = this.z - v.z();
+        int dx = this.x - v.x;
+        int dy = this.y - v.y;
+        int dz = this.z - v.z;
         return dx * dx + dy * dy + dz * dz;
     }
 
@@ -703,16 +706,16 @@ struct Vector3i {
      * @return this
      */
     public Vector3i min(Vector3i v) {
-        this.x = x < v.x() ? x : v.x();
-        this.y = y < v.y() ? y : v.y();
-        this.z = z < v.z() ? z : v.z();
+        this.x = x < v.x ? x : v.x;
+        this.y = y < v.y ? y : v.y;
+        this.z = z < v.z ? z : v.z;
         return this;
     }
 
     public Vector3i min(Vector3i v, Vector3i dest) {
-        dest.x = x < v.x() ? x : v.x();
-        dest.y = y < v.y() ? y : v.y();
-        dest.z = z < v.z() ? z : v.z();
+        dest.x = x < v.x ? x : v.x;
+        dest.y = y < v.y ? y : v.y;
+        dest.z = z < v.z ? z : v.z;
         return dest;
     }
 
@@ -724,16 +727,16 @@ struct Vector3i {
      * @return this
      */
     public Vector3i max(Vector3i v) {
-        this.x = x > v.x() ? x : v.x();
-        this.y = y > v.y() ? y : v.y();
-        this.z = z > v.z() ? z : v.z();
+        this.x = x > v.x ? x : v.x;
+        this.y = y > v.y ? y : v.y;
+        this.z = z > v.z ? z : v.z;
         return this;
     }
 
     public Vector3i max(Vector3i v, Vector3i dest) {
-        dest.x = x > v.x() ? x : v.x();
-        dest.y = y > v.y() ? y : v.y();
-        dest.z = z > v.z() ? z : v.z();
+        dest.x = x > v.x ? x : v.x;
+        dest.y = y > v.y ? y : v.y;
+        dest.z = z > v.z ? z : v.z;
         return dest;
     }
 
@@ -781,7 +784,7 @@ struct Vector3i {
     }
 
     public int hashCode() {
-        final int prime = 31;
+        immutable int prime = 31;
         int result = 1;
         result = prime * result + x;
         result = prime * result + y;
