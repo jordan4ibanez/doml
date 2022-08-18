@@ -335,24 +335,23 @@ double cosFromSin(double sin, double angle) {
 
 /* Other math functions not yet approximated */
 
-float sqrt(float r) {
-    return cast(float) math_sqrt(r);
-}
+// float sqrt(float r) {
+    // return cast(float) math_sqrt(r);
+// }
 double sqrt(double r) {
     return math_sqrt(r);
 }
-double sqrt(long r) {
-    return math_sqrt(cast(double)r);
-}
+// double sqrt(long r) {
+    // return math_sqrt(cast(double)r);
+// }
 
+// int sqrt(int r) {
+    // return cast(int)math_sqrt(cast(double)r);
+// }
 
-int sqrt(int r) {
-    return cast(int)math_sqrt(cast(double)r);
-}
-
-float invsqrt(float r) {
-    return 1.0f / cast(float) math_sqrt(r);
-}
+// float invsqrt(float r) {
+    // return 1.0f / cast(float) math_sqrt(r);
+// }
 double invsqrt(double r) {
     return 1.0 / math_sqrt(r);
 }
