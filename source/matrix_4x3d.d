@@ -63,6 +63,52 @@ struct Matrix4x3d {
     double m31 = 0.0;
     double m32 = 0.0;
 
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>x=-1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_NX = 0;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>x=1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_PX = 1;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>y=-1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_NY = 2;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>y=1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_PY = 3;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>z=-1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_NZ = 4;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>z=1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_PZ = 5;
+
+    /**
+     * Bit returned by {@link #properties()} to indicate that the matrix represents the identity transformation.
+     */
+    immutable static byte PROPERTY_IDENTITY = 1<<2;
+    /**
+     * Bit returned by {@link #properties()} to indicate that the matrix represents a pure translation transformation.
+     */
+    immutable static byte PROPERTY_TRANSLATION = 1<<3;
+    /**
+     * Bit returned by {@link #properties()} to indicate that the left 3x3 submatrix represents an orthogonal
+     * matrix (i.e. orthonormal basis).
+     */
+    immutable static byte PROPERTY_ORTHONORMAL = 1<<4;
+
+
     int properties = PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL;
 
     /**

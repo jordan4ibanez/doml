@@ -71,7 +71,105 @@ struct Matrix4d {
     double m33 = 1.0;
 
 
-    int properties;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>x=-1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_NX = 0;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>x=1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_PX = 1;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>y=-1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_NY = 2;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>y=1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_PY = 3;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>z=-1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_NZ = 4;
+    /**
+     * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
+     * identifying the plane with equation <code>z=1</code> when using the identity matrix.  
+     */
+    immutable static int PLANE_PZ = 5;
+    /**
+     * Argument to the first parameter of {@link #frustumCorner(int, Vector3d)}
+     * identifying the corner <code>(-1, -1, -1)</code> when using the identity matrix.
+     */
+    immutable static int CORNER_NXNYNZ = 0;
+    /**
+     * Argument to the first parameter of {@link #frustumCorner(int, Vector3d)}
+     * identifying the corner <code>(1, -1, -1)</code> when using the identity matrix.
+     */
+    immutable static int CORNER_PXNYNZ = 1;
+    /**
+     * Argument to the first parameter of {@link #frustumCorner(int, Vector3d)}
+     * identifying the corner <code>(1, 1, -1)</code> when using the identity matrix.
+     */
+    immutable static int CORNER_PXPYNZ = 2;
+    /**
+     * Argument to the first parameter of {@link #frustumCorner(int, Vector3d)}
+     * identifying the corner <code>(-1, 1, -1)</code> when using the identity matrix.
+     */
+    immutable static int CORNER_NXPYNZ = 3;
+    /**
+     * Argument to the first parameter of {@link #frustumCorner(int, Vector3d)}
+     * identifying the corner <code>(1, -1, 1)</code> when using the identity matrix.
+     */
+    immutable static int CORNER_PXNYPZ = 4;
+    /**
+     * Argument to the first parameter of {@link #frustumCorner(int, Vector3d)}
+     * identifying the corner <code>(-1, -1, 1)</code> when using the identity matrix.
+     */
+    immutable static int CORNER_NXNYPZ = 5;
+    /**
+     * Argument to the first parameter of {@link #frustumCorner(int, Vector3d)}
+     * identifying the corner <code>(-1, 1, 1)</code> when using the identity matrix.
+     */
+    immutable static int CORNER_NXPYPZ = 6;
+    /**
+     * Argument to the first parameter of {@link #frustumCorner(int, Vector3d)}
+     * identifying the corner <code>(1, 1, 1)</code> when using the identity matrix.
+     */
+    immutable static int CORNER_PXPYPZ = 7;
+
+    /**
+     * Bit returned by {@link #properties()} to indicate that the matrix represents a perspective transformation.
+     */
+    immutable static byte PROPERTY_PERSPECTIVE = 1<<0;
+    /**
+     * Bit returned by {@link #properties()} to indicate that the matrix represents an affine transformation.
+     */
+    immutable static byte PROPERTY_AFFINE = 1<<1;
+    /**
+     * Bit returned by {@link #properties()} to indicate that the matrix represents the identity transformation.
+     */
+    immutable static byte PROPERTY_IDENTITY = 1<<2;
+    /**
+     * Bit returned by {@link #properties()} to indicate that the matrix represents a pure translation transformation.
+     */
+    immutable static byte PROPERTY_TRANSLATION = 1<<3;
+    /**
+     * Bit returned by {@link #properties()} to indicate that the upper-left 3x3 submatrix represents an orthogonal
+     * matrix (i.e. orthonormal basis). For practical reasons, this property also always implies 
+     * {@link #PROPERTY_AFFINE} in this implementation.
+     */
+    immutable byte PROPERTY_ORTHONORMAL = 1<<4;
+
+
+
+
+
+    int properties = PROPERTY_IDENTITY | PROPERTY_AFFINE | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL;
 
     /**
      * Create a new {@link Matrix4d} and make it a copy of the given matrix.
