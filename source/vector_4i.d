@@ -869,4 +869,16 @@ struct Vector4i {
         return true;
     }
 
+    public bool equals(Vector4i other) {
+        if (this.x != other.x)
+            return false;
+        if (this.y != other.y)
+            return false;
+        if (this.z != other.z)
+            return false;
+        if (this.w != other.w)
+            return false;
+        return true;
+    }
+
 }
