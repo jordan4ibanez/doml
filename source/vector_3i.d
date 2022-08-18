@@ -124,25 +124,6 @@ struct Vector3i {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    this(float x, float y, float z, int mode) {
-        this.x = Math.roundUsing(x, mode);
-        this.y = Math.roundUsing(y, mode);
-        this.z = Math.roundUsing(z, mode);
-    }
-
-    /**
-     * Create a new {@link Vector3i} with the given component values and
-     * round using the given {@link RoundingMode}.
-     *
-     * @param x
-     *          the value of x
-     * @param y
-     *          the value of y
-     * @param z
-     *          the value of z
-     * @param mode
-     *          the {@link RoundingMode} to use
-     */
     this(double x, double y, double z, int mode) {
         this.x = Math.roundUsing(x, mode);
         this.y = Math.roundUsing(y, mode);
@@ -801,5 +782,16 @@ struct Vector3i {
             return false;
         return true;
     }
+
+    public bool equals(Vector3i other) {
+        if (this.x != other.x)
+            return false;
+        if (this.y != other.y)
+            return false;
+        if (this.z != other.z)
+            return false;
+        return true;
+    }
+
 
 }
