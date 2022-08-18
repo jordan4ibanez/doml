@@ -1374,6 +1374,20 @@ struct Vector4d {
         return true;
     }
 
+    public bool equals(Vector4d other) {
+        if (this == other)
+            return true;
+        if (!this.x == other.x)
+            return false;
+        if (!this.y == other.y)
+            return false;
+        if (!this.z == other.z)
+            return false;
+        if (!this.w == other.w)
+            return false;
+        return true;
+    }
+
     public bool equals(double x, double y, double z, double w) {
         if (Math.doubleToLongBits(this.x) != Math.doubleToLongBits(x))
             return false;
