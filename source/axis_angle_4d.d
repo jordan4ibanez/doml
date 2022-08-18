@@ -85,16 +85,16 @@ struct AxisAngle4d {
      *            the quaternion from which to create the new AngleAxis4d
      */
     this(Quaterniond q) {
-        double acos = Math.safeAcos(q.w());
-        double invSqrt = Math.invsqrt(1.0 - q.w() * q.w());
-        if (Double.isInfinite(invSqrt)) {
+        double acos = Math.safeAcos(q.w);
+        double invSqrt = Math.invsqrt(1.0 - q.w * q.w);
+        if (Math.isInfinite(invSqrt)) {
             this.x = 0.0;
             this.y = 0.0;
             this.z = 1.0;
         } else {
-            this.x = q.x() * invSqrt;
-            this.y = q.y() * invSqrt;
-            this.z = q.z() * invSqrt;
+            this.x = q.x * invSqrt;
+            this.y = q.y * invSqrt;
+            this.z = q.z * invSqrt;
         }
         this.angle = acos + acos;
     }
@@ -125,7 +125,7 @@ struct AxisAngle4d {
      * @param v     the rotation axis as a {@link Vector3d}
      */
     this(double angle, Vector3d v) {
-        this(angle, v.x(), v.y(), v.z());
+        this(angle, v.x, v.y, v.z);
     }
 
 
@@ -160,7 +160,7 @@ struct AxisAngle4d {
      * @return this
      */
     public AxisAngle4d set(double angle, Vector3d v) {
-        return set(angle, v.x(), v.y(), v.z());
+        return set(angle, v.x, v.y, v.z);
     }
 
     /**
@@ -172,16 +172,16 @@ struct AxisAngle4d {
      * @return this
      */
     public AxisAngle4d set(Quaterniond q) {
-        double acos = Math.safeAcos(q.w());
-        double invSqrt = Math.invsqrt(1.0f - q.w() * q.w());
-        if (Double.isInfinite(invSqrt)) {
+        double acos = Math.safeAcos(q.w);
+        double invSqrt = Math.invsqrt(1.0f - q.w * q.w);
+        if (Math.isInfinite(invSqrt)) {
             this.x = 0.0;
             this.y = 0.0;
             this.z = 1.0;
         } else {
-            this.x = q.x() * invSqrt;
-            this.y = q.y() * invSqrt;
-            this.z = q.z() * invSqrt;
+            this.x = q.x * invSqrt;
+            this.y = q.y * invSqrt;
+            this.z = q.z * invSqrt;
         }
         this.angle = acos + acos;
         return this;
@@ -198,12 +198,12 @@ struct AxisAngle4d {
      * @return this
      */
     public AxisAngle4d set(Matrix3d m) {
-        double nm00 = m.m00(), nm01 = m.m01(), nm02 = m.m02();
-        double nm10 = m.m10(), nm11 = m.m11(), nm12 = m.m12();
-        double nm20 = m.m20(), nm21 = m.m21(), nm22 = m.m22();
-        double lenX = Math.invsqrt(m.m00() * m.m00() + m.m01() * m.m01() + m.m02() * m.m02());
-        double lenY = Math.invsqrt(m.m10() * m.m10() + m.m11() * m.m11() + m.m12() * m.m12());
-        double lenZ = Math.invsqrt(m.m20() * m.m20() + m.m21() * m.m21() + m.m22() * m.m22());
+        double nm00 = m.m00, nm01 = m.m01, nm02 = m.m02;
+        double nm10 = m.m10, nm11 = m.m11, nm12 = m.m12;
+        double nm20 = m.m20, nm21 = m.m21, nm22 = m.m22;
+        double lenX = Math.invsqrt(m.m00 * m.m00 + m.m01 * m.m01 + m.m02 * m.m02);
+        double lenY = Math.invsqrt(m.m10 * m.m10 + m.m11 * m.m11 + m.m12 * m.m12);
+        double lenZ = Math.invsqrt(m.m20 * m.m20 + m.m21 * m.m21 + m.m22 * m.m22);
         nm00 *= lenX; nm01 *= lenX; nm02 *= lenX;
         nm10 *= lenY; nm11 *= lenY; nm12 *= lenY;
         nm20 *= lenZ; nm21 *= lenZ; nm22 *= lenZ;
@@ -258,12 +258,12 @@ struct AxisAngle4d {
      * @return this
      */
     public AxisAngle4d set(Matrix4d m) {
-        double nm00 = m.m00(), nm01 = m.m01(), nm02 = m.m02();
-        double nm10 = m.m10(), nm11 = m.m11(), nm12 = m.m12();
-        double nm20 = m.m20(), nm21 = m.m21(), nm22 = m.m22();
-        double lenX = Math.invsqrt(m.m00() * m.m00() + m.m01() * m.m01() + m.m02() * m.m02());
-        double lenY = Math.invsqrt(m.m10() * m.m10() + m.m11() * m.m11() + m.m12() * m.m12());
-        double lenZ = Math.invsqrt(m.m20() * m.m20() + m.m21() * m.m21() + m.m22() * m.m22());
+        double nm00 = m.m00, nm01 = m.m01, nm02 = m.m02;
+        double nm10 = m.m10, nm11 = m.m11, nm12 = m.m12;
+        double nm20 = m.m20, nm21 = m.m21, nm22 = m.m22;
+        double lenX = Math.invsqrt(m.m00 * m.m00 + m.m01 * m.m01 + m.m02 * m.m02);
+        double lenY = Math.invsqrt(m.m10 * m.m10 + m.m11 * m.m11 + m.m12 * m.m12);
+        double lenZ = Math.invsqrt(m.m20 * m.m20 + m.m21 * m.m21 + m.m22 * m.m22);
         nm00 *= lenX; nm01 *= lenX; nm02 *= lenX;
         nm10 *= lenY; nm11 *= lenY; nm12 *= lenY;
         nm20 *= lenZ; nm21 *= lenZ; nm22 *= lenZ;
@@ -304,6 +304,21 @@ struct AxisAngle4d {
         x = (nm12 - nm21) / s;
         y = (nm20 - nm02) / s;
         z = (nm01 - nm10) / s;
+        return this;
+    }
+
+    /**
+     * Set this {@link AxisAngle4d} to the values of <code>a</code>.
+     * 
+     * @param a
+     *            the AngleAxis4f to copy the values from
+     * @return this
+     */
+    public AxisAngle4d set(AxisAngle4d a) {
+        x = a.x;
+        y = a.y;
+        z = a.z;
+        angle = (a.angle < 0.0 ? Math.PI + Math.PI + a.angle % (Math.PI + Math.PI) : a.angle) % (Math.PI + Math.PI);
         return this;
     }
 
@@ -409,10 +424,10 @@ struct AxisAngle4d {
     public Vector3d transform(Vector3d v, Vector3d dest) {
         double sin = Math.sin(angle);
         double cos = Math.cosFromSin(sin, angle);
-        double dot = x * v.x() + y * v.y() + z * v.z();
-        dest.set(v.x() * cos + sin * (y * v.z() - z * v.y()) + (1.0 - cos) * dot * x,
-                 v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y,
-                 v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z);
+        double dot = x * v.x + y * v.y + z * v.z;
+        dest.set(v.x * cos + sin * (y * v.z - z * v.y) + (1.0 - cos) * dot * x,
+                 v.y * cos + sin * (z * v.x - x * v.z) + (1.0 - cos) * dot * y,
+                 v.z * cos + sin * (x * v.y - y * v.x) + (1.0 - cos) * dot * z);
         return dest;
     }
 
@@ -440,40 +455,40 @@ struct AxisAngle4d {
     public Vector4d transform(Vector4d v, Vector4d dest) {
         double sin = Math.sin(angle);
         double cos = Math.cosFromSin(sin, angle);
-        double dot = x * v.x() + y * v.y() + z * v.z();
-        dest.set(v.x() * cos + sin * (y * v.z() - z * v.y()) + (1.0 - cos) * dot * x,
-                 v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y,
-                 v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z,
+        double dot = x * v.x + y * v.y + z * v.z;
+        dest.set(v.x * cos + sin * (y * v.z - z * v.y) + (1.0 - cos) * dot * x,
+                 v.y * cos + sin * (z * v.x - x * v.z) + (1.0 - cos) * dot * y,
+                 v.z * cos + sin * (x * v.y - y * v.x) + (1.0 - cos) * dot * z,
                  dest.w);
         return dest;
     }
 
     public int hashCode() {
-        final int prime = 31;
+        immutable int prime = 31;
         int result = 1;
         long temp;
-        temp = Double.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI));
+        temp = Math.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI));
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(x);
+        temp = Math.doubleToLongBits(x);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(y);
+        temp = Math.doubleToLongBits(y);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(z);
+        temp = Math.doubleToLongBits(z);
         result = prime * result + cast(int) (temp ^ (temp >>> 32));
         return result;
     }
 
-    public bool equals(AxisAngle4d obj) {
-        if (this == obj)
+    public bool equals(AxisAngle4d other) {
+        if (this == other)
             return true;
-        if (Double.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI)) != 
-                Double.doubleToLongBits((other.angle < 0.0 ? Math.PI + Math.PI + other.angle % (Math.PI + Math.PI) : other.angle) % (Math.PI + Math.PI)))
+        if (Math.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI)) != 
+                Math.doubleToLongBits((other.angle < 0.0 ? Math.PI + Math.PI + other.angle % (Math.PI + Math.PI) : other.angle) % (Math.PI + Math.PI)))
             return false;
-        if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
+        if (Math.doubleToLongBits(x) != Math.doubleToLongBits(other.x))
             return false;
-        if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+        if (Math.doubleToLongBits(y) != Math.doubleToLongBits(other.y))
             return false;
-        if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
+        if (Math.doubleToLongBits(z) != Math.doubleToLongBits(other.z))
             return false;
         return true;
     }
