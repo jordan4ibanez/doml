@@ -905,12 +905,12 @@ struct Vector4d {
      *          the quaternion to transform this vector
      * @return this
      */
-    ref public Vector4d rotate(Quaterniond quat) return {
+    ref public Vector4d rotate(ref Quaterniond quat) return {
         quat.transform(this, this);
         return this;
     }
 
-    public Vector4d rotate(Quaterniond quat, ref Vector4d dest) {
+    public Vector4d rotate(ref Quaterniond quat, ref Vector4d dest) {
         quat.transform(this, dest);
         return dest;
     }

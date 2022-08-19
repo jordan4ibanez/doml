@@ -310,7 +310,7 @@ struct QuaterniondInterpolator {
      *            will hold the result
      * @return dest
      */
-    public Quaterniond computeWeightedAverage(Quaterniond[] qs, double[] weights, int maxSvdIterations, Quaterniond dest) {
+    public Quaterniond computeWeightedAverage(ref Quaterniond[] qs, double[] weights, int maxSvdIterations, Quaterniond dest) {
         double m00 = 0.0, m01 = 0.0, m02 = 0.0;
         double m10 = 0.0, m11 = 0.0, m12 = 0.0;
         double m20 = 0.0, m21 = 0.0, m22 = 0.0;

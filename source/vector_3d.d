@@ -941,12 +941,12 @@ struct Vector3d {
      *          the quaternion to rotate this vector
      * @return this
      */
-    ref public Vector3d rotate(Quaterniond quat) return {
+    ref public Vector3d rotate(ref Quaterniond quat) return {
         quat.transform(this, this);
         return this;
     }
 
-    public Vector3d rotate(Quaterniond quat, ref Vector3d dest) {
+    public Vector3d rotate(ref Quaterniond quat, ref Vector3d dest) {
         return quat.transform(this, dest);
     }
 
