@@ -9,14 +9,10 @@ JOML translated to D with a few changes:
 
 - Simplified using D's strengths
 
-Currently Translating: Vector2i test
-
 Note: set all switches to final so they automatically get out of bounds errors
 
-Need to fix a severe memory mismanagement:
+Need to make most things references so they work like in java
 
-ref Matrix4d _m01(double m01) return {
-
-Look up: return this
-
-search for swap( in case any functions need a reference
+Tests needing translation:
+quaterniond
+rayaabbintersection
