@@ -785,7 +785,7 @@ struct Vector4d {
      *          the matrix to multiply the vector with
      * @return this
      */
-    ref public Vector4d mul(Matrix4x3d mat) return {
+    ref public Vector4d mul(ref Matrix4x3d mat) return {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w)));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, Math.fma(mat.m22, z, mat.m32 * w)));
@@ -795,7 +795,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d mul(Matrix4x3d mat, ref Vector4d dest) {
+    public Vector4d mul(ref Matrix4x3d mat, ref Vector4d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w)));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, Math.fma(mat.m22, z, mat.m32 * w)));

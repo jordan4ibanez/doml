@@ -192,7 +192,7 @@ struct Matrix4d {
      * @param mat
      *          the {@link Matrix4x3d} to copy the values from
      */
-    this(Matrix4x3d mat) {
+    this(ref Matrix4x3d mat) {
         set(mat);
     }
 
@@ -853,13 +853,13 @@ struct Matrix4d {
      * Store the values of the given matrix <code>m</code> into <code>this</code> matrix
      * and set the other matrix elements to identity.
      * 
-     * @see #Matrix4d(Matrix4x3d)
+     * @see #Matrix4d(ref Matrix4x3d)
      * 
      * @param m
      *          the matrix to copy the values from
      * @return this
      */
-    ref public Matrix4d set(Matrix4x3d m) return {
+    ref public Matrix4d set(ref Matrix4x3d m) return {
         return
         _m00(m.m00).
         _m01(m.m01).
@@ -944,7 +944,7 @@ struct Matrix4d {
      *          the {@link Matrix4x3d}
      * @return this
      */
-    ref public Matrix4d set4x3(Matrix4x3d mat) return {
+    ref public Matrix4d set4x3(ref Matrix4x3d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -1501,12 +1501,12 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    ref public Matrix4d mul(Matrix4x3d right) return {
+    ref public Matrix4d mul(ref Matrix4x3d right) return {
         mul(right, this);
         return this;
     }
 
-    public Matrix4d mul(Matrix4x3d right, ref Matrix4d dest) {
+    public Matrix4d mul(ref Matrix4x3d right, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.set(right);
         else if ((right.properties & PROPERTY_IDENTITY) != 0)
@@ -1519,7 +1519,7 @@ struct Matrix4d {
             return mulPerspectiveAffine(right, dest);
         return mulGeneric(right, dest);
     }
-    private Matrix4d mulTranslation(Matrix4x3d right, ref Matrix4d dest) {
+    private Matrix4d mulTranslation(ref Matrix4x3d right, ref Matrix4d dest) {
         return dest
         ._m00(right.m00)
         ._m01(right.m01)
@@ -1539,7 +1539,7 @@ struct Matrix4d {
         ._m33(m33)
         ._properties(PROPERTY_AFFINE | (right.properties & PROPERTY_ORTHONORMAL));
     }
-    private Matrix4d mulAffine(Matrix4x3d right, ref Matrix4d dest) {
+    private Matrix4d mulAffine(ref Matrix4x3d right, ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         double m20 = this.m20, m21 = this.m21, m22 = this.m22;
@@ -1566,7 +1566,7 @@ struct Matrix4d {
         ._m33(m33)
         ._properties(PROPERTY_AFFINE | (this.properties & right.properties & PROPERTY_ORTHONORMAL));
     }
-    private Matrix4d mulGeneric(Matrix4x3d right, ref Matrix4d dest) {
+    private Matrix4d mulGeneric(ref Matrix4x3d right, ref Matrix4d dest) {
         double nm00 = Math.fma(m00, right.m00, Math.fma(m10, right.m01, m20 * right.m02));
         double nm01 = Math.fma(m01, right.m00, Math.fma(m11, right.m01, m21 * right.m02));
         double nm02 = Math.fma(m02, right.m00, Math.fma(m12, right.m01, m22 * right.m02));
@@ -1602,7 +1602,7 @@ struct Matrix4d {
         ._properties(properties & ~(PROPERTY_IDENTITY | PROPERTY_PERSPECTIVE | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL));
         return dest;
     }
-    public Matrix4d mulPerspectiveAffine(Matrix4x3d view, ref Matrix4d dest) {
+    public Matrix4d mulPerspectiveAffine(ref Matrix4x3d view, ref Matrix4d dest) {
         double lm00 = m00, lm11 = m11, lm22 = m22, lm23 = m23;
         dest._m00(lm00 * view.m00)._m01(lm11 * view.m01)._m02(lm22 * view.m02)._m03(lm23 * view.m02).
         _m10(lm00 * view.m10)._m11(lm11 * view.m11)._m12(lm22 * view.m12)._m13(lm23 * view.m12).
@@ -2626,7 +2626,7 @@ struct Matrix4d {
         ._properties(0);
     }
 
-    public Matrix4d invertPerspectiveView(Matrix4x3d view, ref Matrix4d dest) {
+    public Matrix4d invertPerspectiveView(ref Matrix4x3d view, ref Matrix4d dest) {
         double a =  1.0 / (m00 * m11);
         double l = -1.0 / (m23 * m32);
         double pm00 =  m11 * a;

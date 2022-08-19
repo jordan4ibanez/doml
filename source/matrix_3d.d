@@ -391,7 +391,7 @@ struct Matrix3d {
      *          the matrix to copy the elements from
      * @return this
      */
-    ref public Matrix3d set(Matrix4x3d m) return {
+    ref public Matrix3d set(ref Matrix4x3d m) return {
         m00 = m.m00;
         m01 = m.m01;
         m02 = m.m02;
