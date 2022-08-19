@@ -21,6 +21,7 @@ import tests.vector_4d_test;
 import tests.vector_4i_test;
 
 import tests.matrix_2d_test;
+import tests.matrix_3d_test;
 
 
 
@@ -43,4 +44,5 @@ void main()
 
     // Matrix
     testMatrix2d();
+    testMatrix3d();
 }
