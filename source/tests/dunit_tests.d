@@ -94,8 +94,8 @@ void assertEquals(double a, double b, long precision) {
 
 void assertEquals(double a, double b, double precision) {
     if (verbose) {
-        double debugger = 1_000_000_000.0;
-        writeln(cast(long)(a * debugger), " ", cast(long)(b * debugger));
+        // double debugger = 1_000_000_000.0;
+        // writeln(cast(long)(a * debugger), " ", cast(long)(b * debugger));
         writeln("Value1: ", a, " | Value2: ", b);
     }
     assert(Math.abs(a - b) < precision);
