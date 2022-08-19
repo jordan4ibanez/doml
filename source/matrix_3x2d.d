@@ -240,7 +240,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3x2d mul(Matrix3x2d right, Matrix3x2d dest) {
+    public Matrix3x2d mul(Matrix3x2d right, ref Matrix3x2d dest) {
         double nm00 = m00 * right.m00 + m10 * right.m01;
         double nm01 = m01 * right.m00 + m11 * right.m01;
         double nm10 = m00 * right.m10 + m10 * right.m11;
@@ -272,7 +272,7 @@ public struct Matrix3x2d {
        return mulLocal(left, this);
     }
 
-    public Matrix3x2d mulLocal(Matrix3x2d left, Matrix3x2d dest) {
+    public Matrix3x2d mulLocal(Matrix3x2d left, ref Matrix3x2d dest) {
         double nm00 = left.m00 * m00 + left.m10 * m01;
         double nm01 = left.m01 * m00 + left.m11 * m01;
         double nm10 = left.m00 * m10 + left.m10 * m11;
@@ -363,7 +363,7 @@ public struct Matrix3x2d {
      *             will hold the result
      * @return dest
      */
-    public Matrix3x2d invert(Matrix3x2d dest) {
+    public Matrix3x2d invert(ref Matrix3x2d dest) {
         // client must make sure that matrix is invertible
         double s = 1.0 / (m00 * m11 - m01 * m10);
         double nm00 =  m11 * s;
@@ -487,7 +487,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3x2d translate(double x, double y, Matrix3x2d dest) {
+    public Matrix3x2d translate(double x, double y, ref Matrix3x2d dest) {
         double rm20 = x;
         double rm21 = y;
         dest.m20 = m00 * rm20 + m10 * rm21 + m20;
@@ -542,7 +542,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3x2d translate(Vector2d offset, Matrix3x2d dest) {
+    public Matrix3x2d translate(Vector2d offset, ref Matrix3x2d dest) {
         return translate(offset.x, offset.y, dest);
     }
 
@@ -609,7 +609,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3x2d translateLocal(Vector2d offset, Matrix3x2d dest) {
+    public Matrix3x2d translateLocal(Vector2d offset, ref Matrix3x2d dest) {
         return translateLocal(offset.x, offset.y, dest);
     }
 
@@ -635,7 +635,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3x2d translateLocal(double x, double y, Matrix3x2d dest) {
+    public Matrix3x2d translateLocal(double x, double y, ref Matrix3x2d dest) {
         dest.m00 = m00;
         dest.m01 = m01;
         dest.m10 = m10;
@@ -682,7 +682,7 @@ public struct Matrix3x2d {
      *          the destination matrix
      * @return dest
      */
-    public Matrix3x2d get(Matrix3x2d dest) {
+    public Matrix3x2d get(ref Matrix3x2d dest) {
         return dest.set(this);
     }
 
@@ -809,7 +809,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d scale(double x, double y, Matrix3x2d dest) {
+    public Matrix3x2d scale(double x, double y, ref Matrix3x2d dest) {
         dest.m00 = m00 * x;
         dest.m01 = m01 * x;
         dest.m10 = m10 * y;
@@ -865,7 +865,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d scale(Vector2d xy, Matrix3x2d dest) {
+    public Matrix3x2d scale(Vector2d xy, ref Matrix3x2d dest) {
         return scale(xy.x, xy.y, dest);
     }
 
@@ -885,7 +885,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d scale(double xy, Matrix3x2d dest) {
+    public Matrix3x2d scale(double xy, ref Matrix3x2d dest) {
         return scale(xy, xy, dest);
     }
 
@@ -906,7 +906,7 @@ public struct Matrix3x2d {
         return scale(xy, xy);
     }
 
-    public Matrix3x2d scaleLocal(double x, double y, Matrix3x2d dest) {
+    public Matrix3x2d scaleLocal(double x, double y, ref Matrix3x2d dest) {
         dest.m00 = x * m00;
         dest.m01 = y * m01;
         dest.m10 = x * m10;
@@ -934,7 +934,7 @@ public struct Matrix3x2d {
         return scaleLocal(x, y, this);
     }
 
-    public Matrix3x2d scaleLocal(double xy, Matrix3x2d dest) {
+    public Matrix3x2d scaleLocal(double xy, ref Matrix3x2d dest) {
         return scaleLocal(xy, xy, dest);
     }
 
@@ -977,7 +977,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d scaleAround(double sx, double sy, double ox, double oy, Matrix3x2d dest) {
+    public Matrix3x2d scaleAround(double sx, double sy, double ox, double oy, ref Matrix3x2d dest) {
         double nm20 = m00 * ox + m10 * oy + m20;
         double nm21 = m01 * ox + m11 * oy + m21;
         dest.m00 = m00 * sx;
@@ -1036,7 +1036,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return this
      */
-    public Matrix3x2d scaleAround(double factor, double ox, double oy, Matrix3x2d dest) {
+    public Matrix3x2d scaleAround(double factor, double ox, double oy, ref Matrix3x2d dest) {
         return scaleAround(factor, factor, ox, oy, this);
     }
 
@@ -1063,7 +1063,7 @@ public struct Matrix3x2d {
         return scaleAround(factor, factor, ox, oy, this);
     }
 
-    public Matrix3x2d scaleAroundLocal(double sx, double sy, double ox, double oy, Matrix3x2d dest) {
+    public Matrix3x2d scaleAroundLocal(double sx, double sy, double ox, double oy, ref Matrix3x2d dest) {
         dest.m00 = sx * m00;
         dest.m01 = sy * m01;
         dest.m10 = sx * m10;
@@ -1073,7 +1073,7 @@ public struct Matrix3x2d {
         return dest;
     }
 
-    public Matrix3x2d scaleAroundLocal(double factor, double ox, double oy, Matrix3x2d dest) {
+    public Matrix3x2d scaleAroundLocal(double factor, double ox, double oy, ref Matrix3x2d dest) {
         return scaleAroundLocal(factor, factor, ox, oy, dest);
     }
 
@@ -1219,7 +1219,7 @@ public struct Matrix3x2d {
      *          will contain the result
      * @return dest
      */
-    public Vector3d transform(Vector3d v, Vector3d dest) {
+    public Vector3d transform(Vector3d v, ref Vector3d dest) {
         return v.mul(this, dest);
     }
 
@@ -1236,7 +1236,7 @@ public struct Matrix3x2d {
      *          will contain the result
      * @return dest
      */
-    public Vector3d transform(double x, double y, double z, Vector3d dest) {
+    public Vector3d transform(double x, double y, double z, ref Vector3d dest) {
        return dest.set(m00 * x + m10 * y + m20 * z, m01 * x + m11 * y + m21 * z, z);
     }
 
@@ -1280,7 +1280,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Vector2d transformPosition(Vector2d v, Vector2d dest) {
+    public Vector2d transformPosition(Vector2d v, ref Vector2d dest) {
         dest.set(m00 * v.x + m10 * v.y + m20,
                  m01 * v.x + m11 * v.y + m21);
         return dest;
@@ -1306,7 +1306,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Vector2d transformPosition(double x, double y, Vector2d dest) {
+    public Vector2d transformPosition(double x, double y, ref Vector2d dest) {
         return dest.set(m00 * x + m10 * y + m20, m01 * x + m11 * y + m21);
     }
 
@@ -1350,7 +1350,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Vector2d transformDirection(Vector2d v, Vector2d dest) {
+    public Vector2d transformDirection(Vector2d v, ref Vector2d dest) {
         dest.set(m00 * v.x + m10 * v.y,
                  m01 * v.x + m11 * v.y);
         return dest;
@@ -1376,7 +1376,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Vector2d transformDirection(double x, double y, Vector2d dest) {
+    public Vector2d transformDirection(double x, double y, ref Vector2d dest) {
         return dest.set(m00 * x + m10 * y, m01 * x + m11 * y);
     }
 
@@ -1409,7 +1409,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d rotate(double ang, Matrix3x2d dest) {
+    public Matrix3x2d rotate(double ang, ref Matrix3x2d dest) {
         double cos = Math.cos(ang);
         double sin = Math.sin(ang);
         double rm00 = cos;
@@ -1448,7 +1448,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d rotateLocal(double ang, Matrix3x2d dest) {
+    public Matrix3x2d rotateLocal(double ang, ref Matrix3x2d dest) {
         double sin = Math.sin(ang);
         double cos = Math.cosFromSin(sin, ang);
         double nm00 = cos * m00 - sin * m01;
@@ -1537,7 +1537,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d rotateAbout(double ang, double x, double y, Matrix3x2d dest) {
+    public Matrix3x2d rotateAbout(double ang, double x, double y, ref Matrix3x2d dest) {
         double tm20 = m00 * x + m10 * y + m20;
         double tm21 = m01 * x + m11 * y + m21;
         double cos = Math.cos(ang);
@@ -1569,7 +1569,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d rotateTo(Vector2d fromDir, Vector2d toDir, Matrix3x2d dest) {
+    public Matrix3x2d rotateTo(Vector2d fromDir, Vector2d toDir, ref Matrix3x2d dest) {
         double dot = fromDir.x * toDir.x + fromDir.y * toDir.y;
         double det = fromDir.x * toDir.y - fromDir.y * toDir.x;
         double rm00 = dot;
@@ -1628,7 +1628,7 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3x2d view(double left, double right, double bottom, double top, Matrix3x2d dest) {
+    public Matrix3x2d view(double left, double right, double bottom, double top, ref Matrix3x2d dest) {
         double rm00 = 2.0 / (right - left);
         double rm11 = 2.0 / (top - bottom);
         double rm20 = (left + right) / (left - right);
@@ -1812,7 +1812,7 @@ public struct Matrix3x2d {
      *          will hold the unprojected position
      * @return dest
      */
-    public Vector2d unproject(double winX, double winY, int[] viewport, Vector2d dest) {
+    public Vector2d unproject(double winX, double winY, int[] viewport, ref Vector2d dest) {
         double s = 1.0 / (m00 * m11 - m01 * m10);
         double im00 =  m11 * s;
         double im01 = -m01 * s;
@@ -1846,7 +1846,7 @@ public struct Matrix3x2d {
      *          will hold the unprojected position
      * @return dest
      */
-    public Vector2d unprojectInv(double winX, double winY, int[] viewport, Vector2d dest) {
+    public Vector2d unprojectInv(double winX, double winY, int[] viewport, ref Vector2d dest) {
         double ndcX = (winX-viewport[0])/viewport[2]*2.0-1.0;
         double ndcY = (winY-viewport[1])/viewport[3]*2.0-1.0;
         dest.x = m00 * ndcX + m10 * ndcY + m20;
