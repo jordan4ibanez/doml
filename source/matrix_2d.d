@@ -1059,7 +1059,7 @@ public struct Matrix2d {
      *          the other matrix to exchange the values with
      * @return this
      */
-    ref public Matrix2d swap(Matrix2d other) return {
+    ref public Matrix2d swap(ref Matrix2d other) return {
         MemUtil.swap(this, other);
         return this;
     }

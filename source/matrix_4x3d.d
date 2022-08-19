@@ -8089,7 +8089,7 @@ struct Matrix4x3d {
      *          the other matrix to exchange the values with
      * @return this
      */
-    ref public Matrix4x3d swap(Matrix4x3d other) return {
+    ref public Matrix4x3d swap(ref Matrix4x3d other) return {
         double tmp;
         tmp = m00; m00 = other.m00; other.m00 = tmp;
         tmp = m01; m01 = other.m01; other.m01 = tmp;

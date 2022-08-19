@@ -3181,7 +3181,7 @@ struct Matrix3d {
      *          the other matrix to exchange the values with
      * @return this
      */
-    ref public Matrix3d swap(Matrix3d other) return {
+    ref public Matrix3d swap(ref Matrix3d other) return {
         double tmp;
         tmp = m00; m00 = other.m00; other.m00 = tmp;
         tmp = m01; m01 = other.m01; other.m01 = tmp;
