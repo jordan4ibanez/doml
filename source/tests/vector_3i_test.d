@@ -38,7 +38,7 @@ import vector_3d;
 /**
  * Test class for {@link Vector3i}.
  */
-void testVector3i() {
+unittest {
 
     writeln("\nBEGINNING VECTOR3I TESTING\n");
 

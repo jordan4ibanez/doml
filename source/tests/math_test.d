@@ -42,7 +42,7 @@ import rounding_mode;
  * @author F. Neurath
  */
 
-void testMath() {
+unittest {
     writeln("\nBEGIN MATH LIBRARY\n");
 
     writeln("BEGINNING CLAMP TEST");

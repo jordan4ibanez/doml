@@ -5,6 +5,7 @@ import Math = math;
 import matrix_4d;
 import axis_angle_4d;
 import frustum_intersection;
+import std.stdio;
 
 
 /*
@@ -36,7 +37,9 @@ import frustum_intersection;
  * 
  * @author Kai Burjack
  */
-void testFrustumIntersect() {
+unittest {
+
+    writeln("\nBEGINNING FRUSTUM INTERSECT TEST\n");
 
     // testIsSphereInFrustumOrtho
     {
@@ -98,5 +101,7 @@ void testFrustumIntersect() {
         assertEquals(Matrix4d.PLANE_NX, c.intersectAab(-6.1f, 0, -3, -5, 2, -2, FrustumIntersection.PLANE_MASK_NX));
         assertEquals(Matrix4d.PLANE_NX, c.intersectAab(-6.1f, 0, -3, -5, 2, -2, ~0, Matrix4d.PLANE_NX));
     }
+
+    writeln("PASSED");
 
 }

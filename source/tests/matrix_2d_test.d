@@ -31,7 +31,7 @@ import vector_2d;
  * THE SOFTWARE.
  */
 
-void testMatrix2d() {
+unittest {
 
     // This is going to be lumped in to one thing, assert tells you what line anyways
 

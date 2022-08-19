@@ -35,7 +35,7 @@ import vector_4d;
  * Test class for {@link Vector4d}.
  * @author Sebastian Fellner
  */
-void testVector4d() {
+unittest {
 
     writeln("\nBEGINNING VECTOR4D TESTING\n");
 

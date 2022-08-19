@@ -5,6 +5,7 @@ import Math = math;
 import vector_2d;
 import vector_3d;
 import tests.dunit_tests;
+import std.stdio;
 
 /*
  * The MIT License
@@ -37,8 +38,9 @@ import tests.dunit_tests;
  *
  * @author Jarosław Piotrowski
  */
-void testGeometryUtils() {
+unittest {
 
+    writeln("\nBEGINNING TEST OF GEOMETRY UTILS\n");
     
     Vector3d pos1 = Vector3d(-1.0f,  1.0f, 0.0f);
     Vector3d pos2 = Vector3d( 1.0f, -1.0f, 0.0f);
@@ -63,5 +65,7 @@ void testGeometryUtils() {
     tangentBitangent(pos1, uv1, pos2, uv2, pos3, uv3, vecTangent, vecBitangent);
     assertEquals(t, vecTangent);
     assertEquals(b, vecBitangent);    
+
+    writeln("PASSED!");
 
 }

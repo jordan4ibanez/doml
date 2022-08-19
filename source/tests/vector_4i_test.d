@@ -12,7 +12,7 @@ import std.stdio;
 import tests.dunit_tests;
 
 
-void testVector4i() {
+unittest {
     writeln("\nBEGINNING VECTOR4I TESTING\n");
 
     writeln("TESTING VECTOR4I CONSTRUCTORS");

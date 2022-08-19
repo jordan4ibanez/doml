@@ -40,7 +40,7 @@ import matrix_3d;
  * 
  * @author Kai Burjack
  */
-void testMatrix4d() {
+unittest {
 
     writeln("\nTESTING MATRIX4D\n");
 

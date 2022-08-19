@@ -5,6 +5,7 @@ import tests.dunit_tests;
 import matrix_4x3d;
 import vector_3d;
 import Math = math;
+import std.stdio;
 
 /*
  * The MIT License
@@ -35,7 +36,9 @@ import Math = math;
  * 
  * @author Kai Burjack
  */
-void testMatrix4x3d() {
+unittest {
+
+    writeln("\nBEGINNING MATRIX4X3D TESTING\n");
 
     // testLookAt
     {
@@ -203,5 +206,7 @@ void testMatrix4x3d() {
         Matrix4x3d n = Matrix4x3d().rotationYXZ(0.12f, 0.0623f, 0.95f);
         assertMatrix4x3dEquals(m, n, 1E-6f);
     }
+
+    writeln("PASSED!");
 
 }

@@ -35,9 +35,9 @@ import std.stdio;
  * Test class for {@link Vector2d}.
  * @author Sebastian Fellner
  */
-void testVector2d() {
+unittest {
 
-    writeln("\nBEGINNING VECTOR2D\n");
+    writeln("\nBEGINNING VECTOR2D TESTING\n");
 
     writeln("TESTING ANGLE VECTOR2D TO VECTOR2D");
     {

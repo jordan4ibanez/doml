@@ -35,7 +35,7 @@ import Math = math;
  * THE SOFTWARE.
  */
 
-void testAxisAngle() {
+unittest {
 
     writeln("\nBEGIN AXIS ANGLE\n");
 

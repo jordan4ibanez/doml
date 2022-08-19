@@ -34,7 +34,7 @@ import rounding_mode;
 /**
  * Test class for {@link Vector2i}.
  */
-void testVector2i() {
+unittest {
 
     writeln("\nBEGINNING GENERAL VECTOR2I TEST\n");
 

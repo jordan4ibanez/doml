@@ -37,9 +37,9 @@ import std.stdio;
  * Test class for {@link Quaterniond}.
  * @author Sebastian Fellner
  */
-void testQuaterniond() {
+unittest {
     
-    writeln("\nSTARING QUATERNIOND\n");
+    writeln("\nSTARING QUATERNIOND TESTING\n");
 
     // testMulQuaternionDQuaternionDQuaternionD
     {

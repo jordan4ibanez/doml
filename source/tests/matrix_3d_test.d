@@ -35,7 +35,7 @@ import vector_3d;
  *
  * @author mhameed
  */
-void testMatrix3d() {
+unittest {
 
     writeln("\nBEGINNING TEST OF MATRIX3D\n");
 

@@ -36,7 +36,7 @@ import vector_2d;
  * 
  * @author Kai Burjack
  */
-void testMatrix3x2d() {
+unittest {
 
     writeln("\nBEGINNING MATRIX3X2D TESTS\n");
 

@@ -34,7 +34,7 @@ import std.stdio;
  * 
  * @author Kai Burjack
  */
-void testRayAABBIntersect() {
+unittest {
 
     writeln("\nTESTING RAY AABB INTERSECT\n");
 

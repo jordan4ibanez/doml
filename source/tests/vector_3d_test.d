@@ -34,7 +34,7 @@ import Math = math;
  * Test class for {@link Vector3d}.
  * @author Sebastian Fellner
  */
-void testVector3d() {
+unittest {
 
     writeln("\nBEGIN GENERAL VECTOR3D TEST\n");
 
