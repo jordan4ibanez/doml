@@ -42,8 +42,8 @@ import vector_4d;
     * Return value of
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
     * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #findClosestPointOnTriangle(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} or
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
     * to signal that the closest point is the first vertex of the triangle.
     */
@@ -52,8 +52,8 @@ public static immutable int POINT_ON_TRIANGLE_VERTEX_0 = 1;
     * Return value of
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
     * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #findClosestPointOnTriangle(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} or
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
     * to signal that the closest point is the second vertex of the triangle.
     */
@@ -62,8 +62,8 @@ public static immutable int POINT_ON_TRIANGLE_VERTEX_1 = 2;
     * Return value of
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
     * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #findClosestPointOnTriangle(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} or
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
     * to signal that the closest point is the third vertex of the triangle.
     */
@@ -73,8 +73,8 @@ public static immutable int POINT_ON_TRIANGLE_VERTEX_2 = 3;
     * Return value of
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
     * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #findClosestPointOnTriangle(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} or
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
     * to signal that the closest point lies on the edge between the first and second vertex of the triangle.
     */
@@ -83,8 +83,8 @@ public static immutable int POINT_ON_TRIANGLE_EDGE_01 = 4;
     * Return value of
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
     * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #findClosestPointOnTriangle(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} or
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
     * to signal that the closest point lies on the edge between the second and third vertex of the triangle.
     */
@@ -93,8 +93,8 @@ public static immutable int POINT_ON_TRIANGLE_EDGE_12 = 5;
     * Return value of
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
     * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #findClosestPointOnTriangle(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} or
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
     * to signal that the closest point lies on the edge between the third and first vertex of the triangle.
     */
@@ -104,66 +104,66 @@ public static immutable int POINT_ON_TRIANGLE_EDGE_20 = 6;
     * Return value of
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
     * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #findClosestPointOnTriangle(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} or 
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or 
     * {@link #intersectSweptSphereTriangle}
     * to signal that the closest point lies on the face of the triangle.
     */
 public static immutable int POINT_ON_TRIANGLE_FACE = 7;
 
 /**
-    * Return value of {@link #intersectRayAar(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectRayAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)}
+    * Return value of {@link #intersectRayAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectRayAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)}
     * to indicate that the ray intersects the side of the axis-aligned rectangle with the minimum x coordinate.
     */
 public static immutable int AAR_SIDE_MINX = 0;
 /**
-    * Return value of {@link #intersectRayAar(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectRayAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)}
+    * Return value of {@link #intersectRayAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectRayAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)}
     * to indicate that the ray intersects the side of the axis-aligned rectangle with the minimum y coordinate.
     */
 public static immutable int AAR_SIDE_MINY = 1;
 /**
-    * Return value of {@link #intersectRayAar(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectRayAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)}
+    * Return value of {@link #intersectRayAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectRayAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)}
     * to indicate that the ray intersects the side of the axis-aligned rectangle with the maximum x coordinate.
     */
 public static immutable int AAR_SIDE_MAXX = 2;
 /**
-    * Return value of {@link #intersectRayAar(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectRayAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)}
+    * Return value of {@link #intersectRayAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectRayAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)}
     * to indicate that the ray intersects the side of the axis-aligned rectangle with the maximum y coordinate.
     */
 public static immutable int AAR_SIDE_MAXY = 3;
 
 /**
-    * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d, Vector2d)} to indicate that the line segment does not intersect the axis-aligned box;
-    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectLineSegmentAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} to indicate that the line segment does not intersect the axis-aligned rectangle.
+    * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)} to indicate that the line segment does not intersect the axis-aligned box;
+    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectLineSegmentAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} to indicate that the line segment does not intersect the axis-aligned rectangle.
     */
 public static immutable int OUTSIDE = -1;
 /**
-    * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d, Vector2d)} to indicate that one end point of the line segment lies inside of the axis-aligned box;
-    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectLineSegmentAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} to indicate that one end point of the line segment lies inside of the axis-aligned rectangle.
+    * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)} to indicate that one end point of the line segment lies inside of the axis-aligned box;
+    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectLineSegmentAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} to indicate that one end point of the line segment lies inside of the axis-aligned rectangle.
     */
 public static immutable int ONE_INTERSECTION = 1;
 /**
-    * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d, Vector2d)} to indicate that the line segment intersects two sides of the axis-aligned box
+    * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)} to indicate that the line segment intersects two sides of the axis-aligned box
     * or lies on an edge or a side of the box;
-    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectLineSegmentAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} to indicate that the line segment intersects two edges of the axis-aligned rectangle
+    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectLineSegmentAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} to indicate that the line segment intersects two edges of the axis-aligned rectangle
     * or lies on an edge of the rectangle.
     */
 public static immutable int TWO_INTERSECTION = 2;
 /**
-    * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d, Vector2d)} to indicate that the line segment lies completely inside of the axis-aligned box;
-    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double, Vector2d)} and
-    * {@link #intersectLineSegmentAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)} to indicate that the line segment lies completely inside of the axis-aligned rectangle.
+    * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)} to indicate that the line segment lies completely inside of the axis-aligned box;
+    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
+    * {@link #intersectLineSegmentAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} to indicate that the line segment lies completely inside of the axis-aligned rectangle.
     */
 public static immutable int INSIDE = 3;
 
@@ -1973,7 +1973,7 @@ public static bool testPointInTriangle(double pX, double pY, double pZ, double v
     * @return <code>true</code> if the ray intersects the sphere; <code>false</code> otherwise
     */
 public static bool intersectRaySphere(double originX, double originY, double originZ, double dirX, double dirY, double dirZ,
-        double centerX, double centerY, double centerZ, double radiusSquared, Vector2d result) {
+        double centerX, double centerY, double centerZ, double radiusSquared,ref Vector2d result) {
     double Lx = centerX - originX;
     double Ly = centerY - originY;
     double Lz = centerZ - originZ;
@@ -2015,7 +2015,7 @@ public static bool intersectRaySphere(double originX, double originY, double ori
     *              <i>p(t) = origin + t * dir</i> for both points (near, far) of intersections with the sphere
     * @return <code>true</code> if the ray intersects the sphere; <code>false</code> otherwise
     */
-public static bool intersectRaySphere(Vector3d origin, Vector3d dir, Vector3d center, double radiusSquared, Vector2d result) {
+public static bool intersectRaySphere(Vector3d origin, Vector3d dir, Vector3d center, double radiusSquared,ref Vector2d result) {
     return intersectRaySphere(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, center.x, center.y, center.z, radiusSquared, result);
 }
 
@@ -2173,7 +2173,7 @@ public static bool testLineSegmentSphere(Vector3d p0, Vector3d p1, Vector3d cent
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #intersectRayAab(Vector3d, Vector3d, Vector3d, Vector3d, Vector2d)
+    * @see #intersectRayAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)
     * @see RayAabIntersection
     * 
     * @param originX
@@ -2258,7 +2258,7 @@ public static bool intersectRayAab(double originX, double originY, double origin
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #intersectRayAab(double, double, double, double, double, double, double, double, double, double, double, double, Vector2d)
+    * @see #intersectRayAab(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector2d)
     * @see RayAabIntersection
     * 
     * @param origin
@@ -2288,7 +2288,7 @@ public static bool intersectRayAab(Vector3d origin, Vector3d dir, Vector3d min, 
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d, Vector2d)
+    * @see #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)
     * 
     * @param p0X
     *              the x coordinate of the line segment's first end point
@@ -2325,7 +2325,7 @@ public static bool intersectRayAab(Vector3d origin, Vector3d dir, Vector3d min, 
     *         or lies on an edge or a side of the box
     */
 public static int intersectLineSegmentAab(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z,
-        double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Vector2d result) {
+        double minX, double minY, double minZ, double maxX, double maxY, double maxZ,ref Vector2d result) {
     double dirX = p1X - p0X, dirY = p1Y - p0Y, dirZ = p1Z - p0Z;
     double invDirX = 1.0 / dirX, invDirY = 1.0 / dirY, invDirZ = 1.0 / dirZ;
     double tNear, tFar, tymin, tymax, tzmin, tzmax;
@@ -2386,7 +2386,7 @@ public static int intersectLineSegmentAab(double p0X, double p0Y, double p0Z, do
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d, Vector2d)
+    * @see #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)
     * 
     * @param p0
     *              the line segment's first end point
@@ -3323,7 +3323,7 @@ public static bool testAarLine(double minX, double minY, double maxX, double max
     *          the constant in the line equation
     * @return <code>true</code> iff the axis-aligned rectangle intersects the line; <code>false</code> otherwise
     */
-public static bool testAarLine(Vector2d min, Vector2d max, double a, double b, double c) {
+public static bool testAarLine(ref Vector2d min,ref Vector2d max, double a, double b, double c) {
     return testAarLine(min.x, min.y, max.x, max.y, a, b, c);
 }
 
@@ -3398,7 +3398,7 @@ public static bool testAarAar(double minXA, double minYA, double maxXA, double m
     *              the maximum corner of the second axis-aligned rectangle
     * @return <code>true</code> iff both axis-aligned rectangles intersect; <code>false</code> otherwise
     */
-public static bool testAarAar(Vector2d minA, Vector2d maxA, Vector2d minB, Vector2d maxB) {
+public static bool testAarAar(ref Vector2d minA,ref Vector2d maxA,ref Vector2d minB,ref Vector2d maxB) {
     return testAarAar(minA.x, minA.y, maxA.x, maxA.y, minB.x, minB.y, maxB.x, maxB.y);
 }
 
@@ -3479,7 +3479,7 @@ public static bool testMovingCircleCircle(double aX, double aY, double maX, doub
     *              the radius of the second circle
     * @return <code>true</code> if both circle intersect; <code>false</code> otherwise
     */
-public static bool testMovingCircleCircle(Vector2d centerA, Vector2d moveA, double aR, Vector2d centerB, double bR) {
+public static bool testMovingCircleCircle(ref Vector2d centerA,ref Vector2d moveA, double aR,ref Vector2d centerB, double bR) {
     return testMovingCircleCircle(centerA.x, centerA.y, moveA.x, moveA.y, aR, centerB.x, centerB.y, bR);
 }
 
@@ -3543,7 +3543,7 @@ public static bool intersectCircleCircle(double aX, double aY, double radiusSqua
     *              will hold the center of the line segment of intersection in the <code>(x, y)</code> components and the half-length in the z component
     * @return <code>true</code> iff both circles intersect; <code>false</code> otherwise
     */
-public static bool intersectCircleCircle(Vector2d centerA, double radiusSquaredA, Vector2d centerB, double radiusSquaredB, Vector3d intersectionCenterAndHL) {
+public static bool intersectCircleCircle(ref Vector2d centerA, double radiusSquaredA,ref Vector2d centerB, double radiusSquaredB, Vector3d intersectionCenterAndHL) {
     return intersectCircleCircle(centerA.x, centerA.y, radiusSquaredA, centerB.x, centerB.y, radiusSquaredB, intersectionCenterAndHL);
 }
 
@@ -3591,7 +3591,7 @@ public static bool testCircleCircle(double aX, double aY, double rA, double bX, 
     *              the square of the second circle's radius
     * @return <code>true</code> iff both circles intersect; <code>false</code> otherwise
     */
-public static bool testCircleCircle(Vector2d centerA, double radiusSquaredA, Vector2d centerB, double radiusSquaredB) {
+public static bool testCircleCircle(ref Vector2d centerA, double radiusSquaredA,ref Vector2d centerB, double radiusSquaredB) {
     return testCircleCircle(centerA.x, centerA.y, radiusSquaredA, centerB.x, centerB.y, radiusSquaredB);
 }
 
@@ -3737,7 +3737,7 @@ public static double intersectRayLine(double originX, double originY, double dir
     * @return the value of the parameter <i>t</i> in the ray equation <i>p(t) = origin + t * dir</i> of the intersection point, if the ray
     *         intersects the line; <code>-1.0</code> otherwise
     */
-public static double intersectRayLine(Vector2d origin, Vector2d dir, Vector2d point, Vector2d normal, double epsilon) {
+public static double intersectRayLine(ref Vector2d origin,ref Vector2d dir,ref Vector2d point,ref Vector2d normal, double epsilon) {
     return intersectRayLine(origin.x, origin.y, dir.x, dir.y, point.x, point.y, normal.x, normal.y, epsilon);
 }
 
@@ -3748,7 +3748,7 @@ public static double intersectRayLine(Vector2d origin, Vector2d dir, Vector2d po
     * <p>
     * This method returns <code>-1.0</code> if the ray does not intersect the line segment.
     * 
-    * @see #intersectRayLineSegment(Vector2d, Vector2d, Vector2d, Vector2d)
+    * @see #intersectRayLineSegment(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)
     * 
     * @param originX
     *              the x coordinate of the ray's origin
@@ -3802,7 +3802,7 @@ public static double intersectRayLineSegment(double originX, double originY, dou
     * @return the value of the parameter <i>t</i> in the ray equation <i>p(t) = origin + t * dir</i> of the intersection point, if the ray
     *         intersects the line segment; <code>-1.0</code> otherwise
     */
-public static double intersectRayLineSegment(Vector2d origin, Vector2d dir, Vector2d a, Vector2d b) {
+public static double intersectRayLineSegment(ref Vector2d origin,ref Vector2d dir,ref Vector2d a,ref Vector2d b) {
     return intersectRayLineSegment(origin.x, origin.y, dir.x, dir.y, a.x, a.y, b.x, b.y);
 }
 
@@ -3863,7 +3863,7 @@ public static bool testAarCircle(double minX, double minY, double maxX, double m
     *          the squared of the circle's radius
     * @return <code>true</code> iff the axis-aligned rectangle intersects the circle; <code>false</code> otherwise
     */
-public static bool testAarCircle(Vector2d min, Vector2d max, Vector2d center, double radiusSquared) {
+public static bool testAarCircle(ref Vector2d min,ref Vector2d max,ref Vector2d center, double radiusSquared) {
     return testAarCircle(min.x, min.y, max.x, max.y, center.x, center.y, radiusSquared);
 }
 
@@ -3899,7 +3899,7 @@ public static bool testAarCircle(Vector2d min, Vector2d max, Vector2d center, do
     *                {@link #POINT_ON_TRIANGLE_EDGE_01}, {@link #POINT_ON_TRIANGLE_EDGE_12}, {@link #POINT_ON_TRIANGLE_EDGE_20} or
     *                {@link #POINT_ON_TRIANGLE_FACE}
     */
-public static int findClosestPointOnTriangle(double v0X, double v0Y, double v1X, double v1Y, double v2X, double v2Y, double pX, double pY, Vector2d result) {
+public static int findClosestPointOnTriangle(double v0X, double v0Y, double v1X, double v1Y, double v2X, double v2Y, double pX, double pY,ref Vector2d result) {
     double abX = v1X - v0X, abY = v1Y - v0Y;
     double acX = v2X - v0X, acY = v2Y - v0Y;
     double apX = pX - v0X, apY = pY - v0Y;
@@ -3979,7 +3979,7 @@ public static int findClosestPointOnTriangle(double v0X, double v0Y, double v1X,
     *                {@link #POINT_ON_TRIANGLE_EDGE_01}, {@link #POINT_ON_TRIANGLE_EDGE_12}, {@link #POINT_ON_TRIANGLE_EDGE_20} or
     *                {@link #POINT_ON_TRIANGLE_FACE}
     */
-public static int findClosestPointOnTriangle(Vector2d v0, Vector2d v1, Vector2d v2, Vector2d p, Vector2d result) {
+public static int findClosestPointOnTriangle(ref Vector2d v0,ref Vector2d v1,ref Vector2d v2,ref Vector2d p,ref Vector2d result) {
     return findClosestPointOnTriangle(v0.x, v0.y, v1.x, v1.y, v2.x, v2.y, p.x, p.y, result);
 }
 
@@ -4013,7 +4013,7 @@ public static int findClosestPointOnTriangle(Vector2d v0, Vector2d v1, Vector2d 
     * @return <code>true</code> if the ray intersects the circle; <code>false</code> otherwise
     */
 public static bool intersectRayCircle(double originX, double originY, double dirX, double dirY, 
-        double centerX, double centerY, double radiusSquared, Vector2d result) {
+        double centerX, double centerY, double radiusSquared,ref Vector2d result) {
     double Lx = centerX - originX;
     double Ly = centerY - originY;
     double tca = Lx * dirX + Ly * dirY;
@@ -4054,7 +4054,7 @@ public static bool intersectRayCircle(double originX, double originY, double dir
     *              <i>p(t) = origin + t * dir</i> for both points (near, far) of intersections with the circle
     * @return <code>true</code> if the ray intersects the circle; <code>false</code> otherwise
     */
-public static bool intersectRayCircle(Vector2d origin, Vector2d dir, Vector2d center, double radiusSquared, Vector2d result) {
+public static bool intersectRayCircle(ref Vector2d origin,ref Vector2d dir,ref Vector2d center, double radiusSquared,ref Vector2d result) {
     return intersectRayCircle(origin.x, origin.y, dir.x, dir.y, center.x, center.y, radiusSquared, result);
 }
 
@@ -4114,7 +4114,7 @@ public static bool testRayCircle(double originX, double originY, double dirX, do
     *              the circle radius squared
     * @return <code>true</code> if the ray intersects the circle; <code>false</code> otherwise
     */
-public static bool testRayCircle(Vector2d origin, Vector2d dir, Vector2d center, double radiusSquared) {
+public static bool testRayCircle(ref Vector2d origin,ref Vector2d dir,ref Vector2d center, double radiusSquared) {
     return testRayCircle(origin.x, origin.y, dir.x, dir.y, center.x, center.y, radiusSquared);
 }
 
@@ -4128,7 +4128,7 @@ public static bool testRayCircle(Vector2d origin, Vector2d dir, Vector2d center,
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #intersectRayAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)
+    * @see #intersectRayAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)
     * 
     * @param originX
     *              the x coordinate of the ray's origin
@@ -4154,7 +4154,7 @@ public static bool testRayCircle(Vector2d origin, Vector2d dir, Vector2d center,
     *         or <code>-1</code> if the ray does not intersect the axis-aligned rectangle;
     */
 public static int intersectRayAar(double originX, double originY, double dirX, double dirY, 
-        double minX, double minY, double maxX, double maxY, Vector2d result) {
+        double minX, double minY, double maxX, double maxY,ref Vector2d result) {
     double invDirX = 1.0 / dirX, invDirY = 1.0 / dirY;
     double tNear, tFar, tymin, tymax;
     if (invDirX >= 0.0) {
@@ -4211,7 +4211,7 @@ public static int intersectRayAar(double originX, double originY, double dirX, d
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #intersectRayAar(double, double, double, double, double, double, double, double, Vector2d)
+    * @see #intersectRayAar(double, double, double, double, double, double, double, double,ref Vector2d)
     * 
     * @param origin
     *              the ray's origin
@@ -4228,7 +4228,7 @@ public static int intersectRayAar(double originX, double originY, double dirX, d
     *         {@link #AAR_SIDE_MINX}, {@link #AAR_SIDE_MINY}, {@link #AAR_SIDE_MAXX} or {@link #AAR_SIDE_MAXY};
     *         or <code>-1</code> if the ray does not intersect the axis-aligned rectangle;
     */
-public static int intersectRayAar(Vector2d origin, Vector2d dir, Vector2d min, Vector2d max, Vector2d result) {
+public static int intersectRayAar(ref Vector2d origin,ref Vector2d dir,ref Vector2d min,ref Vector2d max,ref Vector2d result) {
     return intersectRayAar(origin.x, origin.y, dir.x, dir.y, min.x, min.y, max.x, max.y, result);
 }
 
@@ -4242,7 +4242,7 @@ public static int intersectRayAar(Vector2d origin, Vector2d dir, Vector2d min, V
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     *
-    * @see #intersectLineSegmentAar(Vector2d, Vector2d, Vector2d, Vector2d, Vector2d)
+    * @see #intersectLineSegmentAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)
     * 
     * @param p0X
     *              the x coordinate of the line segment's first end point
@@ -4269,7 +4269,7 @@ public static int intersectRayAar(Vector2d origin, Vector2d dir, Vector2d min, V
     *         {@link #TWO_INTERSECTION} if the line segment intersects two edges of the axis-aligned rectangle or lies on one edge of the rectangle
     */
 public static int intersectLineSegmentAar(double p0X, double p0Y, double p1X, double p1Y, 
-        double minX, double minY, double maxX, double maxY, Vector2d result) {
+        double minX, double minY, double maxX, double maxY,ref Vector2d result) {
     double dirX = p1X - p0X, dirY = p1Y - p0Y;
     double invDirX = 1.0 / dirX, invDirY = 1.0 / dirY;
     double tNear, tFar, tymin, tymax;
@@ -4320,7 +4320,7 @@ public static int intersectLineSegmentAar(double p0X, double p0Y, double p1X, do
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     *
-    * #see {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double, Vector2d)}
+    * #see {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double,ref Vector2d)}
     * 
     * @param p0
     *              the line segment's first end point
@@ -4338,7 +4338,7 @@ public static int intersectLineSegmentAar(double p0X, double p0Y, double p1X, do
     *         {@link #ONE_INTERSECTION} if one of the end points of the line segment lies inside of the axis-aligned rectangle; or
     *         {@link #TWO_INTERSECTION} if the line segment intersects two edges of the axis-aligned rectangle
     */
-public static int intersectLineSegmentAar(Vector2d p0, Vector2d p1, Vector2d min, Vector2d max, Vector2d result) {
+public static int intersectLineSegmentAar(ref Vector2d p0,ref Vector2d p1,ref Vector2d min,ref Vector2d max,ref Vector2d result) {
     return intersectLineSegmentAar(p0.x, p0.y, p1.x, p1.y, min.x, min.y, max.x, max.y, result);
 }
 
@@ -4350,7 +4350,7 @@ public static int intersectLineSegmentAar(Vector2d p0, Vector2d p1, Vector2d min
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #testRayAar(Vector2d, Vector2d, Vector2d, Vector2d)
+    * @see #testRayAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)
     * 
     * @param originX
     *              the x coordinate of the ray's origin
@@ -4414,7 +4414,7 @@ public static bool testRayAar(double originX, double originY, double dirX, doubl
     *              the maximum corner of the axis-aligned rectangle
     * @return <code>true</code> if the given ray intersects the axis-aligned rectangle; <code>false</code> otherwise
     */
-public static bool testRayAar(Vector2d origin, Vector2d dir, Vector2d min, Vector2d max) {
+public static bool testRayAar(ref Vector2d origin,ref Vector2d dir,ref Vector2d min,ref Vector2d max) {
     return testRayAar(origin.x, origin.y, dir.x, dir.y, min.x, min.y, max.x, max.y);
 }
 
@@ -4461,7 +4461,7 @@ public static bool testPointTriangle(double pX, double pY, double v0X, double v0
     *          the point
     * @return <code>true</code> iff the point lies inside the triangle; <code>false</code> otherwise
     */
-public static bool testPointTriangle(Vector2d point, Vector2d v0, Vector2d v1, Vector2d v2) {
+public static bool testPointTriangle(ref Vector2d point,ref Vector2d v0,ref Vector2d v1,ref Vector2d v2) {
     return testPointTriangle(point.x, point.y, v0.x, v0.y, v1.x, v1.y, v2.x, v2.y);
 }
 
@@ -4603,7 +4603,7 @@ public static bool testCircleTriangle(double centerX, double centerY, double rad
     *          the third vertex of the triangle
     * @return <code>true</code> iff the circle intersects the triangle; <code>false</code> otherwise
     */
-public static bool testCircleTriangle(Vector2d center, double radiusSquared, Vector2d v0, Vector2d v1, Vector2d v2) {
+public static bool testCircleTriangle(ref Vector2d center, double radiusSquared,ref Vector2d v0,ref Vector2d v1,ref Vector2d v2) {
     return testCircleTriangle(center.x, center.y, radiusSquared, v0.x, v0.y, v1.x, v1.y, v2.x, v2.y);
 }
 
@@ -4629,7 +4629,7 @@ public static bool testCircleTriangle(Vector2d center, double radiusSquared, Vec
     *          will hold the point of intersection
     * @return the index of the first vertex of the polygon edge that intersects the ray; or <code>-1</code> if the ray does not intersect the polygon
     */
-public static int intersectPolygonRay(double[] verticesXY, double originX, double originY, double dirX, double dirY, Vector2d p) {
+public static int intersectPolygonRay(double[] verticesXY, double originX, double originY, double dirX, double dirY,ref Vector2d p) {
     double nearestT = double.infinity;
     int count = cast(int)(verticesXY.length >> 1);
     int edgeIndex = -1;
@@ -4677,7 +4677,7 @@ public static int intersectPolygonRay(double[] verticesXY, double originX, doubl
     *          will hold the point of intersection
     * @return the index of the first vertex of the polygon edge that intersects the ray; or <code>-1</code> if the ray does not intersect the polygon
     */
-public static int intersectPolygonRay(Vector2d[] vertices, double originX, double originY, double dirX, double dirY, Vector2d p) {
+public static int intersectPolygonRay(ref Vector2d[] vertices, double originX, double originY, double dirX, double dirY,ref Vector2d p) {
     double nearestT = double.infinity;
     int count = cast(int)vertices.length;
     int edgeIndex = -1;
@@ -4728,7 +4728,7 @@ public static int intersectPolygonRay(Vector2d[] vertices, double originX, doubl
     *          will hold the point of intersection
     * @return <code>true</code> iff the two lines intersect; <code>false</code> otherwise
     */
-public static bool intersectLineLine(double ps1x, double ps1y, double pe1x, double pe1y, double ps2x, double ps2y, double pe2x, double pe2y, Vector2d p) {
+public static bool intersectLineLine(double ps1x, double ps1y, double pe1x, double pe1y, double ps2x, double ps2y, double pe2x, double pe2y,ref Vector2d p) {
     double d1x = ps1x - pe1x;
     double d1y = pe1y - ps1y;
     double d1ps1 = d1y * ps1x + d1x * ps1y;
@@ -4743,7 +4743,7 @@ public static bool intersectLineLine(double ps1x, double ps1y, double pe1x, doub
     return true;
 }
 
-private static bool separatingAxis(Vector2d[] v1s, Vector2d[] v2s, double aX, double aY) {
+private static bool separatingAxis(ref Vector2d[] v1s,ref Vector2d[] v2s, double aX, double aY) {
     double minA = double.infinity, maxA = -double.infinity;
     double minB = double.infinity, maxB = -double.infinity;
     int maxLen = cast(int)Math.max(v1s.length, v2s.length);
@@ -4778,7 +4778,7 @@ private static bool separatingAxis(Vector2d[] v1s, Vector2d[] v2s, double aX, do
     *          the vertices of the second convex polygon
     * @return <code>true</code> if the convex polygons intersect; <code>false</code> otherwise
     */
-public static bool testPolygonPolygon(Vector2d[] v1s, Vector2d[] v2s) {
+public static bool testPolygonPolygon(ref Vector2d[] v1s,ref Vector2d[] v2s) {
     /* Try to find a separating axis using the first polygon's edges */
     for (int i = 0, j = cast(int)v1s.length - 1; i < v1s.length; j = i, i++) {
         Vector2d s = v1s[i], t = v1s[j];

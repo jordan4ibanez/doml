@@ -80,7 +80,7 @@ struct Vector2d {
      * @param v
      *          the {@link Vector2d} to copy the values from
      */
-    this(Vector2d v) {
+    this(ref Vector2d v) {
         x = v.x;
         y = v.y;
     }
@@ -143,7 +143,7 @@ struct Vector2d {
      *          the vector to copy from
      * @return this
      */
-    ref public Vector2d set(Vector2d v) return {
+    ref public Vector2d set(ref Vector2d v) return {
         this.x = v.x;
         this.y = v.y;
         return this;
@@ -254,7 +254,7 @@ struct Vector2d {
      *          the vector to subtract
      * @return this
      */
-    ref public Vector2d sub(Vector2d v) return {
+    ref public Vector2d sub(ref Vector2d v) return {
         this.x = x - v.x;
         this.y = y - v.y;
         return this;
@@ -282,7 +282,7 @@ struct Vector2d {
     }
 
 
-    public Vector2d sub(Vector2d v, ref Vector2d dest) {
+    public Vector2d sub(ref Vector2d v, ref Vector2d dest) {
         dest.x = x - v.x;
         dest.y = y - v.y;
         return dest;
@@ -336,13 +336,13 @@ struct Vector2d {
      *          the vector to multiply by
      * @return this
      */
-    ref public Vector2d mul(Vector2d v) return {
+    ref public Vector2d mul(ref Vector2d v) return {
         this.x = x * v.x;
         this.y = y * v.y;
         return this;
     }
 
-    public Vector2d mul(Vector2d v, ref Vector2d dest) {
+    public Vector2d mul(ref Vector2d v, ref Vector2d dest) {
         dest.x = x * v.x;
         dest.y = y * v.y;
         return dest;
@@ -397,14 +397,14 @@ struct Vector2d {
      *          the vector to divide by
      * @return this
      */
-    ref public Vector2d div(Vector2d v) return {
+    ref public Vector2d div(ref Vector2d v) return {
         this.x = x / v.x;
         this.y = y / v.y;
         return this;
     }
 
 
-    public Vector2d div(Vector2d v, ref Vector2d dest) {
+    public Vector2d div(ref Vector2d v, ref Vector2d dest) {
         dest.x = x / v.x;
         dest.y = y / v.y;
         return dest;
@@ -505,11 +505,11 @@ struct Vector2d {
         return dest;
     }
 
-    public double dot(Vector2d v) {
+    public double dot(ref Vector2d v) {
         return x * v.x + y * v.y;
     }
 
-    public double angle(Vector2d v) {
+    public double angle(ref Vector2d v) {
         double dot = x*v.x + y*v.y;
         double det = x*v.y - y*v.x;
         return Math.atan2(det, dot);
@@ -551,13 +551,13 @@ struct Vector2d {
         return Math.sqrt(x * x + y * y);
     }
 
-    public double distance(Vector2d v) {
+    public double distance(ref Vector2d v) {
         double dx = this.x - v.x;
         double dy = this.y - v.y;
         return Math.sqrt(dx * dx + dy * dy);
     }
 
-    public double distanceSquared(Vector2d v) {
+    public double distanceSquared(ref Vector2d v) {
         double dx = this.x - v.x;
         double dy = this.y - v.y;
         return dx * dx + dy * dy;
@@ -660,7 +660,7 @@ struct Vector2d {
      *          the vector to add
      * @return this
      */
-    ref public Vector2d add(Vector2d v) return {
+    ref public Vector2d add(ref Vector2d v) return {
         this.x = x + v.x;
         this.y = y + v.y;
         return this;
@@ -688,7 +688,7 @@ struct Vector2d {
     }
 
 
-    public Vector2d add(Vector2d v, ref Vector2d dest) {
+    public Vector2d add(ref Vector2d v, ref Vector2d dest) {
         dest.x = x + v.x;
         dest.y = y + v.y;
         return dest;
@@ -735,13 +735,13 @@ struct Vector2d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    ref public Vector2d lerp(Vector2d other, double t) return {
+    ref public Vector2d lerp(ref Vector2d other, double t) return {
         this.x = x + (other.x - x) * t;
         this.y = y + (other.y - y) * t;
         return this;
     }
 
-    public Vector2d lerp(Vector2d other, double t, ref Vector2d dest) {
+    public Vector2d lerp(ref Vector2d other, double t, ref Vector2d dest) {
         dest.x = x + (other.x - x) * t;
         dest.y = y + (other.y - y) * t;
         return dest;
@@ -785,7 +785,7 @@ struct Vector2d {
      *          the second multiplicand
      * @return this
      */
-    ref public Vector2d fma(Vector2d a, Vector2d b) return {
+    ref public Vector2d fma(ref Vector2d a,ref Vector2d b) return {
         this.x = x + a.x * b.x;
         this.y = y + a.y * b.y;
         return this;
@@ -800,19 +800,19 @@ struct Vector2d {
      *          the second multiplicand
      * @return this
      */
-    ref public Vector2d fma(double a, Vector2d b) return {
+    ref public Vector2d fma(double a,ref Vector2d b) return {
         this.x = x + a * b.x;
         this.y = y + a * b.y;
         return this;
     }
 
-    public Vector2d fma(Vector2d a, Vector2d b, ref Vector2d dest) {
+    public Vector2d fma(ref Vector2d a,ref Vector2d b, ref Vector2d dest) {
         dest.x = x + a.x * b.x;
         dest.y = y + a.y * b.y;
         return dest;
     }
 
-    public Vector2d fma(double a, Vector2d b, ref Vector2d dest) {
+    public Vector2d fma(double a,ref Vector2d b, ref Vector2d dest) {
         dest.x = x + a * b.x;
         dest.y = y + a * b.y;
         return dest;
@@ -825,13 +825,13 @@ struct Vector2d {
      *          the other vector
      * @return this
      */
-    ref public Vector2d min(Vector2d v) return {
+    ref public Vector2d min(ref Vector2d v) return {
         this.x = x < v.x ? x : v.x;
         this.y = y < v.y ? y : v.y;
         return this;
     }
 
-    public Vector2d min(Vector2d v, ref Vector2d dest) {
+    public Vector2d min(ref Vector2d v, ref Vector2d dest) {
         dest.x = x < v.x ? x : v.x;
         dest.y = y < v.y ? y : v.y;
         return dest;
@@ -844,13 +844,13 @@ struct Vector2d {
      *          the other vector
      * @return this
      */
-    ref public Vector2d max(Vector2d v) return {
+    ref public Vector2d max(ref Vector2d v) return {
         this.x = x > v.x ? x : v.x;
         this.y = y > v.y ? y : v.y;
         return this;
     }
 
-    public Vector2d max(Vector2d v, ref Vector2d dest) {
+    public Vector2d max(ref Vector2d v, ref Vector2d dest) {
         dest.x = x > v.x ? x : v.x;
         dest.y = y > v.y ? y : v.y;
         return dest;
