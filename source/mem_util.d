@@ -200,7 +200,7 @@ public Matrix4d set(ref Matrix4d m, int column, int row, double value) {
 }
 
 
-public double get(Matrix3d m, int column, int row) {
+public double get(ref Matrix3d m, int column, int row) {
     switch (column) {
     case 0:
         switch (row) {
@@ -328,7 +328,7 @@ public void copy(ref Matrix2d src, ref Matrix3d dest) {
     dest._m22 = 1.0;
 }
 
-public void copy(Matrix3d src, ref Matrix2d dest) {
+public void copy(ref Matrix3d src, ref Matrix2d dest) {
     dest._m00 = src.m00;
     dest._m01 = src.m01;
     dest._m10 = src.m10;

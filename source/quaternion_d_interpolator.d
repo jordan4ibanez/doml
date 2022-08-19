@@ -55,7 +55,7 @@ private static struct SvdDecomposition3d {
         return (b) >= 0.0 ? Math.abs(a) : -Math.abs(a);
     }
 
-    void svd(double[] a, int maxIterations, Matrix3d destU, Matrix3d destV) {
+    void svd(double[] a, int maxIterations,ref Matrix3d destU,ref Matrix3d destV) {
         int flag, i, its, j, jj, k, l = 0, nm = 0;
         double c, f, h, s, x, y, z;
         double anorm = 0.0, g = 0.0, scale = 0.0;

@@ -132,7 +132,7 @@ struct Matrix4x3d {
      * @param mat
      *          the {@link Matrix3d}
      */
-    this(Matrix3d mat) {
+    this(ref Matrix3d mat) {
         set(mat);
     }
 
@@ -629,13 +629,13 @@ struct Matrix4x3d {
      * Set the left 3x3 submatrix of this {@link Matrix4x3d} to the given {@link Matrix3d} 
      * and the rest to identity.
      * 
-     * @see #Matrix4x3d(Matrix3d)
+     * @see #Matrix4x3d(ref Matrix3d)
      * 
      * @param mat
      *          the {@link Matrix3d}
      * @return this
      */
-    ref public Matrix4x3d set(Matrix3d mat) return {
+    ref public Matrix4x3d set(ref Matrix3d mat) return {
         m00 = mat.m00;
         m01 = mat.m01;
         m02 = mat.m02;
@@ -1355,7 +1355,7 @@ struct Matrix4x3d {
         return dest;
     }
 
-    public Matrix3d transpose3x3(Matrix3d dest) {
+    public Matrix3d transpose3x3(ref Matrix3d dest) {
         dest.m00 = (m00);
         dest.m01 = (m10);
         dest.m02 = (m20);
@@ -2172,7 +2172,7 @@ struct Matrix4x3d {
      *          the 3x3 matrix
      * @return this
      */
-    ref public Matrix4x3d set3x3(Matrix3d mat) return {
+    ref public Matrix4x3d set3x3(ref Matrix3d mat) return {
         m00 = mat.m00;
         m01 = mat.m01;
         m02 = mat.m02;
@@ -4994,15 +4994,15 @@ struct Matrix4x3d {
         return dest;
     }
 
-    public Matrix3d normal(Matrix3d dest) {
+    public Matrix3d normal(ref Matrix3d dest) {
         if ((properties & PROPERTY_ORTHONORMAL) != 0)
             return normalOrthonormal(dest);
         return normalGeneric(dest);
     }
-    private Matrix3d normalOrthonormal(Matrix3d dest) {
+    private Matrix3d normalOrthonormal(ref Matrix3d dest) {
         return dest.set(this);
     }
-    private Matrix3d normalGeneric(Matrix3d dest) {
+    private Matrix3d normalGeneric(ref Matrix3d dest) {
         double m00m11 = m00 * m11;
         double m01m10 = m01 * m10;
         double m02m10 = m02 * m10;
@@ -5041,14 +5041,14 @@ struct Matrix4x3d {
      * Compute the cofactor matrix of the left 3x3 submatrix of <code>this</code>
      * and store it into <code>dest</code>.
      * <p>
-     * The cofactor matrix can be used instead of {@link #normal(Matrix3d)} to transform normals
+     * The cofactor matrix can be used instead of {@link #normal(ref Matrix3d)} to transform normals
      * when the orientation of the normals with respect to the surface should be preserved.
      * 
      * @param dest
      *             will hold the result
      * @return dest
      */
-    public Matrix3d cofactor3x3(Matrix3d dest) {
+    public Matrix3d cofactor3x3(ref Matrix3d dest) {
         dest.m00 = m11 * m22 - m21 * m12;
         dest.m01 = m20 * m12 - m10 * m22;
         dest.m02 = m10 * m21 - m20 * m11;
@@ -5123,7 +5123,7 @@ struct Matrix4x3d {
         return dest;
     }
 
-    public Matrix3d normalize3x3(Matrix3d dest) {
+    public Matrix3d normalize3x3(ref Matrix3d dest) {
         double invXlen = Math.invsqrt(m00 * m00 + m01 * m01 + m02 * m02);
         double invYlen = Math.invsqrt(m10 * m10 + m11 * m11 + m12 * m12);
         double invZlen = Math.invsqrt(m20 * m20 + m21 * m21 + m22 * m22);
