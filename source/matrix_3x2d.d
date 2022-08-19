@@ -71,7 +71,7 @@ public struct Matrix3x2d {
      * @param mat
      *          the {@link Matrix3x2d} to copy the values from
      */
-    this(ref Matrix3x2d mat) {
+    this(Matrix3x2d mat) {
         setMatrix3x2d(mat);
     }
 
@@ -177,11 +177,11 @@ public struct Matrix3x2d {
      *          the matrix to copy the elements from
      * @return this
      */
-    ref public Matrix3x2d set(ref Matrix3x2d m) return {
+    ref public Matrix3x2d set(Matrix3x2d m) return {
         setMatrix3x2d(m);
         return this;
     }
-    private void setMatrix3x2d(ref Matrix3x2d mat) {
+    private void setMatrix3x2d(Matrix3x2d mat) {
         m00 = mat.m00;
         m01 = mat.m01;
         m10 = mat.m10;
@@ -221,7 +221,7 @@ public struct Matrix3x2d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    ref public Matrix3x2d mul(ref Matrix3x2d right) return {
+    ref public Matrix3x2d mul(Matrix3x2d right) return {
         mul(right, this);
         return this;
     }
@@ -241,7 +241,7 @@ public struct Matrix3x2d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3x2d mul(ref Matrix3x2d right, ref Matrix3x2d dest) {
+    public Matrix3x2d mul(Matrix3x2d right, ref Matrix3x2d dest) {
         double nm00 = m00 * right.m00 + m10 * right.m01;
         double nm01 = m01 * right.m00 + m11 * right.m01;
         double nm10 = m00 * right.m10 + m10 * right.m11;
@@ -269,12 +269,12 @@ public struct Matrix3x2d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    ref public Matrix3x2d mulLocal(ref Matrix3x2d left) return {
+    ref public Matrix3x2d mulLocal(Matrix3x2d left) return {
        mulLocal(left, this);
        return this;
     }
 
-    public Matrix3x2d mulLocal(ref Matrix3x2d left, ref Matrix3x2d dest) {
+    public Matrix3x2d mulLocal(Matrix3x2d left, ref Matrix3x2d dest) {
         double nm00 = left.m00 * m00 + left.m10 * m01;
         double nm01 = left.m01 * m00 + left.m11 * m01;
         double nm10 = left.m00 * m10 + left.m10 * m11;
@@ -679,10 +679,10 @@ public struct Matrix3x2d {
      * Get the current values of <code>this</code> matrix and store them into
      * <code>dest</code>.
      * <p>
-     * This is the reverse method of {@link #set(ref Matrix3x2d)} and allows to obtain
+     * This is the reverse method of {@link #set(Matrix3x2d)} and allows to obtain
      * intermediate calculation results when chaining multiple transformations.
      * 
-     * @see #set(ref Matrix3x2d)
+     * @see #set(Matrix3x2d)
      * 
      * @param dest
      *          the destination matrix
@@ -885,7 +885,7 @@ public struct Matrix3x2d {
      * then the new matrix will be <code>M * S</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * S * v</code>, the scaling will be applied first!
      * 
-     * @see #scale(double, double,ref Matrix3x2d)
+     * @see #scale(double, double, Matrix3x2d)
      * 
      * @param xy
      *            the factor for the two components
@@ -1212,7 +1212,7 @@ public struct Matrix3x2d {
      * Transform/multiply the given vector by this matrix by assuming a third row in this matrix of <code>(0, 0, 1)</code>
      * and store the result in that vector.
      * 
-     * @see Vector3d#mul(ref Matrix3x2d)
+     * @see Vector3d#mul(Matrix3x2d)
      * 
      * @param v
      *          the vector to transform and to hold the final result
@@ -1226,7 +1226,7 @@ public struct Matrix3x2d {
      * Transform/multiply the given vector by this matrix by assuming a third row in this matrix of <code>(0, 0, 1)</code>
      * and store the result in <code>dest</code>.
      * 
-     * @see Vector3d#mul(ref Matrix3x2d, Vector3d)
+     * @see Vector3d#mul(Matrix3x2d, Vector3d)
      * 
      * @param v
      *          the vector to transform
@@ -1542,8 +1542,8 @@ public struct Matrix3x2d {
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the rotation will be applied first!
      * 
-     * @see #translate(double, double,ref Matrix3x2d)
-     * @see #rotate(double,ref Matrix3x2d)
+     * @see #translate(double, double, Matrix3x2d)
+     * @see #rotate(double, Matrix3x2d)
      * 
      * @param ang
      *            the angle in radians
@@ -1817,10 +1817,10 @@ public struct Matrix3x2d {
      * <p>
      * As a necessary computation step for unprojecting, this method computes the inverse of <code>this</code> matrix.
      * In order to avoid computing the matrix inverse with every invocation, the inverse of <code>this</code> matrix can be built
-     * once outside using {@link #invert(ref Matrix3x2d)} and then the method {@link #unprojectInv(double, double, int[], Vector2d) unprojectInv()} can be invoked on it.
+     * once outside using {@link #invert(Matrix3x2d)} and then the method {@link #unprojectInv(double, double, int[], Vector2d) unprojectInv()} can be invoked on it.
      * 
      * @see #unprojectInv(double, double, int[], Vector2d)
-     * @see #invert(ref Matrix3x2d)
+     * @see #invert(Matrix3x2d)
      * 
      * @param winX
      *          the x-coordinate in window coordinates (pixels)
@@ -1961,7 +1961,7 @@ public struct Matrix3x2d {
         return result;
     }
 
-    public bool equals(ref Matrix3x2d m, double delta) {
+    public bool equals(Matrix3x2d m, double delta) {
         if (this == m)
             return true;
         if (!Math.equals(m00, m.m00, delta))

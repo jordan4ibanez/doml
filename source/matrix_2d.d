@@ -227,11 +227,11 @@ public struct Matrix2d {
      *          the matrix to copy the elements from
      * @return this
      */
-    ref public Matrix2d set(ref Matrix3x2d m) return {
+    ref public Matrix2d set(Matrix3x2d m) return {
         setMatrix3x2d(m);
         return this;
     }
-    private void setMatrix3x2d(ref Matrix3x2d mat) {
+    private void setMatrix3x2d(Matrix3x2d mat) {
         m00 = mat.m00;
         m01 = mat.m01;
         m10 = mat.m10;
