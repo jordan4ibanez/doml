@@ -829,7 +829,7 @@ struct Quaterniond {
         return transformInverse(vec, vec);
     }
 
-    public Vector3d transform(Vector3d vec, Vector3d dest) {
+    public Vector3d transform(Vector3d vec, ref Vector3d dest) {
         return transform(vec.x, vec.y, vec.z, dest);
     }
 
