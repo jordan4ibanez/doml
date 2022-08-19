@@ -95,4 +95,6 @@ void testMatrix3x2d() {
         assertFalse(m.testPoint(area[2]+0.01, 0));
     }
 
+    writeln("PASSED!");
+
 }

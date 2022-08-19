@@ -570,7 +570,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m00(double m00) {
+    ref Matrix4d _m00(double m00) return {
         setm00(m00);
         return this;
     }
@@ -581,7 +581,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m01(double m01) {
+    ref Matrix4d _m01(double m01) return {
         setm01(m01);
         return this;
     }
@@ -592,7 +592,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m02(double m02) {
+    ref Matrix4d _m02(double m02) return {
         setm02(m02);
         return this;
     }
@@ -603,7 +603,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m03(double m03) {
+    ref Matrix4d _m03(double m03) return {
         setm03(m03);
         return this;
     }
@@ -614,7 +614,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m10(double m10) {
+    ref Matrix4d _m10(double m10) return {
         setm10(m10);
         return this;
     }
@@ -625,7 +625,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m11(double m11) {
+    ref Matrix4d _m11(double m11) return {
         setm11(m11);
         return this;
     }
@@ -636,7 +636,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m12(double m12) {
+    ref Matrix4d _m12(double m12) return {
         setm12(m12);
         return this;
     }
@@ -647,7 +647,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m13(double m13) {
+    ref Matrix4d _m13(double m13) return {
         setm13(m13);
         return this;
     }
@@ -658,7 +658,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m20(double m20) {
+    ref Matrix4d _m20(double m20) return {
         setm20(m20);
         return this;
     }
@@ -669,7 +669,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m21(double m21) {
+    ref Matrix4d _m21(double m21) return {
         setm21(m21);
         return this;
     }
@@ -680,7 +680,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m22(double m22) {
+    ref Matrix4d _m22(double m22) return {
         setm22(m22);
         return this;
     }
@@ -691,7 +691,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m23(double m23) {
+    ref Matrix4d _m23(double m23) return {
         setm23(m23);
         return this;
     }
@@ -702,7 +702,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m30(double m30) {
+    ref Matrix4d _m30(double m30) return {
         setm30(m30);
         return this;
     }
@@ -713,7 +713,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m31(double m31) {
+    ref Matrix4d _m31(double m31) return {
         setm31(m31);
         return this;
     }
@@ -724,7 +724,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m32(double m32) {
+    ref Matrix4d _m32(double m32) return {
         setm32(m32);
         return this;
     }
@@ -735,7 +735,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    Matrix4d _m33(double m33) {
+    ref Matrix4d _m33(double m33) return {
         setm33(m33);
         return this;
     }
