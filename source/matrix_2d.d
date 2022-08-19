@@ -59,7 +59,7 @@ public struct Matrix2d {
      * @param mat
      *          the {@link Matrix2d} to copy the values from
      */
-    this(ref Matrix2d mat) {
+    this(Matrix2d mat) {
         setMatrix2d(mat);
     }
 
@@ -208,11 +208,11 @@ public struct Matrix2d {
      *          the matrix to copy the elements from
      * @return this
      */
-    ref public Matrix2d set(ref Matrix2d m) return {
+    ref public Matrix2d set(Matrix2d m) return {
         setMatrix2d(m);
         return this;
     }
-    private void setMatrix2d(ref Matrix2d mat) {
+    private void setMatrix2d(Matrix2d mat) {
         m00 = mat.m00;
         m01 = mat.m01;
         m10 = mat.m10;
@@ -274,7 +274,7 @@ public struct Matrix2d {
         return this;
     }
 
-    public Matrix2d mul(ref Matrix2d right, ref Matrix2d dest) {
+    public Matrix2d mul(Matrix2d right, ref Matrix2d dest) {
         double nm00 = m00 * right.m00 + m10 * right.m01;
         double nm01 = m01 * right.m00 + m11 * right.m01;
         double nm10 = m00 * right.m10 + m10 * right.m11;
@@ -303,7 +303,7 @@ public struct Matrix2d {
         return this;
     }
 
-    public Matrix2d mulLocal(ref Matrix2d left, ref Matrix2d dest) {
+    public Matrix2d mulLocal(Matrix2d left, ref Matrix2d dest) {
         double nm00 = left.m00 * m00 + left.m10 * m01;
         double nm01 = left.m01 * m00 + left.m11 * m01;
         double nm10 = left.m00 * m10 + left.m10 * m11;
@@ -404,10 +404,10 @@ public struct Matrix2d {
      * Get the current values of <code>this</code> matrix and store them into
      * <code>dest</code>.
      * <p>
-     * This is the reverse method of {@link #set(ref Matrix2d)} and allows to obtain
+     * This is the reverse method of {@link #set(Matrix2d)} and allows to obtain
      * intermediate calculation results when chaining multiple transformations.
      *
-     * @see #set(ref Matrix2d)
+     * @see #set(Matrix2d)
      *
      * @param dest
      *          the destination matrix
@@ -934,9 +934,9 @@ public struct Matrix2d {
      * <p>
      * Please note that, if <code>this</code> is an orthogonal matrix or a matrix whose columns are orthogonal vectors,
      * then this method <i>need not</i> be invoked, since in that case <code>this</code> itself is its normal matrix.
-     * In this case, use {@link #set(ref Matrix2d)} to set a given Matrix2d to this matrix.
+     * In this case, use {@link #set(Matrix2d)} to set a given Matrix2d to this matrix.
      *
-     * @see #set(ref Matrix2d)
+     * @see #set(Matrix2d)
      *
      * @return this
      */
@@ -950,9 +950,9 @@ public struct Matrix2d {
      * <p>
      * Please note that, if <code>this</code> is an orthogonal matrix or a matrix whose columns are orthogonal vectors,
      * then this method <i>need not</i> be invoked, since in that case <code>this</code> itself is its normal matrix.
-     * In this case, use {@link #set(ref Matrix2d)} to set a given Matrix2d to this matrix.
+     * In this case, use {@link #set(Matrix2d)} to set a given Matrix2d to this matrix.
      *
-     * @see #set(ref Matrix2d)
+     * @see #set(Matrix2d)
      *
      * @param dest
      *             will hold the result
@@ -1038,7 +1038,7 @@ public struct Matrix2d {
         return result;
     }
 
-    public bool equals(ref Matrix2d m, double delta) {
+    public bool equals(Matrix2d m, double delta) {
         if (this == m)
             return true;
         if (!Math.equals(m00, m.m00, delta))
@@ -1071,12 +1071,12 @@ public struct Matrix2d {
      *          the other addend
      * @return this
      */
-    ref public Matrix2d add(ref Matrix2d other) return {
+    ref public Matrix2d add(Matrix2d other) return {
         this.add(other, this);
         return this;
     }
 
-    public Matrix2d add(ref Matrix2d other, ref Matrix2d dest) {
+    public Matrix2d add(Matrix2d other, ref Matrix2d dest) {
         dest.m00 = m00 + other.m00;
         dest.m01 = m01 + other.m01;
         dest.m10 = m10 + other.m10;
@@ -1091,12 +1091,12 @@ public struct Matrix2d {
      *          the subtrahend
      * @return this
      */
-    ref public Matrix2d sub(ref Matrix2d subtrahend) return {
+    ref public Matrix2d sub(Matrix2d subtrahend) return {
         this.sub(subtrahend, this);
         return this;
     }
 
-    public Matrix2d sub(ref Matrix2d other, ref Matrix2d dest) {
+    public Matrix2d sub(Matrix2d other, ref Matrix2d dest) {
         dest.m00 = m00 - other.m00;
         dest.m01 = m01 - other.m01;
         dest.m10 = m10 - other.m10;
@@ -1111,11 +1111,11 @@ public struct Matrix2d {
      *          the other matrix
      * @return this
      */
-    public Matrix2d mulComponentWise(ref Matrix2d other) {
+    public Matrix2d mulComponentWise(Matrix2d other) {
         return sub(other, this);
     }
 
-    public Matrix2d mulComponentWise(ref Matrix2d other, ref Matrix2d dest) {
+    public Matrix2d mulComponentWise(Matrix2d other, ref Matrix2d dest) {
         dest.m00 = m00 * other.m00;
         dest.m01 = m01 * other.m01;
         dest.m10 = m10 * other.m10;
@@ -1136,11 +1136,11 @@ public struct Matrix2d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    public Matrix2d lerp(ref Matrix2d other, double t) {
+    public Matrix2d lerp(Matrix2d other, double t) {
         return lerp(other, t, this);
     }
 
-    public Matrix2d lerp(ref Matrix2d other, double t, ref Matrix2d dest) {
+    public Matrix2d lerp(Matrix2d other, double t, ref Matrix2d dest) {
         dest.m00 = Math.fma(other.m00 - m00, t, m00);
         dest.m01 = Math.fma(other.m01 - m01, t, m01);
         dest.m10 = Math.fma(other.m10 - m10, t, m10);

@@ -60,7 +60,7 @@ public struct Matrix3x2d {
      * @param mat
      *          the {@link Matrix2d}
      */
-    this(ref Matrix2d mat) {
+    this(Matrix2d mat) {
         setMatrix2d(mat);
     }
 
@@ -197,11 +197,11 @@ public struct Matrix3x2d {
      *          the 2x2 matrix
      * @return this
      */
-    ref public Matrix3x2d set(ref Matrix2d m) return {
+    ref public Matrix3x2d set(Matrix2d m) return {
         setMatrix2d(m);
         return this;
     }
-    private void setMatrix2d(ref Matrix2d mat) {
+    private void setMatrix2d(Matrix2d mat) {
         m00 = mat.m00;
         m01 = mat.m01;
         m10 = mat.m10;

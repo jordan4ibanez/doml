@@ -417,7 +417,7 @@ struct Vector2d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    ref public Vector2d mul(ref Matrix2d mat) return {
+    ref public Vector2d mul(Matrix2d mat) return {
         double rx = mat.m00 * x + mat.m10 * y;
         double ry = mat.m01 * x + mat.m11 * y;
         this.x = rx;
@@ -425,7 +425,7 @@ struct Vector2d {
         return this;
     }
 
-    public Vector2d mul(ref Matrix2d mat, ref Vector2d dest) {
+    public Vector2d mul(Matrix2d mat, ref Vector2d dest) {
         double rx = mat.m00 * x + mat.m10 * y;
         double ry = mat.m01 * x + mat.m11 * y;
         dest.x = rx;
@@ -439,7 +439,7 @@ struct Vector2d {
      *          the matrix
      * @return this
      */
-    ref public Vector2d mulTranspose(ref Matrix2d mat) return {
+    ref public Vector2d mulTranspose(Matrix2d mat) return {
         double rx = mat.m00 * x + mat.m01 * y;
         double ry = mat.m10 * x + mat.m11 * y;
         this.x = rx;
@@ -447,7 +447,7 @@ struct Vector2d {
         return this;
     }
 
-    public Vector2d mulTranspose(ref Matrix2d mat, ref Vector2d dest) {
+    public Vector2d mulTranspose(Matrix2d mat, ref Vector2d dest) {
         double rx = mat.m00 * x + mat.m01 * y;
         double ry = mat.m10 * x + mat.m11 * y;
         dest.x = rx;

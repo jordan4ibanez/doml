@@ -70,7 +70,7 @@ struct Matrix3d {
      * @param mat
      *          the {@link Matrix2d}
      */
-    this(ref Matrix2d mat) {
+    this(Matrix2d mat) {
         set(mat);
     }
 
@@ -430,13 +430,13 @@ struct Matrix3d {
      * Set the upper left 2x2 submatrix of this {@link Matrix3d} to the given {@link Matrix2d}
      * and the rest to identity.
      *
-     * @see #Matrix3d(ref Matrix2d)
+     * @see #Matrix3d(Matrix2d)
      *
      * @param mat
      *          the {@link Matrix2d}
      * @return this
      */
-    ref public Matrix3d set(ref Matrix2d mat) return {
+    ref public Matrix3d set(Matrix2d mat) return {
         m00 = mat.m00;
         m01 = mat.m01;
         m02 = 0.0;
