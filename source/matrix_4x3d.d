@@ -713,7 +713,7 @@ struct Matrix4x3d {
      *          the {@link AxisAngle4d}
      * @return this
      */
-    ref public Matrix4x3d set(AxisAngle4d axisAngle) return {
+    ref public Matrix4x3d set(ref AxisAngle4d axisAngle) return {
         double x = axisAngle.x;
         double y = axisAngle.y;
         double z = axisAngle.z;
@@ -3829,17 +3829,17 @@ struct Matrix4x3d {
      * matrix to obtain an additional rotation.
      * <p>
      * In order to apply the rotation transformation to an existing transformation,
-     * use {@link #rotate(AxisAngle4d) rotate()} instead.
+     * use {@link #rotate(ref AxisAngle4d) rotate()} instead.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
      *
-     * @see #rotate(AxisAngle4d)
+     * @see #rotate(ref AxisAngle4d)
      * 
      * @param angleAxis
      *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
      * @return this
      */
-    ref public Matrix4x3d rotation(AxisAngle4d angleAxis) return {
+    ref public Matrix4x3d rotation(ref AxisAngle4d angleAxis) return {
         return rotation(angleAxis.angle, angleAxis.x, angleAxis.y, angleAxis.z);
     }
 
@@ -4674,18 +4674,18 @@ struct Matrix4x3d {
      * the {@link AxisAngle4d} rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(AxisAngle4d)}.
+     * use {@link #rotation(ref AxisAngle4d)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
      * 
      * @see #rotate(double, double, double, double)
-     * @see #rotation(AxisAngle4d)
+     * @see #rotation(ref AxisAngle4d)
      * 
      * @param axisAngle
      *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
      * @return this
      */
-    ref public Matrix4x3d rotate(AxisAngle4d axisAngle) return {
+    ref public Matrix4x3d rotate(ref AxisAngle4d axisAngle) return {
         return rotate(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z);
     }
 
@@ -4702,12 +4702,12 @@ struct Matrix4x3d {
      * the {@link AxisAngle4d} rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(AxisAngle4d)}.
+     * use {@link #rotation(ref AxisAngle4d)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
      * 
      * @see #rotate(double, double, double, double)
-     * @see #rotation(AxisAngle4d)
+     * @see #rotation(ref AxisAngle4d)
      * 
      * @param axisAngle
      *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
@@ -4715,7 +4715,7 @@ struct Matrix4x3d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4x3d rotate(AxisAngle4d axisAngle, ref Matrix4x3d dest) {
+    public Matrix4x3d rotate(ref AxisAngle4d axisAngle, ref Matrix4x3d dest) {
         return rotate(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z, dest);
     }
 

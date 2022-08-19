@@ -67,7 +67,7 @@ struct AxisAngle4d {
      * @param a
      *            the AngleAxis4d to copy the values from
      */
-    this(AxisAngle4d a) {
+    this(ref AxisAngle4d a) {
         x = a.x;
         y = a.y;
         z = a.z;
@@ -314,7 +314,7 @@ struct AxisAngle4d {
      *            the AngleAxis4f to copy the values from
      * @return this
      */
-    ref public AxisAngle4d set(AxisAngle4d a) return {
+    ref public AxisAngle4d set(ref AxisAngle4d a) return {
         x = a.x;
         y = a.y;
         z = a.z;
@@ -325,7 +325,7 @@ struct AxisAngle4d {
     /**
      * Set the given {@link Quaterniond} to be equivalent to this {@link AxisAngle4d} rotation.
      * 
-     * @see Quaterniond#set(AxisAngle4d)
+     * @see Quaterniond#set(ref AxisAngle4d)
      * 
      * @param q
      *          the quaternion to set
@@ -338,7 +338,7 @@ struct AxisAngle4d {
     /**
      * Set the given {@link Matrix4d} to a rotation transformation equivalent to this {@link AxisAngle4d}.
      * 
-     * @see Matrix4f#set(AxisAngle4d)
+     * @see Matrix4f#set(ref AxisAngle4d)
      * 
      * @param m
      *          the matrix to set
@@ -351,7 +351,7 @@ struct AxisAngle4d {
     /**
      * Set the given {@link Matrix3d} to a rotation transformation equivalent to this {@link AxisAngle4d}.
      * 
-     * @see Matrix3f#set(AxisAngle4d)
+     * @see Matrix3f#set(ref AxisAngle4d)
      * 
      * @param m
      *          the matrix to set
@@ -368,7 +368,7 @@ struct AxisAngle4d {
      *          will hold the result
      * @return dest
      */
-    public AxisAngle4d get(AxisAngle4d dest) {
+    public AxisAngle4d get(ref AxisAngle4d dest) {
         return dest.set(this);
     }
 
@@ -478,7 +478,7 @@ struct AxisAngle4d {
         return result;
     }
 
-    public bool equals(AxisAngle4d other) {
+    public bool equals(ref AxisAngle4d other) {
         if (this == other)
             return true;
         if (Math.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI)) != 

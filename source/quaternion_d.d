@@ -96,7 +96,7 @@ struct Quaterniond {
      * @param axisAngle
      *          the axis-angle to initialize this quaternion with
      */
-    this(AxisAngle4d axisAngle) {
+    this(ref AxisAngle4d axisAngle) {
         double s = Math.sin(axisAngle.angle * 0.5);
         x = axisAngle.x * s;
         y = axisAngle.y * s;
@@ -193,7 +193,7 @@ struct Quaterniond {
         return dest.set(this);
     }
 
-    public AxisAngle4d get(AxisAngle4d dest) {
+    public AxisAngle4d get(ref AxisAngle4d dest) {
         double x = this.x;
         double y = this.y;
         double z = this.z;
@@ -278,7 +278,7 @@ struct Quaterniond {
      *            the {@link AxisAngle4d}
      * @return this
      */
-    ref public Quaterniond set(AxisAngle4d axisAngle) return {
+    ref public Quaterniond set(ref AxisAngle4d axisAngle) return {
         return setAngleAxis(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z);
     }
 
