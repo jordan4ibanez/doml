@@ -1176,7 +1176,7 @@ public static bool testAabSphere(Vector3d min, Vector3d max, Vector3d center, do
     *          will hold the result
     * @return result
     */
-public static Vector3d findClosestPointOnPlane(double aX, double aY, double aZ, double nX, double nY, double nZ, double pX, double pY, double pZ, Vector3d result) {
+public static Vector3d findClosestPointOnPlane(double aX, double aY, double aZ, double nX, double nY, double nZ, double pX, double pY, double pZ, ref Vector3d result) {
     double d = -(nX * aX + nY * aY + nZ * aZ);
     double t = nX * pX + nY * pY + nZ * pZ - d;
     result.x = pX - t * nX;
@@ -1210,7 +1210,7 @@ public static Vector3d findClosestPointOnPlane(double aX, double aY, double aZ, 
     *          will hold the result
     * @return result
     */
-public static Vector3d findClosestPointOnLineSegment(double aX, double aY, double aZ, double bX, double bY, double bZ, double pX, double pY, double pZ, Vector3d result) {
+public static Vector3d findClosestPointOnLineSegment(double aX, double aY, double aZ, double bX, double bY, double bZ, double pX, double pY, double pZ, ref Vector3d result) {
     double abX = bX - aX, abY = bY - aY, abZ = bZ - aZ;
     double t = ((pX - aX) * abX + (pY - aY) * abY + (pZ - aZ) * abZ) / (abX * abX + abY * abY + abZ * abZ);
     if (t < 0.0) t = 0.0;
@@ -1613,7 +1613,7 @@ public static Vector3d findClosestPointOnRectangle(
         double aX, double aY, double aZ,
         double bX, double bY, double bZ,
         double cX, double cY, double cZ,
-        double pX, double pY, double pZ, Vector3d res) {
+        double pX, double pY, double pZ, ref Vector3d res) {
     double abX = bX - aX, abY = bY - aY, abZ = bZ - aZ;
     double acX = cX - aX, acY = cY - aY, acZ = cZ - aZ;
     double dX = pX - aX, dY = pY - aY, dZ = pZ - aZ;
@@ -2207,7 +2207,7 @@ public static bool testLineSegmentSphere(Vector3d p0, Vector3d p1, Vector3d cent
     * @return <code>true</code> if the given ray intersects the axis-aligned box; <code>false</code> otherwise
     */
 public static bool intersectRayAab(double originX, double originY, double originZ, double dirX, double dirY, double dirZ,
-        double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Vector2d result) {
+        double minX, double minY, double minZ, double maxX, double maxY, double maxZ, ref Vector2d result) {
     double invDirX = 1.0 / dirX, invDirY = 1.0 / dirY, invDirZ = 1.0 / dirZ;
     double tNear, tFar, tymin, tymax, tzmin, tzmax;
     if (invDirX >= 0.0) {
@@ -2275,7 +2275,7 @@ public static bool intersectRayAab(double originX, double originY, double origin
     *              iff the ray intersects the axis-aligned box
     * @return <code>true</code> if the given ray intersects the axis-aligned box; <code>false</code> otherwise
     */
-public static bool intersectRayAab(Vector3d origin, Vector3d dir, Vector3d min, Vector3d max, Vector2d result) {
+public static bool intersectRayAab(Vector3d origin, Vector3d dir, Vector3d min, Vector3d max, ref Vector2d result) {
     return intersectRayAab(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, min.x, min.y, min.z, max.x, max.y, max.z, result);
 }
 
@@ -2315,7 +2315,7 @@ public static bool intersectRayAab(Vector3d origin, Vector3d dir, Vector3d min, 
     * @param maxZ
     *              the y coordinate of the opposite corner of the axis-aligned box
     * @param result
-    *              a vector which will hold the resulting values of the parameter
+    *              a vector which will ing values of the parameter
     *              <i>t</i> in the ray equation <i>p(t) = p0 + t * (p1 - p0)</i> of the near and far point of intersection
     *              iff the line segment intersects the axis-aligned box
     * @return {@link #INSIDE} if the line segment lies completely inside of the axis-aligned box; or
@@ -2406,7 +2406,7 @@ public static int intersectLineSegmentAab(double p0X, double p0Y, double p0Z, do
     *         {@link #TWO_INTERSECTION} if the line segment intersects two sides of the axis-aligned box
     *         or lies on an edge or a side of the box
     */
-public static int intersectLineSegmentAab(Vector3d p0, Vector3d p1, Vector3d min, Vector3d max, Vector2d result) {
+public static int intersectLineSegmentAab(Vector3d p0, Vector3d p1, Vector3d min, Vector3d max, ref Vector2d result) {
     return intersectLineSegmentAab(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, min.x, min.y, min.z, max.x, max.y, max.z, result);
 }
 
