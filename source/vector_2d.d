@@ -115,7 +115,7 @@ struct Vector2d {
      *          the value of both components
      * @return this
      */
-    public Vector2d set(double d) {
+    ref public Vector2d set(double d) return {
         this.x = d;
         this.y = d;
         return this;
@@ -130,7 +130,7 @@ struct Vector2d {
      *          the y value
      * @return this
      */
-    public Vector2d set(double x, double y) {
+    ref public Vector2d set(double x, double y) return {
         this.x = x;
         this.y = y;
         return this;
@@ -143,7 +143,7 @@ struct Vector2d {
      *          the vector to copy from
      * @return this
      */
-    public Vector2d set(Vector2d v) {
+    ref public Vector2d set(Vector2d v) return {
         this.x = v.x;
         this.y = v.y;
         return this;
@@ -157,7 +157,7 @@ struct Vector2d {
      *          the vector to copy from
      * @return this
      */
-    public Vector2d set(Vector2i v) {
+    ref public Vector2d set(Vector2i v) return {
         this.x = v.x;
         this.y = v.y;
         return this;
@@ -170,7 +170,7 @@ struct Vector2d {
      *          the array containing at least three elements
      * @return this
      */
-    public Vector2d set(double[] xy) {
+    ref public Vector2d set(double[] xy) return {
         this.x = xy[0];
         this.y = xy[1];
         return this;
@@ -183,7 +183,7 @@ struct Vector2d {
      *          the array containing at least two elements
      * @return this
      */
-    public Vector2d set(float[] xy) {
+    ref public Vector2d set(float[] xy) return {
         this.x = xy[0];
         this.y = xy[1];
         return this;
@@ -222,7 +222,7 @@ struct Vector2d {
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..1]</code>
      */
-    public Vector2d setComponent(int component, double value) {
+    ref public Vector2d setComponent(int component, double value) return {
         switch (component) {
             case 0:
                 x = value;
@@ -240,7 +240,7 @@ struct Vector2d {
      * 
      * @return this
      */
-    public Vector2d perpendicular() {
+    ref public Vector2d perpendicular() return {
         double xTemp = y;
         this.y = x * -1;
         this.x = xTemp;
@@ -254,7 +254,7 @@ struct Vector2d {
      *          the vector to subtract
      * @return this
      */
-    public Vector2d sub(Vector2d v) {
+    ref public Vector2d sub(Vector2d v) return {
         this.x = x - v.x;
         this.y = y - v.y;
         return this;
@@ -269,7 +269,7 @@ struct Vector2d {
      *          the y component to subtract
      * @return this
      */
-    public Vector2d sub(double x, double y) {
+    ref public Vector2d sub(double x, double y) return {
         this.x = this.x - x;
         this.y = this.y - y;
         return this;
@@ -296,7 +296,7 @@ struct Vector2d {
      *        the value to multiply this vector's components by
      * @return this
      */
-    public Vector2d mul(double scalar) {
+    ref public Vector2d mul(double scalar) return {
         this.x = x * scalar;
         this.y = y * scalar;
         return this;
@@ -317,7 +317,7 @@ struct Vector2d {
      *          the y component to multiply this vector by
      * @return this
      */
-    public Vector2d mul(double x, double y) {
+    ref public Vector2d mul(double x, double y) return {
         this.x = this.x * x;
         this.y = this.y * y;
         return this;
@@ -336,7 +336,7 @@ struct Vector2d {
      *          the vector to multiply by
      * @return this
      */
-    public Vector2d mul(Vector2d v) {
+    ref public Vector2d mul(Vector2d v) return {
         this.x = x * v.x;
         this.y = y * v.y;
         return this;
@@ -355,7 +355,7 @@ struct Vector2d {
      *          the scalar to divide this vector by
      * @return this
      */
-    public Vector2d div(double scalar) {
+    ref public Vector2d div(double scalar) return {
         double inv = 1.0 / scalar;
         this.x = x * inv;
         this.y = y * inv;
@@ -378,7 +378,7 @@ struct Vector2d {
      *          the y component to divide this vector by
      * @return this
      */
-    public Vector2d div(double x, double y) {
+    ref public Vector2d div(double x, double y) return {
         this.x = this.x / x;
         this.y = this.y / y;
         return this;
@@ -397,7 +397,7 @@ struct Vector2d {
      *          the vector to divide by
      * @return this
      */
-    public Vector2d div(Vector2d v) {
+    ref public Vector2d div(Vector2d v) return {
         this.x = x / v.x;
         this.y = y / v.y;
         return this;
@@ -417,7 +417,7 @@ struct Vector2d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector2d mul(Matrix2d mat) {
+    ref public Vector2d mul(Matrix2d mat) return {
         double rx = mat.m00 * x + mat.m10 * y;
         double ry = mat.m01 * x + mat.m11 * y;
         this.x = rx;
@@ -439,7 +439,7 @@ struct Vector2d {
      *          the matrix
      * @return this
      */
-    public Vector2d mulTranspose(Matrix2d mat) {
+    ref public Vector2d mulTranspose(Matrix2d mat) return {
         double rx = mat.m00 * x + mat.m01 * y;
         double ry = mat.m10 * x + mat.m11 * y;
         this.x = rx;
@@ -464,7 +464,7 @@ struct Vector2d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector2d mulPosition(Matrix3x2d mat) {
+    ref public Vector2d mulPosition(Matrix3x2d mat) return {
         double rx = mat.m00 * x + mat.m10 * y + mat.m20;
         double ry = mat.m01 * x + mat.m11 * y + mat.m21;
         this.x = rx;
@@ -489,7 +489,7 @@ struct Vector2d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    public Vector2d mulDirection(Matrix3x2d mat) {
+    ref public Vector2d mulDirection(Matrix3x2d mat) return {
         double rx = mat.m00 * x + mat.m10 * y;
         double ry = mat.m01 * x + mat.m11 * y;
         this.x = rx;
@@ -618,7 +618,7 @@ struct Vector2d {
      * 
      * @return this
      */
-    public Vector2d normalize() {
+    ref public Vector2d normalize() return {
         double invLength = Math.invsqrt(x * x + y * y);
         this.x = x * invLength;
         this.y = y * invLength;
@@ -639,7 +639,7 @@ struct Vector2d {
      *          the desired length
      * @return this
      */
-    public Vector2d normalize(double length) {
+    ref public Vector2d normalize(double length) return {
         double invLength = Math.invsqrt(x * x + y * y) * length;
         this.x = x * invLength;
         this.y = y * invLength;
@@ -660,7 +660,7 @@ struct Vector2d {
      *          the vector to add
      * @return this
      */
-    public Vector2d add(Vector2d v) {
+    ref public Vector2d add(Vector2d v) return {
         this.x = x + v.x;
         this.y = y + v.y;
         return this;
@@ -675,7 +675,7 @@ struct Vector2d {
      *          the y component to add
      * @return this
      */
-    public Vector2d add(double x, double y) {
+    ref public Vector2d add(double x, double y) return {
         this.x = this.x + x;
         this.y = this.y + y;
         return this;
@@ -699,7 +699,7 @@ struct Vector2d {
      * 
      * @return this
      */
-    public Vector2d zero() {
+    ref public Vector2d zero() return {
         this.x = 0;
         this.y = 0;
         return this;
@@ -710,7 +710,7 @@ struct Vector2d {
      * 
      * @return this
      */
-    public Vector2d negate() {
+    ref public Vector2d negate() return {
         this.x = -x;
         this.y = -y;
         return this;
@@ -735,7 +735,7 @@ struct Vector2d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    public Vector2d lerp(Vector2d other, double t) {
+    ref public Vector2d lerp(Vector2d other, double t) return {
         this.x = x + (other.x - x) * t;
         this.y = y + (other.y - y) * t;
         return this;
@@ -785,7 +785,7 @@ struct Vector2d {
      *          the second multiplicand
      * @return this
      */
-    public Vector2d fma(Vector2d a, Vector2d b) {
+    ref public Vector2d fma(Vector2d a, Vector2d b) return {
         this.x = x + a.x * b.x;
         this.y = y + a.y * b.y;
         return this;
@@ -800,7 +800,7 @@ struct Vector2d {
      *          the second multiplicand
      * @return this
      */
-    public Vector2d fma(double a, Vector2d b) {
+    ref public Vector2d fma(double a, Vector2d b) return {
         this.x = x + a * b.x;
         this.y = y + a * b.y;
         return this;
@@ -825,7 +825,7 @@ struct Vector2d {
      *          the other vector
      * @return this
      */
-    public Vector2d min(Vector2d v) {
+    ref public Vector2d min(Vector2d v) return {
         this.x = x < v.x ? x : v.x;
         this.y = y < v.y ? y : v.y;
         return this;
@@ -844,7 +844,7 @@ struct Vector2d {
      *          the other vector
      * @return this
      */
-    public Vector2d max(Vector2d v) {
+    ref public Vector2d max(Vector2d v) return {
         this.x = x > v.x ? x : v.x;
         this.y = y > v.y ? y : v.y;
         return this;
@@ -879,7 +879,7 @@ struct Vector2d {
      *
      * @return this
      */
-    public Vector2d floor() {
+    ref public Vector2d floor() return {
         this.x = Math.floor(x);
         this.y = Math.floor(y);
         return this;
@@ -898,7 +898,7 @@ struct Vector2d {
      *
      * @return this
      */
-    public Vector2d ceil() {
+    ref public Vector2d ceil() return {
         this.x = Math.ceil(x);
         this.y = Math.ceil(y);
         return this;
@@ -916,7 +916,7 @@ struct Vector2d {
      *
      * @return this
      */
-    public Vector2d round() {
+    ref public Vector2d round() return {
         this.x = Math.round(x);
         this.y = Math.round(y);
         return this;
@@ -937,7 +937,7 @@ struct Vector2d {
      * 
      * @return this
      */
-    public Vector2d absolute() {
+    ref public Vector2d absolute() return {
         this.x = Math.abs(this.x);
         this.y = Math.abs(this.y);
         return this;
