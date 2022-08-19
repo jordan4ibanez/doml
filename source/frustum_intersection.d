@@ -205,7 +205,7 @@ struct FrustumIntersection {
      *          the {@link Matrix4d matrix} to update <code>this</code> frustum culler's frustum planes from
      * @return this
      */
-    public FrustumIntersection set(Matrix4d m) {
+    ref public FrustumIntersection set(Matrix4d m) return {
         return set(m, true);
     }
 
@@ -224,7 +224,7 @@ struct FrustumIntersection {
      *          If no spheres need to be tested, then <code>false</code> should be used
      * @return this
      */
-    public FrustumIntersection set(Matrix4d m, bool allowTestSpheres) {
+    ref public FrustumIntersection set(Matrix4d m, bool allowTestSpheres) return {
         float invl;
         nxX = m.m03 + m.m00; nxY = m.m13 + m.m10; nxZ = m.m23 + m.m20; nxW = m.m33 + m.m30;
         if (allowTestSpheres) {
