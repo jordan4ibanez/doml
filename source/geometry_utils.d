@@ -55,7 +55,7 @@ import vector_3d;
     * @param dest2
     *            will hold the second perpendicular vector
     */
-public static void perpendicular(float x, float y, float z, Vector3d dest1, Vector3d dest2) {
+public static void perpendicular(float x, float y, float z, ref Vector3d dest1, ref Vector3d dest2) {
     float magX = z * z + y * y;
     float magY = z * z + x * x;
     float magZ = y * y + x * x;
@@ -99,7 +99,7 @@ public static void perpendicular(float x, float y, float z, Vector3d dest1, Vect
     * @param dest2
     *            will hold the second perpendicular vector
     */
-public static void perpendicular(Vector3d v, Vector3d dest1, Vector3d dest2) {
+public static void perpendicular(ref Vector3d v, ref Vector3d dest1, ref Vector3d dest2) {
     perpendicular(v.x, v.y, v.z, dest1, dest2);
 }
 
@@ -169,7 +169,7 @@ public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y,
     * @param dest
     *            the tangent will be stored here
     */
-public static void tangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2, Vector3d v3, Vector2d uv3, Vector3d dest) {
+public static void tangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, ref Vector2d uv2, ref Vector3d v3, ref Vector2d uv3, ref Vector3d dest) {
     float DeltaV1 = uv2.y - uv1.y;
     float DeltaV2 = uv3.y - uv1.y;
 
@@ -199,7 +199,7 @@ public static void tangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2,
     * @param dest
     *            the binormal will be stored here
     */
-public static void bitangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2, Vector3d v3, Vector2d uv3, Vector3d dest) {
+public static void bitangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, ref Vector2d uv2, ref Vector3d v3, ref Vector2d uv3, ref Vector3d dest) {
     float DeltaU1 = uv2.x - uv1.x;
     float DeltaU2 = uv3.x - uv1.x;
 
@@ -231,7 +231,7 @@ public static void bitangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv
     * @param destBitangent
     *            the bitangent will be stored here
     */
-public static void tangentBitangent(Vector3d v1, Vector2d uv1, Vector3d v2, Vector2d uv2, Vector3d v3, Vector2d uv3, Vector3d destTangent, Vector3d destBitangent) {
+public static void tangentBitangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, ref Vector2d uv2, ref Vector3d v3, ref Vector2d uv3, ref Vector3d destTangent, ref Vector3d destBitangent) {
     float DeltaV1 = uv2.y - uv1.y;
     float DeltaV2 = uv3.y - uv1.y;
     float DeltaU1 = uv2.x - uv1.x;
