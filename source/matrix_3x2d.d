@@ -423,7 +423,7 @@ public struct Matrix3x2d {
      *          the translation
      * @return this
      */
-    public Matrix3x2d translation(Vector2d offset) {
+    public Matrix3x2d translation(ref Vector2d offset) {
         return translation(offset.x, offset.y);
     }
 
@@ -461,7 +461,7 @@ public struct Matrix3x2d {
      *          the new translation to set
      * @return this
      */
-    public Matrix3x2d setTranslation(Vector2d offset) {
+    public Matrix3x2d setTranslation(ref Vector2d offset) {
         return setTranslation(offset.x, offset.y);
     }
 
@@ -543,7 +543,7 @@ public struct Matrix3x2d {
      * @return dest
      */
     public Matrix3x2d translate(Vector2d offset, ref Matrix3x2d dest) {
-        return translate(offset.x, offset.y, dest);
+        return dest.translate(offset.x, offset.y, dest);
     }
 
     /**
@@ -1203,7 +1203,7 @@ public struct Matrix3x2d {
      *          the vector to transform and to hold the final result
      * @return v
      */
-    public Vector3d transform(Vector3d v) {
+    public Vector3d transform(ref Vector3d v) {
         return v.mul(this);
     }
 
@@ -1256,7 +1256,7 @@ public struct Matrix3x2d {
      *          the vector to transform and to hold the final result
      * @return v
      */
-    public Vector2d transformPosition(Vector2d v) {
+    public Vector2d transformPosition(ref Vector2d v) {
         v.set(m00 * v.x + m10 * v.y + m20,
               m01 * v.x + m11 * v.y + m21);
         return v;
@@ -1326,7 +1326,7 @@ public struct Matrix3x2d {
      *          the vector to transform and to hold the final result
      * @return v
      */
-    public Vector2d transformDirection(Vector2d v) {
+    public Vector2d transformDirection(ref Vector2d v) {
         v.set(m00 * v.x + m10 * v.y,
               m01 * v.x + m11 * v.y);
         return v;
@@ -1707,7 +1707,7 @@ public struct Matrix3x2d {
      *          will hold the position transformed to the origin
      * @return origin
      */
-    public Vector2d origin(Vector2d origin) {
+    public Vector2d origin(ref Vector2d origin) {
         double s = 1.0 / (m00 * m11 - m01 * m10);
         origin.x = (m10 * m21 - m20 * m11) * s;
         origin.y = (m20 * m01 - m00 * m21) * s;
@@ -1761,7 +1761,7 @@ public struct Matrix3x2d {
         return area;
     }
 
-    public Vector2d positiveX(Vector2d dir) {
+    public Vector2d positiveX(ref Vector2d dir) {
         double s = m00 * m11 - m01 * m10;
         s = 1.0 / s;
         dir.x =  m11 * s;
@@ -1769,13 +1769,13 @@ public struct Matrix3x2d {
         return dir.normalize(dir);
     }
 
-    public Vector2d normalizedPositiveX(Vector2d dir) {
+    public Vector2d normalizedPositiveX(ref Vector2d dir) {
         dir.x =  m11;
         dir.y = -m01;
         return dir;
     }
 
-    public Vector2d positiveY(Vector2d dir) {
+    public Vector2d positiveY(ref Vector2d dir) {
         double s = m00 * m11 - m01 * m10;
         s = 1.0 / s;
         dir.x = -m10 * s;
@@ -1783,7 +1783,7 @@ public struct Matrix3x2d {
         return dir.normalize(dir);
     }
 
-    public Vector2d normalizedPositiveY(Vector2d dir) {
+    public Vector2d normalizedPositiveY(ref Vector2d dir) {
         dir.x = -m10;
         dir.y =  m00;
         return dir;
