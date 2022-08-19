@@ -81,7 +81,7 @@ void assertEquals(Vector4i a, Vector4i b) {
     assert(a.equals(b));
 }
 
-
+/*
 void assertEquals(double a, double b, long precision) {
     long c = cast(long)(a * precision);
     long d = cast(long)(b * precision);
@@ -90,15 +90,13 @@ void assertEquals(double a, double b, long precision) {
     }
     assert(c == d);
 }
+*/
 
 void assertEquals(double a, double b, double precision) {
-    long MAX_PRECISION = cast(long)(1 / precision);
-    long c = cast(long)(a * MAX_PRECISION);
-    long d = cast(long)(b * MAX_PRECISION);
     if (verbose) {
         writeln("Value1: ", a, " | Value2: ", b);
     }
-    assert(c == d);
+    assert(Math.abs(a - b) < precision);
 }
 
 void assertEquals(double a, double b) {
