@@ -115,7 +115,7 @@ public static void perpendicular(Vector3d v, Vector3d dest1, Vector3d dest2) {
     * @param dest
     *            will hold the result
     */
-public static void normal(Vector3d v0, Vector3d v1, Vector3d v2, Vector3d dest) {
+public static void normal(Vector3d v0, Vector3d v1, Vector3d v2, ref Vector3d dest) {
     normal(v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, dest);
 }
 
@@ -144,7 +144,7 @@ public static void normal(Vector3d v0, Vector3d v1, Vector3d v2, Vector3d dest) 
     * @param dest
     *            will hold the result
     */
-public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y, float v1Z, float v2X, float v2Y, float v2Z, Vector3d dest) {
+public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y, float v1Z, float v2X, float v2Y, float v2Z, ref Vector3d dest) {
     dest.x = ((v1Y - v0Y) * (v2Z - v0Z)) - ((v1Z - v0Z) * (v2Y - v0Y));
     dest.y = ((v1Z - v0Z) * (v2X - v0X)) - ((v1X - v0X) * (v2Z - v0Z));
     dest.z = ((v1X - v0X) * (v2Y - v0Y)) - ((v1Y - v0Y) * (v2X - v0X));
