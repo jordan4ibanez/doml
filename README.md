@@ -18,3 +18,5 @@ Need to fix a severe memory mismanagement:
 ref Matrix4d _m01(double m01) return {
 
 Look up: return this
+
+search for swap( in case any functions need a reference
