@@ -84,7 +84,7 @@ struct AxisAngle4d {
      * @param q
      *            the quaternion from which to create the new AngleAxis4d
      */
-    this(ref Quaterniond q) {
+    this(Quaterniond q) {
         double acos = Math.safeAcos(q.w);
         double invSqrt = Math.invsqrt(1.0 - q.w * q.w);
         if (Math.isInfinite(invSqrt)) {
@@ -331,7 +331,7 @@ struct AxisAngle4d {
      *          the quaternion to set
      * @return q
      */
-    public Quaterniond get(ref Quaterniond q) {
+    public Quaterniond get(Quaterniond q) {
         return q.set(this);
     }
 

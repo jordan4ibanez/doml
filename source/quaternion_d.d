@@ -83,7 +83,7 @@ struct Quaterniond {
      * @param source
      *          the {@link Quaterniond} to take the component values from
      */
-    this(ref Quaterniond source) {
+    this(Quaterniond source) {
         x = source.x;
         y = source.y;
         z = source.z;
@@ -118,7 +118,7 @@ struct Quaterniond {
         return this;
     }
 
-    public Quaterniond normalize(ref Quaterniond dest) {
+    public Quaterniond normalize(Quaterniond dest) {
         double invNorm = Math.invsqrt(lengthSquared());
         dest.x = x * invNorm;
         dest.y = y * invNorm;
@@ -160,7 +160,7 @@ struct Quaterniond {
      *          the quaternion to add to this
      * @return this
      */
-    ref public Quaterniond add(ref Quaterniond q2) return {
+    ref public Quaterniond add(Quaterniond q2) return {
         x += q2.x;
         y += q2.y;
         z += q2.z;
@@ -168,7 +168,7 @@ struct Quaterniond {
         return this;
     }
 
-    public Quaterniond add(ref Quaterniond q2, Quaterniond dest) {
+    public Quaterniond add(Quaterniond q2, Quaterniond dest) {
         dest.x = x + q2.x;
         dest.y = y + q2.y;
         dest.z = z + q2.z;
@@ -176,7 +176,7 @@ struct Quaterniond {
         return dest;
     }
 
-    public double dot(ref Quaterniond otherQuat) {
+    public double dot(Quaterniond otherQuat) {
         return this.x * otherQuat.x + this.y * otherQuat.y + this.z * otherQuat.z + this.w * otherQuat.w;
     }
 
@@ -223,13 +223,13 @@ struct Quaterniond {
     /**
      * Set the given {@link Quaterniond} to the values of <code>this</code>.
      * 
-     * @see #set(ref Quaterniond)
+     * @see #set(Quaterniond)
      * 
      * @param dest
      *          the {@link Quaterniond} to set
      * @return the passed in destination
      */
-    public Quaterniond get(ref Quaterniond dest) {
+    public Quaterniond get(Quaterniond dest) {
         return dest.set(this);
     }
 
@@ -262,7 +262,7 @@ struct Quaterniond {
      *          the {@link Quaterniond} to copy
      * @return this
      */
-    ref public Quaterniond set(ref Quaterniond q) return {
+    ref public Quaterniond set(Quaterniond q) return {
         x = q.x;
         y = q.y;
         z = q.z;
@@ -542,12 +542,12 @@ struct Quaterniond {
      *          the quaternion to multiply <code>this</code> by
      * @return this
      */
-    ref public Quaterniond mul(ref Quaterniond q) return {
+    ref public Quaterniond mul(Quaterniond q) return {
         mul(q, this);
         return this;
     }
 
-    public Quaterniond mul(ref Quaterniond q, Quaterniond dest) {
+    public Quaterniond mul(Quaterniond q, Quaterniond dest) {
         return mul(q.x, q.y, q.z, q.w, dest);
     }
 
@@ -597,12 +597,12 @@ struct Quaterniond {
      *            the quaternion to pre-multiply <code>this</code> by
      * @return this
      */
-    ref public Quaterniond premul(ref Quaterniond q) return {
+    ref public Quaterniond premul(Quaterniond q) return {
         premul(q, this);
         return this;
     }
 
-    public Quaterniond premul(ref Quaterniond q, Quaterniond dest) {
+    public Quaterniond premul(Quaterniond q, Quaterniond dest) {
         return premul(q.x, q.y, q.z, q.w, dest);
     }
 
@@ -948,7 +948,7 @@ struct Quaterniond {
     }
 
 
-    public Quaterniond invert(ref Quaterniond dest) {
+    public Quaterniond invert(Quaterniond dest) {
         double invNorm = 1.0 / lengthSquared();
         dest.x = -x * invNorm;
         dest.y = -y * invNorm;
@@ -971,7 +971,7 @@ struct Quaterniond {
         return this;
     }
 
-    public Quaterniond div(ref Quaterniond b, Quaterniond dest) {
+    public Quaterniond div(Quaterniond b, Quaterniond dest) {
         double invNorm = 1.0 / Math.fma(b.x, b.x, Math.fma(b.y, b.y, Math.fma(b.z, b.z, b.w * b.w)));
         double x = -b.x * invNorm;
         double y = -b.y * invNorm;
@@ -994,7 +994,7 @@ struct Quaterniond {
      *          the {@link Quaterniond} to divide this by
      * @return this
      */
-    ref public Quaterniond div(ref Quaterniond b) return {
+    ref public Quaterniond div(Quaterniond b) return {
         div(b, this);
         return this;
     }
@@ -1011,7 +1011,7 @@ struct Quaterniond {
         return this;
     }
 
-    public Quaterniond conjugate(ref Quaterniond dest) {
+    public Quaterniond conjugate(Quaterniond dest) {
         dest.x = -x;
         dest.y = -y;
         dest.z = -z;
@@ -1154,12 +1154,12 @@ struct Quaterniond {
      *          the interpolation factor, within <code>[0..1]</code>
      * @return this
      */
-    ref public Quaterniond slerp(ref Quaterniond target, double alpha) return {
+    ref public Quaterniond slerp(Quaterniond target, double alpha) return {
         slerp(target, alpha, this);
         return this;
     }
 
-    public Quaterniond slerp(ref Quaterniond target, double alpha, Quaterniond dest) {
+    public Quaterniond slerp(Quaterniond target, double alpha, Quaterniond dest) {
         double cosom = Math.fma(x, target.x, Math.fma(y, target.y, Math.fma(z, target.z, w * target.w)));
         double absCosom = Math.abs(cosom);
         double scale0, scale1;
@@ -1185,7 +1185,7 @@ struct Quaterniond {
      * Interpolate between all of the quaternions given in <code>qs</code> via spherical linear interpolation using the specified interpolation factors <code>weights</code>,
      * and store the result in <code>dest</code>.
      * <p>
-     * This method will interpolate between each two successive quaternions via {@link #slerp(ref Quaterniond, double)} using their relative interpolation weights.
+     * This method will interpolate between each two successive quaternions via {@link #slerp(Quaterniond, double)} using their relative interpolation weights.
      * <p>
      * This method resorts to non-spherical linear interpolation when the absolute dot product of any two interpolated quaternions is below <code>1E-6f</code>.
      * <p>
@@ -1199,7 +1199,7 @@ struct Quaterniond {
      *          will hold the result
      * @return dest
      */
-    public static Quaterniond slerp(ref Quaterniond[] qs, double[] weights, Quaterniond dest) {
+    public static Quaterniond slerp(Quaterniond[] qs, double[] weights, Quaterniond dest) {
         dest.set(qs[0]);
         double w = weights[0];
         for (int i = 1; i < qs.length; i++) {
@@ -1313,12 +1313,12 @@ struct Quaterniond {
      *          the interpolation factor. It is between 0.0 and 1.0
      * @return this
      */
-    ref public Quaterniond nlerp(ref Quaterniond q, double factor) return {
+    ref public Quaterniond nlerp(Quaterniond q, double factor) return {
         nlerp(q, factor, this);
         return this;
     }
 
-    public Quaterniond nlerp(ref Quaterniond q, double factor, Quaterniond dest) {
+    public Quaterniond nlerp(Quaterniond q, double factor, Quaterniond dest) {
         double cosom = Math.fma(x, q.x, Math.fma(y, q.y, Math.fma(z, q.z, w * q.w)));
         double scale0 = 1.0 - factor;
         double scale1 = (cosom >= 0.0) ? factor : -factor;
@@ -1338,7 +1338,7 @@ struct Quaterniond {
      * Interpolate between all of the quaternions given in <code>qs</code> via non-spherical linear interpolation using the
      * specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
      * <p>
-     * This method will interpolate between each two successive quaternions via {@link #nlerp(ref Quaterniond, double)}
+     * This method will interpolate between each two successive quaternions via {@link #nlerp(Quaterniond, double)}
      * using their relative interpolation weights.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/62354/method-for-interpolation-between-3-quaternions#answer-62356">http://gamedev.stackexchange.com/</a>
@@ -1351,7 +1351,7 @@ struct Quaterniond {
      *          will hold the result
      * @return dest
      */
-    public static Quaterniond nlerp(ref Quaterniond[] qs, double[] weights, Quaterniond dest) {
+    public static Quaterniond nlerp(Quaterniond[] qs, double[] weights, Quaterniond dest) {
         dest.set(qs[0]);
         double w = weights[0];
         for (int i = 1; i < qs.length; i++) {
@@ -1364,7 +1364,7 @@ struct Quaterniond {
         return dest;
     }
 
-    public Quaterniond nlerpIterative(ref Quaterniond q, double alpha, double dotThreshold, Quaterniond dest) {
+    public Quaterniond nlerpIterative(Quaterniond q, double alpha, double dotThreshold, Quaterniond dest) {
         double q1x = x, q1y = y, q1z = z, q1w = w;
         double q2x = q.x, q2y = q.y, q2z = q.z, q2w = q.w;
         double dot = Math.fma(q1x, q2x, Math.fma(q1y, q2y, Math.fma(q1z, q2z, q1w * q2w)));
@@ -1421,7 +1421,7 @@ struct Quaterniond {
      * iteratively and store the result in <code>this</code>.
      * <p>
      * This method performs a series of small-step nlerp interpolations to avoid doing a costly spherical linear interpolation, like
-     * {@link #slerp(ref Quaterniond, double, Quaterniond) slerp},
+     * {@link #slerp(Quaterniond, double, Quaterniond) slerp},
      * by subdividing the rotation arc between <code>this</code> and <code>q</code> via non-spherical linear interpolations as long as
      * the absolute dot product of <code>this</code> and <code>q</code> is greater than the given <code>dotThreshold</code> parameter.
      * <p>
@@ -1436,7 +1436,7 @@ struct Quaterniond {
      *          of a small-step linear interpolation
      * @return this
      */
-    ref public Quaterniond nlerpIterative(ref Quaterniond q, double alpha, double dotThreshold) return {
+    ref public Quaterniond nlerpIterative(Quaterniond q, double alpha, double dotThreshold) return {
         nlerpIterative(q, alpha, dotThreshold, this);
         return this;
     }
@@ -1445,7 +1445,7 @@ struct Quaterniond {
      * Interpolate between all of the quaternions given in <code>qs</code> via iterative non-spherical linear interpolation using the
      * specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
      * <p>
-     * This method will interpolate between each two successive quaternions via {@link #nlerpIterative(ref Quaterniond, double, double)}
+     * This method will interpolate between each two successive quaternions via {@link #nlerpIterative(Quaterniond, double, double)}
      * using their relative interpolation weights.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/62354/method-for-interpolation-between-3-quaternions#answer-62356">http://gamedev.stackexchange.com/</a>
@@ -1455,13 +1455,13 @@ struct Quaterniond {
      * @param weights
      *          the weights of each individual quaternion in <code>qs</code>
      * @param dotThreshold
-     *          the threshold for the dot product of each two interpolated quaternions above which {@link #nlerpIterative(ref Quaterniond, double, double)} performs another iteration
+     *          the threshold for the dot product of each two interpolated quaternions above which {@link #nlerpIterative(Quaterniond, double, double)} performs another iteration
      *          of a small-step linear interpolation
      * @param dest
      *          will hold the result
      * @return dest
      */
-    public static Quaterniond nlerpIterative(ref Quaterniond[] qs, double[] weights, double dotThreshold, Quaterniond dest) {
+    public static Quaterniond nlerpIterative(Quaterniond[] qs, double[] weights, double dotThreshold, Quaterniond dest) {
         dest.set(qs[0]);
         double w = weights[0];
         for (int i = 1; i < qs.length; i++) {
@@ -1617,7 +1617,7 @@ struct Quaterniond {
         return result;
     }
 
-    public bool equals(ref Quaterniond other) {
+    public bool equals(Quaterniond other) {
         if (this == other)
             return true;
         if (Math.doubleToLongBits(w) != Math.doubleToLongBits(other.w))
@@ -1647,12 +1647,12 @@ struct Quaterniond {
      *          the other quaternion
      * @return this
      */
-    ref public Quaterniond difference(ref Quaterniond other) return {
+    ref public Quaterniond difference(Quaterniond other) return {
         difference(other, this);
         return this;
     }
 
-    public Quaterniond difference(ref Quaterniond other, Quaterniond dest) {
+    public Quaterniond difference(Quaterniond other, Quaterniond dest) {
         double invNorm = 1.0 / lengthSquared();
         double x = -this.x * invNorm;
         double y = -this.y * invNorm;
@@ -2381,7 +2381,7 @@ struct Quaterniond {
      *          the {@link Quaterniond} to conjugate <code>this</code> by
      * @return this
      */
-    ref public Quaterniond conjugateBy(ref Quaterniond q) return {
+    ref public Quaterniond conjugateBy(Quaterniond q) return {
         conjugateBy(q, this);
         return this;
     }
@@ -2396,7 +2396,7 @@ struct Quaterniond {
      *          will hold the result
      * @return dest
      */
-    public Quaterniond conjugateBy(ref Quaterniond q, Quaterniond dest) {
+    public Quaterniond conjugateBy(Quaterniond q, Quaterniond dest) {
         double invNorm = 1.0 / q.lengthSquared();
         double qix = -q.x * invNorm, qiy = -q.y * invNorm, qiz = -q.z * invNorm, qiw = q.w * invNorm;
         double qpx = Math.fma(q.w, x, Math.fma(q.x, w, Math.fma(q.y, z, -q.z * y)));
@@ -2413,7 +2413,7 @@ struct Quaterniond {
         return Math.isFinite(x) && Math.isFinite(y) && Math.isFinite(z) && Math.isFinite(w);
     }
 
-    public bool equals(ref Quaterniond q, double delta) {
+    public bool equals(Quaterniond q, double delta) {
         if (this == q)
             return true;
         if (!Math.equals(x, q.x, delta))

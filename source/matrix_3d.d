@@ -494,13 +494,13 @@ struct Matrix3d {
      * <p>
      * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/">http://www.euclideanspace.com/</a>
      * 
-     * @see #rotation(ref Quaterniond)
+     * @see #rotation(Quaterniond)
      * 
      * @param q
      *          the quaternion
      * @return this
      */
-    ref public Matrix3d set(ref Quaterniond q) return {
+    ref public Matrix3d set(Quaterniond q) return {
         return rotation(q);
     }
 
@@ -1417,17 +1417,17 @@ struct Matrix3d {
      * matrix to obtain an additional rotation.
      * <p>
      * In order to apply the rotation transformation to an existing transformation,
-     * use {@link #rotate(ref Quaterniond) rotate()} instead.
+     * use {@link #rotate(Quaterniond) rotate()} instead.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotate(ref Quaterniond)
+     * @see #rotate(Quaterniond)
      * 
      * @param quat
      *          the {@link Quaterniond}
      * @return this
      */
-    ref public Matrix3d rotation(ref Quaterniond quat) return {
+    ref public Matrix3d rotation(Quaterniond quat) return {
         double w2 = quat.w * quat.w;
         double x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y;
@@ -2264,11 +2264,11 @@ struct Matrix3d {
      * the quaternion rotation will be applied last!
      * <p>
      * In order to set the matrix to a rotation transformation without pre-multiplying,
-     * use {@link #rotation(ref Quaterniond)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(ref Quaterniond)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
      *          the {@link Quaterniond}
@@ -2276,7 +2276,7 @@ struct Matrix3d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3d rotateLocal(ref Quaterniond quat, ref Matrix3d dest) {
+    public Matrix3d rotateLocal(Quaterniond quat, ref Matrix3d dest) {
         double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
         double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
@@ -2325,17 +2325,17 @@ struct Matrix3d {
      * the quaternion rotation will be applied last!
      * <p>
      * In order to set the matrix to a rotation transformation without pre-multiplying,
-     * use {@link #rotation(ref Quaterniond)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(ref Quaterniond)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
      *          the {@link Quaterniond}
      * @return this
      */
-    ref public Matrix3d rotateLocal(ref Quaterniond quat) return {
+    ref public Matrix3d rotateLocal(Quaterniond quat) return {
         rotateLocal(quat, this);
         return this;
     }
@@ -2354,17 +2354,17 @@ struct Matrix3d {
      * the quaternion rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(ref Quaterniond)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(ref Quaterniond)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
      *          the {@link Quaterniond}
      * @return this
      */
-    ref public Matrix3d rotate(ref Quaterniond quat) return {
+    ref public Matrix3d rotate(Quaterniond quat) return {
         rotate(quat, this);
         return this;
     }
@@ -2383,11 +2383,11 @@ struct Matrix3d {
      * the quaternion rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(ref Quaterniond)}.
+     * use {@link #rotation(Quaterniond)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
      * 
-     * @see #rotation(ref Quaterniond)
+     * @see #rotation(Quaterniond)
      * 
      * @param quat
      *          the {@link Quaterniond}
@@ -2395,7 +2395,7 @@ struct Matrix3d {
      *          will hold the result
      * @return dest
      */
-    public Matrix3d rotate(ref Quaterniond quat, ref Matrix3d dest) {
+    public Matrix3d rotate(Quaterniond quat, ref Matrix3d dest) {
         double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
         double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
@@ -3762,12 +3762,12 @@ struct Matrix3d {
      *          the plane orientation
      * @return this
      */
-    ref public Matrix3d reflect(ref Quaterniond orientation) return {
+    ref public Matrix3d reflect(Quaterniond orientation) return {
         reflect(orientation, this);
         return this;
     }
 
-    public Matrix3d reflect(ref Quaterniond orientation, ref Matrix3d dest) {
+    public Matrix3d reflect(Quaterniond orientation, ref Matrix3d dest) {
         double num1 = orientation.x + orientation.x;
         double num2 = orientation.y + orientation.y;
         double num3 = orientation.z + orientation.z;
@@ -3831,7 +3831,7 @@ struct Matrix3d {
      *          the plane orientation
      * @return this
      */
-    ref public Matrix3d reflection(ref Quaterniond orientation) return {
+    ref public Matrix3d reflection(Quaterniond orientation) return {
         double num1 = orientation.x + orientation.x;
         double num2 = orientation.y + orientation.y;
         double num3 = orientation.z + orientation.z;
