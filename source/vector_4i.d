@@ -176,7 +176,7 @@ struct Vector4i {
      *          the vector whose values will be copied into this
      * @return this
      */
-    public Vector4i set(Vector4i v) {
+    ref public Vector4i set(Vector4i v) return {
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;
@@ -194,7 +194,7 @@ struct Vector4i {
      *          the vector to copy from
      * @return this
      */
-    public Vector4i set(Vector4d v) {
+    ref public Vector4i set(Vector4d v) return {
         this.x = cast(int) v.x;
         this.y = cast(int) v.y;
         this.z = cast(int) v.z;
@@ -214,7 +214,7 @@ struct Vector4i {
      *          the {@link RoundingMode} to use
      * @return this
      */
-    public Vector4i set(Vector4d v, int mode) {
+    ref public Vector4i set(Vector4d v, int mode) return {
         this.x = Math.roundUsing(v.x, mode);
         this.y = Math.roundUsing(v.y, mode);
         this.z = Math.roundUsing(v.z, mode);
@@ -232,7 +232,7 @@ struct Vector4i {
      *          the w component
      * @return this
      */
-    public Vector4i set(Vector3i v, int w) {
+    ref public Vector4i set(Vector3i v, int w) return {
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;
@@ -253,7 +253,7 @@ struct Vector4i {
      *          the w component
      * @return this
      */
-    public Vector4i set(Vector2i v, int z, int w) {
+    ref public Vector4i set(Vector2i v, int z, int w) return {
         this.x = v.x;
         this.y = v.y;
         this.z = z;
@@ -268,7 +268,7 @@ struct Vector4i {
      *          the value of all four components
      * @return this
      */
-    public Vector4i set(int s) {
+    ref public Vector4i set(int s) return {
         this.x = s;
         this.y = s;
         this.z = s;
@@ -289,7 +289,7 @@ struct Vector4i {
      *          the w component
      * @return this
      */
-    public Vector4i set(int x, int y, int z, int w) {
+    ref public Vector4i set(int x, int y, int z, int w) return {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -304,7 +304,7 @@ struct Vector4i {
      *          the array containing at least four elements
      * @return this
      */
-    public Vector4i set(int[] xyzw) {
+    ref public Vector4i set(int[] xyzw) return {
         this.x = xyzw[0];
         this.y = xyzw[1];
         this.z = xyzw[2];
@@ -367,7 +367,7 @@ struct Vector4i {
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..3]</code>
      */
-    public Vector4i setComponent(int component, int value) {
+    ref public Vector4i setComponent(int component, int value) return {
         switch (component) {
             case 0:
                 x = value;
@@ -393,7 +393,7 @@ struct Vector4i {
      *          the vector to subtract
      * @return this
      */
-    public Vector4i sub(Vector4i v) {
+    ref public Vector4i sub(Vector4i v) return {
         this.x = this.x - v.x;
         this.y = this.y - v.y;
         this.z = this.z - v.z;
@@ -414,7 +414,7 @@ struct Vector4i {
      *          the w component to subtract
      * @return this
      */
-    public Vector4i sub(int x, int y, int z, int w) {
+    ref public Vector4i sub(int x, int y, int z, int w) return {
         this.x = this.x - x;
         this.y = this.y - y;
         this.z = this.z - z;
@@ -445,7 +445,7 @@ struct Vector4i {
      *          the vector to add
      * @return this
      */
-    public Vector4i add(Vector4i v) {
+    ref public Vector4i add(Vector4i v) return {
         this.x = this.x + v.x;
         this.y = this.y + v.y;
         this.z = this.z + v.z;
@@ -474,7 +474,7 @@ struct Vector4i {
      *          the w component to add
      * @return this
      */
-    public Vector4i add(int x, int y, int z, int w) {
+    ref public Vector4i add(int x, int y, int z, int w) return {
         this.x = this.x + x;
         this.y = this.y + y;
         this.z = this.z + z;
@@ -497,7 +497,7 @@ struct Vector4i {
      *          the other vector
      * @return this
      */
-    public Vector4i mul(Vector4i v) {
+    ref public Vector4i mul(Vector4i v) return {
         this.x = x * v.x;
         this.y = y * v.y;
         this.z = z * v.z;
@@ -520,7 +520,7 @@ struct Vector4i {
      *          the vector to divide by
      * @return this
      */
-    public Vector4i div(Vector4i v) {
+    ref public Vector4i div(Vector4i v) return {
         this.x = x / v.x;
         this.y = y / v.y;
         this.z = z / v.z;
@@ -544,7 +544,7 @@ struct Vector4i {
      *          the scalar to multiply by
      * @return this
      */
-    public Vector4i mul(int scalar) {
+    ref public Vector4i mul(int scalar) return {
         this.x = x * scalar;
         this.y = y * scalar;
         this.z = z * scalar;
@@ -567,7 +567,7 @@ struct Vector4i {
      *          the scalar to divide by
      * @return this
      */
-    public Vector4i div(float scalar) {
+    ref public Vector4i div(float scalar) return {
         float invscalar = 1.0f / scalar;
         this.x = cast(int) (x * invscalar);
         this.y = cast(int) (y * invscalar);
@@ -592,7 +592,7 @@ struct Vector4i {
      *          the scalar to divide by
      * @return this
      */
-    public Vector4i div(int scalar) {
+    ref public Vector4i div(int scalar) return {
         this.x = x / scalar;
         this.y = y / scalar;
         this.z = z / scalar;
@@ -751,7 +751,7 @@ struct Vector4i {
      *
      * @return this
      */
-    public Vector4i zero() {
+    ref public Vector4i zero() return {
         x = 0;
         y = 0;
         z = 0;
@@ -764,7 +764,7 @@ struct Vector4i {
      *
      * @return this
      */
-    public Vector4i negate() {
+    ref public Vector4i negate() return {
         this.x = -x;
         this.y = -y;
         this.z = -z;
@@ -787,7 +787,7 @@ struct Vector4i {
      *          the other vector
      * @return this
      */
-    public Vector4i min(Vector4i v) {
+    ref public Vector4i min(Vector4i v) return {
         this.x = x < v.x ? x : v.x;
         this.y = y < v.y ? y : v.y;
         this.z = z < v.z ? z : v.z;
@@ -810,7 +810,7 @@ struct Vector4i {
      *          the other vector
      * @return this
      */
-    public Vector4i max(Vector4i v) {
+    ref public Vector4i max(Vector4i v) return {
         this.x = x > v.x ? x : v.x;
         this.y = y > v.y ? y : v.y;
         this.z = z > v.z ? z : v.z;
@@ -831,7 +831,7 @@ struct Vector4i {
      * 
      * @return this
      */
-    public Vector4i absolute() {
+    ref public Vector4i absolute() return {
         this.x = Math.abs(x);
         this.y = Math.abs(y);
         this.z = Math.abs(z);
