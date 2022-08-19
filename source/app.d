@@ -23,6 +23,7 @@ import tests.matrix_4x3d_test;
 
 import tests.geometry_utils_test;
 import tests.quaterniond_test;
+import tests.ray_aabb_intersect_test;
 
 
 
@@ -53,5 +54,7 @@ void main()
     testGeometryUtils();
     testFrustumIntersect();
 
-    testQuaterniond();
+    // testQuaterniond();
+    testRayAABBIntersect();
+
 }
