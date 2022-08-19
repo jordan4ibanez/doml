@@ -118,7 +118,7 @@ public double get(Matrix4d m, int column, int row) {
     return 0;
 }
 
-public Matrix4d set(Matrix4d m, int column, int row, double value) {
+public Matrix4d set(ref Matrix4d m, int column, int row, double value) {
     switch (column) {
     case 0:
         switch (row) {
@@ -245,7 +245,7 @@ public double get(Matrix3d m, int column, int row) {
     return 0;
 }
 
-public Matrix3d set(Matrix3d m, int column, int row, double value) {
+public Matrix3d set(ref Matrix3d m, int column, int row, double value) {
     switch (column) {
     case 0:
         switch (row) {
