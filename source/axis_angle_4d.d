@@ -142,7 +142,7 @@ struct AxisAngle4d {
      *            the z-coordinate of the rotation axis
      * @return this
      */
-    public AxisAngle4d set(double angle, double x, double y, double z) {
+    ref public AxisAngle4d set(double angle, double x, double y, double z) return {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -159,7 +159,7 @@ struct AxisAngle4d {
      *            the rotation axis as a {@link Vector3d}
      * @return this
      */
-    public AxisAngle4d set(double angle, Vector3d v) {
+    ref public AxisAngle4d set(double angle, Vector3d v) return {
         return set(angle, v.x, v.y, v.z);
     }
 
@@ -171,7 +171,7 @@ struct AxisAngle4d {
      *            the quaternion to set this AngleAxis4d from
      * @return this
      */
-    public AxisAngle4d set(Quaterniond q) {
+    ref public AxisAngle4d set(Quaterniond q) return {
         double acos = Math.safeAcos(q.w);
         double invSqrt = Math.invsqrt(1.0f - q.w * q.w);
         if (Math.isInfinite(invSqrt)) {
@@ -197,7 +197,7 @@ struct AxisAngle4d {
      *            the Matrix3d to set this AngleAxis4d from
      * @return this
      */
-    public AxisAngle4d set(Matrix3d m) {
+    ref public AxisAngle4d set(Matrix3d m) return {
         double nm00 = m.m00, nm01 = m.m01, nm02 = m.m02;
         double nm10 = m.m10, nm11 = m.m11, nm12 = m.m12;
         double nm20 = m.m20, nm21 = m.m21, nm22 = m.m22;
@@ -257,7 +257,7 @@ struct AxisAngle4d {
      *            the Matrix4d to set this AngleAxis4d from
      * @return this
      */
-    public AxisAngle4d set(Matrix4d m) {
+    ref public AxisAngle4d set(Matrix4d m) return {
         double nm00 = m.m00, nm01 = m.m01, nm02 = m.m02;
         double nm10 = m.m10, nm11 = m.m11, nm12 = m.m12;
         double nm20 = m.m20, nm21 = m.m21, nm22 = m.m22;
@@ -314,7 +314,7 @@ struct AxisAngle4d {
      *            the AngleAxis4f to copy the values from
      * @return this
      */
-    public AxisAngle4d set(AxisAngle4d a) {
+    ref public AxisAngle4d set(AxisAngle4d a) return {
         x = a.x;
         y = a.y;
         z = a.z;
@@ -377,7 +377,7 @@ struct AxisAngle4d {
      * 
      * @return this
      */
-    public AxisAngle4d normalize() {
+    ref public AxisAngle4d normalize() return {
         double invLength = Math.invsqrt(x * x + y * y + z * z);
         x *= invLength;
         y *= invLength;
@@ -394,7 +394,7 @@ struct AxisAngle4d {
      *          the angle increase
      * @return this
      */
-    public AxisAngle4d rotate(double ang) {
+    ref public AxisAngle4d rotate(double ang) return {
         angle += ang;
         angle = (angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI);
         return this;
