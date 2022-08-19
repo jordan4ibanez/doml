@@ -109,7 +109,7 @@ struct Quaterniond {
      * 
      * @return this
      */
-    public Quaterniond normalize() {
+    ref public Quaterniond normalize() return {
         double invNorm = Math.invsqrt(lengthSquared());
         x *= invNorm;
         y *= invNorm;
@@ -140,8 +140,9 @@ struct Quaterniond {
      *          the real/scalar component
      * @return this
      */
-    public Quaterniond add(double x, double y, double z, double w) {
-        return add(x, y, z, w, this);
+    ref public Quaterniond add(double x, double y, double z, double w) return {
+        add(x, y, z, w, this);
+        return this;
     }
 
     public Quaterniond add(double x, double y, double z, double w, Quaterniond dest) {
@@ -159,7 +160,7 @@ struct Quaterniond {
      *          the quaternion to add to this
      * @return this
      */
-    public Quaterniond add(Quaterniond q2) {
+    ref public Quaterniond add(Quaterniond q2) return {
         x += q2.x;
         y += q2.y;
         z += q2.z;
@@ -246,7 +247,7 @@ struct Quaterniond {
      *          the new value of w
      * @return this
      */
-    public Quaterniond set(double x, double y, double z, double w) {
+    ref public Quaterniond set(double x, double y, double z, double w) return {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -261,7 +262,7 @@ struct Quaterniond {
      *          the {@link Quaterniond} to copy
      * @return this
      */
-    public Quaterniond set(Quaterniond q) {
+    ref public Quaterniond set(Quaterniond q) return {
         x = q.x;
         y = q.y;
         z = q.z;
@@ -277,7 +278,7 @@ struct Quaterniond {
      *            the {@link AxisAngle4d}
      * @return this
      */
-    public Quaterniond set(AxisAngle4d axisAngle) {
+    ref public Quaterniond set(AxisAngle4d axisAngle) return {
         return setAngleAxis(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z);
     }
 
@@ -297,7 +298,7 @@ struct Quaterniond {
      *          the z-component of the normalized rotation axis
      * @return this
      */
-    public Quaterniond setAngleAxis(double angle, double x, double y, double z) {
+    ref public Quaterniond setAngleAxis(double angle, double x, double y, double z) return {
         double s = Math.sin(angle * 0.5);
         this.x = x * s;
         this.y = y * s;
@@ -316,7 +317,7 @@ struct Quaterniond {
      *          the rotation axis
      * @return this
      */
-    public Quaterniond setAngleAxis(double angle, Vector3d axis) {
+    ref public Quaterniond setAngleAxis(double angle, Vector3d axis) return {
         return setAngleAxis(angle, axis.x, axis.y, axis.z);
     }
 
@@ -379,7 +380,7 @@ struct Quaterniond {
      *          the matrix whose rotational component is used to set this quaternion
      * @return this
      */
-    public Quaterniond setFromUnnormalized(Matrix4x3d mat) {
+    ref public Quaterniond setFromUnnormalized(Matrix4x3d mat) return {
         setFromUnnormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
@@ -394,7 +395,7 @@ struct Quaterniond {
      *          the matrix whose rotational component is used to set this quaternion
      * @return this
      */
-    public Quaterniond setFromNormalized(Matrix4x3d mat) {
+    ref public Quaterniond setFromNormalized(Matrix4x3d mat) return {
         setFromNormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
@@ -408,7 +409,7 @@ struct Quaterniond {
      *          the matrix whose rotational component is used to set this quaternion
      * @return this
      */
-    public Quaterniond setFromUnnormalized(Matrix4d mat) {
+    ref public Quaterniond setFromUnnormalized(Matrix4d mat) return {
         setFromUnnormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
@@ -422,7 +423,7 @@ struct Quaterniond {
      *          the matrix whose rotational component is used to set this quaternion
      * @return this
      */
-    public Quaterniond setFromNormalized(Matrix4d mat) {
+    ref public Quaterniond setFromNormalized(Matrix4d mat) return {
         setFromNormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
@@ -438,7 +439,7 @@ struct Quaterniond {
      *          the matrix whose rotational component is used to set this quaternion
      * @return this
      */
-    public Quaterniond setFromUnnormalized(Matrix3d mat) {
+    ref public Quaterniond setFromUnnormalized(Matrix3d mat) return {
         setFromUnnormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
@@ -450,7 +451,7 @@ struct Quaterniond {
      *          the matrix whose rotational component is used to set this quaternion
      * @return this
      */
-    public Quaterniond setFromNormalized(Matrix3d mat) {
+    ref public Quaterniond setFromNormalized(Matrix3d mat) return {
         setFromNormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
@@ -465,7 +466,7 @@ struct Quaterniond {
      *          the angle in radians
      * @return this
      */
-    public Quaterniond fromAxisAngleRad(Vector3d axis, double angle) {
+    ref public Quaterniond fromAxisAngleRad(Vector3d axis, double angle) return {
         return fromAxisAngleRad(axis.x, axis.y, axis.z, angle);
     }
 
@@ -483,7 +484,7 @@ struct Quaterniond {
      *          the angle in radians
      * @return this
      */
-    public Quaterniond fromAxisAngleRad(double axisX, double axisY, double axisZ, double angle) {
+    ref public Quaterniond fromAxisAngleRad(double axisX, double axisY, double axisZ, double angle) return {
         double hangle = angle / 2.0;
         double sinAngle = Math.sin(hangle);
         double vLength = Math.sqrt(axisX * axisX + axisY * axisY + axisZ * axisZ);
@@ -504,7 +505,7 @@ struct Quaterniond {
      *          the angle in degrees
      * @return this
      */
-    public Quaterniond fromAxisAngleDeg(Vector3d axis, double angle) {
+    ref public Quaterniond fromAxisAngleDeg(Vector3d axis, double angle) return {
         return fromAxisAngleRad(axis.x, axis.y, axis.z, Math.toRadians(angle));
     }
 
@@ -522,7 +523,7 @@ struct Quaterniond {
      *          the angle in radians
      * @return this
      */
-    public Quaterniond fromAxisAngleDeg(double axisX, double axisY, double axisZ, double angle) {
+    ref public Quaterniond fromAxisAngleDeg(double axisX, double axisY, double axisZ, double angle) return {
         return fromAxisAngleRad(axisX, axisY, axisZ, Math.toRadians(angle));
     }
 
@@ -541,8 +542,9 @@ struct Quaterniond {
      *          the quaternion to multiply <code>this</code> by
      * @return this
      */
-    public Quaterniond mul(Quaterniond q) {
-        return mul(q, this);
+    ref public Quaterniond mul(Quaterniond q) return {
+        mul(q, this);
+        return this;
     }
 
     public Quaterniond mul(Quaterniond q, Quaterniond dest) {
@@ -570,8 +572,9 @@ struct Quaterniond {
      *          the w component of the quaternion to multiply <code>this</code> by
      * @return this
      */
-    public Quaterniond mul(double qx, double qy, double qz, double qw) {
-        return mul(qx, qy, qz, qw, this);
+    ref public Quaterniond mul(double qx, double qy, double qz, double qw) return {
+        mul(qx, qy, qz, qw, this);
+        return this;
     }
 
     public Quaterniond mul(double qx, double qy, double qz, double qw, Quaterniond dest) {
@@ -594,8 +597,9 @@ struct Quaterniond {
      *            the quaternion to pre-multiply <code>this</code> by
      * @return this
      */
-    public Quaterniond premul(Quaterniond q) {
-        return premul(q, this);
+    ref public Quaterniond premul(Quaterniond q) return {
+        premul(q, this);
+        return this;
     }
 
     public Quaterniond premul(Quaterniond q, Quaterniond dest) {
@@ -621,8 +625,9 @@ struct Quaterniond {
      *          the w component of the quaternion to multiply <code>this</code> by
      * @return this
      */
-    public Quaterniond premul(double qx, double qy, double qz, double qw) {
-        return premul(qx, qy, qz, qw, this);
+    ref public Quaterniond premul(double qx, double qy, double qz, double qw) return {
+        premul(qx, qy, qz, qw, this);
+        return this;
     }
 
     public Quaterniond premul(double qx, double qy, double qz, double qw, Quaterniond dest) {
@@ -961,8 +966,9 @@ struct Quaterniond {
      * 
      * @return this
      */
-    public Quaterniond invert() {
-        return invert(this);
+    ref public Quaterniond invert() return {
+        invert(this);
+        return this;
     }
 
     public Quaterniond div(Quaterniond b, Quaterniond dest) {
@@ -988,8 +994,9 @@ struct Quaterniond {
      *          the {@link Quaterniond} to divide this by
      * @return this
      */
-    public Quaterniond div(Quaterniond b) {
-        return div(b, this);
+    ref public Quaterniond div(Quaterniond b) return {
+        div(b, this);
+        return this;
     }
 
     /**
@@ -997,7 +1004,7 @@ struct Quaterniond {
      * 
      * @return this
      */
-    public Quaterniond conjugate() {
+    ref public Quaterniond conjugate() return {
         x = -x;
         y = -y;
         z = -z;
@@ -1017,7 +1024,7 @@ struct Quaterniond {
      * 
      * @return this
      */
-    public Quaterniond identity() {
+    ref public Quaterniond identity() return {
         x = 0.0;
         y = 0.0;
         z = 0.0;
@@ -1044,7 +1051,7 @@ struct Quaterniond {
      *          the angle in radians to rotate about z
      * @return this
      */
-    public Quaterniond rotationXYZ(double angleX, double angleY, double angleZ) {
+    ref public Quaterniond rotationXYZ(double angleX, double angleY, double angleZ) return {
         double sx = Math.sin(angleX * 0.5);
         double cx = Math.cosFromSin(sx, angleX * 0.5);
         double sy = Math.sin(angleY * 0.5);
@@ -1079,7 +1086,7 @@ struct Quaterniond {
      *          the angle in radians to rotate about z
      * @return this
      */
-    public Quaterniond rotationZYX(double angleZ, double angleY, double angleX) {
+    ref public Quaterniond rotationZYX(double angleZ, double angleY, double angleX) return {
         double sx = Math.sin(angleX * 0.5);
         double cx = Math.cosFromSin(sx, angleX * 0.5);
         double sy = Math.sin(angleY * 0.5);
@@ -1114,7 +1121,7 @@ struct Quaterniond {
      *          the angle in radians to rotate about z
      * @return this
      */
-    public Quaterniond rotationYXZ(double angleY, double angleX, double angleZ) {
+    ref public Quaterniond rotationYXZ(double angleY, double angleX, double angleZ) return {
         double sx = Math.sin(angleX * 0.5);
         double cx = Math.cosFromSin(sx, angleX * 0.5);
         double sy = Math.sin(angleY * 0.5);
@@ -1147,8 +1154,9 @@ struct Quaterniond {
      *          the interpolation factor, within <code>[0..1]</code>
      * @return this
      */
-    public Quaterniond slerp(Quaterniond target, double alpha) {
-        return slerp(target, alpha, this);
+    ref public Quaterniond slerp(Quaterniond target, double alpha) return {
+        slerp(target, alpha, this);
+        return this;
     }
 
     public Quaterniond slerp(Quaterniond target, double alpha, Quaterniond dest) {
@@ -1212,8 +1220,9 @@ struct Quaterniond {
      *          the scaling factor
      * @return this
      */
-    public Quaterniond scale(double factor) {
-        return scale(factor, this);
+    ref public Quaterniond scale(double factor) return {
+        scale(factor, this);
+        return this;
     }
 
     public Quaterniond scale(double factor, Quaterniond dest) {
@@ -1233,7 +1242,7 @@ struct Quaterniond {
      *          the scaling factor
      * @return this
      */
-    public Quaterniond scaling(double factor) {
+    ref public Quaterniond scaling(double factor) return {
         double sqrt = Math.sqrt(factor);
         this.x = 0.0;
         this.y = 0.0;
@@ -1263,8 +1272,9 @@ struct Quaterniond {
      *          the angular velocity around the z axis
      * @return this
      */
-    public Quaterniond integrate(double dt, double vx, double vy, double vz) {
-        return integrate(dt, vx, vy, vz, this);
+    ref public Quaterniond integrate(double dt, double vx, double vy, double vz) return {
+        integrate(dt, vx, vy, vz, this);
+        return this;
     }
 
     public Quaterniond integrate(double dt, double vx, double vy, double vz, Quaterniond dest) {
@@ -1303,8 +1313,9 @@ struct Quaterniond {
      *          the interpolation factor. It is between 0.0 and 1.0
      * @return this
      */
-    public Quaterniond nlerp(Quaterniond q, double factor) {
-        return nlerp(q, factor, this);
+    ref public Quaterniond nlerp(Quaterniond q, double factor) return {
+        nlerp(q, factor, this);
+        return this;
     }
 
     public Quaterniond nlerp(Quaterniond q, double factor, Quaterniond dest) {
@@ -1425,8 +1436,9 @@ struct Quaterniond {
      *          of a small-step linear interpolation
      * @return this
      */
-    public Quaterniond nlerpIterative(Quaterniond q, double alpha, double dotThreshold) {
-        return nlerpIterative(q, alpha, dotThreshold, this);
+    ref public Quaterniond nlerpIterative(Quaterniond q, double alpha, double dotThreshold) return {
+        nlerpIterative(q, alpha, dotThreshold, this);
+        return this;
     }
 
     /**
@@ -1484,8 +1496,9 @@ struct Quaterniond {
      *              spanned by the given <code>dir</code> and <code>up</code>
      * @return this
      */
-    public Quaterniond lookAlong(Vector3d dir, Vector3d up) {
-        return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
+    ref public Quaterniond lookAlong(Vector3d dir, Vector3d up) return {
+        lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
+        return this;
     }
 
     public Quaterniond lookAlong(Vector3d dir, Vector3d up, Quaterniond dest) {
@@ -1521,8 +1534,9 @@ struct Quaterniond {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Quaterniond lookAlong(double dirX, double dirY, double dirZ, double upX, double upY, double upZ) {
-        return lookAlong(dirX, dirY, dirZ, upX, upY, upZ, this);
+    ref public Quaterniond lookAlong(double dirX, double dirY, double dirZ, double upX, double upY, double upZ) return {
+        lookAlong(dirX, dirY, dirZ, upX, upY, upZ, this);
+        return this;
     }
 
     public Quaterniond lookAlong(double dirX, double dirY, double dirZ, double upX, double upY, double upZ, Quaterniond dest) {
@@ -1633,8 +1647,9 @@ struct Quaterniond {
      *          the other quaternion
      * @return this
      */
-    public Quaterniond difference(Quaterniond other) {
-        return difference(other, this);
+    ref public Quaterniond difference(Quaterniond other) return {
+        difference(other, this);
+        return this;
     }
 
     public Quaterniond difference(Quaterniond other, Quaterniond dest) {
@@ -1671,7 +1686,7 @@ struct Quaterniond {
      *              the z-coordinate of the direction to rotate to
      * @return this
      */
-    public Quaterniond rotationTo(double fromDirX, double fromDirY, double fromDirZ, double toDirX, double toDirY, double toDirZ) {
+    ref public Quaterniond rotationTo(double fromDirX, double fromDirY, double fromDirZ, double toDirX, double toDirY, double toDirZ) return {
         double fn = Math.invsqrt(Math.fma(fromDirX, fromDirX, Math.fma(fromDirY, fromDirY, fromDirZ * fromDirZ)));
         double tn = Math.invsqrt(Math.fma(toDirX, toDirX, Math.fma(toDirY, toDirY, toDirZ * toDirZ)));
         double fx = fromDirX * fn, fy = fromDirY * fn, fz = fromDirZ * fn;
@@ -1725,7 +1740,7 @@ struct Quaterniond {
      *          the destination direction
      * @return this
      */
-    public Quaterniond rotationTo(Vector3d fromDir, Vector3d toDir) {
+    ref public Quaterniond rotationTo(Vector3d fromDir, Vector3d toDir) return {
         return rotationTo(fromDir.x, fromDir.y, fromDir.z, toDir.x, toDir.y, toDir.z);
     }
 
@@ -1784,7 +1799,7 @@ struct Quaterniond {
      *          the z-coordinate of the rotation axis
      * @return this
      */
-    public Quaterniond rotationAxis(double angle, double axisX, double axisY, double axisZ) {
+    ref public Quaterniond rotationAxis(double angle, double axisX, double axisY, double axisZ) return {
         double hangle = angle / 2.0;
         double sinAngle = Math.sin(hangle);
         double invVLength = Math.invsqrt(axisX * axisX + axisY * axisY + axisZ * axisZ);
@@ -1801,7 +1816,7 @@ struct Quaterniond {
      *              the angle in radians to rotate about the x axis
      * @return this
      */
-    public Quaterniond rotationX(double angle) {
+    ref public Quaterniond rotationX(double angle) return {
         double sin = Math.sin(angle * 0.5);
         double cos = Math.cosFromSin(sin, angle * 0.5);
         return set(sin, 0, cos, 0);
@@ -1814,7 +1829,7 @@ struct Quaterniond {
      *              the angle in radians to rotate about the y axis
      * @return this
      */
-    public Quaterniond rotationY(double angle) {
+    ref public Quaterniond rotationY(double angle) return {
         double sin = Math.sin(angle * 0.5);
         double cos = Math.cosFromSin(sin, angle * 0.5);
         return set(0, sin, 0, cos);
@@ -1827,7 +1842,7 @@ struct Quaterniond {
      *              the angle in radians to rotate about the z axis
      * @return this
      */
-    public Quaterniond rotationZ(double angle) {
+    ref public Quaterniond rotationZ(double angle) return {
         double sin = Math.sin(angle * 0.5);
         double cos = Math.cosFromSin(sin, angle * 0.5);
         return set(0, 0, sin, cos);
@@ -1859,8 +1874,9 @@ struct Quaterniond {
      *              the z-coordinate of the direction to rotate to
      * @return this
      */
-    public Quaterniond rotateTo(double fromDirX, double fromDirY, double fromDirZ, double toDirX, double toDirY, double toDirZ) {
-        return rotateTo(fromDirX, fromDirY, fromDirZ, toDirX, toDirY, toDirZ, this);
+    ref public Quaterniond rotateTo(double fromDirX, double fromDirY, double fromDirZ, double toDirX, double toDirY, double toDirZ) return {
+        rotateTo(fromDirX, fromDirY, fromDirZ, toDirX, toDirY, toDirZ, this);
+        return this;
     }
 
     public Quaterniond rotateTo(Vector3d fromDir, Vector3d toDir, Quaterniond dest) {
@@ -1885,8 +1901,9 @@ struct Quaterniond {
      *          the destination direction
      * @return this
      */
-    public Quaterniond rotateTo(Vector3d fromDir, Vector3d toDir) {
-        return rotateTo(fromDir.x, fromDir.y, fromDir.z, toDir.x, toDir.y, toDir.z, this);
+    ref public Quaterniond rotateTo(Vector3d fromDir, Vector3d toDir) return {
+        rotateTo(fromDir.x, fromDir.y, fromDir.z, toDir.x, toDir.y, toDir.z, this);
+        return this;
     }
 
     /**
@@ -1901,8 +1918,9 @@ struct Quaterniond {
      *              the angle in radians to rotate about the x axis
      * @return this
      */
-    public Quaterniond rotateX(double angle) {
-        return rotateX(angle, this);
+    ref public Quaterniond rotateX(double angle) return {
+        rotateX(angle, this);
+        return this;
     }
 
     public Quaterniond rotateX(double angle, Quaterniond dest) {
@@ -1926,8 +1944,9 @@ struct Quaterniond {
      *              the angle in radians to rotate about the y axis
      * @return this
      */
-    public Quaterniond rotateY(double angle) {
-        return rotateY(angle, this);
+    ref public Quaterniond rotateY(double angle) return {
+        rotateY(angle, this);
+        return this;
     }
 
     public Quaterniond rotateY(double angle, Quaterniond dest) {
@@ -1951,8 +1970,9 @@ struct Quaterniond {
      *              the angle in radians to rotate about the z axis
      * @return this
      */
-    public Quaterniond rotateZ(double angle) {
-        return rotateZ(angle, this);
+    ref public Quaterniond rotateZ(double angle) return {
+        rotateZ(angle, this);
+        return this;
     }
 
     public Quaterniond rotateZ(double angle, Quaterniond dest) {
@@ -1976,8 +1996,9 @@ struct Quaterniond {
      *              the angle in radians to rotate about the local x axis
      * @return this
      */
-    public Quaterniond rotateLocalX(double angle) {
-        return rotateLocalX(angle, this);
+    ref public Quaterniond rotateLocalX(double angle) return {
+        rotateLocalX(angle, this);
+        return this;
     }
 
     public Quaterniond rotateLocalX(double angle, Quaterniond dest) {
@@ -2003,8 +2024,9 @@ struct Quaterniond {
      *              the angle in radians to rotate about the local y axis
      * @return this
      */
-    public Quaterniond rotateLocalY(double angle) {
-        return rotateLocalY(angle, this);
+    ref public Quaterniond rotateLocalY(double angle) return {
+        rotateLocalY(angle, this);
+        return this;
     }
 
     public Quaterniond rotateLocalY(double angle, Quaterniond dest) {
@@ -2030,8 +2052,9 @@ struct Quaterniond {
      *              the angle in radians to rotate about the local z axis
      * @return this
      */
-    public Quaterniond rotateLocalZ(double angle) {
-        return rotateLocalZ(angle, this);
+    ref public Quaterniond rotateLocalZ(double angle) return {
+        rotateLocalZ(angle, this);
+        return this;
     }
 
     public Quaterniond rotateLocalZ(double angle, Quaterniond dest) {
@@ -2064,8 +2087,9 @@ struct Quaterniond {
      *              the angle in radians to rotate about the z axis
      * @return this
      */
-    public Quaterniond rotateXYZ(double angleX, double angleY, double angleZ) {
-        return rotateXYZ(angleX, angleY, angleZ, this);
+    ref public Quaterniond rotateXYZ(double angleX, double angleY, double angleZ) return {
+        rotateXYZ(angleX, angleY, angleZ, this);
+        return this;
     }
 
     public Quaterniond rotateXYZ(double angleX, double angleY, double angleZ, Quaterniond dest) {
@@ -2110,8 +2134,9 @@ struct Quaterniond {
      *              the angle in radians to rotate about the x axis
      * @return this
      */
-    public Quaterniond rotateZYX(double angleZ, double angleY, double angleX) {
-        return rotateZYX(angleZ, angleY, angleX, this);
+    ref public Quaterniond rotateZYX(double angleZ, double angleY, double angleX) return {
+        rotateZYX(angleZ, angleY, angleX, this);
+        return this;
     }
 
     public Quaterniond rotateZYX(double angleZ, double angleY, double angleX, Quaterniond dest) {
@@ -2156,8 +2181,9 @@ struct Quaterniond {
      *              the angle in radians to rotate about the z axis
      * @return this
      */
-    public Quaterniond rotateYXZ(double angleY, double angleX, double angleZ) {
-        return rotateYXZ(angleY, angleX, angleZ, this);
+    ref public Quaterniond rotateYXZ(double angleY, double angleX, double angleZ) return {
+        rotateYXZ(angleY, angleX, angleZ, this);
+        return this;
     }
 
     public Quaterniond rotateYXZ(double angleY, double angleX, double angleZ, Quaterniond dest) {
@@ -2245,8 +2271,9 @@ struct Quaterniond {
      *              the rotation axis
      * @return this
      */
-    public Quaterniond rotateAxis(double angle, Vector3d axis) {
-        return rotateAxis(angle, axis.x, axis.y, axis.z, this);
+    ref public Quaterniond rotateAxis(double angle, Vector3d axis) return {
+        rotateAxis(angle, axis.x, axis.y, axis.z, this);
+        return this;
     }
 
     /**
@@ -2269,8 +2296,9 @@ struct Quaterniond {
      *              the z coordinate of the rotation axis
      * @return this
      */
-    public Quaterniond rotateAxis(double angle, double axisX, double axisY, double axisZ) {
-        return rotateAxis(angle, axisX, axisY, axisZ, this);
+    ref public Quaterniond rotateAxis(double angle, double axisX, double axisY, double axisZ) return {
+        rotateAxis(angle, axisX, axisY, axisZ, this);
+        return this;
     }
 
     public Vector3d positiveX(Vector3d dir) {
@@ -2353,8 +2381,9 @@ struct Quaterniond {
      *          the {@link Quaterniond} to conjugate <code>this</code> by
      * @return this
      */
-    public Quaterniond conjugateBy(Quaterniond q) {
-        return conjugateBy(q, this);
+    ref public Quaterniond conjugateBy(Quaterniond q) return {
+        conjugateBy(q, this);
+        return this;
     }
 
     /**
