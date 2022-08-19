@@ -63,20 +63,20 @@ void testMatrix3d() {
         Matrix3d m = Matrix3d(1, 2, 3, 4, 5, 6, 7, 8, 9);
         for (int c = 0; c < 3; c++)
             for (int r = 0; r < 3; r++)
-                assertEquals(c*3+r+1, m.get(c, r), 0);
+                assertEquals(c*3+r+1, m.get(c, r), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
     }
 
     // testSet
     {
-        assertMatrix3dEquals(Matrix3d().zero().set(0, 0, 3), Matrix3d(3, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(0, 1, 3), Matrix3d(0, 3, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(0, 2, 3), Matrix3d(0, 0, 3, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(1, 0, 3), Matrix3d(0, 0, 0, 3, 0, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(1, 1, 3), Matrix3d(0, 0, 0, 0, 3, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(1, 2, 3), Matrix3d(0, 0, 0, 0, 0, 3, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(2, 0, 3), Matrix3d(0, 0, 0, 0, 0, 0, 3, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(2, 1, 3), Matrix3d(0, 0, 0, 0, 0, 0, 0, 3, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(2, 2, 3), Matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 3), 0);
+        assertMatrix3dEquals(Matrix3d().zero().set(0, 0, 3), Matrix3d(3, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(0, 1, 3), Matrix3d(0, 3, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(0, 2, 3), Matrix3d(0, 0, 3, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(1, 0, 3), Matrix3d(0, 0, 0, 3, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(1, 1, 3), Matrix3d(0, 0, 0, 0, 3, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(1, 2, 3), Matrix3d(0, 0, 0, 0, 0, 3, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(2, 0, 3), Matrix3d(0, 0, 0, 0, 0, 0, 3, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(2, 1, 3), Matrix3d(0, 0, 0, 0, 0, 0, 0, 3, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(2, 2, 3), Matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 3), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
     }
 
 
@@ -137,7 +137,7 @@ void testMatrix3d() {
         invm.transform(v, w);
 
         // Precision was too low for this test, raised up
-        assertVector3dEquals(orig, w, STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertVector3dEquals(orig, w, MANY_OPS_AROUND_ZERO_PRECISION_DOUBLE);
 
         invm.invert();
         assertMatrix3dEquals(m, invm, 1E-3);
@@ -148,20 +148,20 @@ void testMatrix3d() {
         Matrix3d m = Matrix3d(1, 2, 3, 4, 5, 6, 7, 8, 9);
         for (int c = 0; c < 3; c++)
             for (int r = 0; r < 3; r++)
-                assertEquals(c*3+r+1, m.get(c, r), 0);
+                assertEquals(c*3+r+1, m.get(c, r), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
     }
 
     // testSet
     {
-        assertMatrix3dEquals(Matrix3d().zero().set(0, 0, 3), Matrix3d(3, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(0, 1, 3), Matrix3d(0, 3, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(0, 2, 3), Matrix3d(0, 0, 3, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(1, 0, 3), Matrix3d(0, 0, 0, 3, 0, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(1, 1, 3), Matrix3d(0, 0, 0, 0, 3, 0, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(1, 2, 3), Matrix3d(0, 0, 0, 0, 0, 3, 0, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(2, 0, 3), Matrix3d(0, 0, 0, 0, 0, 0, 3, 0, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(2, 1, 3), Matrix3d(0, 0, 0, 0, 0, 0, 0, 3, 0), 0);
-        assertMatrix3dEquals(Matrix3d().zero().set(2, 2, 3), Matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 3), 0);
+        assertMatrix3dEquals(Matrix3d().zero().set(0, 0, 3), Matrix3d(3, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(0, 1, 3), Matrix3d(0, 3, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(0, 2, 3), Matrix3d(0, 0, 3, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(1, 0, 3), Matrix3d(0, 0, 0, 3, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(1, 1, 3), Matrix3d(0, 0, 0, 0, 3, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(1, 2, 3), Matrix3d(0, 0, 0, 0, 0, 3, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(2, 0, 3), Matrix3d(0, 0, 0, 0, 0, 0, 3, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(2, 1, 3), Matrix3d(0, 0, 0, 0, 0, 0, 0, 3, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix3dEquals(Matrix3d().zero().set(2, 2, 3), Matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 3), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
     }
 
     writeln("PASSED!");
