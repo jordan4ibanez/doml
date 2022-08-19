@@ -154,7 +154,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d setm00(double m00) {
+    ref public Matrix3d setm00(double m00) return {
         this.m00 = m00;
         return this;
     }
@@ -165,7 +165,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d setm01(double m01) {
+    ref public Matrix3d setm01(double m01) return {
         this.m01 = m01;
         return this;
     }
@@ -176,7 +176,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d setm02(double m02) {
+    ref public Matrix3d setm02(double m02) return {
         this.m02 = m02;
         return this;
     }
@@ -187,7 +187,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d setm10(double m10) {
+    ref public Matrix3d setm10(double m10) return {
         this.m10 = m10;
         return this;
     }
@@ -198,7 +198,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d setm11(double m11) {
+    ref public Matrix3d setm11(double m11) return {
         this.m11 = m11;
         return this;
     }
@@ -209,7 +209,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d setm12(double m12) {
+    ref public Matrix3d setm12(double m12) return {
         this.m12 = m12;
         return this;
     }
@@ -220,7 +220,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d setm20(double m20) {
+    ref public Matrix3d setm20(double m20) return {
         this.m20 = m20;
         return this;
     }
@@ -231,7 +231,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d setm21(double m21) {
+    ref public Matrix3d setm21(double m21) return {
         this.m21 = m21;
         return this;
     }
@@ -242,7 +242,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    public Matrix3d setm22(double m22) {
+    ref public Matrix3d setm22(double m22) return {
         this.m22 = m22;
         return this;
     }
@@ -254,7 +254,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    Matrix3d _m00(double m00) {
+    ref Matrix3d _m00(double m00) return {
         this.m00 = m00;
         return this;
     }
@@ -265,7 +265,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    Matrix3d _m01(double m01) {
+    ref Matrix3d _m01(double m01) return {
         this.m01 = m01;
         return this;
     }
@@ -276,7 +276,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    Matrix3d _m02(double m02) {
+    ref Matrix3d _m02(double m02) return {
         this.m02 = m02;
         return this;
     }
@@ -287,7 +287,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    Matrix3d _m10(double m10) {
+    ref Matrix3d _m10(double m10) return {
         this.m10 = m10;
         return this;
     }
@@ -298,7 +298,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    Matrix3d _m11(double m11) {
+    ref Matrix3d _m11(double m11) return {
         this.m11 = m11;
         return this;
     }
@@ -309,7 +309,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    Matrix3d _m12(double m12) {
+    ref Matrix3d _m12(double m12) return {
         this.m12 = m12;
         return this;
     }
@@ -320,7 +320,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    Matrix3d _m20(double m20) {
+    ref Matrix3d _m20(double m20) return {
         this.m20 = m20;
         return this;
     }
@@ -331,7 +331,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    Matrix3d _m21(double m21) {
+    ref Matrix3d _m21(double m21) return {
         this.m21 = m21;
         return this;
     }
@@ -342,7 +342,7 @@ struct Matrix3d {
      *          the new value
      * @return this
      */
-    Matrix3d _m22(double m22) {
+    ref Matrix3d _m22(double m22) return {
         this.m22 = m22;
         return this;
     }
@@ -354,7 +354,7 @@ struct Matrix3d {
      *          the matrix whose values will be copied
      * @return this
      */
-    public Matrix3d set(Matrix3d m) {
+    ref public Matrix3d set(Matrix3d m) return {
         m00 = m.m00;
         m01 = m.m01;
         m02 = m.m02;
@@ -374,7 +374,7 @@ struct Matrix3d {
      *          the matrix to copy the transposed values from
      * @return this
      */
-    public Matrix3d setTransposed(Matrix3d m) {
+    ref public Matrix3d setTransposed(Matrix3d m) return {
         double nm10 = m.m01, nm12 = m.m21;
         double nm20 = m.m02, nm21 = m.m12;
         return this
@@ -391,7 +391,7 @@ struct Matrix3d {
      *          the matrix to copy the elements from
      * @return this
      */
-    public Matrix3d set(Matrix4x3d m) {
+    ref public Matrix3d set(Matrix4x3d m) return {
         m00 = m.m00;
         m01 = m.m01;
         m02 = m.m02;
@@ -412,7 +412,7 @@ struct Matrix3d {
      *          the {@link Matrix4d} to copy the values from
      * @return this
      */
-    public Matrix3d set(Matrix4d mat) {
+    ref public Matrix3d set(Matrix4d mat) return {
         m00 = mat.m00;
         m01 = mat.m01;
         m02 = mat.m02;
@@ -436,7 +436,7 @@ struct Matrix3d {
      *          the {@link Matrix2d}
      * @return this
      */
-    public Matrix3d set(Matrix2d mat) {
+    ref public Matrix3d set(Matrix2d mat) return {
         m00 = mat.m00;
         m01 = mat.m01;
         m02 = 0.0;
@@ -457,7 +457,7 @@ struct Matrix3d {
      *          the {@link AxisAngle4d}
      * @return this
      */
-    public Matrix3d set(AxisAngle4d axisAngle) {
+    ref public Matrix3d set(AxisAngle4d axisAngle) return {
         double x = axisAngle.x;
         double y = axisAngle.y;
         double z = axisAngle.z;
@@ -500,7 +500,7 @@ struct Matrix3d {
      *          the quaternion
      * @return this
      */
-    public Matrix3d set(Quaterniond q) {
+    ref public Matrix3d set(Quaterniond q) return {
         return rotation(q);
     }
 
@@ -517,7 +517,7 @@ struct Matrix3d {
      *          the right operand
      * @return this
      */
-    public Matrix3d mul(Matrix3d right) {
+    ref public Matrix3d mul(Matrix3d right) return {
         return mul(right, this);
     }
 
@@ -555,7 +555,7 @@ struct Matrix3d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    public Matrix3d mulLocal(Matrix3d left) {
+    ref public Matrix3d mulLocal(Matrix3d left) return {
        return mulLocal(left, this);
     }
 
@@ -609,9 +609,9 @@ struct Matrix3d {
      *          the new value of m22
      * @return this
      */
-    public Matrix3d set(double m00, double m01, double m02, 
+    ref public Matrix3d set(double m00, double m01, double m02, 
                         double m10, double m11, double m12, 
-                        double m20, double m21, double m22) {
+                        double m20, double m21, double m22) return {
         this.m00 = m00;
         this.m01 = m01;
         this.m02 = m02;
@@ -637,7 +637,7 @@ struct Matrix3d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix3d set(double[] m) {
+    ref public Matrix3d set(double[] m) return {
         m00 = m[0];
         m01 = m[1];
         m02 = m[2];
@@ -663,7 +663,7 @@ struct Matrix3d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix3d set(float[] m) {
+    ref public Matrix3d set(float[] m) return {
         m00 = m[0];
         m01 = m[1];
         m02 = m[2];
@@ -687,7 +687,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d invert() {
+    ref public Matrix3d invert() return {
         return invert(this);
     }
 
@@ -723,7 +723,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d transpose() {
+    ref public Matrix3d transpose() return {
         return transpose(this);
     }
 
@@ -748,7 +748,7 @@ struct Matrix3d {
      *          the destination matrix
      * @return the passed in destination
      */
-    public Matrix3d get(ref Matrix3d dest) {
+    ref public Matrix3d get(ref Matrix3d dest) return {
         return dest.set(this);
     }
 
@@ -807,9 +807,9 @@ struct Matrix3d {
      *          the third column
      * @return this
      */
-    public Matrix3d set(Vector3d col0,
+    ref public Matrix3d set(Vector3d col0,
                         Vector3d col1, 
-                        Vector3d col2) {
+                        Vector3d col2) return {
         this.m00 = col0.x;
         this.m01 = col0.y;
         this.m02 = col0.z;
@@ -827,7 +827,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d zero() {
+    ref public Matrix3d zero() return {
         m00 = 0.0;
         m01 = 0.0;
         m02 = 0.0;
@@ -845,7 +845,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d identity() {
+    ref public Matrix3d identity() return {
         m00 = 1.0;
         m01 = 0.0;
         m02 = 0.0;
@@ -873,7 +873,7 @@ struct Matrix3d {
      *             the scale factor in x, y and z
      * @return this
      */
-    public Matrix3d scaling(double factor) {
+    ref public Matrix3d scaling(double factor) return {
         m00 = factor;
         m01 = 0.0;
         m02 = 0.0;
@@ -897,7 +897,7 @@ struct Matrix3d {
      *             the scale in z
      * @return this
      */
-    public Matrix3d scaling(double x, double y, double z) {
+    ref public Matrix3d scaling(double x, double y, double z) return {
         m00 = x;
         m01 = 0.0;
         m02 = 0.0;
@@ -925,7 +925,7 @@ struct Matrix3d {
      *             the scale in x, y and z respectively
      * @return this
      */
-    public Matrix3d scaling(Vector3d xyz) {
+    ref public Matrix3d scaling(Vector3d xyz) return {
         m00 = xyz.x;
         m01 = 0.0;
         m02 = 0.0;
@@ -955,7 +955,7 @@ struct Matrix3d {
      *            the factors of the x, y and z component, respectively
      * @return this
      */
-    public Matrix3d scale(Vector3d xyz) {
+    ref public Matrix3d scale(Vector3d xyz) return {
         return scale(xyz.x, xyz.y, xyz.z, this);
     }
 
@@ -992,7 +992,7 @@ struct Matrix3d {
      *            the factor of the z component
      * @return this
      */
-    public Matrix3d scale(double x, double y, double z) {
+    ref public Matrix3d scale(double x, double y, double z) return {
         return scale(x, y, z, this);
     }
 
@@ -1014,7 +1014,7 @@ struct Matrix3d {
      *            the factor for all components
      * @return this
      */
-    public Matrix3d scale(double xyz) {
+    ref public Matrix3d scale(double xyz) return {
         return scale(xyz, xyz, xyz);
     }
 
@@ -1057,7 +1057,7 @@ struct Matrix3d {
      *            the factor of the z component
      * @return this
      */
-    public Matrix3d scaleLocal(double x, double y, double z) {
+    ref public Matrix3d scaleLocal(double x, double y, double z) return {
         return scaleLocal(x, y, z, this);
     }
 
@@ -1082,7 +1082,7 @@ struct Matrix3d {
      *          the axis to rotate about (needs to be {@link Vector3d#normalize() normalized})
      * @return this
      */
-    public Matrix3d rotation(double angle, Vector3d axis) {
+    ref public Matrix3d rotation(double angle, Vector3d axis) return {
         return rotation(angle, axis.x, axis.y, axis.z);
     }
 
@@ -1109,7 +1109,7 @@ struct Matrix3d {
      *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
      * @return this
      */
-    public Matrix3d rotation(AxisAngle4d axisAngle) {
+    ref public Matrix3d rotation(AxisAngle4d axisAngle) return {
         return rotation(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z);
     }
 
@@ -1142,7 +1142,7 @@ struct Matrix3d {
      *          the z-component of the rotation axis
      * @return this
      */
-    public Matrix3d rotation(double angle, double x, double y, double z) {
+    ref public Matrix3d rotation(double angle, double x, double y, double z) return {
         double sin = Math.sin(angle);
         double cos = Math.cosFromSin(sin, angle);
         double C = 1.0 - cos;
@@ -1172,7 +1172,7 @@ struct Matrix3d {
      *            the angle in radians
      * @return this
      */
-    public Matrix3d rotationX(double ang) {
+    ref public Matrix3d rotationX(double ang) return {
         double sin, cos;
         sin = Math.sin(ang);
         cos = Math.cosFromSin(sin, ang);
@@ -1201,7 +1201,7 @@ struct Matrix3d {
      *            the angle in radians
      * @return this
      */
-    public Matrix3d rotationY(double ang) {
+    ref public Matrix3d rotationY(double ang) return {
         double sin, cos;
         sin = Math.sin(ang);
         cos = Math.cosFromSin(sin, ang);
@@ -1230,7 +1230,7 @@ struct Matrix3d {
      *            the angle in radians
      * @return this
      */
-    public Matrix3d rotationZ(double ang) {
+    ref public Matrix3d rotationZ(double ang) return {
         double sin, cos;
         sin = Math.sin(ang);
         cos = Math.cosFromSin(sin, ang);
@@ -1264,7 +1264,7 @@ struct Matrix3d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix3d rotationXYZ(double angleX, double angleY, double angleZ) {
+    ref public Matrix3d rotationXYZ(double angleX, double angleY, double angleZ) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -1315,7 +1315,7 @@ struct Matrix3d {
      *            the angle to rotate about X
      * @return this
      */
-    public Matrix3d rotationZYX(double angleZ, double angleY, double angleX) {
+    ref public Matrix3d rotationZYX(double angleZ, double angleY, double angleX) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -1366,7 +1366,7 @@ struct Matrix3d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix3d rotationYXZ(double angleY, double angleX, double angleZ) {
+    ref public Matrix3d rotationYXZ(double angleY, double angleX, double angleZ) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -1420,7 +1420,7 @@ struct Matrix3d {
      *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix3d rotation(Quaterniond quat) {
+    ref public Matrix3d rotation(Quaterniond quat) return {
         double w2 = quat.w * quat.w;
         double x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y;
@@ -1520,7 +1520,7 @@ struct Matrix3d {
      *            the angle in radians
      * @return this
      */
-    public Matrix3d rotateX(double ang) {
+    ref public Matrix3d rotateX(double ang) return {
         return rotateX(ang, this);
     }
 
@@ -1569,7 +1569,7 @@ struct Matrix3d {
      *            the angle in radians
      * @return this
      */
-    public Matrix3d rotateY(double ang) {
+    ref public Matrix3d rotateY(double ang) return {
         return rotateY(ang, this);
     }
 
@@ -1618,7 +1618,7 @@ struct Matrix3d {
      *            the angle in radians
      * @return this
      */
-    public Matrix3d rotateZ(double ang) {
+    ref public Matrix3d rotateZ(double ang) return {
         return rotateZ(ang, this);
     }
 
@@ -1645,7 +1645,7 @@ struct Matrix3d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix3d rotateXYZ(double angleX, double angleY, double angleZ) {
+    ref public Matrix3d rotateXYZ(double angleX, double angleY, double angleZ) return {
         return rotateXYZ(angleX, angleY, angleZ, this);
     }
 
@@ -1707,11 +1707,11 @@ struct Matrix3d {
      *            the angle to rotate about X
      * @return this
      */
-    public Matrix3d rotateZYX(double angleZ, double angleY, double angleX) {
+    ref public Matrix3d rotateZYX(double angleZ, double angleY, double angleX) return {
         return rotateZYX(angleZ, angleY, angleX, this);
     }
 
-    public Matrix3d rotateZYX(double angleZ, double angleY, double angleX, ref Matrix3d dest) {
+    ref public Matrix3d rotateZYX(double angleZ, double angleY, double angleX, ref Matrix3d dest) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -1765,7 +1765,7 @@ struct Matrix3d {
      *            the Euler angles
      * @return this
      */
-    public Matrix3d rotateYXZ(Vector3d angles) {
+    ref public Matrix3d rotateYXZ(Vector3d angles) return {
         return rotateYXZ(angles.y, angles.x, angles.z);
     }
 
@@ -1792,7 +1792,7 @@ struct Matrix3d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix3d rotateYXZ(double angleY, double angleX, double angleZ) {
+    ref public Matrix3d rotateYXZ(double angleY, double angleX, double angleZ) return {
         return rotateYXZ(angleY, angleX, angleZ, this);
     }
 
@@ -1858,7 +1858,7 @@ struct Matrix3d {
      *            the z component of the axis
      * @return this
      */
-    public Matrix3d rotate(double ang, double x, double y, double z) {
+    ref public Matrix3d rotate(double ang, double x, double y, double z) return {
         return rotate(ang, x, y, z, this);
     }
 
@@ -2006,7 +2006,7 @@ struct Matrix3d {
      *            the z component of the axis
      * @return this
      */
-    public Matrix3d rotateLocal(double ang, double x, double y, double z) {
+    ref public Matrix3d rotateLocal(double ang, double x, double y, double z) return {
         return rotateLocal(ang, x, y, z, this);
     }
 
@@ -2080,7 +2080,7 @@ struct Matrix3d {
      *            the angle in radians to rotate about the X axis
      * @return this
      */
-    public Matrix3d rotateLocalX(double ang) {
+    ref public Matrix3d rotateLocalX(double ang) return {
         return rotateLocalX(ang, this);
     }
 
@@ -2154,7 +2154,7 @@ struct Matrix3d {
      *            the angle in radians to rotate about the Y axis
      * @return this
      */
-    public Matrix3d rotateLocalY(double ang) {
+    ref public Matrix3d rotateLocalY(double ang) return {
         return rotateLocalY(ang, this);
     }
 
@@ -2228,7 +2228,7 @@ struct Matrix3d {
      *            the angle in radians to rotate about the Z axis
      * @return this
      */
-    public Matrix3d rotateLocalZ(double ang) {
+    ref public Matrix3d rotateLocalZ(double ang) return {
         return rotateLocalZ(ang, this);
     }
 
@@ -2317,7 +2317,7 @@ struct Matrix3d {
      *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix3d rotateLocal(Quaterniond quat) {
+    ref public Matrix3d rotateLocal(Quaterniond quat) return {
         return rotateLocal(quat, this);
     }
 
@@ -2345,7 +2345,7 @@ struct Matrix3d {
      *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix3d rotate(Quaterniond quat) {
+    ref public Matrix3d rotate(Quaterniond quat) return {
         return rotate(quat, this);
     }
 
@@ -2432,7 +2432,7 @@ struct Matrix3d {
      *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
      * @return this
      */
-    public Matrix3d rotate(AxisAngle4d axisAngle) {
+    ref public Matrix3d rotate(AxisAngle4d axisAngle) return {
         return rotate(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z);
     }
 
@@ -3690,7 +3690,7 @@ struct Matrix3d {
      *          the z-coordinate of the plane normal
      * @return this
      */
-    public Matrix3d reflect(double nx, double ny, double nz) {
+    ref public Matrix3d reflect(double nx, double ny, double nz) return {
         return reflect(nx, ny, nz, this);
     }
 
@@ -3707,7 +3707,7 @@ struct Matrix3d {
      *          the plane normal
      * @return this
      */
-    public Matrix3d reflect(Vector3d normal) {
+    ref public Matrix3d reflect(Vector3d normal) return {
         return reflect(normal.x, normal.y, normal.z);
     }
 
@@ -3728,7 +3728,7 @@ struct Matrix3d {
      *          the plane orientation
      * @return this
      */
-    public Matrix3d reflect(Quaterniond orientation) {
+    ref public Matrix3d reflect(Quaterniond orientation) return {
         return reflect(orientation, this);
     }
 
@@ -3758,7 +3758,7 @@ struct Matrix3d {
      *          the z-coordinate of the plane normal
      * @return this
      */
-    public Matrix3d reflection(double nx, double ny, double nz) {
+    ref public Matrix3d reflection(double nx, double ny, double nz) return {
         double da = nx + nx, db = ny + ny, d = nz + nz;
         this._m00(1.0 - da * nx);
         this._m01(-da * ny);
@@ -3780,7 +3780,7 @@ struct Matrix3d {
      *          the plane normal
      * @return this
      */
-    public Matrix3d reflection(Vector3d normal) {
+    ref public Matrix3d reflection(Vector3d normal) return {
         return reflection(normal.x, normal.y, normal.z);
     }
 
@@ -3796,7 +3796,7 @@ struct Matrix3d {
      *          the plane orientation
      * @return this
      */
-    public Matrix3d reflection(Quaterniond orientation) {
+    ref public Matrix3d reflection(Quaterniond orientation) return {
         double num1 = orientation.x + orientation.x;
         double num2 = orientation.y + orientation.y;
         double num3 = orientation.z + orientation.z;
@@ -3833,7 +3833,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapXZy() {
+    ref public Matrix3d mapXZy() return {
         return mapXZY(this);
     }
     public Matrix3d mapXZY(ref Matrix3d dest) {
@@ -3850,7 +3850,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapXZny() {
+    ref public Matrix3d mapXZny() return {
         return mapXZnY(this);
     }
     public Matrix3d mapXZnY(ref Matrix3d dest) {
@@ -3867,7 +3867,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapXnYnz() {
+    ref public Matrix3d mapXnYnz() return {
         return mapXnYnZ(this);
     }
     public Matrix3d mapXnYnZ(ref Matrix3d dest) {
@@ -3883,7 +3883,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapXnZy() {
+    ref public Matrix3d mapXnZy() return {
         return mapXnZY(this);
     }
     public Matrix3d mapXnZY(ref Matrix3d dest) {
@@ -3900,7 +3900,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapXnZny() {
+    ref public Matrix3d mapXnZny() return {
         return mapXnZnY(this);
     }
     public Matrix3d mapXnZnY(ref Matrix3d dest) {
@@ -3917,7 +3917,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapYXz() {
+    ref public Matrix3d mapYXz() return {
         return mapYXZ(this);
     }
     public Matrix3d mapYXZ(ref Matrix3d dest) {
@@ -3934,7 +3934,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapYXnz() {
+    ref public Matrix3d mapYXnz() return {
         return mapYXnZ(this);
     }
     public Matrix3d mapYXnZ(ref Matrix3d dest) {
@@ -3951,7 +3951,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapYZx() {
+    ref public Matrix3d mapYZx() return {
         return mapYZX(this);
     }
     public Matrix3d mapYZX(ref Matrix3d dest) {
@@ -3968,7 +3968,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapYZnx() {
+    ref public Matrix3d mapYZnx() return {
         return mapYZnX(this);
     }
     public Matrix3d mapYZnX(ref Matrix3d dest) {
@@ -3985,7 +3985,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapYnXz() {
+    ref public Matrix3d mapYnXz() return {
         return mapYnXZ(this);
     }
     public Matrix3d mapYnXZ(ref Matrix3d dest) {
@@ -4002,7 +4002,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapYnXnz() {
+    ref public Matrix3d mapYnXnz() return {
         return mapYnXnZ(this);
     }
     public Matrix3d mapYnXnZ(ref Matrix3d dest) {
@@ -4019,7 +4019,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapYnZx() {
+    ref public Matrix3d mapYnZx() return {
         return mapYnZX(this);
     }
     public Matrix3d mapYnZX(ref Matrix3d dest) {
@@ -4036,7 +4036,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapYnZnx() {
+    ref public Matrix3d mapYnZnx() return {
         return mapYnZnX(this);
     }
     public Matrix3d mapYnZnX(ref Matrix3d dest) {
@@ -4053,7 +4053,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapZXy() {
+    ref public Matrix3d mapZXy() return {
         return mapZXY(this);
     }
     public Matrix3d mapZXY(ref Matrix3d dest) {
@@ -4071,7 +4071,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapZXny() {
+    ref public Matrix3d mapZXny() return {
         return mapZXnY(this);
     }
     public Matrix3d mapZXnY(ref Matrix3d dest) {
@@ -4089,7 +4089,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapZYx() {
+    ref public Matrix3d mapZYx() return {
         return mapZYX(this);
     }
     public Matrix3d mapZYX(ref Matrix3d dest) {
@@ -4106,7 +4106,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapZYnx() {
+    ref public Matrix3d mapZYnx() return {
         return mapZYnX(this);
     }
     public Matrix3d mapZYnX(ref Matrix3d dest) {
@@ -4123,7 +4123,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapZnXy() {
+    ref public Matrix3d mapZnXy() return {
         return mapZnXY(this);
     }
     public Matrix3d mapZnXY(ref Matrix3d dest) {
@@ -4141,7 +4141,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapZnXny() {
+    ref public Matrix3d mapZnXny() return {
         return mapZnXnY(this);
     }
     public Matrix3d mapZnXnY(ref Matrix3d dest) {
@@ -4159,7 +4159,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapZnYx() {
+    ref public Matrix3d mapZnYx() return {
         return mapZnYX(this);
     }
     public Matrix3d mapZnYX(ref Matrix3d dest) {
@@ -4176,7 +4176,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapZnYnx() {
+    ref public Matrix3d mapZnYnx() return {
         return mapZnYnX(this);
     }
     public Matrix3d mapZnYnX(ref Matrix3d dest) {
@@ -4193,7 +4193,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnXYnz() {
+    ref public Matrix3d mapnXYnz() return {
         return mapnXYnZ(this);
     }
     public Matrix3d mapnXYnZ(ref Matrix3d dest) {
@@ -4209,7 +4209,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnXZy() {
+    ref public Matrix3d mapnXZy() return {
         return mapnXZY(this);
     }
     public Matrix3d mapnXZY(ref Matrix3d dest) {
@@ -4226,7 +4226,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnXZny() {
+    ref public Matrix3d mapnXZny() return {
         return mapnXZnY(this);
     }
     public Matrix3d mapnXZnY(ref Matrix3d dest) {
@@ -4243,7 +4243,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnXnYz() {
+    ref public Matrix3d mapnXnYz() return {
         return mapnXnYZ(this);
     }
     public Matrix3d mapnXnYZ(ref Matrix3d dest) {
@@ -4259,7 +4259,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnXnYnz() {
+    ref public Matrix3d mapnXnYnz() return {
         return mapnXnYnZ(this);
     }
     public Matrix3d mapnXnYnZ(ref Matrix3d dest) {
@@ -4275,7 +4275,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnXnZy() {
+    ref public Matrix3d mapnXnZy() return {
         return mapnXnZY(this);
     }
     public Matrix3d mapnXnZY(ref Matrix3d dest) {
@@ -4292,7 +4292,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnXnZny() {
+    ref public Matrix3d mapnXnZny() return {
         return mapnXnZnY(this);
     }
     public Matrix3d mapnXnZnY(ref Matrix3d dest) {
@@ -4309,7 +4309,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnYXz() {
+    ref public Matrix3d mapnYXz() return {
         return mapnYXZ(this);
     }
     public Matrix3d mapnYXZ(ref Matrix3d dest) {
@@ -4326,7 +4326,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnYXnz() {
+    ref public Matrix3d mapnYXnz() return {
         return mapnYXnZ(this);
     }
     public Matrix3d mapnYXnZ(ref Matrix3d dest) {
@@ -4343,7 +4343,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnYZx() {
+    ref public Matrix3d mapnYZx() return {
         return mapnYZX(this);
     }
     public Matrix3d mapnYZX(ref Matrix3d dest) {
@@ -4360,7 +4360,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnYZnx() {
+    ref public Matrix3d mapnYZnx() return {
         return mapnYZnX(this);
     }
     public Matrix3d mapnYZnX(ref Matrix3d dest) {
@@ -4377,7 +4377,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnYnXz() {
+    ref public Matrix3d mapnYnXz() return {
         return mapnYnXZ(this);
     }
     public Matrix3d mapnYnXZ(ref Matrix3d dest) {
@@ -4394,7 +4394,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnYnXnz() {
+    ref public Matrix3d mapnYnXnz() return {
         return mapnYnXnZ(this);
     }
     public Matrix3d mapnYnXnZ(ref Matrix3d dest) {
@@ -4411,7 +4411,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnYnZx() {
+    ref public Matrix3d mapnYnZx() return {
         return mapnYnZX(this);
     }
     public Matrix3d mapnYnZX(ref Matrix3d dest) {
@@ -4428,7 +4428,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnYnZnx() {
+    ref public Matrix3d mapnYnZnx() return {
         return mapnYnZnX(this);
     }
     public Matrix3d mapnYnZnX(ref Matrix3d dest) {
@@ -4445,7 +4445,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnZXy() {
+    ref public Matrix3d mapnZXy() return {
         return mapnZXY(this);
     }
     public Matrix3d mapnZXY(ref Matrix3d dest) {
@@ -4463,7 +4463,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnZXny() {
+    ref public Matrix3d mapnZXny() return {
         return mapnZXnY(this);
     }
     public Matrix3d mapnZXnY(ref Matrix3d dest) {
@@ -4481,7 +4481,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnZYx() {
+    ref public Matrix3d mapnZYx() return {
         return mapnZYX(this);
     }
     public Matrix3d mapnZYX(ref Matrix3d dest) {
@@ -4498,7 +4498,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnZYnx() {
+    ref public Matrix3d mapnZYnx() return {
         return mapnZYnX(this);
     }
     public Matrix3d mapnZYnX(ref Matrix3d dest) {
@@ -4515,7 +4515,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnZnXy() {
+    ref public Matrix3d mapnZnXy() return {
         return mapnZnXY(this);
     }
     public Matrix3d mapnZnXY(ref Matrix3d dest) {
@@ -4533,7 +4533,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnZnXny() {
+    ref public Matrix3d mapnZnXny() return {
         return mapnZnXnY(this);
     }
     public Matrix3d mapnZnXnY(ref Matrix3d dest) {
@@ -4551,7 +4551,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnZnYx() {
+    ref public Matrix3d mapnZnYx() return {
         return mapnZnYX(this);
     }
     public Matrix3d mapnZnYX(ref Matrix3d dest) {
@@ -4568,7 +4568,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d mapnZnYnx() {
+    ref public Matrix3d mapnZnYnx() return {
         return mapnZnYnX(this);
     }
     public Matrix3d mapnZnYnX(ref Matrix3d dest) {
@@ -4586,7 +4586,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d negatex() {
+    ref public Matrix3d negatex() return {
         return _m00(-m00)._m01(-m01)._m02(-m02);
     }
     public Matrix3d negateX(ref Matrix3d dest) {
@@ -4603,7 +4603,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d negatey() {
+    ref public Matrix3d negatey() return {
         return _m10(-m10)._m11(-m11)._m12(-m12);
     }
     public Matrix3d negateY(ref Matrix3d dest) {
@@ -4620,7 +4620,7 @@ struct Matrix3d {
      * 
      * @return this
      */
-    public Matrix3d negatez() {
+    ref public Matrix3d negatez() return {
         return _m20(-m20)._m21(-m21)._m22(-m22);
     }
     public Matrix3d negateZ(ref Matrix3d dest) {
