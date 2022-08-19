@@ -1066,7 +1066,7 @@ struct Matrix4d {
         return mul(right, this);
     }
 
-    public Matrix4d mul(Matrix4d right, Matrix4d dest) {
+    public Matrix4d mul(Matrix4d right, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.set(right);
         else if ((right.properties & PROPERTY_IDENTITY) != 0)
@@ -1102,7 +1102,7 @@ struct Matrix4d {
        return mul0(right, this);
     }
 
-    public Matrix4d mul0(Matrix4d right, Matrix4d dest) {
+    public Matrix4d mul0(Matrix4d right, ref Matrix4d dest) {
         double nm00 = Math.fma(m00, right.m00, Math.fma(m10, right.m01, Math.fma(m20, right.m02, m30 * right.m03)));
         double nm01 = Math.fma(m01, right.m00, Math.fma(m11, right.m01, Math.fma(m21, right.m02, m31 * right.m03)));
         double nm02 = Math.fma(m02, right.m00, Math.fma(m12, right.m01, Math.fma(m22, right.m02, m32 * right.m03)));
@@ -1193,7 +1193,7 @@ struct Matrix4d {
             double r00, double r01, double r02, double r03,
             double r10, double r11, double r12, double r13,
             double r20, double r21, double r22, double r23,
-            double r30, double r31, double r32, double r33, Matrix4d dest) {
+            double r30, double r31, double r32, double r33, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.set(r00, r01, r02, r03, r10, r11, r12, r13, r20, r21, r22, r23, r30, r31, r32, r33);
         else if ((properties & PROPERTY_AFFINE) != 0)
@@ -1204,7 +1204,7 @@ struct Matrix4d {
             double r00, double r01, double r02, double r03,
             double r10, double r11, double r12, double r13,
             double r20, double r21, double r22, double r23,
-            double r30, double r31, double r32, double r33, Matrix4d dest) {
+            double r30, double r31, double r32, double r33, ref Matrix4d dest) {
         double nm00 = Math.fma(m00, r00, Math.fma(m10, r01, Math.fma(m20, r02, m30 * r03)));
         double nm01 = Math.fma(m01, r00, Math.fma(m11, r01, Math.fma(m21, r02, m31 * r03)));
         double nm02 = Math.fma(m02, r00, Math.fma(m12, r01, Math.fma(m22, r02, m32 * r03)));
@@ -1244,7 +1244,7 @@ struct Matrix4d {
             double r00, double r01, double r02, double r03,
             double r10, double r11, double r12, double r13,
             double r20, double r21, double r22, double r23,
-            double r30, double r31, double r32, double r33, Matrix4d dest) {
+            double r30, double r31, double r32, double r33, ref Matrix4d dest) {
         double nm00 = Math.fma(m00, r00, Math.fma(m10, r01, Math.fma(m20, r02, m30 * r03)));
         double nm01 = Math.fma(m01, r00, Math.fma(m11, r01, Math.fma(m21, r02, m31 * r03)));
         double nm02 = Math.fma(m02, r00, Math.fma(m12, r01, Math.fma(m22, r02, m32 * r03)));
@@ -1319,7 +1319,7 @@ struct Matrix4d {
     public Matrix4d mul3x3(
             double r00, double r01, double r02,
             double r10, double r11, double r12,
-            double r20, double r21, double r22, Matrix4d dest) {
+            double r20, double r21, double r22, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.set(r00, r01, r02, 0, r10, r11, r12, 0, r20, r21, r22, 0, 0, 0, 0, 1);
         return mulGeneric3x3(r00, r01, r02, r10, r11, r12, r20, r21, r22, dest);
@@ -1327,7 +1327,7 @@ struct Matrix4d {
     private Matrix4d mulGeneric3x3(
             double r00, double r01, double r02,
             double r10, double r11, double r12,
-            double r20, double r21, double r22, Matrix4d dest) {
+            double r20, double r21, double r22, ref Matrix4d dest) {
         double nm00 = Math.fma(m00, r00, Math.fma(m10, r01, m20 * r02));
         double nm01 = Math.fma(m01, r00, Math.fma(m11, r01, m21 * r02));
         double nm02 = Math.fma(m02, r00, Math.fma(m12, r01, m22 * r02));
@@ -1376,7 +1376,7 @@ struct Matrix4d {
        return mulLocal(left, this);
     }
 
-    public Matrix4d mulLocal(Matrix4d left, Matrix4d dest) {
+    public Matrix4d mulLocal(Matrix4d left, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.set(left);
         else if ((left.properties & PROPERTY_IDENTITY) != 0)
@@ -1385,7 +1385,7 @@ struct Matrix4d {
             return mulLocalAffine(left, dest);
         return mulLocalGeneric(left, dest);
     }
-    private Matrix4d mulLocalGeneric(Matrix4d left, Matrix4d dest) {
+    private Matrix4d mulLocalGeneric(Matrix4d left, ref Matrix4d dest) {
         double nm00 = Math.fma(left.m00, m00, Math.fma(left.m10, m01, Math.fma(left.m20, m02, left.m30 * m03)));
         double nm01 = Math.fma(left.m01, m00, Math.fma(left.m11, m01, Math.fma(left.m21, m02, left.m31 * m03)));
         double nm02 = Math.fma(left.m02, m00, Math.fma(left.m12, m01, Math.fma(left.m22, m02, left.m32 * m03)));
@@ -1444,7 +1444,7 @@ struct Matrix4d {
        return mulLocalAffine(left, this);
     }
 
-    public Matrix4d mulLocalAffine(Matrix4d left, Matrix4d dest) {
+    public Matrix4d mulLocalAffine(Matrix4d left, ref Matrix4d dest) {
         double nm00 = left.m00 * m00 + left.m10 * m01 + left.m20 * m02;
         double nm01 = left.m01 * m00 + left.m11 * m01 + left.m21 * m02;
         double nm02 = left.m02 * m00 + left.m12 * m01 + left.m22 * m02;
@@ -1499,7 +1499,7 @@ struct Matrix4d {
         return mul(right, this);
     }
 
-    public Matrix4d mul(Matrix4x3d right, Matrix4d dest) {
+    public Matrix4d mul(Matrix4x3d right, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.set(right);
         else if ((right.properties & PROPERTY_IDENTITY) != 0)
@@ -1512,7 +1512,7 @@ struct Matrix4d {
             return mulPerspectiveAffine(right, dest);
         return mulGeneric(right, dest);
     }
-    private Matrix4d mulTranslation(Matrix4x3d right, Matrix4d dest) {
+    private Matrix4d mulTranslation(Matrix4x3d right, ref Matrix4d dest) {
         return dest
         ._m00(right.m00)
         ._m01(right.m01)
@@ -1532,7 +1532,7 @@ struct Matrix4d {
         ._m33(m33)
         ._properties(PROPERTY_AFFINE | (right.properties & PROPERTY_ORTHONORMAL));
     }
-    private Matrix4d mulAffine(Matrix4x3d right, Matrix4d dest) {
+    private Matrix4d mulAffine(Matrix4x3d right, ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         double m20 = this.m20, m21 = this.m21, m22 = this.m22;
@@ -1559,7 +1559,7 @@ struct Matrix4d {
         ._m33(m33)
         ._properties(PROPERTY_AFFINE | (this.properties & right.properties & PROPERTY_ORTHONORMAL));
     }
-    private Matrix4d mulGeneric(Matrix4x3d right, Matrix4d dest) {
+    private Matrix4d mulGeneric(Matrix4x3d right, ref Matrix4d dest) {
         double nm00 = Math.fma(m00, right.m00, Math.fma(m10, right.m01, m20 * right.m02));
         double nm01 = Math.fma(m01, right.m00, Math.fma(m11, right.m01, m21 * right.m02));
         double nm02 = Math.fma(m02, right.m00, Math.fma(m12, right.m01, m22 * right.m02));
@@ -1595,7 +1595,7 @@ struct Matrix4d {
         ._properties(properties & ~(PROPERTY_IDENTITY | PROPERTY_PERSPECTIVE | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL));
         return dest;
     }
-    public Matrix4d mulPerspectiveAffine(Matrix4x3d view, Matrix4d dest) {
+    public Matrix4d mulPerspectiveAffine(Matrix4x3d view, ref Matrix4d dest) {
         double lm00 = m00, lm11 = m11, lm22 = m22, lm23 = m23;
         dest._m00(lm00 * view.m00)._m01(lm11 * view.m01)._m02(lm22 * view.m02)._m03(lm23 * view.m02).
         _m10(lm00 * view.m10)._m11(lm11 * view.m11)._m12(lm22 * view.m12)._m13(lm23 * view.m12).
@@ -1622,7 +1622,7 @@ struct Matrix4d {
         return mul(right, this);
     }
 
-    public Matrix4d mul(Matrix3x2d right, Matrix4d dest) {
+    public Matrix4d mul(Matrix3x2d right, ref Matrix4d dest) {
         double nm00 = m00 * right.m00 + m10 * right.m01;
         double nm01 = m01 * right.m00 + m11 * right.m01;
         double nm02 = m02 * right.m00 + m12 * right.m01;
@@ -1674,7 +1674,7 @@ struct Matrix4d {
        return mulPerspectiveAffine(view, this);
     }
 
-    public Matrix4d mulPerspectiveAffine(Matrix4d view, Matrix4d dest) {
+    public Matrix4d mulPerspectiveAffine(Matrix4d view, ref Matrix4d dest) {
         double nm00 = m00 * view.m00, nm01 = m11 * view.m01, nm02 = m22 * view.m02, nm03 = m23 * view.m02;
         double nm10 = m00 * view.m10, nm11 = m11 * view.m11, nm12 = m22 * view.m12, nm13 = m23 * view.m12;
         double nm20 = m00 * view.m20, nm21 = m11 * view.m21, nm22 = m22 * view.m22, nm23 = m23 * view.m22;
@@ -1706,7 +1706,7 @@ struct Matrix4d {
        return mulAffineR(right, this);
     }
 
-    public Matrix4d mulAffineR(Matrix4d right, Matrix4d dest) {
+    public Matrix4d mulAffineR(Matrix4d right, ref Matrix4d dest) {
         double nm00 = Math.fma(m00, right.m00, Math.fma(m10, right.m01, m20 * right.m02));
         double nm01 = Math.fma(m01, right.m00, Math.fma(m11, right.m01, m21 * right.m02));
         double nm02 = Math.fma(m02, right.m00, Math.fma(m12, right.m01, m22 * right.m02));
@@ -1765,7 +1765,7 @@ struct Matrix4d {
        return mulAffine(right, this);
     }
 
-    public Matrix4d mulAffine(Matrix4d right, Matrix4d dest) {
+    public Matrix4d mulAffine(Matrix4d right, ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         double m20 = this.m20, m21 = this.m21, m22 = this.m22;
@@ -1793,7 +1793,7 @@ struct Matrix4d {
         ._properties(PROPERTY_AFFINE | (this.properties & right.properties & PROPERTY_ORTHONORMAL));
     }
 
-    public Matrix4d mulTranslationAffine(Matrix4d right, Matrix4d dest) {
+    public Matrix4d mulTranslationAffine(Matrix4d right, ref Matrix4d dest) {
         return dest
         ._m00(right.m00)
         ._m01(right.m01)
@@ -1830,7 +1830,7 @@ struct Matrix4d {
         return mulOrthoAffine(view, this);
     }
 
-    public Matrix4d mulOrthoAffine(Matrix4d view, Matrix4d dest) {
+    public Matrix4d mulOrthoAffine(Matrix4d view, ref Matrix4d dest) {
         double nm00 = m00 * view.m00;
         double nm01 = m11 * view.m01;
         double nm02 = m22 * view.m02;
@@ -1884,7 +1884,7 @@ struct Matrix4d {
         return fma4x3(other, otherFactor, this);
     }
 
-    public Matrix4d fma4x3(Matrix4d other, double otherFactor, Matrix4d dest) {
+    public Matrix4d fma4x3(Matrix4d other, double otherFactor, ref Matrix4d dest) {
         dest._m00(Math.fma(other.m00, otherFactor, m00))
         ._m01(Math.fma(other.m01, otherFactor, m01))
         ._m02(Math.fma(other.m02, otherFactor, m02))
@@ -1916,7 +1916,7 @@ struct Matrix4d {
         return add(other, this);
     }
 
-    public Matrix4d add(Matrix4d other, Matrix4d dest) {
+    public Matrix4d add(Matrix4d other, ref Matrix4d dest) {
         dest._m00(m00 + other.m00)
         ._m01(m01 + other.m01)
         ._m02(m02 + other.m02)
@@ -1948,7 +1948,7 @@ struct Matrix4d {
         return sub(subtrahend, this);
     }
 
-    public Matrix4d sub(Matrix4d subtrahend, Matrix4d dest) {
+    public Matrix4d sub(Matrix4d subtrahend, ref Matrix4d dest) {
         dest._m00(m00 - subtrahend.m00)
         ._m01(m01 - subtrahend.m01)
         ._m02(m02 - subtrahend.m02)
@@ -1980,7 +1980,7 @@ struct Matrix4d {
         return mulComponentWise(other, this);
     }
 
-    public Matrix4d mulComponentWise(Matrix4d other, Matrix4d dest) {
+    public Matrix4d mulComponentWise(Matrix4d other, ref Matrix4d dest) {
         dest._m00(m00 * other.m00)
         ._m01(m01 * other.m01)
         ._m02(m02 * other.m02)
@@ -2012,7 +2012,7 @@ struct Matrix4d {
         return add4x3(other, this);
     }
 
-    public Matrix4d add4x3(Matrix4d other, Matrix4d dest) {
+    public Matrix4d add4x3(Matrix4d other, ref Matrix4d dest) {
         dest._m00(m00 + other.m00)
         ._m01(m01 + other.m01)
         ._m02(m02 + other.m02)
@@ -2044,7 +2044,7 @@ struct Matrix4d {
         return sub4x3(subtrahend, this);
     }
 
-    public Matrix4d sub4x3(Matrix4d subtrahend, Matrix4d dest) {
+    public Matrix4d sub4x3(Matrix4d subtrahend, ref Matrix4d dest) {
         dest._m00(m00 - subtrahend.m00)
         ._m01(m01 - subtrahend.m01)
         ._m02(m02 - subtrahend.m02)
@@ -2076,7 +2076,7 @@ struct Matrix4d {
         return mul4x3ComponentWise(other, this);
     }
 
-    public Matrix4d mul4x3ComponentWise(Matrix4d other, Matrix4d dest) {
+    public Matrix4d mul4x3ComponentWise(Matrix4d other, ref Matrix4d dest) {
         dest._m00(m00 * other.m00)
         ._m01(m01 * other.m01)
         ._m02(m02 * other.m02)
@@ -2351,7 +2351,7 @@ struct Matrix4d {
         return invert(this);
     }
 
-    public Matrix4d invert(Matrix4d dest) {
+    public Matrix4d invert(ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.identity();
         else if ((properties & PROPERTY_TRANSLATION) != 0)
@@ -2364,7 +2364,7 @@ struct Matrix4d {
             return invertPerspective(dest);
         return invertGeneric(dest);
     }
-    private Matrix4d invertTranslation(Matrix4d dest) {
+    private Matrix4d invertTranslation(ref Matrix4d dest) {
         if (dest != this)
             dest.set(this);
         dest._m30(-m30)
@@ -2373,7 +2373,7 @@ struct Matrix4d {
         ._properties(PROPERTY_AFFINE | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
         return dest;
     }
-    private Matrix4d invertOrthonormal(Matrix4d dest) {
+    private Matrix4d invertOrthonormal(ref Matrix4d dest) {
         double nm30 = -(m00 * m30 + m01 * m31 + m02 * m32);
         double nm31 = -(m10 * m30 + m11 * m31 + m12 * m32);
         double nm32 = -(m20 * m30 + m21 * m31 + m22 * m32);
@@ -2399,12 +2399,12 @@ struct Matrix4d {
         ._properties(PROPERTY_AFFINE | PROPERTY_ORTHONORMAL);
         return dest;
     }
-    private Matrix4d invertGeneric(Matrix4d dest) {
+    private Matrix4d invertGeneric(ref Matrix4d dest) {
         if (this != dest)
             return invertGenericNonThis(dest);
         return invertGenericThis(dest);
     }
-    private Matrix4d invertGenericNonThis(Matrix4d dest) {
+    private Matrix4d invertGenericNonThis(ref Matrix4d dest) {
         double a = m00 * m11 - m01 * m10;
         double b = m00 * m12 - m02 * m10;
         double c = m00 * m13 - m03 * m10;
@@ -2438,7 +2438,7 @@ struct Matrix4d {
         ._m33(Math.fma( m20, d, Math.fma(-m21, b,  m22 * a)) * det)
         ._properties(0);
     }
-    private Matrix4d invertGenericThis(Matrix4d dest) {
+    private Matrix4d invertGenericThis(ref Matrix4d dest) {
         double a = m00 * m11 - m01 * m10;
         double b = m00 * m12 - m02 * m10;
         double c = m00 * m13 - m03 * m10;
@@ -2489,7 +2489,7 @@ struct Matrix4d {
         ._properties(0);
     }
 
-    public Matrix4d invertPerspective(Matrix4d dest) {
+    public Matrix4d invertPerspective(ref Matrix4d dest) {
         double a =  1.0 / (m00 * m11);
         double l = -1.0 / (m23 * m32);
         dest.set(m11 * a, 0, 0, 0,
@@ -2514,7 +2514,7 @@ struct Matrix4d {
         return invertPerspective(this);
     }
 
-    public Matrix4d invertFrustum(Matrix4d dest) {
+    public Matrix4d invertFrustum(ref Matrix4d dest) {
         double invM00 = 1.0 / m00;
         double invM11 = 1.0 / m11;
         double invM23 = 1.0 / m23;
@@ -2545,7 +2545,7 @@ struct Matrix4d {
         return invertFrustum(this);
     }
 
-    public Matrix4d invertOrtho(Matrix4d dest) {
+    public Matrix4d invertOrtho(ref Matrix4d dest) {
         double invM00 = 1.0 / m00;
         double invM11 = 1.0 / m11;
         double invM22 = 1.0 / m22;
@@ -2568,7 +2568,7 @@ struct Matrix4d {
         return invertOrtho(this);
     }
 
-    public Matrix4d invertPerspectiveView(Matrix4d view, Matrix4d dest) {
+    public Matrix4d invertPerspectiveView(Matrix4d view, ref Matrix4d dest) {
         double a =  1.0 / (m00 * m11);
         double l = -1.0 / (m23 * m32);
         double pm00 =  m11 * a;
@@ -2603,7 +2603,7 @@ struct Matrix4d {
         ._properties(0);
     }
 
-    public Matrix4d invertPerspectiveView(Matrix4x3d view, Matrix4d dest) {
+    public Matrix4d invertPerspectiveView(Matrix4x3d view, ref Matrix4d dest) {
         double a =  1.0 / (m00 * m11);
         double l = -1.0 / (m23 * m32);
         double pm00 =  m11 * a;
@@ -2634,7 +2634,7 @@ struct Matrix4d {
         ._properties(0);
     }
 
-    public Matrix4d invertAffine(Matrix4d dest) {
+    public Matrix4d invertAffine(ref Matrix4d dest) {
         double m11m00 = m00 * m11, m10m01 = m01 * m10, m10m02 = m02 * m10;
         double m12m00 = m00 * m12, m12m01 = m01 * m12, m11m02 = m02 * m11;
         double s = 1.0 / ((m11m00 - m10m01) * m22 + (m10m02 - m12m00) * m21 + (m12m01 - m11m02) * m20);
@@ -2692,14 +2692,14 @@ struct Matrix4d {
         return transpose(this);
     }
 
-    public Matrix4d transpose(Matrix4d dest) {
+    public Matrix4d transpose(ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.identity();
         else if (this != dest)
             return transposeNonThisGeneric(dest);
         return transposeThisGeneric(dest);
     }
-    private Matrix4d transposeNonThisGeneric(Matrix4d dest) {
+    private Matrix4d transposeNonThisGeneric(ref Matrix4d dest) {
         return dest
         ._m00(m00)
         ._m01(m10)
@@ -2719,7 +2719,7 @@ struct Matrix4d {
         ._m33(m33)
         ._properties(0);
     }
-    private Matrix4d transposeThisGeneric(Matrix4d dest) {
+    private Matrix4d transposeThisGeneric(ref Matrix4d dest) {
         double nm10 = m01;
         double nm20 = m02;
         double nm21 = m12;
@@ -2753,7 +2753,7 @@ struct Matrix4d {
         return transpose3x3(this);
     }
 
-    public Matrix4d transpose3x3(Matrix4d dest) {
+    public Matrix4d transpose3x3(ref Matrix4d dest) {
         double nm10 = m01, nm20 = m02, nm21 = m12;
         return dest
         ._m00(m00)
@@ -2768,7 +2768,7 @@ struct Matrix4d {
         ._properties(this.properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL | PROPERTY_IDENTITY | PROPERTY_TRANSLATION));
     }
 
-    public Matrix3d transpose3x3(Matrix3d dest) {
+    public Matrix3d transpose3x3(ref Matrix3d dest) {
         return dest
         ._m00(m00)
         ._m01(m10)
@@ -2863,41 +2863,41 @@ struct Matrix4d {
         return setTranslation(xyz.x, xyz.y, xyz.z);
     }
 
-    public Vector3d getTranslation(Vector3d dest) {
+    public Vector3d getTranslation(ref Vector3d dest) {
         dest.x = m30;
         dest.y = m31;
         dest.z = m32;
         return dest;
     }
 
-    public Vector3d getScale(Vector3d dest) {
+    public Vector3d getScale(ref Vector3d dest) {
         dest.x = Math.sqrt(m00 * m00 + m01 * m01 + m02 * m02);
         dest.y = Math.sqrt(m10 * m10 + m11 * m11 + m12 * m12);
         dest.z = Math.sqrt(m20 * m20 + m21 * m21 + m22 * m22);
         return dest;
     }
 
-    public Matrix4d get(Matrix4d dest) {
+    public Matrix4d get(ref Matrix4d dest) {
         return dest.set(this);
     }
 
-    public Matrix4x3d get4x3(Matrix4x3d dest) {
+    public Matrix4x3d get4x3(ref Matrix4x3d dest) {
         return dest.set(this);
     }
 
-    public Matrix3d get3x3(Matrix3d dest) {
+    public Matrix3d get3x3(ref Matrix3d dest) {
         return dest.set(this);
     }
 
-    public Quaterniond getUnnormalizedRotation(Quaterniond dest) {
+    public Quaterniond getUnnormalizedRotation(ref Quaterniond dest) {
         return dest.setFromUnnormalized(this);
     }
 
-    public Quaterniond getNormalizedRotation(Quaterniond dest) {
+    public Quaterniond getNormalizedRotation(ref Quaterniond dest) {
         return dest.setFromNormalized(this);
     }
 
-    public double[] get(double[] dest, int offset) {
+    public double[] get(ref double[] dest, int offset) {
         dest[offset+0]  = m00;
         dest[offset+1]  = m01;
         dest[offset+2]  = m02;
@@ -2917,31 +2917,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public double[] get(double[] dest) {
-        return get(dest, 0);
-    }
-
-    public float[] get(float[] dest, int offset) {
-        dest[offset+0]  = cast(float)m00;
-        dest[offset+1]  = cast(float)m01;
-        dest[offset+2]  = cast(float)m02;
-        dest[offset+3]  = cast(float)m03;
-        dest[offset+4]  = cast(float)m10;
-        dest[offset+5]  = cast(float)m11;
-        dest[offset+6]  = cast(float)m12;
-        dest[offset+7]  = cast(float)m13;
-        dest[offset+8]  = cast(float)m20;
-        dest[offset+9]  = cast(float)m21;
-        dest[offset+10] = cast(float)m22;
-        dest[offset+11] = cast(float)m23;
-        dest[offset+12] = cast(float)m30;
-        dest[offset+13] = cast(float)m31;
-        dest[offset+14] = cast(float)m32;
-        dest[offset+15] = cast(float)m33;
-        return dest;
-    }
-
-    public float[] get(float[] dest) {
+    public double[] get(ref double[] dest) {
         return get(dest, 0);
     }
 
@@ -3525,11 +3501,11 @@ struct Matrix4d {
         return v.mul(this);
     }
 
-    public Vector4d transform(Vector4d v, Vector4d dest) {
+    public Vector4d transform(Vector4d v, ref Vector4d dest) {
         return v.mul(this, dest);
     }
 
-    public Vector4d transform(double x, double y, double z, double w, Vector4d dest) {
+    public Vector4d transform(double x, double y, double z, double w, ref Vector4d dest) {
         return dest.set(m00 * x + m10 * y + m20 * z + m30 * w,
                         m01 * x + m11 * y + m21 * z + m31 * w,
                         m02 * x + m12 * y + m22 * z + m32 * w,
@@ -3539,10 +3515,10 @@ struct Matrix4d {
     public Vector4d transformTranspose(Vector4d v) {
         return v.mulTranspose(this);
     }
-    public Vector4d transformTranspose(Vector4d v, Vector4d dest) {
+    public Vector4d transformTranspose(Vector4d v, ref Vector4d dest) {
         return v.mulTranspose(this, dest);
     }
-    public Vector4d transformTranspose(double x, double y, double z, double w, Vector4d dest) {
+    public Vector4d transformTranspose(double x, double y, double z, double w, ref Vector4d dest) {
        return dest.set(x, y, z, w).mulTranspose(this);
     }
 
@@ -3550,11 +3526,11 @@ struct Matrix4d {
         return v.mulProject(this);
     }
 
-    public Vector4d transformProject(Vector4d v, Vector4d dest) {
+    public Vector4d transformProject(Vector4d v, ref Vector4d dest) {
         return v.mulProject(this, dest);
     }
 
-    public Vector4d transformProject(double x, double y, double z, double w, Vector4d dest) {
+    public Vector4d transformProject(double x, double y, double z, double w, ref Vector4d dest) {
         double invW = 1.0 / (m03 * x + m13 * y + m23 * z + m33 * w);
         return dest.set((m00 * x + m10 * y + m20 * z + m30 * w) * invW,
                         (m01 * x + m11 * y + m21 * z + m31 * w) * invW,
@@ -3566,71 +3542,71 @@ struct Matrix4d {
         return v.mulProject(this);
     }
 
-    public Vector3d transformProject(Vector3d v, Vector3d dest) {
+    public Vector3d transformProject(Vector3d v, ref Vector3d dest) {
         return v.mulProject(this, dest);
     }
 
-    public Vector3d transformProject(double x, double y, double z, Vector3d dest) {
+    public Vector3d transformProject(double x, double y, double z, ref Vector3d dest) {
         double invW = 1.0 / (m03 * x + m13 * y + m23 * z + m33);
         return dest.set((m00 * x + m10 * y + m20 * z + m30) * invW,
                         (m01 * x + m11 * y + m21 * z + m31) * invW,
                         (m02 * x + m12 * y + m22 * z + m32) * invW);
     }
 
-    public Vector3d transformProject(Vector4d v, Vector3d dest) {
+    public Vector3d transformProject(Vector4d v, ref Vector3d dest) {
         return v.mulProject(this, dest);
     }
 
-    public Vector3d transformProject(double x, double y, double z, double w, Vector3d dest) {
+    public Vector3d transformProject(double x, double y, double z, double w, ref Vector3d dest) {
         dest.x = x;
         dest.y = y;
         dest.z = z;
         return dest.mulProject(this, w, dest);
     }
 
-    public Vector3d transformPosition(Vector3d dest) {
+    public Vector3d transformPosition(ref Vector3d dest) {
         return dest.set(m00 * dest.x + m10 * dest.y + m20 * dest.z + m30,
                         m01 * dest.x + m11 * dest.y + m21 * dest.z + m31,
                         m02 * dest.x + m12 * dest.y + m22 * dest.z + m32);
     }
 
-    public Vector3d transformPosition(Vector3d v, Vector3d dest) {
+    public Vector3d transformPosition(Vector3d v, ref Vector3d dest) {
         return transformPosition(v.x, v.y, v.z, dest);
     }
 
-    public Vector3d transformPosition(double x, double y, double z, Vector3d dest) {
+    public Vector3d transformPosition(double x, double y, double z, ref Vector3d dest) {
         return dest.set(m00 * x + m10 * y + m20 * z + m30,
                         m01 * x + m11 * y + m21 * z + m31,
                         m02 * x + m12 * y + m22 * z + m32);
     }
 
-    public Vector3d transformDirection(Vector3d dest) {
+    public Vector3d transformDirection(ref Vector3d dest) {
         return dest.set(m00 * dest.x + m10 * dest.y + m20 * dest.z,
                         m01 * dest.x + m11 * dest.y + m21 * dest.z,
                         m02 * dest.x + m12 * dest.y + m22 * dest.z);
     }
 
-    public Vector3d transformDirection(Vector3d v, Vector3d dest) {
+    public Vector3d transformDirection(Vector3d v, ref Vector3d dest) {
         return dest.set(m00 * v.x + m10 * v.y + m20 * v.z,
                         m01 * v.x + m11 * v.y + m21 * v.z,
                         m02 * v.x + m12 * v.y + m22 * v.z);
     }
 
-    public Vector3d transformDirection(double x, double y, double z, Vector3d dest) {
+    public Vector3d transformDirection(double x, double y, double z, ref Vector3d dest) {
         return dest.set(m00 * x + m10 * y + m20 * z,
                         m01 * x + m11 * y + m21 * z,
                         m02 * x + m12 * y + m22 * z);
     }
 
-    public Vector4d transformAffine(Vector4d dest) {
+    public Vector4d transformAffine(ref Vector4d dest) {
         return dest.mulAffine(this, dest);
     }
 
-    public Vector4d transformAffine(Vector4d v, Vector4d dest) {
+    public Vector4d transformAffine(Vector4d v, ref Vector4d dest) {
         return transformAffine(v.x, v.y, v.z, v.w, dest);
     }
 
-    public Vector4d transformAffine(double x, double y, double z, double w, Vector4d dest) {
+    public Vector4d transformAffine(double x, double y, double z, double w, ref Vector4d dest) {
         double rx = m00 * x + m10 * y + m20 * z + m30 * w;
         double ry = m01 * x + m11 * y + m21 * z + m31 * w;
         double rz = m02 * x + m12 * y + m22 * z + m32 * w;
@@ -3662,7 +3638,7 @@ struct Matrix4d {
         _properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL));
     }
 
-    public Matrix4d scale(Vector3d xyz, Matrix4d dest) {
+    public Matrix4d scale(Vector3d xyz, ref Matrix4d dest) {
         return scale(xyz.x, xyz.y, xyz.z, dest);
     }
 
@@ -3683,12 +3659,12 @@ struct Matrix4d {
         return scale(xyz.x, xyz.y, xyz.z, this);
     }
 
-    public Matrix4d scale(double x, double y, double z, Matrix4d dest) {
+    public Matrix4d scale(double x, double y, double z, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.scaling(x, y, z);
         return scaleGeneric(x, y, z, dest);
     }
-    private Matrix4d scaleGeneric(double x, double y, double z, Matrix4d dest) {
+    private Matrix4d scaleGeneric(double x, double y, double z, ref Matrix4d dest) {
         bool one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
         dest._m00(m00 * x)
         ._m01(m01 * x)
@@ -3732,7 +3708,7 @@ struct Matrix4d {
         return scale(x, y, z, this);
     }
 
-    public Matrix4d scale(double xyz, Matrix4d dest) {
+    public Matrix4d scale(double xyz, ref Matrix4d dest) {
         return scale(xyz, xyz, xyz, dest);
     }
 
@@ -3754,7 +3730,7 @@ struct Matrix4d {
         return scale(xyz, xyz, xyz);
     }
 
-    public Matrix4d scaleXY(double x, double y, Matrix4d dest) {
+    public Matrix4d scaleXY(double x, double y, ref Matrix4d dest) {
         return scale(x, y, 1.0, dest);
     }
 
@@ -3776,7 +3752,7 @@ struct Matrix4d {
         return scale(x, y, 1.0);
     }
 
-    public Matrix4d scaleAround(double sx, double sy, double sz, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d scaleAround(double sx, double sy, double sz, double ox, double oy, double oz, ref Matrix4d dest) {
         double nm30 = m00 * ox + m10 * oy + m20 * oz + m30;
         double nm31 = m01 * ox + m11 * oy + m21 * oz + m31;
         double nm32 = m02 * ox + m12 * oy + m22 * oz + m32;
@@ -3857,16 +3833,16 @@ struct Matrix4d {
         return scaleAround(factor, factor, factor, ox, oy, oz, this);
     }
 
-    public Matrix4d scaleAround(double factor, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d scaleAround(double factor, double ox, double oy, double oz, ref Matrix4d dest) {
         return scaleAround(factor, factor, factor, ox, oy, oz, dest);
     }
 
-    public Matrix4d scaleLocal(double x, double y, double z, Matrix4d dest) {
+    public Matrix4d scaleLocal(double x, double y, double z, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.scaling(x, y, z);
         return scaleLocalGeneric(x, y, z, dest);
     }
-    private Matrix4d scaleLocalGeneric(double x, double y, double z, Matrix4d dest) {
+    private Matrix4d scaleLocalGeneric(double x, double y, double z, ref Matrix4d dest) {
         double nm00 = x * m00;
         double nm01 = y * m01;
         double nm02 = z * m02;
@@ -3901,7 +3877,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d scaleLocal(double xyz, Matrix4d dest) {
+    public Matrix4d scaleLocal(double xyz, ref Matrix4d dest) {
         return scaleLocal(xyz, xyz, xyz, dest);
     }
 
@@ -3942,7 +3918,7 @@ struct Matrix4d {
         return scaleLocal(x, y, z, this);
     }
 
-    public Matrix4d scaleAroundLocal(double sx, double sy, double sz, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d scaleAroundLocal(double sx, double sy, double sz, double ox, double oy, double oz, ref Matrix4d dest) {
         bool one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
         dest._m00(sx * (m00 - ox * m03) + ox * m03)
         ._m01(sy * (m01 - oy * m03) + oy * m03)
@@ -4019,11 +3995,11 @@ struct Matrix4d {
         return scaleAroundLocal(factor, factor, factor, ox, oy, oz, this);
     }
 
-    public Matrix4d scaleAroundLocal(double factor, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d scaleAroundLocal(double factor, double ox, double oy, double oz, ref Matrix4d dest) {
         return scaleAroundLocal(factor, factor, factor, ox, oy, oz, dest);
     }
 
-    public Matrix4d rotate(double ang, double x, double y, double z, Matrix4d dest) {
+    public Matrix4d rotate(double ang, double x, double y, double z, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotation(ang, x, y, z);
         else if ((properties & PROPERTY_TRANSLATION) != 0)
@@ -4032,7 +4008,7 @@ struct Matrix4d {
             return rotateAffine(ang, x, y, z, dest);
         return rotateGeneric(ang, x, y, z, dest);
     }
-    private Matrix4d rotateGeneric(double ang, double x, double y, double z, Matrix4d dest) {
+    private Matrix4d rotateGeneric(double ang, double x, double y, double z, ref Matrix4d dest) {
         if (y == 0.0 && z == 0.0 && Math.absEqualsOne(x))
             return rotateX(x * ang, dest);
         else if (x == 0.0 && z == 0.0 && Math.absEqualsOne(y))
@@ -4041,7 +4017,7 @@ struct Matrix4d {
             return rotateZ(z * ang, dest);
         return rotateGenericInternal(ang, x, y, z, dest);
     }
-    private Matrix4d rotateGenericInternal(double ang, double x, double y, double z, Matrix4d dest) {
+    private Matrix4d rotateGenericInternal(double ang, double x, double y, double z, ref Matrix4d dest) {
         double s = Math.sin(ang);
         double c = Math.cosFromSin(s, ang);
         double C = 1.0 - c;
@@ -4153,7 +4129,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d rotateTranslation(double ang, double x, double y, double z, Matrix4d dest) {
+    public Matrix4d rotateTranslation(double ang, double x, double y, double z, ref Matrix4d dest) {
         double tx = m30, ty = m31, tz = m32;
         if (y == 0.0 && z == 0.0 && Math.absEqualsOne(x))
             return dest.rotationX(x * ang).setTranslation(tx, ty, tz);
@@ -4163,7 +4139,7 @@ struct Matrix4d {
             return dest.rotationZ(z * ang).setTranslation(tx, ty, tz);
         return rotateTranslationInternal(ang, x, y, z, dest);
     }
-    private Matrix4d rotateTranslationInternal(double ang, double x, double y, double z, Matrix4d dest) {
+    private Matrix4d rotateTranslationInternal(double ang, double x, double y, double z, ref Matrix4d dest) {
         double s = Math.sin(ang);
         double c = Math.cosFromSin(s, ang);
         double C = 1.0 - c;
@@ -4235,7 +4211,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d rotateAffine(double ang, double x, double y, double z, Matrix4d dest) {
+    public Matrix4d rotateAffine(double ang, double x, double y, double z, ref Matrix4d dest) {
         if (y == 0.0 && z == 0.0 && Math.absEqualsOne(x))
             return rotateX(x * ang, dest);
         else if (x == 0.0 && z == 0.0 && Math.absEqualsOne(y))
@@ -4244,7 +4220,7 @@ struct Matrix4d {
             return rotateZ(z * ang, dest);
         return rotateAffineInternal(ang, x, y, z, dest);
     }
-    private Matrix4d rotateAffineInternal(double ang, double x, double y, double z, Matrix4d dest) {
+    private Matrix4d rotateAffineInternal(double ang, double x, double y, double z, ref Matrix4d dest) {
         double s = Math.sin(ang);
         double c = Math.cosFromSin(s, ang);
         double C = 1.0 - c;
@@ -4357,7 +4333,7 @@ struct Matrix4d {
         return rotateAround(quat, ox, oy, oz, this);
     }
 
-    public Matrix4d rotateAroundAffine(Quaterniond quat, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d rotateAroundAffine(Quaterniond quat, double ox, double oy, double oz, ref Matrix4d dest) {
         double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
         double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
@@ -4402,14 +4378,14 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d rotateAround(Quaterniond quat, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d rotateAround(Quaterniond quat, double ox, double oy, double oz, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return rotationAround(quat, ox, oy, oz);
         else if ((properties & PROPERTY_AFFINE) != 0)
             return rotateAroundAffine(quat, ox, oy, oz, this);
         return rotateAroundGeneric(quat, ox, oy, oz, this);
     }
-    private Matrix4d rotateAroundGeneric(Quaterniond quat, double ox, double oy, double oz, Matrix4d dest) {
+    private Matrix4d rotateAroundGeneric(Quaterniond quat, double ox, double oy, double oz, ref Matrix4d dest) {
         double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
         double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
@@ -4537,12 +4513,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d rotateLocal(double ang, double x, double y, double z, Matrix4d dest) {
+    public Matrix4d rotateLocal(double ang, double x, double y, double z, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotation(ang, x, y, z);
         return rotateLocalGeneric(ang, x, y, z, dest);
     }
-    private Matrix4d rotateLocalGeneric(double ang, double x, double y, double z, Matrix4d dest) {
+    private Matrix4d rotateLocalGeneric(double ang, double x, double y, double z, ref Matrix4d dest) {
         if (y == 0.0 && z == 0.0 && Math.absEqualsOne(x))
             return rotateLocalX(x * ang, dest);
         else if (x == 0.0 && z == 0.0 && Math.absEqualsOne(y))
@@ -4551,7 +4527,7 @@ struct Matrix4d {
             return rotateLocalZ(z * ang, dest);
         return rotateLocalGenericInternal(ang, x, y, z, dest);
     }
-    private Matrix4d rotateLocalGenericInternal(double ang, double x, double y, double z, Matrix4d dest) {
+    private Matrix4d rotateLocalGenericInternal(double ang, double x, double y, double z, ref Matrix4d dest) {
         double s = Math.sin(ang);
         double c = Math.cosFromSin(s, ang);
         double C = 1.0 - c;
@@ -4635,7 +4611,7 @@ struct Matrix4d {
         return rotateLocal(ang, x, y, z, this);
     }
 
-    public Matrix4d rotateAroundLocal(Quaterniond quat, double ox, double oy, double oz, Matrix4d dest) {
+    public Matrix4d rotateAroundLocal(Quaterniond quat, double ox, double oy, double oz, ref Matrix4d dest) {
         double w2 = quat.w * quat.w;
         double x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y;
@@ -4760,7 +4736,7 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d translate(Vector3d offset, Matrix4d dest) {
+    public Matrix4d translate(Vector3d offset, ref Matrix4d dest) {
         return translate(offset.x, offset.y, offset.z, dest);
     }
 
@@ -4790,12 +4766,12 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d translate(double x, double y, double z, Matrix4d dest) {
+    public Matrix4d translate(double x, double y, double z, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.translation(x, y, z);
         return translateGeneric(x, y, z, dest);
     }
-    private Matrix4d translateGeneric(double x, double y, double z, Matrix4d dest) {
+    private Matrix4d translateGeneric(double x, double y, double z, ref Matrix4d dest) {
         dest._m00(m00)
         ._m01(m01)
         ._m02(m02)
@@ -4891,7 +4867,7 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d translateLocal(Vector3d offset, Matrix4d dest) {
+    public Matrix4d translateLocal(Vector3d offset, ref Matrix4d dest) {
         return translateLocal(offset.x, offset.y, offset.z, dest);
     }
 
@@ -4919,12 +4895,12 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d translateLocal(double x, double y, double z, Matrix4d dest) {
+    public Matrix4d translateLocal(double x, double y, double z, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.translation(x, y, z);
         return translateLocalGeneric(x, y, z, dest);
     }
-    private Matrix4d translateLocalGeneric(double x, double y, double z, Matrix4d dest) {
+    private Matrix4d translateLocalGeneric(double x, double y, double z, ref Matrix4d dest) {
         double nm00 = m00 + x * m03;
         double nm01 = m01 + y * m03;
         double nm02 = m02 + z * m03;
@@ -5009,7 +4985,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d rotateLocalX(double ang, Matrix4d dest) {
+    public Matrix4d rotateLocalX(double ang, ref Matrix4d dest) {
         double sin = Math.sin(ang);
         double cos = Math.cosFromSin(sin, ang);
         double nm02 = sin * m01 + cos * m02;
@@ -5090,7 +5066,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d rotateLocalY(double ang, Matrix4d dest) {
+    public Matrix4d rotateLocalY(double ang, ref Matrix4d dest) {
         double sin = Math.sin(ang);
         double cos = Math.cosFromSin(sin, ang);
         double nm02 = -sin * m00 + cos * m02;
@@ -5171,7 +5147,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d rotateLocalZ(double ang, Matrix4d dest) {
+    public Matrix4d rotateLocalZ(double ang, ref Matrix4d dest) {
         double sin = Math.sin(ang);
         double cos = Math.cosFromSin(sin, ang);
         double nm01 = sin * m00 + cos * m01;
@@ -5226,7 +5202,7 @@ struct Matrix4d {
         return rotateLocalZ(ang, this);
     }
 
-    public Matrix4d rotateX(double ang, Matrix4d dest) {
+    public Matrix4d rotateX(double ang, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationX(ang);
         else if ((properties & PROPERTY_TRANSLATION) != 0) {
@@ -5235,7 +5211,7 @@ struct Matrix4d {
         }
         return rotateXInternal(ang, dest);
     }
-    private Matrix4d rotateXInternal(double ang, Matrix4d dest) {
+    private Matrix4d rotateXInternal(double ang, ref Matrix4d dest) {
         double sin, cos;
         sin = Math.sin(ang);
         cos = Math.cosFromSin(sin, ang);
@@ -5293,7 +5269,7 @@ struct Matrix4d {
         return rotateX(ang, this);
     }
 
-    public Matrix4d rotateY(double ang, Matrix4d dest) {
+    public Matrix4d rotateY(double ang, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationY(ang);
         else if ((properties & PROPERTY_TRANSLATION) != 0) {
@@ -5302,7 +5278,7 @@ struct Matrix4d {
         }
         return rotateYInternal(ang, dest);
     }
-    private Matrix4d rotateYInternal(double ang, Matrix4d dest) {
+    private Matrix4d rotateYInternal(double ang, ref Matrix4d dest) {
         double sin, cos;
         sin = Math.sin(ang);
         cos = Math.cosFromSin(sin, ang);
@@ -5360,7 +5336,7 @@ struct Matrix4d {
         return rotateY(ang, this);
     }
 
-    public Matrix4d rotateZ(double ang, Matrix4d dest) {
+    public Matrix4d rotateZ(double ang, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationZ(ang);
         else if ((properties & PROPERTY_TRANSLATION) != 0) {
@@ -5369,7 +5345,7 @@ struct Matrix4d {
         }
         return rotateZInternal(ang, dest);
     }
-    private Matrix4d rotateZInternal(double ang, Matrix4d dest) {
+    private Matrix4d rotateZInternal(double ang, ref Matrix4d dest) {
         double sin = Math.sin(ang);
         double cos = Math.cosFromSin(sin, ang);
         return rotateTowardsXY(sin, cos, dest);
@@ -5417,7 +5393,7 @@ struct Matrix4d {
         return rotateTowardsXY(dirX, dirY, this);
     }
 
-    public Matrix4d rotateTowardsXY(double dirX, double dirY, Matrix4d dest) {
+    public Matrix4d rotateTowardsXY(double dirX, double dirY, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationTowardsXY(dirX, dirY);
         double rm00 = dirY;
@@ -5498,7 +5474,7 @@ struct Matrix4d {
         return rotateXYZ(angleX, angleY, angleZ, this);
     }
 
-    public Matrix4d rotateXYZ(double angleX, double angleY, double angleZ, Matrix4d dest) {
+    public Matrix4d rotateXYZ(double angleX, double angleY, double angleZ, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationXYZ(angleX, angleY, angleZ);
         else if ((properties & PROPERTY_TRANSLATION) != 0) {
@@ -5508,7 +5484,7 @@ struct Matrix4d {
             return dest.rotateAffineXYZ(angleX, angleY, angleZ);
         return rotateXYZInternal(angleX, angleY, angleZ, dest);
     }
-    private Matrix4d rotateXYZInternal(double angleX, double angleY, double angleZ, Matrix4d dest) {
+    private Matrix4d rotateXYZInternal(double angleX, double angleY, double angleZ, ref Matrix4d dest) {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -5585,7 +5561,7 @@ struct Matrix4d {
         return rotateAffineXYZ(angleX, angleY, angleZ, this);
     }
 
-    public Matrix4d rotateAffineXYZ(double angleX, double angleY, double angleZ, Matrix4d dest) {
+    public Matrix4d rotateAffineXYZ(double angleX, double angleY, double angleZ, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationXYZ(angleX, angleY, angleZ);
         else if ((properties & PROPERTY_TRANSLATION) != 0) {
@@ -5594,7 +5570,7 @@ struct Matrix4d {
         }
         return rotateAffineXYZInternal(angleX, angleY, angleZ, dest);
     }
-    private Matrix4d rotateAffineXYZInternal(double angleX, double angleY, double angleZ, Matrix4d dest) {
+    private Matrix4d rotateAffineXYZInternal(double angleX, double angleY, double angleZ, ref Matrix4d dest) {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -5688,7 +5664,7 @@ struct Matrix4d {
         return rotateZYX(angleZ, angleY, angleX, this);
     }
 
-    public Matrix4d rotateZYX(double angleZ, double angleY, double angleX, Matrix4d dest) {
+    public Matrix4d rotateZYX(double angleZ, double angleY, double angleX, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationZYX(angleZ, angleY, angleX);
         else if ((properties & PROPERTY_TRANSLATION) != 0) {
@@ -5698,7 +5674,7 @@ struct Matrix4d {
             return dest.rotateAffineZYX(angleZ, angleY, angleX);
         return rotateZYXInternal(angleZ, angleY, angleX, dest);
     }
-    private Matrix4d rotateZYXInternal(double angleZ, double angleY, double angleX, Matrix4d dest) {
+    private Matrix4d rotateZYXInternal(double angleZ, double angleY, double angleX, ref Matrix4d dest) {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -5773,7 +5749,7 @@ struct Matrix4d {
         return rotateAffineZYX(angleZ, angleY, angleX, this);
     }
 
-    public Matrix4d rotateAffineZYX(double angleZ, double angleY, double angleX, Matrix4d dest) {
+    public Matrix4d rotateAffineZYX(double angleZ, double angleY, double angleX, ref Matrix4d dest) {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -5867,7 +5843,7 @@ struct Matrix4d {
         return rotateYXZ(angleY, angleX, angleZ, this);
     }
 
-    public Matrix4d rotateYXZ(double angleY, double angleX, double angleZ, Matrix4d dest) {
+    public Matrix4d rotateYXZ(double angleY, double angleX, double angleZ, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotationYXZ(angleY, angleX, angleZ);
         else if ((properties & PROPERTY_TRANSLATION) != 0) {
@@ -5877,7 +5853,7 @@ struct Matrix4d {
             return dest.rotateAffineYXZ(angleY, angleX, angleZ);
         return rotateYXZInternal(angleY, angleX, angleZ, dest);
     }
-    private Matrix4d rotateYXZInternal(double angleY, double angleX, double angleZ, Matrix4d dest) {
+    private Matrix4d rotateYXZInternal(double angleY, double angleX, double angleZ, ref Matrix4d dest) {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -5952,7 +5928,7 @@ struct Matrix4d {
         return rotateAffineYXZ(angleY, angleX, angleZ, this);
     }
 
-    public Matrix4d rotateAffineYXZ(double angleY, double angleX, double angleZ, Matrix4d dest) {
+    public Matrix4d rotateAffineYXZ(double angleY, double angleX, double angleZ, ref Matrix4d dest) {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -6671,7 +6647,7 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotate(Quaterniond quat, Matrix4d dest) {
+    public Matrix4d rotate(Quaterniond quat, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.rotation(quat);
         else if ((properties & PROPERTY_TRANSLATION) != 0)
@@ -6680,7 +6656,7 @@ struct Matrix4d {
             return rotateAffine(quat, dest);
         return rotateGeneric(quat, dest);
     }
-    private Matrix4d rotateGeneric(Quaterniond quat, Matrix4d dest) {
+    private Matrix4d rotateGeneric(Quaterniond quat, ref Matrix4d dest) {
         double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
         double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
@@ -6780,7 +6756,7 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotateAffine(Quaterniond quat, Matrix4d dest) {
+    public Matrix4d rotateAffine(Quaterniond quat, ref Matrix4d dest) {
         double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
         double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
@@ -6878,7 +6854,7 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotateTranslation(Quaterniond quat, Matrix4d dest) {
+    public Matrix4d rotateTranslation(Quaterniond quat, ref Matrix4d dest) {
         double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
         double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
@@ -6940,7 +6916,7 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotateLocal(Quaterniond quat, Matrix4d dest) {
+    public Matrix4d rotateLocal(Quaterniond quat, ref Matrix4d dest) {
         double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
         double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
@@ -7072,7 +7048,7 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotate(AxisAngle4d axisAngle, Matrix4d dest) {
+    public Matrix4d rotate(AxisAngle4d axisAngle, ref Matrix4d dest) {
         return rotate(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z, dest);
     }
 
@@ -7134,11 +7110,11 @@ struct Matrix4d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4d rotate(double angle, Vector3d axis, Matrix4d dest) {
+    public Matrix4d rotate(double angle, Vector3d axis, ref Matrix4d dest) {
         return rotate(angle, axis.x, axis.y, axis.z, dest);
     }
 
-    public Vector4d getRow(int row, Vector4d dest) {
+    public Vector4d getRow(int row, ref Vector4d dest) {
         switch (row) {
         case 0:
             dest.x = m00;
@@ -7169,7 +7145,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector3d getRow(int row, Vector3d dest){
+    public Vector3d getRow(int row, ref Vector3d dest){
         switch (row) {
         case 0:
             dest.x = m00;
@@ -7221,7 +7197,7 @@ struct Matrix4d {
         }
     }
 
-    public Vector4d getColumn(int column, Vector4d dest) {
+    public Vector4d getColumn(int column, ref Vector4d dest) {
         switch (column) {
         case 0:
             dest.x = m00;
@@ -7252,7 +7228,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector3d getColumn(int column, Vector3d dest) {
+    public Vector3d getColumn(int column, ref Vector3d dest) {
         switch (column) {
         case 0:
             dest.x = m00;
@@ -7380,19 +7356,19 @@ struct Matrix4d {
      *             will hold the result
      * @return dest
      */
-    public Matrix4d normal(Matrix4d dest) {
+    public Matrix4d normal(ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.identity();
         else if ((properties & PROPERTY_ORTHONORMAL) != 0)
             return normalOrthonormal(dest);
         return normalGeneric(dest);
     }
-    private Matrix4d normalOrthonormal(Matrix4d dest) {
+    private Matrix4d normalOrthonormal(ref Matrix4d dest) {
         if (dest != this)
             dest.set(this);
         return dest._properties(PROPERTY_AFFINE | PROPERTY_ORTHONORMAL);
     }
-    private Matrix4d normalGeneric(Matrix4d dest) {
+    private Matrix4d normalGeneric(ref Matrix4d dest) {
         double m00m11 = m00 * m11;
         double m01m10 = m01 * m10;
         double m02m10 = m02 * m10;
@@ -7449,16 +7425,16 @@ struct Matrix4d {
      *             will hold the result
      * @return dest
      */
-    public Matrix3d normal(Matrix3d dest) {
+    public Matrix3d normal(ref Matrix3d dest) {
         if ((properties & PROPERTY_ORTHONORMAL) != 0)
             return normalOrthonormal(dest);
         return normalGeneric(dest);
     }
-    private Matrix3d normalOrthonormal(Matrix3d dest) {
+    private Matrix3d normalOrthonormal(ref Matrix3d dest) {
         dest.set(this);
         return dest;
     }
-    private Matrix3d normalGeneric(Matrix3d dest) {
+    private Matrix3d normalGeneric(ref Matrix3d dest) {
         double m00m11 = m00 * m11;
         double m01m10 = m01 * m10;
         double m02m10 = m02 * m10;
@@ -7502,7 +7478,7 @@ struct Matrix4d {
      *             will hold the result
      * @return dest
      */
-    public Matrix3d cofactor3x3(Matrix3d dest) {
+    public Matrix3d cofactor3x3(ref Matrix3d dest) {
         return dest._m00(m11 * m22 - m21 * m12)
         ._m01(m20 * m12 - m10 * m22)
         ._m02(m10 * m21 - m20 * m11)
@@ -7526,7 +7502,7 @@ struct Matrix4d {
      *             will hold the result
      * @return dest
      */
-    public Matrix4d cofactor3x3(Matrix4d dest) {
+    public Matrix4d cofactor3x3(ref Matrix4d dest) {
         double nm10 = m21 * m02 - m01 * m22;
         double nm11 = m00 * m22 - m20 * m02;
         double nm12 = m20 * m01 - m00 * m21;
@@ -7566,7 +7542,7 @@ struct Matrix4d {
         return normalize3x3(this);
     }
 
-    public Matrix4d normalize3x3(Matrix4d dest) {
+    public Matrix4d normalize3x3(ref Matrix4d dest) {
         double invXlen = Math.invsqrt(m00 * m00 + m01 * m01 + m02 * m02);
         double invYlen = Math.invsqrt(m10 * m10 + m11 * m11 + m12 * m12);
         double invZlen = Math.invsqrt(m20 * m20 + m21 * m21 + m22 * m22);
@@ -7578,7 +7554,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix3d normalize3x3(Matrix3d dest) {
+    public Matrix3d normalize3x3(ref Matrix3d dest) {
         double invXlen = Math.invsqrt(m00 * m00 + m01 * m01 + m02 * m02);
         double invYlen = Math.invsqrt(m10 * m10 + m11 * m11 + m12 * m12);
         double invZlen = Math.invsqrt(m20 * m20 + m21 * m21 + m22 * m22);
@@ -7596,7 +7572,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector4d unproject(double winX, double winY, double winZ, int[] viewport, Vector4d dest) {
+    public Vector4d unproject(double winX, double winY, double winZ, int[] viewport, ref Vector4d dest) {
         double a = m00 * m11 - m01 * m10;
         double b = m00 * m12 - m02 * m10;
         double c = m00 * m13 - m03 * m10;
@@ -7638,7 +7614,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector3d unproject(double winX, double winY, double winZ, int[] viewport, Vector3d dest) {
+    public Vector3d unproject(double winX, double winY, double winZ, int[] viewport, ref Vector3d dest) {
         double a = m00 * m11 - m01 * m10;
         double b = m00 * m12 - m02 * m10;
         double c = m00 * m13 - m03 * m10;
@@ -7679,15 +7655,15 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector4d unproject(Vector3d winCoords, int[] viewport, Vector4d dest) {
+    public Vector4d unproject(Vector3d winCoords, int[] viewport, ref Vector4d dest) {
         return unproject(winCoords.x, winCoords.y, winCoords.z, viewport, dest);
     }
 
-    public Vector3d unproject(Vector3d winCoords, int[] viewport, Vector3d dest) {
+    public Vector3d unproject(Vector3d winCoords, int[] viewport, ref Vector3d dest) {
         return unproject(winCoords.x, winCoords.y, winCoords.z, viewport, dest);
     }
 
-    public Matrix4d unprojectRay(double winX, double winY, int[] viewport, Vector3d originDest, Vector3d dirDest) {
+    public Matrix4d unprojectRay(double winX, double winY, int[] viewport, ref Vector3d originDest, ref Vector3d dirDest) {
         double a = m00 * m11 - m01 * m10;
         double b = m00 * m12 - m02 * m10;
         double c = m00 * m13 - m03 * m10;
@@ -7736,15 +7712,15 @@ struct Matrix4d {
         return this;
     }
 
-    public Matrix4d unprojectRay(Vector2d winCoords, int[] viewport, Vector3d originDest, Vector3d dirDest) {
+    public Matrix4d unprojectRay(Vector2d winCoords, int[] viewport, ref Vector3d originDest, ref Vector3d dirDest) {
         return unprojectRay(winCoords.x, winCoords.y, viewport, originDest, dirDest);
     }
 
-    public Vector4d unprojectInv(Vector3d winCoords, int[] viewport, Vector4d dest) {
+    public Vector4d unprojectInv(Vector3d winCoords, int[] viewport, ref Vector4d dest) {
         return unprojectInv(winCoords.x, winCoords.y, winCoords.z, viewport, dest);
     }
 
-    public Vector4d unprojectInv(double winX, double winY, double winZ, int[] viewport, Vector4d dest) {
+    public Vector4d unprojectInv(double winX, double winY, double winZ, int[] viewport, ref Vector4d dest) {
         double ndcX = (winX-viewport[0])/viewport[2]*2.0-1.0;
         double ndcY = (winY-viewport[1])/viewport[3]*2.0-1.0;
         double ndcZ = winZ+winZ-1.0;
@@ -7756,11 +7732,11 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector3d unprojectInv(Vector3d winCoords, int[] viewport, Vector3d dest) {
+    public Vector3d unprojectInv(Vector3d winCoords, int[] viewport, ref Vector3d dest) {
         return unprojectInv(winCoords.x, winCoords.y, winCoords.z, viewport, dest);
     }
 
-    public Vector3d unprojectInv(double winX, double winY, double winZ, int[] viewport, Vector3d dest) {
+    public Vector3d unprojectInv(double winX, double winY, double winZ, int[] viewport, ref Vector3d dest) {
         double ndcX = (winX-viewport[0])/viewport[2]*2.0-1.0;
         double ndcY = (winY-viewport[1])/viewport[3]*2.0-1.0;
         double ndcZ = winZ+winZ-1.0;
@@ -7771,11 +7747,11 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d unprojectInvRay(Vector2d winCoords, int[] viewport, Vector3d originDest, Vector3d dirDest) {
+    public Matrix4d unprojectInvRay(Vector2d winCoords, int[] viewport, ref Vector3d originDest, ref Vector3d dirDest) {
         return unprojectInvRay(winCoords.x, winCoords.y, viewport, originDest, dirDest);
     }
 
-    public Matrix4d unprojectInvRay(double winX, double winY, int[] viewport, Vector3d originDest, Vector3d dirDest) {
+    public Matrix4d unprojectInvRay(double winX, double winY, int[] viewport, ref Vector3d originDest, ref Vector3d dirDest) {
         double ndcX = (winX-viewport[0])/viewport[2]*2.0-1.0;
         double ndcY = (winY-viewport[1])/viewport[3]*2.0-1.0;
         double px = m00 * ndcX + m10 * ndcY + m30;
@@ -7794,7 +7770,7 @@ struct Matrix4d {
         return this;
     }
 
-    public Vector4d project(double x, double y, double z, int[] viewport, Vector4d winCoordsDest) {
+    public Vector4d project(double x, double y, double z, int[] viewport, ref Vector4d winCoordsDest) {
         double invW = 1.0 / Math.fma(m03, x, Math.fma(m13, y, Math.fma(m23, z, m33)));
         double nx = Math.fma(m00, x, Math.fma(m10, y, Math.fma(m20, z, m30))) * invW;
         double ny = Math.fma(m01, x, Math.fma(m11, y, Math.fma(m21, z, m31))) * invW;
@@ -7805,7 +7781,7 @@ struct Matrix4d {
                                  1.0);
     }
 
-    public Vector3d project(double x, double y, double z, int[] viewport, Vector3d winCoordsDest) {
+    public Vector3d project(double x, double y, double z, int[] viewport, ref Vector3d winCoordsDest) {
         double invW = 1.0 / Math.fma(m03, x, Math.fma(m13, y, Math.fma(m23, z, m33)));
         double nx = Math.fma(m00, x, Math.fma(m10, y, Math.fma(m20, z, m30))) * invW;
         double ny = Math.fma(m01, x, Math.fma(m11, y, Math.fma(m21, z, m31))) * invW;
@@ -7816,15 +7792,15 @@ struct Matrix4d {
         return winCoordsDest;
     }
 
-    public Vector4d project(Vector3d position, int[] viewport, Vector4d dest) {
+    public Vector4d project(Vector3d position, int[] viewport, ref Vector4d dest) {
         return project(position.x, position.y, position.z, viewport, dest);
     }
 
-    public Vector3d project(Vector3d position, int[] viewport, Vector3d dest) {
+    public Vector3d project(Vector3d position, int[] viewport, ref Vector3d dest) {
         return project(position.x, position.y, position.z, viewport, dest);
     }
 
-    public Matrix4d reflect(double a, double b, double c, double d, Matrix4d dest) {
+    public Matrix4d reflect(double a, double b, double c, double d, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.reflection(a, b, c, d);
         if ((properties & PROPERTY_IDENTITY) != 0)
@@ -7833,7 +7809,7 @@ struct Matrix4d {
             return reflectAffine(a, b, c, d, dest);
         return reflectGeneric(a, b, c, d, dest);
     }
-    private Matrix4d reflectAffine(double a, double b, double c, double d, Matrix4d dest) {
+    private Matrix4d reflectAffine(double a, double b, double c, double d, ref Matrix4d dest) {
         double da = a + a, db = b + b, dc = c + c, dd = d + d;
         double rm00 = 1.0 - da * a;
         double rm01 = -da * b;
@@ -7873,7 +7849,7 @@ struct Matrix4d {
         ._properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION));
         return dest;
     }
-    private Matrix4d reflectGeneric(double a, double b, double c, double d, Matrix4d dest) {
+    private Matrix4d reflectGeneric(double a, double b, double c, double d, ref Matrix4d dest) {
         double da = a + a, db = b + b, dc = c + c, dd = d + d;
         double rm00 = 1.0 - da * a;
         double rm01 = -da * b;
@@ -7970,7 +7946,7 @@ struct Matrix4d {
         return reflect(nx, ny, nz, px, py, pz, this);
     }
 
-    public Matrix4d reflect(double nx, double ny, double nz, double px, double py, double pz, Matrix4d dest) {
+    public Matrix4d reflect(double nx, double ny, double nz, double px, double py, double pz, ref Matrix4d dest) {
         double invLength = Math.invsqrt(nx * nx + ny * ny + nz * nz);
         double nnx = nx * invLength;
         double nny = ny * invLength;
@@ -8021,7 +7997,7 @@ struct Matrix4d {
         return reflect(orientation, point, this);
     }
 
-    public Matrix4d reflect(Quaterniond orientation, Vector3d point, Matrix4d dest) {
+    public Matrix4d reflect(Quaterniond orientation, Vector3d point, ref Matrix4d dest) {
         double num1 = orientation.x + orientation.x;
         double num2 = orientation.y + orientation.y;
         double num3 = orientation.z + orientation.z;
@@ -8031,7 +8007,7 @@ struct Matrix4d {
         return reflect(normalX, normalY, normalZ, point.x, point.y, point.z, dest);
     }
 
-    public Matrix4d reflect(Vector3d normal, Vector3d point, Matrix4d dest) {
+    public Matrix4d reflect(Vector3d normal, Vector3d point, ref Matrix4d dest) {
         return reflect(normal.x, normal.y, normal.z, point.x, point.y, point.z, dest);
     }
 
@@ -8175,12 +8151,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrtho(left, right, bottom, top, zNear, zFar, zZeroToOne);
         return orthoGeneric(left, right, bottom, top, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d orthoGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d orthoGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / (right - left);
         double rm11 = 2.0 / (top - bottom);
@@ -8242,7 +8218,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, ref Matrix4d dest) {
         return ortho(left, right, bottom, top, zNear, zFar, false, dest);
     }
 
@@ -8352,12 +8328,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrthoLH(left, right, bottom, top, zNear, zFar, zZeroToOne);
         return orthoLHGeneric(left, right, bottom, top, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d orthoLHGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d orthoLHGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / (right - left);
         double rm11 = 2.0 / (top - bottom);
@@ -8419,7 +8395,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, ref Matrix4d dest) {
         return orthoLH(left, right, bottom, top, zNear, zFar, false, dest);
     }
 
@@ -8668,12 +8644,12 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrthoSymmetric(width, height, zNear, zFar, zZeroToOne);
         return orthoSymmetricGeneric(width, height, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d orthoSymmetricGeneric(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d orthoSymmetricGeneric(double width, double height, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / width;
         double rm11 = 2.0 / height;
@@ -8732,7 +8708,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, ref Matrix4d dest) {
         return orthoSymmetric(width, height, zNear, zFar, false, dest);
     }
 
@@ -8839,12 +8815,12 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrthoSymmetricLH(width, height, zNear, zFar, zZeroToOne);
         return orthoSymmetricLHGeneric(width, height, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d orthoSymmetricLHGeneric(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d orthoSymmetricLHGeneric(double width, double height, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / width;
         double rm11 = 2.0 / height;
@@ -8903,7 +8879,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, ref Matrix4d dest) {
         return orthoSymmetricLH(width, height, zNear, zFar, false, dest);
     }
 
@@ -9139,12 +9115,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d ortho2D(double left, double right, double bottom, double top, Matrix4d dest) {
+    public Matrix4d ortho2D(double left, double right, double bottom, double top, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrtho2D(left, right, bottom, top);
         return ortho2DGeneric(left, right, bottom, top, dest);
     }
-    private Matrix4d ortho2DGeneric(double left, double right, double bottom, double top, Matrix4d dest) {
+    private Matrix4d ortho2DGeneric(double left, double right, double bottom, double top, ref Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / (right - left);
         double rm11 = 2.0 / (top - bottom);
@@ -9236,12 +9212,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d ortho2DLH(double left, double right, double bottom, double top, Matrix4d dest) {
+    public Matrix4d ortho2DLH(double left, double right, double bottom, double top, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setOrtho2DLH(left, right, bottom, top);
         return ortho2DLHGeneric(left, right, bottom, top, dest);
     }
-    private Matrix4d ortho2DLHGeneric(double left, double right, double bottom, double top, Matrix4d dest) {
+    private Matrix4d ortho2DLHGeneric(double left, double right, double bottom, double top, ref Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = 2.0 / (right - left);
         double rm11 = 2.0 / (top - bottom);
@@ -9430,7 +9406,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d lookAlong(Vector3d dir, Vector3d up, Matrix4d dest) {
+    public Matrix4d lookAlong(Vector3d dir, Vector3d up, ref Matrix4d dest) {
         return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, dest);
     }
 
@@ -9469,13 +9445,13 @@ struct Matrix4d {
      *              will hold the result
      * @return dest
      */
-    public Matrix4d lookAlong(double dirX, double dirY, double dirZ, double upX, double upY, double upZ, Matrix4d dest) {
+    public Matrix4d lookAlong(double dirX, double dirY, double dirZ, double upX, double upY, double upZ, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setLookAlong(dirX, dirY, dirZ, upX, upY, upZ);
         return lookAlongGeneric(dirX, dirY, dirZ, upX, upY, upZ, dest);
     }
 
-    private Matrix4d lookAlongGeneric(double dirX, double dirY, double dirZ, double upX, double upY, double upZ, Matrix4d dest) {
+    private Matrix4d lookAlongGeneric(double dirX, double dirY, double dirZ, double upX, double upY, double upZ, ref Matrix4d dest) {
         // Normalize direction
         double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
         dirX *= -invDirLength;
@@ -9794,7 +9770,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d lookAt(Vector3d eye, Vector3d center, Vector3d up, Matrix4d dest) {
+    public Matrix4d lookAt(Vector3d eye, Vector3d center, Vector3d up, ref Matrix4d dest) {
         return lookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, dest);
     }
 
@@ -9864,7 +9840,7 @@ struct Matrix4d {
      */
     public Matrix4d lookAt(double eyeX, double eyeY, double eyeZ,
                            double centerX, double centerY, double centerZ,
-                           double upX, double upY, double upZ, Matrix4d dest) {
+                           double upX, double upY, double upZ, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
         else if ((properties & PROPERTY_PERSPECTIVE) != 0)
@@ -9873,7 +9849,7 @@ struct Matrix4d {
     }
     private Matrix4d lookAtGeneric(double eyeX, double eyeY, double eyeZ,
                                    double centerX, double centerY, double centerZ,
-                                   double upX, double upY, double upZ, Matrix4d dest) {
+                                   double upX, double upY, double upZ, ref Matrix4d dest) {
         // Compute direction from position to lookAt
         double dirX, dirY, dirZ;
         dirX = eyeX - centerX;
@@ -10026,7 +10002,7 @@ struct Matrix4d {
      */
     public Matrix4d lookAtPerspective(double eyeX, double eyeY, double eyeZ,
             double centerX, double centerY, double centerZ,
-            double upX, double upY, double upZ, Matrix4d dest) {
+            double upX, double upY, double upZ, ref Matrix4d dest) {
         // Compute direction from position to lookAt
         double dirX, dirY, dirZ;
         dirX = eyeX - centerX;
@@ -10209,7 +10185,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d lookAtLH(Vector3d eye, Vector3d center, Vector3d up, Matrix4d dest) {
+    public Matrix4d lookAtLH(Vector3d eye, Vector3d center, Vector3d up, ref Matrix4d dest) {
         return lookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, dest);
     }
 
@@ -10278,7 +10254,7 @@ struct Matrix4d {
      */
     public Matrix4d lookAtLH(double eyeX, double eyeY, double eyeZ,
                              double centerX, double centerY, double centerZ,
-                             double upX, double upY, double upZ, Matrix4d dest) {
+                             double upX, double upY, double upZ, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setLookAtLH(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
         else if ((properties & PROPERTY_PERSPECTIVE) != 0)
@@ -10287,7 +10263,7 @@ struct Matrix4d {
     }
     private Matrix4d lookAtLHGeneric(double eyeX, double eyeY, double eyeZ,
                                      double centerX, double centerY, double centerZ,
-                                     double upX, double upY, double upZ, Matrix4d dest) {
+                                     double upX, double upY, double upZ, ref Matrix4d dest) {
         // Compute direction from position to lookAt
         double dirX, dirY, dirZ;
         dirX = centerX - eyeX;
@@ -10440,7 +10416,7 @@ struct Matrix4d {
      */
     public Matrix4d lookAtPerspectiveLH(double eyeX, double eyeY, double eyeZ,
             double centerX, double centerY, double centerZ,
-            double upX, double upY, double upZ, Matrix4d dest) {
+            double upX, double upY, double upZ, ref Matrix4d dest) {
         // Compute direction from position to lookAt
         double dirX, dirY, dirZ;
         dirX = centerX - eyeX;
@@ -10538,7 +10514,7 @@ struct Matrix4d {
     public Matrix4d tile(int x, int y, int w, int h) {
         return tile(x, y, w, h, this);
     }
-    public Matrix4d tile(int x, int y, int w, int h, Matrix4d dest) {
+    public Matrix4d tile(int x, int y, int w, int h, ref Matrix4d dest) {
         float tx = w - 1 - (x<<1), ty = h - 1 - (y<<1);
         return dest
         ._m30(Math.fma(m00, tx, Math.fma(m10, ty, m30)))
@@ -10593,12 +10569,12 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setPerspective(fovy, aspect, zNear, zFar, zZeroToOne);
         return perspectiveGeneric(fovy, aspect, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d perspectiveGeneric(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d perspectiveGeneric(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         double h = Math.tan(fovy * 0.5);
         // calculate right matrix elements
         double rm00 = 1.0 / (h * aspect);
@@ -10675,7 +10651,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, ref Matrix4d dest) {
         return perspective(fovy, aspect, zNear, zFar, false, dest);
     }
 
@@ -10779,12 +10755,12 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setPerspectiveRect(width, height, zNear, zFar, zZeroToOne);
         return perspectiveRectGeneric(width, height, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d perspectiveRectGeneric(double width, double height, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d perspectiveRectGeneric(double width, double height, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         double rm00 = (zNear + zNear) / width;
         double rm11 = (zNear + zNear) / height;
         double rm22, rm32;
@@ -10858,7 +10834,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, ref Matrix4d dest) {
         return perspectiveRect(width, height, zNear, zFar, false, dest);
     }
 
@@ -10971,12 +10947,12 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return dest
      */
-    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setPerspectiveOffCenter(fovy, offAngleX, offAngleY, aspect, zNear, zFar, zZeroToOne);
         return perspectiveOffCenterGeneric(fovy, offAngleX, offAngleY, aspect, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d perspectiveOffCenterGeneric(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d perspectiveOffCenterGeneric(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         double h = Math.tan(fovy * 0.5);
         // calculate right matrix elements
         double xScale = 1.0 / (h * aspect);
@@ -11068,7 +11044,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, ref Matrix4d dest) {
         return perspectiveOffCenter(fovy, offAngleX, offAngleY, aspect, zNear, zFar, false, dest);
     }
 
@@ -11202,7 +11178,7 @@ struct Matrix4d {
     public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
         return perspectiveOffCenterFov(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, zZeroToOne, this);
     }
-    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         return frustum(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne, dest);
     }
 
@@ -11248,7 +11224,7 @@ struct Matrix4d {
     public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) {
         return perspectiveOffCenterFov(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, this);
     }
-    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, ref Matrix4d dest) {
         return frustum(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, dest);
     }
 
@@ -11297,7 +11273,7 @@ struct Matrix4d {
     public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
         return perspectiveOffCenterFovLH(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, zZeroToOne, this);
     }
-    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         return frustumLH(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne, dest);
     }
 
@@ -11343,7 +11319,7 @@ struct Matrix4d {
     public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) {
         return perspectiveOffCenterFovLH(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, this);
     }
-    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, ref Matrix4d dest) {
         return frustumLH(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, dest);
     }
 
@@ -11805,12 +11781,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setPerspectiveLH(fovy, aspect, zNear, zFar, zZeroToOne);
         return perspectiveLHGeneric(fovy, aspect, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d perspectiveLHGeneric(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d perspectiveLHGeneric(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         double h = Math.tan(fovy * 0.5);
         // calculate right matrix elements
         double rm00 = 1.0 / (h * aspect);
@@ -11922,7 +11898,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, ref Matrix4d dest) {
         return perspectiveLH(fovy, aspect, zNear, zFar, false, dest);
     }
 
@@ -12085,12 +12061,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setFrustum(left, right, bottom, top, zNear, zFar, zZeroToOne);
         return frustumGeneric(left, right, bottom, top, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d frustumGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d frustumGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = (zNear + zNear) / (right - left);
         double rm11 = (zNear + zNear) / (top - bottom);
@@ -12174,7 +12150,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, ref Matrix4d dest) {
         return frustum(left, right, bottom, top, zNear, zFar, false, dest);
     }
 
@@ -12389,12 +12365,12 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.setFrustumLH(left, right, bottom, top, zNear, zFar, zZeroToOne);
         return frustumLHGeneric(left, right, bottom, top, zNear, zFar, zZeroToOne, dest);
     }
-    private Matrix4d frustumLHGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, Matrix4d dest) {
+    private Matrix4d frustumLHGeneric(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         // calculate right matrix elements
         double rm00 = (zNear + zNear) / (right - left);
         double rm11 = (zNear + zNear) / (top - bottom);
@@ -12519,7 +12495,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, Matrix4d dest) {
+    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, ref Matrix4d dest) {
         return frustumLH(left, right, bottom, top, zNear, zFar, false, dest);
     }
 
@@ -12706,7 +12682,7 @@ struct Matrix4d {
         return this;
     }
 
-    public Vector4d frustumPlane(int plane, Vector4d dest) {
+    public Vector4d frustumPlane(int plane, ref Vector4d dest) {
         switch (plane) {
         case PLANE_NX:
             dest.set(m03 + m00, m13 + m10, m23 + m20, m33 + m30).normalize3();
@@ -12732,7 +12708,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector3d frustumCorner(int corner, Vector3d dest) {
+    public Vector3d frustumCorner(int corner, ref Vector3d dest) {
         double d1, d2, d3;
         double n1x, n1y, n1z, n2x, n2y, n2z, n3x, n3y, n3z;
         switch (corner) {
@@ -12798,7 +12774,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector3d perspectiveOrigin(Vector3d dest) {
+    public Vector3d perspectiveOrigin(ref Vector3d dest) {
         /*
          * Simply compute the intersection point of the left, right and top frustum plane.
          */
@@ -12826,7 +12802,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector3d perspectiveInvOrigin(Vector3d dest) {
+    public Vector3d perspectiveInvOrigin(ref Vector3d dest) {
         double invW = 1.0 / m23;
         dest.x = m20 * invW;
         dest.y = m21 * invW;
@@ -12854,7 +12830,7 @@ struct Matrix4d {
         return m32 / (m22 - m23);
     }
 
-    public Vector3d frustumRayDir(double x, double y, Vector3d dest) {
+    public Vector3d frustumRayDir(double x, double y, ref Vector3d dest) {
         /*
          * This method works by first obtaining the frustum plane normals,
          * then building the cross product to obtain the corner rays,
@@ -12918,7 +12894,7 @@ struct Matrix4d {
         return dir.set(m01, m11, m21);
     }
 
-    public Vector3d originAffine(Vector3d dest) {
+    public Vector3d originAffine(ref Vector3d dest) {
         double a = m00 * m11 - m01 * m10;
         double b = m00 * m12 - m02 * m10;
         double d = m01 * m12 - m02 * m11;
@@ -12931,12 +12907,12 @@ struct Matrix4d {
         return dest;
     }
 
-    public Vector3d origin(Vector3d dest) {
+    public Vector3d origin(ref Vector3d dest) {
         if ((properties & PROPERTY_AFFINE) != 0)
             return originAffine(dest);
         return originGeneric(dest);
     }
-    private Vector3d originGeneric(Vector3d dest) {
+    private Vector3d originGeneric(ref Vector3d dest) {
         double a = m00 * m11 - m01 * m10;
         double b = m00 * m12 - m02 * m10;
         double c = m00 * m13 - m03 * m10;
@@ -12990,7 +12966,7 @@ struct Matrix4d {
         return shadow(light.x, light.y, light.z, light.w, a, b, c, d, this);
     }
 
-    public Matrix4d shadow(Vector4d light, double a, double b, double c, double d, Matrix4d dest) {
+    public Matrix4d shadow(Vector4d light, double a, double b, double c, double d, ref Matrix4d dest) {
         return shadow(light.x, light.y, light.z, light.w, a, b, c, d, dest);
     }
 
@@ -13029,7 +13005,7 @@ struct Matrix4d {
         return shadow(lightX, lightY, lightZ, lightW, a, b, c, d, this);
     }
 
-    public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, double a, double b, double c, double d, Matrix4d dest) {
+    public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, double a, double b, double c, double d, ref Matrix4d dest) {
         // normalize plane
         double invPlaneLen = Math.invsqrt(a*a + b*b + c*c);
         double an = a * invPlaneLen;
@@ -13090,7 +13066,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d shadow(Vector4d light, Matrix4d planeTransform, Matrix4d dest) {
+    public Matrix4d shadow(Vector4d light, Matrix4d planeTransform, ref Matrix4d dest) {
         // compute plane equation by transforming (y = 0)
         double a = planeTransform.m10;
         double b = planeTransform.m11;
@@ -13122,7 +13098,7 @@ struct Matrix4d {
         return shadow(light, planeTransform, this);
     }
 
-    public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, Matrix4d planeTransform, Matrix4d dest) {
+    public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, Matrix4d planeTransform, ref Matrix4d dest) {
         // compute plane equation by transforming (y = 0)
         double a = planeTransform.m10;
         double b = planeTransform.m11;
@@ -13413,7 +13389,7 @@ struct Matrix4d {
         return true;
     }
 
-    public Matrix4d pick(double x, double y, double width, double height, int[] viewport, Matrix4d dest) {
+    public Matrix4d pick(double x, double y, double width, double height, int[] viewport, ref Matrix4d dest) {
         double sx = viewport[2] / width;
         double sy = viewport[3] / height;
         double tx = (viewport[2] + 2.0 * (viewport[0] - x)) / width;
@@ -13489,7 +13465,7 @@ struct Matrix4d {
         return this;
     }
 
-    public Matrix4d arcball(double radius, double centerX, double centerY, double centerZ, double angleX, double angleY, Matrix4d dest) {
+    public Matrix4d arcball(double radius, double centerX, double centerY, double centerZ, double angleX, double angleY, ref Matrix4d dest) {
         double m30 = m20 * -radius + this.m30;
         double m31 = m21 * -radius + this.m31;
         double m32 = m22 * -radius + this.m32;
@@ -13534,7 +13510,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d arcball(double radius, Vector3d center, double angleX, double angleY, Matrix4d dest) {
+    public Matrix4d arcball(double radius, Vector3d center, double angleX, double angleY, ref Matrix4d dest) {
         return arcball(radius, center.x, center.y, center.z, angleX, angleY, dest);
     }
 
@@ -13628,7 +13604,7 @@ struct Matrix4d {
         return this;
     }
 
-    public Matrix4d projectedGridRange(Matrix4d projector, double sLower, double sUpper, Matrix4d dest) {
+    public Matrix4d projectedGridRange(Matrix4d projector, double sLower, double sUpper, ref Matrix4d dest) {
         // Compute intersection with frustum edges and plane
         double minX = double.infinity, minY = double.infinity;
         double maxX = -double.infinity, maxY = -double.infinity;
@@ -13690,7 +13666,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d perspectiveFrustumSlice(double near, double far, Matrix4d dest) {
+    public Matrix4d perspectiveFrustumSlice(double near, double far, ref Matrix4d dest) {
         double invOldNear = (m23 + m22) / m32;
         double invNearFar = 1.0 / (near - far);
         dest._m00(m00 * invOldNear * near)
@@ -13713,7 +13689,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d orthoCrop(Matrix4d view, Matrix4d dest) {
+    public Matrix4d orthoCrop(Matrix4d view, ref Matrix4d dest) {
         // determine min/max world z and min/max orthographically view-projected x/y
         double minX = double.infinity, maxX = -double.infinity;
         double minY = double.infinity, maxY = -double.infinity;
@@ -13908,7 +13884,7 @@ struct Matrix4d {
         return lerp(other, t, this);
     }
 
-    public Matrix4d lerp(Matrix4d other, double t, Matrix4d dest) {
+    public Matrix4d lerp(Matrix4d other, double t, ref Matrix4d dest) {
         dest._m00(Math.fma(other.m00 - m00, t, m00))
         ._m01(Math.fma(other.m01 - m01, t, m01))
         ._m02(Math.fma(other.m02 - m02, t, m02))
@@ -13955,7 +13931,7 @@ struct Matrix4d {
      *              will hold the result
      * @return dest
      */
-    public Matrix4d rotateTowards(Vector3d direction, Vector3d up, Matrix4d dest) {
+    public Matrix4d rotateTowards(Vector3d direction, Vector3d up, ref Matrix4d dest) {
         return rotateTowards(direction.x, direction.y, direction.z, up.x, up.y, up.z, dest);
     }
 
@@ -14055,7 +14031,7 @@ struct Matrix4d {
      *              will hold the result
      * @return dest
      */
-    public Matrix4d rotateTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ, Matrix4d dest) {
+    public Matrix4d rotateTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ, ref Matrix4d dest) {
         // Normalize direction
         double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
         double ndirX = dirX * invDirLength;
@@ -14287,14 +14263,14 @@ struct Matrix4d {
         return this;
     }
 
-    public Vector3d getEulerAnglesZYX(Vector3d dest) {
+    public Vector3d getEulerAnglesZYX(ref Vector3d dest) {
         dest.x = Math.atan2(m12, m22);
         dest.y = Math.atan2(-m02, Math.sqrt(1.0 - m02 * m02));
         dest.z = Math.atan2(m01, m00);
         return dest;
     }
 
-    public Vector3d getEulerAnglesXYZ(Vector3d dest) {
+    public Vector3d getEulerAnglesXYZ(ref Vector3d dest) {
         dest.x = Math.atan2(-m21, m22);
         dest.y = Math.atan2(m20, Math.sqrt(1.0 - m20 * m20));
         dest.z = Math.atan2(-m10, m00);
@@ -14466,7 +14442,7 @@ struct Matrix4d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4d obliqueZ(double a, double b, Matrix4d dest) {
+    public Matrix4d obliqueZ(double a, double b, ref Matrix4d dest) {
         dest._m00(m00)
         ._m01(m01)
         ._m02(m02)
@@ -14521,7 +14497,7 @@ struct Matrix4d {
      */
     public static void projViewFromRectangle(
             Vector3d eye, Vector3d p, Vector3d x, Vector3d y, double nearFarDist, bool zeroToOne,
-            Matrix4d projDest, Matrix4d viewDest) {
+            ref Matrix4d projDest, ref Matrix4d viewDest) {
         double zx = y.y * x.z - y.z * x.y, zy = y.z * x.x - y.x * x.z, zz = y.x * x.y - y.y * x.x;
         double zd = zx * (p.x - eye.x) + zy * (p.y - eye.y) + zz * (p.z - eye.z);
         double zs = zd >= 0 ? 1 : -1; zx *= zs; zy *= zs; zz *= zs; zd *= zs; 
@@ -14566,8 +14542,8 @@ struct Matrix4d {
         return withLookAtUp(up.x, up.y, up.z, this);
     }
 
-    public Matrix4d withLookAtUp(Vector3d up, Matrix4d dest) {
-        return withLookAtUp(up.x, up.y, up.z);
+    public Matrix4d withLookAtUp(Vector3d up, ref Matrix4d dest) {
+        return dest.withLookAtUp(up.x, up.y, up.z);
     }
 
     /**
@@ -14594,7 +14570,7 @@ struct Matrix4d {
         return withLookAtUp(upX, upY, upZ, this);
     }
 
-    public Matrix4d withLookAtUp(double upX, double upY, double upZ, Matrix4d dest) {
+    public Matrix4d withLookAtUp(double upX, double upY, double upZ, ref Matrix4d dest) {
         double y = (upY * m21 - upZ * m11) * m02 +
                    (upZ * m01 - upX * m21) * m12 +
                    (upX * m11 - upY * m01) * m22;
@@ -14630,7 +14606,7 @@ struct Matrix4d {
     public Matrix4d mapXZY() {
         return mapXZY(this);
     }
-    public Matrix4d mapXZY(Matrix4d dest) {
+    public Matrix4d mapXZY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m00)._m01(m01)._m02(m02)._m03(m03)._m10(m20)._m11(m21)._m12(m22)._m13(m13)._m20(m10)._m21(m11)._m22(m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14648,7 +14624,7 @@ struct Matrix4d {
     public Matrix4d mapXZnY() {
         return mapXZnY(this);
     }
-    public Matrix4d mapXZnY(Matrix4d dest) {
+    public Matrix4d mapXZnY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m00)._m01(m01)._m02(m02)._m03(m03)._m10(m20)._m11(m21)._m12(m22)._m13(m13)._m20(-m10)._m21(-m11)._m22(-m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14666,7 +14642,7 @@ struct Matrix4d {
     public Matrix4d mapXnYnZ() {
         return mapXnYnZ(this);
     }
-    public Matrix4d mapXnYnZ(Matrix4d dest) {
+    public Matrix4d mapXnYnZ(ref Matrix4d dest) {
         return dest._m00(m00)._m01(m01)._m02(m02)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
     /**
@@ -14683,7 +14659,7 @@ struct Matrix4d {
     public Matrix4d mapXnZY() {
         return mapXnZY(this);
     }
-    public Matrix4d mapXnZY(Matrix4d dest) {
+    public Matrix4d mapXnZY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m00)._m01(m01)._m02(m02)._m03(m03)._m10(-m20)._m11(-m21)._m12(-m22)._m13(m13)._m20(m10)._m21(m11)._m22(m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14701,7 +14677,7 @@ struct Matrix4d {
     public Matrix4d mapXnZnY() {
         return mapXnZnY(this);
     }
-    public Matrix4d mapXnZnY(Matrix4d dest) {
+    public Matrix4d mapXnZnY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m00)._m01(m01)._m02(m02)._m03(m03)._m10(-m20)._m11(-m21)._m12(-m22)._m13(m13)._m20(-m10)._m21(-m11)._m22(-m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14719,7 +14695,7 @@ struct Matrix4d {
     public Matrix4d mapYXZ() {
         return mapYXZ(this);
     }
-    public Matrix4d mapYXZ(Matrix4d dest) {
+    public Matrix4d mapYXZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m03(m03)._m10(m00)._m11(m01)._m12(m02)._m13(m13)._m20(m20)._m21(m21)._m22(m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14737,7 +14713,7 @@ struct Matrix4d {
     public Matrix4d mapYXnZ() {
         return mapYXnZ(this);
     }
-    public Matrix4d mapYXnZ(Matrix4d dest) {
+    public Matrix4d mapYXnZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m03(m03)._m10(m00)._m11(m01)._m12(m02)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14755,7 +14731,7 @@ struct Matrix4d {
     public Matrix4d mapYZX() {
         return mapYZX(this);
     }
-    public Matrix4d mapYZX(Matrix4d dest) {
+    public Matrix4d mapYZX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m03(m03)._m10(m20)._m11(m21)._m12(m22)._m13(m13)._m20(m00)._m21(m01)._m22(m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14773,7 +14749,7 @@ struct Matrix4d {
     public Matrix4d mapYZnX() {
         return mapYZnX(this);
     }
-    public Matrix4d mapYZnX(Matrix4d dest) {
+    public Matrix4d mapYZnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m03(m03)._m10(m20)._m11(m21)._m12(m22)._m13(m13)._m20(-m00)._m21(-m01)._m22(-m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14791,7 +14767,7 @@ struct Matrix4d {
     public Matrix4d mapYnXZ() {
         return mapYnXZ(this);
     }
-    public Matrix4d mapYnXZ(Matrix4d dest) {
+    public Matrix4d mapYnXZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m03(m03)._m10(-m00)._m11(-m01)._m12(-m02)._m13(m13)._m20(m20)._m21(m21)._m22(m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14809,7 +14785,7 @@ struct Matrix4d {
     public Matrix4d mapYnXnZ() {
         return mapYnXnZ(this);
     }
-    public Matrix4d mapYnXnZ(Matrix4d dest) {
+    public Matrix4d mapYnXnZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m03(m03)._m10(-m00)._m11(-m01)._m12(-m02)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14827,7 +14803,7 @@ struct Matrix4d {
     public Matrix4d mapYnZX() {
         return mapYnZX(this);
     }
-    public Matrix4d mapYnZX(Matrix4d dest) {
+    public Matrix4d mapYnZX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m03(m03)._m10(-m20)._m11(-m21)._m12(-m22)._m13(m13)._m20(m00)._m21(m01)._m22(m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14845,7 +14821,7 @@ struct Matrix4d {
     public Matrix4d mapYnZnX() {
         return mapYnZnX(this);
     }
-    public Matrix4d mapYnZnX(Matrix4d dest) {
+    public Matrix4d mapYnZnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m03(m03)._m10(-m20)._m11(-m21)._m12(-m22)._m13(m13)._m20(-m00)._m21(-m01)._m22(-m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14863,7 +14839,7 @@ struct Matrix4d {
     public Matrix4d mapZXY() {
         return mapZXY(this);
     }
-    public Matrix4d mapZXY(Matrix4d dest) {
+    public Matrix4d mapZXY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m20)._m01(m21)._m02(m22)._m03(m03)._m10(m00)._m11(m01)._m12(m02)._m13(m13)._m20(m10)._m21(m11)._m22(m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -14882,7 +14858,7 @@ struct Matrix4d {
     public Matrix4d mapZXnY() {
         return mapZXnY(this);
     }
-    public Matrix4d mapZXnY(Matrix4d dest) {
+    public Matrix4d mapZXnY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m20)._m01(m21)._m02(m22)._m03(m03)._m10(m00)._m11(m01)._m12(m02)._m13(m13)._m20(-m10)._m21(-m11)._m22(-m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -14901,7 +14877,7 @@ struct Matrix4d {
     public Matrix4d mapZYX() {
         return mapZYX(this);
     }
-    public Matrix4d mapZYX(Matrix4d dest) {
+    public Matrix4d mapZYX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m20)._m01(m21)._m02(m22)._m03(m03)._m10(m10)._m11(m11)._m12(m12)._m13(m13)._m20(m00)._m21(m01)._m22(m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14919,7 +14895,7 @@ struct Matrix4d {
     public Matrix4d mapZYnX() {
         return mapZYnX(this);
     }
-    public Matrix4d mapZYnX(Matrix4d dest) {
+    public Matrix4d mapZYnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m20)._m01(m21)._m02(m22)._m03(m03)._m10(m10)._m11(m11)._m12(m12)._m13(m13)._m20(-m00)._m21(-m01)._m22(-m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14937,7 +14913,7 @@ struct Matrix4d {
     public Matrix4d mapZnXY() {
         return mapZnXY(this);
     }
-    public Matrix4d mapZnXY(Matrix4d dest) {
+    public Matrix4d mapZnXY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m20)._m01(m21)._m02(m22)._m03(m03)._m10(-m00)._m11(-m01)._m12(-m02)._m13(m13)._m20(m10)._m21(m11)._m22(m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -14956,7 +14932,7 @@ struct Matrix4d {
     public Matrix4d mapZnXnY() {
         return mapZnXnY(this);
     }
-    public Matrix4d mapZnXnY(Matrix4d dest) {
+    public Matrix4d mapZnXnY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m20)._m01(m21)._m02(m22)._m03(m03)._m10(-m00)._m11(-m01)._m12(-m02)._m13(m13)._m20(-m10)._m21(-m11)._m22(-m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -14975,7 +14951,7 @@ struct Matrix4d {
     public Matrix4d mapZnYX() {
         return mapZnYX(this);
     }
-    public Matrix4d mapZnYX(Matrix4d dest) {
+    public Matrix4d mapZnYX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m20)._m01(m21)._m02(m22)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(m00)._m21(m01)._m22(m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -14993,7 +14969,7 @@ struct Matrix4d {
     public Matrix4d mapZnYnX() {
         return mapZnYnX(this);
     }
-    public Matrix4d mapZnYnX(Matrix4d dest) {
+    public Matrix4d mapZnYnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m20)._m01(m21)._m02(m22)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(-m00)._m21(-m01)._m22(-m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15011,7 +14987,7 @@ struct Matrix4d {
     public Matrix4d mapnXYnZ() {
         return mapnXYnZ(this);
     }
-    public Matrix4d mapnXYnZ(Matrix4d dest) {
+    public Matrix4d mapnXYnZ(ref Matrix4d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(m10)._m11(m11)._m12(m12)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
     /**
@@ -15028,7 +15004,7 @@ struct Matrix4d {
     public Matrix4d mapnXZY() {
         return mapnXZY(this);
     }
-    public Matrix4d mapnXZY(Matrix4d dest) {
+    public Matrix4d mapnXZY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(m20)._m11(m21)._m12(m22)._m13(m13)._m20(m10)._m21(m11)._m22(m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15046,7 +15022,7 @@ struct Matrix4d {
     public Matrix4d mapnXZnY() {
         return mapnXZnY(this);
     }
-    public Matrix4d mapnXZnY(Matrix4d dest) {
+    public Matrix4d mapnXZnY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(m20)._m11(m21)._m12(m22)._m13(m13)._m20(-m10)._m21(-m11)._m22(-m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15064,7 +15040,7 @@ struct Matrix4d {
     public Matrix4d mapnXnYZ() {
         return mapnXnYZ(this);
     }
-    public Matrix4d mapnXnYZ(Matrix4d dest) {
+    public Matrix4d mapnXnYZ(ref Matrix4d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(m20)._m21(m21)._m22(m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
     /**
@@ -15081,7 +15057,7 @@ struct Matrix4d {
     public Matrix4d mapnXnYnZ() {
         return mapnXnYnZ(this);
     }
-    public Matrix4d mapnXnYnZ(Matrix4d dest) {
+    public Matrix4d mapnXnYnZ(ref Matrix4d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
     /**
@@ -15098,7 +15074,7 @@ struct Matrix4d {
     public Matrix4d mapnXnZY() {
         return mapnXnZY(this);
     }
-    public Matrix4d mapnXnZY(Matrix4d dest) {
+    public Matrix4d mapnXnZY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(-m20)._m11(-m21)._m12(-m22)._m13(m13)._m20(m10)._m21(m11)._m22(m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15116,7 +15092,7 @@ struct Matrix4d {
     public Matrix4d mapnXnZnY() {
         return mapnXnZnY(this);
     }
-    public Matrix4d mapnXnZnY(Matrix4d dest) {
+    public Matrix4d mapnXnZnY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(-m20)._m11(-m21)._m12(-m22)._m13(m13)._m20(-m10)._m21(-m11)._m22(-m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15134,7 +15110,7 @@ struct Matrix4d {
     public Matrix4d mapnYXZ() {
         return mapnYXZ(this);
     }
-    public Matrix4d mapnYXZ(Matrix4d dest) {
+    public Matrix4d mapnYXZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m03(m03)._m10(m00)._m11(m01)._m12(m02)._m13(m13)._m20(m20)._m21(m21)._m22(m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15152,7 +15128,7 @@ struct Matrix4d {
     public Matrix4d mapnYXnZ() {
         return mapnYXnZ(this);
     }
-    public Matrix4d mapnYXnZ(Matrix4d dest) {
+    public Matrix4d mapnYXnZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m03(m03)._m10(m00)._m11(m01)._m12(m02)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15170,7 +15146,7 @@ struct Matrix4d {
     public Matrix4d mapnYZX() {
         return mapnYZX(this);
     }
-    public Matrix4d mapnYZX(Matrix4d dest) {
+    public Matrix4d mapnYZX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m03(m03)._m10(m20)._m11(m21)._m12(m22)._m13(m13)._m20(m00)._m21(m01)._m22(m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15188,7 +15164,7 @@ struct Matrix4d {
     public Matrix4d mapnYZnX() {
         return mapnYZnX(this);
     }
-    public Matrix4d mapnYZnX(Matrix4d dest) {
+    public Matrix4d mapnYZnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m03(m03)._m10(m20)._m11(m21)._m12(m22)._m13(m13)._m20(-m00)._m21(-m01)._m22(-m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15206,7 +15182,7 @@ struct Matrix4d {
     public Matrix4d mapnYnXZ() {
         return mapnYnXZ(this);
     }
-    public Matrix4d mapnYnXZ(Matrix4d dest) {
+    public Matrix4d mapnYnXZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m03(m03)._m10(-m00)._m11(-m01)._m12(-m02)._m13(m13)._m20(m20)._m21(m21)._m22(m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15224,7 +15200,7 @@ struct Matrix4d {
     public Matrix4d mapnYnXnZ() {
         return mapnYnXnZ(this);
     }
-    public Matrix4d mapnYnXnZ(Matrix4d dest) {
+    public Matrix4d mapnYnXnZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m03(m03)._m10(-m00)._m11(-m01)._m12(-m02)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15242,7 +15218,7 @@ struct Matrix4d {
     public Matrix4d mapnYnZX() {
         return mapnYnZX(this);
     }
-    public Matrix4d mapnYnZX(Matrix4d dest) {
+    public Matrix4d mapnYnZX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m03(m03)._m10(-m20)._m11(-m21)._m12(-m22)._m13(m13)._m20(m00)._m21(m01)._m22(m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15260,7 +15236,7 @@ struct Matrix4d {
     public Matrix4d mapnYnZnX() {
         return mapnYnZnX(this);
     }
-    public Matrix4d mapnYnZnX(Matrix4d dest) {
+    public Matrix4d mapnYnZnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m03(m03)._m10(-m20)._m11(-m21)._m12(-m22)._m13(m13)._m20(-m00)._m21(-m01)._m22(-m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15278,7 +15254,7 @@ struct Matrix4d {
     public Matrix4d mapnZXY() {
         return mapnZXY(this);
     }
-    public Matrix4d mapnZXY(Matrix4d dest) {
+    public Matrix4d mapnZXY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m03(m03)._m10(m00)._m11(m01)._m12(m02)._m13(m13)._m20(m10)._m21(m11)._m22(m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -15297,7 +15273,7 @@ struct Matrix4d {
     public Matrix4d mapnZXnY() {
         return mapnZXnY(this);
     }
-    public Matrix4d mapnZXnY(Matrix4d dest) {
+    public Matrix4d mapnZXnY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m03(m03)._m10(m00)._m11(m01)._m12(m02)._m13(m13)._m20(-m10)._m21(-m11)._m22(-m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -15316,7 +15292,7 @@ struct Matrix4d {
     public Matrix4d mapnZYX() {
         return mapnZYX(this);
     }
-    public Matrix4d mapnZYX(Matrix4d dest) {
+    public Matrix4d mapnZYX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m03(m03)._m10(m10)._m11(m11)._m12(m12)._m13(m13)._m20(m00)._m21(m01)._m22(m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15334,7 +15310,7 @@ struct Matrix4d {
     public Matrix4d mapnZYnX() {
         return mapnZYnX(this);
     }
-    public Matrix4d mapnZYnX(Matrix4d dest) {
+    public Matrix4d mapnZYnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m03(m03)._m10(m10)._m11(m11)._m12(m12)._m13(m13)._m20(-m00)._m21(-m01)._m22(-m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15352,7 +15328,7 @@ struct Matrix4d {
     public Matrix4d mapnZnXY() {
         return mapnZnXY(this);
     }
-    public Matrix4d mapnZnXY(Matrix4d dest) {
+    public Matrix4d mapnZnXY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m03(m03)._m10(-m00)._m11(-m01)._m12(-m02)._m13(m13)._m20(m10)._m21(m11)._m22(m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -15371,7 +15347,7 @@ struct Matrix4d {
     public Matrix4d mapnZnXnY() {
         return mapnZnXnY(this);
     }
-    public Matrix4d mapnZnXnY(Matrix4d dest) {
+    public Matrix4d mapnZnXnY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m03(m03)._m10(-m00)._m11(-m01)._m12(-m02)._m13(m13)._m20(-m10)._m21(-m11)._m22(-m12)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -15390,7 +15366,7 @@ struct Matrix4d {
     public Matrix4d mapnZnYX() {
         return mapnZnYX(this);
     }
-    public Matrix4d mapnZnYX(Matrix4d dest) {
+    public Matrix4d mapnZnYX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(m00)._m21(m01)._m22(m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15408,7 +15384,7 @@ struct Matrix4d {
     public Matrix4d mapnZnYnX() {
         return mapnZnYnX(this);
     }
-    public Matrix4d mapnZnYnX(Matrix4d dest) {
+    public Matrix4d mapnZnYnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(-m00)._m21(-m01)._m22(-m02)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
@@ -15427,7 +15403,7 @@ struct Matrix4d {
     public Matrix4d negateX() {
         return _m00(-m00)._m01(-m01)._m02(-m02)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
-    public Matrix4d negateX(Matrix4d dest) {
+    public Matrix4d negateX(ref Matrix4d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(m10)._m11(m11)._m12(m12)._m13(m13)._m20(m20)._m21(m21)._m22(m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
 
@@ -15445,7 +15421,7 @@ struct Matrix4d {
     public Matrix4d negateY() {
         return _m10(-m10)._m11(-m11)._m12(-m12)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
-    public Matrix4d negateY(Matrix4d dest) {
+    public Matrix4d negateY(ref Matrix4d dest) {
         return dest._m00(m00)._m01(m01)._m02(m02)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(m20)._m21(m21)._m22(m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
 
@@ -15463,7 +15439,7 @@ struct Matrix4d {
     public Matrix4d negateZ() {
         return _m20(-m20)._m21(-m21)._m22(-m22)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
-    public Matrix4d negateZ(Matrix4d dest) {
+    public Matrix4d negateZ(ref Matrix4d dest) {
         return dest._m00(m00)._m01(m01)._m02(m02)._m03(m03)._m10(m10)._m11(m11)._m12(m12)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
 
