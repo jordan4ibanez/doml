@@ -177,7 +177,7 @@ struct Vector2i {
      *          the vector to copy from
      * @return this
      */
-    ref public Vector2i set(ref Vector2d v) return {
+    ref public Vector2i set(Vector2d v) return {
         this.x = cast(int) v.x;
         this.y = cast(int) v.y;
         return this;
@@ -195,7 +195,7 @@ struct Vector2i {
      *          the {@link RoundingMode} to use
      * @return this
      */
-    ref public Vector2i set(ref Vector2d v, int mode) return {
+    ref public Vector2i set(Vector2d v, int mode) return {
         this.x = Math.roundUsing(v.x, mode);
         this.y = Math.roundUsing(v.y, mode);
         return this;

@@ -104,7 +104,7 @@ public struct Matrix2d {
      * @param col1
      *          the second column
      */
-    this(ref Vector2d col0,ref Vector2d col1) {
+    this(Vector2d col0, Vector2d col1) {
         m00 = col0.x;
         m01 = col0.y;
         m10 = col1.x;
@@ -348,7 +348,7 @@ public struct Matrix2d {
      *          the second column
      * @return this
      */
-    ref public Matrix2d set(ref Vector2d col0,ref Vector2d col1) return {
+    ref public Matrix2d set(Vector2d col0, Vector2d col1) return {
         m00 = col0.x;
         m01 = col0.y;
         m10 = col1.x;
@@ -452,7 +452,7 @@ public struct Matrix2d {
         return this;
     }
 
-    public Matrix2d scale(ref Vector2d xy, ref Matrix2d dest) {
+    public Matrix2d scale(Vector2d xy, ref Matrix2d dest) {
         return scale(xy.x, xy.y, dest);
     }
 
@@ -469,7 +469,7 @@ public struct Matrix2d {
      *            the factors of the x and y component, respectively
      * @return this
      */
-    ref public Matrix2d scale(ref Vector2d xy) return {
+    ref public Matrix2d scale(Vector2d xy) return {
         this.scale(xy.x, xy.y, this);
         return this;
     }
@@ -600,15 +600,15 @@ public struct Matrix2d {
      * matrix to obtain an additional scaling.
      * <p>
      * In order to post-multiply a scaling transformation directly to a
-     * matrix use {@link #scale(ref Vector2d) scale()} instead.
+     * matrix use {@link #scale(Vector2d) scale()} instead.
      *
-     * @see #scale(ref Vector2d)
+     * @see #scale(Vector2d)
      *
      * @param xy
      *             the scale in x and y respectively
      * @return this
      */
-    ref public Matrix2d scaling(ref Vector2d xy) return {
+    ref public Matrix2d scaling(Vector2d xy) return {
         return scaling(xy.x, xy.y);
     }
 
@@ -643,7 +643,7 @@ public struct Matrix2d {
         return v.mul(this);
     }
 
-    public Vector2d transform(ref Vector2d v, ref Vector2d dest) {
+    public Vector2d transform(Vector2d v, ref Vector2d dest) {
         v.mul(this, dest);
         return dest;
     }
@@ -654,11 +654,11 @@ public struct Matrix2d {
         return dest;
     }
 
-    public Vector2d transformTranspose(ref Vector2d v) {
+    public Vector2d transformTranspose(Vector2d v) {
         return v.mulTranspose(this);
     }
 
-    public Vector2d transformTranspose(ref Vector2d v, ref Vector2d dest) {
+    public Vector2d transformTranspose(Vector2d v, ref Vector2d dest) {
         v.mulTranspose(this, dest);
         return dest;
     }
@@ -773,7 +773,7 @@ public struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    ref public Matrix2d setRow(int row,ref Vector2d src) return {
+    ref public Matrix2d setRow(int row, Vector2d src) return {
         return setRow(row, src.x, src.y);
     }
 
@@ -829,7 +829,7 @@ public struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
-    ref public Matrix2d setColumn(int column,ref Vector2d src) return {
+    ref public Matrix2d setColumn(int column, Vector2d src) return {
         return setColumn(column, src.x, src.y);
     }
 
@@ -990,7 +990,7 @@ public struct Matrix2d {
         return dir.normalize(dir);
     }
 
-    public Vector2d normalizedPositiveX(ref Vector2d dir) {
+    public Vector2d normalizedPositiveX(Vector2d dir) {
         if (m00 * m11 < m01 * m10) { // negative determinant?
             dir.x = -m11;
             dir.y = m01;
@@ -1012,7 +1012,7 @@ public struct Matrix2d {
         return dir.normalize(dir);
     }
 
-    public Vector2d normalizedPositiveY(ref Vector2d dir) {
+    public Vector2d normalizedPositiveY(Vector2d dir) {
         if (m00 * m11 < m01 * m10) { // negative determinant?
             dir.x = m10;
             dir.y = -m00;

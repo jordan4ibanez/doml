@@ -478,7 +478,7 @@ struct FrustumIntersection {
      *          the maximum corner coordinates of the XY-plane
      * @return <code>true</code> if the XY-plane is completely or partly inside of the frustum; <code>false</code> otherwise
      */
-    public bool testPlaneXY(ref Vector2d min,ref Vector2d max) {
+    public bool testPlaneXY(Vector2d min, Vector2d max) {
         return testPlaneXY(min.x, min.y, max.x, max.y);
     }
 

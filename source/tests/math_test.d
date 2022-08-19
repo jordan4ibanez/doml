@@ -60,12 +60,12 @@ void testMath() {
     
     writeln("BEGINNING VECTOR LENGTH TEST");
     // Integer value tests
-    assertEquals(5.,Vector2d.length(4, 3), 1000);
+    assertEquals(5., Vector2d.length(4, 3), 1000);
     assertEquals(6., Vector3d.length(2, -4, 4), 1000);
     assertEquals(3., Vector4d.length(2, -1, 0, -2), 1000);
 
     // Floating point value tests
-    assertEquals(Math.sqrt(.41),Vector2d.length(.4, -.5), 1000);
+    assertEquals(Math.sqrt(.41), Vector2d.length(.4, -.5), 1000);
     assertEquals(Math.sqrt(.3), Vector3d.length(.1, -.5, .2), 1000);
     assertEquals(1., Vector4d.length(.5, .5, .5, .5), 1000);
 

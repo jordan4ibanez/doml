@@ -234,7 +234,7 @@ public static int doubleCompare(double a, double b, double precision) {
     * @param precision if abs(a.[comp] - b.[comp]) <= precision for every component comp (x, y, z, w), a and b are considered equal
     * @return whether a and b are equal
     */
-public static bool quatEqual(Quaterniond a, Quaterniond b, double precision) {
+public static bool quatEqual(ref Quaterniond a, Quaterniond b, double precision) {
     return doubleEqual(a.x, b.x, precision)
         && doubleEqual(a.y, b.y, precision)
         && doubleEqual(a.z, b.z, precision)
@@ -249,7 +249,7 @@ public static bool quatEqual(Quaterniond a, Quaterniond b, double precision) {
     * @param actual
     * @param delta
     */
-public static void assertQuaterniondEquals(Quaterniond expected, Quaterniond actual, double delta) {
+public static void assertQuaterniondEquals(ref Quaterniond expected, Quaterniond actual, double delta) {
     assertEquals(expected.x, actual.x, delta);
     assertEquals(expected.y, actual.y, delta);
     assertEquals(expected.z, actual.z, delta);
@@ -371,7 +371,7 @@ public static void assertVector3dEquals(Vector3d expected, Vector3d actual, doub
     * @param actual
     * @param delta
     */
-public static void assertVector2dEquals(Vector2d expected,Vector2d actual, double delta) {
+public static void assertVector2dEquals(Vector2d expected, Vector2d actual, double delta) {
     assertEquals(expected.x, actual.x, delta);
     assertEquals(expected.y, actual.y, delta);
 }
