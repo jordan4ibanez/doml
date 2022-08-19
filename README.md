@@ -10,3 +10,5 @@ JOML translated to D with a few changes:
 - Simplified using D's strengths
 
 Currently Translating: Vector2i test
+
+Note: set all switches to final so they automatically get out of bounds errors
