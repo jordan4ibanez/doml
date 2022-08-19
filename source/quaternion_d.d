@@ -189,7 +189,7 @@ struct Quaterniond {
     }
 
 
-    public Matrix4d get(Matrix4d dest) {
+    public Matrix4d get(ref Matrix4d dest) {
         return dest.set(this);
     }
 
@@ -409,7 +409,7 @@ struct Quaterniond {
      *          the matrix whose rotational component is used to set this quaternion
      * @return this
      */
-    ref public Quaterniond setFromUnnormalized(Matrix4d mat) return {
+    ref public Quaterniond setFromUnnormalized(ref Matrix4d mat) return {
         setFromUnnormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }
@@ -423,7 +423,7 @@ struct Quaterniond {
      *          the matrix whose rotational component is used to set this quaternion
      * @return this
      */
-    ref public Quaterniond setFromNormalized(Matrix4d mat) return {
+    ref public Quaterniond setFromNormalized(ref Matrix4d mat) return {
         setFromNormalized(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
         return this;
     }

@@ -34,7 +34,7 @@ void assertEquals(AxisAngle4d a, AxisAngle4d b) {
 }
 
 /*
-void assertEquals(AxisAngle4d a, AxisAngle4d b) {
+void assertEquals(AxisAngle4d a,  AxisAngle4d b) {
     writeln("M1: ", a, " | M2: ", b)
     assert(a.equals(b));
 }*/

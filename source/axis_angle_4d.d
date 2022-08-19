@@ -257,7 +257,7 @@ struct AxisAngle4d {
      *            the Matrix4d to set this AngleAxis4d from
      * @return this
      */
-    ref public AxisAngle4d set(Matrix4d m) return {
+    ref public AxisAngle4d set(ref Matrix4d m) return {
         double nm00 = m.m00, nm01 = m.m01, nm02 = m.m02;
         double nm10 = m.m10, nm11 = m.m11, nm12 = m.m12;
         double nm20 = m.m20, nm21 = m.m21, nm22 = m.m22;
@@ -344,7 +344,7 @@ struct AxisAngle4d {
      *          the matrix to set
      * @return m
      */
-    public Matrix4d get(Matrix4d m) {
+    public Matrix4d get(ref Matrix4d m) {
         return m.set(this);
     }
 
