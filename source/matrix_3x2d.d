@@ -110,7 +110,7 @@ public struct Matrix3x2d {
      *          the new value
      * @return this
      */
-    Matrix3x2d _m00(double m00) {
+    ref Matrix3x2d _m00(double m00) return {
         this.m00 = m00;
         return this;
     }
@@ -121,7 +121,7 @@ public struct Matrix3x2d {
      *          the new value
      * @return this
      */
-    Matrix3x2d _m01(double m01) {
+    ref Matrix3x2d _m01(double m01) return {
         this.m01 = m01;
         return this;
     }
@@ -132,7 +132,7 @@ public struct Matrix3x2d {
      *          the new value
      * @return this
      */
-    Matrix3x2d _m10(double m10) {
+    ref Matrix3x2d _m10(double m10) return {
         this.m10 = m10;
         return this;
     }
@@ -143,7 +143,7 @@ public struct Matrix3x2d {
      *          the new value
      * @return this
      */
-    Matrix3x2d _m11(double m11) {
+    ref Matrix3x2d _m11(double m11) return {
         this.m11 = m11;
         return this;
     }
@@ -154,7 +154,7 @@ public struct Matrix3x2d {
      *          the new value
      * @return this
      */
-    Matrix3x2d _m20(double m20) {
+    ref Matrix3x2d _m20(double m20) return {
         this.m20 = m20;
         return this;
     }
@@ -165,7 +165,7 @@ public struct Matrix3x2d {
      *          the new value
      * @return this
      */
-    Matrix3x2d _m21(double m21) {
+    ref Matrix3x2d _m21(double m21) return {
         this.m21 = m21;
         return this;
     }
@@ -177,7 +177,7 @@ public struct Matrix3x2d {
      *          the matrix to copy the elements from
      * @return this
      */
-    public Matrix3x2d set(Matrix3x2d m) {
+    ref public Matrix3x2d set(Matrix3x2d m) return {
         setMatrix3x2d(m);
         return this;
     }
@@ -197,7 +197,7 @@ public struct Matrix3x2d {
      *          the 2x2 matrix
      * @return this
      */
-    public Matrix3x2d set(Matrix2d m) {
+    ref public Matrix3x2d set(Matrix2d m) return {
         setMatrix2d(m);
         return this;
     }
@@ -221,8 +221,9 @@ public struct Matrix3x2d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    public Matrix3x2d mul(Matrix3x2d right) {
-        return mul(right, this);
+    ref public Matrix3x2d mul(Matrix3x2d right) return {
+        mul(right, this);
+        return this;
     }
 
     /**
@@ -268,8 +269,9 @@ public struct Matrix3x2d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    public Matrix3x2d mulLocal(Matrix3x2d left) {
-       return mulLocal(left, this);
+    ref public Matrix3x2d mulLocal(Matrix3x2d left) return {
+       mulLocal(left, this);
+       return this;
     }
 
     public Matrix3x2d mulLocal(Matrix3x2d left, ref Matrix3x2d dest) {
@@ -308,9 +310,9 @@ public struct Matrix3x2d {
      *          the new value of m21
      * @return this
      */
-    public Matrix3x2d set(double m00, double m01, 
+    ref public Matrix3x2d set(double m00, double m01, 
                           double m10, double m11, 
-                          double m20, double m21) {
+                          double m20, double m21) return {
         this.m00 = m00;
         this.m01 = m01;
         this.m10 = m10;
@@ -332,7 +334,7 @@ public struct Matrix3x2d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix3x2d set(double[] m) {
+    ref public Matrix3x2d set(double[] m) return {
         MemUtil.copy(m, 0, this);
         return this;
     }
@@ -351,8 +353,9 @@ public struct Matrix3x2d {
      *
      * @return this
      */
-    public Matrix3x2d invert() {
-        return invert(this);
+    ref public Matrix3x2d invert() return {
+        invert(this);
+        return this;
     }
 
     /**
@@ -398,7 +401,7 @@ public struct Matrix3x2d {
      *          the units to translate in y
      * @return this
      */
-    public Matrix3x2d translation(double x, double y) {
+    ref public Matrix3x2d translation(double x, double y) return {
         m00 = 1.0;
         m01 = 0.0;
         m10 = 0.0;
@@ -423,7 +426,7 @@ public struct Matrix3x2d {
      *          the translation
      * @return this
      */
-    public Matrix3x2d translation(ref Vector2d offset) {
+    ref public Matrix3x2d translation(ref Vector2d offset) return {
         return translation(offset.x, offset.y);
     }
 
@@ -442,7 +445,7 @@ public struct Matrix3x2d {
      *          the offset to translate in y
      * @return this
      */
-    public Matrix3x2d setTranslation(double x, double y) {
+    ref public Matrix3x2d setTranslation(double x, double y) return {
         m20 = x;
         m21 = y;
         return this;
@@ -461,7 +464,7 @@ public struct Matrix3x2d {
      *          the new translation to set
      * @return this
      */
-    public Matrix3x2d setTranslation(ref Vector2d offset) {
+    ref public Matrix3x2d setTranslation(ref Vector2d offset) return {
         return setTranslation(offset.x, offset.y);
     }
 
@@ -518,8 +521,9 @@ public struct Matrix3x2d {
      *          the offset to translate in y
      * @return this
      */
-    public Matrix3x2d translate(double x, double y) {
-        return translate(x, y, this);
+    ref public Matrix3x2d translate(double x, double y) return {
+        translate(x, y, this);
+        return this;
     }
 
     /**
@@ -563,8 +567,9 @@ public struct Matrix3x2d {
      *          the offset to translate
      * @return this
      */
-    public Matrix3x2d translate(Vector2d offset) {
-        return translate(offset.x, offset.y, this);
+    ref public Matrix3x2d translate(Vector2d offset) return {
+        translate(offset.x, offset.y, this);
+        return this;
     }
 
     /**
@@ -585,7 +590,7 @@ public struct Matrix3x2d {
      *          the number of units in x and y by which to translate
      * @return this
      */
-    public Matrix3x2d translateLocal(Vector2d offset) {
+    ref public Matrix3x2d translateLocal(Vector2d offset) return {
         return translateLocal(offset.x, offset.y);
     }
 
@@ -665,8 +670,9 @@ public struct Matrix3x2d {
      *          the offset to translate in y
      * @return this
      */
-    public Matrix3x2d translateLocal(double x, double y) {
-        return translateLocal(x, y, this);
+    ref public Matrix3x2d translateLocal(double x, double y) return {
+        translateLocal(x, y, this);
+        return this;
     }
 
     /**
@@ -779,7 +785,7 @@ public struct Matrix3x2d {
      * 
      * @return this
      */
-    public Matrix3x2d zero() {
+    ref public Matrix3x2d zero() return {
         MemUtil.zero(this);
         return this;
     }
@@ -789,7 +795,7 @@ public struct Matrix3x2d {
      * 
      * @return this
      */
-    public Matrix3x2d identity() {
+    ref public Matrix3x2d identity() return {
         MemUtil.identity(this);
         return this;
     }
@@ -832,8 +838,9 @@ public struct Matrix3x2d {
      *            the factor of the y component
      * @return this
      */
-    public Matrix3x2d scale(double x, double y) {
-        return scale(x, y, this);
+    ref public Matrix3x2d scale(double x, double y) return {
+        scale(x, y, this);
+        return this;
     }
 
     /**
@@ -847,8 +854,9 @@ public struct Matrix3x2d {
      *            the factors of the x and y component, respectively
      * @return this
      */
-    public Matrix3x2d scale(Vector2d xy) {
-        return scale(xy.x, xy.y, this);
+    ref public Matrix3x2d scale(Vector2d xy) return {
+        scale(xy.x, xy.y, this);
+        return this;
     }
 
     /**
@@ -902,7 +910,7 @@ public struct Matrix3x2d {
      *            the factor for the two components
      * @return this
      */
-    public Matrix3x2d scale(double xy) {
+    ref public Matrix3x2d scale(double xy) return {
         return scale(xy, xy);
     }
 
@@ -930,8 +938,9 @@ public struct Matrix3x2d {
      *            the factor of the y component
      * @return this
      */
-    public Matrix3x2d scaleLocal(double x, double y) {
-        return scaleLocal(x, y, this);
+    ref public Matrix3x2d scaleLocal(double x, double y) return {
+        scaleLocal(x, y, this);
+        return this;
     }
 
     public Matrix3x2d scaleLocal(double xy, ref Matrix3x2d dest) {
@@ -950,8 +959,9 @@ public struct Matrix3x2d {
      *            the factor of the x and y component
      * @return this
      */
-    public Matrix3x2d scaleLocal(double xy) {
-        return scaleLocal(xy, xy, this);
+    ref public Matrix3x2d scaleLocal(double xy) return {
+        scaleLocal(xy, xy, this);
+        return this;
     }
 
     /**
@@ -1010,8 +1020,9 @@ public struct Matrix3x2d {
      *            the y coordinate of the scaling origin
      * @return this
      */
-    public Matrix3x2d scaleAround(double sx, double sy, double ox, double oy) {
-        return scaleAround(sx, sy, ox, oy, this);
+    ref public Matrix3x2d scaleAround(double sx, double sy, double ox, double oy) return {
+        scaleAround(sx, sy, ox, oy, this);
+        return this;
     }
 
     /**
@@ -1036,8 +1047,9 @@ public struct Matrix3x2d {
      *            will hold the result
      * @return this
      */
-    public Matrix3x2d scaleAround(double factor, double ox, double oy, ref Matrix3x2d dest) {
-        return scaleAround(factor, factor, ox, oy, this);
+    ref public Matrix3x2d scaleAround(double factor, double ox, double oy, ref Matrix3x2d dest) return {
+        scaleAround(factor, factor, ox, oy, this);
+        return this;
     }
 
     /**
@@ -1059,8 +1071,9 @@ public struct Matrix3x2d {
      *            the y coordinate of the scaling origin
      * @return this
      */
-    public Matrix3x2d scaleAround(double factor, double ox, double oy) {
-        return scaleAround(factor, factor, ox, oy, this);
+    ref public Matrix3x2d scaleAround(double factor, double ox, double oy) return {
+        scaleAround(factor, factor, ox, oy, this);
+        return this;
     }
 
     public Matrix3x2d scaleAroundLocal(double sx, double sy, double ox, double oy, ref Matrix3x2d dest) {
@@ -1102,8 +1115,9 @@ public struct Matrix3x2d {
      *            the z coordinate of the scaling origin
      * @return this
      */
-    public Matrix3x2d scaleAroundLocal(double sx, double sy, double sz, double ox, double oy, double oz) {
-        return scaleAroundLocal(sx, sy, ox, oy, this);
+    ref public Matrix3x2d scaleAroundLocal(double sx, double sy, double sz, double ox, double oy, double oz) return {
+        scaleAroundLocal(sx, sy, ox, oy, this);
+        return this;
     }
 
     /**
@@ -1125,8 +1139,9 @@ public struct Matrix3x2d {
      *            the y coordinate of the scaling origin
      * @return this
      */
-    public Matrix3x2d scaleAroundLocal(double factor, double ox, double oy) {
-        return scaleAroundLocal(factor, factor, ox, oy, this);
+    ref public Matrix3x2d scaleAroundLocal(double factor, double ox, double oy) return {
+        scaleAroundLocal(factor, factor, ox, oy, this);
+        return this;
     }
 
     /**
@@ -1143,7 +1158,7 @@ public struct Matrix3x2d {
      *             the scale factor in x and y
      * @return this
      */
-    public Matrix3x2d scaling(double factor) {
+    ref public Matrix3x2d scaling(double factor) return {
         return scaling(factor, factor);
     }
 
@@ -1156,7 +1171,7 @@ public struct Matrix3x2d {
      *             the scale in y
      * @return this
      */
-    public Matrix3x2d scaling(double x, double y) {
+    ref public Matrix3x2d scaling(double x, double y) return {
         m00 = x;
         m01 = 0.0;
         m10 = 0.0;
@@ -1181,7 +1196,7 @@ public struct Matrix3x2d {
      *          the angle in radians
      * @return this
      */
-    public Matrix3x2d rotation(double angle) {
+    ref public Matrix3x2d rotation(double angle) return {
         double cos = Math.cos(angle);
         double sin = Math.sin(angle);
         m00 = cos;
@@ -1392,8 +1407,9 @@ public struct Matrix3x2d {
      *            the angle in radians
      * @return this
      */
-    public Matrix3x2d rotate(double ang) {
-        return rotate(ang, this);
+    ref public Matrix3x2d rotate(double ang) return {
+        rotate(ang, this);
+        return this;
     }
 
     /**
@@ -1485,8 +1501,9 @@ public struct Matrix3x2d {
      *            the angle in radians to rotate
      * @return this
      */
-    public Matrix3x2d rotateLocal(double ang) {
-        return rotateLocal(ang, this);
+    ref public Matrix3x2d rotateLocal(double ang) return {
+        rotateLocal(ang, this);
+        return this;
     }
 
     /**
@@ -1510,8 +1527,9 @@ public struct Matrix3x2d {
      *            the y component of the rotation center
      * @return this
      */
-    public Matrix3x2d rotateAbout(double ang, double x, double y) {
-        return rotateAbout(ang, x, y, this);
+    ref public Matrix3x2d rotateAbout(double ang, double x, double y) return {
+        rotateAbout(ang, x, y, this);
+        return this;
     }
 
     /**
@@ -1601,8 +1619,9 @@ public struct Matrix3x2d {
      *            the normalized destination direction
      * @return this
      */
-    public Matrix3x2d rotateTo(Vector2d fromDir, Vector2d toDir) {
-        return rotateTo(fromDir, toDir, this);
+    ref public Matrix3x2d rotateTo(Vector2d fromDir, Vector2d toDir) return {
+        rotateTo(fromDir, toDir, this);
+        return this;
     }
 
     /**
@@ -1663,8 +1682,9 @@ public struct Matrix3x2d {
      *            the distance from the center to the top view edge
      * @return this
      */
-    public Matrix3x2d view(double left, double right, double bottom, double top) {
-        return view(left, right, bottom, top, this);
+    ref public Matrix3x2d view(double left, double right, double bottom, double top) return {
+        view(left, right, bottom, top, this);
+        return this;
     }
 
     /**
@@ -1683,7 +1703,7 @@ public struct Matrix3x2d {
      *            the distance from the center to the top view edge
      * @return this
      */
-    public Matrix3x2d setView(double left, double right, double bottom, double top) {
+    ref public Matrix3x2d setView(double left, double right, double bottom, double top) return {
         m00 = 2.0 / (right - left);
         m01 = 0.0;
         m10 = 0.0;
@@ -1870,7 +1890,7 @@ public struct Matrix3x2d {
      *          will hold the direction and length of the span along the positive Y axis
      * @return this
      */
-    public Matrix3x2d span(Vector2d corner, Vector2d xDir, Vector2d yDir) {
+    ref public Matrix3x2d span(Vector2d corner, Vector2d xDir, Vector2d yDir) return {
         double s = 1.0 / (m00 * m11 - m01 * m10);
         double nm00 =  m11 * s, nm01 = -m01 * s, nm10 = -m10 * s, nm11 =  m00 * s;
         corner.x = -nm00 - nm10 + (m10 * m21 - m20 * m11) * s;
