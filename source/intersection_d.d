@@ -40,8 +40,8 @@ import vector_4d;
 
 /**
     * Return value of
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector3d)},
-    * {@link #findClosestPointOnTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d)},
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
+    * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
@@ -50,8 +50,8 @@ import vector_4d;
 public static immutable int POINT_ON_TRIANGLE_VERTEX_0 = 1;
 /**
     * Return value of
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector3d)},
-    * {@link #findClosestPointOnTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d)},
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
+    * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
@@ -60,8 +60,8 @@ public static immutable int POINT_ON_TRIANGLE_VERTEX_0 = 1;
 public static immutable int POINT_ON_TRIANGLE_VERTEX_1 = 2;
 /**
     * Return value of
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector3d)},
-    * {@link #findClosestPointOnTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d)},
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
+    * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
@@ -71,8 +71,8 @@ public static immutable int POINT_ON_TRIANGLE_VERTEX_2 = 3;
 
 /**
     * Return value of
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector3d)},
-    * {@link #findClosestPointOnTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d)},
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
+    * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
@@ -81,8 +81,8 @@ public static immutable int POINT_ON_TRIANGLE_VERTEX_2 = 3;
 public static immutable int POINT_ON_TRIANGLE_EDGE_01 = 4;
 /**
     * Return value of
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector3d)},
-    * {@link #findClosestPointOnTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d)},
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
+    * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
@@ -91,8 +91,8 @@ public static immutable int POINT_ON_TRIANGLE_EDGE_01 = 4;
 public static immutable int POINT_ON_TRIANGLE_EDGE_12 = 5;
 /**
     * Return value of
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector3d)},
-    * {@link #findClosestPointOnTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d)},
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
+    * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or
     * {@link #intersectSweptSphereTriangle}
@@ -102,8 +102,8 @@ public static immutable int POINT_ON_TRIANGLE_EDGE_20 = 6;
 
 /**
     * Return value of
-    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector3d)},
-    * {@link #findClosestPointOnTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d)},
+    * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
+    * {@link #findClosestPointOnTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d)},
     * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #findClosestPointOnTriangle(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} or 
     * {@link #intersectSweptSphereTriangle}
@@ -138,21 +138,21 @@ public static immutable int AAR_SIDE_MAXY = 3;
 
 /**
     * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector2d)} and
-    * {@link #intersectLineSegmentAab(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector2d)} to indicate that the line segment does not intersect the axis-aligned box;
+    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)} to indicate that the line segment does not intersect the axis-aligned box;
     * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #intersectLineSegmentAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} to indicate that the line segment does not intersect the axis-aligned rectangle.
     */
 public static immutable int OUTSIDE = -1;
 /**
     * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector2d)} and
-    * {@link #intersectLineSegmentAab(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector2d)} to indicate that one end point of the line segment lies inside of the axis-aligned box;
+    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)} to indicate that one end point of the line segment lies inside of the axis-aligned box;
     * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #intersectLineSegmentAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} to indicate that one end point of the line segment lies inside of the axis-aligned rectangle.
     */
 public static immutable int ONE_INTERSECTION = 1;
 /**
     * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector2d)} and
-    * {@link #intersectLineSegmentAab(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector2d)} to indicate that the line segment intersects two sides of the axis-aligned box
+    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)} to indicate that the line segment intersects two sides of the axis-aligned box
     * or lies on an edge or a side of the box;
     * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #intersectLineSegmentAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} to indicate that the line segment intersects two edges of the axis-aligned rectangle
@@ -161,7 +161,7 @@ public static immutable int ONE_INTERSECTION = 1;
 public static immutable int TWO_INTERSECTION = 2;
 /**
     * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double,ref Vector2d)} and
-    * {@link #intersectLineSegmentAab(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector2d)} to indicate that the line segment lies completely inside of the axis-aligned box;
+    * {@link #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)} to indicate that the line segment lies completely inside of the axis-aligned box;
     * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double,ref Vector2d)} and
     * {@link #intersectLineSegmentAar(ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d,ref Vector2d)} to indicate that the line segment lies completely inside of the axis-aligned rectangle.
     */
@@ -433,7 +433,7 @@ public static bool testAabPlane(
     *          the constant in the plane equation
     * @return <code>true</code> iff the axis-aligned box intersects the plane; <code>false</code> otherwise
     */
-public static bool testAabPlane(ref Vector3d min,ref Vector3d max, double a, double b, double c, double d) {
+public static bool testAabPlane(Vector3d min, Vector3d max, double a, double b, double c, double d) {
     return testAabPlane(min.x, min.y, min.z, max.x, max.y, max.z, a, b, c, d);
 }
 
@@ -490,7 +490,7 @@ public static bool testAabAab(
     *              the maximum corner of the second axis-aligned box
     * @return <code>true</code> iff both axis-aligned boxes intersect; <code>false</code> otherwise
     */
-public static bool testAabAab(ref Vector3d minA,ref Vector3d maxA,ref Vector3d minB,ref Vector3d maxB) {
+public static bool testAabAab(Vector3d minA, Vector3d maxA, Vector3d minB, Vector3d maxB) {
     return testAabAab(minA.x, minA.y, minA.z, maxA.x, maxA.y, maxA.z, minB.x, minB.y, minB.z, maxB.x, maxB.y, maxB.z);
 }
 
@@ -526,8 +526,8 @@ public static bool testAabAab(ref Vector3d minA,ref Vector3d maxA,ref Vector3d m
     * @return <code>true</code> if both boxes intersect; <code>false</code> otherwise
     */
 public static bool testObOb(
-        Vector3d b0c,ref Vector3d b0uX,ref Vector3d b0uY,ref Vector3d b0uZ,ref Vector3d b0hs,
-        Vector3d b1c,ref Vector3d b1uX,ref Vector3d b1uY,ref Vector3d b1uZ,ref Vector3d b1hs) {
+        Vector3d b0c, Vector3d b0uX, Vector3d b0uY, Vector3d b0uZ, Vector3d b0hs,
+        Vector3d b1c, Vector3d b1uX, Vector3d b1uY, Vector3d b1uZ, Vector3d b1hs) {
     return testObOb(
             b0c.x, b0c.y, b0c.z, b0uX.x, b0uX.y, b0uX.z, b0uY.x, b0uY.y, b0uY.z, b0uZ.x, b0uZ.y, b0uZ.z, b0hs.x, b0hs.y, b0hs.z,
             b1c.x, b1c.y, b1c.z, b1uX.x, b1uX.y, b1uX.z, b1uY.x, b1uY.y, b1uY.z, b1uZ.x, b1uZ.y, b1uZ.z, b1hs.x, b1hs.y, b1hs.z);
@@ -765,7 +765,7 @@ public static bool intersectSphereSphere(
     *              will hold the center of the circle of intersection in the <code>(x, y, z)</code> components and the radius in the w component
     * @return <code>true</code> iff both spheres intersect; <code>false</code> otherwise
     */
-public static bool intersectSphereSphere(ref Vector3d centerA, double radiusSquaredA,ref Vector3d centerB, double radiusSquaredB, Vector4d centerAndRadiusOfIntersectionCircle) {
+public static bool intersectSphereSphere(Vector3d centerA, double radiusSquaredA, Vector3d centerB, double radiusSquaredB, Vector4d centerAndRadiusOfIntersectionCircle) {
     return intersectSphereSphere(centerA.x, centerA.y, centerA.z, radiusSquaredA, centerB.x, centerB.y, centerB.z, radiusSquaredB, centerAndRadiusOfIntersectionCircle);
 }
 
@@ -874,7 +874,7 @@ public static bool testSphereSphere(
     *              the square of the second sphere's radius
     * @return <code>true</code> iff both spheres intersect; <code>false</code> otherwise
     */
-public static bool testSphereSphere(ref Vector3d centerA, double radiusSquaredA,ref Vector3d centerB, double radiusSquaredB) {
+public static bool testSphereSphere(Vector3d centerA, double radiusSquaredA, Vector3d centerB, double radiusSquaredB) {
     return testSphereSphere(centerA.x, centerA.y, centerA.z, radiusSquaredA, centerB.x, centerB.y, centerB.z, radiusSquaredB);
 }
 
@@ -1024,7 +1024,7 @@ public static double intersectRayPlane(double originX, double originY, double or
     * @return the value of the parameter <i>t</i> in the ray equation <i>p(t) = origin + t * dir</i> of the intersection point, if the ray
     *         intersects the plane; <code>-1.0</code> otherwise
     */
-public static double intersectRayPlane(ref Vector3d origin,ref Vector3d dir,ref Vector3d point,ref Vector3d normal, double epsilon) {
+public static double intersectRayPlane(Vector3d origin, Vector3d dir, Vector3d point, Vector3d normal, double epsilon) {
     return intersectRayPlane(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, point.x, point.y, point.z, normal.x, normal.y, normal.z, epsilon);
 }
 
@@ -1147,7 +1147,7 @@ public static bool testAabSphere(
     *          the squared of the sphere's radius
     * @return <code>true</code> iff the axis-aligned box intersects the sphere; <code>false</code> otherwise
     */
-public static bool testAabSphere(ref Vector3d min,ref Vector3d max,ref Vector3d center, double radiusSquared) {
+public static bool testAabSphere(Vector3d min, Vector3d max, Vector3d center, double radiusSquared) {
     return testAabSphere(min.x, min.y, min.z, max.x, max.y, max.z, center.x, center.y, center.z, radiusSquared);
 }
 
@@ -1260,7 +1260,7 @@ public static Vector3d findClosestPointOnLineSegment(double aX, double aY, doubl
 public static double findClosestPointsLineSegments(
         double a0X, double a0Y, double a0Z, double a1X, double a1Y, double a1Z,
         double b0X, double b0Y, double b0Z, double b1X, double b1Y, double b1Z,
-        Vector3d resultA,ref Vector3d resultB) {
+        Vector3d resultA, Vector3d resultB) {
     double d1x = a1X - a0X, d1y = a1Y - a0Y, d1z = a1Z - a0Z;
     double d2x = b1X - b0X, d2y = b1Y - b0Y, d2z = b1Z - b0Z;
     double rX = a0X - b0X, rY = a0Y - b0Y, rZ = a0Z - b0Z;
@@ -1361,7 +1361,7 @@ public static double findClosestPointsLineSegments(
 public static double findClosestPointsLineSegmentTriangle(
         double aX, double aY, double aZ, double bX, double bY, double bZ,
         double v0X, double v0Y, double v0Z, double v1X, double v1Y, double v1Z, double v2X, double v2Y, double v2Z,
-        Vector3d lineSegmentResult,ref Vector3d triangleResult) {
+        Vector3d lineSegmentResult, Vector3d triangleResult) {
     double min, d;
     double minlsX, minlsY, minlsZ, mintX, mintY, mintZ;
     // AB -> V0V1
@@ -1571,7 +1571,7 @@ public static int findClosestPointOnTriangle(
     *                {@link #POINT_ON_TRIANGLE_EDGE_01}, {@link #POINT_ON_TRIANGLE_EDGE_12}, {@link #POINT_ON_TRIANGLE_EDGE_20} or
     *                {@link #POINT_ON_TRIANGLE_FACE}
     */
-public static int findClosestPointOnTriangle(ref Vector3d v0,ref Vector3d v1,ref Vector3d v2,ref Vector3d p,ref Vector3d result) {
+public static int findClosestPointOnTriangle(Vector3d v0, Vector3d v1, Vector3d v2, Vector3d p, Vector3d result) {
     return findClosestPointOnTriangle(v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, p.x, p.y, p.z, result);
 }
 
@@ -2015,7 +2015,7 @@ public static bool intersectRaySphere(double originX, double originY, double ori
     *              <i>p(t) = origin + t * dir</i> for both points (near, far) of intersections with the sphere
     * @return <code>true</code> if the ray intersects the sphere; <code>false</code> otherwise
     */
-public static bool intersectRaySphere(ref Vector3d origin,ref Vector3d dir,ref Vector3d center, double radiusSquared,ref Vector2d result) {
+public static bool intersectRaySphere(Vector3d origin, Vector3d dir, Vector3d center, double radiusSquared,ref Vector2d result) {
     return intersectRaySphere(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, center.x, center.y, center.z, radiusSquared, result);
 }
 
@@ -2082,7 +2082,7 @@ public static bool testRaySphere(double originX, double originY, double originZ,
     *              the sphere radius squared
     * @return <code>true</code> if the ray intersects the sphere; <code>false</code> otherwise
     */
-public static bool testRaySphere(ref Vector3d origin,ref Vector3d dir,ref Vector3d center, double radiusSquared) {
+public static bool testRaySphere(Vector3d origin, Vector3d dir, Vector3d center, double radiusSquared) {
     return testRaySphere(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, center.x, center.y, center.z, radiusSquared);
 }
 
@@ -2158,7 +2158,7 @@ public static bool testLineSegmentSphere(double p0X, double p0Y, double p0Z, dou
     *              the sphere radius squared
     * @return <code>true</code> if the line segment intersects the sphere; <code>false</code> otherwise
     */
-public static bool testLineSegmentSphere(ref Vector3d p0,ref Vector3d p1,ref Vector3d center, double radiusSquared) {
+public static bool testLineSegmentSphere(Vector3d p0, Vector3d p1, Vector3d center, double radiusSquared) {
     return testLineSegmentSphere(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, center.x, center.y, center.z, radiusSquared);
 }
 
@@ -2173,7 +2173,7 @@ public static bool testLineSegmentSphere(ref Vector3d p0,ref Vector3d p1,ref Vec
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #intersectRayAab(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector2d)
+    * @see #intersectRayAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)
     * @see RayAabIntersection
     * 
     * @param originX
@@ -2275,7 +2275,7 @@ public static bool intersectRayAab(double originX, double originY, double origin
     *              iff the ray intersects the axis-aligned box
     * @return <code>true</code> if the given ray intersects the axis-aligned box; <code>false</code> otherwise
     */
-public static bool intersectRayAab(ref Vector3d origin,ref Vector3d dir,ref Vector3d min,ref Vector3d max, ref Vector2d result) {
+public static bool intersectRayAab(Vector3d origin, Vector3d dir, Vector3d min, Vector3d max, ref Vector2d result) {
     return intersectRayAab(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, min.x, min.y, min.z, max.x, max.y, max.z, result);
 }
 
@@ -2288,7 +2288,7 @@ public static bool intersectRayAab(ref Vector3d origin,ref Vector3d dir,ref Vect
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #intersectLineSegmentAab(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector2d)
+    * @see #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)
     * 
     * @param p0X
     *              the x coordinate of the line segment's first end point
@@ -2386,7 +2386,7 @@ public static int intersectLineSegmentAab(double p0X, double p0Y, double p0Z, do
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #intersectLineSegmentAab(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector2d)
+    * @see #intersectLineSegmentAab(Vector3d, Vector3d, Vector3d, Vector3d,ref Vector2d)
     * 
     * @param p0
     *              the line segment's first end point
@@ -2406,7 +2406,7 @@ public static int intersectLineSegmentAab(double p0X, double p0Y, double p0Z, do
     *         {@link #TWO_INTERSECTION} if the line segment intersects two sides of the axis-aligned box
     *         or lies on an edge or a side of the box
     */
-public static int intersectLineSegmentAab(ref Vector3d p0,ref Vector3d p1,ref Vector3d min,ref Vector3d max, ref Vector2d result) {
+public static int intersectLineSegmentAab(Vector3d p0, Vector3d p1, Vector3d min, Vector3d max, ref Vector2d result) {
     return intersectLineSegmentAab(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, min.x, min.y, min.z, max.x, max.y, max.z, result);
 }
 
@@ -2420,7 +2420,7 @@ public static int intersectLineSegmentAab(ref Vector3d p0,ref Vector3d p1,ref Ve
     * <p>
     * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
     * 
-    * @see #testRayAab(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d)
+    * @see #testRayAab(Vector3d, Vector3d, Vector3d, Vector3d)
     * @see RayAabIntersection
     * 
     * @param originX
@@ -2508,7 +2508,7 @@ public static bool testRayAab(double originX, double originY, double originZ, do
     *              the maximum corner of the axis-aligned box
     * @return <code>true</code> if the given ray intersects the axis-aligned box; <code>false</code> otherwise
     */
-public static bool testRayAab(ref Vector3d origin,ref Vector3d dir,ref Vector3d min,ref Vector3d max) {
+public static bool testRayAab(Vector3d origin, Vector3d dir, Vector3d min, Vector3d max) {
     return testRayAab(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, min.x, min.y, min.z, max.x, max.y, max.z);
 }
 
@@ -2523,7 +2523,7 @@ public static bool testRayAab(ref Vector3d origin,ref Vector3d dir,ref Vector3d 
     * winding order assuming a <i>right-handed</i> coordinate system when seen along the ray's direction, even if the ray intersects the triangle.
     * This is in compliance with how OpenGL handles backface culling with default frontface/backface settings.
     * 
-    * @see #testRayTriangleFront(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d, double)
+    * @see #testRayTriangleFront(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d, double)
     * 
     * @param originX
     *              the x coordinate of the ray's origin
@@ -2618,7 +2618,7 @@ public static bool testRayTriangleFront(double originX, double originY, double o
     *              a small epsilon when testing rays that are almost parallel to the triangle
     * @return <code>true</code> if the given ray intersects the frontface of the triangle; <code>false</code> otherwise
     */
-public static bool testRayTriangleFront(ref Vector3d origin,ref Vector3d dir,ref Vector3d v0,ref Vector3d v1,ref Vector3d v2, double epsilon) {
+public static bool testRayTriangleFront(Vector3d origin, Vector3d dir, Vector3d v0, Vector3d v1, Vector3d v2, double epsilon) {
     return testRayTriangleFront(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, epsilon);
 }
 
@@ -2631,7 +2631,7 @@ public static bool testRayTriangleFront(ref Vector3d origin,ref Vector3d dir,ref
     * <p>
     * This test does not take into account the winding order of the triangle, so a ray will intersect a front-facing triangle as well as a back-facing triangle.
     * 
-    * @see #testRayTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d, double)
+    * @see #testRayTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d, double)
     * 
     * @param originX
     *              the x coordinate of the ray's origin
@@ -2724,7 +2724,7 @@ public static bool testRayTriangle(double originX, double originY, double origin
     *              a small epsilon when testing rays that are almost parallel to the triangle
     * @return <code>true</code> if the given ray intersects the frontface of the triangle; <code>false</code> otherwise
     */
-public static bool testRayTriangle(ref Vector3d origin,ref Vector3d dir,ref Vector3d v0,ref Vector3d v1,ref Vector3d v2, double epsilon) {
+public static bool testRayTriangle(Vector3d origin, Vector3d dir, Vector3d v0, Vector3d v1, Vector3d v2, double epsilon) {
     return testRayTriangle(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, epsilon);
 }
 
@@ -2740,7 +2740,7 @@ public static bool testRayTriangle(ref Vector3d origin,ref Vector3d dir,ref Vect
     * winding order assuming a <i>right-handed</i> coordinate system when seen along the ray's direction, even if the ray intersects the triangle.
     * This is in compliance with how OpenGL handles backface culling with default frontface/backface settings.
     * 
-    * @see #testRayTriangleFront(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d, double)
+    * @see #testRayTriangleFront(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d, double)
     * 
     * @param originX
     *              the x coordinate of the ray's origin
@@ -2837,7 +2837,7 @@ public static double intersectRayTriangleFront(double originX, double originY, d
     * @return the value of the parameter <i>t</i> in the ray equation <i>p(t) = origin + t * dir</i> of the point of intersection
     *         if the ray intersects the frontface of the triangle; <code>-1.0</code> otherwise
     */
-public static double intersectRayTriangleFront(ref Vector3d origin,ref Vector3d dir,ref Vector3d v0,ref Vector3d v1,ref Vector3d v2, double epsilon) {
+public static double intersectRayTriangleFront(Vector3d origin, Vector3d dir, Vector3d v0, Vector3d v1, Vector3d v2, double epsilon) {
     return intersectRayTriangleFront(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, epsilon);
 }
 
@@ -2851,7 +2851,7 @@ public static double intersectRayTriangleFront(ref Vector3d origin,ref Vector3d 
     * <p>
     * This test does not take into account the winding order of the triangle, so a ray will intersect a front-facing triangle as well as a back-facing triangle.
     * 
-    * @see #testRayTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d, double)
+    * @see #testRayTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d, double)
     * 
     * @param originX
     *              the x coordinate of the ray's origin
@@ -2946,7 +2946,7 @@ public static double intersectRayTriangle(double originX, double originY, double
     * @return the value of the parameter <i>t</i> in the ray equation <i>p(t) = origin + t * dir</i> of the point of intersection
     *         if the ray intersects the triangle; <code>-1.0</code> otherwise
     */
-public static double intersectRayTriangle(ref Vector3d origin,ref Vector3d dir,ref Vector3d v0,ref Vector3d v1,ref Vector3d v2, double epsilon) {
+public static double intersectRayTriangle(Vector3d origin, Vector3d dir, Vector3d v0, Vector3d v1, Vector3d v2, double epsilon) {
     return intersectRayTriangle(origin.x, origin.y, origin.z, dir.x, dir.y, dir.z, v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, epsilon);
 }
 
@@ -2958,7 +2958,7 @@ public static double intersectRayTriangle(ref Vector3d origin,ref Vector3d dir,r
     * Reference: <a href="http://www.graphics.cornell.edu/pubs/1997/MT97.pdf">
     * Fast, Minimum Storage Ray/Triangle Intersection</a>
     * 
-    * @see #testLineSegmentTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d, double)
+    * @see #testLineSegmentTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d, double)
     * 
     * @param p0X
     *              the x coordinate of the line segment's first end point
@@ -3028,7 +3028,7 @@ public static bool testLineSegmentTriangle(double p0X, double p0Y, double p0Z, d
     *              a small epsilon when testing line segments that are almost parallel to the triangle
     * @return <code>true</code> if the given line segment intersects the triangle; <code>false</code> otherwise
     */
-public static bool testLineSegmentTriangle(ref Vector3d p0,ref Vector3d p1,ref Vector3d v0,ref Vector3d v1,ref Vector3d v2, double epsilon) {
+public static bool testLineSegmentTriangle(Vector3d p0, Vector3d p1, Vector3d v0, Vector3d v1, Vector3d v2, double epsilon) {
     return testLineSegmentTriangle(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, epsilon);
 }
 
@@ -3041,7 +3041,7 @@ public static bool testLineSegmentTriangle(ref Vector3d p0,ref Vector3d p1,ref V
     * Reference: <a href="http://www.graphics.cornell.edu/pubs/1997/MT97.pdf">
     * Fast, Minimum Storage Ray/Triangle Intersection</a>
     * 
-    * @see #intersectLineSegmentTriangle(ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d,ref Vector3d, double,ref Vector3d)
+    * @see #intersectLineSegmentTriangle(Vector3d, Vector3d, Vector3d, Vector3d, Vector3d, double, Vector3d)
     * 
     * @param p0X
     *              the x coordinate of the line segment's first end point
@@ -3081,7 +3081,7 @@ public static bool testLineSegmentTriangle(ref Vector3d p0,ref Vector3d p1,ref V
     */
 public static bool intersectLineSegmentTriangle(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z,
         double v0X, double v0Y, double v0Z, double v1X, double v1Y, double v1Z, double v2X, double v2Y, double v2Z,
-        double epsilon,ref Vector3d intersectionPoint) {
+        double epsilon, Vector3d intersectionPoint) {
     double dirX = p1X - p0X;
     double dirY = p1Y - p0Y;
     double dirZ = p1Z - p0Z;
@@ -3104,7 +3104,7 @@ public static bool intersectLineSegmentTriangle(double p0X, double p0Y, double p
     * Reference: <a href="http://www.graphics.cornell.edu/pubs/1997/MT97.pdf">
     * Fast, Minimum Storage Ray/Triangle Intersection</a>
     * 
-    * @see #intersectLineSegmentTriangle(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double,ref Vector3d)
+    * @see #intersectLineSegmentTriangle(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)
     * 
     * @param p0
     *              the line segment's first end point
@@ -3122,7 +3122,7 @@ public static bool intersectLineSegmentTriangle(double p0X, double p0Y, double p
     *              the point of intersection
     * @return <code>true</code> if the given line segment intersects the triangle; <code>false</code> otherwise
     */
-public static bool intersectLineSegmentTriangle(ref Vector3d p0,ref Vector3d p1,ref Vector3d v0,ref Vector3d v1,ref Vector3d v2, double epsilon,ref Vector3d intersectionPoint) {
+public static bool intersectLineSegmentTriangle(Vector3d p0, Vector3d p1, Vector3d v0, Vector3d v1, Vector3d v2, double epsilon, Vector3d intersectionPoint) {
     return intersectLineSegmentTriangle(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, epsilon, intersectionPoint);
 }
 
@@ -3156,7 +3156,7 @@ public static bool intersectLineSegmentTriangle(ref Vector3d p0,ref Vector3d p1,
     * @return <code>true</code> if the given line segment intersects the plane; <code>false</code> otherwise
     */
 public static bool intersectLineSegmentPlane(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z,
-        double a, double b, double c, double d,ref Vector3d intersectionPoint) {
+        double a, double b, double c, double d, Vector3d intersectionPoint) {
     double dirX = p1X - p0X;
     double dirY = p1Y - p0Y;
     double dirZ = p1Z - p0Z;
@@ -3220,7 +3220,7 @@ public static bool testLineCircle(double a, double b, double c, double centerX, 
     *          will hold the center of the line segment of intersection in the <code>(x, y)</code> components and the half-length in the z component
     * @return <code>true</code> iff the line intersects the circle; <code>false</code> otherwise
     */
-public static bool intersectLineCircle(double a, double b, double c, double centerX, double centerY, double radius,ref Vector3d intersectionCenterAndHL) {
+public static bool intersectLineCircle(double a, double b, double c, double centerX, double centerY, double radius, Vector3d intersectionCenterAndHL) {
     double invDenom = Math.invsqrt(a * a + b * b);
     double dist = (a * centerX + b * centerY + c) * invDenom;
     if (-radius <= dist && dist <= radius) {
@@ -3257,7 +3257,7 @@ public static bool intersectLineCircle(double a, double b, double c, double cent
     *          will hold the center of the line segment of intersection in the <code>(x, y)</code> components and the half-length in the z component
     * @return <code>true</code> iff the line intersects the circle; <code>false</code> otherwise
     */
-public static bool intersectLineCircle(double x0, double y0, double x1, double y1, double centerX, double centerY, double radius,ref Vector3d intersectionCenterAndHL) {
+public static bool intersectLineCircle(double x0, double y0, double x1, double y1, double centerX, double centerY, double radius, Vector3d intersectionCenterAndHL) {
     // Build general line equation from two points and use the other method
     return intersectLineCircle(y0 - y1, x1 - x0, (x0 - x1) * y0 + (y1 - y0) * x0, centerX, centerY, radius, intersectionCenterAndHL);
 }
@@ -3508,7 +3508,7 @@ public static bool testMovingCircleCircle(ref Vector2d centerA,ref Vector2d move
     *              will hold the center of the circle of intersection in the <code>(x, y, z)</code> components and the radius in the w component
     * @return <code>true</code> iff both circles intersect; <code>false</code> otherwise
     */
-public static bool intersectCircleCircle(double aX, double aY, double radiusSquaredA, double bX, double bY, double radiusSquaredB,ref Vector3d intersectionCenterAndHL) {
+public static bool intersectCircleCircle(double aX, double aY, double radiusSquaredA, double bX, double bY, double radiusSquaredB, Vector3d intersectionCenterAndHL) {
     double dX = bX - aX, dY = bY - aY;
     double distSquared = dX * dX + dY * dY;
     double h = 0.5 + (radiusSquaredA - radiusSquaredB) / distSquared;
@@ -3543,7 +3543,7 @@ public static bool intersectCircleCircle(double aX, double aY, double radiusSqua
     *              will hold the center of the line segment of intersection in the <code>(x, y)</code> components and the half-length in the z component
     * @return <code>true</code> iff both circles intersect; <code>false</code> otherwise
     */
-public static bool intersectCircleCircle(ref Vector2d centerA, double radiusSquaredA,ref Vector2d centerB, double radiusSquaredB,ref Vector3d intersectionCenterAndHL) {
+public static bool intersectCircleCircle(ref Vector2d centerA, double radiusSquaredA,ref Vector2d centerB, double radiusSquaredB, Vector3d intersectionCenterAndHL) {
     return intersectCircleCircle(centerA.x, centerA.y, radiusSquaredA, centerB.x, centerB.y, radiusSquaredB, intersectionCenterAndHL);
 }
 

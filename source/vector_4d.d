@@ -99,7 +99,7 @@ struct Vector4d {
      * @param w
      *          the w component
      */
-    this(ref Vector3d v, double w) {
+    this(Vector3d v, double w) {
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;
@@ -258,7 +258,7 @@ struct Vector4d {
      *          the w component
      * @return this
      */
-    ref public Vector4d set(ref Vector3d v, double w) return {
+    ref public Vector4d set(Vector3d v, double w) return {
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;

@@ -317,7 +317,7 @@ struct Quaterniond {
      *          the rotation axis
      * @return this
      */
-    ref public Quaterniond setAngleAxis(double angle,ref Vector3d axis) return {
+    ref public Quaterniond setAngleAxis(double angle, Vector3d axis) return {
         return setAngleAxis(angle, axis.x, axis.y, axis.z);
     }
 
@@ -466,7 +466,7 @@ struct Quaterniond {
      *          the angle in radians
      * @return this
      */
-    ref public Quaterniond fromAxisAngleRad(ref Vector3d axis, double angle) return {
+    ref public Quaterniond fromAxisAngleRad(Vector3d axis, double angle) return {
         return fromAxisAngleRad(axis.x, axis.y, axis.z, angle);
     }
 
@@ -505,7 +505,7 @@ struct Quaterniond {
      *          the angle in degrees
      * @return this
      */
-    ref public Quaterniond fromAxisAngleDeg(ref Vector3d axis, double angle) return {
+    ref public Quaterniond fromAxisAngleDeg(Vector3d axis, double angle) return {
         return fromAxisAngleRad(axis.x, axis.y, axis.z, Math.toRadians(angle));
     }
 
@@ -637,23 +637,23 @@ struct Quaterniond {
                         Math.fma(qw, w, Math.fma(-qx, x, Math.fma(-qy, y, -qz * z))));
     }
 
-    public Vector3d transform(ref Vector3d vec){
+    public Vector3d transform(Vector3d vec){
         return transform(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector3d transformInverse(ref Vector3d vec){
+    public Vector3d transformInverse(Vector3d vec){
         return transformInverse(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector3d transformUnit(ref Vector3d vec){
+    public Vector3d transformUnit(Vector3d vec){
         return transformUnit(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector3d transformInverseUnit(ref Vector3d vec){
+    public Vector3d transformInverseUnit(Vector3d vec){
         return transformInverseUnit(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector3d transformPositiveX(ref Vector3d dest) {
+    public Vector3d transformPositiveX(Vector3d dest) {
         double ww = w * w;
         double xx = x * x;
         double yy = y * y;
@@ -683,7 +683,7 @@ struct Quaterniond {
         return dest;
     }
 
-    public Vector3d transformUnitPositiveX(ref Vector3d dest) {
+    public Vector3d transformUnitPositiveX(Vector3d dest) {
         double yy = y * y;
         double zz = z * z;
         double xy = x * y;
@@ -709,7 +709,7 @@ struct Quaterniond {
         return dest;
     }
 
-    public Vector3d transformPositiveY(ref Vector3d dest) {
+    public Vector3d transformPositiveY(Vector3d dest) {
         double ww = w * w;
         double xx = x * x;
         double yy = y * y;
@@ -752,7 +752,7 @@ struct Quaterniond {
         return dest;
     }
 
-    public Vector3d transformUnitPositiveY(ref Vector3d dest) {
+    public Vector3d transformUnitPositiveY(Vector3d dest) {
         double xx = x * x;
         double zz = z * z;
         double xy = x * y;
@@ -765,7 +765,7 @@ struct Quaterniond {
         return dest;
     }
 
-    public Vector3d transformPositiveZ(ref Vector3d dest) {
+    public Vector3d transformPositiveZ(Vector3d dest) {
         double ww = w * w;
         double xx = x * x;
         double yy = y * y;
@@ -808,7 +808,7 @@ struct Quaterniond {
         return dest;
     }
 
-    public Vector3d transformUnitPositiveZ(ref Vector3d dest) {
+    public Vector3d transformUnitPositiveZ(Vector3d dest) {
         double xx = x * x;
         double yy = y * y;
         double xz = x * z;
@@ -829,15 +829,15 @@ struct Quaterniond {
         return transformInverse(vec, vec);
     }
 
-    public Vector3d transform(ref Vector3d vec,ref Vector3d dest) {
+    public Vector3d transform(Vector3d vec, Vector3d dest) {
         return transform(vec.x, vec.y, vec.z, dest);
     }
 
-    public Vector3d transformInverse(ref Vector3d vec,ref Vector3d dest) {
+    public Vector3d transformInverse(Vector3d vec, Vector3d dest) {
         return transformInverse(vec.x, vec.y, vec.z, dest);
     }
 
-    public Vector3d transform(double x, double y, double z,ref Vector3d dest) {
+    public Vector3d transform(double x, double y, double z, Vector3d dest) {
         double xx = this.x * this.x, yy = this.y * this.y, zz = this.z * this.z, ww = this.w * this.w;
         double xy = this.x * this.y, xz = this.x * this.z, yz = this.y * this.z, xw = this.x * this.w;
         double zw = this.z * this.w, yw = this.y * this.w, k = 1 / (xx + yy + zz + ww);
@@ -846,7 +846,7 @@ struct Quaterniond {
                         Math.fma(2 * (xz - yw) * k, x, Math.fma(2 * (yz + xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
     }
 
-    public Vector3d transformInverse(double x, double y, double z,ref Vector3d dest) {
+    public Vector3d transformInverse(double x, double y, double z, Vector3d dest) {
         double n = 1.0 / Math.fma(this.x, this.x, Math.fma(this.y, this.y, Math.fma(this.z, this.z, this.w * this.w)));
         double qx = this.x * n, qy = this.y * n, qz = this.z * n, qw = this.w * n;
         double xx = qx * qx, yy = qy * qy, zz = qz * qz, ww = qw * qw;
@@ -893,15 +893,15 @@ struct Quaterniond {
         return transformInverseUnit(vec, vec);
     }
 
-    public Vector3d transformUnit(ref Vector3d vec,ref Vector3d dest) {
+    public Vector3d transformUnit(Vector3d vec, Vector3d dest) {
         return transformUnit(vec.x, vec.y, vec.z, dest);
     }
 
-    public Vector3d transformInverseUnit(ref Vector3d vec,ref Vector3d dest) {
+    public Vector3d transformInverseUnit(Vector3d vec, Vector3d dest) {
         return transformInverseUnit(vec.x, vec.y, vec.z, dest);
     }
 
-    public Vector3d transformUnit(double x, double y, double z,ref Vector3d dest) {
+    public Vector3d transformUnit(double x, double y, double z, Vector3d dest) {
         double xx = this.x * this.x, xy = this.x * this.y, xz = this.x * this.z;
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
@@ -910,7 +910,7 @@ struct Quaterniond {
                         Math.fma(2 * (xz - yw), x, Math.fma(2 * (yz + xw), y, Math.fma(-2, xx + yy, 1) * z)));
     }
 
-    public Vector3d transformInverseUnit(double x, double y, double z,ref Vector3d dest) {
+    public Vector3d transformInverseUnit(double x, double y, double z, Vector3d dest) {
         double xx = this.x * this.x, xy = this.x * this.y, xz = this.x * this.z;
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
@@ -1496,12 +1496,12 @@ struct Quaterniond {
      *              spanned by the given <code>dir</code> and <code>up</code>
      * @return this
      */
-    ref public Quaterniond lookAlong(ref Vector3d dir,ref Vector3d up) return {
+    ref public Quaterniond lookAlong(Vector3d dir, Vector3d up) return {
         lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
         return this;
     }
 
-    public Quaterniond lookAlong(ref Vector3d dir,ref Vector3d up, Quaterniond dest) {
+    public Quaterniond lookAlong(Vector3d dir, Vector3d up, Quaterniond dest) {
         return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, dest);
     }
 
@@ -1740,7 +1740,7 @@ struct Quaterniond {
      *          the destination direction
      * @return this
      */
-    ref public Quaterniond rotationTo(ref Vector3d fromDir,ref Vector3d toDir) return {
+    ref public Quaterniond rotationTo(Vector3d fromDir, Vector3d toDir) return {
         return rotationTo(fromDir.x, fromDir.y, fromDir.z, toDir.x, toDir.y, toDir.z);
     }
 
@@ -1879,7 +1879,7 @@ struct Quaterniond {
         return this;
     }
 
-    public Quaterniond rotateTo(ref Vector3d fromDir,ref Vector3d toDir, Quaterniond dest) {
+    public Quaterniond rotateTo(Vector3d fromDir, Vector3d toDir, Quaterniond dest) {
         return rotateTo(fromDir.x, fromDir.y, fromDir.z, toDir.x, toDir.y, toDir.z, dest);
     }
 
@@ -1901,7 +1901,7 @@ struct Quaterniond {
      *          the destination direction
      * @return this
      */
-    ref public Quaterniond rotateTo(ref Vector3d fromDir,ref Vector3d toDir) return {
+    ref public Quaterniond rotateTo(Vector3d fromDir, Vector3d toDir) return {
         rotateTo(fromDir.x, fromDir.y, fromDir.z, toDir.x, toDir.y, toDir.z, this);
         return this;
     }
@@ -2209,28 +2209,28 @@ struct Quaterniond {
                         Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
     }
 
-    public Vector3d getEulerAnglesXYZ(ref Vector3d eulerAngles) {
+    public Vector3d getEulerAnglesXYZ(Vector3d eulerAngles) {
         eulerAngles.x = Math.atan2(x * w - y * z, 0.5 - x * x - y * y);
         eulerAngles.y = Math.safeAsin(2.0 * (x * z + y * w));
         eulerAngles.z = Math.atan2(z * w - x * y, 0.5 - y * y - z * z);
         return eulerAngles;
     }
 
-    public Vector3d getEulerAnglesZYX(ref Vector3d eulerAngles) {
+    public Vector3d getEulerAnglesZYX(Vector3d eulerAngles) {
         eulerAngles.x = Math.atan2(y * z + w * x, 0.5 - x * x + y * y);
         eulerAngles.y = Math.safeAsin(-2.0 * (x * z - w * y));
         eulerAngles.z = Math.atan2(x * y + w * z, 0.5 - y * y - z * z);
         return eulerAngles;
     }
 
-    public Vector3d getEulerAnglesZXY(ref Vector3d eulerAngles) {
+    public Vector3d getEulerAnglesZXY(Vector3d eulerAngles) {
         eulerAngles.x = Math.safeAsin(2.0 * (w * x + y * z));
         eulerAngles.y = Math.atan2(w * y - x * z, 0.5 - y * y - x * x);
         eulerAngles.z = Math.atan2(w * z - x * y, 0.5 - z * z - x * x);
         return eulerAngles;
     }
 
-    public Vector3d getEulerAnglesYXZ(ref Vector3d eulerAngles) {
+    public Vector3d getEulerAnglesYXZ(Vector3d eulerAngles) {
         eulerAngles.x = Math.safeAsin(-2.0 * (y * z - w * x));
         eulerAngles.y = Math.atan2(x * z + y * w, 0.5 - y * y - x * x);
         eulerAngles.z = Math.atan2(y * x + w * z, 0.5 - x * x - z * z);
@@ -2251,7 +2251,7 @@ struct Quaterniond {
                         Math.fma(this.w, rw, Math.fma(-this.x, rx, Math.fma(-this.y, ry, -this.z * rz))));
     }
 
-    public Quaterniond rotateAxis(double angle,ref Vector3d axis, Quaterniond dest) {
+    public Quaterniond rotateAxis(double angle, Vector3d axis, Quaterniond dest) {
         return rotateAxis(angle, axis.x, axis.y, axis.z, dest);
     }
 
@@ -2271,7 +2271,7 @@ struct Quaterniond {
      *              the rotation axis
      * @return this
      */
-    ref public Quaterniond rotateAxis(double angle,ref Vector3d axis) return {
+    ref public Quaterniond rotateAxis(double angle, Vector3d axis) return {
         rotateAxis(angle, axis.x, axis.y, axis.z, this);
         return this;
     }
@@ -2301,7 +2301,7 @@ struct Quaterniond {
         return this;
     }
 
-    public Vector3d positiveX(ref Vector3d dir) {
+    public Vector3d positiveX(Vector3d dir) {
         double invNorm = 1.0 / lengthSquared();
         double nx = -x * invNorm;
         double ny = -y * invNorm;
@@ -2315,7 +2315,7 @@ struct Quaterniond {
         return dir;
     }
 
-    public Vector3d normalizedPositiveX(ref Vector3d dir) {
+    public Vector3d normalizedPositiveX(Vector3d dir) {
         double dy = y + y;
         double dz = z + z;
         dir.x = -y * dy - z * dz + 1.0;
@@ -2324,7 +2324,7 @@ struct Quaterniond {
         return dir;
     }
 
-    public Vector3d positiveY(ref Vector3d dir) {
+    public Vector3d positiveY(Vector3d dir) {
         double invNorm = 1.0 / lengthSquared();
         double nx = -x * invNorm;
         double ny = -y * invNorm;
@@ -2339,7 +2339,7 @@ struct Quaterniond {
         return dir;
     }
 
-    public Vector3d normalizedPositiveY(ref Vector3d dir) {
+    public Vector3d normalizedPositiveY(Vector3d dir) {
         double dx = x + x;
         double dy = y + y;
         double dz = z + z;
@@ -2349,7 +2349,7 @@ struct Quaterniond {
         return dir;
     }
 
-    public Vector3d positiveZ(ref Vector3d dir) {
+    public Vector3d positiveZ(Vector3d dir) {
         double invNorm = 1.0 / lengthSquared();
         double nx = -x * invNorm;
         double ny = -y * invNorm;
@@ -2364,7 +2364,7 @@ struct Quaterniond {
         return dir;
     }
 
-    public Vector3d normalizedPositiveZ(ref Vector3d dir) {
+    public Vector3d normalizedPositiveZ(Vector3d dir) {
         double dx = x + x;
         double dy = y + y;
         double dz = z + z;

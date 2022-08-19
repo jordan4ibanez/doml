@@ -283,7 +283,7 @@ public static Vector3d interpolateTriangle(
         double v0X, double v0Y, double f0X, double f0Y, double f0Z,
         double v1X, double v1Y, double f1X, double f1Y, double f1Z,
         double v2X, double v2Y, double f2X, double f2Y, double f2Z,
-        double x, double y,ref Vector3d dest) {
+        double x, double y, Vector3d dest) {
     // compute interpolation factors
     Vector3d t = dest;
     interpolationFactorsTriangle(v0X, v0Y, v1X, v1Y, v2X, v2Y, x, y, t);
@@ -324,7 +324,7 @@ public static Vector3d interpolateTriangle(
     */
 public static Vector3d interpolationFactorsTriangle(
         double v0X, double v0Y, double v1X, double v1Y, double v2X, double v2Y,
-        double x, double y,ref Vector3d dest) {
+        double x, double y, Vector3d dest) {
     double v12Y = v1Y - v2Y;
     double v21X = v2X - v1X;
     double v02X = v0X - v2X;

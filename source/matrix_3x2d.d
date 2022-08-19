@@ -1226,7 +1226,7 @@ public struct Matrix3x2d {
      * Transform/multiply the given vector by this matrix by assuming a third row in this matrix of <code>(0, 0, 1)</code>
      * and store the result in <code>dest</code>.
      * 
-     * @see Vector3d#mul(ref Matrix3x2d,ref Vector3d)
+     * @see Vector3d#mul(ref Matrix3x2d, Vector3d)
      * 
      * @param v
      *          the vector to transform
@@ -1234,7 +1234,7 @@ public struct Matrix3x2d {
      *          will contain the result
      * @return dest
      */
-    public Vector3d transform(ref Vector3d v, ref Vector3d dest) {
+    public Vector3d transform(Vector3d v, ref Vector3d dest) {
         return v.mul(this, dest);
     }
 
@@ -1265,7 +1265,7 @@ public struct Matrix3x2d {
      * In order to store the result in another vector, use {@link #transformPosition(ref Vector2d,ref Vector2d)}.
      * 
      * @see #transformPosition(ref Vector2d,ref Vector2d)
-     * @see #transform(ref Vector3d)
+     * @see #transform(Vector3d)
      * 
      * @param v
      *          the vector to transform and to hold the final result
@@ -1287,7 +1287,7 @@ public struct Matrix3x2d {
      * In order to store the result in the same vector, use {@link #transformPosition(ref Vector2d)}.
      * 
      * @see #transformPosition(ref Vector2d)
-     * @see #transform(ref Vector3d,ref Vector3d)
+     * @see #transform(Vector3d, Vector3d)
      * 
      * @param v
      *          the vector to transform
@@ -1311,7 +1311,7 @@ public struct Matrix3x2d {
      * In order to store the result in the same vector, use {@link #transformPosition(ref Vector2d)}.
      * 
      * @see #transformPosition(ref Vector2d)
-     * @see #transform(ref Vector3d,ref Vector3d)
+     * @see #transform(Vector3d, Vector3d)
      * 
      * @param x
      *          the x component of the vector to transform
