@@ -1,4 +1,4 @@
-module frustum_intersection;
+module frustum_intersect_test;
 
 import Math = math;
 
