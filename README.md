@@ -1,4 +1,4 @@
-# doml
+# DOML
 A D math library for OpenGL rendering calculations.
 
 JOML translated to D with a few changes:
@@ -9,6 +9,10 @@ JOML translated to D with a few changes:
 
 - Simplified using D's strengths
 
+- Only structs, no GC impact
+
 This was a monumental effort, if you find anything wrong, please help me fix it.
 
 There are a few missing elements, they will (hopefully) be translated in later on.
+
+You should be able to follow a LWJGL tutorial (mostly, remember it's structs now) and get a functioning OpenGL/Vulkan program.
