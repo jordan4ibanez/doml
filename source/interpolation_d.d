@@ -175,7 +175,7 @@ public static Vector2d interpolateTriangle(
 public static Vector2d dFdxLinear(
         double v0X, double v0Y, double f0X, double f0Y,
         double v1X, double v1Y, double f1X, double f1Y,
-        double v2X, double v2Y, double f2X, double f2Y, Vector2d dest) {
+        double v2X, double v2Y, double f2X, double f2Y, ref Vector2d dest) {
     double v12Y = v1Y - v2Y;
     double v02Y = v0Y - v2Y;
     double den = v12Y * (v0X - v2X) + (v2X - v1X) * v02Y;
@@ -225,7 +225,7 @@ public static Vector2d dFdyLinear(
         double v0X, double v0Y, double f0X, double f0Y,
         double v1X, double v1Y, double f1X, double f1Y,
         double v2X, double v2Y, double f2X, double f2Y,
-        Vector2d dest) {
+        ref Vector2d dest) {
     double v21X = v2X - v1X;
     double v02X = v0X - v2X;
     double den = (v1Y - v2Y) * v02X + v21X * (v0Y - v2Y);
