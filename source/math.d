@@ -88,15 +88,11 @@ import rounding_mode;
 * from the same site.
 */
 
-const double PI = math_pi;
-const double PI2 = PI * 2.0;
-const double PIHalf = PI * 0.5;
-const double PI_4 = PI * 0.25;
-const double PI_INV = 1.0 / PI;
-private const int lookupBits = Options.SIN_LOOKUP_BITS;
-private const int lookupTableSize = 1 << lookupBits;
-private const int lookupTableSizeMinus1 = lookupTableSize - 1;
-private const int lookupTableSizeWithMargin = lookupTableSize + 1;
+immutable double PI = math_pi;
+immutable double PI2 = PI * 2.0;
+immutable double PIHalf = PI * 0.5;
+immutable double PI_4 = PI * 0.25;
+immutable double PI_INV = 1.0 / PI;
 
 
 // Credit: https://forum.dlang.org/post/bug-5900-3@http.d.puremagic.com%2Fissues%2F
