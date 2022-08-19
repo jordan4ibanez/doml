@@ -181,7 +181,7 @@ struct Matrix4d {
      * @param mat
      *          the {@link Matrix4d} to copy the values from
      */
-    this(ref Matrix4d mat) {
+    this(Matrix4d mat) {
         set(mat);
     }
 
@@ -796,14 +796,14 @@ struct Matrix4d {
     /**
      * Store the values of the given matrix <code>m</code> into <code>this</code> matrix.
      * 
-     * @see #Matrix4d(ref Matrix4d)
-     * @see #get(ref Matrix4d)
+     * @see #Matrix4d(Matrix4d)
+     * @see #get(Matrix4d)
      * 
      * @param m
      *          the matrix to copy the values from
      * @return this
      */
-    ref public Matrix4d set(ref Matrix4d m) return {
+    ref public Matrix4d set(Matrix4d m) return {
         return
         _m00(m.m00).
         _m01(m.m01).
@@ -832,12 +832,12 @@ struct Matrix4d {
      *          the matrix to copy the transposed values from
      * @return this
      */
-    ref public Matrix4d setTransposed(ref Matrix4d m) return {
+    ref public Matrix4d setTransposed(Matrix4d m) return {
         if ((m.properties & PROPERTY_IDENTITY) != 0)
             return this.identity();
         return setTransposedInternal(m);
     }
-    ref private Matrix4d setTransposedInternal(ref Matrix4d m) return {
+    ref private Matrix4d setTransposedInternal(Matrix4d m) return {
         double nm10 = m.m01, nm12 = m.m21, nm13 = m.m31;
         double nm20 = m.m02, nm21 = m.m12, nm30 = m.m03;
         double nm31 = m.m13, nm32 = m.m23;
@@ -920,7 +920,7 @@ struct Matrix4d {
      *          the {@link Matrix4d}
      * @return this
      */
-    ref public Matrix4d set3x3(ref Matrix4d mat) return {
+    ref public Matrix4d set3x3(Matrix4d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -938,7 +938,7 @@ struct Matrix4d {
      * Set the upper 4x3 submatrix of this {@link Matrix4d} to the given {@link Matrix4x3d} 
      * and don't change the other elements.
      * 
-     * @see Matrix4x3d#get(ref Matrix4d)
+     * @see Matrix4x3d#get(Matrix4d)
      * 
      * @param mat
      *          the {@link Matrix4x3d}
@@ -970,7 +970,7 @@ struct Matrix4d {
      *          the {@link Matrix4d}
      * @return this
      */
-    ref public Matrix4d set4x3(ref Matrix4d mat) return {
+    ref public Matrix4d set4x3(Matrix4d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -1062,12 +1062,12 @@ struct Matrix4d {
      *          the right operand of the multiplication
      * @return this
      */
-    ref public Matrix4d mul(ref Matrix4d right) return {
+    ref public Matrix4d mul(Matrix4d right) return {
         mul(right, this);
         return this;
     }
 
-    public Matrix4d mul(ref Matrix4d right, ref Matrix4d dest) {
+    public Matrix4d mul(Matrix4d right, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.set(right);
         else if ((right.properties & PROPERTY_IDENTITY) != 0)
@@ -1099,12 +1099,12 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    ref public Matrix4d mul0(ref Matrix4d right) return {
+    ref public Matrix4d mul0(Matrix4d right) return {
        mul0(right, this);
        return this;
     }
 
-    public Matrix4d mul0(ref Matrix4d right, ref Matrix4d dest) {
+    public Matrix4d mul0(Matrix4d right, ref Matrix4d dest) {
         double nm00 = Math.fma(m00, right.m00, Math.fma(m10, right.m01, Math.fma(m20, right.m02, m30 * right.m03)));
         double nm01 = Math.fma(m01, right.m00, Math.fma(m11, right.m01, Math.fma(m21, right.m02, m31 * right.m03)));
         double nm02 = Math.fma(m02, right.m00, Math.fma(m12, right.m01, Math.fma(m22, right.m02, m32 * right.m03)));
@@ -1376,12 +1376,12 @@ struct Matrix4d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    ref public Matrix4d mulLocal(ref Matrix4d left) return {
+    ref public Matrix4d mulLocal(Matrix4d left) return {
        mulLocal(left, this);
        return this;
     }
 
-    public Matrix4d mulLocal(ref Matrix4d left, ref Matrix4d dest) {
+    public Matrix4d mulLocal(Matrix4d left, ref Matrix4d dest) {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return dest.set(left);
         else if ((left.properties & PROPERTY_IDENTITY) != 0)
@@ -1390,7 +1390,7 @@ struct Matrix4d {
             return mulLocalAffine(left, dest);
         return mulLocalGeneric(left, dest);
     }
-    private Matrix4d mulLocalGeneric(ref Matrix4d left, ref Matrix4d dest) {
+    private Matrix4d mulLocalGeneric(Matrix4d left, ref Matrix4d dest) {
         double nm00 = Math.fma(left.m00, m00, Math.fma(left.m10, m01, Math.fma(left.m20, m02, left.m30 * m03)));
         double nm01 = Math.fma(left.m01, m00, Math.fma(left.m11, m01, Math.fma(left.m21, m02, left.m31 * m03)));
         double nm02 = Math.fma(left.m02, m00, Math.fma(left.m12, m01, Math.fma(left.m22, m02, left.m32 * m03)));
@@ -1445,12 +1445,12 @@ struct Matrix4d {
      *          the left operand of the matrix multiplication (the last row is assumed to be <code>(0, 0, 0, 1)</code>)
      * @return this
      */
-    ref public Matrix4d mulLocalAffine(ref Matrix4d left) return {
+    ref public Matrix4d mulLocalAffine(Matrix4d left) return {
        mulLocalAffine(left, this);
        return this;
     }
 
-    public Matrix4d mulLocalAffine(ref Matrix4d left, ref Matrix4d dest) {
+    public Matrix4d mulLocalAffine(Matrix4d left, ref Matrix4d dest) {
         double nm00 = left.m00 * m00 + left.m10 * m01 + left.m20 * m02;
         double nm01 = left.m01 * m00 + left.m11 * m01 + left.m21 * m02;
         double nm02 = left.m02 * m00 + left.m12 * m01 + left.m22 * m02;
@@ -1678,12 +1678,12 @@ struct Matrix4d {
      *          the {@link #isAffine() affine} matrix to multiply <code>this</code> symmetric perspective projection matrix by
      * @return this
      */
-    ref public Matrix4d mulPerspectiveAffine(ref Matrix4d view) return {
+    ref public Matrix4d mulPerspectiveAffine(Matrix4d view) return {
        mulPerspectiveAffine(view, this);
        return this;
     }
 
-    public Matrix4d mulPerspectiveAffine(ref Matrix4d view, ref Matrix4d dest) {
+    public Matrix4d mulPerspectiveAffine(Matrix4d view, ref Matrix4d dest) {
         double nm00 = m00 * view.m00, nm01 = m11 * view.m01, nm02 = m22 * view.m02, nm03 = m23 * view.m02;
         double nm10 = m00 * view.m10, nm11 = m11 * view.m11, nm12 = m22 * view.m12, nm13 = m23 * view.m12;
         double nm20 = m00 * view.m20, nm21 = m11 * view.m21, nm22 = m22 * view.m22, nm23 = m23 * view.m22;
@@ -1711,12 +1711,12 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication (the last row is assumed to be <code>(0, 0, 0, 1)</code>)
      * @return this
      */
-    ref public Matrix4d mulAffineR(ref Matrix4d right) return {
+    ref public Matrix4d mulAffineR(Matrix4d right) return {
        mulAffineR(right, this);
        return this;
     }
 
-    public Matrix4d mulAffineR(ref Matrix4d right, ref Matrix4d dest) {
+    public Matrix4d mulAffineR(Matrix4d right, ref Matrix4d dest) {
         double nm00 = Math.fma(m00, right.m00, Math.fma(m10, right.m01, m20 * right.m02));
         double nm01 = Math.fma(m01, right.m00, Math.fma(m11, right.m01, m21 * right.m02));
         double nm02 = Math.fma(m02, right.m00, Math.fma(m12, right.m01, m22 * right.m02));
@@ -1771,12 +1771,12 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication (the last row is assumed to be <code>(0, 0, 0, 1)</code>)
      * @return this
      */
-    ref public Matrix4d mulAffine(ref Matrix4d right) return {
+    ref public Matrix4d mulAffine(Matrix4d right) return {
        mulAffine(right, this);
        return this;
     }
 
-    public Matrix4d mulAffine(ref Matrix4d right, ref Matrix4d dest) {
+    public Matrix4d mulAffine(Matrix4d right, ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         double m20 = this.m20, m21 = this.m21, m22 = this.m22;
@@ -1804,7 +1804,7 @@ struct Matrix4d {
         ._properties(PROPERTY_AFFINE | (this.properties & right.properties & PROPERTY_ORTHONORMAL));
     }
 
-    public Matrix4d mulTranslationAffine(ref Matrix4d right, ref Matrix4d dest) {
+    public Matrix4d mulTranslationAffine(Matrix4d right, ref Matrix4d dest) {
         return dest
         ._m00(right.m00)
         ._m01(right.m01)
@@ -1837,12 +1837,12 @@ struct Matrix4d {
      *          the affine matrix which to multiply <code>this</code> with
      * @return this
      */
-    ref public Matrix4d mulOrthoAffine(ref Matrix4d view) return {
+    ref public Matrix4d mulOrthoAffine(Matrix4d view) return {
         mulOrthoAffine(view, this);
         return this;
     }
 
-    public Matrix4d mulOrthoAffine(ref Matrix4d view, ref Matrix4d dest) {
+    public Matrix4d mulOrthoAffine(Matrix4d view, ref Matrix4d dest) {
         double nm00 = m00 * view.m00;
         double nm01 = m11 * view.m01;
         double nm02 = m22 * view.m02;
@@ -1892,12 +1892,12 @@ struct Matrix4d {
      *          the factor to multiply each of the other matrix's 4x3 components
      * @return this
      */
-    ref public Matrix4d fma4x3(ref Matrix4d other, double otherFactor) return {
+    ref public Matrix4d fma4x3(Matrix4d other, double otherFactor) return {
         fma4x3(other, otherFactor, this);
         return this;
     }
 
-    public Matrix4d fma4x3(ref Matrix4d other, double otherFactor, ref Matrix4d dest) {
+    public Matrix4d fma4x3(Matrix4d other, double otherFactor, ref Matrix4d dest) {
         dest._m00(Math.fma(other.m00, otherFactor, m00))
         ._m01(Math.fma(other.m01, otherFactor, m01))
         ._m02(Math.fma(other.m02, otherFactor, m02))
@@ -1925,12 +1925,12 @@ struct Matrix4d {
      *          the other addend
      * @return this
      */
-    ref public Matrix4d add(ref Matrix4d other) return {
+    ref public Matrix4d add(Matrix4d other) return {
         add(other, this);
         return this;
     }
 
-    public Matrix4d add(ref Matrix4d other, ref Matrix4d dest) {
+    public Matrix4d add(Matrix4d other, ref Matrix4d dest) {
         dest._m00(m00 + other.m00)
         ._m01(m01 + other.m01)
         ._m02(m02 + other.m02)
@@ -1958,12 +1958,12 @@ struct Matrix4d {
      *          the subtrahend
      * @return this
      */
-    ref public Matrix4d sub(ref Matrix4d subtrahend) return {
+    ref public Matrix4d sub(Matrix4d subtrahend) return {
         sub(subtrahend, this);
         return this;
     }
 
-    public Matrix4d sub(ref Matrix4d subtrahend, ref Matrix4d dest) {
+    public Matrix4d sub(Matrix4d subtrahend, ref Matrix4d dest) {
         dest._m00(m00 - subtrahend.m00)
         ._m01(m01 - subtrahend.m01)
         ._m02(m02 - subtrahend.m02)
@@ -1991,12 +1991,12 @@ struct Matrix4d {
      *          the other matrix
      * @return this
      */
-    ref public Matrix4d mulComponentWise(ref Matrix4d other) return {
+    ref public Matrix4d mulComponentWise(Matrix4d other) return {
         mulComponentWise(other, this);
         return this;
     }
 
-    public Matrix4d mulComponentWise(ref Matrix4d other, ref Matrix4d dest) {
+    public Matrix4d mulComponentWise(Matrix4d other, ref Matrix4d dest) {
         dest._m00(m00 * other.m00)
         ._m01(m01 * other.m01)
         ._m02(m02 * other.m02)
@@ -2024,12 +2024,12 @@ struct Matrix4d {
      *          the other addend
      * @return this
      */
-    ref public Matrix4d add4x3(ref Matrix4d other) return {
+    ref public Matrix4d add4x3(Matrix4d other) return {
         add4x3(other, this);
         return this;
     }
 
-    public Matrix4d add4x3(ref Matrix4d other, ref Matrix4d dest) {
+    public Matrix4d add4x3(Matrix4d other, ref Matrix4d dest) {
         dest._m00(m00 + other.m00)
         ._m01(m01 + other.m01)
         ._m02(m02 + other.m02)
@@ -2057,12 +2057,12 @@ struct Matrix4d {
      *          the subtrahend
      * @return this
      */
-    ref public Matrix4d sub4x3(ref Matrix4d subtrahend) return {
+    ref public Matrix4d sub4x3(Matrix4d subtrahend) return {
         sub4x3(subtrahend, this);
         return this;
     }
 
-    public Matrix4d sub4x3(ref Matrix4d subtrahend, ref Matrix4d dest) {
+    public Matrix4d sub4x3(Matrix4d subtrahend, ref Matrix4d dest) {
         dest._m00(m00 - subtrahend.m00)
         ._m01(m01 - subtrahend.m01)
         ._m02(m02 - subtrahend.m02)
@@ -2090,12 +2090,12 @@ struct Matrix4d {
      *          the other matrix
      * @return this
      */
-    ref public Matrix4d mul4x3ComponentWise(ref Matrix4d other) return {
+    ref public Matrix4d mul4x3ComponentWise(Matrix4d other) return {
         mul4x3ComponentWise(other, this);
         return this;
     }
 
-    public Matrix4d mul4x3ComponentWise(ref Matrix4d other, ref Matrix4d dest) {
+    public Matrix4d mul4x3ComponentWise(Matrix4d other, ref Matrix4d dest) {
         dest._m00(m00 * other.m00)
         ._m01(m01 * other.m01)
         ._m02(m02 * other.m02)
@@ -2591,7 +2591,7 @@ struct Matrix4d {
         return this;
     }
 
-    public Matrix4d invertPerspectiveView(ref Matrix4d view, ref Matrix4d dest) {
+    public Matrix4d invertPerspectiveView(Matrix4d view, ref Matrix4d dest) {
         double a =  1.0 / (m00 * m11);
         double l = -1.0 / (m23 * m32);
         double pm00 =  m11 * a;
@@ -6420,7 +6420,7 @@ struct Matrix4d {
      * @see #translation(double, double, double)
      * @see #rotate(ref Quaterniond)
      * @see #scale(double, double, double)
-     * @see #mulAffine(ref Matrix4d)
+     * @see #mulAffine(Matrix4d)
      * 
      * @param tx
      *          the number of units by which to translate the x-component
@@ -7387,10 +7387,10 @@ struct Matrix4d {
      * <p>
      * Please note that, if <code>this</code> is an orthogonal matrix or a matrix whose columns are orthogonal vectors, 
      * then this method <i>need not</i> be invoked, since in that case <code>this</code> itself is its normal matrix.
-     * In that case, use {@link #set3x3(ref Matrix4d)} to set a given Matrix4f to only the upper left 3x3 submatrix
+     * In that case, use {@link #set3x3(Matrix4d)} to set a given Matrix4f to only the upper left 3x3 submatrix
      * of this matrix.
      * 
-     * @see #set3x3(ref Matrix4d)
+     * @see #set3x3(Matrix4d)
      * 
      * @return this
      */
@@ -7408,10 +7408,10 @@ struct Matrix4d {
      * <p>
      * Please note that, if <code>this</code> is an orthogonal matrix or a matrix whose columns are orthogonal vectors, 
      * then this method <i>need not</i> be invoked, since in that case <code>this</code> itself is its normal matrix.
-     * In that case, use {@link #set3x3(ref Matrix4d)} to set a given Matrix4d to only the upper left 3x3 submatrix
+     * In that case, use {@link #set3x3(Matrix4d)} to set a given Matrix4d to only the upper left 3x3 submatrix
      * of a given matrix.
      * 
-     * @see #set3x3(ref Matrix4d)
+     * @see #set3x3(Matrix4d)
      * 
      * @param dest
      *             will hold the result
@@ -7476,10 +7476,10 @@ struct Matrix4d {
      * <p>
      * Please note that, if <code>this</code> is an orthogonal matrix or a matrix whose columns are orthogonal vectors, 
      * then this method <i>need not</i> be invoked, since in that case <code>this</code> itself is its normal matrix.
-     * In that case, use {@link Matrix3d#set(ref Matrix4d)} to set a given Matrix3d to only the upper left 3x3 submatrix
+     * In that case, use {@link Matrix3d#set(Matrix4d)} to set a given Matrix3d to only the upper left 3x3 submatrix
      * of this matrix.
      * 
-     * @see Matrix3d#set(ref Matrix4d)
+     * @see Matrix3d#set(Matrix4d)
      * @see #get3x3(ref Matrix3d)
      * 
      * @param dest
@@ -7557,7 +7557,7 @@ struct Matrix4d {
      * and store it into <code>dest</code>.
      * All other values of <code>dest</code> will be set to {@link #identity() identity}.
      * <p>
-     * The cofactor matrix can be used instead of {@link #normal(ref Matrix4d)} to transform normals
+     * The cofactor matrix can be used instead of {@link #normal(Matrix4d)} to transform normals
      * when the orientation of the normals with respect to the surface should be preserved.
      * 
      * @param dest
@@ -8682,7 +8682,7 @@ struct Matrix4d {
      * Apply a symmetric orthographic projection transformation for a right-handed coordinate system
      * using the given NDC z range to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, bool, ref Matrix4d) ortho()} with
+     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, bool, Matrix4d) ortho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -8749,7 +8749,7 @@ struct Matrix4d {
      * Apply a symmetric orthographic projection transformation for a right-handed coordinate system
      * using OpenGL's NDC z range of <code>[-1..+1]</code> to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, ref Matrix4d) ortho()} with
+     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, Matrix4d) ortho()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -8855,7 +8855,7 @@ struct Matrix4d {
      * Apply a symmetric orthographic projection transformation for a left-handed coordinate system
      * using the given NDC z range to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, bool, ref Matrix4d) orthoLH()} with
+     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, bool, Matrix4d) orthoLH()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -8922,7 +8922,7 @@ struct Matrix4d {
      * Apply a symmetric orthographic projection transformation for a left-handed coordinate system
      * using OpenGL's NDC z range of <code>[-1..+1]</code> to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, ref Matrix4d) orthoLH()} with
+     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, Matrix4d) orthoLH()} with
      * <code>left=-width/2</code>, <code>right=+width/2</code>, <code>bottom=-height/2</code> and <code>top=+height/2</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -9159,7 +9159,7 @@ struct Matrix4d {
      * Apply an orthographic projection transformation for a right-handed coordinate system
      * to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, ref Matrix4d) ortho()} with
+     * This method is equivalent to calling {@link #ortho(double, double, double, double, double, double, Matrix4d) ortho()} with
      * <code>zNear=-1</code> and <code>zFar=+1</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -9172,7 +9172,7 @@ struct Matrix4d {
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #ortho(double, double, double, double, double, double, ref Matrix4d)
+     * @see #ortho(double, double, double, double, double, double, Matrix4d)
      * @see #setOrtho2D(double, double, double, double)
      * 
      * @param left
@@ -9257,7 +9257,7 @@ struct Matrix4d {
     /**
      * Apply an orthographic projection transformation for a left-handed coordinate system to this matrix and store the result in <code>dest</code>.
      * <p>
-     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, ref Matrix4d) orthoLH()} with
+     * This method is equivalent to calling {@link #orthoLH(double, double, double, double, double, double, Matrix4d) orthoLH()} with
      * <code>zNear=-1</code> and <code>zFar=+1</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
@@ -9270,7 +9270,7 @@ struct Matrix4d {
      * <p>
      * Reference: <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html#ortho">http://www.songho.ca</a>
      * 
-     * @see #orthoLH(double, double, double, double, double, double, ref Matrix4d)
+     * @see #orthoLH(double, double, double, double, double, double, Matrix4d)
      * @see #setOrtho2DLH(double, double, double, double)
      * 
      * @param left
@@ -13165,7 +13165,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d shadow(ref Vector4d light, ref Matrix4d planeTransform, ref Matrix4d dest) {
+    public Matrix4d shadow(ref Vector4d light, Matrix4d planeTransform, ref Matrix4d dest) {
         // compute plane equation by transforming (y = 0)
         double a = planeTransform.m10;
         double b = planeTransform.m11;
@@ -13193,12 +13193,12 @@ struct Matrix4d {
      *          the transformation to transform the implied plane <code>y = 0</code> before applying the projection
      * @return this
      */
-    ref public Matrix4d shadow(ref Vector4d light, ref Matrix4d planeTransform) return {
+    ref public Matrix4d shadow(ref Vector4d light, Matrix4d planeTransform) return {
         shadow(light, planeTransform, this);
         return this;
     }
 
-    public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, ref Matrix4d planeTransform, ref Matrix4d dest) {
+    public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, Matrix4d planeTransform, ref Matrix4d dest) {
         // compute plane equation by transforming (y = 0)
         double a = planeTransform.m10;
         double b = planeTransform.m11;
@@ -13232,7 +13232,7 @@ struct Matrix4d {
      *          the transformation to transform the implied plane <code>y = 0</code> before applying the projection
      * @return this
      */
-    ref public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, ref Matrix4d planeTransform) return {
+    ref public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, Matrix4d planeTransform) return {
         shadow(lightX, lightY, lightZ, lightW, planeTransform, this);
         return this;
     }
@@ -13452,7 +13452,7 @@ struct Matrix4d {
         return result;
     }
 
-    public bool equals(ref Matrix4d m, double delta) {
+    public bool equals(Matrix4d m, double delta) {
         if (this == m)
             return true;
         if (!Math.equals(m00, m.m00, delta))
@@ -13708,7 +13708,7 @@ struct Matrix4d {
         return this;
     }
 
-    public Matrix4d projectedGridRange(ref Matrix4d projector, double sLower, double sUpper, ref Matrix4d dest) {
+    public Matrix4d projectedGridRange(Matrix4d projector, double sLower, double sUpper, ref Matrix4d dest) {
         // Compute intersection with frustum edges and plane
         double minX = double.infinity, minY = double.infinity;
         double maxX = -double.infinity, maxY = -double.infinity;
@@ -13793,7 +13793,7 @@ struct Matrix4d {
         return dest;
     }
 
-    public Matrix4d orthoCrop(ref Matrix4d view, ref Matrix4d dest) {
+    public Matrix4d orthoCrop(Matrix4d view, ref Matrix4d dest) {
         // determine min/max world z and min/max orthographically view-projected x/y
         double minX = double.infinity, maxX = -double.infinity;
         double minY = double.infinity, maxY = -double.infinity;
@@ -13984,12 +13984,12 @@ struct Matrix4d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    ref public Matrix4d lerp(ref Matrix4d other, double t) return {
+    ref public Matrix4d lerp(Matrix4d other, double t) return {
         lerp(other, t, this);
         return this;
     }
 
-    public Matrix4d lerp(ref Matrix4d other, double t, ref Matrix4d dest) {
+    public Matrix4d lerp(Matrix4d other, double t, ref Matrix4d dest) {
         dest._m00(Math.fma(other.m00 - m00, t, m00))
         ._m01(Math.fma(other.m01 - m01, t, m01))
         ._m02(Math.fma(other.m02 - m02, t, m02))
@@ -14025,7 +14025,7 @@ struct Matrix4d {
      * <p>
      * This method is equivalent to calling: <code>mulAffine(new Matrix4d().lookAt(new Vector3d(), new Vector3d(dir).negate(), up).invertAffine(), dest)</code>
      * 
-     * @see #rotateTowards(double, double, double, double, double, double, ref Matrix4d)
+     * @see #rotateTowards(double, double, double, double, double, double, Matrix4d)
      * @see #rotationTowards(ref Vector3d, Vector3d)
      * 
      * @param direction

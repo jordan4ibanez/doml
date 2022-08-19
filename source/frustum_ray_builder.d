@@ -54,7 +54,7 @@ struct FrustumRayBuilder {
      * @param m
      *          the {@link Matrix4d} to create the frustum from
      */
-    this(ref Matrix4d m) {
+    this(Matrix4d m) {
         set(m);
     }
 
@@ -70,7 +70,7 @@ struct FrustumRayBuilder {
      *          the {@link Matrix4d matrix} to update the frustum corner rays and origin with
      * @return this
      */
-    ref public FrustumRayBuilder set(ref Matrix4d m) return {
+    ref public FrustumRayBuilder set(Matrix4d m) return {
         float nxX = m.m03 + m.m00, nxY = m.m13 + m.m10, nxZ = m.m23 + m.m20, d1 = m.m33 + m.m30;
         float pxX = m.m03 - m.m00, pxY = m.m13 - m.m10, pxZ = m.m23 - m.m20, d2 = m.m33 - m.m30;
         float nyX = m.m03 + m.m01, nyY = m.m13 + m.m11, nyZ = m.m23 + m.m21;

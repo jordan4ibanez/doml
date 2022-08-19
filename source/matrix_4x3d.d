@@ -604,7 +604,7 @@ struct Matrix4x3d {
      *          the matrix to copy the values from
      * @return this
      */
-    ref public Matrix4x3d set(ref Matrix4d m) return {
+    ref public Matrix4x3d set(Matrix4d m) return {
         m00 = m.m00;
         m01 = m.m01;
         m02 = m.m02;

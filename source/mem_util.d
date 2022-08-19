@@ -53,7 +53,7 @@ import matrix_4x3d;
 
 
 
-public double get(ref Matrix4d m, int column, int row) {
+public double get(Matrix4d m, int column, int row) {
     switch (column) {
     case 0:
         switch (row) {

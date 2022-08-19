@@ -1,4 +1,4 @@
-module frustum_intersect;
+module frustum_intersect_test;
 
 import Math = math;
 
@@ -166,23 +166,23 @@ struct FrustumIntersection {
     /**
      * Create a new {@link FrustumIntersection} from the given {@link Matrix4d matrix} by extracing the matrix's frustum planes.
      * <p>
-     * In order to update the compute frustum planes later on, call {@link #set(ref Matrix4d)}.
+     * In order to update the compute frustum planes later on, call {@link #set(Matrix4d)}.
      * 
-     * @see #set(ref Matrix4d)
+     * @see #set(Matrix4d)
      * 
      * @param m
      *          the {@link Matrix4d} to create the frustum culler from
      */
-    this(ref Matrix4d m) {
+    this(Matrix4d m) {
         set(m, true);
     }
 
     /**
      * Create a new {@link FrustumIntersection} from the given {@link Matrix4d matrix} by extracing the matrix's frustum planes.
      * <p>
-     * In order to update the compute frustum planes later on, call {@link #set(ref Matrix4d)}.
+     * In order to update the compute frustum planes later on, call {@link #set(Matrix4d)}.
      * 
-     * @see #set(ref Matrix4d)
+     * @see #set(Matrix4d)
      * 
      * @param m
      *          the {@link Matrix4d} to create the frustum culler from
@@ -191,7 +191,7 @@ struct FrustumIntersection {
      *          {@link #intersectSphere(Vector3d, float)} or {@link #intersectSphere(float, float, float, float)} will used.
      *          If no spheres need to be tested, then <code>false</code> should be used 
      */
-    this(ref Matrix4d m, bool allowTestSpheres) {
+    this(Matrix4d m, bool allowTestSpheres) {
         set(m, allowTestSpheres);
     }
 
@@ -206,8 +206,7 @@ struct FrustumIntersection {
      * @return this
      */
     ref public FrustumIntersection set(Matrix4d m) return {
-        set(m, true);
-        return this;
+        return set(m, true);
     }
 
     /**
@@ -225,7 +224,7 @@ struct FrustumIntersection {
      *          If no spheres need to be tested, then <code>false</code> should be used
      * @return this
      */
-    ref public FrustumIntersection set(ref Matrix4d m, bool allowTestSpheres) return {
+    ref public FrustumIntersection set(Matrix4d m, bool allowTestSpheres) return {
         float invl;
         nxX = m.m03 + m.m00; nxY = m.m13 + m.m10; nxZ = m.m23 + m.m20; nxW = m.m33 + m.m30;
         if (allowTestSpheres) {

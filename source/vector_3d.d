@@ -550,7 +550,7 @@ struct Vector3d {
         return dest;
     }
 
-    public Vector3d mulProject(ref Matrix4d mat, double w, ref Vector3d dest) {
+    public Vector3d mulProject(Matrix4d mat, double w, ref Vector3d dest) {
         double invW = 1.0 / Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33 * w)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w))) * invW;
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w))) * invW;
@@ -561,7 +561,7 @@ struct Vector3d {
         return dest;
     }
 
-    public Vector3d mulProject(ref Matrix4d mat, ref Vector3d dest) {
+    public Vector3d mulProject(Matrix4d mat, ref Vector3d dest) {
         double invW = 1.0 / Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30))) * invW;
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31))) * invW;
@@ -581,7 +581,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    ref public Vector3d mulProject(ref Matrix4d mat) return {
+    ref public Vector3d mulProject(Matrix4d mat) return {
         double invW = 1.0 / Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30))) * invW;
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31))) * invW;
@@ -682,7 +682,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    ref public Vector3d mulPosition(ref Matrix4d mat) return {
+    ref public Vector3d mulPosition(Matrix4d mat) return {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31)));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, Math.fma(mat.m22, z, mat.m32)));
@@ -712,7 +712,7 @@ struct Vector3d {
     }
 
 
-    public Vector3d mulPosition(ref Matrix4d mat, ref Vector3d dest) {
+    public Vector3d mulPosition(Matrix4d mat, ref Vector3d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31)));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, Math.fma(mat.m22, z, mat.m32)));
@@ -741,7 +741,7 @@ struct Vector3d {
      *          the matrix whose transpose to multiply this vector by
      * @return this
      */
-    ref public Vector3d mulTransposePosition(ref Matrix4d mat) return {
+    ref public Vector3d mulTransposePosition(Matrix4d mat) return {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m01, y, Math.fma(mat.m02, z, mat.m03)));
         double ry = Math.fma(mat.m10, x, Math.fma(mat.m11, y, Math.fma(mat.m12, z, mat.m13)));
         double rz = Math.fma(mat.m20, x, Math.fma(mat.m21, y, Math.fma(mat.m22, z, mat.m23)));
@@ -751,7 +751,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d mulTransposePosition(ref Matrix4d mat, ref Vector3d dest) {
+    public Vector3d mulTransposePosition(Matrix4d mat, ref Vector3d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m01, y, Math.fma(mat.m02, z, mat.m03)));
         double ry = Math.fma(mat.m10, x, Math.fma(mat.m11, y, Math.fma(mat.m12, z, mat.m13)));
         double rz = Math.fma(mat.m20, x, Math.fma(mat.m21, y, Math.fma(mat.m22, z, mat.m23)));
@@ -774,7 +774,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return the <i>w</i> component of the resulting 4D vector after multiplication
      */
-    public double mulPositionW(ref Matrix4d mat) {
+    public double mulPositionW(Matrix4d mat) {
         double w = Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31)));
@@ -785,7 +785,7 @@ struct Vector3d {
         return w;
     }
 
-    public double mulPositionW(ref Matrix4d mat, ref Vector3d dest) {
+    public double mulPositionW(Matrix4d mat, ref Vector3d dest) {
         double w = Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31)));
@@ -806,7 +806,7 @@ struct Vector3d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    ref public Vector3d mulDirection(ref Matrix4d mat) return {
+    ref public Vector3d mulDirection(Matrix4d mat) return {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, mat.m20 * z));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, mat.m21 * z));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, mat.m22 * z));
@@ -836,7 +836,7 @@ struct Vector3d {
     }
 
 
-    public Vector3d mulDirection(ref Matrix4d mat, Vector3d dest) {
+    public Vector3d mulDirection(Matrix4d mat, Vector3d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, mat.m20 * z));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, mat.m21 * z));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, mat.m22 * z));
@@ -866,7 +866,7 @@ struct Vector3d {
      *          the matrix whose transpose to multiply this vector by
      * @return this
      */
-    ref public Vector3d mulTransposeDirection(ref Matrix4d mat) return {
+    ref public Vector3d mulTransposeDirection(Matrix4d mat) return {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m01, y, mat.m02 * z));
         double ry = Math.fma(mat.m10, x, Math.fma(mat.m11, y, mat.m12 * z));
         double rz = Math.fma(mat.m20, x, Math.fma(mat.m21, y, mat.m22 * z));
@@ -876,7 +876,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d mulTransposeDirection(ref Matrix4d mat, ref Vector3d dest) {
+    public Vector3d mulTransposeDirection(Matrix4d mat, ref Vector3d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m01, y, mat.m02 * z));
         double ry = Math.fma(mat.m10, x, Math.fma(mat.m11, y, mat.m12 * z));
         double rz = Math.fma(mat.m20, x, Math.fma(mat.m21, y, mat.m22 * z));

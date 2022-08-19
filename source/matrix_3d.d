@@ -92,7 +92,7 @@ struct Matrix3d {
      * @param mat
      *          the {@link Matrix4d} to copy the values from
      */
-    this(ref Matrix4d mat) {
+    this(Matrix4d mat) {
         set(mat);
     }
 
@@ -412,7 +412,7 @@ struct Matrix3d {
      *          the {@link Matrix4d} to copy the values from
      * @return this
      */
-    ref public Matrix3d set(ref Matrix4d mat) return {
+    ref public Matrix3d set(Matrix4d mat) return {
         m00 = mat.m00;
         m01 = mat.m01;
         m02 = mat.m02;

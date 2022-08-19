@@ -702,7 +702,7 @@ struct Vector4d {
      *          the matrix to multiply by
      * @return this
      */
-    ref public Vector4d mul(ref Matrix4d mat) return {
+    ref public Vector4d mul(Matrix4d mat) return {
         if ((mat.properties & Matrix4d.PROPERTY_AFFINE) != 0)
             mulAffine(mat, this);
         else
@@ -710,7 +710,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector4d mul(ref Matrix4d mat, ref Vector4d dest) {
+    public Vector4d mul(Matrix4d mat, ref Vector4d dest) {
         if ((mat.properties & Matrix4d.PROPERTY_AFFINE) != 0)
             return mulAffine(mat, dest);
         return mulGeneric(mat, dest);
@@ -724,20 +724,20 @@ struct Vector4d {
      *          the matrix whose transpose to multiply the vector with
      * @return this
      */
-    ref public Vector4d mulTranspose(ref Matrix4d mat) return {
+    ref public Vector4d mulTranspose(Matrix4d mat) return {
         if ((mat.properties & Matrix4d.PROPERTY_AFFINE) != 0)
             mulAffineTranspose(mat, this);
         else
             mulGenericTranspose(mat, this);
         return this;
     }
-    public Vector4d mulTranspose(ref Matrix4d mat, ref Vector4d dest) {
+    public Vector4d mulTranspose(Matrix4d mat, ref Vector4d dest) {
         if ((mat.properties & Matrix4d.PROPERTY_AFFINE) != 0)
             return mulAffineTranspose(mat, dest);
         return mulGenericTranspose(mat, dest);
     }
 
-    public Vector4d mulAffine(ref Matrix4d mat, ref Vector4d dest) {
+    public Vector4d mulAffine(Matrix4d mat, ref Vector4d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w)));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, Math.fma(mat.m22, z, mat.m32 * w)));
@@ -748,7 +748,7 @@ struct Vector4d {
         return dest;
     }
 
-    private Vector4d mulGeneric(ref Matrix4d mat, ref Vector4d dest) {
+    private Vector4d mulGeneric(Matrix4d mat, ref Vector4d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w)));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w)));
         double rz = Math.fma(mat.m02, x, Math.fma(mat.m12, y, Math.fma(mat.m22, z, mat.m32 * w)));
@@ -760,7 +760,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d mulAffineTranspose(ref Matrix4d mat, ref Vector4d dest) {
+    public Vector4d mulAffineTranspose(Matrix4d mat, ref Vector4d dest) {
         double x = this.x, y = this.y, z = this.z, w = this.w;
         dest.x = Math.fma(mat.m00, x, Math.fma(mat.m01, y, mat.m02 * z));
         dest.y = Math.fma(mat.m10, x, Math.fma(mat.m11, y, mat.m12 * z));
@@ -768,7 +768,7 @@ struct Vector4d {
         dest.w = Math.fma(mat.m30, x, Math.fma(mat.m31, y, mat.m32 * z + w));
         return dest;
     }
-    private Vector4d mulGenericTranspose(ref Matrix4d mat, ref Vector4d dest) {
+    private Vector4d mulGenericTranspose(Matrix4d mat, ref Vector4d dest) {
         double x = this.x, y = this.y, z = this.z, w = this.w;
         dest.x = Math.fma(mat.m00, x, Math.fma(mat.m01, y, Math.fma(mat.m02, z, mat.m03 * w)));
         dest.y = Math.fma(mat.m10, x, Math.fma(mat.m11, y, Math.fma(mat.m12, z, mat.m13 * w)));
@@ -806,7 +806,7 @@ struct Vector4d {
         return dest;
     }
 
-    public Vector4d mulProject(ref Matrix4d mat, ref Vector4d dest) {
+    public Vector4d mulProject(Matrix4d mat, ref Vector4d dest) {
         double invW = 1.0 / Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33 * w)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w))) * invW;
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w))) * invW;
@@ -825,7 +825,7 @@ struct Vector4d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    ref public Vector4d mulProject(ref Matrix4d mat) return {
+    ref public Vector4d mulProject(Matrix4d mat) return {
         double invW = 1.0 / Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33 * w)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w))) * invW;
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w))) * invW;
@@ -837,7 +837,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector3d mulProject(ref Matrix4d mat, ref Vector3d dest) {
+    public Vector3d mulProject(Matrix4d mat, ref Vector3d dest) {
         double invW = 1.0 / Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33 * w)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w))) * invW;
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w))) * invW;
