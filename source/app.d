@@ -6,7 +6,7 @@ import tests.dunit_tests;
 
 import tests.math_test;
 import tests.axis_angle_test;
-import tests.frustum_intersect;
+import tests.frustum_intersect_test;
 
 import tests.vector_2d_test;
 import tests.vector_2i_test;
