@@ -300,7 +300,7 @@ public Matrix3d set(ref Matrix3d m, int column, int row, double value) {
 }
 
 
-public void copy(Matrix3x2d src, ref Matrix3x2d dest) {
+public void copy(ref Matrix3x2d src, ref Matrix3x2d dest) {
     dest._m00 = src.m00;
     dest._m01 = src.m01;
     dest._m10 = src.m10;
@@ -344,7 +344,7 @@ public void copy(ref Matrix2d src, ref Matrix3x2d dest) {
     dest._m21 = 0.0;
 }
 
-public void copy(Matrix3x2d src, ref Matrix2d dest) {
+public void copy(ref Matrix3x2d src, ref Matrix2d dest) {
     dest._m00 = src.m00;
     dest._m01 = src.m01;
     dest._m10 = src.m10;
@@ -367,7 +367,7 @@ public void copy(double[] arr, int off, ref Matrix2d dest) {
     dest._m11 = arr[off+3];
 }
 
-public void copy(Matrix3x2d src, ref double[] dest, int off) {
+public void copy(ref Matrix3x2d src, ref double[] dest, int off) {
     dest[off+0] = src.m00;
     dest[off+1] = src.m01;
     dest[off+2] = src.m10;
@@ -402,7 +402,7 @@ public void copy4x4(Matrix4x3d src, ref double[] dest, int off) {
     dest[off+15] = 1.0;
 }
 
-public void copy3x3(Matrix3x2d src, ref double[] dest, int off) {
+public void copy3x3(ref Matrix3x2d src, ref double[] dest, int off) {
     dest[off+0] = src.m00;
     dest[off+1] = src.m01;
     dest[off+2] = 0.0;
@@ -414,7 +414,7 @@ public void copy3x3(Matrix3x2d src, ref double[] dest, int off) {
     dest[off+8] = 1.0;
 }
 
-public void copy4x4(Matrix3x2d src, ref double[] dest, int off) {
+public void copy4x4(ref Matrix3x2d src, ref double[] dest, int off) {
     dest[off+0]  = src.m00;
     dest[off+1]  = src.m01;
     dest[off+2]  = 0.0;

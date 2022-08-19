@@ -1625,12 +1625,12 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    ref public Matrix4d mul(Matrix3x2d right) return {
+    ref public Matrix4d mul(ref Matrix3x2d right) return {
         mul(right, this);
         return this;
     }
 
-    public Matrix4d mul(Matrix3x2d right, ref Matrix4d dest) {
+    public Matrix4d mul(ref Matrix3x2d right, ref Matrix4d dest) {
         double nm00 = m00 * right.m00 + m10 * right.m01;
         double nm01 = m01 * right.m00 + m11 * right.m01;
         double nm02 = m02 * right.m00 + m12 * right.m01;

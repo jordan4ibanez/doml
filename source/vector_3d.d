@@ -628,7 +628,7 @@ struct Vector3d {
      *          the matrix
      * @return this
      */
-    ref public Vector3d mul(Matrix3x2d mat) return {
+    ref public Vector3d mul(ref Matrix3x2d mat) return {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, mat.m20 * z));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, mat.m21 * z));
         this.x = rx;
@@ -636,7 +636,7 @@ struct Vector3d {
         return this;
     }
 
-    public Vector3d mul(Matrix3x2d mat, ref Vector3d dest) {
+    public Vector3d mul(ref Matrix3x2d mat, ref Vector3d dest) {
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, mat.m20 * z));
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, mat.m21 * z));
         dest.x = rx;

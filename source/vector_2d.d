@@ -464,7 +464,7 @@ struct Vector2d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    ref public Vector2d mulPosition(Matrix3x2d mat) return {
+    ref public Vector2d mulPosition(ref Matrix3x2d mat) return {
         double rx = mat.m00 * x + mat.m10 * y + mat.m20;
         double ry = mat.m01 * x + mat.m11 * y + mat.m21;
         this.x = rx;
@@ -472,7 +472,7 @@ struct Vector2d {
         return this;
     }
 
-    public Vector2d mulPosition(Matrix3x2d mat, ref Vector2d dest) {
+    public Vector2d mulPosition(ref Matrix3x2d mat, ref Vector2d dest) {
         double rx = mat.m00 * x + mat.m10 * y + mat.m20;
         double ry = mat.m01 * x + mat.m11 * y + mat.m21;
         dest.x = rx;
@@ -489,7 +489,7 @@ struct Vector2d {
      *          the matrix to multiply this vector by
      * @return this
      */
-    ref public Vector2d mulDirection(Matrix3x2d mat) return {
+    ref public Vector2d mulDirection(ref Matrix3x2d mat) return {
         double rx = mat.m00 * x + mat.m10 * y;
         double ry = mat.m01 * x + mat.m11 * y;
         this.x = rx;
@@ -497,7 +497,7 @@ struct Vector2d {
         return this;
     }
 
-    public Vector2d mulDirection(Matrix3x2d mat, ref Vector2d dest) {
+    public Vector2d mulDirection(ref Matrix3x2d mat, ref Vector2d dest) {
         double rx = mat.m00 * x + mat.m10 * y;
         double ry = mat.m01 * x + mat.m11 * y;
         dest.x = rx;
