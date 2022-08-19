@@ -4,7 +4,7 @@ import tests.dunit_tests;
 import Math = math;
 import matrix_4d;
 import axis_angle_4d;
-import frustum_intersection;
+import frustum_intersect_test;
 
 
 /*
