@@ -195,12 +195,14 @@ void testMatrix4d() {
 
         Matrix4d m = Matrix4d(m00,m01,m02,m03,m10,m11,m12,m13,m20,m21,m22,m23,m30,m31,m32,m33);
         Matrix4d expect = Matrix4d(m00,m10,m20,m03,m01,m11,m21,m13,m02,m12,m22,m23,m30,m31,m32,m33);
-        assertMatrix4dEquals(Matrix4d(m).transpose3x3(),expect, 1E-5f);
+
+        Matrix4d testUnit3 = Matrix4d(m).transpose3x3();
+
+        assertMatrix4dEquals(testUnit3,expect, 1E-5f);
         Matrix3d expect1 = Matrix3d(m00,m10,m20,m01,m11,m21,m02,m12,m22);
         Matrix4d expect2 = Matrix4d(expect1);
         Matrix4d testUnit1 = Matrix4d();
         assertMatrix4dEquals(Matrix4d(m).transpose3x3(testUnit1),expect2, 1E-5f);
-
         Matrix3d testUnit2 = Matrix3d();
         assertMatrix3dEquals(Matrix4d(m).transpose3x3(testUnit2),expect1, 1E-5f);
     }
@@ -208,10 +210,11 @@ void testMatrix4d() {
     // testPositiveXRotateY
     {
         Vector3d dir = Vector3d();
-        Matrix4d m = Matrix4d()
-                .rotateY(cast(float) Math.toRadians(90));
+        Matrix4d m = Matrix4d();
+        m.rotateY(Math.toRadians(90));
         m.positiveX(dir);
-        assertVector3dEquals(Vector3d(0, 0, 1), dir, 1E-7f);
+        Vector3d testUnit = Vector3d(0, 0, 1);
+        assertVector3dEquals(testUnit, dir, 1E-7f);
     }
 
     // testPositiveYRotateX
