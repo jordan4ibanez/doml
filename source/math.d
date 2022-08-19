@@ -90,29 +90,14 @@ import rounding_mode;
 
 const double PI = math_pi;
 const double PI2 = PI * 2.0;
-const float PI_f = cast(float) PI;
-const float PI2_f = PI_f * 2.0f;
 const double PIHalf = PI * 0.5;
-const float PIHalf_f = cast(float) (PI * 0.5);
 const double PI_4 = PI * 0.25;
 const double PI_INV = 1.0 / PI;
 private const int lookupBits = Options.SIN_LOOKUP_BITS;
 private const int lookupTableSize = 1 << lookupBits;
 private const int lookupTableSizeMinus1 = lookupTableSize - 1;
 private const int lookupTableSizeWithMargin = lookupTableSize + 1;
-private const float pi2OverLookupSize = PI2_f / lookupTableSize;
-private const float lookupSizeOverPi2 = lookupTableSize / PI2_f;
-private const float[] sinTable = {
-    // Thanks to brianush1 for teaching me inline compiled functions
-    float[] tempTable;
-    if (Options.FASTMATH && Options.SIN_LOOKUP) {
-        for (int i = 0; i < lookupTableSizeWithMargin; i++) {
-            double d = i * pi2OverLookupSize;
-            tempTable ~= cast(float) sin(d);
-        }
-    }
-    return tempTable;
-}();
+
 
 // Credit: https://forum.dlang.org/post/bug-5900-3@http.d.puremagic.com%2Fissues%2F
 /// Converts from degrees to radians.
@@ -261,67 +246,18 @@ double sin_roquen_newk(double v) {
     return x + x*x2*r;
 }
 
-/**
-* Reference: <a href="http://www.java-gaming.org/topics/extremely-fast-sine-cosine/36469/msg/349515/view.html#msg349515">http://www.java-gaming.org/</a>
-*/
-float sin_theagentd_lookup(float rad) {
-    float index = rad * lookupSizeOverPi2;
-    int ii = cast(int)math_floor(index);
-    float alpha = index - ii;
-    int i = ii & lookupTableSizeMinus1;
-    float sin1 = sinTable[i];
-    float sin2 = sinTable[i + 1];
-    return sin1 + (sin2 - sin1) * alpha;
-}
-
-float sin(float rad) {
-    if (Options.FASTMATH) {
-        if (Options.SIN_LOOKUP)
-            return sin_theagentd_lookup(rad);
-        return cast(float) sin_roquen_newk(rad);
-    }
-    return cast(float) sin(rad);
-}
 double sin(double rad) {
-    if (Options.FASTMATH) {
-        if (Options.SIN_LOOKUP)
-            return sin_theagentd_lookup(cast(float) rad);
-        return sin_roquen_newk(rad);
-    }
     return math_sin(rad);
 }
 
-float cos(float rad) {
-    if (Options.FASTMATH)
-        return sin(rad + PIHalf_f);
-    return cast(float) math_cos(rad);
-}
 double cos(double rad) {
-    if (Options.FASTMATH)
-        return math_sin(rad + PIHalf);
     return math_cos(rad);
 }
 
-float cosFromSin(float sin, float angle) {
-    if (Options.FASTMATH)
-        return math_sin(angle + PIHalf_f);
-    return cosFromSinInternal(sin, angle);
-}
-private float cosFromSinInternal(float sin, float angle) {
-    // sin(x)^2 + cos(x)^2 = 1
-    float cos = math_sqrt(1.0f - sin * sin);
-    float a = angle + PIHalf_f;
-    float b = a - cast(int)(a / PI2_f) * PI2_f;
-    if (b < 0.0)
-        b = PI2_f + b;
-    if (b >= PI_f)
-        return -cos;
-    return cos;
-}
 double cosFromSin(double sin, double angle) {
-    if (Options.FASTMATH){
-        return math_sin(angle + PIHalf);
-    }
+    //if (Options.FASTMATH){
+        // return math_sin(angle + PIHalf);
+    // }
     // sin(x)^2 + cos(x)^2 = 1
     double cos = math_sqrt(1.0 - sin * sin);
     double a = angle + PIHalf;
@@ -335,49 +271,22 @@ double cosFromSin(double sin, double angle) {
 
 /* Other math functions not yet approximated */
 
-// float sqrt(float r) {
-    // return cast(float) math_sqrt(r);
-// }
 double sqrt(double r) {
     return math_sqrt(r);
 }
-// double sqrt(long r) {
-    // return math_sqrt(cast(double)r);
-// }
 
-// int sqrt(int r) {
-    // return cast(int)math_sqrt(cast(double)r);
-// }
-
-// float invsqrt(float r) {
-    // return 1.0f / cast(float) math_sqrt(r);
-// }
 double invsqrt(double r) {
     return 1.0 / math_sqrt(r);
 }
 
-float tan(float r) {
-    return cast(float) math_tan(r);
-}
 double tan(double r) {
     return math_tan(r);
 }
 
-float acos(float r) {
-    return cast(float) math_acos(r);
-}
 double acos(double r) {
     return math_acos(r);
 }
 
-float safeAcos(float v) {
-    if (v < -1.0f)
-        return PI_f;
-    else if (v > +1.0f)
-        return 0.0f;
-    else
-        return math_acos(v);
-}
 double safeAcos(double v) {
     if (v < -1.0)
         return PI;
@@ -387,46 +296,15 @@ double safeAcos(double v) {
         return math_acos(v);
 }
 
-/**
-    * https://math.stackexchange.com/questions/1098487/atan2-faster-approximation/1105038#answer-1105038
-    */
-private double fastAtan2(double y, double x) {
-    double ax = x >= 0.0 ? x : -x, ay = y >= 0.0 ? y : -y;
-    double a = math_min(ax, ay) / math_max(ax, ay);
-    double s = a * a;
-    double r = ((-0.0464964749 * s + 0.15931422) * s - 0.327622764) * s * a + a;
-    if (ay > ax)
-        r = 1.57079637 - r;
-    if (x < 0.0)
-        r = 3.14159274 - r;
-    return y >= 0 ? r : -r;
-}
 
-// float atan2(float y, float x) {
-    // return cast(float) math_atan2(y, x);
-// }
 double atan2(double y, double x) {
-    if (Options.FASTMATH)
-        return fastAtan2(y, x);
     return math_atan2(y, x);
 }
 
-float asin(float r) {
-    return cast(float) math_asin(r);
-}
 double asin(double r) {
     return math_asin(r);
 }
-float safeAsin(float r) {
-    return r <= -1.0f ? -PIHalf_f : r >= 1.0f ? PIHalf_f : math_asin(r);
-}
-double safeAsin(double r) {
-    return r <= -1.0 ? -PIHalf : r >= 1.0 ? PIHalf : math_asin(r);
-}
 
-float abs(float r) {
-    return math_abs(r);
-}
 double abs(double r) {
     return math_abs(r);
 }
@@ -436,9 +314,6 @@ bool equals(double a, double b, double delta) {
     return doubleToLongBits(a) == doubleToLongBits(b) || abs(a - b) <= delta;
 }
 
-bool absEqualsOne(float r) {
-    return (floatToRawIntBits(r) & 0x7FFFFFFF) == 0x3F800000;
-}
 bool absEqualsOne(double r) {
     return (doubleToLongBits(r) & 0x7FFFFFFFFFFFFFFFL) == 0x3FF0000000000000L;
 }
@@ -458,13 +333,7 @@ int min(int x, int y) {
 double min(double a, double b) {
     return a < b ? a : b;
 }
-float min(float a, float b) {
-    return a < b ? a : b;
-}
 
-float max(float a, float b) {
-    return a > b ? a : b;
-}
 double max(double a, double b) {
     return a > b ? a : b;
 }
@@ -473,9 +342,6 @@ ulong max(ulong a, ulong b) {
     return a > b ? a : b;
 }
 
-float clamp(float a, float b, float val){
-    return max(a,math_min(b,val));
-}
 double clamp(double a, double b, double val) {
     return max(a,math_min(b,val));
 }
@@ -496,24 +362,12 @@ double floor(double v) {
     return math_floor(v);
 }
 
-float floor(float v) {
-    return cast(float) math_floor(v);
-}
-
 double ceil(double v) {
     return math_ceil(v);
 }
 
-float ceil(float v) {
-    return cast(float) math_ceil(v);
-}
-
 long round(double v) {
     return cast(long) math_round(v);
-}
-
-int round(float v) {
-    return cast(int) math_round(v);
 }
 
 double exp(double a) {
@@ -524,44 +378,9 @@ bool isFinite(double d) {
     return math_abs(d) <= double.max;
 }
 
-bool isFinite(float f) {
-    return math_abs(f) <= float.max;
-}
-
-float fma(float a, float b, float c) {
-    return math_fma(a, b, c);
-}
-
-float fma(double a, float b, double c) {
-    return math_fma(a, b, c);
-}
-
-float fma(double a, float b, float c) {
-    return math_fma(a, b, c);
-}
-
 double fma(double a, double b, double c) {
     return math_fma(a, b, c);
 }
-
-double fma(int a, double b, int c) {
-    return math_fma(a, b, c);
-}
-
-double fma(int a, int b, int c) {
-    return math_fma(a, b, c);
-}
-
-double fma(int a, int b, double c) {
-    return math_fma(a, b, c);
-}
-
-
-
-double fma(double a, int b, int c) {
-    return math_fma(a, b, c);
-}
-
 
 int roundUsing(double v, int mode) {
     switch (mode) {
@@ -583,34 +402,14 @@ int roundUsing(double v, int mode) {
     }
 }
 
-float lerp(float a, float b, float t){
-    return math_fma(b - a, t, a);
-}
 double lerp(double a, double b, double t) {
     return math_fma(b - a, t, a);
-}
-
-float biLerp(float q00, float q10, float q01, float q11, float tx, float ty) {
-    float lerpX1 = lerp(q00, q10, tx);
-    float lerpX2 = lerp(q01, q11, tx);
-    return lerp(lerpX1, lerpX2, ty);
 }
 
 double biLerp(double q00, double q10, double q01, double q11, double tx, double ty) {
     double lerpX1 = lerp(q00, q10, tx);
     double lerpX2 = lerp(q01, q11, tx);
     return lerp(lerpX1, lerpX2, ty);
-}
-
-float triLerp(float q000, float q100, float q010, float q110, float q001, float q101, float q011, float q111, float tx,
- float ty, float tz) {
-    float x00 = lerp(q000, q100, tx);
-    float x10 = lerp(q010, q110, tx);
-    float x01 = lerp(q001, q101, tx);
-    float x11 = lerp(q011, q111, tx);
-    float y0 = lerp(x00, x10, ty);
-    float y1 = lerp(x01, x11, ty);
-    return lerp(y0, y1, tz);
 }
 
 double triLerp(double q000, double q100, double q010, double q110, double q001, double q101, double q011, double q111,
@@ -622,16 +421,6 @@ double triLerp(double q000, double q100, double q010, double q110, double q001, 
     double y0 = lerp(x00, x10, ty);
     double y1 = lerp(x01, x11, ty);
     return lerp(y0, y1, tz);
-}
-
-int roundHalfEven(float v) {
-    return cast(int) math_rint(v);
-}
-int roundHalfDown(float v) {
-    return (v > 0) ? cast(int) math_ceil(v - 0.5) : cast(int) math_floor(v + 0.5);
-}
-int roundHalfUp(float v) {
-    return (v > 0) ? cast(int) math_floor(v + 0.5) : cast(int) math_ceil(v - 0.5);
 }
 
 int roundHalfEven(double v) {
@@ -649,30 +438,23 @@ double random() {
     return math_uniform(0.0, 1.0, random);
 }
 
-double signum(double v) {
-    return math_signum(v);
+double safeAsin(double r) {
+    return r <= -1.0 ? -PIHalf : r >= 1.0 ? PIHalf : math_asin(r);
 }
-float signum(float v) {
+
+double signum(double v) {
     return math_signum(v);
 }
 int signum(int v) {
     int r;
-//#ifdef __HAS_INTEGER_SIGNUM__
     r = math_signum(v);
-//#else
-    // code from java.lang.Integer.signum(int)
     r = (v >> 31) | (-v >>> 31);
-//#endif
     return r;
 }
 int signum(long v) {
     int r;
-//#ifdef __HAS_INTEGER_SIGNUM__
     r = cast(int)math_signum(v);
-//#else
-    // code from java.lang.Long.signum(long)
     r = cast(int) ((v >> 63) | (-v >>> 63));
-//#endif
     return r;
 }
 
