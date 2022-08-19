@@ -383,7 +383,7 @@ public void copy(ref Matrix2d src, ref double[] dest, int off) {
     dest[off+3] = src.m11;
 }
 
-public void copy4x4(ref Matrix4x3d src, ref double[] dest, int off) {
+public void copy4x4(Matrix4x3d src, ref double[] dest, int off) {
     dest[off+0]  = src.m00;
     dest[off+1]  = src.m01;
     dest[off+2]  = src.m02;
