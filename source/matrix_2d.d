@@ -118,7 +118,7 @@ public struct Matrix2d {
      *          the new value
      * @return this
      */
-    public Matrix2d setm00(double m00) {
+    ref public Matrix2d setm00(double m00) return {
         this.m00 = m00;
         return this;
     }
@@ -129,7 +129,7 @@ public struct Matrix2d {
      *          the new value
      * @return this
      */
-    public Matrix2d setm01(double m01) {
+    ref public Matrix2d setm01(double m01) return {
         this.m01 = m01;
         return this;
     }
@@ -140,7 +140,7 @@ public struct Matrix2d {
      *          the new value
      * @return this
      */
-    public Matrix2d setm10(double m10) {
+    ref public Matrix2d setm10(double m10) return {
         this.m10 = m10;
         return this;
     }
@@ -151,7 +151,7 @@ public struct Matrix2d {
      *          the new value
      * @return this
      */
-    public Matrix2d setm11(double m11) {
+    ref public Matrix2d setm11(double m11) return {
         this.m11 = m11;
         return this;
     }
@@ -163,7 +163,7 @@ public struct Matrix2d {
      *          the new value
      * @return this
      */
-    Matrix2d _m00(double m00) {
+    ref Matrix2d _m00(double m00) return {
         this.m00 = m00;
         return this;
     }
@@ -174,7 +174,7 @@ public struct Matrix2d {
      *          the new value
      * @return this
      */
-    Matrix2d _m01(double m01) {
+    ref Matrix2d _m01(double m01) return {
         this.m01 = m01;
         return this;
     }
@@ -185,7 +185,7 @@ public struct Matrix2d {
      *          the new value
      * @return this
      */
-    Matrix2d _m10(double m10) {
+    ref Matrix2d _m10(double m10) return {
         this.m10 = m10;
         return this;
     }
@@ -196,7 +196,7 @@ public struct Matrix2d {
      *          the new value
      * @return this
      */
-    Matrix2d _m11(double m11) {
+    ref Matrix2d _m11(double m11) return {
         this.m11 = m11;
         return this;
     }
@@ -208,7 +208,7 @@ public struct Matrix2d {
      *          the matrix to copy the elements from
      * @return this
      */
-    public Matrix2d set(Matrix2d m) {
+    ref public Matrix2d set(Matrix2d m) return {
         setMatrix2d(m);
         return this;
     }
@@ -227,7 +227,7 @@ public struct Matrix2d {
      *          the matrix to copy the elements from
      * @return this
      */
-    public Matrix2d set(Matrix3x2d m) {
+    ref public Matrix2d set(Matrix3x2d m) return {
         setMatrix3x2d(m);
         return this;
     }
@@ -245,7 +245,7 @@ public struct Matrix2d {
      *          the {@link Matrix3d} to copy the values from
      * @return this
      */
-    public Matrix2d set(Matrix3d m) {
+    ref public Matrix2d set(Matrix3d m) return {
         setMatrix3d(m);
         return this;
     }
@@ -269,8 +269,9 @@ public struct Matrix2d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    public Matrix2d mul(Matrix2d right) {
-        return mul(right, this);
+    ref public Matrix2d mul(Matrix2d right) return {
+        this.mul(right, this);
+        return this;
     }
 
     public Matrix2d mul(Matrix2d right, ref Matrix2d dest) {
@@ -297,8 +298,9 @@ public struct Matrix2d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    public Matrix2d mulLocal(Matrix2d left) {
-        return mulLocal(left, this);
+    ref public Matrix2d mulLocal(Matrix2d left) return {
+        this.mulLocal(left, this);
+        return this;
     }
 
     public Matrix2d mulLocal(Matrix2d left, ref Matrix2d dest) {
@@ -329,8 +331,8 @@ public struct Matrix2d {
      *          the new value of m11
      * @return this
      */
-    public Matrix2d set(double m00, double m01,
-                        double m10, double m11) {
+    ref public Matrix2d set(double m00, double m01,
+                        double m10, double m11) return {
         this.m00 = m00;
         this.m01 = m01;
         this.m10 = m10;
@@ -346,7 +348,7 @@ public struct Matrix2d {
      *          the second column
      * @return this
      */
-    public Matrix2d set(Vector2d col0, Vector2d col1) {
+    ref public Matrix2d set(Vector2d col0, Vector2d col1) return {
         m00 = col0.x;
         m01 = col0.y;
         m10 = col1.x;
@@ -363,8 +365,9 @@ public struct Matrix2d {
      *
      * @return this
      */
-    public Matrix2d invert() {
-        return invert(this);
+    ref public Matrix2d invert() return {
+        this.invert(this);
+        return this;
     }
 
     public Matrix2d invert(ref Matrix2d dest) {
@@ -385,8 +388,9 @@ public struct Matrix2d {
      *
      * @return this
      */
-    public Matrix2d transpose() {
-        return transpose(this);
+    ref public Matrix2d transpose() return {
+        this.transpose(this);
+        return this;
     }
 
     public Matrix2d transpose(ref Matrix2d dest) {
@@ -430,7 +434,7 @@ public struct Matrix2d {
      *
      * @return this
      */
-    public Matrix2d zero() {
+    ref public Matrix2d zero() return {
         MemUtil.zero(this);
         return this;
     }
@@ -440,7 +444,7 @@ public struct Matrix2d {
      *
      * @return this
      */
-    public Matrix2d identity() {
+    ref public Matrix2d identity() return {
         m00 = 1.0;
         m01 = 0.0;
         m10 = 0.0;
@@ -465,8 +469,9 @@ public struct Matrix2d {
      *            the factors of the x and y component, respectively
      * @return this
      */
-    public Matrix2d scale(Vector2d xy) {
-        return scale(xy.x, xy.y, this);
+    ref public Matrix2d scale(Vector2d xy) return {
+        this.scale(xy.x, xy.y, this);
+        return this;
     }
 
     public Matrix2d scale(double x, double y, ref Matrix2d dest) {
@@ -495,8 +500,9 @@ public struct Matrix2d {
      *            the factor of the y component
      * @return this
      */
-    public Matrix2d scale(double x, double y) {
-        return scale(x, y, this);
+    ref public Matrix2d scale(double x, double y) return {
+        this.scale(x, y, this);
+        return this;
     }
 
     public Matrix2d scale(double xy, ref Matrix2d dest) {
@@ -517,7 +523,7 @@ public struct Matrix2d {
      *            the factor for all components
      * @return this
      */
-    public Matrix2d scale(double xy) {
+    ref public Matrix2d scale(double xy) return {
         return scale(xy, xy);
     }
 
@@ -544,8 +550,9 @@ public struct Matrix2d {
      *            the factor of the y component
      * @return this
      */
-    public Matrix2d scaleLocal(double x, double y) {
-        return scaleLocal(x, y, this);
+    ref public Matrix2d scaleLocal(double x, double y) return {
+        this.scaleLocal(x, y, this);
+        return this;
     }
 
     /**
@@ -563,7 +570,7 @@ public struct Matrix2d {
      *             the scale factor in x and y
      * @return this
      */
-    public Matrix2d scaling(double factor) {
+    ref public Matrix2d scaling(double factor) return {
         MemUtil.zero(this);
         m00 = factor;
         m11 = factor;
@@ -579,7 +586,7 @@ public struct Matrix2d {
      *             the scale in y
      * @return this
      */
-    public Matrix2d scaling(double x, double y) {
+    ref public Matrix2d scaling(double x, double y) return {
         MemUtil.zero(this);
         m00 = x;
         m11 = y;
@@ -601,7 +608,7 @@ public struct Matrix2d {
      *             the scale in x and y respectively
      * @return this
      */
-    public Matrix2d scaling(Vector2d xy) {
+    ref public Matrix2d scaling(Vector2d xy) return {
         return scaling(xy.x, xy.y);
     }
 
@@ -622,7 +629,7 @@ public struct Matrix2d {
      *          the angle in radians
      * @return this
      */
-    public Matrix2d rotation(double angle) {
+    ref public Matrix2d rotation(double angle) return {
         double sin = Math.sin(angle);
         double cos = Math.cosFromSin(sin, angle);
         m00 = cos;
@@ -678,8 +685,9 @@ public struct Matrix2d {
      *            the angle in radians
      * @return this
      */
-    public Matrix2d rotate(double angle) {
-        return rotate(angle, this);
+    ref public Matrix2d rotate(double angle) return {
+        this.rotate(angle, this);
+        return this;
     }
 
     public Matrix2d rotate(double angle, ref Matrix2d dest) {
@@ -719,8 +727,9 @@ public struct Matrix2d {
      *            the angle in radians to rotate about the X axis
      * @return this
      */
-    public Matrix2d rotateLocal(double angle) {
-        return rotateLocal(angle, this);
+    ref public Matrix2d rotateLocal(double angle) return {
+        this.rotateLocal(angle, this);
+        return this;
     }
 
     public Matrix2d rotateLocal(double angle, ref Matrix2d dest) {
@@ -764,7 +773,7 @@ public struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setRow(int row, Vector2d src) {
+    ref public Matrix2d setRow(int row, Vector2d src) return {
         return setRow(row, src.x, src.y);
     }
 
@@ -780,7 +789,7 @@ public struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setRow(int row, double x, double y) {
+    ref public Matrix2d setRow(int row, double x, double y) return {
         switch (row) {
             case 0:
                 this.m00 = x;
@@ -820,7 +829,7 @@ public struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setColumn(int column, Vector2d src) {
+    ref public Matrix2d setColumn(int column, Vector2d src) return {
         return setColumn(column, src.x, src.y);
     }
 
@@ -836,7 +845,7 @@ public struct Matrix2d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
-    public Matrix2d setColumn(int column, double x, double y) {
+    ref public Matrix2d setColumn(int column, double x, double y) return {
         switch (column) {
             case 0:
                 this.m00 = x;
@@ -889,7 +898,7 @@ public struct Matrix2d {
      *          the value
      * @return this
      */
-    public Matrix2d set(int column, int row, double value) {
+    ref public Matrix2d set(int column, int row, double value) return {
         switch (column) {
             case 0:
                 switch (row) {
@@ -931,8 +940,9 @@ public struct Matrix2d {
      *
      * @return this
      */
-    public Matrix2d normal() {
-        return normal(this);
+    ref public Matrix2d normal() return {
+        this.normal(this);
+        return this;
     }
 
     /**
@@ -1049,7 +1059,7 @@ public struct Matrix2d {
      *          the other matrix to exchange the values with
      * @return this
      */
-    public Matrix2d swap(Matrix2d other) {
+    ref public Matrix2d swap(Matrix2d other) return {
         MemUtil.swap(this, other);
         return this;
     }
@@ -1061,8 +1071,9 @@ public struct Matrix2d {
      *          the other addend
      * @return this
      */
-    public Matrix2d add(Matrix2d other) {
-        return add(other, this);
+    ref public Matrix2d add(Matrix2d other) return {
+        this.add(other, this);
+        return this;
     }
 
     public Matrix2d add(Matrix2d other, ref Matrix2d dest) {
@@ -1080,8 +1091,9 @@ public struct Matrix2d {
      *          the subtrahend
      * @return this
      */
-    public Matrix2d sub(Matrix2d subtrahend) {
-        return sub(subtrahend, this);
+    ref public Matrix2d sub(Matrix2d subtrahend) return {
+        this.sub(subtrahend, this);
+        return this;
     }
 
     public Matrix2d sub(Matrix2d other, ref Matrix2d dest) {
