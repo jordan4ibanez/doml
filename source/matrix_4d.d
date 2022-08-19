@@ -299,7 +299,7 @@ struct Matrix4d {
      *          bitset of the properties to assume about this matrix
      * @return this
      */
-    public Matrix4d assume(int properties) {
+    ref public Matrix4d assume(int properties) return {
         this.properties = cast(byte) properties;
         return this;
     }
@@ -310,7 +310,7 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d determineProperties() {
+    ref public Matrix4d determineProperties() return {
         int __properties = 0;
         if (m03 == 0.0 && m13 == 0.0) {
             if (m23 == 0.0 && m33 == 1.0) {
@@ -345,7 +345,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm00(double m00) {
+    ref public Matrix4d setm00(double m00) return {
         this.m00 = m00;
         properties &= ~PROPERTY_ORTHONORMAL;
         if (m00 != 1.0)
@@ -359,7 +359,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm01(double m01) {
+    ref public Matrix4d setm01(double m01) return {
         this.m01 = m01;
         properties &= ~PROPERTY_ORTHONORMAL;
         if (m01 != 0.0)
@@ -373,7 +373,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm02(double m02) {
+    ref public Matrix4d setm02(double m02) return {
         this.m02 = m02;
         properties &= ~PROPERTY_ORTHONORMAL;
         if (m02 != 0.0)
@@ -387,7 +387,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm03(double m03) {
+    ref public Matrix4d setm03(double m03) return {
         this.m03 = m03;
         if (m03 != 0.0)
             properties = 0;
@@ -400,7 +400,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm10(double m10) {
+    ref public Matrix4d setm10(double m10) return {
         this.m10 = m10;
         properties &= ~PROPERTY_ORTHONORMAL;
         if (m10 != 0.0)
@@ -414,7 +414,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm11(double m11) {
+    ref public Matrix4d setm11(double m11) return {
         this.m11 = m11;
         properties &= ~PROPERTY_ORTHONORMAL;
         if (m11 != 1.0)
@@ -428,7 +428,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm12(double m12) {
+    ref public Matrix4d setm12(double m12) return {
         this.m12 = m12;
         properties &= ~PROPERTY_ORTHONORMAL;
         if (m12 != 0.0)
@@ -442,7 +442,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm13(double m13) {
+    ref public Matrix4d setm13(double m13) return {
         this.m13 = m13;
         if (m03 != 0.0)
             properties = 0;
@@ -455,7 +455,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm20(double m20) {
+    ref public Matrix4d setm20(double m20) return {
         this.m20 = m20;
         properties &= ~PROPERTY_ORTHONORMAL;
         if (m20 != 0.0)
@@ -469,7 +469,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm21(double m21) {
+    ref public Matrix4d setm21(double m21) return {
         this.m21 = m21;
         properties &= ~PROPERTY_ORTHONORMAL;
         if (m21 != 0.0)
@@ -483,7 +483,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm22(double m22) {
+    ref public Matrix4d setm22(double m22) return {
         this.m22 = m22;
         properties &= ~PROPERTY_ORTHONORMAL;
         if (m22 != 1.0)
@@ -497,7 +497,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm23(double m23) {
+    ref public Matrix4d setm23(double m23) return {
         this.m23 = m23;
         if (m23 != 0.0)
             properties &= ~(PROPERTY_IDENTITY | PROPERTY_AFFINE | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
@@ -510,7 +510,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm30(double m30) {
+    ref public Matrix4d setm30(double m30) return {
         this.m30 = m30;
         if (m30 != 0.0)
             properties &= ~(PROPERTY_IDENTITY | PROPERTY_PERSPECTIVE);
@@ -523,7 +523,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm31(double m31) {
+    ref public Matrix4d setm31(double m31) return {
         this.m31 = m31;
         if (m31 != 0.0)
             properties &= ~(PROPERTY_IDENTITY | PROPERTY_PERSPECTIVE);
@@ -536,7 +536,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm32(double m32) {
+    ref public Matrix4d setm32(double m32) return {
         this.m32 = m32;
         if (m32 != 0.0)
             properties &= ~(PROPERTY_IDENTITY | PROPERTY_PERSPECTIVE);
@@ -549,7 +549,7 @@ struct Matrix4d {
      *          the new value
      * @return this
      */
-    public Matrix4d setm33(double m33) {
+    ref public Matrix4d setm33(double m33) return {
         this.m33 = m33;
         if (m33 != 0.0)
             properties &= ~(PROPERTY_PERSPECTIVE);
@@ -558,7 +558,7 @@ struct Matrix4d {
         return this;
     }
 
-    Matrix4d _properties(int properties) {
+    ref Matrix4d _properties(int properties) return {
         this.properties = properties;
         return this;
     }
@@ -767,7 +767,7 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d identity() {
+    ref public Matrix4d identity() return {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return this;
         _identity();
@@ -803,7 +803,7 @@ struct Matrix4d {
      *          the matrix to copy the values from
      * @return this
      */
-    public Matrix4d set(Matrix4d m) {
+    ref public Matrix4d set(Matrix4d m) return {
         return
         _m00(m.m00).
         _m01(m.m01).
@@ -832,12 +832,12 @@ struct Matrix4d {
      *          the matrix to copy the transposed values from
      * @return this
      */
-    public Matrix4d setTransposed(Matrix4d m) {
+    ref public Matrix4d setTransposed(Matrix4d m) return {
         if ((m.properties & PROPERTY_IDENTITY) != 0)
             return this.identity();
         return setTransposedInternal(m);
     }
-    private Matrix4d setTransposedInternal(Matrix4d m) {
+    ref private Matrix4d setTransposedInternal(Matrix4d m) return {
         double nm10 = m.m01, nm12 = m.m21, nm13 = m.m31;
         double nm20 = m.m02, nm21 = m.m12, nm30 = m.m03;
         double nm31 = m.m13, nm32 = m.m23;
@@ -859,7 +859,7 @@ struct Matrix4d {
      *          the matrix to copy the values from
      * @return this
      */
-    public Matrix4d set(Matrix4x3d m) {
+    ref public Matrix4d set(Matrix4x3d m) return {
         return
         _m00(m.m00).
         _m01(m.m01).
@@ -891,7 +891,7 @@ struct Matrix4d {
      *          the {@link Matrix3d}
      * @return this
      */
-    public Matrix4d set(Matrix3d mat) {
+    ref public Matrix4d set(Matrix3d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -920,7 +920,7 @@ struct Matrix4d {
      *          the {@link Matrix4d}
      * @return this
      */
-    public Matrix4d set3x3(Matrix4d mat) {
+    ref public Matrix4d set3x3(Matrix4d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -944,7 +944,7 @@ struct Matrix4d {
      *          the {@link Matrix4x3d}
      * @return this
      */
-    public Matrix4d set4x3(Matrix4x3d mat) {
+    ref public Matrix4d set4x3(Matrix4x3d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -970,7 +970,7 @@ struct Matrix4d {
      *          the {@link Matrix4d}
      * @return this
      */
-    public Matrix4d set4x3(Matrix4d mat) {
+    ref public Matrix4d set4x3(Matrix4d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -994,7 +994,7 @@ struct Matrix4d {
      *          the {@link AxisAngle4d}
      * @return this
      */
-    public Matrix4d set(AxisAngle4d axisAngle) {
+    ref public Matrix4d set(AxisAngle4d axisAngle) return {
         double x = axisAngle.x;
         double y = axisAngle.y;
         double z = axisAngle.z;
@@ -1046,7 +1046,7 @@ struct Matrix4d {
      *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d set(Quaterniond q) {
+    ref public Matrix4d set(Quaterniond q) return {
         return rotation(q);
     }
 
@@ -1062,8 +1062,9 @@ struct Matrix4d {
      *          the right operand of the multiplication
      * @return this
      */
-    public Matrix4d mul(Matrix4d right) {
-        return mul(right, this);
+    ref public Matrix4d mul(Matrix4d right) return {
+        mul(right, this);
+        return this;
     }
 
     public Matrix4d mul(Matrix4d right, ref Matrix4d dest) {
@@ -1098,8 +1099,9 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    public Matrix4d mul0(Matrix4d right) {
-       return mul0(right, this);
+    ref public Matrix4d mul0(Matrix4d right) return {
+       mul0(right, this);
+       return this;
     }
 
     public Matrix4d mul0(Matrix4d right, ref Matrix4d dest) {
@@ -1181,12 +1183,13 @@ struct Matrix4d {
      *          the m33 element of the right matrix
      * @return this
      */
-    public Matrix4d mul(
+    ref public Matrix4d mul(
             double r00, double r01, double r02, double r03,
             double r10, double r11, double r12, double r13,
             double r20, double r21, double r22, double r23,
-            double r30, double r31, double r32, double r33) {
-        return mul(r00, r01, r02, r03, r10, r11, r12, r13, r20, r21, r22, r23, r30, r31, r32, r33, this);
+            double r30, double r31, double r32, double r33) return {
+        mul(r00, r01, r02, r03, r10, r11, r12, r13, r20, r21, r22, r23, r30, r31, r32, r33, this);
+        return this;
     }
 
     public Matrix4d mul(
@@ -1310,11 +1313,12 @@ struct Matrix4d {
      *          the m22 element of the right matrix
      * @return this
      */
-    public Matrix4d mul3x3(
+    ref public Matrix4d mul3x3(
             double r00, double r01, double r02,
             double r10, double r11, double r12,
-            double r20, double r21, double r22) {
-        return mul3x3(r00, r01, r02, r10, r11, r12, r20, r21, r22, this);
+            double r20, double r21, double r22) return {
+        mul3x3(r00, r01, r02, r10, r11, r12, r20, r21, r22, this);
+        return this;
     }
     public Matrix4d mul3x3(
             double r00, double r01, double r02,
@@ -1372,8 +1376,9 @@ struct Matrix4d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    public Matrix4d mulLocal(Matrix4d left) {
-       return mulLocal(left, this);
+    ref public Matrix4d mulLocal(Matrix4d left) return {
+       mulLocal(left, this);
+       return this;
     }
 
     public Matrix4d mulLocal(Matrix4d left, ref Matrix4d dest) {
@@ -1440,8 +1445,9 @@ struct Matrix4d {
      *          the left operand of the matrix multiplication (the last row is assumed to be <code>(0, 0, 0, 1)</code>)
      * @return this
      */
-    public Matrix4d mulLocalAffine(Matrix4d left) {
-       return mulLocalAffine(left, this);
+    ref public Matrix4d mulLocalAffine(Matrix4d left) return {
+       mulLocalAffine(left, this);
+       return this;
     }
 
     public Matrix4d mulLocalAffine(Matrix4d left, ref Matrix4d dest) {
@@ -1495,8 +1501,9 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    public Matrix4d mul(Matrix4x3d right) {
-        return mul(right, this);
+    ref public Matrix4d mul(Matrix4x3d right) return {
+        mul(right, this);
+        return this;
     }
 
     public Matrix4d mul(Matrix4x3d right, ref Matrix4d dest) {
@@ -1618,8 +1625,9 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication
      * @return this
      */
-    public Matrix4d mul(Matrix3x2d right) {
-        return mul(right, this);
+    ref public Matrix4d mul(Matrix3x2d right) return {
+        mul(right, this);
+        return this;
     }
 
     public Matrix4d mul(Matrix3x2d right, ref Matrix4d dest) {
@@ -1670,8 +1678,9 @@ struct Matrix4d {
      *          the {@link #isAffine() affine} matrix to multiply <code>this</code> symmetric perspective projection matrix by
      * @return this
      */
-    public Matrix4d mulPerspectiveAffine(Matrix4d view) {
-       return mulPerspectiveAffine(view, this);
+    ref public Matrix4d mulPerspectiveAffine(Matrix4d view) return {
+       mulPerspectiveAffine(view, this);
+       return this;
     }
 
     public Matrix4d mulPerspectiveAffine(Matrix4d view, ref Matrix4d dest) {
@@ -1702,8 +1711,9 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication (the last row is assumed to be <code>(0, 0, 0, 1)</code>)
      * @return this
      */
-    public Matrix4d mulAffineR(Matrix4d right) {
-       return mulAffineR(right, this);
+    ref public Matrix4d mulAffineR(Matrix4d right) return {
+       mulAffineR(right, this);
+       return this;
     }
 
     public Matrix4d mulAffineR(Matrix4d right, ref Matrix4d dest) {
@@ -1761,8 +1771,9 @@ struct Matrix4d {
      *          the right operand of the matrix multiplication (the last row is assumed to be <code>(0, 0, 0, 1)</code>)
      * @return this
      */
-    public Matrix4d mulAffine(Matrix4d right) {
-       return mulAffine(right, this);
+    ref public Matrix4d mulAffine(Matrix4d right) return {
+       mulAffine(right, this);
+       return this;
     }
 
     public Matrix4d mulAffine(Matrix4d right, ref Matrix4d dest) {
@@ -1826,8 +1837,9 @@ struct Matrix4d {
      *          the affine matrix which to multiply <code>this</code> with
      * @return this
      */
-    public Matrix4d mulOrthoAffine(Matrix4d view) {
-        return mulOrthoAffine(view, this);
+    ref public Matrix4d mulOrthoAffine(Matrix4d view) return {
+        mulOrthoAffine(view, this);
+        return this;
     }
 
     public Matrix4d mulOrthoAffine(Matrix4d view, ref Matrix4d dest) {
@@ -1880,8 +1892,9 @@ struct Matrix4d {
      *          the factor to multiply each of the other matrix's 4x3 components
      * @return this
      */
-    public Matrix4d fma4x3(Matrix4d other, double otherFactor) {
-        return fma4x3(other, otherFactor, this);
+    ref public Matrix4d fma4x3(Matrix4d other, double otherFactor) return {
+        fma4x3(other, otherFactor, this);
+        return this;
     }
 
     public Matrix4d fma4x3(Matrix4d other, double otherFactor, ref Matrix4d dest) {
@@ -1912,8 +1925,9 @@ struct Matrix4d {
      *          the other addend
      * @return this
      */
-    public Matrix4d add(Matrix4d other) {
-        return add(other, this);
+    ref public Matrix4d add(Matrix4d other) return {
+        add(other, this);
+        return this;
     }
 
     public Matrix4d add(Matrix4d other, ref Matrix4d dest) {
@@ -1944,8 +1958,9 @@ struct Matrix4d {
      *          the subtrahend
      * @return this
      */
-    public Matrix4d sub(Matrix4d subtrahend) {
-        return sub(subtrahend, this);
+    ref public Matrix4d sub(Matrix4d subtrahend) return {
+        sub(subtrahend, this);
+        return this;
     }
 
     public Matrix4d sub(Matrix4d subtrahend, ref Matrix4d dest) {
@@ -1976,8 +1991,9 @@ struct Matrix4d {
      *          the other matrix
      * @return this
      */
-    public Matrix4d mulComponentWise(Matrix4d other) {
-        return mulComponentWise(other, this);
+    ref public Matrix4d mulComponentWise(Matrix4d other) return {
+        mulComponentWise(other, this);
+        return this;
     }
 
     public Matrix4d mulComponentWise(Matrix4d other, ref Matrix4d dest) {
@@ -2008,8 +2024,9 @@ struct Matrix4d {
      *          the other addend
      * @return this
      */
-    public Matrix4d add4x3(Matrix4d other) {
-        return add4x3(other, this);
+    ref public Matrix4d add4x3(Matrix4d other) return {
+        add4x3(other, this);
+        return this;
     }
 
     public Matrix4d add4x3(Matrix4d other, ref Matrix4d dest) {
@@ -2040,8 +2057,9 @@ struct Matrix4d {
      *          the subtrahend
      * @return this
      */
-    public Matrix4d sub4x3(Matrix4d subtrahend) {
-        return sub4x3(subtrahend, this);
+    ref public Matrix4d sub4x3(Matrix4d subtrahend) return {
+        sub4x3(subtrahend, this);
+        return this;
     }
 
     public Matrix4d sub4x3(Matrix4d subtrahend, ref Matrix4d dest) {
@@ -2072,8 +2090,9 @@ struct Matrix4d {
      *          the other matrix
      * @return this
      */
-    public Matrix4d mul4x3ComponentWise(Matrix4d other) {
-        return mul4x3ComponentWise(other, this);
+    ref public Matrix4d mul4x3ComponentWise(Matrix4d other) return {
+        mul4x3ComponentWise(other, this);
+        return this;
     }
 
     public Matrix4d mul4x3ComponentWise(Matrix4d other, ref Matrix4d dest) {
@@ -2138,10 +2157,10 @@ struct Matrix4d {
      *          the new value of m33
      * @return this
      */
-    public Matrix4d set(double m00, double m01, double m02,double m03,
+    ref public Matrix4d set(double m00, double m01, double m02,double m03,
                         double m10, double m11, double m12, double m13,
                         double m20, double m21, double m22, double m23, 
-                        double m30, double m31, double m32, double m33) {
+                        double m30, double m31, double m32, double m33) return {
         setm00(m00);
         setm10(m10);
         setm20(m20);
@@ -2179,7 +2198,7 @@ struct Matrix4d {
      *          the offset into the array
      * @return this
      */
-    public Matrix4d set(double[] m, int off) {
+    ref public Matrix4d set(double[] m, int off) return {
         return
         _m00(m[off+0]).
         _m01(m[off+1]).
@@ -2216,7 +2235,7 @@ struct Matrix4d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix4d set(double[] m) {
+    ref public Matrix4d set(double[] m) return {
         return set(m, 0);
     }
 
@@ -2238,7 +2257,7 @@ struct Matrix4d {
      *          the offset into the array
      * @return this
      */
-    public Matrix4d set(float[] m, int off) {
+    ref public Matrix4d set(float[] m, int off) return {
         return
         _m00(m[off+0]).
         _m01(m[off+1]).
@@ -2275,7 +2294,7 @@ struct Matrix4d {
      *          the array to read the matrix values from
      * @return this
      */
-    public Matrix4d set(float[] m) {
+    ref public Matrix4d set(float[] m) return {
         return set(m, 0);
     }
 
@@ -2293,7 +2312,7 @@ struct Matrix4d {
      *          the fourth column
      * @return this
      */
-    public Matrix4d set(Vector4d col0, Vector4d col1, Vector4d col2, Vector4d col3) {
+    ref public Matrix4d set(Vector4d col0, Vector4d col1, Vector4d col2, Vector4d col3) return {
         return
         _m00(col0.x).
         _m01(col0.y).
@@ -2347,8 +2366,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d invert() {
-        return invert(this);
+    ref public Matrix4d invert() return {
+        invert(this);
+        return this;
     }
 
     public Matrix4d invert(ref Matrix4d dest) {
@@ -2510,8 +2530,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d invertPerspective() {
-        return invertPerspective(this);
+    ref public Matrix4d invertPerspective() return {
+        invertPerspective(this);
+        return this;
     }
 
     public Matrix4d invertFrustum(ref Matrix4d dest) {
@@ -2541,8 +2562,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d invertFrustum() {
-        return invertFrustum(this);
+    ref public Matrix4d invertFrustum() return {
+        invertFrustum(this);
+        return this;
     }
 
     public Matrix4d invertOrtho(ref Matrix4d dest) {
@@ -2564,8 +2586,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d invertOrtho() {
-        return invertOrtho(this);
+    ref public Matrix4d invertOrtho() return {
+        invertOrtho(this);
+        return this;
     }
 
     public Matrix4d invertPerspectiveView(Matrix4d view, ref Matrix4d dest) {
@@ -2679,8 +2702,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d invertAffine() {
-        return invertAffine(this);
+    ref public Matrix4d invertAffine() return {
+        invertAffine(this);
+        return this;
     }
 
     /**
@@ -2688,8 +2712,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d transpose() {
-        return transpose(this);
+    ref public Matrix4d transpose() return {
+        transpose(this);
+        return this;
     }
 
     public Matrix4d transpose(ref Matrix4d dest) {
@@ -2749,8 +2774,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d transpose3x3() {
-        return transpose3x3(this);
+    ref public Matrix4d transpose3x3() return {
+        transpose3x3(this);
+        return this;
     }
 
     public Matrix4d transpose3x3(ref Matrix4d dest) {
@@ -2795,7 +2821,7 @@ struct Matrix4d {
      *          the offset to translate in z
      * @return this
      */
-    public Matrix4d translation(double x, double y, double z) {
+    ref public Matrix4d translation(double x, double y, double z) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             this._identity();
         return this.
@@ -2817,7 +2843,7 @@ struct Matrix4d {
      *              the offsets in x, y and z to translate
      * @return this
      */
-    public Matrix4d translation(Vector3d offset) {
+    ref public Matrix4d translation(Vector3d offset) return {
         return translation(offset.x, offset.y, offset.z);
     }
 
@@ -2838,7 +2864,7 @@ struct Matrix4d {
      *          the units to translate in z
      * @return this
      */
-    public Matrix4d setTranslation(double x, double y, double z) {
+    ref public Matrix4d setTranslation(double x, double y, double z) return {
         _m30(x).
         _m31(y).
         _m32(z).
@@ -2859,7 +2885,7 @@ struct Matrix4d {
      *          the units to translate in <code>(x, y, z)</code>
      * @return this
      */
-    public Matrix4d setTranslation(Vector3d xyz) {
+    ref public Matrix4d setTranslation(Vector3d xyz) return {
         return setTranslation(xyz.x, xyz.y, xyz.z);
     }
 
@@ -2926,7 +2952,7 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d zero() {
+    ref public Matrix4d zero() return {
         return
         _m00(0.0).
         _m01(0.0).
@@ -2962,7 +2988,7 @@ struct Matrix4d {
      *             the scale factor in x, y and z
      * @return this
      */
-    public Matrix4d scaling(double factor) {
+    ref public Matrix4d scaling(double factor) return {
         return scaling(factor, factor, factor);
     }
 
@@ -2977,7 +3003,7 @@ struct Matrix4d {
      *          the scale in z         
      * @return this
      */
-    public Matrix4d scaling(double x, double y, double z) {
+    ref public Matrix4d scaling(double x, double y, double z) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             identity();
         bool one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
@@ -3004,7 +3030,7 @@ struct Matrix4d {
      *             the scale in x, y and z, respectively
      * @return this
      */
-    public Matrix4d scaling(Vector3d xyz) {
+    ref public Matrix4d scaling(Vector3d xyz) return {
         return scaling(xyz.x, xyz.y, xyz.z);
     }
 
@@ -3027,14 +3053,16 @@ struct Matrix4d {
      *          the z-coordinate of the axis to rotate about
      * @return this
      */
-    public Matrix4d rotation(double angle, double x, double y, double z) {
+    ref public Matrix4d rotation(double angle, double x, double y, double z) return {
         if (y == 0.0 && z == 0.0 && Math.absEqualsOne(x))
-            return rotationX(x * angle);
+            rotationX(x * angle);
         else if (x == 0.0 && z == 0.0 && Math.absEqualsOne(y))
-            return rotationY(y * angle);
+            rotationY(y * angle);
         else if (x == 0.0 && y == 0.0 && Math.absEqualsOne(z))
-            return rotationZ(z * angle);
-        return rotationInternal(angle, x, y, z);
+            rotationZ(z * angle);
+        else
+            rotationInternal(angle, x, y, z);
+        return this;
     }
     private Matrix4d rotationInternal(double angle, double x, double y, double z) {
         double sin = Math.sin(angle);
@@ -3069,7 +3097,7 @@ struct Matrix4d {
      *            the angle in radians
      * @return this
      */
-    public Matrix4d rotationX(double ang) {
+    ref public Matrix4d rotationX(double ang) return {
         double sin, cos;
         sin = Math.sin(ang);
         cos = Math.cosFromSin(sin, ang);
@@ -3096,7 +3124,7 @@ struct Matrix4d {
      *            the angle in radians
      * @return this
      */
-    public Matrix4d rotationY(double ang) {
+    ref public Matrix4d rotationY(double ang) return {
         double sin, cos;
         sin = Math.sin(ang);
         cos = Math.cosFromSin(sin, ang);
@@ -3123,7 +3151,7 @@ struct Matrix4d {
      *            the angle in radians
      * @return this
      */
-    public Matrix4d rotationZ(double ang) {
+    ref public Matrix4d rotationZ(double ang) return {
         double sin, cos;
         sin = Math.sin(ang);
         cos = Math.cosFromSin(sin, ang);
@@ -3148,7 +3176,7 @@ struct Matrix4d {
      *            the y component of the normalized direction
      * @return this
      */
-    public Matrix4d rotationTowardsXY(double dirX, double dirY) {
+    ref public Matrix4d rotationTowardsXY(double dirX, double dirY) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             this._identity();
         setm00(dirY);
@@ -3177,7 +3205,7 @@ struct Matrix4d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix4d rotationXYZ(double angleX, double angleY, double angleZ) {
+    ref public Matrix4d rotationXYZ(double angleX, double angleY, double angleZ) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -3231,7 +3259,7 @@ struct Matrix4d {
      *            the angle to rotate about X
      * @return this
      */
-    public Matrix4d rotationZYX(double angleZ, double angleY, double angleX) {
+    ref public Matrix4d rotationZYX(double angleZ, double angleY, double angleX) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -3285,7 +3313,7 @@ struct Matrix4d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix4d rotationYXZ(double angleY, double angleX, double angleZ) {
+    ref public Matrix4d rotationYXZ(double angleY, double angleX, double angleZ) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -3343,7 +3371,7 @@ struct Matrix4d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix4d setRotationXYZ(double angleX, double angleY, double angleZ) {
+    ref public Matrix4d setRotationXYZ(double angleX, double angleY, double angleZ) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -3393,7 +3421,7 @@ struct Matrix4d {
      *            the angle to rotate about X
      * @return this
      */
-    public Matrix4d setRotationZYX(double angleZ, double angleY, double angleX) {
+    ref public Matrix4d setRotationZYX(double angleZ, double angleY, double angleX) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -3443,7 +3471,7 @@ struct Matrix4d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix4d setRotationYXZ(double angleY, double angleX, double angleZ) {
+    ref public Matrix4d setRotationYXZ(double angleY, double angleX, double angleZ) return {
         double sinX = Math.sin(angleX);
         double cosX = Math.cosFromSin(sinX, angleX);
         double sinY = Math.sin(angleY);
@@ -3492,7 +3520,7 @@ struct Matrix4d {
      *          the axis to rotate about
      * @return this
      */
-    public Matrix4d rotation(double angle, Vector3d axis) {
+    ref public Matrix4d rotation(double angle, Vector3d axis) return {
         return rotation(angle, axis.x, axis.y, axis.z);
     }
 
@@ -3624,7 +3652,7 @@ struct Matrix4d {
      *          the 3x3 matrix
      * @return this
      */
-    public Matrix4d set3x3(Matrix3d mat) {
+    ref public Matrix4d set3x3(Matrix3d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -3655,8 +3683,9 @@ struct Matrix4d {
      *            the factors of the x, y and z component, respectively
      * @return this
      */
-    public Matrix4d scale(Vector3d xyz) {
-        return scale(xyz.x, xyz.y, xyz.z, this);
+    ref public Matrix4d scale(Vector3d xyz) return {
+        scale(xyz.x, xyz.y, xyz.z, this);
+        return this;
     }
 
     public Matrix4d scale(double x, double y, double z, ref Matrix4d dest) {
@@ -3704,8 +3733,9 @@ struct Matrix4d {
      *            the factor of the z component
      * @return this
      */
-    public Matrix4d scale(double x, double y, double z) {
-        return scale(x, y, z, this);
+    ref public Matrix4d scale(double x, double y, double z) return {
+        scale(x, y, z, this);
+        return this;
     }
 
     public Matrix4d scale(double xyz, ref Matrix4d dest) {
@@ -3726,7 +3756,7 @@ struct Matrix4d {
      *            the factor for all components
      * @return this
      */
-    public Matrix4d scale(double xyz) {
+    ref public Matrix4d scale(double xyz) return {
         return scale(xyz, xyz, xyz);
     }
 
@@ -3748,7 +3778,7 @@ struct Matrix4d {
      *            the factor of the y component
      * @return this
      */
-    public Matrix4d scaleXY(double x, double y) {
+    ref public Matrix4d scaleXY(double x, double y) return {
         return scale(x, y, 1.0);
     }
 
@@ -3804,8 +3834,9 @@ struct Matrix4d {
      *            the z coordinate of the scaling origin
      * @return this
      */
-    public Matrix4d scaleAround(double sx, double sy, double sz, double ox, double oy, double oz) {
-        return scaleAround(sx, sy, sz, ox, oy, oz, this);
+    ref public Matrix4d scaleAround(double sx, double sy, double sz, double ox, double oy, double oz) return {
+        scaleAround(sx, sy, sz, ox, oy, oz, this);
+        return this;
     }
 
     /**
@@ -3829,8 +3860,9 @@ struct Matrix4d {
      *            the z coordinate of the scaling origin
      * @return this
      */
-    public Matrix4d scaleAround(double factor, double ox, double oy, double oz) {
-        return scaleAround(factor, factor, factor, ox, oy, oz, this);
+    ref public Matrix4d scaleAround(double factor, double ox, double oy, double oz) return {
+        scaleAround(factor, factor, factor, ox, oy, oz, this);
+        return this;
     }
 
     public Matrix4d scaleAround(double factor, double ox, double oy, double oz, ref Matrix4d dest) {
@@ -3893,8 +3925,9 @@ struct Matrix4d {
      *            the factor of the x, y and z component
      * @return this
      */
-    public Matrix4d scaleLocal(double xyz) {
-        return scaleLocal(xyz, this);
+    ref public Matrix4d scaleLocal(double xyz) return {
+        scaleLocal(xyz, this);
+        return this;
     }
 
     /**
@@ -3914,8 +3947,9 @@ struct Matrix4d {
      *            the factor of the z component
      * @return this
      */
-    public Matrix4d scaleLocal(double x, double y, double z) {
-        return scaleLocal(x, y, z, this);
+    ref public Matrix4d scaleLocal(double x, double y, double z) return {
+        scaleLocal(x, y, z, this);
+        return this;
     }
 
     public Matrix4d scaleAroundLocal(double sx, double sy, double sz, double ox, double oy, double oz, ref Matrix4d dest) {
@@ -3966,8 +4000,9 @@ struct Matrix4d {
      *            the z coordinate of the scaling origin
      * @return this
      */
-    public Matrix4d scaleAroundLocal(double sx, double sy, double sz, double ox, double oy, double oz) {
-        return scaleAroundLocal(sx, sy, sz, ox, oy, oz, this);
+    ref public Matrix4d scaleAroundLocal(double sx, double sy, double sz, double ox, double oy, double oz) return {
+        scaleAroundLocal(sx, sy, sz, ox, oy, oz, this);
+        return this;
     }
 
     /**
@@ -3991,8 +4026,9 @@ struct Matrix4d {
      *            the z coordinate of the scaling origin
      * @return this
      */
-    public Matrix4d scaleAroundLocal(double factor, double ox, double oy, double oz) {
-        return scaleAroundLocal(factor, factor, factor, ox, oy, oz, this);
+    ref public Matrix4d scaleAroundLocal(double factor, double ox, double oy, double oz) return {
+        scaleAroundLocal(factor, factor, factor, ox, oy, oz, this);
+        return this;
     }
 
     public Matrix4d scaleAroundLocal(double factor, double ox, double oy, double oz, ref Matrix4d dest) {
@@ -4089,8 +4125,9 @@ struct Matrix4d {
      *            the z component of the axis
      * @return this
      */
-    public Matrix4d rotate(double ang, double x, double y, double z) {
-        return rotate(ang, x, y, z, this);
+    ref public Matrix4d rotate(double ang, double x, double y, double z) return {
+        rotate(ang, x, y, z, this);
+        return this;
     }
 
     /**
@@ -4299,8 +4336,9 @@ struct Matrix4d {
      *            the z component of the axis
      * @return this
      */
-    public Matrix4d rotateAffine(double ang, double x, double y, double z) {
-        return rotateAffine(ang, x, y, z, this);
+    ref public Matrix4d rotateAffine(double ang, double x, double y, double z) return {
+        rotateAffine(ang, x, y, z, this);
+        return this;
     }
 
     /**
@@ -4329,8 +4367,9 @@ struct Matrix4d {
      *          the z coordinate of the rotation origin
      * @return this
      */
-    public Matrix4d rotateAround(Quaterniond quat, double ox, double oy, double oz) {
-        return rotateAround(quat, ox, oy, oz, this);
+    ref public Matrix4d rotateAround(Quaterniond quat, double ox, double oy, double oz) return {
+        rotateAround(quat, ox, oy, oz, this);
+        return this;
     }
 
     public Matrix4d rotateAroundAffine(Quaterniond quat, double ox, double oy, double oz, ref Matrix4d dest) {
@@ -4453,7 +4492,7 @@ struct Matrix4d {
      *          the z coordinate of the rotation origin
      * @return this
      */
-    public Matrix4d rotationAround(Quaterniond quat, double ox, double oy, double oz) {
+    ref public Matrix4d rotationAround(Quaterniond quat, double ox, double oy, double oz) return {
         double w2 = quat.w * quat.w, x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y, z2 = quat.z * quat.z;
         double zw = quat.z * quat.w, dzw = zw + zw, xy = quat.x * quat.y, dxy = xy + xy;
@@ -4607,8 +4646,9 @@ struct Matrix4d {
      *            the z component of the axis
      * @return this
      */
-    public Matrix4d rotateLocal(double ang, double x, double y, double z) {
-        return rotateLocal(ang, x, y, z, this);
+    ref public Matrix4d rotateLocal(double ang, double x, double y, double z) return {
+        rotateLocal(ang, x, y, z, this);
+        return this;
     }
 
     public Matrix4d rotateAroundLocal(Quaterniond quat, double ox, double oy, double oz, ref Matrix4d dest) {
@@ -4690,8 +4730,9 @@ struct Matrix4d {
      *          the z coordinate of the rotation origin
      * @return this
      */
-    public Matrix4d rotateAroundLocal(Quaterniond quat, double ox, double oy, double oz) {
-        return rotateAroundLocal(quat, ox, oy, oz, this);
+    ref public Matrix4d rotateAroundLocal(Quaterniond quat, double ox, double oy, double oz) return {
+        rotateAroundLocal(quat, ox, oy, oz, this);
+        return this;
     }
 
     /**
@@ -4712,7 +4753,7 @@ struct Matrix4d {
      *          the number of units in x, y and z by which to translate
      * @return this
      */
-    public Matrix4d translate(Vector3d offset) {
+    ref public Matrix4d translate(Vector3d offset) return {
         return translate(offset.x, offset.y, offset.z);
     }
 
@@ -4814,7 +4855,7 @@ struct Matrix4d {
      *          the offset to translate in z
      * @return this
      */
-    public Matrix4d translate(double x, double y, double z) {
+    ref public Matrix4d translate(double x, double y, double z) return {
         if ((properties & PROPERTY_IDENTITY) != 0)
             return translation(x, y, z);
         this._m30(Math.fma(m00, x, Math.fma(m10, y, Math.fma(m20, z, m30))));
@@ -4843,7 +4884,7 @@ struct Matrix4d {
      *          the number of units in x, y and z by which to translate
      * @return this
      */
-    public Matrix4d translateLocal(Vector3d offset) {
+    ref public Matrix4d translateLocal(Vector3d offset) return {
         return translateLocal(offset.x, offset.y, offset.z);
     }
 
@@ -4955,8 +4996,9 @@ struct Matrix4d {
      *          the offset to translate in z
      * @return this
      */
-    public Matrix4d translateLocal(double x, double y, double z) {
-        return translateLocal(x, y, z, this);
+    ref public Matrix4d translateLocal(double x, double y, double z) return {
+        translateLocal(x, y, z, this);
+        return this;
     }
 
     /**
@@ -5036,8 +5078,9 @@ struct Matrix4d {
      *            the angle in radians to rotate about the X axis
      * @return this
      */
-    public Matrix4d rotateLocalX(double ang) {
-        return rotateLocalX(ang, this);
+    ref public Matrix4d rotateLocalX(double ang) return {
+        rotateLocalX(ang, this);
+        return this;
     }
 
     /**
@@ -5117,8 +5160,9 @@ struct Matrix4d {
      *            the angle in radians to rotate about the Y axis
      * @return this
      */
-    public Matrix4d rotateLocalY(double ang) {
-        return rotateLocalY(ang, this);
+    ref public Matrix4d rotateLocalY(double ang) return {
+        rotateLocalY(ang, this);
+        return this;
     }
 
     /**
@@ -5198,8 +5242,9 @@ struct Matrix4d {
      *            the angle in radians to rotate about the Z axis
      * @return this
      */
-    public Matrix4d rotateLocalZ(double ang) {
-        return rotateLocalZ(ang, this);
+    ref public Matrix4d rotateLocalZ(double ang) return {
+        rotateLocalZ(ang, this);
+        return this;
     }
 
     public Matrix4d rotateX(double ang, ref Matrix4d dest) {
@@ -5265,8 +5310,9 @@ struct Matrix4d {
      *            the angle in radians
      * @return this
      */
-    public Matrix4d rotateX(double ang) {
-        return rotateX(ang, this);
+    ref public Matrix4d rotateX(double ang) return {
+        rotateX(ang, this);
+        return this;
     }
 
     public Matrix4d rotateY(double ang, ref Matrix4d dest) {
@@ -5332,8 +5378,9 @@ struct Matrix4d {
      *            the angle in radians
      * @return this
      */
-    public Matrix4d rotateY(double ang) {
-        return rotateY(ang, this);
+    ref public Matrix4d rotateY(double ang) return {
+        rotateY(ang, this);
+        return this;
     }
 
     public Matrix4d rotateZ(double ang, ref Matrix4d dest) {
@@ -5369,8 +5416,9 @@ struct Matrix4d {
      *            the angle in radians
      * @return this
      */
-    public Matrix4d rotateZ(double ang) {
-        return rotateZ(ang, this);
+    ref public Matrix4d rotateZ(double ang) return {
+        rotateZ(ang, this);
+        return this;
     }
 
     /**
@@ -5389,8 +5437,9 @@ struct Matrix4d {
      *            the y component of the normalized direction
      * @return this
      */
-    public Matrix4d rotateTowardsXY(double dirX, double dirY) {
-        return rotateTowardsXY(dirX, dirY, this);
+    ref public Matrix4d rotateTowardsXY(double dirX, double dirY) return {
+        rotateTowardsXY(dirX, dirY, this);
+        return this;
     }
 
     public Matrix4d rotateTowardsXY(double dirX, double dirY, ref Matrix4d dest) {
@@ -5443,7 +5492,7 @@ struct Matrix4d {
      *            the Euler angles
      * @return this
      */
-    public Matrix4d rotateXYZ(Vector3d angles) {
+    ref public Matrix4d rotateXYZ(Vector3d angles) return {
         return rotateXYZ(angles.x, angles.y, angles.z);
     }
 
@@ -5470,8 +5519,9 @@ struct Matrix4d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix4d rotateXYZ(double angleX, double angleY, double angleZ) {
-        return rotateXYZ(angleX, angleY, angleZ, this);
+    ref public Matrix4d rotateXYZ(double angleX, double angleY, double angleZ) return {
+        rotateXYZ(angleX, angleY, angleZ, this);
+        return this;
     }
 
     public Matrix4d rotateXYZ(double angleX, double angleY, double angleZ, ref Matrix4d dest) {
@@ -5557,8 +5607,9 @@ struct Matrix4d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix4d rotateAffineXYZ(double angleX, double angleY, double angleZ) {
-        return rotateAffineXYZ(angleX, angleY, angleZ, this);
+    ref public Matrix4d rotateAffineXYZ(double angleX, double angleY, double angleZ) return {
+        rotateAffineXYZ(angleX, angleY, angleZ, this);
+        return this;
     }
 
     public Matrix4d rotateAffineXYZ(double angleX, double angleY, double angleZ, ref Matrix4d dest) {
@@ -5633,7 +5684,7 @@ struct Matrix4d {
      *            the Euler angles
      * @return this
      */
-    public Matrix4d rotateZYX(Vector3d angles) {
+    ref public Matrix4d rotateZYX(Vector3d angles) return {
         return rotateZYX(angles.z, angles.y, angles.x);
     }
 
@@ -5660,8 +5711,9 @@ struct Matrix4d {
      *            the angle to rotate about X
      * @return this
      */
-    public Matrix4d rotateZYX(double angleZ, double angleY, double angleX) {
-        return rotateZYX(angleZ, angleY, angleX, this);
+    ref public Matrix4d rotateZYX(double angleZ, double angleY, double angleX) return {
+        rotateZYX(angleZ, angleY, angleX, this);
+        return this;
     }
 
     public Matrix4d rotateZYX(double angleZ, double angleY, double angleX, ref Matrix4d dest) {
@@ -5745,8 +5797,9 @@ struct Matrix4d {
      *            the angle to rotate about X
      * @return this
      */
-    public Matrix4d rotateAffineZYX(double angleZ, double angleY, double angleX) {
-        return rotateAffineZYX(angleZ, angleY, angleX, this);
+    ref public Matrix4d rotateAffineZYX(double angleZ, double angleY, double angleX) return {
+        rotateAffineZYX(angleZ, angleY, angleX, this);
+        return this;
     }
 
     public Matrix4d rotateAffineZYX(double angleZ, double angleY, double angleX, ref Matrix4d dest) {
@@ -5812,7 +5865,7 @@ struct Matrix4d {
      *            the Euler angles
      * @return this
      */
-    public Matrix4d rotateYXZ(Vector3d angles) {
+    ref public Matrix4d rotateYXZ(Vector3d angles) return {
         return rotateYXZ(angles.y, angles.x, angles.z);
     }
 
@@ -5839,8 +5892,9 @@ struct Matrix4d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix4d rotateYXZ(double angleY, double angleX, double angleZ) {
-        return rotateYXZ(angleY, angleX, angleZ, this);
+    ref public Matrix4d rotateYXZ(double angleY, double angleX, double angleZ) return {
+        rotateYXZ(angleY, angleX, angleZ, this);
+        return this;
     }
 
     public Matrix4d rotateYXZ(double angleY, double angleX, double angleZ, ref Matrix4d dest) {
@@ -5924,8 +5978,9 @@ struct Matrix4d {
      *            the angle to rotate about Z
      * @return this
      */
-    public Matrix4d rotateAffineYXZ(double angleY, double angleX, double angleZ) {
-        return rotateAffineYXZ(angleY, angleX, angleZ, this);
+    ref public Matrix4d rotateAffineYXZ(double angleY, double angleX, double angleZ) return {
+        rotateAffineYXZ(angleY, angleX, angleZ, this);
+        return this;
     }
 
     public Matrix4d rotateAffineYXZ(double angleY, double angleX, double angleZ, ref Matrix4d dest) {
@@ -5993,7 +6048,7 @@ struct Matrix4d {
      *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
      * @return this
      */
-    public Matrix4d rotation(AxisAngle4d angleAxis) {
+    ref public Matrix4d rotation(AxisAngle4d angleAxis) return {
         return rotation(angleAxis.angle, angleAxis.x, angleAxis.y, angleAxis.z);
     }
 
@@ -6018,7 +6073,7 @@ struct Matrix4d {
      *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d rotation(Quaterniond quat) {
+    ref public Matrix4d rotation(Quaterniond quat) return {
         double w2 = quat.w * quat.w;
         double x2 = quat.x * quat.x;
         double y2 = quat.y * quat.y;
@@ -6085,9 +6140,9 @@ struct Matrix4d {
      *          the scaling factor for the z-axis
      * @return this
      */
-    public Matrix4d translationRotateScale(double tx, double ty, double tz, 
+    ref public Matrix4d translationRotateScale(double tx, double ty, double tz, 
                                            double qx, double qy, double qz, double qw, 
-                                           double sx, double sy, double sz) {
+                                           double sx, double sy, double sz) return {
         double dqx = qx + qx, dqy = qy + qy, dqz = qz + qz;
         double q00 = dqx * qx;
         double q11 = dqy * qy;
@@ -6145,9 +6200,9 @@ struct Matrix4d {
      *          the scaling factors
      * @return this
      */
-    public Matrix4d translationRotateScale(Vector3d translation, 
+    ref public Matrix4d translationRotateScale(Vector3d translation, 
                                            Quaterniond quat, 
-                                           Vector3d scale) {
+                                           Vector3d scale) return {
         return translationRotateScale(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z, quat.w, scale.x, scale.y, scale.z);
     }
 
@@ -6187,9 +6242,9 @@ struct Matrix4d {
      *          the scaling factor for all three axes
      * @return this
      */
-    public Matrix4d translationRotateScale(double tx, double ty, double tz, 
+    ref public Matrix4d translationRotateScale(double tx, double ty, double tz, 
                                            double qx, double qy, double qz, double qw, 
-                                           double scale) {
+                                           double scale) return {
         return translationRotateScale(tx, ty, tz, qx, qy, qz, qw, scale, scale, scale);
     }
 
@@ -6219,9 +6274,9 @@ struct Matrix4d {
      *          the scaling factors
      * @return this
      */
-    public Matrix4d translationRotateScale(Vector3d translation, 
+    ref public Matrix4d translationRotateScale(Vector3d translation, 
                                            Quaterniond quat, 
-                                           double scale) {
+                                           double scale) return {
         return translationRotateScale(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z, quat.w, scale, scale, scale);
     }
 
@@ -6258,9 +6313,9 @@ struct Matrix4d {
      *          the scaling factor for the z-axis
      * @return this
      */
-    public Matrix4d translationRotateScaleInvert(double tx, double ty, double tz, 
+    ref public Matrix4d translationRotateScaleInvert(double tx, double ty, double tz, 
                                                  double qx, double qy, double qz, double qw, 
-                                                 double sx, double sy, double sz) {
+                                                 double sx, double sy, double sz) return {
         bool one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
         if (one)
             return translationRotateInvert(tx, ty, tz, qx, qy, qz, qw);
@@ -6316,9 +6371,9 @@ struct Matrix4d {
      *          the scaling factors
      * @return this
      */
-    public Matrix4d translationRotateScaleInvert(Vector3d translation, 
+    ref public Matrix4d translationRotateScaleInvert(Vector3d translation, 
                                                  Quaterniond quat, 
-                                                 Vector3d scale) {
+                                                 Vector3d scale) return {
         return translationRotateScaleInvert(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z, quat.w, scale.x, scale.y, scale.z);
     }
 
@@ -6341,9 +6396,9 @@ struct Matrix4d {
      *          the scaling factors
      * @return this
      */
-    public Matrix4d translationRotateScaleInvert(Vector3d translation, 
+    ref public Matrix4d translationRotateScaleInvert(Vector3d translation, 
                                                  Quaterniond quat, 
-                                                 double scale) {
+                                                 double scale) return {
         return translationRotateScaleInvert(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z, quat.w, scale, scale, scale);
     }
 
@@ -6391,10 +6446,10 @@ struct Matrix4d {
      *          the {@link #isAffine() affine} matrix to multiply by
      * @return this
      */
-    public Matrix4d translationRotateScaleMulAffine(double tx, double ty, double tz, 
+    ref public Matrix4d translationRotateScaleMulAffine(double tx, double ty, double tz, 
                                                     double qx, double qy, double qz, double qw, 
                                                     double sx, double sy, double sz,
-                                                    Matrix4d m) {
+                                                    Matrix4d m) return {
         double w2 = qw * qw;
         double x2 = qx * qx;
         double y2 = qy * qy;
@@ -6476,7 +6531,7 @@ struct Matrix4d {
      *          the scalar part of the quaternion
      * @return this
      */
-    public Matrix4d translationRotate(double tx, double ty, double tz, double qx, double qy, double qz, double qw) {
+    ref public Matrix4d translationRotate(double tx, double ty, double tz, double qx, double qy, double qz, double qw) return {
         double w2 = qw * qw;
         double x2 = qx * qx;
         double y2 = qy * qy;
@@ -6529,7 +6584,7 @@ struct Matrix4d {
      *          the quaternion representing a rotation
      * @return this
      */
-    public Matrix4d translationRotate(double tx, double ty, double tz, Quaterniond quat) {
+    ref public Matrix4d translationRotate(double tx, double ty, double tz, Quaterniond quat) return {
         return translationRotate(tx, ty, tz, quat.x, quat.y, quat.z, quat.w);
     }
 
@@ -6555,8 +6610,8 @@ struct Matrix4d {
      *          the quaternion representing a rotation
      * @return this
      */
-    public Matrix4d translationRotate(Vector3d translation, 
-                                      Quaterniond quat) {
+    ref public Matrix4d translationRotate(Vector3d translation, 
+                                      Quaterniond quat) return {
         return translationRotate(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z, quat.w);
     }
 
@@ -6585,7 +6640,7 @@ struct Matrix4d {
      *          the scalar part of the quaternion
      * @return this
      */
-    public Matrix4d translationRotateInvert(double tx, double ty, double tz, double qx, double qy, double qz, double qw) {
+    ref public Matrix4d translationRotateInvert(double tx, double ty, double tz, double qx, double qy, double qz, double qw) return {
         double nqx = -qx, nqy = -qy, nqz = -qz;
         double dqx = nqx + nqx;
         double dqy = nqy + nqy;
@@ -6723,8 +6778,9 @@ struct Matrix4d {
      *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d rotate(Quaterniond quat) {
-        return rotate(quat, this);
+    ref public Matrix4d rotate(Quaterniond quat) return {
+        rotate(quat, this);
+        return this;
     }
 
 
@@ -6822,8 +6878,9 @@ struct Matrix4d {
      *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d rotateAffine(Quaterniond quat) {
-        return rotateAffine(quat, this);
+    ref public Matrix4d rotateAffine(Quaterniond quat) return {
+        rotateAffine(quat, this);
+        return this;
     }
 
     /**
@@ -6989,8 +7046,9 @@ struct Matrix4d {
      *          the {@link Quaterniond}
      * @return this
      */
-    public Matrix4d rotateLocal(Quaterniond quat) {
-        return rotateLocal(quat, this);
+    ref public Matrix4d rotateLocal(Quaterniond quat) return {
+        rotateLocal(quat, this);
+        return this;
     }
 
 
@@ -7018,7 +7076,7 @@ struct Matrix4d {
      *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
      * @return this
      */
-    public Matrix4d rotate(AxisAngle4d axisAngle) {
+    ref public Matrix4d rotate(AxisAngle4d axisAngle) return {
         return rotate(axisAngle.angle, axisAngle.x, axisAngle.y, axisAngle.z);
     }
 
@@ -7078,7 +7136,7 @@ struct Matrix4d {
      *          the rotation axis (needs to be {@link Vector3d#normalize() normalized})
      * @return this
      */
-    public Matrix4d rotate(double angle, Vector3d axis) {
+    ref public Matrix4d rotate(double angle, Vector3d axis) return {
         return rotate(angle, axis.x, axis.y, axis.z);
     }
 
@@ -7182,7 +7240,7 @@ struct Matrix4d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..3]</code>
      */
-    public Matrix4d setRow(int row, Vector4d src) {
+    ref public Matrix4d setRow(int row, Vector4d src) return {
         switch (row) {
         case 0:
             return _m00(src.x)._m10(src.y)._m20(src.z)._m30(src.w)._properties(0);
@@ -7265,7 +7323,7 @@ struct Matrix4d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..3]</code>
      */
-    public Matrix4d setColumn(int column, Vector4d src) {
+    ref public Matrix4d setColumn(int column, Vector4d src) return {
         switch (column) {
         case 0:
             return _m00(src.x)._m01(src.y)._m02(src.z)._m03(src.w)._properties(0);
@@ -7295,8 +7353,9 @@ struct Matrix4d {
      *          the value
      * @return this
      */
-    public Matrix4d set(int column, int row, double value) {
-        return MemUtil.set(this, column, row, value);
+    ref public Matrix4d set(int column, int row, double value) return {
+        MemUtil.set(this, column, row, value);
+        return this;
     }
 
     public double getRowColumn(int row, int column) {
@@ -7314,8 +7373,9 @@ struct Matrix4d {
      *          the value
      * @return this
      */
-    public Matrix4d setRowColumn(int row, int column, double value) {
-        return MemUtil.set(this, column, row, value);
+    ref public Matrix4d setRowColumn(int row, int column, double value) return {
+        MemUtil.set(this, column, row, value);
+        return this;
     }
 
     /**
@@ -7334,8 +7394,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d normal() {
-        return normal(this);
+    ref public Matrix4d normal() return {
+        normal(this);
+        return this;
     }
 
     /**
@@ -7463,8 +7524,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d cofactor3x3() {
-        return cofactor3x3(this);
+    ref public Matrix4d cofactor3x3() return {
+        cofactor3x3(this);
+        return this;
     }
 
     /**
@@ -7538,8 +7600,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d normalize3x3() {
-        return normalize3x3(this);
+    ref public Matrix4d normalize3x3() return {
+        normalize3x3(this);
+        return this;
     }
 
     public Matrix4d normalize3x3(ref Matrix4d dest) {
@@ -7663,7 +7726,7 @@ struct Matrix4d {
         return unproject(winCoords.x, winCoords.y, winCoords.z, viewport, dest);
     }
 
-    public Matrix4d unprojectRay(double winX, double winY, int[] viewport, ref Vector3d originDest, ref Vector3d dirDest) {
+    ref public Matrix4d unprojectRay(double winX, double winY, int[] viewport, ref Vector3d originDest, ref Vector3d dirDest) return {
         double a = m00 * m11 - m01 * m10;
         double b = m00 * m12 - m02 * m10;
         double c = m00 * m13 - m03 * m10;
@@ -7751,7 +7814,7 @@ struct Matrix4d {
         return unprojectInvRay(winCoords.x, winCoords.y, viewport, originDest, dirDest);
     }
 
-    public Matrix4d unprojectInvRay(double winX, double winY, int[] viewport, ref Vector3d originDest, ref Vector3d dirDest) {
+    ref public Matrix4d unprojectInvRay(double winX, double winY, int[] viewport, ref Vector3d originDest, ref Vector3d dirDest) return  {
         double ndcX = (winX-viewport[0])/viewport[2]*2.0-1.0;
         double ndcY = (winY-viewport[1])/viewport[3]*2.0-1.0;
         double px = m00 * ndcX + m10 * ndcY + m30;
@@ -7915,8 +7978,9 @@ struct Matrix4d {
      *          the constant in the plane equation
      * @return this
      */
-    public Matrix4d reflect(double a, double b, double c, double d) {
-        return reflect(a, b, c, d, this);
+    ref public Matrix4d reflect(double a, double b, double c, double d) return {
+        reflect(a, b, c, d, this);
+        return this;
     }
 
     /**
@@ -7942,8 +8006,9 @@ struct Matrix4d {
      *          the z-coordinate of a point on the plane
      * @return this
      */
-    public Matrix4d reflect(double nx, double ny, double nz, double px, double py, double pz) {
-        return reflect(nx, ny, nz, px, py, pz, this);
+    ref public Matrix4d reflect(double nx, double ny, double nz, double px, double py, double pz) return {
+        reflect(nx, ny, nz, px, py, pz, this);
+        return this;
     }
 
     public Matrix4d reflect(double nx, double ny, double nz, double px, double py, double pz, ref Matrix4d dest) {
@@ -7970,7 +8035,7 @@ struct Matrix4d {
      *          a point on the plane
      * @return this
      */
-    public Matrix4d reflect(Vector3d normal, Vector3d point) {
+    ref public Matrix4d reflect(Vector3d normal, Vector3d point) return {
         return reflect(normal.x, normal.y, normal.z, point.x, point.y, point.z);
     }
 
@@ -7993,8 +8058,9 @@ struct Matrix4d {
      *          a point on the plane
      * @return this
      */
-    public Matrix4d reflect(Quaterniond orientation, Vector3d point) {
-        return reflect(orientation, point, this);
+    ref public Matrix4d reflect(Quaterniond orientation, Vector3d point) return {
+        reflect(orientation, point, this);
+        return this;
     }
 
     public Matrix4d reflect(Quaterniond orientation, Vector3d point, ref Matrix4d dest) {
@@ -8029,7 +8095,7 @@ struct Matrix4d {
      *          the constant in the plane equation
      * @return this
      */
-    public Matrix4d reflection(double a, double b, double c, double d) {
+    ref public Matrix4d reflection(double a, double b, double c, double d) return {
         double da = a + a, db = b + b, dc = c + c, dd = d + d;
         _m00(1.0 - da * a).
         _m01(-da * b).
@@ -8069,7 +8135,7 @@ struct Matrix4d {
      *          the z-coordinate of a point on the plane
      * @return this
      */
-    public Matrix4d reflection(double nx, double ny, double nz, double px, double py, double pz) {
+    ref public Matrix4d reflection(double nx, double ny, double nz, double px, double py, double pz) return {
         double invLength = Math.invsqrt(nx * nx + ny * ny + nz * nz);
         double nnx = nx * invLength;
         double nny = ny * invLength;
@@ -8088,7 +8154,7 @@ struct Matrix4d {
      *          a point on the plane
      * @return this
      */
-    public Matrix4d reflection(Vector3d normal, Vector3d point) {
+    ref public Matrix4d reflection(Vector3d normal, Vector3d point) return {
         return reflection(normal.x, normal.y, normal.z, point.x, point.y, point.z);
     }
 
@@ -8106,7 +8172,7 @@ struct Matrix4d {
      *          a point on the plane
      * @return this
      */
-    public Matrix4d reflection(Quaterniond orientation, Vector3d point) {
+    ref public Matrix4d reflection(Quaterniond orientation, Vector3d point) return {
         double num1 = orientation.x + orientation.x;
         double num2 = orientation.y + orientation.y;
         double num3 = orientation.z + orientation.z;
@@ -8255,8 +8321,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
-        return ortho(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) return {
+        ortho(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -8289,7 +8356,7 @@ struct Matrix4d {
      *            far clipping plane distance
      * @return this
      */
-    public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar) {
+    ref public Matrix4d ortho(double left, double right, double bottom, double top, double zNear, double zFar) return {
         return ortho(left, right, bottom, top, zNear, zFar, false);
     }
 
@@ -8432,8 +8499,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
-        return orthoLH(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) return {
+        orthoLH(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -8466,7 +8534,7 @@ struct Matrix4d {
      *            far clipping plane distance
      * @return this
      */
-    public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar) {
+    ref public Matrix4d orthoLH(double left, double right, double bottom, double top, double zNear, double zFar) return {
         return orthoLH(left, right, bottom, top, zNear, zFar, false);
     }
 
@@ -8498,7 +8566,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setOrtho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setOrtho(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / (right - left)).
@@ -8536,7 +8604,7 @@ struct Matrix4d {
      *            far clipping plane distance
      * @return this
      */
-    public Matrix4d setOrtho(double left, double right, double bottom, double top, double zNear, double zFar) {
+    ref public Matrix4d setOrtho(double left, double right, double bottom, double top, double zNear, double zFar) return {
         return setOrtho(left, right, bottom, top, zNear, zFar, false);
     }
 
@@ -8568,7 +8636,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setOrthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setOrthoLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / (right - left)).
@@ -8606,7 +8674,7 @@ struct Matrix4d {
      *            far clipping plane distance
      * @return this
      */
-    public Matrix4d setOrthoLH(double left, double right, double bottom, double top, double zNear, double zFar) {
+    ref public Matrix4d setOrthoLH(double left, double right, double bottom, double top, double zNear, double zFar) return {
         return setOrthoLH(left, right, bottom, top, zNear, zFar, false);
     }
 
@@ -8744,8 +8812,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne) {
-        return orthoSymmetric(width, height, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne) return {
+        orthoSymmetric(width, height, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -8777,8 +8846,9 @@ struct Matrix4d {
      *            far clipping plane distance
      * @return this
      */
-    public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar) {
-        return orthoSymmetric(width, height, zNear, zFar, false, this);
+    ref public Matrix4d orthoSymmetric(double width, double height, double zNear, double zFar) return {
+        orthoSymmetric(width, height, zNear, zFar, false, this);
+        return this;
     }
 
     /**
@@ -8915,8 +8985,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne) {
-        return orthoSymmetricLH(width, height, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne) return {
+        orthoSymmetricLH(width, height, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -8948,8 +9019,9 @@ struct Matrix4d {
      *            far clipping plane distance
      * @return this
      */
-    public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar) {
-        return orthoSymmetricLH(width, height, zNear, zFar, false, this);
+    ref public Matrix4d orthoSymmetricLH(double width, double height, double zNear, double zFar) return {
+        orthoSymmetricLH(width, height, zNear, zFar, false, this);
+        return this;
     }
 
     /**
@@ -8979,7 +9051,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setOrthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setOrthoSymmetric(double width, double height, double zNear, double zFar, bool zZeroToOne) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / width).
@@ -9014,7 +9086,7 @@ struct Matrix4d {
      *            far clipping plane distance
      * @return this
      */
-    public Matrix4d setOrthoSymmetric(double width, double height, double zNear, double zFar) {
+    ref public Matrix4d setOrthoSymmetric(double width, double height, double zNear, double zFar) return {
         return setOrthoSymmetric(width, height, zNear, zFar, false);
     }
 
@@ -9044,7 +9116,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setOrthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setOrthoSymmetricLH(double width, double height, double zNear, double zFar, bool zZeroToOne) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / width).
@@ -9079,7 +9151,7 @@ struct Matrix4d {
      *            far clipping plane distance
      * @return this
      */
-    public Matrix4d setOrthoSymmetricLH(double width, double height, double zNear, double zFar) {
+    ref public Matrix4d setOrthoSymmetricLH(double width, double height, double zNear, double zFar) return {
         return setOrthoSymmetricLH(width, height, zNear, zFar, false);
     }
 
@@ -9177,8 +9249,9 @@ struct Matrix4d {
      *            the distance from the center to the top frustum edge
      * @return this
      */
-    public Matrix4d ortho2D(double left, double right, double bottom, double top) {
-        return ortho2D(left, right, bottom, top, this);
+    ref public Matrix4d ortho2D(double left, double right, double bottom, double top) return {
+        ortho2D(left, right, bottom, top, this);
+        return this;
     }
 
     /**
@@ -9274,8 +9347,9 @@ struct Matrix4d {
      *            the distance from the center to the top frustum edge
      * @return this
      */
-    public Matrix4d ortho2DLH(double left, double right, double bottom, double top) {
-        return ortho2DLH(left, right, bottom, top, this);
+    ref public Matrix4d ortho2DLH(double left, double right, double bottom, double top) return {
+        ortho2DLH(left, right, bottom, top, this);
+        return this;
     }
 
     /**
@@ -9302,7 +9376,7 @@ struct Matrix4d {
      *            the distance from the center to the top frustum edge
      * @return this
      */
-    public Matrix4d setOrtho2D(double left, double right, double bottom, double top) {
+    ref public Matrix4d setOrtho2D(double left, double right, double bottom, double top) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / (right - left)).
@@ -9338,7 +9412,7 @@ struct Matrix4d {
      *            the distance from the center to the top frustum edge
      * @return this
      */
-    public Matrix4d setOrtho2DLH(double left, double right, double bottom, double top) {
+    ref public Matrix4d setOrtho2DLH(double left, double right, double bottom, double top) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00(2.0 / (right - left)).
@@ -9374,8 +9448,9 @@ struct Matrix4d {
      *            the direction of 'up'
      * @return this
      */
-    public Matrix4d lookAlong(Vector3d dir, Vector3d up) {
-        return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
+    ref public Matrix4d lookAlong(Vector3d dir, Vector3d up) return {
+        lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
+        return this;
     }
 
     /**
@@ -9544,9 +9619,10 @@ struct Matrix4d {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Matrix4d lookAlong(double dirX, double dirY, double dirZ,
-                              double upX, double upY, double upZ) {
-        return lookAlong(dirX, dirY, dirZ, upX, upY, upZ, this);
+    ref public Matrix4d lookAlong(double dirX, double dirY, double dirZ,
+                              double upX, double upY, double upZ) return {
+        lookAlong(dirX, dirY, dirZ, upX, upY, upZ, this);
+        return this;
     }
 
     /**
@@ -9569,7 +9645,7 @@ struct Matrix4d {
      *            the direction of 'up'
      * @return this
      */
-    public Matrix4d setLookAlong(Vector3d dir, Vector3d up) {
+    ref public Matrix4d setLookAlong(Vector3d dir, Vector3d up) return {
         return setLookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
@@ -9601,8 +9677,8 @@ struct Matrix4d {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Matrix4d setLookAlong(double dirX, double dirY, double dirZ,
-                                 double upX, double upY, double upZ) {
+    ref public Matrix4d setLookAlong(double dirX, double dirY, double dirZ,
+                                 double upX, double upY, double upZ) return {
         // Normalize direction
         double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
         dirX *= -invDirLength;
@@ -9664,7 +9740,7 @@ struct Matrix4d {
      *            the direction of 'up'
      * @return this
      */
-    public Matrix4d setLookAt(Vector3d eye, Vector3d center, Vector3d up) {
+    ref public Matrix4d setLookAt(Vector3d eye, Vector3d center, Vector3d up) return {
         return setLookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
     }
 
@@ -9698,9 +9774,9 @@ struct Matrix4d {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Matrix4d setLookAt(double eyeX, double eyeY, double eyeZ,
+    ref public Matrix4d setLookAt(double eyeX, double eyeY, double eyeZ,
                               double centerX, double centerY, double centerZ,
-                              double upX, double upY, double upZ) {
+                              double upX, double upY, double upZ) return {
         // Compute direction from position to lookAt
         double dirX, dirY, dirZ;
         dirX = eyeX - centerX;
@@ -9797,8 +9873,9 @@ struct Matrix4d {
      *            the direction of 'up'
      * @return this
      */
-    public Matrix4d lookAt(Vector3d eye, Vector3d center, Vector3d up) {
-        return lookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, this);
+    ref public Matrix4d lookAt(Vector3d eye, Vector3d center, Vector3d up) return {
+        lookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, this);
+        return this;
     }
 
     /**
@@ -9954,10 +10031,11 @@ struct Matrix4d {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Matrix4d lookAt(double eyeX, double eyeY, double eyeZ,
+    ref public Matrix4d lookAt(double eyeX, double eyeY, double eyeZ,
                            double centerX, double centerY, double centerZ,
-                           double upX, double upY, double upZ) {
-        return lookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ, this);
+                           double upX, double upY, double upZ) return {
+        lookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ, this);
+        return this;
     }
 
     /**
@@ -10079,7 +10157,7 @@ struct Matrix4d {
      *            the direction of 'up'
      * @return this
      */
-    public Matrix4d setLookAtLH(Vector3d eye, Vector3d center, Vector3d up) {
+    ref public Matrix4d setLookAtLH(Vector3d eye, Vector3d center, Vector3d up) return {
         return setLookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
     }
 
@@ -10113,9 +10191,9 @@ struct Matrix4d {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Matrix4d setLookAtLH(double eyeX, double eyeY, double eyeZ,
+    ref public Matrix4d setLookAtLH(double eyeX, double eyeY, double eyeZ,
                                 double centerX, double centerY, double centerZ,
-                                double upX, double upY, double upZ) {
+                                double upX, double upY, double upZ) return {
         // Compute direction from position to lookAt
         double dirX, dirY, dirZ;
         dirX = centerX - eyeX;
@@ -10211,8 +10289,9 @@ struct Matrix4d {
      *            the direction of 'up'
      * @return this
      */
-    public Matrix4d lookAtLH(Vector3d eye, Vector3d center, Vector3d up) {
-        return lookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, this);
+    ref public Matrix4d lookAtLH(Vector3d eye, Vector3d center, Vector3d up) return {
+        lookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, this);
+        return this;
     }
 
     /**
@@ -10368,10 +10447,11 @@ struct Matrix4d {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Matrix4d lookAtLH(double eyeX, double eyeY, double eyeZ,
+    ref public Matrix4d lookAtLH(double eyeX, double eyeY, double eyeZ,
                              double centerX, double centerY, double centerZ,
-                             double upX, double upY, double upZ) {
-        return lookAtLH(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ, this);
+                             double upX, double upY, double upZ) return {
+        lookAtLH(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ, this);
+        return this;
     }
 
     /**
@@ -10511,8 +10591,9 @@ struct Matrix4d {
      *             the number of tiles along the y axis
      * @return this
      */
-    public Matrix4d tile(int x, int y, int w, int h) {
-        return tile(x, y, w, h, this);
+    ref public Matrix4d tile(int x, int y, int w, int h) return {
+        tile(x, y, w, h, this);
+        return this;
     }
     public Matrix4d tile(int x, int y, int w, int h, ref Matrix4d dest) {
         float tx = w - 1 - (x<<1), ty = h - 1 - (y<<1);
@@ -10686,8 +10767,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) {
-        return perspective(fovy, aspect, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) return {
+        perspective(fovy, aspect, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -10718,8 +10800,9 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */    
-    public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar) {
-        return perspective(fovy, aspect, zNear, zFar, this);
+    ref public Matrix4d perspective(double fovy, double aspect, double zNear, double zFar) return {
+        perspective(fovy, aspect, zNear, zFar, this);
+        return this;
     }
 
     /**
@@ -10869,8 +10952,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, bool zZeroToOne) {
-        return perspectiveRect(width, height, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar, bool zZeroToOne) return {
+        perspectiveRect(width, height, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -10901,8 +10985,9 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar) {
-        return perspectiveRect(width, height, zNear, zFar, this);
+    ref public Matrix4d perspectiveRect(double width, double height, double zNear, double zFar) return {
+        perspectiveRect(width, height, zNear, zFar, this);
+        return this;
     }
 
     /**
@@ -11088,8 +11173,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, bool zZeroToOne) {
-        return perspectiveOffCenter(fovy, offAngleX, offAngleY, aspect, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar, bool zZeroToOne) return {
+        perspectiveOffCenter(fovy, offAngleX, offAngleY, aspect, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -11129,8 +11215,9 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar) {
-        return perspectiveOffCenter(fovy, offAngleX, offAngleY, aspect, zNear, zFar, this);
+    ref public Matrix4d perspectiveOffCenter(double fovy, double offAngleX, double offAngleY, double aspect, double zNear, double zFar) return {
+        perspectiveOffCenter(fovy, offAngleX, offAngleY, aspect, zNear, zFar, this);
+        return this;
     }
 
     /**
@@ -11175,8 +11262,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
-        return perspectiveOffCenterFov(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) return {
+        perspectiveOffCenterFov(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, zZeroToOne, this);
+        return this;
     }
     public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         return frustum(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne, dest);
@@ -11221,8 +11309,9 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) {
-        return perspectiveOffCenterFov(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, this);
+    ref public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) return {
+        perspectiveOffCenterFov(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, this);
+        return this;
     }
     public Matrix4d perspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, ref Matrix4d dest) {
         return frustum(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, dest);
@@ -11270,8 +11359,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
-        return perspectiveOffCenterFovLH(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) return {
+        perspectiveOffCenterFovLH(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, zZeroToOne, this);
+        return this;
     }
     public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne, ref Matrix4d dest) {
         return frustumLH(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne, dest);
@@ -11316,8 +11406,9 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) {
-        return perspectiveOffCenterFovLH(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, this);
+    ref public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) return {
+        perspectiveOffCenterFovLH(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, this);
+        return this;
     }
     public Matrix4d perspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, ref Matrix4d dest) {
         return frustumLH(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, dest);
@@ -11349,7 +11440,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspective(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setPerspective(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) return {
         double h = Math.tan(fovy * 0.5);
         _m00(1.0 / (h * aspect)).
         _m01(0.0).
@@ -11407,7 +11498,7 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d setPerspective(double fovy, double aspect, double zNear, double zFar) {
+    ref public Matrix4d setPerspective(double fovy, double aspect, double zNear, double zFar) return {
         return setPerspective(fovy, aspect, zNear, zFar, false);
     }
 
@@ -11437,7 +11528,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspectiveRect(double width, double height, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setPerspectiveRect(double width, double height, double zNear, double zFar, bool zZeroToOne) return {
         this.zero();
         this._m00((zNear + zNear) / width);
         this._m11((zNear + zNear) / height);
@@ -11484,7 +11575,7 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Float#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d setPerspectiveRect(double width, double height, double zNear, double zFar) {
+    ref public Matrix4d setPerspectiveRect(double width, double height, double zNear, double zFar) return {
         return setPerspectiveRect(width, height, zNear, zFar, false);
     }
 
@@ -11520,8 +11611,8 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d setPerspectiveOffCenter(double fovy, double offAngleX, double offAngleY,
-            double aspect, double zNear, double zFar) {
+    ref public Matrix4d setPerspectiveOffCenter(double fovy, double offAngleX, double offAngleY,
+            double aspect, double zNear, double zFar) return {
         return setPerspectiveOffCenter(fovy, offAngleX, offAngleY, aspect, zNear, zFar, false);
     }
     /**
@@ -11559,8 +11650,8 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspectiveOffCenter(double fovy, double offAngleX, double offAngleY,
-                                            double aspect, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setPerspectiveOffCenter(double fovy, double offAngleX, double offAngleY,
+                                            double aspect, double zNear, double zFar, bool zZeroToOne) return {
         this.zero();
         double h = Math.tan(fovy * 0.5);
         double xScale = 1.0 / (h * aspect), yScale = 1.0 / h;
@@ -11626,7 +11717,7 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Float#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d setPerspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) {
+    ref public Matrix4d setPerspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) return {
         return setPerspectiveOffCenterFov(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, false);
     }
     /**
@@ -11666,7 +11757,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setPerspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) return {
         return setFrustum(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne);
     }
 
@@ -11704,7 +11795,7 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Float#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d setPerspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) {
+    ref public Matrix4d setPerspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) return {
         return setPerspectiveOffCenterFovLH(angleLeft, angleRight, angleDown, angleUp, zNear, zFar, false);
     }
     /**
@@ -11744,7 +11835,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setPerspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar, bool zZeroToOne) return {
         return setFrustumLH(Math.tan(angleLeft)*zNear, Math.tan(angleRight)*zNear, Math.tan(angleDown)*zNear, Math.tan(angleUp)*zNear, zNear, zFar, zZeroToOne);
     }
 
@@ -11864,8 +11955,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) {
-        return perspectiveLH(fovy, aspect, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) return {
+        perspectiveLH(fovy, aspect, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -11930,8 +12022,9 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar) {
-        return perspectiveLH(fovy, aspect, zNear, zFar, this);
+    ref public Matrix4d perspectiveLH(double fovy, double aspect, double zNear, double zFar) return {
+        perspectiveLH(fovy, aspect, zNear, zFar, this);
+        return this;
     }
 
     /**
@@ -11960,7 +12053,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setPerspectiveLH(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setPerspectiveLH(double fovy, double aspect, double zNear, double zFar, bool zZeroToOne) return {
         double h = Math.tan(fovy * 0.5);
         _m00(1.0 / (h * aspect)).
         _m01(0.0).
@@ -12018,7 +12111,7 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d setPerspectiveLH(double fovy, double aspect, double zNear, double zFar) {
+    ref public Matrix4d setPerspectiveLH(double fovy, double aspect, double zNear, double zFar) return {
         return setPerspectiveLH(fovy, aspect, zNear, zFar, false);
     }
 
@@ -12191,8 +12284,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
-        return frustum(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) return {
+        frustum(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -12229,8 +12323,9 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar) {
-        return frustum(left, right, bottom, top, zNear, zFar, this);
+    ref public Matrix4d frustum(double left, double right, double bottom, double top, double zNear, double zFar) return {
+        frustum(left, right, bottom, top, zNear, zFar, this);
+        return this;
     }
 
     /**
@@ -12265,7 +12360,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setFrustum(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setFrustum(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00((zNear + zNear) / (right - left)).
@@ -12322,7 +12417,7 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d setFrustum(double left, double right, double bottom, double top, double zNear, double zFar) {
+    ref public Matrix4d setFrustum(double left, double right, double bottom, double top, double zNear, double zFar) return {
         return setFrustum(left, right, bottom, top, zNear, zFar, false);
     }
 
@@ -12455,8 +12550,9 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
-        return frustumLH(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
+    ref public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) return {
+        frustumLH(left, right, bottom, top, zNear, zFar, zZeroToOne, this);
+        return this;
     }
 
     /**
@@ -12533,8 +12629,9 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar) {
-        return frustumLH(left, right, bottom, top, zNear, zFar, this);
+    ref public Matrix4d frustumLH(double left, double right, double bottom, double top, double zNear, double zFar) return {
+        frustumLH(left, right, bottom, top, zNear, zFar, this);
+        return this;
     }
 
     /**
@@ -12569,7 +12666,7 @@ struct Matrix4d {
      *            or whether to use OpenGL's NDC z range of <code>[-1..+1]</code> when <code>false</code>
      * @return this
      */
-    public Matrix4d setFrustumLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) {
+    ref public Matrix4d setFrustumLH(double left, double right, double bottom, double top, double zNear, double zFar, bool zZeroToOne) return {
         if ((properties & PROPERTY_IDENTITY) == 0)
             _identity();
         _m00((zNear + zNear) / (right - left)).
@@ -12626,7 +12723,7 @@ struct Matrix4d {
      *            In that case, <code>zNear</code> may not also be {@link Double#POSITIVE_INFINITY}.
      * @return this
      */
-    public Matrix4d setFrustumLH(double left, double right, double bottom, double top, double zNear, double zFar) {
+    ref public Matrix4d setFrustumLH(double left, double right, double bottom, double top, double zNear, double zFar) return {
         return setFrustumLH(left, right, bottom, top, zNear, zFar, false);
     }
 
@@ -12658,7 +12755,7 @@ struct Matrix4d {
      *          the distance to the far plane
      * @return this
      */
-    public Matrix4d setFromIntrinsic(double alphaX, double alphaY, double gamma, double u0, double v0, int imgWidth, int imgHeight, double near, double far) {
+    ref public Matrix4d setFromIntrinsic(double alphaX, double alphaY, double gamma, double u0, double v0, int imgWidth, int imgHeight, double near, double far) return {
         double l00 = 2.0 / imgWidth;
         double l11 = 2.0 / imgHeight;
         double l22 = 2.0 / (near - far);
@@ -12962,8 +13059,9 @@ struct Matrix4d {
      *          the constant in the plane equation
      * @return this
      */
-    public Matrix4d shadow(Vector4d light, double a, double b, double c, double d) {
-        return shadow(light.x, light.y, light.z, light.w, a, b, c, d, this);
+    ref public Matrix4d shadow(Vector4d light, double a, double b, double c, double d) return {
+        shadow(light.x, light.y, light.z, light.w, a, b, c, d, this);
+        return this;
     }
 
     public Matrix4d shadow(Vector4d light, double a, double b, double c, double d, ref Matrix4d dest) {
@@ -13001,8 +13099,9 @@ struct Matrix4d {
      *          the constant in the plane equation
      * @return this
      */
-    public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, double a, double b, double c, double d) {
-        return shadow(lightX, lightY, lightZ, lightW, a, b, c, d, this);
+    ref public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, double a, double b, double c, double d) return {
+        shadow(lightX, lightY, lightZ, lightW, a, b, c, d, this);
+        return this;
     }
 
     public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, double a, double b, double c, double d, ref Matrix4d dest) {
@@ -13094,8 +13193,9 @@ struct Matrix4d {
      *          the transformation to transform the implied plane <code>y = 0</code> before applying the projection
      * @return this
      */
-    public Matrix4d shadow(Vector4d light, Matrix4d planeTransform) {
-        return shadow(light, planeTransform, this);
+    ref public Matrix4d shadow(Vector4d light, Matrix4d planeTransform) return {
+        shadow(light, planeTransform, this);
+        return this;
     }
 
     public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, Matrix4d planeTransform, ref Matrix4d dest) {
@@ -13132,8 +13232,9 @@ struct Matrix4d {
      *          the transformation to transform the implied plane <code>y = 0</code> before applying the projection
      * @return this
      */
-    public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, Matrix4d planeTransform) {
-        return shadow(lightX, lightY, lightZ, lightW, planeTransform, this);
+    ref public Matrix4d shadow(double lightX, double lightY, double lightZ, double lightW, Matrix4d planeTransform) return {
+        shadow(lightX, lightY, lightZ, lightW, planeTransform, this);
+        return this;
     }
 
     /**
@@ -13151,7 +13252,7 @@ struct Matrix4d {
      *          the rotation axis (must be {@link Vector3d#normalize() normalized})
      * @return this
      */
-    public Matrix4d billboardCylindrical(Vector3d objPos, Vector3d targetPos, Vector3d up) {
+    ref public Matrix4d billboardCylindrical(Vector3d objPos, Vector3d targetPos, Vector3d up) return {
         double dirX = targetPos.x - objPos.x;
         double dirY = targetPos.y - objPos.y;
         double dirZ = targetPos.z - objPos.z;
@@ -13215,7 +13316,7 @@ struct Matrix4d {
      *          the up axis used to orient the object
      * @return this
      */
-    public Matrix4d billboardSpherical(Vector3d objPos, Vector3d targetPos, Vector3d up) {
+    ref public Matrix4d billboardSpherical(Vector3d objPos, Vector3d targetPos, Vector3d up) return {
         double dirX = targetPos.x - objPos.x;
         double dirY = targetPos.y - objPos.y;
         double dirZ = targetPos.z - objPos.z;
@@ -13276,7 +13377,7 @@ struct Matrix4d {
      *          the position of the target (for example the camera) towards which to rotate the object
      * @return this
      */
-    public Matrix4d billboardSpherical(Vector3d objPos, Vector3d targetPos) {
+    ref public Matrix4d billboardSpherical(Vector3d objPos, Vector3d targetPos) return {
         double toDirX = targetPos.x - objPos.x;
         double toDirY = targetPos.y - objPos.y;
         double toDirZ = targetPos.z - objPos.z;
@@ -13426,8 +13527,9 @@ struct Matrix4d {
      *          the viewport described by <code>[x, y, width, height]</code>
      * @return this
      */
-    public Matrix4d pick(double x, double y, double width, double height, int[] viewport) {
-        return pick(x, y, width, height, viewport, this);
+    ref public Matrix4d pick(double x, double y, double width, double height, int[] viewport) return {
+        pick(x, y, width, height, viewport, this);
+        return this;
     }
 
     public bool isAffine() {
@@ -13441,7 +13543,7 @@ struct Matrix4d {
      *          the other matrix to exchange the values with
      * @return this
      */
-    public Matrix4d swap(Matrix4d other) {
+    ref public Matrix4d swap(ref Matrix4d other) return {
         double tmp;
         tmp = m00; m00 = other.m00; other.m00 = tmp;
         tmp = m01; m01 = other.m01; other.m01 = tmp;
@@ -13534,8 +13636,9 @@ struct Matrix4d {
      *          the rotation angle around the Y axis in radians
      * @return this
      */
-    public Matrix4d arcball(double radius, double centerX, double centerY, double centerZ, double angleX, double angleY) {
-        return arcball(radius, centerX, centerY, centerZ, angleX, angleY, this);
+    ref public Matrix4d arcball(double radius, double centerX, double centerY, double centerZ, double angleX, double angleY) return {
+        arcball(radius, centerX, centerY, centerZ, angleX, angleY, this);
+        return this;
     }
 
     /**
@@ -13554,8 +13657,9 @@ struct Matrix4d {
      *          the rotation angle around the Y axis in radians
      * @return this
      */
-    public Matrix4d arcball(double radius, Vector3d center, double angleX, double angleY) {
-        return arcball(radius, center.x, center.y, center.z, angleX, angleY, this);
+    ref public Matrix4d arcball(double radius, Vector3d center, double angleX, double angleY) return {
+        arcball(radius, center.x, center.y, center.z, angleX, angleY, this);
+        return this;
     }
 
     /**
@@ -13573,7 +13677,7 @@ struct Matrix4d {
      *          will hold the maximum corner coordinates of the axis-aligned bounding box
      * @return this
      */
-    public Matrix4d frustumAabb(Vector3d min, Vector3d max) {
+    ref public Matrix4d frustumAabb(Vector3d min, Vector3d max) return {
         double minX = double.infinity;
         double minY = double.infinity;
         double minZ = double.infinity;
@@ -13744,7 +13848,7 @@ struct Matrix4d {
      *          the y coordinate of the left corner at the longer edge of the trapezoid
      * @return this
      */
-    public Matrix4d trapezoidCrop(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double p3x, double p3y) {
+    ref public Matrix4d trapezoidCrop(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double p3x, double p3y) return {
         double aX = p1y - p0y, aY = p0x - p1x;
         double nm00 = aY;
         double nm10 = -aX;
@@ -13782,7 +13886,7 @@ struct Matrix4d {
         return this;
     }
 
-    public Matrix4d transformAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Vector3d outMin, Vector3d outMax) {
+    ref public Matrix4d transformAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, ref Vector3d outMin, ref Vector3d outMax) return {
         double xax = m00 * minX, xay = m01 * minX, xaz = m02 * minX;
         double xbx = m00 * maxX, xby = m01 * maxX, xbz = m02 * maxX;
         double yax = m10 * minY, yay = m11 * minY, yaz = m12 * minY;
@@ -13863,7 +13967,7 @@ struct Matrix4d {
         return this;
     }
 
-    public Matrix4d transformAab(Vector3d min, Vector3d max, Vector3d outMin, Vector3d outMax) {
+    ref public Matrix4d transformAab(ref Vector3d min, ref Vector3d max, ref Vector3d outMin, ref Vector3d outMax) return {
         return transformAab(min.x, min.y, min.z, max.x, max.y, max.z, outMin, outMax);
     }
 
@@ -13880,8 +13984,9 @@ struct Matrix4d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    public Matrix4d lerp(Matrix4d other, double t) {
-        return lerp(other, t, this);
+    ref public Matrix4d lerp(Matrix4d other, double t) return {
+        lerp(other, t, this);
+        return this;
     }
 
     public Matrix4d lerp(Matrix4d other, double t, ref Matrix4d dest) {
@@ -13958,8 +14063,9 @@ struct Matrix4d {
      *              the up vector
      * @return this
      */
-    public Matrix4d rotateTowards(Vector3d direction, Vector3d up) {
-        return rotateTowards(direction.x, direction.y, direction.z, up.x, up.y, up.z, this);
+    ref public Matrix4d rotateTowards(Vector3d direction, Vector3d up) return {
+        rotateTowards(direction.x, direction.y, direction.z, up.x, up.y, up.z, this);
+        return this;
     }
 
     /**
@@ -13993,8 +14099,9 @@ struct Matrix4d {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Matrix4d rotateTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ) {
-        return rotateTowards(dirX, dirY, dirZ, upX, upY, upZ, this);
+    ref public Matrix4d rotateTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ) return {
+        rotateTowards(dirX, dirY, dirZ, upX, upY, upZ, this);
+        return this;
     }
 
     /**
@@ -14106,7 +14213,7 @@ struct Matrix4d {
      *              the up vector
      * @return this
      */
-    public Matrix4d rotationTowards(Vector3d dir, Vector3d up) {
+    ref public Matrix4d rotationTowards(Vector3d dir, Vector3d up) return {
         return rotationTowards(dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
@@ -14136,7 +14243,7 @@ struct Matrix4d {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Matrix4d rotationTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ) {
+    ref public Matrix4d rotationTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ) return {
         // Normalize direction
         double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
         double ndirX = dirX * invDirLength;
@@ -14189,7 +14296,7 @@ struct Matrix4d {
      *              the up vector
      * @return this
      */
-    public Matrix4d translationRotateTowards(Vector3d pos, Vector3d dir, Vector3d up) {
+    ref public Matrix4d translationRotateTowards(Vector3d pos, Vector3d dir, Vector3d up) return {
         return translationRotateTowards(pos.x, pos.y, pos.z, dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
@@ -14223,7 +14330,7 @@ struct Matrix4d {
      *              the z-coordinate of the up vector
      * @return this
      */
-    public Matrix4d translationRotateTowards(double posX, double posY, double posZ, double dirX, double dirY, double dirZ, double upX, double upY, double upZ) {
+    ref public Matrix4d translationRotateTowards(double posX, double posY, double posZ, double dirX, double dirY, double dirZ, double upX, double upY, double upZ) return {
         // Normalize direction
         double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
         double ndirX = dirX * invDirLength;
@@ -14299,7 +14406,7 @@ struct Matrix4d {
      *          will hold the direction and length of the span along the positive z axis
      * @return this
      */
-    public Matrix4d affineSpan(Vector3d corner, Vector3d xDir, Vector3d yDir, Vector3d zDir) {
+    ref public Matrix4d affineSpan(ref Vector3d corner, ref Vector3d xDir, ref Vector3d yDir, ref Vector3d zDir) return {
         double a = m10 * m22, b = m10 * m21, c = m10 * m02, d = m10 * m01;
         double e = m11 * m22, f = m11 * m20, g = m11 * m02, h = m11 * m00;
         double i = m12 * m21, j = m12 * m20, k = m12 * m01, l = m12 * m00;
@@ -14403,7 +14510,7 @@ struct Matrix4d {
      *            the value for the z factor that applies to y
      * @return this
      */
-    public Matrix4d obliqueZ(double a, double b) {
+    ref public Matrix4d obliqueZ(double a, double b) return {
         setm20(m00 * a + m10 * b + m20);
         setm21(m01 * a + m11 * b + m21);
         setm22(m02 * a + m12 * b + m22);
@@ -14538,8 +14645,9 @@ struct Matrix4d {
      *            the up vector
      * @return this
      */
-    public Matrix4d withLookAtUp(Vector3d up) {
-        return withLookAtUp(up.x, up.y, up.z, this);
+    ref public Matrix4d withLookAtUp(Vector3d up) return {
+        withLookAtUp(up.x, up.y, up.z, this);
+        return this;
     }
 
     public Matrix4d withLookAtUp(Vector3d up, ref Matrix4d dest) {
@@ -14566,8 +14674,9 @@ struct Matrix4d {
      *            the z coordinate of the up vector
      * @return this
      */
-    public Matrix4d withLookAtUp(double upX, double upY, double upZ) {
-        return withLookAtUp(upX, upY, upZ, this);
+    ref public Matrix4d withLookAtUp(double upX, double upY, double upZ) return {
+        withLookAtUp(upX, upY, upZ, this);
+        return this;
     }
 
     public Matrix4d withLookAtUp(double upX, double upY, double upZ, ref Matrix4d dest) {
@@ -14603,8 +14712,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapXZY() {
-        return mapXZY(this);
+    ref public Matrix4d mapXZY() return {
+        mapXZY(this);
+        return this;
     }
     public Matrix4d mapXZY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
@@ -14621,8 +14731,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapXZnY() {
-        return mapXZnY(this);
+    ref public Matrix4d mapXZnY() return {
+        mapXZnY(this);
+        return this;
     }
     public Matrix4d mapXZnY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
@@ -14639,8 +14750,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapXnYnZ() {
-        return mapXnYnZ(this);
+    ref public Matrix4d mapXnYnZ() return {
+        mapXnYnZ(this);
+        return this;
     }
     public Matrix4d mapXnYnZ(ref Matrix4d dest) {
         return dest._m00(m00)._m01(m01)._m02(m02)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -14656,8 +14768,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapXnZY() {
-        return mapXnZY(this);
+    ref public Matrix4d mapXnZY() return {
+        mapXnZY(this);
+        return this;
     }
     public Matrix4d mapXnZY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
@@ -14674,8 +14787,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapXnZnY() {
-        return mapXnZnY(this);
+    ref public Matrix4d mapXnZnY() return {
+        mapXnZnY(this);
+        return this;
     }
     public Matrix4d mapXnZnY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
@@ -14692,8 +14806,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapYXZ() {
-        return mapYXZ(this);
+    ref public Matrix4d mapYXZ() return {
+        mapYXZ(this);
+        return this;
     }
     public Matrix4d mapYXZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14710,8 +14825,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapYXnZ() {
-        return mapYXnZ(this);
+    ref public Matrix4d mapYXnZ() return {
+        mapYXnZ(this);
+        return this;
     }
     public Matrix4d mapYXnZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14728,8 +14844,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapYZX() {
-        return mapYZX(this);
+    ref public Matrix4d mapYZX() return {
+        mapYZX(this);
+        return this;
     }
     public Matrix4d mapYZX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14746,8 +14863,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapYZnX() {
-        return mapYZnX(this);
+    ref public Matrix4d mapYZnX() return {
+        mapYZnX(this);
+        return this;
     }
     public Matrix4d mapYZnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14764,8 +14882,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapYnXZ() {
-        return mapYnXZ(this);
+    ref public Matrix4d mapYnXZ() return {
+        mapYnXZ(this);
+        return this;
     }
     public Matrix4d mapYnXZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14782,8 +14901,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapYnXnZ() {
-        return mapYnXnZ(this);
+    ref public Matrix4d mapYnXnZ() return {
+        mapYnXnZ(this);
+        return this;
     }
     public Matrix4d mapYnXnZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14800,8 +14920,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapYnZX() {
-        return mapYnZX(this);
+    ref public Matrix4d mapYnZX() return {
+        mapYnZX(this);
+        return this;
     }
     public Matrix4d mapYnZX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14818,8 +14939,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapYnZnX() {
-        return mapYnZnX(this);
+    ref public Matrix4d mapYnZnX() return {
+        mapYnZnX(this);
+        return this;
     }
     public Matrix4d mapYnZnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14836,8 +14958,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapZXY() {
-        return mapZXY(this);
+    ref public Matrix4d mapZXY() return {
+        mapZXY(this);
+        return this;
     }
     public Matrix4d mapZXY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14855,8 +14978,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapZXnY() {
-        return mapZXnY(this);
+    ref public Matrix4d mapZXnY() return {
+        mapZXnY(this);
+        return this;
     }
     public Matrix4d mapZXnY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14874,8 +14998,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapZYX() {
-        return mapZYX(this);
+    ref public Matrix4d mapZYX() return {
+        mapZYX(this);
+        return this;
     }
     public Matrix4d mapZYX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14892,8 +15017,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapZYnX() {
-        return mapZYnX(this);
+    ref public Matrix4d mapZYnX() return {
+        mapZYnX(this);
+        return this;
     }
     public Matrix4d mapZYnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14910,8 +15036,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapZnXY() {
-        return mapZnXY(this);
+    ref public Matrix4d mapZnXY() return {
+        mapZnXY(this);
+        return this;
     }
     public Matrix4d mapZnXY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14929,8 +15056,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapZnXnY() {
-        return mapZnXnY(this);
+    ref public Matrix4d mapZnXnY() return {
+        mapZnXnY(this);
+        return this;
     }
     public Matrix4d mapZnXnY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14948,8 +15076,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapZnYX() {
-        return mapZnYX(this);
+    ref public Matrix4d mapZnYX() return {
+        mapZnYX(this);
+        return this;
     }
     public Matrix4d mapZnYX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14966,8 +15095,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapZnYnX() {
-        return mapZnYnX(this);
+    ref public Matrix4d mapZnYnX() return {
+        mapZnYnX(this);
+        return this;
     }
     public Matrix4d mapZnYnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -14984,8 +15114,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnXYnZ() {
-        return mapnXYnZ(this);
+    ref public Matrix4d mapnXYnZ() return {
+        mapnXYnZ(this);
+        return this;
     }
     public Matrix4d mapnXYnZ(ref Matrix4d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(m10)._m11(m11)._m12(m12)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -15001,8 +15132,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnXZY() {
-        return mapnXZY(this);
+    ref public Matrix4d mapnXZY() return {
+        mapnXZY(this);
+        return this;
     }
     public Matrix4d mapnXZY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
@@ -15019,8 +15151,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnXZnY() {
-        return mapnXZnY(this);
+    ref public Matrix4d mapnXZnY() return {
+        mapnXZnY(this);
+        return this;
     }
     public Matrix4d mapnXZnY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
@@ -15037,8 +15170,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnXnYZ() {
-        return mapnXnYZ(this);
+    ref public Matrix4d mapnXnYZ() return {
+        mapnXnYZ(this);
+        return this;
     }
     public Matrix4d mapnXnYZ(ref Matrix4d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(m20)._m21(m21)._m22(m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -15054,8 +15188,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnXnYnZ() {
-        return mapnXnYnZ(this);
+    ref public Matrix4d mapnXnYnZ() return {
+        mapnXnYnZ(this);
+        return this;
     }
     public Matrix4d mapnXnYnZ(ref Matrix4d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m03(m03)._m10(-m10)._m11(-m11)._m12(-m12)._m13(m13)._m20(-m20)._m21(-m21)._m22(-m22)._m23(m23)._m30(m30)._m31(m31)._m32(m32)._m33(m33)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
@@ -15071,8 +15206,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnXnZY() {
-        return mapnXnZY(this);
+    ref public Matrix4d mapnXnZY() return {
+        mapnXnZY(this);
+        return this;
     }
     public Matrix4d mapnXnZY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
@@ -15089,8 +15225,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnXnZnY() {
-        return mapnXnZnY(this);
+    ref public Matrix4d mapnXnZnY() return {
+        mapnXnZnY(this);
+        return this;
     }
     public Matrix4d mapnXnZnY(ref Matrix4d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
@@ -15107,8 +15244,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnYXZ() {
-        return mapnYXZ(this);
+    ref public Matrix4d mapnYXZ() return {
+        mapnYXZ(this);
+        return this;
     }
     public Matrix4d mapnYXZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15125,8 +15263,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnYXnZ() {
-        return mapnYXnZ(this);
+    ref public Matrix4d mapnYXnZ() return {
+        mapnYXnZ(this);
+        return this;
     }
     public Matrix4d mapnYXnZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15143,8 +15282,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnYZX() {
-        return mapnYZX(this);
+    ref public Matrix4d mapnYZX() return {
+        mapnYZX(this);
+        return this;
     }
     public Matrix4d mapnYZX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15161,8 +15301,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnYZnX() {
-        return mapnYZnX(this);
+    ref public Matrix4d mapnYZnX() return {
+        mapnYZnX(this);
+        return this;
     }
     public Matrix4d mapnYZnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15179,8 +15320,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnYnXZ() {
-        return mapnYnXZ(this);
+    ref public Matrix4d mapnYnXZ() return {
+        mapnYnXZ(this);
+        return this;
     }
     public Matrix4d mapnYnXZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15197,8 +15339,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnYnXnZ() {
-        return mapnYnXnZ(this);
+    ref public Matrix4d mapnYnXnZ() return {
+        mapnYnXnZ(this);
+        return this;
     }
     public Matrix4d mapnYnXnZ(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15215,8 +15358,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnYnZX() {
-        return mapnYnZX(this);
+    ref public Matrix4d mapnYnZX() return {
+        mapnYnZX(this);
+        return this;
     }
     public Matrix4d mapnYnZX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15233,8 +15377,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnYnZnX() {
-        return mapnYnZnX(this);
+    ref public Matrix4d mapnYnZnX() return {
+        mapnYnZnX(this);
+        return this;
     }
     public Matrix4d mapnYnZnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15251,8 +15396,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnZXY() {
-        return mapnZXY(this);
+    ref public Matrix4d mapnZXY() return {
+        mapnZXY(this);
+        return this;
     }
     public Matrix4d mapnZXY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15270,8 +15416,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnZXnY() {
-        return mapnZXnY(this);
+    ref public Matrix4d mapnZXnY() return {
+        mapnZXnY(this);
+        return this;
     }
     public Matrix4d mapnZXnY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15289,8 +15436,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnZYX() {
-        return mapnZYX(this);
+    ref public Matrix4d mapnZYX() return {
+        mapnZYX(this);
+        return this;
     }
     public Matrix4d mapnZYX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15307,8 +15455,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnZYnX() {
-        return mapnZYnX(this);
+    ref public Matrix4d mapnZYnX() return {
+        mapnZYnX(this);
+        return this;
     }
     public Matrix4d mapnZYnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15325,8 +15474,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnZnXY() {
-        return mapnZnXY(this);
+    ref public Matrix4d mapnZnXY() return {
+        mapnZnXY(this);
+        return this;
     }
     public Matrix4d mapnZnXY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15344,8 +15494,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnZnXnY() {
-        return mapnZnXnY(this);
+    ref public Matrix4d mapnZnXnY() return {
+        mapnZnXnY(this);
+        return this;
     }
     public Matrix4d mapnZnXnY(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15363,8 +15514,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnZnYX() {
-        return mapnZnYX(this);
+    ref public Matrix4d mapnZnYX() return {
+        mapnZnYX(this);
+        return this;
     }
     public Matrix4d mapnZnYX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15381,8 +15533,9 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d mapnZnYnX() {
-        return mapnZnYnX(this);
+    ref public Matrix4d mapnZnYnX() return {
+        mapnZnYnX(this);
+        return this;
     }
     public Matrix4d mapnZnYnX(ref Matrix4d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
@@ -15400,7 +15553,7 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d negateX() {
+    ref public Matrix4d negateX() return {
         return _m00(-m00)._m01(-m01)._m02(-m02)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
     public Matrix4d negateX(ref Matrix4d dest) {
@@ -15418,7 +15571,7 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d negateY() {
+    ref public Matrix4d negateY() return {
         return _m10(-m10)._m11(-m11)._m12(-m12)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
     public Matrix4d negateY(ref Matrix4d dest) {
@@ -15436,7 +15589,7 @@ struct Matrix4d {
      * 
      * @return this
      */
-    public Matrix4d negateZ() {
+    ref public Matrix4d negateZ() return {
         return _m20(-m20)._m21(-m21)._m22(-m22)._properties(properties & (PROPERTY_AFFINE | PROPERTY_ORTHONORMAL));
     }
     public Matrix4d negateZ(ref Matrix4d dest) {
