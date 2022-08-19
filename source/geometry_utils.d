@@ -115,7 +115,7 @@ public static void perpendicular(ref Vector3d v, ref Vector3d dest1, ref Vector3
     * @param dest
     *            will hold the result
     */
-public static void normal(Vector3d v0, Vector3d v1, Vector3d v2, ref Vector3d dest) {
+public static void normal(ref Vector3d v0,ref Vector3d v1,ref Vector3d v2, ref Vector3d dest) {
     normal(v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, dest);
 }
 

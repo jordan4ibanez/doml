@@ -83,7 +83,7 @@ struct FrustumIntersection {
      */
     static immutable int INSIDE = -2;
     /**
-     * Return value of {@link #intersectSphere(Vector3d, float)} or {@link #intersectSphere(float, float, float, float)}
+     * Return value of {@link #intersectSphere(ref Vector3d, float)} or {@link #intersectSphere(float, float, float, float)}
      * indicating that the sphere is completely outside of the frustum.
      */
     static immutable int OUTSIDE = -3;
@@ -187,8 +187,8 @@ struct FrustumIntersection {
      * @param m
      *          the {@link Matrix4d} to create the frustum culler from
      * @param allowTestSpheres
-     *          whether the methods {@link #testSphere(Vector3d, float)}, {@link #testSphere(float, float, float, float)},
-     *          {@link #intersectSphere(Vector3d, float)} or {@link #intersectSphere(float, float, float, float)} will used.
+     *          whether the methods {@link #testSphere(ref Vector3d, float)}, {@link #testSphere(float, float, float, float)},
+     *          {@link #intersectSphere(ref Vector3d, float)} or {@link #intersectSphere(float, float, float, float)} will used.
      *          If no spheres need to be tested, then <code>false</code> should be used 
      */
     this(ref Matrix4d m, bool allowTestSpheres) {
@@ -220,8 +220,8 @@ struct FrustumIntersection {
      * @param m
      *          the {@link Matrix4d matrix} to update <code>this</code> frustum culler's frustum planes from
      * @param allowTestSpheres
-     *          whether the methods {@link #testSphere(Vector3d, float)}, {@link #testSphere(float, float, float, float)},
-     *          {@link #intersectSphere(Vector3d, float)} or {@link #intersectSphere(float, float, float, float)} will be used.
+     *          whether the methods {@link #testSphere(ref Vector3d, float)}, {@link #testSphere(float, float, float, float)},
+     *          {@link #intersectSphere(ref Vector3d, float)} or {@link #intersectSphere(float, float, float, float)} will be used.
      *          If no spheres need to be tested, then <code>false</code> should be used
      * @return this
      */
@@ -273,7 +273,7 @@ struct FrustumIntersection {
      *          the point to test
      * @return <code>true</code> if the given point is inside the frustum; <code>false</code> otherwise
      */
-    public bool testPoint(Vector3d point) {
+    public bool testPoint(ref Vector3d point) {
         return testPoint(point.x, point.y, point.z);
     }
 
@@ -311,7 +311,7 @@ struct FrustumIntersection {
      * @return <code>true</code> if the given sphere is partly or completely inside the frustum;
      *         <code>false</code> otherwise
      */
-    public bool testSphere(Vector3d center, double radius) {
+    public bool testSphere(ref Vector3d center, double radius) {
         return testSphere(center.x, center.y, center.z, radius);
     }
 
@@ -356,7 +356,7 @@ struct FrustumIntersection {
      * @return {@link #INSIDE} if the given sphere is completely inside the frustum, or {@link #INTERSECT} if the sphere intersects
      *         the frustum, or {@link #OUTSIDE} if the sphere is outside of the frustum
      */
-    public int intersectSphere(Vector3d center, float radius) {
+    public int intersectSphere(ref Vector3d center, float radius) {
         return intersectSphere(center.x, center.y, center.z, radius);
     }
 
@@ -423,7 +423,7 @@ struct FrustumIntersection {
      *          the maximum corner coordinates of the axis-aligned box
      * @return <code>true</code> if the axis-aligned box is completely or partly inside of the frustum; <code>false</code> otherwise
      */
-    public bool testAab(Vector3d min, Vector3d max) {
+    public bool testAab(ref Vector3d min,ref Vector3d max) {
         return testAab(min.x, min.y, min.z, max.x, max.y, max.z);
     }
 
@@ -565,7 +565,7 @@ struct FrustumIntersection {
      *         or {@link #INTERSECT} if the box intersects the frustum, or {@link #INSIDE} if the box is fully inside of the frustum.
      *         The plane index is one of {@link #PLANE_NX}, {@link #PLANE_PX}, {@link #PLANE_NY}, {@link #PLANE_PY}, {@link #PLANE_NZ} and {@link #PLANE_PZ}
      */
-    public int intersectAab(Vector3d min, Vector3d max) {
+    public int intersectAab(ref Vector3d min,ref Vector3d max) {
         return intersectAab(min.x, min.y, min.z, max.x, max.y, max.z);
     }
 
@@ -663,7 +663,7 @@ struct FrustumIntersection {
      * and, if the box is not inside this frustum, return the index of the plane that culled it.
      * The box is specified via its <code>min</code> and <code>max</code> corner coordinates.
      * <p>
-     * This method differs from {@link #intersectAab(Vector3d, Vector3d)} in that
+     * This method differs from {@link #intersectAab(ref Vector3d,ref Vector3d)} in that
      * it allows to mask-off planes that should not be calculated. For example, in order to only test a box against the
      * left frustum plane, use a mask of {@link #PLANE_MASK_NX}. Or in order to test all planes <i>except</i> the left plane, use 
      * a mask of <code>(~0 ^ PLANE_MASK_NX)</code>.
@@ -686,7 +686,7 @@ struct FrustumIntersection {
      *         or {@link #INTERSECT} if the box intersects the frustum, or {@link #INSIDE} if the box is fully inside of the frustum.
      *         The plane index is one of {@link #PLANE_NX}, {@link #PLANE_PX}, {@link #PLANE_NY}, {@link #PLANE_PY}, {@link #PLANE_NZ} and {@link #PLANE_PZ}
      */
-    public int intersectAab(Vector3d min, Vector3d max, int mask) {
+    public int intersectAab(ref Vector3d min,ref Vector3d max, int mask) {
         return intersectAab(min.x, min.y, min.z, max.x, max.y, max.z, mask);
     }
 
@@ -768,7 +768,7 @@ struct FrustumIntersection {
      * and, if the box is not inside this frustum, return the index of the plane that culled it.
      * The box is specified via its <code>min</code> and <code>max</code> corner coordinates.
      * <p>
-     * This method differs from {@link #intersectAab(Vector3d, Vector3d)} in that
+     * This method differs from {@link #intersectAab(ref Vector3d,ref Vector3d)} in that
      * it allows to mask-off planes that should not be calculated. For example, in order to only test a box against the
      * left frustum plane, use a mask of {@link #PLANE_MASK_NX}. Or in order to test all planes <i>except</i> the left plane, use 
      * a mask of <code>(~0 ^ PLANE_MASK_NX)</code>.
@@ -799,7 +799,7 @@ struct FrustumIntersection {
      *         or {@link #INTERSECT} if the box intersects the frustum, or {@link #INSIDE} if the box is fully inside of the frustum.
      *         The plane index is one of {@link #PLANE_NX}, {@link #PLANE_PX}, {@link #PLANE_NY}, {@link #PLANE_PY}, {@link #PLANE_NZ} and {@link #PLANE_PZ}
      */
-    public int intersectAab(Vector3d min, Vector3d max, int mask, int startPlane) {
+    public int intersectAab(ref Vector3d min,ref Vector3d max, int mask, int startPlane) {
         return intersectAab(min.x, min.y, min.z, max.x, max.y, max.z, mask, startPlane);
     }
 
@@ -899,7 +899,7 @@ struct FrustumIntersection {
      * @return <code>true</code> if the given line segment is partly or completely inside the frustum;
      *         <code>false</code> otherwise
      */
-    public bool testLineSegment(Vector3d a, Vector3d b) {
+    public bool testLineSegment(ref Vector3d a,ref Vector3d b) {
         return testLineSegment(a.x, a.y, a.z, b.x, b.y, b.z);
     }
 
