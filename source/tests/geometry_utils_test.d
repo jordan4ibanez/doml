@@ -1,5 +1,11 @@
 module tests.geometry_utils_test;
 
+import geometry_utils;
+import Math = math;
+import vector_2d;
+import vector_3d;
+import tests.dunit_tests;
+
 /*
  * The MIT License
  *
@@ -24,43 +30,38 @@ module tests.geometry_utils_test;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.joml.test;
 
-import org.joml.*;
-
-import junit.framework.TestCase;
 
 /**
  * Tests for the {@link GeometryUtils} class.
  *
  * @author Jarosław Piotrowski
  */
-public class GeometryUtilsTest extends TestCase {
+void testGeometryUtils() {
 
-    public static void testTangents() {
-        Vector3f pos1 = new Vector3f(-1.0f,  1.0f, 0.0f);
-        Vector3f pos2 = new Vector3f( 1.0f, -1.0f, 0.0f);
-        Vector3f pos3 = new Vector3f( 1.0f,  1.0f, 0.0f);
+    
+    Vector3d pos1 = Vector3d(-1.0f,  1.0f, 0.0f);
+    Vector3d pos2 = Vector3d( 1.0f, -1.0f, 0.0f);
+    Vector3d pos3 = Vector3d( 1.0f,  1.0f, 0.0f);
 
-        Vector2f uv1 = new Vector2f(0.0f, 1.0f);
-        Vector2f uv2 = new Vector2f(1.0f, 0.0f);
-        Vector2f uv3 = new Vector2f(1.0f, 1.0f);
+    Vector2d uv1 = Vector2d(0.0f, 1.0f);
+    Vector2d uv2 = Vector2d(1.0f, 0.0f);
+    Vector2d uv3 = Vector2d(1.0f, 1.0f);
 
-        Vector3f t = new Vector3f(1, 0, 0);
-        Vector3f b = new Vector3f(0, 1, 0);
+    Vector3d t = Vector3d(1, 0, 0);
+    Vector3d b = Vector3d(0, 1, 0);
 
-        Vector3f tangent = new Vector3f();
-        Vector3f bitangent = new Vector3f();
+    Vector3d vecTangent = Vector3d();
+    Vector3d vecBitangent = Vector3d();
 
-        GeometryUtils.tangent(pos1, uv1, pos2, uv2, pos3, uv3, tangent);
-        assertEquals(t, tangent);
+    tangent(pos1, uv1, pos2, uv2, pos3, uv3, vecTangent);
+    assertEquals(t, vecTangent);
 
-        GeometryUtils.bitangent(pos1, uv1, pos2, uv2, pos3, uv3, bitangent);
-        assertEquals(b, bitangent);
+    bitangent(pos1, uv1, pos2, uv2, pos3, uv3, vecBitangent);
+    assertEquals(b, vecBitangent);
 
-        GeometryUtils.tangentBitangent(pos1, uv1, pos2, uv2, pos3, uv3, tangent, bitangent);
-        assertEquals(t, tangent);
-        assertEquals(b, bitangent);
-    }
+    tangentBitangent(pos1, uv1, pos2, uv2, pos3, uv3, vecTangent, vecBitangent);
+    assertEquals(t, vecTangent);
+    assertEquals(b, vecBitangent);    
 
 }

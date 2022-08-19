@@ -24,6 +24,8 @@ import tests.matrix_3x2d_test;
 import tests.matrix_4d_test;
 import tests.matrix_4x3d_test;
 
+import tests.geometry_utils_test;
+
 
 
 
@@ -49,4 +51,6 @@ void main()
     testMatrix3x2d();
     testMatrix4d();
     testMatrix4x3d();
+
+    testGeometryUtils();
 }
