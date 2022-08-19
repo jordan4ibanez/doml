@@ -1511,6 +1511,16 @@ struct Vector3d {
         return true;
     }
 
+    public bool equals(Vector3d other) {
+        if (Math.doubleToLongBits(this.x) != Math.doubleToLongBits(other.x))
+            return false;
+        if (Math.doubleToLongBits(this.y) != Math.doubleToLongBits(other.y))
+            return false;
+        if (Math.doubleToLongBits(this.z) != Math.doubleToLongBits(other.z))
+            return false;
+        return true;
+    }
+
     /**
      * Reflect this vector about the given normal vector.
      * 
