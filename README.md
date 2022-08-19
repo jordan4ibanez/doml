@@ -9,10 +9,6 @@ JOML translated to D with a few changes:
 
 - Simplified using D's strengths
 
-Note: set all switches to final so they automatically get out of bounds errors
+This was a monumental effort, if you find anything wrong, please help me fix it.
 
-Need to make most things references so they work like in java
-
-Tests needing translation:
-quaterniond
-rayaabbintersection
+There are a few missing elements, they will (hopefully) be translated in later on.
