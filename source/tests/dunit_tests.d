@@ -32,6 +32,9 @@ void setTestVerbose(bool newValue) {
 void assertEquals(AxisAngle4d a, AxisAngle4d b) {
     assert(a.equals(b));
 }
+void assertEquals(Quaterniond a, Quaterniond b) {
+    assert(a.equals(b));
+}
 
 /*
 void assertEquals(AxisAngle4d a, AxisAngle4d b) {
