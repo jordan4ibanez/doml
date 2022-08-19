@@ -203,7 +203,7 @@ struct Matrix4d {
      * @param mat
      *          the {@link Matrix3d}
      */
-    this(ref Matrix3d mat) {
+    this(Matrix3d mat) {
         set(mat);
     }
 
@@ -885,13 +885,13 @@ struct Matrix4d {
      * Set the upper left 3x3 submatrix of this {@link Matrix4d} to the given {@link Matrix3d} 
      * and the rest to identity.
      * 
-     * @see #Matrix4d(ref Matrix3d)
+     * @see #Matrix4d(Matrix3d)
      * 
      * @param mat
      *          the {@link Matrix3d}
      * @return this
      */
-    ref public Matrix4d set(ref Matrix3d mat) return {
+    ref public Matrix4d set(Matrix3d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -3652,7 +3652,7 @@ struct Matrix4d {
      *          the 3x3 matrix
      * @return this
      */
-    ref public Matrix4d set3x3(ref Matrix3d mat) return {
+    ref public Matrix4d set3x3(Matrix3d mat) return {
         return
         _m00(mat.m00).
         _m01(mat.m01).
@@ -7480,7 +7480,7 @@ struct Matrix4d {
      * of this matrix.
      * 
      * @see Matrix3d#set(Matrix4d)
-     * @see #get3x3(ref Matrix3d)
+     * @see #get3x3(Matrix3d)
      * 
      * @param dest
      *             will hold the result
@@ -7533,7 +7533,7 @@ struct Matrix4d {
      * Compute the cofactor matrix of the upper left 3x3 submatrix of <code>this</code>
      * and store it into <code>dest</code>.
      * <p>
-     * The cofactor matrix can be used instead of {@link #normal(ref Matrix3d)} to transform normals
+     * The cofactor matrix can be used instead of {@link #normal(Matrix3d)} to transform normals
      * when the orientation of the normals with respect to the surface should be preserved.
      * 
      * @param dest

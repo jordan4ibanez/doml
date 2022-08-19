@@ -70,7 +70,7 @@ public struct Matrix2d {
      * @param mat
      *          the {@link Matrix3d} to copy the values from
      */
-    this(ref Matrix3d mat) {
+    this(Matrix3d mat) {
         setMatrix3d(mat);
     }
 
@@ -245,11 +245,11 @@ public struct Matrix2d {
      *          the {@link Matrix3d} to copy the values from
      * @return this
      */
-    ref public Matrix2d set(ref Matrix3d m) return {
+    ref public Matrix2d set(Matrix3d m) return {
         setMatrix3d(m);
         return this;
     }
-    private void setMatrix3d(ref Matrix3d mat) {
+    private void setMatrix3d(Matrix3d mat) {
         m00 = mat.m00;
         m01 = mat.m01;
         m10 = mat.m10;

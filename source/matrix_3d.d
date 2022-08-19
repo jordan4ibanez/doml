@@ -81,7 +81,7 @@ struct Matrix3d {
      * @param mat
      *          the matrix to initialize this matrix with
      */
-    this(ref Matrix3d mat) {
+    this(Matrix3d mat) {
         set(mat);
     }
 
@@ -354,7 +354,7 @@ struct Matrix3d {
      *          the matrix whose values will be copied
      * @return this
      */
-    ref public Matrix3d set(ref Matrix3d m) return {
+    ref public Matrix3d set(Matrix3d m) return {
         m00 = m.m00;
         m01 = m.m01;
         m02 = m.m02;
@@ -374,7 +374,7 @@ struct Matrix3d {
      *          the matrix to copy the transposed values from
      * @return this
      */
-    ref public Matrix3d setTransposed(ref Matrix3d m) return {
+    ref public Matrix3d setTransposed(Matrix3d m) return {
         double nm10 = m.m01, nm12 = m.m21;
         double nm20 = m.m02, nm21 = m.m12;
         return this
@@ -517,12 +517,12 @@ struct Matrix3d {
      *          the right operand
      * @return this
      */
-    ref public Matrix3d mul(ref Matrix3d right) return {
+    ref public Matrix3d mul(Matrix3d right) return {
         mul(right, this);
         return this;
     }
 
-    public Matrix3d mul(ref Matrix3d right, ref Matrix3d dest) {
+    public Matrix3d mul(Matrix3d right, ref Matrix3d dest) {
         double nm00 = Math.fma(m00, right.m00, Math.fma(m10, right.m01, m20 * right.m02));
         double nm01 = Math.fma(m01, right.m00, Math.fma(m11, right.m01, m21 * right.m02));
         double nm02 = Math.fma(m02, right.m00, Math.fma(m12, right.m01, m22 * right.m02));
@@ -556,12 +556,12 @@ struct Matrix3d {
      *          the left operand of the matrix multiplication
      * @return this
      */
-    ref public Matrix3d mulLocal(ref Matrix3d left) return {
+    ref public Matrix3d mulLocal(Matrix3d left) return {
        mulLocal(left, this);
        return this;
     }
 
-    public Matrix3d mulLocal(ref Matrix3d left, ref Matrix3d dest) {
+    public Matrix3d mulLocal(Matrix3d left, ref Matrix3d dest) {
         double nm00 = left.m00 * m00 + left.m10 * m01 + left.m20 * m02;
         double nm01 = left.m01 * m00 + left.m11 * m01 + left.m21 * m02;
         double nm02 = left.m02 * m00 + left.m12 * m01 + left.m22 * m02;
@@ -743,10 +743,10 @@ struct Matrix3d {
      * Get the current values of <code>this</code> matrix and store them into
      * <code>dest</code>.
      * <p>
-     * This is the reverse method of {@link #set(ref Matrix3d)} and allows to obtain
+     * This is the reverse method of {@link #set(Matrix3d)} and allows to obtain
      * intermediate calculation results when chaining multiple transformations.
      * 
-     * @see #set(ref Matrix3d)
+     * @see #set(Matrix3d)
      * 
      * @param dest
      *          the destination matrix
@@ -2726,9 +2726,9 @@ struct Matrix3d {
      * <p>
      * Please note that, if <code>this</code> is an orthogonal matrix or a matrix whose columns are orthogonal vectors, 
      * then this method <i>need not</i> be invoked, since in that case <code>this</code> itself is its normal matrix.
-     * In this case, use {@link #set(ref Matrix3d)} to set a given Matrix3f to this matrix.
+     * In this case, use {@link #set(Matrix3d)} to set a given Matrix3f to this matrix.
      * 
-     * @see #set(ref Matrix3d)
+     * @see #set(Matrix3d)
      * 
      * @return this
      */
@@ -2744,9 +2744,9 @@ struct Matrix3d {
      * <p>
      * Please note that, if <code>this</code> is an orthogonal matrix or a matrix whose columns are orthogonal vectors, 
      * then this method <i>need not</i> be invoked, since in that case <code>this</code> itself is its normal matrix.
-     * In this case, use {@link #set(ref Matrix3d)} to set a given Matrix3d to this matrix.
+     * In this case, use {@link #set(Matrix3d)} to set a given Matrix3d to this matrix.
      * 
-     * @see #set(ref Matrix3d)
+     * @see #set(Matrix3d)
      * 
      * @param dest
      *             will hold the result
@@ -2799,7 +2799,7 @@ struct Matrix3d {
     /**
      * Compute the cofactor matrix of <code>this</code> and store it into <code>dest</code>.
      * <p>
-     * The cofactor matrix can be used instead of {@link #normal(ref Matrix3d)} to transform normals
+     * The cofactor matrix can be used instead of {@link #normal(Matrix3d)} to transform normals
      * when the orientation of the normals with respect to the surface should be preserved.
      * 
      * @param dest
@@ -3150,7 +3150,7 @@ struct Matrix3d {
         return result;
     }
 
-    public bool equals(ref Matrix3d m, double delta) {
+    public bool equals(Matrix3d m, double delta) {
         if (this == m)
             return true;
         if (!Math.equals(m00, m.m00, delta))
@@ -3202,12 +3202,12 @@ struct Matrix3d {
      *          the other addend 
      * @return this
      */
-    ref public Matrix3d add(ref Matrix3d other) return {
+    ref public Matrix3d add(Matrix3d other) return {
         add(other, this);
         return this;
     }
 
-    public Matrix3d add(ref Matrix3d other, ref Matrix3d dest) {
+    public Matrix3d add(Matrix3d other, ref Matrix3d dest) {
         dest.m00 = m00 + other.m00;
         dest.m01 = m01 + other.m01;
         dest.m02 = m02 + other.m02;
@@ -3227,12 +3227,12 @@ struct Matrix3d {
      *          the subtrahend
      * @return this
      */
-    ref public Matrix3d sub(ref Matrix3d subtrahend) return {
+    ref public Matrix3d sub(Matrix3d subtrahend) return {
         sub(subtrahend, this);
         return this;
     }
 
-    public Matrix3d sub(ref Matrix3d subtrahend, ref Matrix3d dest) {
+    public Matrix3d sub(Matrix3d subtrahend, ref Matrix3d dest) {
         dest.m00 = m00 - subtrahend.m00;
         dest.m01 = m01 - subtrahend.m01;
         dest.m02 = m02 - subtrahend.m02;
@@ -3252,12 +3252,12 @@ struct Matrix3d {
      *          the other matrix
      * @return this
      */
-    ref public Matrix3d mulComponentWise(ref Matrix3d other) return {
+    ref public Matrix3d mulComponentWise(Matrix3d other) return {
         mulComponentWise(other, this);
         return this;
     }
 
-    public Matrix3d mulComponentWise(ref Matrix3d other, ref Matrix3d dest) {
+    public Matrix3d mulComponentWise(Matrix3d other, ref Matrix3d dest) {
         dest.m00 = m00 * other.m00;
         dest.m01 = m01 * other.m01;
         dest.m02 = m02 * other.m02;
@@ -3312,12 +3312,12 @@ struct Matrix3d {
      *          the interpolation factor between 0.0 and 1.0
      * @return this
      */
-    ref public Matrix3d lerp(ref Matrix3d other, double t) return {
+    ref public Matrix3d lerp(Matrix3d other, double t) return {
         lerp(other, t, this);
         return this;
     }
 
-    public Matrix3d lerp(ref Matrix3d other, double t, ref Matrix3d dest) {
+    public Matrix3d lerp(Matrix3d other, double t, ref Matrix3d dest) {
         dest.m00 = Math.fma(other.m00 - m00, t, m00);
         dest.m01 = Math.fma(other.m01 - m01, t, m01);
         dest.m02 = Math.fma(other.m02 - m02, t, m02);
@@ -3345,7 +3345,7 @@ struct Matrix3d {
      * <p>
      * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(new Vector3d(dir).negate(), up).invert(), dest)</code>
      * 
-     * @see #rotateTowards(double, double, double, double, double, double,ref Matrix3d)
+     * @see #rotateTowards(double, double, double, double, double, double, Matrix3d)
      * @see #rotationTowards(Vector3d, Vector3d)
      * 
      * @param direction

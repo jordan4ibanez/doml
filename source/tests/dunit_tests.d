@@ -34,7 +34,7 @@ void assertEquals(AxisAngle4d a, AxisAngle4d b) {
 }
 
 /*
-void assertEquals(AxisAngle4d a, AxisAngle4d b) {
+void assertEquals(ref AxisAngle4d a, ref AxisAngle4d b) {
     writeln("M1: ", a, " | M2: ", b)
     assert(a.equals(b));
 }*/
@@ -300,7 +300,7 @@ void assertEquals(Vector2i a, Vector2i b) {
     * @param m2
     * @param delta
     */
-public static void assertMatrix3dEquals(Matrix3d m1,Matrix3d m2, double delta) {
+public static void assertMatrix3dEquals(Matrix3d m1, Matrix3d m2, double delta) {
     assertEquals(m1.m00, m2.m00, delta);
     assertEquals(m1.m01, m2.m01, delta);
     assertEquals(m1.m02, m2.m02, delta);
