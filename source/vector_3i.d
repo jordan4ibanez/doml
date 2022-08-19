@@ -182,7 +182,7 @@ struct Vector3i {
      *          contains the values of x, y and z to set
      * @return this
      */
-    public Vector3i set(Vector3i v) {
+    ref public Vector3i set(Vector3i v) return {
         x = v.x;
         y = v.y;
         z = v.z;
@@ -199,7 +199,7 @@ struct Vector3i {
      *          the vector to copy from
      * @return this
      */
-    public Vector3i set(Vector3d v) {
+    ref public Vector3i set(Vector3d v) return {
         this.x = cast(int) v.x;
         this.y = cast(int) v.y;
         this.z = cast(int) v.z;
@@ -218,7 +218,7 @@ struct Vector3i {
      *          the {@link RoundingMode} to use
      * @return this
      */
-    public Vector3i set(Vector3d v, int mode) {
+    ref public Vector3i set(Vector3d v, int mode) return {
         this.x = Math.roundUsing(v.x, mode);
         this.y = Math.roundUsing(v.y, mode);
         this.z = Math.roundUsing(v.z, mode);
@@ -236,7 +236,7 @@ struct Vector3i {
      *          the z component
      * @return this
      */
-    public Vector3i set(Vector2i v, int z) {
+    ref public Vector3i set(Vector2i v, int z) return {
         this.x = v.x;
         this.y = v.y;
         this.z = z;
@@ -250,7 +250,7 @@ struct Vector3i {
      *          the value of all three components
      * @return this
      */
-    public Vector3i set(int d) {
+    ref public Vector3i set(int d) return {
         this.x = d;
         this.y = d;
         this.z = d;
@@ -268,7 +268,7 @@ struct Vector3i {
      *          the z component
      * @return this
      */
-    public Vector3i set(int x, int y, int z) {
+    ref public Vector3i set(int x, int y, int z) return {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -282,7 +282,7 @@ struct Vector3i {
      *          the array containing at least three elements
      * @return this
      */
-    public Vector3i set(int[] xyz) {
+    ref public Vector3i set(int[] xyz) return {
         this.x = xyz[0];
         this.y = xyz[1];
         this.z = xyz[2];
@@ -312,7 +312,7 @@ struct Vector3i {
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..2]</code>
      */
-    public Vector3i setComponent(int component, int value) {
+    ref public Vector3i setComponent(int component, int value) return {
         switch (component) {
             case 0:
                 x = value;
@@ -336,7 +336,7 @@ struct Vector3i {
      *          the vector to subtract
      * @return this
      */
-    public Vector3i sub(Vector3i v) {
+    ref public Vector3i sub(Vector3i v) return {
         this.x = this.x - v.x;
         this.y = this.y - v.y;
         this.z = this.z - v.z;
@@ -361,7 +361,7 @@ struct Vector3i {
      *          the z component to subtract
      * @return this
      */
-    public Vector3i sub(int x, int y, int z) {
+    ref public Vector3i sub(int x, int y, int z) return {
         this.x = this.x - x;
         this.y = this.y - y;
         this.z = this.z - z;
@@ -382,7 +382,7 @@ struct Vector3i {
      *          the vector to add
      * @return this
      */
-    public Vector3i add(Vector3i v) {
+    ref public Vector3i add(Vector3i v) return {
         this.x = this.x + v.x;
         this.y = this.y + v.y;
         this.z = this.z + v.z;
@@ -407,7 +407,7 @@ struct Vector3i {
      *          the z component to add
      * @return this
      */
-    public Vector3i add(int x, int y, int z) {
+    ref public Vector3i add(int x, int y, int z) return {
         this.x = this.x + x;
         this.y = this.y + y;
         this.z = this.z + z;
@@ -429,7 +429,7 @@ struct Vector3i {
      *          the scalar to multiply this vector by
      * @return this
      */
-    public Vector3i mul(int scalar) {
+    ref public Vector3i mul(int scalar) return {
         this.x = x * scalar;
         this.y = y * scalar;
         this.z = z * scalar;
@@ -450,7 +450,7 @@ struct Vector3i {
      *          the vector to multiply
      * @return this
      */
-    public Vector3i mul(Vector3i v) {
+    ref public Vector3i mul(Vector3i v) return {
         this.x = this.x * v.x;
         this.y = this.y * v.y;
         this.z = this.z * v.z;
@@ -475,7 +475,7 @@ struct Vector3i {
      *          the z component to multiply
      * @return this
      */
-    public Vector3i mul(int x, int y, int z) {
+    ref public Vector3i mul(int x, int y, int z) return {
         this.x = this.x * x;
         this.y = this.y * y;
         this.z = this.z * z;
@@ -496,7 +496,7 @@ struct Vector3i {
      *          the scalar to divide by
      * @return this
      */
-    public Vector3i div(float scalar) {
+    ref public Vector3i div(float scalar) return {
         float invscalar = 1.0f / scalar;
         this.x = cast(int) (x * invscalar);
         this.y = cast(int) (y * invscalar);
@@ -519,7 +519,7 @@ struct Vector3i {
      *          the scalar to divide by
      * @return this
      */
-    public Vector3i div(int scalar) {
+    ref public Vector3i div(int scalar) return {
         this.x = x / scalar;
         this.y = y / scalar;
         this.z = z / scalar;
@@ -653,7 +653,7 @@ struct Vector3i {
      *
      * @return this
      */
-    public Vector3i zero() {
+    ref public Vector3i zero() return {
         this.x = 0;
         this.y = 0;
         this.z = 0;
@@ -665,7 +665,7 @@ struct Vector3i {
      *
      * @return this
      */
-    public Vector3i negate() {
+    ref public Vector3i negate() return {
         this.x = -x;
         this.y = -y;
         this.z = -z;
@@ -686,7 +686,7 @@ struct Vector3i {
      *          the other vector
      * @return this
      */
-    public Vector3i min(Vector3i v) {
+    ref public Vector3i min(Vector3i v) return {
         this.x = x < v.x ? x : v.x;
         this.y = y < v.y ? y : v.y;
         this.z = z < v.z ? z : v.z;
@@ -707,7 +707,7 @@ struct Vector3i {
      *          the other vector
      * @return this
      */
-    public Vector3i max(Vector3i v) {
+    ref public Vector3i max(Vector3i v) return {
         this.x = x > v.x ? x : v.x;
         this.y = y > v.y ? y : v.y;
         this.z = z > v.z ? z : v.z;
@@ -750,7 +750,7 @@ struct Vector3i {
      * 
      * @return this
      */
-    public Vector3i absolute() {
+    ref public Vector3i absolute() return {
         this.x = Math.abs(this.x);
         this.y = Math.abs(this.y);
         this.z = Math.abs(this.z);
