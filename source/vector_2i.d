@@ -133,7 +133,7 @@ struct Vector2i {
      *          scalar value of both components
      * @return this
      */
-    public Vector2i set(int s) {
+    ref public Vector2i set(int s) return {
         this.x = s;
         this.y = s;
         return this;
@@ -148,7 +148,7 @@ struct Vector2i {
      *          the y component
      * @return this
      */
-    public Vector2i set(int x, int y) {
+    ref public Vector2i set(int x, int y) return {
         this.x = x;
         this.y = y;
         return this;
@@ -161,7 +161,7 @@ struct Vector2i {
      *          the vector to copy from
      * @return this
      */
-    public Vector2i set(Vector2i v) {
+    ref public Vector2i set(Vector2i v) return {
         this.x = v.x;
         this.y = v.y;
         return this;
@@ -177,7 +177,7 @@ struct Vector2i {
      *          the vector to copy from
      * @return this
      */
-    public Vector2i set(Vector2d v) {
+    ref public Vector2i set(Vector2d v) return {
         this.x = cast(int) v.x;
         this.y = cast(int) v.y;
         return this;
@@ -195,7 +195,7 @@ struct Vector2i {
      *          the {@link RoundingMode} to use
      * @return this
      */
-    public Vector2i set(Vector2d v, int mode) {
+    ref public Vector2i set(Vector2d v, int mode) return {
         this.x = Math.roundUsing(v.x, mode);
         this.y = Math.roundUsing(v.y, mode);
         return this;
@@ -208,7 +208,7 @@ struct Vector2i {
      *          the array containing at least two elements
      * @return this
      */
-    public Vector2i set(int[] xy) {
+    ref public Vector2i set(int[] xy) return {
         this.x = xy[0];
         this.y = xy[1];
         return this;
@@ -235,7 +235,7 @@ struct Vector2i {
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..1]</code>
      */
-    public Vector2i setComponent(int component, int value) {
+    ref public Vector2i setComponent(int component, int value) return {
         switch (component) {
             case 0:
                 x = value;
@@ -256,7 +256,7 @@ struct Vector2i {
      *          the vector to subtract
      * @return this
      */
-    public Vector2i sub(Vector2i v) {
+    ref public Vector2i sub(Vector2i v) return {
         this.x = x - v.x;
         this.y = y - v.y;
         return this;
@@ -277,7 +277,7 @@ struct Vector2i {
      *          the y component to subtract
      * @return this
      */
-    public Vector2i sub(int x, int y) {
+    ref public Vector2i sub(int x, int y) return {
         this.x = this.x - x;
         this.y = this.y - y;
         return this;
@@ -398,7 +398,7 @@ struct Vector2i {
      *          the vector to add
      * @return this
      */
-    public Vector2i add(Vector2i v) {
+    ref public Vector2i add(Vector2i v) return {
         this.x = x + v.x;
         this.y = y + v.y;
         return this;
@@ -419,7 +419,7 @@ struct Vector2i {
      *          the y component to add
      * @return this
      */
-    public Vector2i add(int x, int y) {
+    ref public Vector2i add(int x, int y) return {
         this.x = this.x + x;
         this.y = this.y + y;
         return this;
@@ -439,7 +439,7 @@ struct Vector2i {
      *          the scalar to multiply this vector by
      * @return this
      */
-    public Vector2i mul(int scalar) {
+    ref public Vector2i mul(int scalar) return {
         this.x = x * scalar;
         this.y = y * scalar;
         return this;
@@ -458,7 +458,7 @@ struct Vector2i {
      *          the vector to multiply
      * @return this
      */
-    public Vector2i mul(Vector2i v) {
+    ref public Vector2i mul(Vector2i v) return {
         this.x = x * v.x;
         this.y = y * v.y;
         return this;
@@ -479,7 +479,7 @@ struct Vector2i {
      *          the y component to multiply
      * @return this
      */
-    public Vector2i mul(int x, int y) {
+    ref public Vector2i mul(int x, int y) return {
         this.x = this.x * x;
         this.y = this.y * y;
         return this;
@@ -536,7 +536,7 @@ struct Vector2i {
      *
      * @return this
      */
-    public Vector2i zero() {
+    ref public Vector2i zero() return {
         this.x = 0;
         this.y = 0;
         return this;
@@ -548,7 +548,7 @@ struct Vector2i {
      *
      * @return this
      */
-    public Vector2i negate() {
+    ref public Vector2i negate() return {
         this.x = -x;
         this.y = -y;
         return this;
@@ -567,7 +567,7 @@ struct Vector2i {
      *          the other vector
      * @return this
      */
-    public Vector2i min(Vector2i v) {
+    ref public Vector2i min(Vector2i v) return {
         this.x = x < v.x ? x : v.x;
         this.y = y < v.y ? y : v.y;
         return this;
@@ -586,7 +586,7 @@ struct Vector2i {
      *          the other vector
      * @return this
      */
-    public Vector2i max(Vector2i v) {
+    ref public Vector2i max(Vector2i v) return {
         this.x = x > v.x ? x : v.x;
         this.y = y > v.y ? y : v.y;
         return this;
@@ -619,7 +619,7 @@ struct Vector2i {
      * 
      * @return this
      */
-    public Vector2i absolute() {
+    ref public Vector2i absolute() return {
         this.x = Math.abs(this.x);
         this.y = Math.abs(this.y);
         return this;
