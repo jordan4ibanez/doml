@@ -12,3 +12,9 @@ JOML translated to D with a few changes:
 Currently Translating: Vector2i test
 
 Note: set all switches to final so they automatically get out of bounds errors
+
+Need to fix a severe memory mismanagement:
+
+ref Matrix4d _m01(double m01) return {
+
+Look up: return this
