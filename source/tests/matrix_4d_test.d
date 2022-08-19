@@ -601,9 +601,11 @@ void testMatrix4d() {
     {
         Matrix4d m = Matrix4d(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
         Matrix4d testUnit = Matrix4d();
+        Vector4d testUnit2 = Vector4d(4, 5, 6, 7);
+        Vector4d testUnit3 = Vector4d(4, 5, 6, 7);
         assertVector4dEquals(
-                m.transformTranspose(Vector4d(4, 5, 6, 7)), 
-                m.transpose(testUnit).transform(Vector4d(4, 5, 6, 7)), 
+                m.transformTranspose(testUnit2), 
+                m.transpose(testUnit).transform(testUnit3),
                 1E-6f);
     }
 
@@ -612,27 +614,27 @@ void testMatrix4d() {
         Matrix4d m = Matrix4d(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
         for (int c = 0; c < 4; c++)
             for (int r = 0; r < 4; r++)
-                assertEquals(c*4+r+1, m.get(c, r), 0);
+                assertEquals(c*4+r+1, m.get(c, r), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
     }
 
     // testSet
     {
-        assertMatrix4dEquals(Matrix4d().zero().set(0, 0, 3), Matrix4d(3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(0, 1, 3), Matrix4d(0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(0, 2, 3), Matrix4d(0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(0, 3, 3), Matrix4d(0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(1, 0, 3), Matrix4d(0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(1, 1, 3), Matrix4d(0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(1, 2, 3), Matrix4d(0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(1, 3, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(2, 0, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(2, 1, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(2, 2, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(2, 3, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(3, 0, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(3, 1, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(3, 2, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0), 0);
-        assertMatrix4dEquals(Matrix4d().zero().set(3, 3, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3), 0);
+        assertMatrix4dEquals(Matrix4d().zero().set(0, 0, 3), Matrix4d(3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(0, 1, 3), Matrix4d(0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(0, 2, 3), Matrix4d(0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(0, 3, 3), Matrix4d(0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(1, 0, 3), Matrix4d(0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(1, 1, 3), Matrix4d(0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(1, 2, 3), Matrix4d(0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(1, 3, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(2, 0, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(2, 1, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(2, 2, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(2, 3, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(3, 0, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(3, 1, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(3, 2, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
+        assertMatrix4dEquals(Matrix4d().zero().set(3, 3, 3), Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3), STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
     }
 
     /**
@@ -648,7 +650,7 @@ void testMatrix4d() {
         Matrix4d result2 = t.invertAffine(testUnit2);
         p.mul(result1, result1);
         p.mul0(result2, result2);
-        assertMatrix4dEquals(result1, result2, 0.0f);
+        assertMatrix4dEquals(result1, result2, STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
     }
 
     // testSetPerspectiveOffCenterFov
