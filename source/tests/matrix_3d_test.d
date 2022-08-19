@@ -44,9 +44,9 @@ void testMatrix3d() {
      */
     {
         int row = 0;
-        float x = 0.0F;
-        float y = 1.0F;
-        float z = 2.0F;
+        double x = 0.0;
+        double y = 1.0;
+        double z = 2.0;
 
         Matrix3d instance = Matrix3d();
         Matrix3d result = instance.setRow(row, x, y, z);
@@ -95,9 +95,9 @@ void testMatrix3d() {
      // testSetRow_4args
     {
         int row = 0;
-        float x = 0.0F;
-        float y = 1.0F;
-        float z = 2.0F;
+        double x = 0.0;
+        double y = 1.0;
+        double z = 2.0;
         Matrix3d instance = Matrix3d();
         Vector3d inRow = Vector3d(x, y, z);
         Vector3d outRow = Vector3d();
@@ -108,17 +108,17 @@ void testMatrix3d() {
 
     // testMatrix3dTranspose
     {
-        float m00 = 1, m01 = 2, m02 = 3;
-        float m10 = 5, m11 = 6, m12 = 7;
-        float m20 = 9, m21 = 10, m22 = 11;
+        double m00 = 1, m01 = 2, m02 = 3;
+        double m10 = 5, m11 = 6, m12 = 7;
+        double m20 = 9, m21 = 10, m22 = 11;
 
         Matrix3d m = Matrix3d(m00, m01, m02, m10, m11, m12, m20, m21, m22);
         Matrix3d expect = Matrix3d(m00, m10, m20, m01, m11, m21, m02, m12, m22);
-        assertMatrix3dEquals(Matrix3d(m).transpose(), expect, 1E-5f);
+        assertMatrix3dEquals(Matrix3d(m).transpose(), expect, 1E-5);
         // This test originally constructed a new object using Java's weak memory management
         // Fixed by creating a temporary structure here, uses default constructor
         Matrix3d testUnit = Matrix3d();
-        assertMatrix3dEquals(Matrix3d(m).transpose(testUnit/*new Matrix3d()*/), expect, 1E-5f);
+        assertMatrix3dEquals(Matrix3d(m).transpose(testUnit/*new Matrix3d()*/), expect, 1E-5);
     } // *Poof* testUnit is gone
 
     // testInvert
@@ -140,7 +140,7 @@ void testMatrix3d() {
         assertVector3dEquals(orig, w, STANDARD_AROUND_ZERO_PRECISION_DOUBLE);
 
         invm.invert();
-        assertMatrix3dEquals(m, invm, 1E-3f);
+        assertMatrix3dEquals(m, invm, 1E-3);
     }
 
     // testGet
