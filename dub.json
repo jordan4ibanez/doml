@@ -1,11 +1,11 @@
 {
 	"authors": [
 		"httpdigest",
-        "jordan4ibanez"
+		"jordan4ibanez"
 	],
 	"copyright": "Copyright © 2022, httpdigest/jordan4ibanez",
 	"description": "A D math library for OpenGL and games",
 	"license": "MIT",
 	"name": "doml",
-    "targetType": "library"
+	"targetType": "library"
 }
