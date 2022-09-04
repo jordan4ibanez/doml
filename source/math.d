@@ -20,6 +20,7 @@ math_ceil  = ceil,
 math_round = round, 
 math_exp   = exp, 
 math_fma   = fma,
+math_pow   = pow,
 math_isInfinite = isInfinity;
 
 // These aren't math library but oh well
@@ -242,6 +243,10 @@ double sin_roquen_newk(double v) {
     return x + x*x2*r;
 }
 
+double pow(double a, double b) {
+    return math_pow(a, b);
+}
+
 double sin(double rad) {
     return math_sin(rad);
 }
@@ -344,7 +349,6 @@ double clamp(double a, double b, double val) {
 int clamp(int a, int b, int val) {
     return max(a, math_min(b, val));
 }
-
 
 double toRadians(double angles) {
     return radians(angles);
