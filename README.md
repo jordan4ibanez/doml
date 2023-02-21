@@ -16,3 +16,5 @@ This was a monumental effort, if you find anything wrong, please help me fix it.
 There are a few missing elements, they will (hopefully) be translated in later on.
 
 You should be able to follow a LWJGL tutorial (mostly, remember it's structs now) and get a functioning OpenGL/Vulkan program.
+
+Also hi.
