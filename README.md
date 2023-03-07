@@ -1,6 +1,8 @@
 # DOML
 A D math library for OpenGL rendering calculations.
 
+Discord link: https://discord.gg/dRPyvubfyg
+
 JOML translated to D with a few changes:
 
 - Only doubles, no floats, you can cast down but you can't cast back up (precision loss). There are still integer structures
