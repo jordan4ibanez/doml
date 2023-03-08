@@ -7,6 +7,8 @@ JOML translated to D with a few changes:
 
 - Only doubles, no floats, you can cast down but you can't cast back up (precision loss). There are still integer structures
 
+- That's not a joke, search float in vscode, you're going to get these two and 4 keywords from builtin libraries in math.d
+
 - No readonly views (Vector3DC etc)
 
 - Simplified using D's strengths
