@@ -723,7 +723,7 @@ public struct Matrix3x2d {
     }
 
     /**
-     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied float array at the given offset.
+     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied double array at the given offset.
      * 
      * @param arr
      *          the array to write the matrix values into
@@ -737,7 +737,7 @@ public struct Matrix3x2d {
     }
 
     /**
-     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied float array.
+     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied double array.
      * <p>
      * In order to specify an explicit offset into the array, use the method {@link #get3x3(double[], int)}.
      * 
@@ -752,7 +752,7 @@ public struct Matrix3x2d {
     }
 
     /**
-     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied float array at the given offset.
+     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied double array at the given offset.
      * 
      * @param arr
      *          the array to write the matrix values into
@@ -766,7 +766,7 @@ public struct Matrix3x2d {
     }
 
     /**
-     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied float array.
+     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied double array.
      * <p>
      * In order to specify an explicit offset into the array, use the method {@link #get4x4(double[], int)}.
      * 
