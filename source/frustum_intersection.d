@@ -42,118 +42,118 @@ import vector_4d;
 struct FrustumIntersection {
 
     /**
-     * Return value of {@link #intersectAab(float, float, float, float, float, float) intersectAab()}
+     * Return value of {@link #intersectAab(double, double, double, double, double, double) intersectAab()}
      * and its different overloads identifying the plane with equation <code>x=-1</code> when using the identity frustum.
      */
     static immutable int PLANE_NX = 0;
     /**
-     * Return value of {@link #intersectAab(float, float, float, float, float, float) intersectAab()}
+     * Return value of {@link #intersectAab(double, double, double, double, double, double) intersectAab()}
      * and its different overloads identifying the plane with equation <code>x=1</code> when using the identity frustum.
      */
     static immutable int PLANE_PX = 1;
     /**
-     * Return value of {@link #intersectAab(float, float, float, float, float, float) intersectAab()}
+     * Return value of {@link #intersectAab(double, double, double, double, double, double) intersectAab()}
      * and its different overloads identifying the plane with equation <code>y=-1</code> when using the identity frustum.
      */
     static immutable int PLANE_NY= 2;
     /**
-     * Return value of {@link #intersectAab(float, float, float, float, float, float) intersectAab()}
+     * Return value of {@link #intersectAab(double, double, double, double, double, double) intersectAab()}
      * and its different overloads identifying the plane with equation <code>y=1</code> when using the identity frustum.
      */
     static immutable int PLANE_PY = 3;
     /**
-     * Return value of {@link #intersectAab(float, float, float, float, float, float) intersectAab()}
+     * Return value of {@link #intersectAab(double, double, double, double, double, double) intersectAab()}
      * and its different overloads identifying the plane with equation <code>z=-1</code> when using the identity frustum.
      */
     static immutable int PLANE_NZ = 4;
     /**
-     * Return value of {@link #intersectAab(float, float, float, float, float, float) intersectAab()}
+     * Return value of {@link #intersectAab(double, double, double, double, double, double) intersectAab()}
      * and its different overloads identifying the plane with equation <code>z=1</code> when using the identity frustum.
      */
     static immutable int PLANE_PZ = 5;
 
     /**
-     * Return value of {@link #intersectAab(float, float, float, float, float, float) intersectAab()}
+     * Return value of {@link #intersectAab(double, double, double, double, double, double) intersectAab()}
      * and its different overloads indicating that the axis-aligned box intersects the frustum.
      */
     static immutable int INTERSECT = -1;
     /**
-     * Return value of {@link #intersectAab(float, float, float, float, float, float) intersectAab()}
+     * Return value of {@link #intersectAab(double, double, double, double, double, double) intersectAab()}
      * and its different overloads indicating that the axis-aligned box is fully inside of the frustum.
      */
     static immutable int INSIDE = -2;
     /**
-     * Return value of {@link #intersectSphere(Vector3d, float)} or {@link #intersectSphere(float, float, float, float)}
+     * Return value of {@link #intersectSphere(Vector3d, double)} or {@link #intersectSphere(double, double, double, double)}
      * indicating that the sphere is completely outside of the frustum.
      */
     static immutable int OUTSIDE = -3;
 
     /**
      * The value in a bitmask for
-     * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
+     * {@link #intersectAab(double, double, double, double, double, double, int) intersectAab()}
      * that identifies the plane with equation <code>x=-1</code> when using the identity frustum.
      */
     static immutable int PLANE_MASK_NX = 1<<PLANE_NX;
     /**
      * The value in a bitmask for
-     * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
+     * {@link #intersectAab(double, double, double, double, double, double, int) intersectAab()}
      * that identifies the plane with equation <code>x=1</code> when using the identity frustum.
      */
     static immutable int PLANE_MASK_PX = 1<<PLANE_PX;
     /**
      * The value in a bitmask for
-     * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
+     * {@link #intersectAab(double, double, double, double, double, double, int) intersectAab()}
      * that identifies the plane with equation <code>y=-1</code> when using the identity frustum.
      */
     static immutable int PLANE_MASK_NY = 1<<PLANE_NY;
     /**
      * The value in a bitmask for
-     * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
+     * {@link #intersectAab(double, double, double, double, double, double, int) intersectAab()}
      * that identifies the plane with equation <code>y=1</code> when using the identity frustum.
      */
     static immutable int PLANE_MASK_PY = 1<<PLANE_PY;
     /**
      * The value in a bitmask for
-     * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
+     * {@link #intersectAab(double, double, double, double, double, double, int) intersectAab()}
      * that identifies the plane with equation <code>z=-1</code> when using the identity frustum.
      */
     static immutable int PLANE_MASK_NZ = 1<<PLANE_NZ;
     /**
      * The value in a bitmask for
-     * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
+     * {@link #intersectAab(double, double, double, double, double, double, int) intersectAab()}
      * that identifies the plane with equation <code>z=1</code> when using the identity frustum.
      */
     static immutable int PLANE_MASK_PZ = 1<<PLANE_PZ;
 
-    private float nxX = 0.0;
-    private float nxY = 0.0; 
-    private float nxZ = 0.0;
-    private float nxW = 0.0;
+    private double nxX = 0.0;
+    private double nxY = 0.0; 
+    private double nxZ = 0.0;
+    private double nxW = 0.0;
 
-    private float pxX = 0.0; 
-    private float pxY = 0.0; 
-    private float pxZ = 0.0; 
-    private float pxW = 0.0;
+    private double pxX = 0.0; 
+    private double pxY = 0.0; 
+    private double pxZ = 0.0; 
+    private double pxW = 0.0;
 
-    private float nyX = 0.0; 
-    private float nyY = 0.0; 
-    private float nyZ = 0.0; 
-    private float nyW = 0.0;
+    private double nyX = 0.0; 
+    private double nyY = 0.0; 
+    private double nyZ = 0.0; 
+    private double nyW = 0.0;
 
-    private float pyX = 0.0;
-    private float pyY = 0.0;
-    private float pyZ = 0.0;
-    private float pyW = 0.0;
+    private double pyX = 0.0;
+    private double pyY = 0.0;
+    private double pyZ = 0.0;
+    private double pyW = 0.0;
 
-    private float nzX = 0.0;
-    private float nzY = 0.0;
-    private float nzZ = 0.0;
-    private float nzW = 0.0;
+    private double nzX = 0.0;
+    private double nzY = 0.0;
+    private double nzZ = 0.0;
+    private double nzW = 0.0;
 
-    private float pzX = 0.0;
-    private float pzY = 0.0;
-    private float pzZ = 0.0;
-    private float pzW = 0.0;
+    private double pzX = 0.0;
+    private double pzY = 0.0;
+    private double pzZ = 0.0;
+    private double pzW = 0.0;
 
     private Vector4d[] planes = {
         Vector4d[6] temp;
@@ -187,8 +187,8 @@ struct FrustumIntersection {
      * @param m
      *          the {@link Matrix4d} to create the frustum culler from
      * @param allowTestSpheres
-     *          whether the methods {@link #testSphere(Vector3d, float)}, {@link #testSphere(float, float, float, float)},
-     *          {@link #intersectSphere(Vector3d, float)} or {@link #intersectSphere(float, float, float, float)} will used.
+     *          whether the methods {@link #testSphere(Vector3d, double)}, {@link #testSphere(double, double, double, double)},
+     *          {@link #intersectSphere(Vector3d, double)} or {@link #intersectSphere(double, double, double, double)} will used.
      *          If no spheres need to be tested, then <code>false</code> should be used 
      */
     this(Matrix4d m, bool allowTestSpheres) {
@@ -219,13 +219,13 @@ struct FrustumIntersection {
      * @param m
      *          the {@link Matrix4d matrix} to update <code>this</code> frustum culler's frustum planes from
      * @param allowTestSpheres
-     *          whether the methods {@link #testSphere(Vector3d, float)}, {@link #testSphere(float, float, float, float)},
-     *          {@link #intersectSphere(Vector3d, float)} or {@link #intersectSphere(float, float, float, float)} will be used.
+     *          whether the methods {@link #testSphere(Vector3d, double)}, {@link #testSphere(double, double, double, double)},
+     *          {@link #intersectSphere(Vector3d, double)} or {@link #intersectSphere(double, double, double, double)} will be used.
      *          If no spheres need to be tested, then <code>false</code> should be used
      * @return this
      */
     ref public FrustumIntersection set(Matrix4d m, bool allowTestSpheres) return {
-        float invl;
+        double invl;
         nxX = m.m03 + m.m00; nxY = m.m13 + m.m10; nxZ = m.m23 + m.m20; nxW = m.m33 + m.m30;
         if (allowTestSpheres) {
             invl = Math.invsqrt(nxX * nxX + nxY * nxY + nxZ * nxZ);
@@ -287,7 +287,7 @@ struct FrustumIntersection {
      *          the z-coordinate of the point
      * @return <code>true</code> if the given point is inside the frustum; <code>false</code> otherwise
      */
-    public bool testPoint(float x, float y, float z) {
+    public bool testPoint(double x, double y, double z) {
         return nxX * x + nxY * y + nxZ * z + nxW >= 0 &&
                pxX * x + pxY * y + pxZ * z + pxW >= 0 &&
                nyX * x + nyY * y + nyZ * z + nyW >= 0 &&
@@ -355,7 +355,7 @@ struct FrustumIntersection {
      * @return {@link #INSIDE} if the given sphere is completely inside the frustum, or {@link #INTERSECT} if the sphere intersects
      *         the frustum, or {@link #OUTSIDE} if the sphere is outside of the frustum
      */
-    public int intersectSphere(Vector3d center, float radius) {
+    public int intersectSphere(Vector3d center, double radius) {
         return intersectSphere(center.x, center.y, center.z, radius);
     }
 
@@ -377,9 +377,9 @@ struct FrustumIntersection {
      * @return {@link #INSIDE} if the given sphere is completely inside the frustum, or {@link #INTERSECT} if the sphere intersects
      *         the frustum, or {@link #OUTSIDE} if the sphere is outside of the frustum
      */
-    public int intersectSphere(float x, float y, float z, float r) {
+    public int intersectSphere(double x, double y, double z, double r) {
         bool inside = true;
-        float dist;
+        double dist;
         dist = nxX * x + nxY * y + nxZ * z + nxW;
         if (dist >= -r) {
             inside &= dist >= r;
@@ -450,7 +450,7 @@ struct FrustumIntersection {
      *          the z-coordinate of the maximum corner
      * @return <code>true</code> if the axis-aligned box is completely or partly inside of the frustum; <code>false</code> otherwise
      */
-    public bool testAab(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    public bool testAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         /*
          * This is an implementation of the "2.4 Basic intersection test" of the mentioned site.
          * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is omitted.
@@ -501,7 +501,7 @@ struct FrustumIntersection {
      *          the y-coordinate of the maximum corner
      * @return <code>true</code> if the XY-plane is completely or partly inside of the frustum; <code>false</code> otherwise
      */
-    public bool testPlaneXY(float minX, float minY, float maxX, float maxY) {
+    public bool testPlaneXY(double minX, double minY, double maxX, double maxY) {
         /*
          * This is an implementation of the "2.4 Basic intersection test" of the mentioned site.
          * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is omitted.
@@ -534,7 +534,7 @@ struct FrustumIntersection {
      *          the z-coordinate of the maximum corner
      * @return <code>true</code> if the XZ-plane is completely or partly inside of the frustum; <code>false</code> otherwise
      */
-    public bool testPlaneXZ(float minX, float minZ, float maxX, float maxZ) {
+    public bool testPlaneXZ(double minX, double minZ, double maxX, double maxZ) {
         /*
          * This is an implementation of the "2.4 Basic intersection test" of the mentioned site.
          * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is omitted.
@@ -595,7 +595,7 @@ struct FrustumIntersection {
      *         or {@link #INTERSECT} if the box intersects the frustum, or {@link #INSIDE} if the box is fully inside of the frustum.
      *         The plane index is one of {@link #PLANE_NX}, {@link #PLANE_PX}, {@link #PLANE_NY}, {@link #PLANE_PY}, {@link #PLANE_NZ} and {@link #PLANE_PZ}
      */
-    public int intersectAab(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    public int intersectAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         /*
          * This is an implementation of the "2.4 Basic intersection test" of the mentioned site.
          * 
@@ -652,7 +652,7 @@ struct FrustumIntersection {
      *          {@link #PLANE_NZ} and {@link #PLANE_PZ}
      * @return the signed distance of the axis-aligned box to the plane
      */
-    public float distanceToPlane(float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int plane) {
+    public double distanceToPlane(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, int plane) {
         return planes[plane].x * (planes[plane].x < 0 ? maxX : minX) + planes[plane].y * (planes[plane].y < 0 ? maxY : minY)
                 + planes[plane].z * (planes[plane].z < 0 ? maxZ : minZ) + planes[plane].w;
     }
@@ -694,7 +694,7 @@ struct FrustumIntersection {
      * and, if the box is not inside this frustum, return the index of the plane that culled it.
      * The box is specified via its min and max corner coordinates.
      * <p>
-     * This method differs from {@link #intersectAab(float, float, float, float, float, float)} in that
+     * This method differs from {@link #intersectAab(double, double, double, double, double, double)} in that
      * it allows to mask-off planes that should not be calculated. For example, in order to only test a box against the
      * left frustum plane, use a mask of {@link #PLANE_MASK_NX}. Or in order to test all planes <i>except</i> the left plane, use 
      * a mask of <code>(~0 ^ PLANE_MASK_NX)</code>.
@@ -727,7 +727,7 @@ struct FrustumIntersection {
      *         or {@link #INTERSECT} if the box intersects the frustum, or {@link #INSIDE} if the box is fully inside of the frustum.
      *         The plane index is one of {@link #PLANE_NX}, {@link #PLANE_PX}, {@link #PLANE_NY}, {@link #PLANE_PY}, {@link #PLANE_NZ} and {@link #PLANE_PZ}
      */
-    public int intersectAab(float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int mask) {
+    public int intersectAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, int mask) {
         /*
          * This is an implementation of the first algorithm in "2.5 Plane masking and coherency" of the mentioned site.
          * 
@@ -807,7 +807,7 @@ struct FrustumIntersection {
      * and, if the box is not inside this frustum, return the index of the plane that culled it.
      * The box is specified via its min and max corner coordinates.
      * <p>
-     * This method differs from {@link #intersectAab(float, float, float, float, float, float)} in that
+     * This method differs from {@link #intersectAab(double, double, double, double, double, double)} in that
      * it allows to mask-off planes that should not be calculated. For example, in order to only test a box against the
      * left frustum plane, use a mask of {@link #PLANE_MASK_NX}. Or in order to test all planes <i>except</i> the left plane, use 
      * a mask of <code>(~0 ^ PLANE_MASK_NX)</code>.
@@ -848,7 +848,7 @@ struct FrustumIntersection {
      *         or {@link #INTERSECT} if the box intersects the frustum, or {@link #INSIDE} if the box is fully inside of the frustum.
      *         The plane index is one of {@link #PLANE_NX}, {@link #PLANE_PX}, {@link #PLANE_NY}, {@link #PLANE_PY}, {@link #PLANE_NZ} and {@link #PLANE_PZ}
      */
-    public int intersectAab(float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int mask, int startPlane) {
+    public int intersectAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, int mask, int startPlane) {
         /*
          * This is an implementation of the second algorithm in "2.5 Plane masking and coherency" of the mentioned site.
          * 
@@ -921,15 +921,15 @@ struct FrustumIntersection {
      * @return <code>true</code> if the given line segment is partly or completely inside the frustum;
      *         <code>false</code> otherwise
      */
-    public bool testLineSegment(float aX, float aY, float aZ, float bX, float bY, float bZ) {
-        float da, db;
+    public bool testLineSegment(double aX, double aY, double aZ, double bX, double bY, double bZ) {
+        double da, db;
         da = Math.fma(nxX, aX, Math.fma(nxY, aY, Math.fma(nxZ, aZ, nxW)));
         db = Math.fma(nxX, bX, Math.fma(nxY, bY, Math.fma(nxZ, bZ, nxW)));
         if (da < 0.0f && db < 0.0f)
             return false;
         if (da * db < 0.0f) {
-            float p = Math.abs(da) / Math.abs(db - da);
-            float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
+            double p = Math.abs(da) / Math.abs(db - da);
+            double dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
             if (da < 0.0f) {
                 aX = dx; aY = dy; aZ = dz;
             } else {
@@ -941,8 +941,8 @@ struct FrustumIntersection {
         if (da < 0.0f && db < 0.0f)
             return false;
         if (da * db < 0.0f) {
-            float p = Math.abs(da) / Math.abs(db - da);
-            float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
+            double p = Math.abs(da) / Math.abs(db - da);
+            double dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
             if (da < 0.0f) {
                 aX = dx; aY = dy; aZ = dz;
             } else {
@@ -954,8 +954,8 @@ struct FrustumIntersection {
         if (da < 0.0f && db < 0.0f)
             return false;
         if (da * db < 0.0f) {
-            float p = Math.abs(da) / Math.abs(db - da);
-            float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
+            double p = Math.abs(da) / Math.abs(db - da);
+            double dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
             if (da < 0.0f) {
                 aX = dx; aY = dy; aZ = dz;
             } else {
@@ -967,8 +967,8 @@ struct FrustumIntersection {
         if (da < 0.0f && db < 0.0f)
             return false;
         if (da * db < 0.0f) {
-            float p = Math.abs(da) / Math.abs(db - da);
-            float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
+            double p = Math.abs(da) / Math.abs(db - da);
+            double dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
             if (da < 0.0f) {
                 aX = dx; aY = dy; aZ = dz;
             } else {
@@ -980,8 +980,8 @@ struct FrustumIntersection {
         if (da < 0.0f && db < 0.0f)
             return false;
         if (da * db < 0.0f) {
-            float p = Math.abs(da) / Math.abs(db - da);
-            float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
+            double p = Math.abs(da) / Math.abs(db - da);
+            double dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
             if (da < 0.0f) {
                 aX = dx; aY = dy; aZ = dz;
             } else {
