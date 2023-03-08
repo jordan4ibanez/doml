@@ -41,21 +41,21 @@ import std.math.traits: isNaN;
  * @author Kai Burjack
  */
 struct RayAabIntersection {
-    private float originX, originY, originZ;
-    private float dirX, dirY, dirZ;
+    private double originX, originY, originZ;
+    private double dirX, dirY, dirZ;
 
     /* Needed for ray slope intersection method */
-    private float c_xy, c_yx, c_zy, c_yz, c_xz, c_zx;
-    private float s_xy, s_yx, s_zy, s_yz, s_xz, s_zx;
+    private double c_xy, c_yx, c_zy, c_yz, c_xz, c_zx;
+    private double s_xy, s_yx, s_zy, s_yz, s_xz, s_zx;
     private byte classification;
 
     /**
      * Create a new {@link RayAabIntersection} and initialize it with a ray with origin <code>(originX, originY, originZ)</code>
      * and direction <code>(dirX, dirY, dirZ)</code>.
      * <p>
-     * In order to change the direction and/or origin of the ray later, use {@link #set(float, float, float, float, float, float) set()}.
+     * In order to change the direction and/or origin of the ray later, use {@link #set(double, double, double, double, double, double) set()}.
      * 
-     * @see #set(float, float, float, float, float, float)
+     * @see #set(double, double, double, double, double, double)
      * 
      * @param originX
      *          the x coordinate of the origin
@@ -70,7 +70,7 @@ struct RayAabIntersection {
      * @param dirZ
      *          the z coordinate of the direction
      */
-    this(float originX, float originY, float originZ, float dirX, float dirY, float dirZ) {
+    this(double originX, double originY, double originZ, double dirX, double dirY, double dirZ) {
         set(originX, originY, originZ, dirX, dirY, dirZ);
     }
 
@@ -91,7 +91,7 @@ struct RayAabIntersection {
      * @param dirZ
      *          the z coordinate of the ray direction
      */
-    public void set(float originX, float originY, float originZ, float dirX, float dirY, float dirZ) {
+    public void set(double originX, double originY, double originZ, double dirX, double dirY, double dirZ) {
         this.originX = originX;
         this.originY = originY;
         this.originZ = originZ;
@@ -104,9 +104,9 @@ struct RayAabIntersection {
      * Precompute the values necessary for the ray slope algorithm.
      */
     private void precomputeSlope() {
-        float invDirX = 1.0f / dirX;
-        float invDirY = 1.0f / dirY;
-        float invDirZ = 1.0f / dirZ;
+        double invDirX = 1.0f / dirX;
+        double invDirY = 1.0f / dirY;
+        double invDirZ = 1.0f / dirZ;
         s_yx = dirX * invDirY;
         s_xy = dirY * invDirX;
         s_zy = dirY * invDirZ;
@@ -147,7 +147,7 @@ struct RayAabIntersection {
      *          the z coordinate of the maximum corner
      * @return <code>true</code> iff the ray intersects the given axis-aligned box; <code>false</code> otherwise
      */
-    public bool test(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    public bool test(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         // tableswitch with dense and consecutive cases (will be a simple jump based on the switch argument)
         switch (classification) {
         case 0: // 0b000000: // MMM
@@ -235,7 +235,7 @@ struct RayAabIntersection {
 
     /* Intersection tests for all possible ray direction cases */
 
-    private bool MMM(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool MMM(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX >= minX && originY >= minY && originZ >= minZ
             && s_xy * minX - maxY + c_xy <= 0.0f
             && s_yx * minY - maxX + c_yx <= 0.0f
@@ -244,12 +244,12 @@ struct RayAabIntersection {
             && s_xz * minX - maxZ + c_xz <= 0.0f
             && s_zx * minZ - maxX + c_zx <= 0.0f;
     }
-    private bool OMM(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool OMM(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX >= minX && originX <= maxX && originY >= minY && originZ >= minZ
             && s_zy * minZ - maxY + c_zy <= 0.0f
             && s_yz * minY - maxZ + c_yz <= 0.0f;
     }
-    private bool PMM(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool PMM(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX <= maxX && originY >= minY && originZ >= minZ
             && s_xy * maxX - maxY + c_xy <= 0.0f
             && s_yx * minY - minX + c_yx >= 0.0f
@@ -258,20 +258,20 @@ struct RayAabIntersection {
             && s_xz * maxX - maxZ + c_xz <= 0.0f
             && s_zx * minZ - minX + c_zx >= 0.0f;
     }
-    private bool MOM(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool MOM(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originY >= minY && originY <= maxY && originX >= minX && originZ >= minZ
             && s_xz * minX - maxZ + c_xz <= 0.0f
             && s_zx * minZ - maxX + c_zx <= 0.0f;
     }
-    private bool OOM(float minX, float minY, float minZ, float maxX, float maxY) {
+    private bool OOM(double minX, double minY, double minZ, double maxX, double maxY) {
         return originZ >= minZ && originX >= minX && originX <= maxX && originY >= minY && originY <= maxY;
     }
-    private bool POM(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool POM(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originY >= minY && originY <= maxY && originX <= maxX && originZ >= minZ
             && s_xz * maxX - maxZ + c_xz <= 0.0f
             && s_zx * minZ - minX + c_zx >= 0.0f;
     }
-    private bool MPM(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool MPM(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX >= minX && originY <= maxY && originZ >= minZ
             && s_xy * minX - minY + c_xy >= 0.0f
             && s_yx * maxY - maxX + c_yx <= 0.0f
@@ -280,12 +280,12 @@ struct RayAabIntersection {
             && s_xz * minX - maxZ + c_xz <= 0.0f
             && s_zx * minZ - maxX + c_zx <= 0.0f;
     }
-    private bool OPM(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool OPM(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX >= minX && originX <= maxX && originY <= maxY && originZ >= minZ
             && s_zy * minZ - minY + c_zy >= 0.0f
             && s_yz * maxY - maxZ + c_yz <= 0.0f;
     }
-    private bool PPM(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool PPM(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX <= maxX && originY <= maxY && originZ >= minZ
             && s_xy * maxX - minY + c_xy >= 0.0f
             && s_yx * maxY - minX + c_yx >= 0.0f
@@ -294,39 +294,39 @@ struct RayAabIntersection {
             && s_xz * maxX - maxZ + c_xz <= 0.0f
             && s_zx * minZ - minX + c_zx >= 0.0f;
     }
-    private bool MMO(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool MMO(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originZ >= minZ && originZ <= maxZ && originX >= minX && originY >= minY
             && s_xy * minX - maxY + c_xy <= 0.0f
             && s_yx * minY - maxX + c_yx <= 0.0f;
     }
-    private bool OMO(float minX, float minY, float minZ, float maxX, float maxZ) {
+    private bool OMO(double minX, double minY, double minZ, double maxX, double maxZ) {
         return originY >= minY && originX >= minX && originX <= maxX && originZ >= minZ && originZ <= maxZ;
     }
-    private bool PMO(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool PMO(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originZ >= minZ && originZ <= maxZ && originX <= maxX && originY >= minY
             && s_xy * maxX - maxY + c_xy <= 0.0f
             && s_yx * minY - minX + c_yx >= 0.0f;
     }
-    private bool MOO(float minX, float minY, float minZ, float maxY, float maxZ) {
+    private bool MOO(double minX, double minY, double minZ, double maxY, double maxZ) {
         return originX >= minX && originY >= minY && originY <= maxY && originZ >= minZ && originZ <= maxZ;
     }
-    private bool POO(float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool POO(double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX <= maxX && originY >= minY && originY <= maxY && originZ >= minZ && originZ <= maxZ;
     }
-    private bool MPO(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool MPO(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originZ >= minZ && originZ <= maxZ && originX >= minX && originY <= maxY
             && s_xy * minX - minY + c_xy >= 0.0f
             && s_yx * maxY - maxX + c_yx <= 0.0f;
     }
-    private bool OPO(float minX, float minZ, float maxX, float maxY, float maxZ) {
+    private bool OPO(double minX, double minZ, double maxX, double maxY, double maxZ) {
         return originY <= maxY && originX >= minX && originX <= maxX && originZ >= minZ && originZ <= maxZ;
     }
-    private bool PPO(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool PPO(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originZ >= minZ && originZ <= maxZ && originX <= maxX && originY <= maxY
             && s_xy * maxX - minY + c_xy >= 0.0f
             && s_yx * maxY - minX + c_yx >= 0.0f;
     }
-    private bool MMP(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool MMP(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX >= minX && originY >= minY && originZ <= maxZ
             && s_xy * minX - maxY + c_xy <= 0.0f
             && s_yx * minY - maxX + c_yx <= 0.0f
@@ -335,12 +335,12 @@ struct RayAabIntersection {
             && s_xz * minX - minZ + c_xz >= 0.0f
             && s_zx * maxZ - maxX + c_zx <= 0.0f;
     }
-    private bool OMP(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool OMP(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX >= minX && originX <= maxX && originY >= minY && originZ <= maxZ
             && s_zy * maxZ - maxY + c_zy <= 0.0f
             && s_yz * minY - minZ + c_yz >= 0.0f;
     }
-    private bool PMP(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool PMP(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX <= maxX && originY >= minY && originZ <= maxZ
             && s_xy * maxX - maxY + c_xy <= 0.0f
             && s_yx * minY - minX + c_yx >= 0.0f
@@ -349,20 +349,20 @@ struct RayAabIntersection {
             && s_xz * maxX - minZ + c_xz >= 0.0f
             && s_zx * maxZ - minX + c_zx >= 0.0f;
     }
-    private bool MOP(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool MOP(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originY >= minY && originY <= maxY && originX >= minX && originZ <= maxZ
             && s_xz * minX - minZ + c_xz >= 0.0f
             && s_zx * maxZ - maxX + c_zx <= 0.0f;
     }
-    private bool OOP(float minX, float minY, float maxX, float maxY, float maxZ) {
+    private bool OOP(double minX, double minY, double maxX, double maxY, double maxZ) {
         return originZ <= maxZ && originX >= minX && originX <= maxX && originY >= minY && originY <= maxY;
     }
-    private bool POP(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool POP(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originY >= minY && originY <= maxY && originX <= maxX && originZ <= maxZ
             && s_xz * maxX - minZ + c_xz >= 0.0f
             && s_zx * maxZ - minX + c_zx <= 0.0f;
     }
-    private bool MPP(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool MPP(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX >= minX && originY <= maxY && originZ <= maxZ
             && s_xy * minX - minY + c_xy >= 0.0f
             && s_yx * maxY - maxX + c_yx <= 0.0f
@@ -371,12 +371,12 @@ struct RayAabIntersection {
             && s_xz * minX - minZ + c_xz >= 0.0f
             && s_zx * maxZ - maxX + c_zx <= 0.0f;
     }
-    private bool OPP(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool OPP(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX >= minX && originX <= maxX && originY <= maxY && originZ <= maxZ
             && s_zy * maxZ - minY + c_zy <= 0.0f
             && s_yz * maxY - minZ + c_yz <= 0.0f;
     }
-    private bool PPP(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private bool PPP(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return originX <= maxX && originY <= maxY && originZ <= maxZ
             && s_xy * maxX - minY + c_xy >= 0.0f
             && s_yx * maxY - minX + c_yx >= 0.0f
