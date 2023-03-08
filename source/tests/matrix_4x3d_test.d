@@ -55,68 +55,68 @@ unittest {
 
     // testPositiveXRotateY
     {
-        vector3 dir = vector3();
+        Vector3d dir = Vector3d();
         Matrix4x3d m = Matrix4x3d()
                 .rotateY(cast(double) Math.toRadians(90));
         m.positiveX(dir);
-        assertvector3Equals(vector3(0, 0, 1), dir, 1E-7f);
+        assertVector3dEquals(Vector3d(0, 0, 1), dir, 1E-7f);
     }
 
     // testPositiveYRotateX
     {
-        vector3 dir = vector3();
+        Vector3d dir = Vector3d();
         Matrix4x3d m = Matrix4x3d()
                 .rotateX(cast(double) Math.toRadians(90));
         m.positiveY(dir);
-        assertvector3Equals(vector3(0, 0, -1), dir, 1E-7f);
+        assertVector3dEquals(Vector3d(0, 0, -1), dir, 1E-7f);
     }
 
     // testPositiveZRotateX
     {
-        vector3 dir = vector3();
+        Vector3d dir = Vector3d();
         Matrix4x3d m = Matrix4x3d()
                 .rotateX(cast(double) Math.toRadians(90));
         m.positiveZ(dir);
-        assertvector3Equals(vector3(0, 1, 0), dir, 1E-7f);
+        assertVector3dEquals(Vector3d(0, 1, 0), dir, 1E-7f);
     }
 
     // testPositiveXRotateXY
     {
-        vector3 dir = vector3();
+        Vector3d dir = Vector3d();
         Matrix4x3d m = Matrix4x3d()
                 .rotateY(cast(double) Math.toRadians(90)).rotateX(cast(double) Math.toRadians(45));
         m.positiveX(dir);
-        assertvector3Equals(vector3(0, 1, 1).normalize(), dir, 1E-7f);
+        assertVector3dEquals(Vector3d(0, 1, 1).normalize(), dir, 1E-7f);
     }
 
     // testPositiveXYZLookAt
     {
-        vector3 dir = vector3();
+        Vector3d dir = Vector3d();
         Matrix4x3d m = Matrix4x3d()
                 .lookAt(0, 0, 0, -1, 0, 0, 0, 1, 0);
         m.positiveX(dir);
-        assertvector3Equals(vector3(0, 0, -1).normalize(), dir, 1E-7f);
+        assertVector3dEquals(Vector3d(0, 0, -1).normalize(), dir, 1E-7f);
         m.positiveY(dir);
-        assertvector3Equals(vector3(0, 1, 0).normalize(), dir, 1E-7f);
+        assertVector3dEquals(Vector3d(0, 1, 0).normalize(), dir, 1E-7f);
         m.positiveZ(dir);
-        assertvector3Equals(vector3(1, 0, 0).normalize(), dir, 1E-7f);
+        assertVector3dEquals(Vector3d(1, 0, 0).normalize(), dir, 1E-7f);
     }
 
     // testPositiveXYZSameAsInvert
     {
-        vector3 dir = vector3();
-        vector3 dir2 = vector3();
+        Vector3d dir = Vector3d();
+        Vector3d dir2 = Vector3d();
         Matrix4x3d m = Matrix4x3d().rotateXYZ(0.12f, 1.25f, -2.56f);
         Matrix4x3d inv = Matrix4x3d(m).invert();
         m.positiveX(dir);
         inv.transformDirection(dir2.set(1, 0, 0));
-        assertvector3Equals(dir2, dir, 1E-6f);
+        assertVector3dEquals(dir2, dir, 1E-6f);
         m.positiveY(dir);
         inv.transformDirection(dir2.set(0, 1, 0));
-        assertvector3Equals(dir2, dir, 1E-6f);
+        assertVector3dEquals(dir2, dir, 1E-6f);
         m.positiveZ(dir);
         inv.transformDirection(dir2.set(0, 0, 1));
-        assertvector3Equals(dir2, dir, 1E-6f);
+        assertVector3dEquals(dir2, dir, 1E-6f);
     }
 
     // testNormal
@@ -134,12 +134,12 @@ unittest {
         Matrix4x3d invm = Matrix4x3d();
         Matrix4x3d m = Matrix4x3d();
         m.rotateX(1.2f).rotateY(0.2f).rotateZ(0.1f).translate(1, 2, 3).invert(invm);
-        vector3 orig = vector3(4, -6, 8);
-        vector3 v = vector3();
-        vector3 w = vector3();
+        Vector3d orig = Vector3d(4, -6, 8);
+        Vector3d v = Vector3d();
+        Vector3d w = Vector3d();
         m.transformPosition(orig, v);
         invm.transformPosition(v, w);
-        assertvector3Equals(orig, w, 1E-6f);
+        assertVector3dEquals(orig, w, 1E-6f);
         invm.invert();
         assertMatrix4x3dEquals(m, invm, 1E-6f);
     }

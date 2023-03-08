@@ -48,14 +48,14 @@ unittest {
         Vector3i v1 = Vector3i(0.0, .6, .7, RoundingMode.FLOOR);
         Vector3i v2 = Vector3i(9.5, 1.6, 5.0, RoundingMode.FLOOR);
 
-        Vector3i v3 = Vector3i(vector3(0.0, .6, .7), RoundingMode.FLOOR);
-        Vector3i v4 = Vector3i(vector3(9.5, 1.6, 5.0), RoundingMode.FLOOR);
+        Vector3i v3 = Vector3i(Vector3d(0.0, .6, .7), RoundingMode.FLOOR);
+        Vector3i v4 = Vector3i(Vector3d(9.5, 1.6, 5.0), RoundingMode.FLOOR);
 
         Vector3i v5 = Vector3i(0.0, .6, .7, RoundingMode.CEILING);
         Vector3i v6 = Vector3i(9.5, 1.6, 5.0, RoundingMode.CEILING);
 
-        Vector3i v7 = Vector3i(vector3(0.0, .6, .7), RoundingMode.CEILING);
-        Vector3i v8 = Vector3i(vector3(9.5, 1.6, 5.0), RoundingMode.CEILING);
+        Vector3i v7 = Vector3i(Vector3d(0.0, .6, .7), RoundingMode.CEILING);
+        Vector3i v8 = Vector3i(Vector3d(9.5, 1.6, 5.0), RoundingMode.CEILING);
 
 
         assertEquals(v1, Vector3i(0, 0, 0));

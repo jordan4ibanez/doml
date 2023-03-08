@@ -122,9 +122,9 @@ struct AxisAngle4d {
      * Create a new {@link AxisAngle4d} with the given values.
      *
      * @param angle the angle in radians
-     * @param v     the rotation axis as a {@link vector3}
+     * @param v     the rotation axis as a {@link Vector3d}
      */
-    this(double angle, vector3 v) {
+    this(double angle, Vector3d v) {
         this(angle, v.x, v.y, v.z);
     }
 
@@ -156,10 +156,10 @@ struct AxisAngle4d {
      * @param angle
      *            the angle in radians
      * @param v    
-     *            the rotation axis as a {@link vector3}
+     *            the rotation axis as a {@link Vector3d}
      * @return this
      */
-    ref public AxisAngle4d set(double angle, vector3 v) return {
+    ref public AxisAngle4d set(double angle, Vector3d v) return {
         return set(angle, v.x, v.y, v.z);
     }
 
@@ -407,7 +407,7 @@ struct AxisAngle4d {
      *          the vector to transform
      * @return v
      */
-    public vector3 transform(vector3 v) {
+    public Vector3d transform(Vector3d v) {
         return transform(v, v);
     }
 
@@ -421,7 +421,7 @@ struct AxisAngle4d {
      *          will hold the result
      * @return dest
      */
-    public vector3 transform(vector3 v, vector3 dest) {
+    public Vector3d transform(Vector3d v, Vector3d dest) {
         double sin = Math.sin(angle);
         double cos = Math.cosFromSin(sin, angle);
         double dot = x * v.x + y * v.y + z * v.z;

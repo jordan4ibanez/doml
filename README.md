@@ -9,7 +9,7 @@ JOML translated to D with a few changes:
 
 - That's not a joke, search float in vscode, you're going to get these two and 4 keywords from builtin libraries in math.d
 
-- No readonly views (vector3C etc)
+- No readonly views (Vector3DC etc)
 
 - Simplified using D's strengths
 

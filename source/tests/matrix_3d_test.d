@@ -51,8 +51,8 @@ unittest {
         Matrix3d instance = Matrix3d();
         Matrix3d result = instance.setRow(row, x, y, z);
 
-        vector3 inRow = vector3(x, y, z);
-        vector3 outRow = vector3();
+        Vector3d inRow = Vector3d(x, y, z);
+        Vector3d outRow = Vector3d();
         
         result.getRow(row, outRow);
         assertEquals(inRow, outRow);
@@ -99,8 +99,8 @@ unittest {
         double y = 1.0;
         double z = 2.0;
         Matrix3d instance = Matrix3d();
-        vector3 inRow = vector3(x, y, z);
-        vector3 outRow = vector3();
+        Vector3d inRow = Vector3d(x, y, z);
+        Vector3d outRow = Vector3d();
         Matrix3d result = instance.setRow(row, x, y, z);
         result.getRow(row, outRow);
         assertEquals(inRow, outRow);
@@ -128,16 +128,16 @@ unittest {
 
         m.rotateXYZ(0.23, 1.523, -0.7234).invert(invm);
 
-        vector3 orig = vector3(4, -6, 8);
+        Vector3d orig = Vector3d(4, -6, 8);
 
-        vector3 v = vector3();
-        vector3 w = vector3();
+        Vector3d v = Vector3d();
+        Vector3d w = Vector3d();
 
         m.transform(orig, v);
         invm.transform(v, w);
 
         // Precision was too low for this test, raised up
-        assertvector3Equals(orig, w, MANY_OPS_AROUND_ZERO_PRECISION_DOUBLE);
+        assertVector3dEquals(orig, w, MANY_OPS_AROUND_ZERO_PRECISION_DOUBLE);
 
         invm.invert();
         assertMatrix3dEquals(m, invm, 1E-3);

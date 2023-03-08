@@ -143,7 +143,7 @@ struct Matrix3d {
      * @param col2
      *          the third column
      */
-    this(vector3 col0, vector3 col1, vector3 col2) {
+    this(Vector3d col0, Vector3d col1, Vector3d col2) {
         set(col0, col1, col2);
     }
 
@@ -769,9 +769,9 @@ struct Matrix3d {
      *          the third column
      * @return this
      */
-    ref public Matrix3d set(vector3 col0,
-                        vector3 col1, 
-                        vector3 col2) return {
+    ref public Matrix3d set(Vector3d col0,
+                        Vector3d col1, 
+                        Vector3d col2) return {
         this.m00 = col0.x;
         this.m01 = col0.y;
         this.m02 = col0.z;
@@ -879,15 +879,15 @@ struct Matrix3d {
      * matrix to obtain an additional scaling.
      * <p>
      * In order to post-multiply a scaling transformation directly to a
-     * matrix use {@link #scale(vector3) scale()} instead.
+     * matrix use {@link #scale(Vector3d) scale()} instead.
      * 
-     * @see #scale(vector3)
+     * @see #scale(Vector3d)
      * 
      * @param xyz
      *             the scale in x, y and z respectively
      * @return this
      */
-    ref public Matrix3d scaling(vector3 xyz) return {
+    ref public Matrix3d scaling(Vector3d xyz) return {
         m00 = xyz.x;
         m01 = 0.0;
         m02 = 0.0;
@@ -900,7 +900,7 @@ struct Matrix3d {
         return this;
     }
 
-    public Matrix3d scale(vector3 xyz, ref Matrix3d dest) {
+    public Matrix3d scale(Vector3d xyz, ref Matrix3d dest) {
         return scale(xyz.x, xyz.y, xyz.z, dest);
     }
 
@@ -917,7 +917,7 @@ struct Matrix3d {
      *            the factors of the x, y and z component, respectively
      * @return this
      */
-    ref public Matrix3d scale(vector3 xyz) return {
+    ref public Matrix3d scale(Vector3d xyz) return {
         scale(xyz.x, xyz.y, xyz.z, this);
         return this;
     }
@@ -1037,17 +1037,17 @@ struct Matrix3d {
      * matrix to obtain an additional rotation.
      * <p>
      * In order to post-multiply a rotation transformation directly to a
-     * matrix, use {@link #rotate(double, vector3) rotate()} instead.
+     * matrix, use {@link #rotate(double, Vector3d) rotate()} instead.
      * 
-     * @see #rotate(double, vector3)
+     * @see #rotate(double, Vector3d)
      * 
      * @param angle
      *          the angle in radians
      * @param axis
-     *          the axis to rotate about (needs to be {@link vector3#normalize() normalized})
+     *          the axis to rotate about (needs to be {@link Vector3d#normalize() normalized})
      * @return this
      */
-    ref public Matrix3d rotation(double angle, vector3 axis) return {
+    ref public Matrix3d rotation(double angle, Vector3d axis) return {
         return rotation(angle, axis.x, axis.y, axis.z);
     }
 
@@ -1409,31 +1409,31 @@ struct Matrix3d {
     }
 
 
-    public vector3 transform(vector3 v) {
+    public Vector3d transform(Vector3d v) {
         return v.mul(this);
     }
 
-    public vector3 transform(vector3 v, ref vector3 dest) {
+    public Vector3d transform(Vector3d v, ref Vector3d dest) {
         v.mul(this, dest);
         return dest;
     }
 
 
-    public vector3 transform(double x, double y, double z, ref vector3 dest) {
+    public Vector3d transform(double x, double y, double z, ref Vector3d dest) {
         return dest.set(Math.fma(m00, x, Math.fma(m10, y, m20 * z)),
                         Math.fma(m01, x, Math.fma(m11, y, m21 * z)),
                         Math.fma(m02, x, Math.fma(m12, y, m22 * z)));
     }
 
-    public vector3 transformTranspose(vector3 v) {
+    public Vector3d transformTranspose(Vector3d v) {
         return v.mulTranspose(this);
     }
 
-    public vector3 transformTranspose(vector3 v, ref vector3 dest) {
+    public Vector3d transformTranspose(Vector3d v, ref Vector3d dest) {
         return v.mulTranspose(this, dest);
     }
 
-    public vector3 transformTranspose(double x, double y, double z, ref vector3 dest) {
+    public Vector3d transformTranspose(double x, double y, double z, ref Vector3d dest) {
         return dest.set(Math.fma(m00, x, Math.fma(m01, y, m02 * z)),
                         Math.fma(m10, x, Math.fma(m11, y, m12 * z)),
                         Math.fma(m20, x, Math.fma(m21, y, m22 * z)));
@@ -1735,7 +1735,7 @@ struct Matrix3d {
      *            the Euler angles
      * @return this
      */
-    ref public Matrix3d rotateYXZ(vector3 angles) return {
+    ref public Matrix3d rotateYXZ(Vector3d angles) return {
         return rotateYXZ(angles.y, angles.x, angles.z);
     }
 
@@ -2459,20 +2459,20 @@ struct Matrix3d {
      * the axis-angle rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(double, vector3)}.
+     * use {@link #rotation(double, Vector3d)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
      * 
      * @see #rotate(double, double, double, double)
-     * @see #rotation(double, vector3)
+     * @see #rotation(double, Vector3d)
      * 
      * @param angle
      *          the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link vector3#normalize() normalized})
+     *          the rotation axis (needs to be {@link Vector3d#normalize() normalized})
      * @return this
      */
-    ref public Matrix3d rotate(double angle, vector3 axis) return {
+    ref public Matrix3d rotate(double angle, Vector3d axis) return {
         return rotate(angle, axis.x, axis.y, axis.z);
     }
 
@@ -2491,26 +2491,26 @@ struct Matrix3d {
      * the axis-angle rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(double, vector3)}.
+     * use {@link #rotation(double, Vector3d)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
      * 
      * @see #rotate(double, double, double, double)
-     * @see #rotation(double, vector3)
+     * @see #rotation(double, Vector3d)
      * 
      * @param angle
      *          the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link vector3#normalize() normalized})
+     *          the rotation axis (needs to be {@link Vector3d#normalize() normalized})
      * @param dest
      *          will hold the result
      * @return dest
      */
-    public Matrix3d rotate(double angle, vector3 axis, ref Matrix3d dest) {
+    public Matrix3d rotate(double angle, Vector3d axis, ref Matrix3d dest) {
         return rotate(angle, axis.x, axis.y, axis.z, dest);
     }
 
-    public vector3 getRow(int row, ref vector3 dest) {
+    public Vector3d getRow(int row, ref Vector3d dest) {
         switch (row) {
         case 0:
             return dest.set(m00, m10, m20);
@@ -2533,7 +2533,7 @@ struct Matrix3d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..2]</code>
      */
-    ref public Matrix3d setRow(int row, vector3 src) return {
+    ref public Matrix3d setRow(int row, Vector3d src) return {
         return setRow(row, src.x, src.y, src.z);
     }
 
@@ -2573,7 +2573,7 @@ struct Matrix3d {
         return this;
     }
 
-    public vector3 getColumn(int column, ref vector3 dest){
+    public Vector3d getColumn(int column, ref Vector3d dest){
         switch (column) {
         case 0:
             return dest.set(m00, m01, m02);
@@ -2596,7 +2596,7 @@ struct Matrix3d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..2]</code>
      */
-    ref public Matrix3d setColumn(int column, vector3 src) return {
+    ref public Matrix3d setColumn(int column, Vector3d src) return {
         return setColumn(column, src.x, src.y, src.z);
     }
 
@@ -2795,10 +2795,10 @@ struct Matrix3d {
      * lookalong rotation transformation will be applied first!
      * <p>
      * In order to set the matrix to a lookalong transformation without post-multiplying it,
-     * use {@link #setLookAlong(vector3, vector3) setLookAlong()}.
+     * use {@link #setLookAlong(Vector3d, Vector3d) setLookAlong()}.
      * 
      * @see #lookAlong(double, double, double, double, double, double)
-     * @see #setLookAlong(vector3, vector3)
+     * @see #setLookAlong(Vector3d, Vector3d)
      * 
      * @param dir
      *            the direction in space to look along
@@ -2806,7 +2806,7 @@ struct Matrix3d {
      *            the direction of 'up'
      * @return this
      */
-    ref public Matrix3d lookAlong(vector3 dir, vector3 up) return {
+    ref public Matrix3d lookAlong(Vector3d dir, Vector3d up) return {
         lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
         return this;
     }
@@ -2821,10 +2821,10 @@ struct Matrix3d {
      * lookalong rotation transformation will be applied first!
      * <p>
      * In order to set the matrix to a lookalong transformation without post-multiplying it,
-     * use {@link #setLookAlong(vector3, vector3) setLookAlong()}.
+     * use {@link #setLookAlong(Vector3d, Vector3d) setLookAlong()}.
      * 
      * @see #lookAlong(double, double, double, double, double, double)
-     * @see #setLookAlong(vector3, vector3)
+     * @see #setLookAlong(Vector3d, Vector3d)
      * 
      * @param dir
      *            the direction in space to look along
@@ -2834,7 +2834,7 @@ struct Matrix3d {
      *            will hold the result
      * @return dest
      */
-    public Matrix3d lookAlong(vector3 dir, vector3 up, ref Matrix3d dest) {
+    public Matrix3d lookAlong(Vector3d dir, Vector3d up, ref Matrix3d dest) {
         return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, dest);
     }
 
@@ -2960,10 +2960,10 @@ struct Matrix3d {
      * point along <code>dir</code>.
      * <p>
      * In order to apply the lookalong transformation to any previous existing transformation,
-     * use {@link #lookAlong(vector3, vector3)}.
+     * use {@link #lookAlong(Vector3d, Vector3d)}.
      * 
-     * @see #setLookAlong(vector3, vector3)
-     * @see #lookAlong(vector3, vector3)
+     * @see #setLookAlong(Vector3d, Vector3d)
+     * @see #lookAlong(Vector3d, Vector3d)
      * 
      * @param dir
      *            the direction in space to look along
@@ -2971,7 +2971,7 @@ struct Matrix3d {
      *            the direction of 'up'
      * @return this
      */
-    ref public Matrix3d setLookAlong(vector3 dir, vector3 up) return {
+    ref public Matrix3d setLookAlong(Vector3d dir, Vector3d up) return {
         return setLookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
@@ -3034,49 +3034,49 @@ struct Matrix3d {
         return this;
     }
 
-    public vector3 getScale(ref vector3 dest) {
+    public Vector3d getScale(ref Vector3d dest) {
         dest.x = Math.sqrt(m00 * m00 + m01 * m01 + m02 * m02);
         dest.y = Math.sqrt(m10 * m10 + m11 * m11 + m12 * m12);
         dest.z = Math.sqrt(m20 * m20 + m21 * m21 + m22 * m22);
         return dest;
     }
 
-    public vector3 positiveZ(vector3 dir) {
+    public Vector3d positiveZ(Vector3d dir) {
         dir.x = m10 * m21 - m11 * m20;
         dir.y = m20 * m01 - m21 * m00;
         dir.z = m00 * m11 - m01 * m10;
         return dir.normalize(dir);
     }
 
-    public vector3 normalizedPositiveZ(vector3 dir) {
+    public Vector3d normalizedPositiveZ(Vector3d dir) {
         dir.x = m02;
         dir.y = m12;
         dir.z = m22;
         return dir;
     }
 
-    public vector3 positiveX(vector3 dir) {
+    public Vector3d positiveX(Vector3d dir) {
         dir.x = m11 * m22 - m12 * m21;
         dir.y = m02 * m21 - m01 * m22;
         dir.z = m01 * m12 - m02 * m11;
         return dir.normalize(dir);
     }
 
-    public vector3 normalizedPositiveX(vector3 dir) {
+    public Vector3d normalizedPositiveX(Vector3d dir) {
         dir.x = m00;
         dir.y = m10;
         dir.z = m20;
         return dir;
     }
 
-    public vector3 positiveY(vector3 dir) {
+    public Vector3d positiveY(Vector3d dir) {
         dir.x = m12 * m20 - m10 * m22;
         dir.y = m00 * m22 - m02 * m20;
         dir.z = m02 * m10 - m00 * m12;
         return dir.normalize(dir);
     }
 
-    public vector3 normalizedPositiveY(vector3 dir) {
+    public Vector3d normalizedPositiveY(Vector3d dir) {
         dir.x = m01;
         dir.y = m11;
         dir.z = m21;
@@ -3299,12 +3299,12 @@ struct Matrix3d {
      * the lookat transformation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying it,
-     * use {@link #rotationTowards(vector3, vector3) rotationTowards()}.
+     * use {@link #rotationTowards(Vector3d, Vector3d) rotationTowards()}.
      * <p>
-     * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(new vector3(dir).negate(), up).invert(), dest)</code>
+     * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(new Vector3d(dir).negate(), up).invert(), dest)</code>
      * 
      * @see #rotateTowards(double, double, double, double, double, double, Matrix3d)
-     * @see #rotationTowards(vector3, vector3)
+     * @see #rotationTowards(Vector3d, Vector3d)
      * 
      * @param direction
      *              the direction to rotate towards
@@ -3314,7 +3314,7 @@ struct Matrix3d {
      *              will hold the result
      * @return dest
      */
-    public Matrix3d rotateTowards(vector3 direction, vector3 up, ref Matrix3d dest) {
+    public Matrix3d rotateTowards(Vector3d direction, Vector3d up, ref Matrix3d dest) {
         return rotateTowards(direction.x, direction.y, direction.z, up.x, up.y, up.z, dest);
     }
 
@@ -3328,12 +3328,12 @@ struct Matrix3d {
      * the lookat transformation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying it,
-     * use {@link #rotationTowards(vector3, vector3) rotationTowards()}.
+     * use {@link #rotationTowards(Vector3d, Vector3d) rotationTowards()}.
      * <p>
-     * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(new vector3(dir).negate(), up).invert())</code>
+     * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(new Vector3d(dir).negate(), up).invert())</code>
      * 
      * @see #rotateTowards(double, double, double, double, double, double)
-     * @see #rotationTowards(vector3, vector3)
+     * @see #rotationTowards(Vector3d, Vector3d)
      * 
      * @param direction
      *              the direction to orient towards
@@ -3341,7 +3341,7 @@ struct Matrix3d {
      *              the up vector
      * @return this
      */
-    ref public Matrix3d rotateTowards(vector3 direction, vector3 up) return {
+    ref public Matrix3d rotateTowards(Vector3d direction, Vector3d up) return {
         rotateTowards(direction.x, direction.y, direction.z, up.x, up.y, up.z, this);
         return this;
     }
@@ -3360,7 +3360,7 @@ struct Matrix3d {
      * <p>
      * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(-dirX, -dirY, -dirZ, upX, upY, upZ).invert())</code>
      * 
-     * @see #rotateTowards(vector3, vector3)
+     * @see #rotateTowards(Vector3d, Vector3d)
      * @see #rotationTowards(double, double, double, double, double, double)
      * 
      * @param dirX
@@ -3397,7 +3397,7 @@ struct Matrix3d {
      * <p>
      * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(-dirX, -dirY, -dirZ, upX, upY, upZ).invert(), dest)</code>
      * 
-     * @see #rotateTowards(vector3, vector3)
+     * @see #rotateTowards(Vector3d, Vector3d)
      * @see #rotationTowards(double, double, double, double, double, double)
      * 
      * @param dirX
@@ -3470,9 +3470,9 @@ struct Matrix3d {
      * In order to apply the rotation transformation to a previous existing transformation,
      * use {@link #rotateTowards(double, double, double, double, double, double) rotateTowards}.
      * <p>
-     * This method is equivalent to calling: <code>setLookAlong(new vector3(dir).negate(), up).invert()</code>
+     * This method is equivalent to calling: <code>setLookAlong(new Vector3d(dir).negate(), up).invert()</code>
      * 
-     * @see #rotationTowards(vector3, vector3)
+     * @see #rotationTowards(Vector3d, Vector3d)
      * @see #rotateTowards(double, double, double, double, double, double)
      * 
      * @param dir
@@ -3481,7 +3481,7 @@ struct Matrix3d {
      *              the up vector
      * @return this
      */
-    ref public Matrix3d rotationTowards(vector3 dir, vector3 up) return {
+    ref public Matrix3d rotationTowards(Vector3d dir, Vector3d up) return {
         return rotationTowards(dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
@@ -3494,7 +3494,7 @@ struct Matrix3d {
      * <p>
      * This method is equivalent to calling: <code>setLookAlong(-dirX, -dirY, -dirZ, upX, upY, upZ).invert()</code>
      * 
-     * @see #rotateTowards(vector3, vector3)
+     * @see #rotateTowards(Vector3d, Vector3d)
      * @see #rotationTowards(double, double, double, double, double, double)
      * 
      * @param dirX
@@ -3543,14 +3543,14 @@ struct Matrix3d {
         return this;
     }
 
-    public vector3 getEulerAnglesZYX(ref vector3 dest) {
+    public Vector3d getEulerAnglesZYX(ref Vector3d dest) {
         dest.x = Math.atan2(m12, m22);
         dest.y = Math.atan2(-m02, Math.sqrt(1.0 - m02 * m02));
         dest.z = Math.atan2(m01, m00);
         return dest;
     }
 
-    public vector3 getEulerAnglesXYZ(ref vector3 dest) {
+    public Vector3d getEulerAnglesXYZ(ref Vector3d dest) {
         dest.x = Math.atan2(-m21, m22);
         dest.y = Math.atan2(m20, Math.sqrt(1.0 - m20 * m20));
         dest.z = Math.atan2(-m10, m00);
@@ -3699,7 +3699,7 @@ struct Matrix3d {
      *          the plane normal
      * @return this
      */
-    ref public Matrix3d reflect(vector3 normal) return {
+    ref public Matrix3d reflect(Vector3d normal) return {
         return reflect(normal.x, normal.y, normal.z);
     }
 
@@ -3735,7 +3735,7 @@ struct Matrix3d {
         return reflect(normalX, normalY, normalZ, dest);
     }
 
-    public Matrix3d reflect(vector3 normal, ref Matrix3d dest) {
+    public Matrix3d reflect(Vector3d normal, ref Matrix3d dest) {
         return reflect(normal.x, normal.y, normal.z, dest);
     }
 
@@ -3773,7 +3773,7 @@ struct Matrix3d {
      *          the plane normal
      * @return this
      */
-    ref public Matrix3d reflection(vector3 normal) return {
+    ref public Matrix3d reflection(Vector3d normal) return {
         return reflection(normal.x, normal.y, normal.z);
     }
 
@@ -3812,7 +3812,7 @@ struct Matrix3d {
         return x * Axx + y * Axy + z * Axz; 
     }
 
-    public double quadraticFormProduct(vector3 v) {
+    public double quadraticFormProduct(Vector3d v) {
         return quadraticFormProduct(v.x, v.y, v.z); 
     }
 

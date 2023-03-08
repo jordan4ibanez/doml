@@ -42,19 +42,19 @@ unittest {
 
     writeln("\nBEGINNING TEST OF GEOMETRY UTILS\n");
     
-    vector3 pos1 = vector3(-1.0f,  1.0f, 0.0f);
-    vector3 pos2 = vector3( 1.0f, -1.0f, 0.0f);
-    vector3 pos3 = vector3( 1.0f,  1.0f, 0.0f);
+    Vector3d pos1 = Vector3d(-1.0f,  1.0f, 0.0f);
+    Vector3d pos2 = Vector3d( 1.0f, -1.0f, 0.0f);
+    Vector3d pos3 = Vector3d( 1.0f,  1.0f, 0.0f);
 
     Vector2d uv1 = Vector2d(0.0f, 1.0f);
     Vector2d uv2 = Vector2d(1.0f, 0.0f);
     Vector2d uv3 = Vector2d(1.0f, 1.0f);
 
-    vector3 t = vector3(1, 0, 0);
-    vector3 b = vector3(0, 1, 0);
+    Vector3d t = Vector3d(1, 0, 0);
+    Vector3d b = Vector3d(0, 1, 0);
 
-    vector3 vecTangent = vector3();
-    vector3 vecBitangent = vector3();
+    Vector3d vecTangent = Vector3d();
+    Vector3d vecBitangent = Vector3d();
 
     tangent(pos1, uv1, pos2, uv2, pos3, uv3, vecTangent);
     assertEquals(t, vecTangent);
