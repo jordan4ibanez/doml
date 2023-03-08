@@ -652,31 +652,6 @@ struct Matrix3d {
         return this;
     }
 
-    /**
-     * Set the values in this matrix based on the supplied double array. The result looks like this:
-     * <p>
-     * 0, 3, 6<br>
-     * 1, 4, 7<br>
-     * 2, 5, 8<br>
-     * <p>
-     * Only uses the first 9 values, all others are ignored
-     *
-     * @param m
-     *          the array to read the matrix values from
-     * @return this
-     */
-    ref public Matrix3d set(float[] m) return {
-        m00 = m[0];
-        m01 = m[1];
-        m02 = m[2];
-        m10 = m[3];
-        m11 = m[4];
-        m12 = m[5];
-        m20 = m[6];
-        m21 = m[7];
-        m22 = m[8];
-        return this;
-    }
 
     public double determinant() {
         return (m00 * m11 - m01 * m10) * m22
@@ -779,23 +754,6 @@ struct Matrix3d {
     }
 
     public double[] get(double[] arr) {
-        return get(arr, 0);
-    }
-
-    public float[] get(float[] arr, int offset) {
-        arr[offset+0] = cast(float)m00;
-        arr[offset+1] = cast(float)m01;
-        arr[offset+2] = cast(float)m02;
-        arr[offset+3] = cast(float)m10;
-        arr[offset+4] = cast(float)m11;
-        arr[offset+5] = cast(float)m12;
-        arr[offset+6] = cast(float)m20;
-        arr[offset+7] = cast(float)m21;
-        arr[offset+8] = cast(float)m22;
-        return arr;
-    }
-
-    public float[] get(float[] arr) {
         return get(arr, 0);
     }
 
