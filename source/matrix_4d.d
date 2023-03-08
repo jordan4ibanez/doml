@@ -2240,7 +2240,7 @@ struct Matrix4d {
     }
 
     /**
-     * Set the values in the matrix using a float array that contains the matrix elements in column-major order.
+     * Set the values in the matrix using a double array that contains the matrix elements in column-major order.
      * <p>
      * The results will look like this:<br><br>
      * 
@@ -2249,7 +2249,7 @@ struct Matrix4d {
      * 2, 6, 10, 14<br>
      * 3, 7, 11, 15<br>
      * 
-     * @see #set(float[])
+     * @see #set(double[])
      * 
      * @param m
      *          the array to read the matrix values from
@@ -2257,7 +2257,7 @@ struct Matrix4d {
      *          the offset into the array
      * @return this
      */
-    ref public Matrix4d set(float[] m, int off) return {
+    ref public Matrix4d set(double[] m, int off) return {
         return
         _m00(m[off+0]).
         _m01(m[off+1]).
@@ -2279,7 +2279,7 @@ struct Matrix4d {
     }
 
     /**
-     * Set the values in the matrix using a float array that contains the matrix elements in column-major order.
+     * Set the values in the matrix using a double array that contains the matrix elements in column-major order.
      * <p>
      * The results will look like this:<br><br>
      * 
@@ -2288,13 +2288,13 @@ struct Matrix4d {
      * 2, 6, 10, 14<br>
      * 3, 7, 11, 15<br>
      * 
-     * @see #set(float[], int)
+     * @see #set(double[], int)
      * 
      * @param m
      *          the array to read the matrix values from
      * @return this
      */
-    ref public Matrix4d set(float[] m) return {
+    ref public Matrix4d set(double[] m) return {
         return set(m, 0);
     }
 
@@ -2946,7 +2946,7 @@ struct Matrix4d {
     }
 
     // Additional functionality for D (becomes a DoubleBuffer)
-    public float[16] getFloatArray(ref double[16] dest, int offset) {
+    public double[16] getdoubleArray(ref double[16] dest, int offset) {
         dest[offset+0]  = m00;
         dest[offset+1]  = m01;
         dest[offset+2]  = m02;
@@ -10639,7 +10639,7 @@ struct Matrix4d {
         return this;
     }
     public Matrix4d tile(int x, int y, int w, int h, ref Matrix4d dest) {
-        float tx = w - 1 - (x<<1), ty = h - 1 - (y<<1);
+        double tx = w - 1 - (x<<1), ty = h - 1 - (y<<1);
         return dest
         ._m30(Math.fma(m00, tx, Math.fma(m10, ty, m30)))
         ._m31(Math.fma(m01, tx, Math.fma(m11, ty, m31)))
@@ -11610,12 +11610,12 @@ struct Matrix4d {
      *            the height of the near frustum plane
      * @param zNear
      *            near clipping plane distance. This value must be greater than zero.
-     *            If the special value {@link Float#POSITIVE_INFINITY} is used, the near clipping plane will be at positive infinity.
-     *            In that case, <code>zFar</code> may not also be {@link Float#POSITIVE_INFINITY}.
+     *            If the special value {@link double#POSITIVE_INFINITY} is used, the near clipping plane will be at positive infinity.
+     *            In that case, <code>zFar</code> may not also be {@link double#POSITIVE_INFINITY}.
      * @param zFar
      *            far clipping plane distance. This value must be greater than zero.
-     *            If the special value {@link Float#POSITIVE_INFINITY} is used, the far clipping plane will be at positive infinity.
-     *            In that case, <code>zNear</code> may not also be {@link Float#POSITIVE_INFINITY}.
+     *            If the special value {@link double#POSITIVE_INFINITY} is used, the far clipping plane will be at positive infinity.
+     *            In that case, <code>zNear</code> may not also be {@link double#POSITIVE_INFINITY}.
      * @return this
      */
     ref public Matrix4d setPerspectiveRect(double width, double height, double zNear, double zFar) return {
@@ -11752,12 +11752,12 @@ struct Matrix4d {
      *            the vertical angle between top frustum plane and a line perpendicular to the near/far frustum planes
      * @param zNear
      *            near clipping plane distance. This value must be greater than zero.
-     *            If the special value {@link Float#POSITIVE_INFINITY} is used, the near clipping plane will be at positive infinity.
-     *            In that case, <code>zFar</code> may not also be {@link Float#POSITIVE_INFINITY}.
+     *            If the special value {@link double#POSITIVE_INFINITY} is used, the near clipping plane will be at positive infinity.
+     *            In that case, <code>zFar</code> may not also be {@link double#POSITIVE_INFINITY}.
      * @param zFar
      *            far clipping plane distance. This value must be greater than zero.
-     *            If the special value {@link Float#POSITIVE_INFINITY} is used, the far clipping plane will be at positive infinity.
-     *            In that case, <code>zNear</code> may not also be {@link Float#POSITIVE_INFINITY}.
+     *            If the special value {@link double#POSITIVE_INFINITY} is used, the far clipping plane will be at positive infinity.
+     *            In that case, <code>zNear</code> may not also be {@link double#POSITIVE_INFINITY}.
      * @return this
      */
     ref public Matrix4d setPerspectiveOffCenterFov(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) return {
@@ -11830,12 +11830,12 @@ struct Matrix4d {
      *            the vertical angle between top frustum plane and a line perpendicular to the near/far frustum planes
      * @param zNear
      *            near clipping plane distance. This value must be greater than zero.
-     *            If the special value {@link Float#POSITIVE_INFINITY} is used, the near clipping plane will be at positive infinity.
-     *            In that case, <code>zFar</code> may not also be {@link Float#POSITIVE_INFINITY}.
+     *            If the special value {@link double#POSITIVE_INFINITY} is used, the near clipping plane will be at positive infinity.
+     *            In that case, <code>zFar</code> may not also be {@link double#POSITIVE_INFINITY}.
      * @param zFar
      *            far clipping plane distance. This value must be greater than zero.
-     *            If the special value {@link Float#POSITIVE_INFINITY} is used, the far clipping plane will be at positive infinity.
-     *            In that case, <code>zNear</code> may not also be {@link Float#POSITIVE_INFINITY}.
+     *            If the special value {@link double#POSITIVE_INFINITY} is used, the far clipping plane will be at positive infinity.
+     *            In that case, <code>zNear</code> may not also be {@link double#POSITIVE_INFINITY}.
      * @return this
      */
     ref public Matrix4d setPerspectiveOffCenterFovLH(double angleLeft, double angleRight, double angleDown, double angleUp, double zNear, double zFar) return {
