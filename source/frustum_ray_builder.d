@@ -36,17 +36,17 @@ import vector_3d;
  * This can be used to compute the eye-rays in simple software-based raycasting/raytracing.
  * <p>
  * To obtain the origin of the rays call {@link #origin(Vector3d)}.
- * Then to compute the directions of subsequent rays use {@link #dir(float, float, Vector3d)}.
+ * Then to compute the directions of subsequent rays use {@link #dir(double, double, Vector3d)}.
  * 
  * @author Kai Burjack
  */
 struct FrustumRayBuilder {
 
-    private float nxnyX, nxnyY, nxnyZ;
-    private float pxnyX, pxnyY, pxnyZ;
-    private float pxpyX, pxpyY, pxpyZ;
-    private float nxpyX, nxpyY, nxpyZ;
-    private float cx, cy, cz;
+    private double nxnyX, nxnyY, nxnyZ;
+    private double pxnyX, pxnyY, pxnyZ;
+    private double pxpyX, pxpyY, pxpyZ;
+    private double nxpyX, nxpyY, nxpyZ;
+    private double cx, cy, cz;
 
     /**
      * Create a new {@link FrustumRayBuilder} from the given {@link Matrix4d matrix} by extracing the matrix's frustum.
@@ -71,10 +71,10 @@ struct FrustumRayBuilder {
      * @return this
      */
     ref public FrustumRayBuilder set(Matrix4d m) return {
-        float nxX = m.m03 + m.m00, nxY = m.m13 + m.m10, nxZ = m.m23 + m.m20, d1 = m.m33 + m.m30;
-        float pxX = m.m03 - m.m00, pxY = m.m13 - m.m10, pxZ = m.m23 - m.m20, d2 = m.m33 - m.m30;
-        float nyX = m.m03 + m.m01, nyY = m.m13 + m.m11, nyZ = m.m23 + m.m21;
-        float pyX = m.m03 - m.m01, pyY = m.m13 - m.m11, pyZ = m.m23 - m.m21, d3 = m.m33 - m.m31;
+        double nxX = m.m03 + m.m00, nxY = m.m13 + m.m10, nxZ = m.m23 + m.m20, d1 = m.m33 + m.m30;
+        double pxX = m.m03 - m.m00, pxY = m.m13 - m.m10, pxZ = m.m23 - m.m20, d2 = m.m33 - m.m30;
+        double nyX = m.m03 + m.m01, nyY = m.m13 + m.m11, nyZ = m.m23 + m.m21;
+        double pyX = m.m03 - m.m01, pyY = m.m13 - m.m11, pyZ = m.m23 - m.m21, d3 = m.m33 - m.m31;
         // bottom left
         nxnyX = nyY * nxZ - nyZ * nxY;
         nxnyY = nyZ * nxX - nyX * nxZ;
@@ -92,11 +92,11 @@ struct FrustumRayBuilder {
         pxpyY = pyZ * pxX - pyX * pxZ;
         pxpyZ = pyX * pxY - pyY * pxX;
         // compute origin
-        float pxnxX, pxnxY, pxnxZ;
+        double pxnxX, pxnxY, pxnxZ;
         pxnxX = pxY * nxZ - pxZ * nxY;
         pxnxY = pxZ * nxX - pxX * nxZ;
         pxnxZ = pxX * nxY - pxY * nxX;
-        float invDot = 1.0f / (nxX * pxpyX + nxY * pxpyY + nxZ * pxpyZ);
+        double invDot = 1.0f / (nxX * pxpyX + nxY * pxpyY + nxZ * pxpyZ);
         cx = (-pxpyX * d1 - nxpyX * d2 - pxnxX * d3) * invDot;
         cy = (-pxpyY * d1 - nxpyY * d2 - pxnxY * d3) * invDot;
         cz = (-pxpyZ * d1 - nxpyZ * d2 - pxnxZ * d3) * invDot;
@@ -132,18 +132,18 @@ struct FrustumRayBuilder {
      *          will hold the normalized ray direction
      * @return the <code>dir</code> vector
      */
-    public Vector3d dir(float x, float y, Vector3d dir) {
-        float y1x = nxnyX + (nxpyX - nxnyX) * y;
-        float y1y = nxnyY + (nxpyY - nxnyY) * y;
-        float y1z = nxnyZ + (nxpyZ - nxnyZ) * y;
-        float y2x = pxnyX + (pxpyX - pxnyX) * y;
-        float y2y = pxnyY + (pxpyY - pxnyY) * y;
-        float y2z = pxnyZ + (pxpyZ - pxnyZ) * y;
-        float dx = y1x + (y2x - y1x) * x;
-        float dy = y1y + (y2y - y1y) * x;
-        float dz = y1z + (y2z - y1z) * x;
+    public Vector3d dir(double x, double y, Vector3d dir) {
+        double y1x = nxnyX + (nxpyX - nxnyX) * y;
+        double y1y = nxnyY + (nxpyY - nxnyY) * y;
+        double y1z = nxnyZ + (nxpyZ - nxnyZ) * y;
+        double y2x = pxnyX + (pxpyX - pxnyX) * y;
+        double y2y = pxnyY + (pxpyY - pxnyY) * y;
+        double y2z = pxnyZ + (pxpyZ - pxnyZ) * y;
+        double dx = y1x + (y2x - y1x) * x;
+        double dy = y1y + (y2y - y1y) * x;
+        double dz = y1z + (y2z - y1z) * x;
         // normalize the vector
-        float invLen = Math.invsqrt(dx * dx + dy * dy + dz * dz);
+        double invLen = Math.invsqrt(dx * dx + dy * dy + dz * dz);
         dir.x = dx * invLen;
         dir.y = dy * invLen;
         dir.z = dz * invLen;
