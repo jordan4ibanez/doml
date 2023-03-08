@@ -1163,58 +1163,6 @@ struct Matrix4x3d {
         return set(m, 0);
     }
 
-    /**
-     * Set the values in the matrix using a double array that contains the matrix elements in column-major order.
-     * <p>
-     * The results will look like this:<br><br>
-     * 
-     * 0, 3, 6, 9<br>
-     * 1, 4, 7, 10<br>
-     * 2, 5, 8, 11<br>
-     * 
-     * @see #set(double[])
-     * 
-     * @param m
-     *          the array to read the matrix values from
-     * @param off
-     *          the offset into the array
-     * @return this
-     */
-    ref public Matrix4x3d set(double[] m, int off) return {
-        m00 = m[off+0];
-        m01 = m[off+1];
-        m02 = m[off+2];
-        m10 = m[off+3];
-        m11 = m[off+4];
-        m12 = m[off+5];
-        m20 = m[off+6];
-        m21 = m[off+7];
-        m22 = m[off+8];
-        m30 = m[off+9];
-        m31 = m[off+10];
-        m32 = m[off+11];
-        return determineProperties();
-    }
-
-    /**
-     * Set the values in the matrix using a double array that contains the matrix elements in column-major order.
-     * <p>
-     * The results will look like this:<br><br>
-     * 
-     * 0, 3, 6, 9<br>
-     * 1, 4, 7, 10<br>
-     * 2, 5, 8, 11<br>
-     * 
-     * @see #set(double[], int)
-     * 
-     * @param m
-     *          the array to read the matrix values from
-     * @return this
-     */
-    ref public Matrix4x3d set(double[] m) return {
-        return set(m, 0);
-    }
-
 
 
     public double determinant() {
