@@ -1456,26 +1456,6 @@ struct Matrix4x3d {
         return get(arr, 0);
     }
 
-    public double[] get(double[] arr, int offset) {
-        arr[offset+0]  = cast(double)m00;
-        arr[offset+1]  = cast(double)m01;
-        arr[offset+2]  = cast(double)m02;
-        arr[offset+3]  = cast(double)m10;
-        arr[offset+4]  = cast(double)m11;
-        arr[offset+5]  = cast(double)m12;
-        arr[offset+6]  = cast(double)m20;
-        arr[offset+7]  = cast(double)m21;
-        arr[offset+8]  = cast(double)m22;
-        arr[offset+9]  = cast(double)m30;
-        arr[offset+10] = cast(double)m31;
-        arr[offset+11] = cast(double)m32;
-        return arr;
-    }
-
-    public double[] get(double[] arr) {
-        return get(arr, 0);
-    }
-
 
     public double[] get4x4(double[] arr, int offset) {
         MemUtil.copy4x4(this, arr, offset);
