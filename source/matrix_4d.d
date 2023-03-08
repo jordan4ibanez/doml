@@ -2180,44 +2180,6 @@ struct Matrix4d {
         return determineProperties();
     }
 
-    /**
-     * Set the values in the matrix using a double array that contains the matrix elements in column-major order.
-     * <p>
-     * The results will look like this:<br><br>
-     * 
-     * 0, 4, 8, 12<br>
-     * 1, 5, 9, 13<br>
-     * 2, 6, 10, 14<br>
-     * 3, 7, 11, 15<br>
-     * 
-     * @see #set(double[])
-     * 
-     * @param m
-     *          the array to read the matrix values from
-     * @param off
-     *          the offset into the array
-     * @return this
-     */
-    ref public Matrix4d set(double[] m, int off) return {
-        return
-        _m00(m[off+0]).
-        _m01(m[off+1]).
-        _m02(m[off+2]).
-        _m03(m[off+3]).
-        _m10(m[off+4]).
-        _m11(m[off+5]).
-        _m12(m[off+6]).
-        _m13(m[off+7]).
-        _m20(m[off+8]).
-        _m21(m[off+9]).
-        _m22(m[off+10]).
-        _m23(m[off+11]).
-        _m30(m[off+12]).
-        _m31(m[off+13]).
-        _m32(m[off+14]).
-        _m33(m[off+15]).
-        determineProperties();
-    }
 
     /**
      * Set the values in the matrix using a double array that contains the matrix elements in column-major order.
@@ -2276,26 +2238,6 @@ struct Matrix4d {
         _m32(m[off+14]).
         _m33(m[off+15]).
         determineProperties();
-    }
-
-    /**
-     * Set the values in the matrix using a double array that contains the matrix elements in column-major order.
-     * <p>
-     * The results will look like this:<br><br>
-     * 
-     * 0, 4, 8, 12<br>
-     * 1, 5, 9, 13<br>
-     * 2, 6, 10, 14<br>
-     * 3, 7, 11, 15<br>
-     * 
-     * @see #set(double[], int)
-     * 
-     * @param m
-     *          the array to read the matrix values from
-     * @return this
-     */
-    ref public Matrix4d set(double[] m) return {
-        return set(m, 0);
     }
 
 
@@ -2946,7 +2888,7 @@ struct Matrix4d {
     }
 
     // Additional functionality for D (becomes a DoubleBuffer)
-    public double[16] getdoubleArray(ref double[16] dest, int offset) {
+    public double[16] getDoubleArray(ref double[16] dest, int offset) {
         dest[offset+0]  = m00;
         dest[offset+1]  = m01;
         dest[offset+2]  = m02;
