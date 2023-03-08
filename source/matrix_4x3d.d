@@ -1164,7 +1164,7 @@ struct Matrix4x3d {
     }
 
     /**
-     * Set the values in the matrix using a float array that contains the matrix elements in column-major order.
+     * Set the values in the matrix using a double array that contains the matrix elements in column-major order.
      * <p>
      * The results will look like this:<br><br>
      * 
@@ -1172,7 +1172,7 @@ struct Matrix4x3d {
      * 1, 4, 7, 10<br>
      * 2, 5, 8, 11<br>
      * 
-     * @see #set(float[])
+     * @see #set(double[])
      * 
      * @param m
      *          the array to read the matrix values from
@@ -1180,7 +1180,7 @@ struct Matrix4x3d {
      *          the offset into the array
      * @return this
      */
-    ref public Matrix4x3d set(float[] m, int off) return {
+    ref public Matrix4x3d set(double[] m, int off) return {
         m00 = m[off+0];
         m01 = m[off+1];
         m02 = m[off+2];
@@ -1197,7 +1197,7 @@ struct Matrix4x3d {
     }
 
     /**
-     * Set the values in the matrix using a float array that contains the matrix elements in column-major order.
+     * Set the values in the matrix using a double array that contains the matrix elements in column-major order.
      * <p>
      * The results will look like this:<br><br>
      * 
@@ -1205,13 +1205,13 @@ struct Matrix4x3d {
      * 1, 4, 7, 10<br>
      * 2, 5, 8, 11<br>
      * 
-     * @see #set(float[], int)
+     * @see #set(double[], int)
      * 
      * @param m
      *          the array to read the matrix values from
      * @return this
      */
-    ref public Matrix4x3d set(float[] m) return {
+    ref public Matrix4x3d set(double[] m) return {
         return set(m, 0);
     }
 
@@ -1508,23 +1508,23 @@ struct Matrix4x3d {
         return get(arr, 0);
     }
 
-    public float[] get(float[] arr, int offset) {
-        arr[offset+0]  = cast(float)m00;
-        arr[offset+1]  = cast(float)m01;
-        arr[offset+2]  = cast(float)m02;
-        arr[offset+3]  = cast(float)m10;
-        arr[offset+4]  = cast(float)m11;
-        arr[offset+5]  = cast(float)m12;
-        arr[offset+6]  = cast(float)m20;
-        arr[offset+7]  = cast(float)m21;
-        arr[offset+8]  = cast(float)m22;
-        arr[offset+9]  = cast(float)m30;
-        arr[offset+10] = cast(float)m31;
-        arr[offset+11] = cast(float)m32;
+    public double[] get(double[] arr, int offset) {
+        arr[offset+0]  = cast(double)m00;
+        arr[offset+1]  = cast(double)m01;
+        arr[offset+2]  = cast(double)m02;
+        arr[offset+3]  = cast(double)m10;
+        arr[offset+4]  = cast(double)m11;
+        arr[offset+5]  = cast(double)m12;
+        arr[offset+6]  = cast(double)m20;
+        arr[offset+7]  = cast(double)m21;
+        arr[offset+8]  = cast(double)m22;
+        arr[offset+9]  = cast(double)m30;
+        arr[offset+10] = cast(double)m31;
+        arr[offset+11] = cast(double)m32;
         return arr;
     }
 
-    public float[] get(float[] arr) {
+    public double[] get(double[] arr) {
         return get(arr, 0);
     }
 
