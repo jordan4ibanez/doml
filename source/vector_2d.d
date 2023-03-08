@@ -176,19 +176,6 @@ struct Vector2d {
         return this;
     }
 
-    /**
-     * Set the two components of this vector to the first two elements of the given array.
-     * 
-     * @param xy
-     *          the array containing at least two elements
-     * @return this
-     */
-    ref public Vector2d set(double[] xy) return {
-        this.x = xy[0];
-        this.y = xy[1];
-        return this;
-    }
-
     public double get(int component) {
         switch (component) {
         case 0:
