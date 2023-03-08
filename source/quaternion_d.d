@@ -34,7 +34,7 @@ import vector_4d;
  */
 
 /**
- * Quaternion of 4 double-precision floats which can represent rotation and uniform scaling.
+ * Quaternion of 4 double-precision doubles which can represent rotation and uniform scaling.
  *
  * @author Richard Greenlees
  * @author Kai Burjack
@@ -1381,7 +1381,7 @@ struct Quaterniond {
                 q2y = Math.fma(scale0, q2y, scale1 * q1y);
                 q2z = Math.fma(scale0, q2z, scale1 * q1z);
                 q2w = Math.fma(scale0, q2w, scale1 * q1w);
-                float s = cast(float) Math.invsqrt(Math.fma(q2x, q2x, Math.fma(q2y, q2y, Math.fma(q2z, q2z, q2w * q2w))));
+                double s = cast(double) Math.invsqrt(Math.fma(q2x, q2x, Math.fma(q2y, q2y, Math.fma(q2z, q2z, q2w * q2w))));
                 q2x *= s;
                 q2y *= s;
                 q2z *= s;
@@ -1392,7 +1392,7 @@ struct Quaterniond {
                 q1y = Math.fma(scale0, q1y, scale1 * q2y);
                 q1z = Math.fma(scale0, q1z, scale1 * q2z);
                 q1w = Math.fma(scale0, q1w, scale1 * q2w);
-                float s = cast(float) Math.invsqrt(Math.fma(q1x, q1x, Math.fma(q1y, q1y, Math.fma(q1z, q1z, q1w * q1w))));
+                double s = cast(double) Math.invsqrt(Math.fma(q1x, q1x, Math.fma(q1y, q1y, Math.fma(q1z, q1z, q1w * q1w))));
                 q1x *= s;
                 q1y *= s;
                 q1z *= s;
