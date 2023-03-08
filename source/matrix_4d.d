@@ -2923,46 +2923,46 @@ struct Matrix4d {
         return dest.setFromNormalized(this);
     }
 
-    // Additional functionality for D (becomes a FloatBuffer)
-    public float[16] getFloatArray() {
-        float[16] dest;
-        dest[0]  = cast(float)m00;
-        dest[1]  = cast(float)m01;
-        dest[2]  = cast(float)m02;
-        dest[3]  = cast(float)m03;
-        dest[4]  = cast(float)m10;
-        dest[5]  = cast(float)m11;
-        dest[6]  = cast(float)m12;
-        dest[7]  = cast(float)m13;
-        dest[8]  = cast(float)m20;
-        dest[9]  = cast(float)m21;
-        dest[10] = cast(float)m22;
-        dest[11] = cast(float)m23;
-        dest[12] = cast(float)m30;
-        dest[13] = cast(float)m31;
-        dest[14] = cast(float)m32;
-        dest[15] = cast(float)m33;
+    // Additional functionality for D (becomes a DoubleBuffer)
+    public double[16] getDoubleArray() {
+        double[16] dest;
+        dest[0]  = m00;
+        dest[1]  = m01;
+        dest[2]  = m02;
+        dest[3]  = m03;
+        dest[4]  = m10;
+        dest[5]  = m11;
+        dest[6]  = m12;
+        dest[7]  = m13;
+        dest[8]  = m20;
+        dest[9]  = m21;
+        dest[10] = m22;
+        dest[11] = m23;
+        dest[12] = m30;
+        dest[13] = m31;
+        dest[14] = m32;
+        dest[15] = m33;
         return dest;
     }
 
-    // Additional functionality for D (becomes a FloatBuffer)
-    public float[16] getFloatArray(ref float[16] dest, int offset) {
-        dest[offset+0]  = cast(float)m00;
-        dest[offset+1]  = cast(float)m01;
-        dest[offset+2]  = cast(float)m02;
-        dest[offset+3]  = cast(float)m03;
-        dest[offset+4]  = cast(float)m10;
-        dest[offset+5]  = cast(float)m11;
-        dest[offset+6]  = cast(float)m12;
-        dest[offset+7]  = cast(float)m13;
-        dest[offset+8]  = cast(float)m20;
-        dest[offset+9]  = cast(float)m21;
-        dest[offset+10] = cast(float)m22;
-        dest[offset+11] = cast(float)m23;
-        dest[offset+12] = cast(float)m30;
-        dest[offset+13] = cast(float)m31;
-        dest[offset+14] = cast(float)m32;
-        dest[offset+15] = cast(float)m33;
+    // Additional functionality for D (becomes a DoubleBuffer)
+    public float[16] getFloatArray(ref double[16] dest, int offset) {
+        dest[offset+0]  = m00;
+        dest[offset+1]  = m01;
+        dest[offset+2]  = m02;
+        dest[offset+3]  = m03;
+        dest[offset+4]  = m10;
+        dest[offset+5]  = m11;
+        dest[offset+6]  = m12;
+        dest[offset+7]  = m13;
+        dest[offset+8]  = m20;
+        dest[offset+9]  = m21;
+        dest[offset+10] = m22;
+        dest[offset+11] = m23;
+        dest[offset+12] = m30;
+        dest[offset+13] = m31;
+        dest[offset+14] = m32;
+        dest[offset+15] = m33;
         return dest;
     }
 
