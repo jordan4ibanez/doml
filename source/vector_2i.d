@@ -498,15 +498,15 @@ struct Vector2i {
      *          the scalar to divide by
      * @return a vector holding the result
      */
-    public Vector2i div(float scalar) {
-        float invscalar = 1.0f / scalar;
+    public Vector2i div(double scalar) {
+        double invscalar = 1.0f / scalar;
         this.x = cast(int) (x * invscalar);
         this.y = cast(int) (y * invscalar);
         return this;
     }
 
-    public Vector2i div(float scalar, ref Vector2i dest) {
-        float invscalar = 1.0f / scalar;
+    public Vector2i div(double scalar, ref Vector2i dest) {
+        double invscalar = 1.0f / scalar;
         dest.x = cast(int) (x * invscalar);
         dest.y = cast(int) (y * invscalar);
         return dest;

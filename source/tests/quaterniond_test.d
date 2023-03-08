@@ -153,7 +153,7 @@ unittest {
             if (!t1.equals(t2, 1E-10f))
                 failure++;
         }
-        if (cast(float)failure / N > 0.0001f) // <- allow for a failure rate of 0.01%
+        if (cast(double)failure / N > 0.0001f) // <- allow for a failure rate of 0.01%
             assert(true == false);
     }
 
@@ -181,7 +181,7 @@ unittest {
             if (!t1.equals(t2, 1E-10f))
                 failure++;
         }
-        if (cast(float)failure / N > 0.0001f) // <- allow for a failure rate of 0.01%
+        if (cast(double)failure / N > 0.0001f) // <- allow for a failure rate of 0.01%
             assert(true == false);
     }
 
@@ -210,7 +210,7 @@ unittest {
             if (!t1.equals(t2, 1E-10f))
                 failure++;
         }
-        if (cast(float)failure / N > 0.0001f) // <- allow for a failure rate of 0.01%
+        if (cast(double)failure / N > 0.0001f) // <- allow for a failure rate of 0.01%
             assert(true == false);
     }
 

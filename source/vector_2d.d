@@ -183,7 +183,7 @@ struct Vector2d {
      *          the array containing at least two elements
      * @return this
      */
-    ref public Vector2d set(float[] xy) return {
+    ref public Vector2d set(double[] xy) return {
         this.x = xy[0];
         this.y = xy[1];
         return this;

@@ -567,8 +567,8 @@ struct Vector4i {
      *          the scalar to divide by
      * @return this
      */
-    ref public Vector4i div(float scalar) return {
-        float invscalar = 1.0f / scalar;
+    ref public Vector4i div(double scalar) return {
+        double invscalar = 1.0f / scalar;
         this.x = cast(int) (x * invscalar);
         this.y = cast(int) (y * invscalar);
         this.z = cast(int) (z * invscalar);
@@ -576,8 +576,8 @@ struct Vector4i {
         return this;
     }
 
-    public Vector4i div(float scalar, ref Vector4i dest) {
-        float invscalar = 1.0f / scalar;
+    public Vector4i div(double scalar, ref Vector4i dest) {
+        double invscalar = 1.0f / scalar;
         dest.x = cast(int) (x * invscalar);
         dest.y = cast(int) (y * invscalar);
         dest.z = cast(int) (z * invscalar);

@@ -165,7 +165,7 @@ struct Vector3d {
      * @param xyz
      *          the array containing at least three elements
      */
-    this(float[] xyz) {
+    this(double[] xyz) {
         this.x = xyz[0];
         this.y = xyz[1];
         this.z = xyz[2];
@@ -286,7 +286,7 @@ struct Vector3d {
      *          the array containing at least three elements
      * @return this
      */
-    ref public Vector3d set(float[] xyz) return {
+    ref public Vector3d set(double[] xyz) return {
         this.x = xyz[0];
         this.y = xyz[1];
         this.z = xyz[2];

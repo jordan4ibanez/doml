@@ -51,7 +51,7 @@ unittest {
 
     // testIsSphereInFrustumPerspective
     {
-        Matrix4d m = Matrix4d().perspective(cast(float) Math.PI / 2.0f, 1.0f, 0.1f, 100.0f);
+        Matrix4d m = Matrix4d().perspective(cast(double) Math.PI / 2.0f, 1.0f, 0.1f, 100.0f);
         FrustumIntersection c = FrustumIntersection(m);
         assertTrue(c.testSphere(1, 0, -2, 0.1f));
         assertFalse(c.testSphere(4f, 0, -2, 1.0f));
@@ -76,7 +76,7 @@ unittest {
 
     // testIsAabInPerspective
     {
-        Matrix4d m = Matrix4d().perspective(cast(float) Math.PI / 2.0f, 1.0f, 0.1f, 100.0f);
+        Matrix4d m = Matrix4d().perspective(cast(double) Math.PI / 2.0f, 1.0f, 0.1f, 100.0f);
         FrustumIntersection c = FrustumIntersection(m);
         assertEquals(FrustumIntersection.INSIDE, c.intersectAab(0, 0, -7, 1, 1, -5));
         assertEquals(FrustumIntersection.PLANE_PX, c.intersectAab(1.1f, 0, 0, 2, 2, 2));
@@ -86,7 +86,7 @@ unittest {
 
     // testIsPointInPerspective
     {
-        Matrix4d m = Matrix4d().perspective(cast(float) Math.PI / 2.0f, 1.0f, 0.1f, 100.0f);
+        Matrix4d m = Matrix4d().perspective(cast(double) Math.PI / 2.0f, 1.0f, 0.1f, 100.0f);
         FrustumIntersection c = FrustumIntersection(m);
         assertTrue(c.testPoint(0, 0, -5));
         assertFalse(c.testPoint(0, 6, -5));
@@ -94,7 +94,7 @@ unittest {
 
     // testIsAabInPerspectiveMask
     {
-        Matrix4d m = Matrix4d().perspective(cast(float) Math.PI / 2.0f, 1.0f, 0.1f, 100.0f);
+        Matrix4d m = Matrix4d().perspective(cast(double) Math.PI / 2.0f, 1.0f, 0.1f, 100.0f);
         FrustumIntersection c = FrustumIntersection(m);
         assertEquals(FrustumIntersection.INTERSECT, c.intersectAab(5.1f, 0, -3, 8, 2, -2, ~0 ^ FrustumIntersection.PLANE_MASK_PX));
         assertEquals(FrustumIntersection.INTERSECT, c.intersectAab(-6.1f, 0, -3, -5, 2, -2, ~0 ^ FrustumIntersection.PLANE_MASK_NX));

@@ -44,12 +44,12 @@ unittest {
     {
         Matrix4x3d m1, m2;
         m1 = Matrix4x3d().lookAt(0, 2, 3, 0, 0, 0, 0, 1, 0);
-        m2 = Matrix4x3d().translate(0, 0, -cast(float) Math.sqrt(2 * 2 + 3 * 3)).rotateX(
-                cast(float) Math.atan2(2, 3));
+        m2 = Matrix4x3d().translate(0, 0, -cast(double) Math.sqrt(2 * 2 + 3 * 3)).rotateX(
+                cast(double) Math.atan2(2, 3));
         assertMatrix4x3dEquals(m1, m2, 1E-5f);
         m1 = Matrix4x3d().lookAt(3, 2, 0, 0, 0, 0, 0, 1, 0);
-        m2 = Matrix4x3d().translate(0, 0, -cast(float) Math.sqrt(2 * 2 + 3 * 3))
-                .rotateX(cast(float) Math.atan2(2, 3)).rotateY(cast(float) Math.toRadians(-90));
+        m2 = Matrix4x3d().translate(0, 0, -cast(double) Math.sqrt(2 * 2 + 3 * 3))
+                .rotateX(cast(double) Math.atan2(2, 3)).rotateY(cast(double) Math.toRadians(-90));
         assertMatrix4x3dEquals(m1, m2, 1E-4f);
     }
 
@@ -57,7 +57,7 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4x3d m = Matrix4x3d()
-                .rotateY(cast(float) Math.toRadians(90));
+                .rotateY(cast(double) Math.toRadians(90));
         m.positiveX(dir);
         assertVector3dEquals(Vector3d(0, 0, 1), dir, 1E-7f);
     }
@@ -66,7 +66,7 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4x3d m = Matrix4x3d()
-                .rotateX(cast(float) Math.toRadians(90));
+                .rotateX(cast(double) Math.toRadians(90));
         m.positiveY(dir);
         assertVector3dEquals(Vector3d(0, 0, -1), dir, 1E-7f);
     }
@@ -75,7 +75,7 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4x3d m = Matrix4x3d()
-                .rotateX(cast(float) Math.toRadians(90));
+                .rotateX(cast(double) Math.toRadians(90));
         m.positiveZ(dir);
         assertVector3dEquals(Vector3d(0, 1, 0), dir, 1E-7f);
     }
@@ -84,7 +84,7 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4x3d m = Matrix4x3d()
-                .rotateY(cast(float) Math.toRadians(90)).rotateX(cast(float) Math.toRadians(45));
+                .rotateY(cast(double) Math.toRadians(90)).rotateX(cast(double) Math.toRadians(45));
         m.positiveX(dir);
         assertVector3dEquals(Vector3d(0, 1, 1).normalize(), dir, 1E-7f);
     }
@@ -121,7 +121,7 @@ unittest {
 
     // testNormal
     {
-        Matrix4x3d r = Matrix4x3d().rotateY(cast(float) Math.PI / 2);
+        Matrix4x3d r = Matrix4x3d().rotateY(cast(double) Math.PI / 2);
         Matrix4x3d s = Matrix4x3d(r).scale(0.2f);
         Matrix4x3d n = Matrix4x3d();
         s.normal(n);

@@ -197,7 +197,7 @@ struct Vector4d {
      * @param xyzw
      *          the array containing at least four elements
      */
-    this(float[] xyzw) {
+    this(double[] xyzw) {
         this.x = xyzw[0];
         this.y = xyzw[1];
         this.z = xyzw[2];
@@ -401,7 +401,7 @@ struct Vector4d {
      *          the array containing at least four elements
      * @return this
      */
-    ref public Vector4d set(float[] xyzw) return {
+    ref public Vector4d set(double[] xyzw) return {
         this.x = xyzw[0];
         this.y = xyzw[1];
         this.z = xyzw[2];

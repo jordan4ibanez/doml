@@ -141,7 +141,7 @@ struct Vector3i {
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    this(Vector2d v, float z, int mode) {
+    this(Vector2d v, double z, int mode) {
         this.x = Math.roundUsing(v.x, mode);
         this.y = Math.roundUsing(v.y, mode);
         this.z = Math.roundUsing(z, mode);
@@ -496,16 +496,16 @@ struct Vector3i {
      *          the scalar to divide by
      * @return this
      */
-    ref public Vector3i div(float scalar) return {
-        float invscalar = 1.0f / scalar;
+    ref public Vector3i div(double scalar) return {
+        double invscalar = 1.0f / scalar;
         this.x = cast(int) (x * invscalar);
         this.y = cast(int) (y * invscalar);
         this.z = cast(int) (z * invscalar);
         return this;
     }
 
-    public Vector3i div(float scalar, ref Vector3i dest) {
-        float invscalar = 1.0f / scalar;
+    public Vector3i div(double scalar, ref Vector3i dest) {
+        double invscalar = 1.0f / scalar;
         dest.x = cast(int) (x * invscalar);
         dest.y = cast(int) (y * invscalar);
         dest.z = cast(int) (z * invscalar);
@@ -722,9 +722,9 @@ struct Vector3i {
     }
 
     public int maxComponent() {
-        float absX = Math.abs(x);
-        float absY = Math.abs(y);
-        float absZ = Math.abs(z);
+        double absX = Math.abs(x);
+        double absY = Math.abs(y);
+        double absZ = Math.abs(z);
         if (absX >= absY && absX >= absZ) {
             return 0;
         } else if (absY >= absZ) {
@@ -734,9 +734,9 @@ struct Vector3i {
     }
 
     public int minComponent() {
-        float absX = Math.abs(x);
-        float absY = Math.abs(y);
-        float absZ = Math.abs(z);
+        double absX = Math.abs(x);
+        double absY = Math.abs(y);
+        double absZ = Math.abs(z);
         if (absX < absY && absX < absZ) {
             return 0;
         } else if (absY < absZ) {

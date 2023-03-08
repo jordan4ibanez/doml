@@ -57,14 +57,14 @@ unittest {
 
         /* Build a perspective projection and then project and unproject. */
         Matrix4d m = Matrix4d()
-        .perspective(cast(float) Math.toRadians(45.0f), 1.0f, 0.01f, 100.0f);
+        .perspective(cast(double) Math.toRadians(45.0f), 1.0f, 0.01f, 100.0f);
         m.project(expected, viewport, actual);
         m.unproject(actual, viewport, actual);
 
         /* Check for equality of the components */
-        assertEquals(expected.x, actual.x, MANY_OPS_AROUND_ZERO_PRECISION_FLOAT);
-        assertEquals(expected.y, actual.y, MANY_OPS_AROUND_ZERO_PRECISION_FLOAT);
-        assertEquals(expected.z, actual.z, MANY_OPS_AROUND_ZERO_PRECISION_FLOAT);
+        assertEquals(expected.x, actual.x, MANY_OPS_AROUND_ZERO_PRECISION_double);
+        assertEquals(expected.y, actual.y, MANY_OPS_AROUND_ZERO_PRECISION_double);
+        assertEquals(expected.z, actual.z, MANY_OPS_AROUND_ZERO_PRECISION_double);
     }
 
     // testLookAt
@@ -83,8 +83,8 @@ unittest {
         assertMatrix4dEquals(m1, m2, 1E-2f);
 
         m1 = Matrix4d().lookAt(3, 2, 0, 0, 0, 0, 0, 1, 0);
-        m2 = Matrix4d().translate(0, 0, -cast(float) Math.sqrt(2 * 2 + 3 * 3))
-                .rotateX(cast(float) Math.atan2(2, 3)).rotateY(cast(float) Math.toRadians(-90));
+        m2 = Matrix4d().translate(0, 0, -cast(double) Math.sqrt(2 * 2 + 3 * 3))
+                .rotateX(cast(double) Math.atan2(2, 3)).rotateY(cast(double) Math.toRadians(-90));
         assertMatrix4dEquals(m1, m2, 1E-2f);
     }
 
@@ -105,8 +105,8 @@ unittest {
          * move the camera 5 units "up" and rotate it clock-wise 90 degrees around Y.
          */
         Matrix4d m = Matrix4d()
-        .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
-        .rotateY(cast(float) Math.toRadians(90))
+        .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+        .rotateY(cast(double) Math.toRadians(90))
         .translate(0, -5, 0);
         m.frustumPlane(Matrix4d.PLANE_NX, left);
         m.frustumPlane(Matrix4d.PLANE_PX, right);
@@ -134,8 +134,8 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4d m = Matrix4d()
-                .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
-                .rotateY(cast(float) Math.toRadians(90));
+                .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+                .rotateY(cast(double) Math.toRadians(90));
         Vector3d expectedDir;
         m.frustumRayDir(0, 0, dir);
         expectedDir = Vector3d(1, -1, -1).normalize();
@@ -155,20 +155,20 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4d m = Matrix4d()
-                .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
-                .rotateZ(cast(float) Math.toRadians(45));
+                .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+                .rotateZ(cast(double) Math.toRadians(45));
         Vector3d expectedDir;
         m.frustumRayDir(0, 0, dir);
-        expectedDir = Vector3d(-cast(float)Math.sqrt(2), 0, -1).normalize();
+        expectedDir = Vector3d(-cast(double)Math.sqrt(2), 0, -1).normalize();
         assertVector3dEquals(expectedDir, dir, 1E-5f);
         m.frustumRayDir(1, 0, dir);
-        expectedDir = Vector3d(0, -cast(float)Math.sqrt(2), -1).normalize();
+        expectedDir = Vector3d(0, -cast(double)Math.sqrt(2), -1).normalize();
         assertVector3dEquals(expectedDir, dir, 1E-5f);
         m.frustumRayDir(0, 1, dir);
-        expectedDir = Vector3d(0, cast(float)Math.sqrt(2), -1).normalize();
+        expectedDir = Vector3d(0, cast(double)Math.sqrt(2), -1).normalize();
         assertVector3dEquals(expectedDir, dir, 1E-5f);
         m.frustumRayDir(1, 1, dir);
-        expectedDir = Vector3d(cast(float)Math.sqrt(2), 0, -1).normalize();
+        expectedDir = Vector3d(cast(double)Math.sqrt(2), 0, -1).normalize();
         assertVector3dEquals(expectedDir, dir, 1E-5f);
     }
 
@@ -221,7 +221,7 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4d m = Matrix4d()
-                .rotateX(cast(float) Math.toRadians(90));
+                .rotateX(cast(double) Math.toRadians(90));
         m.positiveY(dir);
         assertVector3dEquals(Vector3d(0, 0, -1), dir, 1E-7f);
     }
@@ -230,7 +230,7 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4d m = Matrix4d()
-                .rotateX(cast(float) Math.toRadians(90));
+                .rotateX(cast(double) Math.toRadians(90));
         m.positiveZ(dir);
         assertVector3dEquals(Vector3d(0, 1, 0), dir, 1E-7f);
     }
@@ -239,7 +239,7 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4d m = Matrix4d()
-                .rotateY(cast(float) Math.toRadians(90)).rotateX(cast(float) Math.toRadians(45));
+                .rotateY(cast(double) Math.toRadians(90)).rotateX(cast(double) Math.toRadians(45));
         m.positiveX(dir);
         assertVector3dEquals(Vector3d(0, 1, 1).normalize(), dir, 1E-7f);
     }
@@ -248,8 +248,8 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4d m = Matrix4d()
-                .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
-                .rotateY(cast(float) Math.toRadians(90));
+                .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+                .rotateY(cast(double) Math.toRadians(90));
         m.positiveX(dir);
         assertVector3dEquals(Vector3d(0, 0, -1), dir, 1E-7f);
     }
@@ -258,8 +258,8 @@ unittest {
     {
         Vector3d dir = Vector3d();
         Matrix4d m = Matrix4d()
-                .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
-                .rotateY(cast(float) Math.toRadians(90)).rotateX(cast(float) Math.toRadians(45));
+                .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+                .rotateY(cast(double) Math.toRadians(90)).rotateX(cast(double) Math.toRadians(45));
         m.positiveX(dir);
         assertVector3dEquals(Vector3d(0, -1, -1).normalize(), dir, 1E-7f);
     }
@@ -328,7 +328,7 @@ unittest {
     // testFrustumCorner
     {
         Matrix4d m = Matrix4d()
-        .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+        .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
         .lookAt(0, 0, 10,
                 0, 0,  0, 
                 0, 1,  0);
@@ -344,7 +344,7 @@ unittest {
     // testFrustumCornerWide
     {
         Matrix4d m = Matrix4d()
-        .perspective(cast(float) Math.toRadians(90), 2.0f, 0.1f, 100.0f)
+        .perspective(cast(double) Math.toRadians(90), 2.0f, 0.1f, 100.0f)
         .lookAt(0, 0, 10,
                 0, 0,  0, 
                 0, 1,  0);
@@ -360,7 +360,7 @@ unittest {
     // testFrustumCornerRotate
     {
         Matrix4d m = Matrix4d()
-        .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+        .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
         .lookAt(10, 0, 0, 
                  0, 0, 0, 
                  0, 1, 0);
@@ -377,7 +377,7 @@ unittest {
     {
         Matrix4d m = Matrix4d()
         // test symmetric frustum with some modelview translation and rotation
-        .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+        .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
         .lookAt(6, 0, 1, 
                 0, 0, 0, 
                 0, 1, 0);
@@ -387,7 +387,7 @@ unittest {
 
         // test symmetric frustum with some modelview translation and rotation
         m = Matrix4d()
-        .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+        .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
         .lookAt(-5, 2, 1, 
                 0, 1, 0, 
                 0, 1, 0);
@@ -407,12 +407,12 @@ unittest {
     // testPerspectiveFov
     {
         Matrix4d m = Matrix4d()
-        .perspective(cast(float) Math.toRadians(45), 1.0f, 0.1f, 100.0f);
+        .perspective(cast(double) Math.toRadians(45), 1.0f, 0.1f, 100.0f);
         double fov = m.perspectiveFov();
         assertEquals(Math.toRadians(45), fov, 1E-5);
 
         m = Matrix4d()
-        .perspective(cast(float) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
+        .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
         .lookAt(6, 0, 1, 
                 0, 0, 0, 
                 0, 1, 0);
@@ -422,7 +422,7 @@ unittest {
 
     // testNormal
     {
-        Matrix4d r = Matrix4d().rotateY(cast(float) Math.PI / 2);
+        Matrix4d r = Matrix4d().rotateY(cast(double) Math.PI / 2);
         Matrix4d s = Matrix4d(r).scale(0.2f);
         Matrix4d n = Matrix4d();
         s.normal(n);
@@ -551,7 +551,7 @@ unittest {
                         0, 0, -1);
         Matrix4d crop = Matrix4d();
         Matrix4d fin = Matrix4d();
-        Matrix4d().perspective(cast(float) Math.toRadians(90), 1.0f, 5, 10).invertPerspective().orthoCrop(lightView, crop).mulOrthoAffine(lightView, fin);
+        Matrix4d().perspective(cast(double) Math.toRadians(90), 1.0f, 5, 10).invertPerspective().orthoCrop(lightView, crop).mulOrthoAffine(lightView, fin);
         Vector3d p = Vector3d();
         fin.transformProject(p.set(0, 0, -5));
         assertEquals(+0.0f, p.x, 1E-6f);
@@ -583,7 +583,7 @@ unittest {
 
     // testTestPoint
     {
-        Matrix4d m = Matrix4d().perspective(cast(float)Math.toRadians(90), 1.0f, 0.1f, 10.0f).lookAt(0, 0, 10, 0, 0, 0, 0, 1, 0).scale(2);
+        Matrix4d m = Matrix4d().perspective(cast(double)Math.toRadians(90), 1.0f, 0.1f, 10.0f).lookAt(0, 0, 10, 0, 0, 0, 0, 1, 0).scale(2);
         assertTrue(m.testPoint(0, 0, 0));
         assertTrue(m.testPoint(9.999f*0.5f, 0, 0));
         assertFalse(m.testPoint(10.001f*0.5f, 0, 0));
@@ -591,7 +591,7 @@ unittest {
 
     // testTestAab
     {
-        Matrix4d m = Matrix4d().perspective(cast(float)Math.toRadians(90), 1.0f, 0.1f, 10.0f).lookAt(0, 0, 10, 0, 0, 0, 0, 1, 0).scale(2);
+        Matrix4d m = Matrix4d().perspective(cast(double)Math.toRadians(90), 1.0f, 0.1f, 10.0f).lookAt(0, 0, 10, 0, 0, 0, 0, 1, 0).scale(2);
         assertTrue(m.testAab(-1, -1, -1, 1, 1, 1));
         assertTrue(m.testAab(9.999f*0.5f, 0, 0, 10, 1, 1));
         assertFalse(m.testAab(10.001f*0.5f, 0, 0, 10, 1, 1));
@@ -643,7 +643,7 @@ unittest {
     // testMulPerspectiveAffine
     {
         Matrix4d t = Matrix4d().lookAt(2, 3, 4, 5, 6, 7, 8, 9, 11);
-        Matrix4d p = Matrix4d().perspective(60.0f * cast(float)Math.PI / 180.0f, 4.0f/3.0f, 0.1f, 1000.0f);
+        Matrix4d p = Matrix4d().perspective(60.0f * cast(double)Math.PI / 180.0f, 4.0f/3.0f, 0.1f, 1000.0f);
         Matrix4d testUnit1 = Matrix4d();
         Matrix4d result1 = t.invertAffine(testUnit1);
         Matrix4d testUnit2 = Matrix4d();
