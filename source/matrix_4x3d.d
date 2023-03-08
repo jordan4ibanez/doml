@@ -665,10 +665,10 @@ struct Matrix4x3d {
      *          the fourth column
      * @return this
      */
-    ref public Matrix4x3d set(Vector3d col0,
-                          Vector3d col1, 
-                          Vector3d col2,
-                          Vector3d col3) return {
+    ref public Matrix4x3d set(vector3 col0,
+                          vector3 col1, 
+                          vector3 col2,
+                          vector3 col3) return {
         this.m00 = col0.x;
         this.m01 = col0.y;
         this.m02 = col0.z;
@@ -1351,7 +1351,7 @@ struct Matrix4x3d {
      *              the offsets in x, y and z to translate
      * @return this
      */
-    ref public Matrix4x3d translation(Vector3d offset) return {
+    ref public Matrix4x3d translation(vector3 offset) return {
         return translation(offset.x, offset.y, offset.z);
     }
 
@@ -1383,28 +1383,28 @@ struct Matrix4x3d {
     /**
      * Set only the translation components <code>(m30, m31, m32)</code> of this matrix to the given values <code>(xyz.x, xyz.y, xyz.z)</code>.
      * <p>
-     * To build a translation matrix instead, use {@link #translation(Vector3d)}.
-     * To apply a translation, use {@link #translate(Vector3d)}.
+     * To build a translation matrix instead, use {@link #translation(vector3)}.
+     * To apply a translation, use {@link #translate(vector3)}.
      * 
-     * @see #translation(Vector3d)
-     * @see #translate(Vector3d)
+     * @see #translation(vector3)
+     * @see #translate(vector3)
      * 
      * @param xyz
      *          the units to translate in <code>(x, y, z)</code>
      * @return this
      */
-    ref public Matrix4x3d setTranslation(Vector3d xyz) return {
+    ref public Matrix4x3d setTranslation(vector3 xyz) return {
         return setTranslation(xyz.x, xyz.y, xyz.z);
     }
 
-    public Vector3d getTranslation(ref Vector3d dest) {
+    public vector3 getTranslation(ref vector3 dest) {
         dest.x = m30;
         dest.y = m31;
         dest.z = m32;
         return dest;
     }
 
-    public Vector3d getScale(ref Vector3d dest) {
+    public vector3 getScale(ref vector3 dest) {
         dest.x = Math.sqrt(m00 * m00 + m01 * m01 + m02 * m02);
         dest.y = Math.sqrt(m10 * m10 + m11 * m11 + m12 * m12);
         dest.z = Math.sqrt(m20 * m20 + m21 * m21 + m22 * m22);
@@ -1558,15 +1558,15 @@ struct Matrix4x3d {
      * matrix to obtain an additional scaling.
      * <p>
      * In order to post-multiply a scaling transformation directly to a
-     * matrix use {@link #scale(Vector3d) scale()} instead.
+     * matrix use {@link #scale(vector3) scale()} instead.
      * 
-     * @see #scale(Vector3d)
+     * @see #scale(vector3)
      * 
      * @param xyz
      *             the scale in x, y and z, respectively
      * @return this
      */
-    ref public Matrix4x3d scaling(Vector3d xyz) return {
+    ref public Matrix4x3d scaling(vector3 xyz) return {
         return scaling(xyz.x, xyz.y, xyz.z);
     }
 
@@ -2053,7 +2053,7 @@ struct Matrix4x3d {
      *          the axis to rotate about
      * @return this
      */
-    ref public Matrix4x3d rotation(double angle, Vector3d axis) return {
+    ref public Matrix4x3d rotation(double angle, vector3 axis) return {
         return rotation(angle, axis.x, axis.y, axis.z);
     }
 
@@ -2065,28 +2065,28 @@ struct Matrix4x3d {
         return v.mul(this, dest);
     }
 
-    public Vector3d transformPosition(ref Vector3d v) {
+    public vector3 transformPosition(ref vector3 v) {
         v.set(m00 * v.x + m10 * v.y + m20 * v.z + m30,
               m01 * v.x + m11 * v.y + m21 * v.z + m31,
               m02 * v.x + m12 * v.y + m22 * v.z + m32);
         return v;
     }
 
-    public Vector3d transformPosition(ref Vector3d v, ref Vector3d dest) {
+    public vector3 transformPosition(ref vector3 v, ref vector3 dest) {
         dest.set(m00 * v.x + m10 * v.y + m20 * v.z + m30,
                  m01 * v.x + m11 * v.y + m21 * v.z + m31,
                  m02 * v.x + m12 * v.y + m22 * v.z + m32);
         return dest;
     }
 
-    public Vector3d transformDirection(ref Vector3d v) {
+    public vector3 transformDirection(ref vector3 v) {
         v.set(m00 * v.x + m10 * v.y + m20 * v.z,
               m01 * v.x + m11 * v.y + m21 * v.z,
               m02 * v.x + m12 * v.y + m22 * v.z);
         return v;
     }
 
-    public Vector3d transformDirection(ref Vector3d v, ref Vector3d dest) {
+    public vector3 transformDirection(ref vector3 v, ref vector3 dest) {
         dest.set(m00 * v.x + m10 * v.y + m20 * v.z,
                  m01 * v.x + m11 * v.y + m21 * v.z,
                  m02 * v.x + m12 * v.y + m22 * v.z);
@@ -2115,7 +2115,7 @@ struct Matrix4x3d {
     }
 
 
-    public Matrix4x3d scale(Vector3d xyz, ref Matrix4x3d dest) {
+    public Matrix4x3d scale(vector3 xyz, ref Matrix4x3d dest) {
         return scale(xyz.x, xyz.y, xyz.z, dest);
     }
 
@@ -2132,7 +2132,7 @@ struct Matrix4x3d {
      *            the factors of the x, y and z component, respectively
      * @return this
      */
-    ref public Matrix4x3d scale(Vector3d xyz) return {
+    ref public Matrix4x3d scale(vector3 xyz) return {
         scale(xyz.x, xyz.y, xyz.z, this);
         return this;
     }
@@ -3026,15 +3026,15 @@ struct Matrix4x3d {
      * <code>M * T * v</code>, the translation will be applied first!
      * <p>
      * In order to set the matrix to a translation transformation without post-multiplying
-     * it, use {@link #translation(Vector3d)}.
+     * it, use {@link #translation(vector3)}.
      * 
-     * @see #translation(Vector3d)
+     * @see #translation(vector3)
      * 
      * @param offset
      *          the number of units in x, y and z by which to translate
      * @return this
      */
-    ref public Matrix4x3d translate(Vector3d offset) return {
+    ref public Matrix4x3d translate(vector3 offset) return {
         return translate(offset.x, offset.y, offset.z);
     }
 
@@ -3048,9 +3048,9 @@ struct Matrix4x3d {
      * <code>M * T * v</code>, the translation will be applied first!
      * <p>
      * In order to set the matrix to a translation transformation without post-multiplying
-     * it, use {@link #translation(Vector3d)}.
+     * it, use {@link #translation(vector3)}.
      * 
-     * @see #translation(Vector3d)
+     * @see #translation(vector3)
      * 
      * @param offset
      *          the number of units in x, y and z by which to translate
@@ -3058,7 +3058,7 @@ struct Matrix4x3d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4x3d translate(Vector3d offset, ref Matrix4x3d dest) {
+    public Matrix4x3d translate(vector3 offset, ref Matrix4x3d dest) {
         return translate(offset.x, offset.y, offset.z, dest);
     }
 
@@ -3152,15 +3152,15 @@ struct Matrix4x3d {
      * <code>T * M * v</code>, the translation will be applied last!
      * <p>
      * In order to set the matrix to a translation transformation without pre-multiplying
-     * it, use {@link #translation(Vector3d)}.
+     * it, use {@link #translation(vector3)}.
      * 
-     * @see #translation(Vector3d)
+     * @see #translation(vector3)
      * 
      * @param offset
      *          the number of units in x, y and z by which to translate
      * @return this
      */
-    ref public Matrix4x3d translateLocal(Vector3d offset) return {
+    ref public Matrix4x3d translateLocal(vector3 offset) return {
         return translateLocal(offset.x, offset.y, offset.z);
     }
 
@@ -3174,9 +3174,9 @@ struct Matrix4x3d {
      * <code>T * M * v</code>, the translation will be applied last!
      * <p>
      * In order to set the matrix to a translation transformation without pre-multiplying
-     * it, use {@link #translation(Vector3d)}.
+     * it, use {@link #translation(vector3)}.
      * 
-     * @see #translation(Vector3d)
+     * @see #translation(vector3)
      * 
      * @param offset
      *          the number of units in x, y and z by which to translate
@@ -3184,7 +3184,7 @@ struct Matrix4x3d {
      *          will hold the result
      * @return dest
      */
-    public Matrix4x3d translateLocal(Vector3d offset, ref Matrix4x3d dest) {
+    public Matrix4x3d translateLocal(vector3 offset, ref Matrix4x3d dest) {
         return translateLocal(offset.x, offset.y, offset.z, dest);
     }
 
@@ -3464,7 +3464,7 @@ struct Matrix4x3d {
      *            the Euler angles
      * @return this
      */
-    ref public Matrix4x3d rotateXYZ(Vector3d angles) return {
+    ref public Matrix4x3d rotateXYZ(vector3 angles) return {
         return rotateXYZ(angles.x, angles.y, angles.z);
     }
 
@@ -3564,7 +3564,7 @@ struct Matrix4x3d {
      *            the Euler angles
      * @return this
      */
-    ref public Matrix4x3d rotateZYX(Vector3d angles) return {
+    ref public Matrix4x3d rotateZYX(vector3 angles) return {
         return rotateZYX(angles.z, angles.y, angles.x);
     }
 
@@ -3664,7 +3664,7 @@ struct Matrix4x3d {
      *            the Euler angles
      * @return this
      */
-    ref public Matrix4x3d rotateYXZ(Vector3d angles) return {
+    ref public Matrix4x3d rotateYXZ(vector3 angles) return {
         return rotateYXZ(angles.y, angles.x, angles.z);
     }
 
@@ -3903,7 +3903,7 @@ struct Matrix4x3d {
      * <p>
      * This method is equivalent to calling: <code>translation(translation).rotate(quat).scale(scale)</code>
      * 
-     * @see #translation(Vector3d)
+     * @see #translation(vector3)
      * @see #rotate(Quaterniond)
      * 
      * @param translation
@@ -3914,9 +3914,9 @@ struct Matrix4x3d {
      *          the scaling factors
      * @return this
      */
-    ref public Matrix4x3d translationRotateScale(Vector3d translation, 
+    ref public Matrix4x3d translationRotateScale(vector3 translation, 
                                            Quaterniond quat, 
-                                           Vector3d scale) return {
+                                           vector3 scale) return {
         return translationRotateScale(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z, 
         quat.w, scale.x, scale.y, scale.z);
     }
@@ -4028,7 +4028,7 @@ struct Matrix4x3d {
      * <p>
      * This method is equivalent to calling: <code>translation(translation).rotate(quat).scale(scale).mul(m)</code>
      * 
-     * @see #translation(Vector3d)
+     * @see #translation(vector3)
      * @see #rotate(Quaterniond)
      * @see #mul(Matrix4x3d)
      * 
@@ -4042,7 +4042,7 @@ struct Matrix4x3d {
      *          the matrix to multiply by
      * @return this
      */
-    ref public Matrix4x3d translationRotateScaleMul(Vector3d translation, Quaterniond quat, Vector3d scale, Matrix4x3d m) return {
+    ref public Matrix4x3d translationRotateScaleMul(vector3 translation, Quaterniond quat, vector3 scale, Matrix4x3d m) return {
         return translationRotateScaleMul(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z
         , quat.w, scale.x, scale.y, scale.z, m);
     }
@@ -4170,7 +4170,7 @@ struct Matrix4x3d {
      * <p>
      * This method is equivalent to calling: <code>translation(translation).rotate(quat)</code>
      * 
-     * @see #translation(Vector3d)
+     * @see #translation(vector3)
      * @see #rotate(Quaterniond)
      * 
      * @param translation
@@ -4179,7 +4179,7 @@ struct Matrix4x3d {
      *          the quaternion representing a rotation
      * @return this
      */
-    ref public Matrix4x3d translationRotate(Vector3d translation, 
+    ref public Matrix4x3d translationRotate(vector3 translation, 
                                         Quaterniond quat) return {
         return translationRotate(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z, quat.w);
     }
@@ -4317,7 +4317,7 @@ struct Matrix4x3d {
      * <p>
      * This method is equivalent to calling: <code>translationRotate(...).invert()</code>
      * 
-     * @see #translationRotate(Vector3d, Quaterniond)
+     * @see #translationRotate(vector3, Quaterniond)
      * @see #invert()
      * 
      * @param translation
@@ -4326,7 +4326,7 @@ struct Matrix4x3d {
      *          the quaternion representing a rotation
      * @return this
      */
-    ref public Matrix4x3d translationRotateInvert(Vector3d translation, 
+    ref public Matrix4x3d translationRotateInvert(vector3 translation, 
                                               Quaterniond quat) return {
         return translationRotateInvert(translation.x, translation.y, translation.z, quat.x, quat.y, quat.z,
          quat.w);
@@ -4660,20 +4660,20 @@ struct Matrix4x3d {
      * the axis-angle rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(double, Vector3d)}.
+     * use {@link #rotation(double, vector3)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
      * 
      * @see #rotate(double, double, double, double)
-     * @see #rotation(double, Vector3d)
+     * @see #rotation(double, vector3)
      * 
      * @param angle
      *          the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link Vector3d#normalize() normalized})
+     *          the rotation axis (needs to be {@link vector3#normalize() normalized})
      * @return this
      */
-    ref public Matrix4x3d rotate(double angle, Vector3d axis) return {
+    ref public Matrix4x3d rotate(double angle, vector3 axis) return {
         return rotate(angle, axis.x, axis.y, axis.z);
     }
 
@@ -4690,22 +4690,22 @@ struct Matrix4x3d {
      * the axis-angle rotation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying,
-     * use {@link #rotation(double, Vector3d)}.
+     * use {@link #rotation(double, vector3)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
      * 
      * @see #rotate(double, double, double, double)
-     * @see #rotation(double, Vector3d)
+     * @see #rotation(double, vector3)
      * 
      * @param angle
      *          the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link Vector3d#normalize() normalized})
+     *          the rotation axis (needs to be {@link vector3#normalize() normalized})
      * @param dest
      *          will hold the result
      * @return dest
      */
-    public Matrix4x3d rotate(double angle, Vector3d axis, ref Matrix4x3d dest) {
+    public Matrix4x3d rotate(double angle, vector3 axis, ref Matrix4x3d dest) {
         return rotate(angle, axis.x, axis.y, axis.z, dest);
     }
 
@@ -4771,7 +4771,7 @@ struct Matrix4x3d {
         return this;
     }
 
-    public Vector3d getColumn(int column, ref Vector3d dest) {
+    public vector3 getColumn(int column, ref vector3 dest) {
         switch (column) {
         case 0:
             dest.x = m00;
@@ -4808,7 +4808,7 @@ struct Matrix4x3d {
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..3]</code>
      */
-    ref public Matrix4x3d setColumn(int column, Vector3d src) return {
+    ref public Matrix4x3d setColumn(int column, vector3 src) return {
         switch (column) {
         case 0:
             this.m00 = src.x;
@@ -5183,7 +5183,7 @@ struct Matrix4x3d {
      *          a point on the plane
      * @return this
      */
-    ref public Matrix4x3d reflect(Vector3d normal, Vector3d point) return {
+    ref public Matrix4x3d reflect(vector3 normal, vector3 point) return {
         return reflect(normal.x, normal.y, normal.z, point.x, point.y, point.z);
     }
 
@@ -5206,12 +5206,12 @@ struct Matrix4x3d {
      *          a point on the plane
      * @return this
      */
-    ref public Matrix4x3d reflect(Quaterniond orientation, Vector3d point) return {
+    ref public Matrix4x3d reflect(Quaterniond orientation, vector3 point) return {
         reflect(orientation, point, this);
         return this;
     }
 
-    public Matrix4x3d reflect(Quaterniond orientation, Vector3d point, ref Matrix4x3d dest) {
+    public Matrix4x3d reflect(Quaterniond orientation, vector3 point, ref Matrix4x3d dest) {
         double num1 = orientation.x + orientation.x;
         double num2 = orientation.y + orientation.y;
         double num3 = orientation.z + orientation.z;
@@ -5221,7 +5221,7 @@ struct Matrix4x3d {
         return reflect(normalX, normalY, normalZ, point.x, point.y, point.z, dest);
     }
 
-    public Matrix4x3d reflect(Vector3d normal, Vector3d point, ref Matrix4x3d dest) {
+    public Matrix4x3d reflect(vector3 normal, vector3 point, ref Matrix4x3d dest) {
         return reflect(normal.x, normal.y, normal.z, point.x, point.y, point.z, dest);
     }
 
@@ -5298,7 +5298,7 @@ struct Matrix4x3d {
      *          a point on the plane
      * @return this
      */
-    ref public Matrix4x3d reflection(Vector3d normal, Vector3d point) return {
+    ref public Matrix4x3d reflection(vector3 normal, vector3 point) return {
         return reflection(normal.x, normal.y, normal.z, point.x, point.y, point.z);
     }
 
@@ -5316,7 +5316,7 @@ struct Matrix4x3d {
      *          a point on the plane
      * @return this
      */
-    ref public Matrix4x3d reflection(Quaterniond orientation, Vector3d point) return {
+    ref public Matrix4x3d reflection(Quaterniond orientation, vector3 point) return {
         double num1 = orientation.x + orientation.x;
         double num2 = orientation.y + orientation.y;
         double num3 = orientation.z + orientation.z;
@@ -6565,15 +6565,15 @@ struct Matrix4x3d {
      * lookalong rotation transformation will be applied first!
      * <p>
      * This is equivalent to calling
-     * {@link #lookAt(Vector3d, Vector3d, Vector3d) lookAt}
+     * {@link #lookAt(vector3, vector3, vector3) lookAt}
      * with <code>eye = (0, 0, 0)</code> and <code>center = dir</code>.
      * <p>
      * In order to set the matrix to a lookalong transformation without post-multiplying it,
-     * use {@link #setLookAlong(Vector3d, Vector3d) setLookAlong()}.
+     * use {@link #setLookAlong(vector3, vector3) setLookAlong()}.
      * 
      * @see #lookAlong(double, double, double, double, double, double)
-     * @see #lookAt(Vector3d, Vector3d, Vector3d)
-     * @see #setLookAlong(Vector3d, Vector3d)
+     * @see #lookAt(vector3, vector3, vector3)
+     * @see #setLookAlong(vector3, vector3)
      * 
      * @param dir
      *            the direction in space to look along
@@ -6581,7 +6581,7 @@ struct Matrix4x3d {
      *            the direction of 'up'
      * @return this
      */
-    ref public Matrix4x3d lookAlong(ref Vector3d dir, Vector3d up) return {
+    ref public Matrix4x3d lookAlong(ref vector3 dir, vector3 up) return {
         lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
         return this;
     }
@@ -6596,15 +6596,15 @@ struct Matrix4x3d {
      * lookalong rotation transformation will be applied first!
      * <p>
      * This is equivalent to calling
-     * {@link #lookAt(Vector3d, Vector3d, Vector3d) lookAt}
+     * {@link #lookAt(vector3, vector3, vector3) lookAt}
      * with <code>eye = (0, 0, 0)</code> and <code>center = dir</code>.
      * <p>
      * In order to set the matrix to a lookalong transformation without post-multiplying it,
-     * use {@link #setLookAlong(Vector3d, Vector3d) setLookAlong()}.
+     * use {@link #setLookAlong(vector3, vector3) setLookAlong()}.
      * 
      * @see #lookAlong(double, double, double, double, double, double)
-     * @see #lookAt(Vector3d, Vector3d, Vector3d)
-     * @see #setLookAlong(Vector3d, Vector3d)
+     * @see #lookAt(vector3, vector3, vector3)
+     * @see #setLookAlong(vector3, vector3)
      * 
      * @param dir
      *            the direction in space to look along
@@ -6614,7 +6614,7 @@ struct Matrix4x3d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4x3d lookAlong(ref Vector3d dir, Vector3d up, ref Matrix4x3d dest) {
+    public Matrix4x3d lookAlong(ref vector3 dir, vector3 up, ref Matrix4x3d dest) {
         return lookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z, dest);
     }
 
@@ -6758,14 +6758,14 @@ struct Matrix4x3d {
      * point along <code>dir</code>.
      * <p>
      * This is equivalent to calling
-     * {@link #setLookAt(Vector3d, Vector3d, Vector3d) setLookAt()} 
+     * {@link #setLookAt(vector3, vector3, vector3) setLookAt()} 
      * with <code>eye = (0, 0, 0)</code> and <code>center = dir</code>.
      * <p>
      * In order to apply the lookalong transformation to any previous existing transformation,
-     * use {@link #lookAlong(Vector3d, Vector3d)}.
+     * use {@link #lookAlong(vector3, vector3)}.
      * 
-     * @see #setLookAlong(Vector3d, Vector3d)
-     * @see #lookAlong(Vector3d, Vector3d)
+     * @see #setLookAlong(vector3, vector3)
+     * @see #lookAlong(vector3, vector3)
      * 
      * @param dir
      *            the direction in space to look along
@@ -6773,7 +6773,7 @@ struct Matrix4x3d {
      *            the direction of 'up'
      * @return this
      */
-    ref public Matrix4x3d setLookAlong(ref Vector3d dir, Vector3d up) return {
+    ref public Matrix4x3d setLookAlong(ref vector3 dir, vector3 up) return {
         return setLookAlong(dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
@@ -6853,10 +6853,10 @@ struct Matrix4x3d {
      * instead.
      * <p>
      * In order to apply the lookat transformation to a previous existing transformation,
-     * use {@link #lookAt(Vector3d, Vector3d, Vector3d) lookAt()}.
+     * use {@link #lookAt(vector3, vector3, vector3) lookAt()}.
      * 
      * @see #setLookAt(double, double, double, double, double, double, double, double, double)
-     * @see #lookAt(Vector3d, Vector3d, Vector3d)
+     * @see #lookAt(vector3, vector3, vector3)
      * 
      * @param eye
      *            the position of the camera
@@ -6866,7 +6866,7 @@ struct Matrix4x3d {
      *            the direction of 'up'
      * @return this
      */
-    ref public Matrix4x3d setLookAt(Vector3d eye, Vector3d center, Vector3d up) return {
+    ref public Matrix4x3d setLookAt(vector3 eye, vector3 center, vector3 up) return {
         return setLookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
     }
 
@@ -6877,7 +6877,7 @@ struct Matrix4x3d {
      * In order to apply the lookat transformation to a previous existing transformation,
      * use {@link #lookAt(double, double, double, double, double, double, double, double, double) lookAt}.
      * 
-     * @see #setLookAt(Vector3d, Vector3d, Vector3d)
+     * @see #setLookAt(vector3, vector3, vector3)
      * @see #lookAt(double, double, double, double, double, double, double, double, double)
      * 
      * @param eyeX
@@ -6955,10 +6955,10 @@ struct Matrix4x3d {
      * the lookat transformation will be applied first!
      * <p>
      * In order to set the matrix to a lookat transformation without post-multiplying it,
-     * use {@link #setLookAt(Vector3d, Vector3d, Vector3d)}.
+     * use {@link #setLookAt(vector3, vector3, vector3)}.
      * 
      * @see #lookAt(double, double, double, double, double, double, double, double, double)
-     * @see #setLookAlong(Vector3d, Vector3d)
+     * @see #setLookAlong(vector3, vector3)
      * 
      * @param eye
      *            the position of the camera
@@ -6970,7 +6970,7 @@ struct Matrix4x3d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4x3d lookAt(Vector3d eye, Vector3d center, Vector3d up, ref Matrix4x3d dest) {
+    public Matrix4x3d lookAt(vector3 eye, vector3 center, vector3 up, ref Matrix4x3d dest) {
         return lookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, dest);
     }
 
@@ -6984,10 +6984,10 @@ struct Matrix4x3d {
      * the lookat transformation will be applied first!
      * <p>
      * In order to set the matrix to a lookat transformation without post-multiplying it,
-     * use {@link #setLookAt(Vector3d, Vector3d, Vector3d)}.
+     * use {@link #setLookAt(vector3, vector3, vector3)}.
      * 
      * @see #lookAt(double, double, double, double, double, double, double, double, double)
-     * @see #setLookAlong(Vector3d, Vector3d)
+     * @see #setLookAlong(vector3, vector3)
      * 
      * @param eye
      *            the position of the camera
@@ -6997,7 +6997,7 @@ struct Matrix4x3d {
      *            the direction of 'up'
      * @return this
      */
-    ref public Matrix4x3d lookAt(Vector3d eye, Vector3d center, Vector3d up) return {
+    ref public Matrix4x3d lookAt(vector3 eye, vector3 center, vector3 up) return {
         lookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, this);
         return this;
     }
@@ -7014,7 +7014,7 @@ struct Matrix4x3d {
      * In order to set the matrix to a lookat transformation without post-multiplying it,
      * use {@link #setLookAt(double, double, double, double, double, double, double, double, double) setLookAt()}.
      * 
-     * @see #lookAt(Vector3d, Vector3d, Vector3d)
+     * @see #lookAt(vector3, vector3, vector3)
      * @see #setLookAt(double, double, double, double, double, double, double, double, double)
      * 
      * @param eyeX
@@ -7127,7 +7127,7 @@ struct Matrix4x3d {
      * In order to set the matrix to a lookat transformation without post-multiplying it,
      * use {@link #setLookAt(double, double, double, double, double, double, double, double, double) setLookAt()}.
      * 
-     * @see #lookAt(Vector3d, Vector3d, Vector3d)
+     * @see #lookAt(vector3, vector3, vector3)
      * @see #setLookAt(double, double, double, double, double, double, double, double, double)
      * 
      * @param eyeX
@@ -7166,10 +7166,10 @@ struct Matrix4x3d {
      * instead.
      * <p>
      * In order to apply the lookat transformation to a previous existing transformation,
-     * use {@link #lookAtLH(Vector3d, Vector3d, Vector3d) lookAt()}.
+     * use {@link #lookAtLH(vector3, vector3, vector3) lookAt()}.
      * 
      * @see #setLookAtLH(double, double, double, double, double, double, double, double, double)
-     * @see #lookAtLH(Vector3d, Vector3d, Vector3d)
+     * @see #lookAtLH(vector3, vector3, vector3)
      * 
      * @param eye
      *            the position of the camera
@@ -7179,7 +7179,7 @@ struct Matrix4x3d {
      *            the direction of 'up'
      * @return this
      */
-    ref public Matrix4x3d setLookAtLH(Vector3d eye, Vector3d center, Vector3d up) return {
+    ref public Matrix4x3d setLookAtLH(vector3 eye, vector3 center, vector3 up) return {
         return setLookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
     }
 
@@ -7190,7 +7190,7 @@ struct Matrix4x3d {
      * In order to apply the lookat transformation to a previous existing transformation,
      * use {@link #lookAtLH(double, double, double, double, double, double, double, double, double) lookAtLH}.
      * 
-     * @see #setLookAtLH(Vector3d, Vector3d, Vector3d)
+     * @see #setLookAtLH(vector3, vector3, vector3)
      * @see #lookAtLH(double, double, double, double, double, double, double, double, double)
      * 
      * @param eyeX
@@ -7268,7 +7268,7 @@ struct Matrix4x3d {
      * the lookat transformation will be applied first!
      * <p>
      * In order to set the matrix to a lookat transformation without post-multiplying it,
-     * use {@link #setLookAtLH(Vector3d, Vector3d, Vector3d)}.
+     * use {@link #setLookAtLH(vector3, vector3, vector3)}.
      * 
      * @see #lookAtLH(double, double, double, double, double, double, double, double, double)
      * 
@@ -7282,7 +7282,7 @@ struct Matrix4x3d {
      *            will hold the result
      * @return dest
      */
-    public Matrix4x3d lookAtLH(Vector3d eye, Vector3d center, Vector3d up, ref Matrix4x3d dest) {
+    public Matrix4x3d lookAtLH(vector3 eye, vector3 center, vector3 up, ref Matrix4x3d dest) {
         return lookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, dest);
     }
 
@@ -7296,7 +7296,7 @@ struct Matrix4x3d {
      * the lookat transformation will be applied first!
      * <p>
      * In order to set the matrix to a lookat transformation without post-multiplying it,
-     * use {@link #setLookAtLH(Vector3d, Vector3d, Vector3d)}.
+     * use {@link #setLookAtLH(vector3, vector3, vector3)}.
      * 
      * @see #lookAtLH(double, double, double, double, double, double, double, double, double)
      * 
@@ -7308,7 +7308,7 @@ struct Matrix4x3d {
      *            the direction of 'up'
      * @return this
      */
-    ref public Matrix4x3d lookAtLH(Vector3d eye, Vector3d center, Vector3d up) return {
+    ref public Matrix4x3d lookAtLH(vector3 eye, vector3 center, vector3 up) return {
         lookAtLH(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z, this);
         return this;
     }
@@ -7325,7 +7325,7 @@ struct Matrix4x3d {
      * In order to set the matrix to a lookat transformation without post-multiplying it,
      * use {@link #setLookAtLH(double, double, double, double, double, double, double, double, double) setLookAtLH()}.
      * 
-     * @see #lookAtLH(Vector3d, Vector3d, Vector3d)
+     * @see #lookAtLH(vector3, vector3, vector3)
      * @see #setLookAtLH(double, double, double, double, double, double, double, double, double)
      * 
      * @param eyeX
@@ -7438,7 +7438,7 @@ struct Matrix4x3d {
      * In order to set the matrix to a lookat transformation without post-multiplying it,
      * use {@link #setLookAtLH(double, double, double, double, double, double, double, double, double) setLookAtLH()}.
      * 
-     * @see #lookAtLH(Vector3d, Vector3d, Vector3d)
+     * @see #lookAtLH(vector3, vector3, vector3)
      * @see #setLookAtLH(double, double, double, double, double, double, double, double, double)
      * 
      * @param eyeX
@@ -7494,49 +7494,49 @@ struct Matrix4x3d {
         return dest;
     }
 
-    public Vector3d positiveZ(ref Vector3d dir) {
+    public vector3 positiveZ(ref vector3 dir) {
         dir.x = m10 * m21 - m11 * m20;
         dir.y = m20 * m01 - m21 * m00;
         dir.z = m00 * m11 - m01 * m10;
         return dir.normalize(dir);
     }
 
-    public Vector3d normalizedPositiveZ(ref Vector3d dir) {
+    public vector3 normalizedPositiveZ(ref vector3 dir) {
         dir.x = m02;
         dir.y = m12;
         dir.z = m22;
         return dir;
     }
 
-    public Vector3d positiveX(ref Vector3d dir) {
+    public vector3 positiveX(ref vector3 dir) {
         dir.x = m11 * m22 - m12 * m21;
         dir.y = m02 * m21 - m01 * m22;
         dir.z = m01 * m12 - m02 * m11;
         return dir.normalize(dir);
     }
 
-    public Vector3d normalizedPositiveX(ref Vector3d dir) {
+    public vector3 normalizedPositiveX(ref vector3 dir) {
         dir.x = m00;
         dir.y = m10;
         dir.z = m20;
         return dir;
     }
 
-    public Vector3d positiveY(ref Vector3d dir) {
+    public vector3 positiveY(ref vector3 dir) {
         dir.x = m12 * m20 - m10 * m22;
         dir.y = m00 * m22 - m02 * m20;
         dir.z = m02 * m10 - m00 * m12;
         return dir.normalize(dir);
     }
 
-    public Vector3d normalizedPositiveY(ref Vector3d dir) {
+    public vector3 normalizedPositiveY(ref vector3 dir) {
         dir.x = m01;
         dir.y = m11;
         dir.z = m21;
         return dir;
     }
 
-    public Vector3d origin(Vector3d origin) {
+    public vector3 origin(vector3 origin) {
         double a = m00 * m11 - m01 * m10;
         double b = m00 * m12 - m02 * m10;
         double d = m01 * m12 - m02 * m11;
@@ -7758,10 +7758,10 @@ struct Matrix4x3d {
      * @param targetPos
      *          the position of the target (for example the camera) towards which to rotate the object
      * @param up
-     *          the rotation axis (must be {@link Vector3d#normalize() normalized})
+     *          the rotation axis (must be {@link vector3#normalize() normalized})
      * @return this
      */
-    ref public Matrix4x3d billboardCylindrical(Vector3d objPos, Vector3d targetPos, Vector3d up) return {
+    ref public Matrix4x3d billboardCylindrical(vector3 objPos, vector3 targetPos, vector3 up) return {
         double dirX = targetPos.x - objPos.x;
         double dirY = targetPos.y - objPos.y;
         double dirZ = targetPos.z - objPos.z;
@@ -7809,9 +7809,9 @@ struct Matrix4x3d {
      * its position <code>objPos</code>.
      * <p>
      * If preserving an <i>up</i> vector is not necessary when rotating the +Z axis, then a shortest arc rotation can be obtained 
-     * using {@link #billboardSpherical(Vector3d, Vector3d)}.
+     * using {@link #billboardSpherical(vector3, vector3)}.
      * 
-     * @see #billboardSpherical(Vector3d, Vector3d)
+     * @see #billboardSpherical(vector3, vector3)
      * 
      * @param objPos
      *          the position of the object to rotate towards <code>targetPos</code>
@@ -7821,7 +7821,7 @@ struct Matrix4x3d {
      *          the up axis used to orient the object
      * @return this
      */
-    ref public Matrix4x3d billboardSpherical(Vector3d objPos, Vector3d targetPos, Vector3d up) return {
+    ref public Matrix4x3d billboardSpherical(vector3 objPos, vector3 targetPos, vector3 up) return {
         double dirX = targetPos.x - objPos.x;
         double dirY = targetPos.y - objPos.y;
         double dirZ = targetPos.z - objPos.z;
@@ -7868,9 +7868,9 @@ struct Matrix4x3d {
      * its position <code>objPos</code>.
      * <p>
      * In order to specify an <i>up</i> vector which needs to be maintained when rotating the +Z axis of the object,
-     * use {@link #billboardSpherical(Vector3d, Vector3d, Vector3d)}.
+     * use {@link #billboardSpherical(vector3, vector3, vector3)}.
      * 
-     * @see #billboardSpherical(Vector3d, Vector3d, Vector3d)
+     * @see #billboardSpherical(vector3, vector3, vector3)
      * 
      * @param objPos
      *          the position of the object to rotate towards <code>targetPos</code>
@@ -7878,7 +7878,7 @@ struct Matrix4x3d {
      *          the position of the target (for example the camera) towards which to rotate the object
      * @return this
      */
-    ref public Matrix4x3d billboardSpherical(Vector3d objPos, Vector3d targetPos) return {
+    ref public Matrix4x3d billboardSpherical(vector3 objPos, vector3 targetPos) return {
         double toDirX = targetPos.x - objPos.x;
         double toDirY = targetPos.y - objPos.y;
         double toDirZ = targetPos.z - objPos.z;
@@ -8073,7 +8073,7 @@ struct Matrix4x3d {
         return dest;
     }
 
-    public Matrix4x3d arcball(double radius, Vector3d center, double angleX, double angleY, ref Matrix4x3d dest) {
+    public Matrix4x3d arcball(double radius, vector3 center, double angleX, double angleY, ref Matrix4x3d dest) {
         return arcball(radius, center.x, center.y, center.z, angleX, angleY, dest);
     }
 
@@ -8118,12 +8118,12 @@ struct Matrix4x3d {
      *          the rotation angle around the Y axis in radians
      * @return this
      */
-    ref public Matrix4x3d arcball(double radius, Vector3d center, double angleX, double angleY) return {
+    ref public Matrix4x3d arcball(double radius, vector3 center, double angleX, double angleY) return {
         arcball(radius, center.x, center.y, center.z, angleX, angleY, this);
         return this;
     }
 
-    public Matrix4x3d transformAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Vector3d outMin, Vector3d outMax) {
+    public Matrix4x3d transformAab(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, vector3 outMin, vector3 outMax) {
         double xax = m00 * minX, xay = m01 * minX, xaz = m02 * minX;
         double xbx = m00 * maxX, xby = m01 * maxX, xbz = m02 * maxX;
         double yax = m10 * minY, yay = m11 * minY, yaz = m12 * minY;
@@ -8204,7 +8204,7 @@ struct Matrix4x3d {
         return this;
     }
 
-    public Matrix4x3d transformAab(Vector3d min, Vector3d max, Vector3d outMin, Vector3d outMax) {
+    public Matrix4x3d transformAab(vector3 min, vector3 max, vector3 outMin, vector3 outMax) {
         return transformAab(min.x, min.y, min.z, max.x, max.y, max.z, outMin, outMax);
     }
 
@@ -8254,12 +8254,12 @@ struct Matrix4x3d {
      * the lookat transformation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying it,
-     * use {@link #rotationTowards(Vector3d, Vector3d) rotationTowards()}.
+     * use {@link #rotationTowards(vector3, vector3) rotationTowards()}.
      * <p>
-     * This method is equivalent to calling: <code>mul(new Matrix4x3d().lookAt(new Vector3d(), new Vector3d(dir).negate(), up).invert(), dest)</code>
+     * This method is equivalent to calling: <code>mul(new Matrix4x3d().lookAt(new vector3(), new vector3(dir).negate(), up).invert(), dest)</code>
      * 
      * @see #rotateTowards(double, double, double, double, double, double, Matrix4x3d)
-     * @see #rotationTowards(Vector3d, Vector3d)
+     * @see #rotationTowards(vector3, vector3)
      * 
      * @param dir
      *              the direction to rotate towards
@@ -8269,7 +8269,7 @@ struct Matrix4x3d {
      *              will hold the result
      * @return dest
      */
-    public Matrix4x3d rotateTowards(ref Vector3d dir, Vector3d up, ref Matrix4x3d dest) {
+    public Matrix4x3d rotateTowards(ref vector3 dir, vector3 up, ref Matrix4x3d dest) {
         return rotateTowards(dir.x, dir.y, dir.z, up.x, up.y, up.z, dest);
     }
 
@@ -8283,12 +8283,12 @@ struct Matrix4x3d {
      * the lookat transformation will be applied first!
      * <p>
      * In order to set the matrix to a rotation transformation without post-multiplying it,
-     * use {@link #rotationTowards(Vector3d, Vector3d) rotationTowards()}.
+     * use {@link #rotationTowards(vector3, vector3) rotationTowards()}.
      * <p>
-     * This method is equivalent to calling: <code>mul(new Matrix4x3d().lookAt(new Vector3d(), new Vector3d(dir).negate(), up).invert())</code>
+     * This method is equivalent to calling: <code>mul(new Matrix4x3d().lookAt(new vector3(), new vector3(dir).negate(), up).invert())</code>
      * 
      * @see #rotateTowards(double, double, double, double, double, double)
-     * @see #rotationTowards(Vector3d, Vector3d)
+     * @see #rotationTowards(vector3, vector3)
      * 
      * @param dir
      *              the direction to orient towards
@@ -8296,7 +8296,7 @@ struct Matrix4x3d {
      *              the up vector
      * @return this
      */
-    ref public Matrix4x3d rotateTowards(ref Vector3d dir, Vector3d up) return {
+    ref public Matrix4x3d rotateTowards(ref vector3 dir, vector3 up) return {
         rotateTowards(dir.x, dir.y, dir.z, up.x, up.y, up.z, this);
         return this;
     }
@@ -8315,7 +8315,7 @@ struct Matrix4x3d {
      * <p>
      * This method is equivalent to calling: <code>mul(new Matrix4x3d().lookAt(0, 0, 0, -dirX, -dirY, -dirZ, upX, upY, upZ).invert())</code>
      * 
-     * @see #rotateTowards(Vector3d, Vector3d)
+     * @see #rotateTowards(vector3, vector3)
      * @see #rotationTowards(double, double, double, double, double, double)
      * 
      * @param dirX
@@ -8352,7 +8352,7 @@ struct Matrix4x3d {
      * <p>
      * This method is equivalent to calling: <code>mul(new Matrix4x3d().lookAt(0, 0, 0, -dirX, -dirY, -dirZ, upX, upY, upZ).invert(), dest)</code>
      * 
-     * @see #rotateTowards(Vector3d, Vector3d)
+     * @see #rotateTowards(vector3, vector3)
      * @see #rotationTowards(double, double, double, double, double, double)
      * 
      * @param dirX
@@ -8429,9 +8429,9 @@ struct Matrix4x3d {
      * In order to apply the rotation transformation to a previous existing transformation,
      * use {@link #rotateTowards(double, double, double, double, double, double) rotateTowards}.
      * <p>
-     * This method is equivalent to calling: <code>setLookAt(new Vector3d(), new Vector3d(dir).negate(), up).invert()</code>
+     * This method is equivalent to calling: <code>setLookAt(new vector3(), new vector3(dir).negate(), up).invert()</code>
      * 
-     * @see #rotationTowards(Vector3d, Vector3d)
+     * @see #rotationTowards(vector3, vector3)
      * @see #rotateTowards(double, double, double, double, double, double)
      * 
      * @param dir
@@ -8440,7 +8440,7 @@ struct Matrix4x3d {
      *              the up vector
      * @return this
      */
-    ref public Matrix4x3d rotationTowards(ref Vector3d dir, Vector3d up) return {
+    ref public Matrix4x3d rotationTowards(ref vector3 dir, vector3 up) return {
         return rotationTowards(dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
@@ -8453,7 +8453,7 @@ struct Matrix4x3d {
      * <p>
      * This method is equivalent to calling: <code>setLookAt(0, 0, 0, -dirX, -dirY, -dirZ, upX, upY, upZ).invert()</code>
      * 
-     * @see #rotateTowards(Vector3d, Vector3d)
+     * @see #rotateTowards(vector3, vector3)
      * @see #rotationTowards(double, double, double, double, double, double)
      * 
      * @param dirX
@@ -8513,8 +8513,8 @@ struct Matrix4x3d {
      * <p>
      * This method is equivalent to calling: <code>translation(pos).rotateTowards(dir, up)</code>
      * 
-     * @see #translation(Vector3d)
-     * @see #rotateTowards(Vector3d, Vector3d)
+     * @see #translation(vector3)
+     * @see #rotateTowards(vector3, vector3)
      *
      * @param pos
      *              the position to translate to
@@ -8524,7 +8524,7 @@ struct Matrix4x3d {
      *              the up vector
      * @return this
      */
-    ref public Matrix4x3d translationRotateTowards(Vector3d pos, ref Vector3d dir, Vector3d up) return {
+    ref public Matrix4x3d translationRotateTowards(vector3 pos, ref vector3 dir, vector3 up) return {
         return translationRotateTowards(pos.x, pos.y, pos.z, dir.x, dir.y, dir.z, up.x, up.y, up.z);
     }
 
@@ -8594,14 +8594,14 @@ struct Matrix4x3d {
         return this;
     }
 
-    public Vector3d getEulerAnglesZYX(ref Vector3d dest) {
+    public vector3 getEulerAnglesZYX(ref vector3 dest) {
         dest.x = Math.atan2(m12, m22);
         dest.y = Math.atan2(-m02, Math.sqrt(1.0 - m02 * m02));
         dest.z = Math.atan2(m01, m00);
         return dest;
     }
 
-    public Vector3d getEulerAnglesXYZ(ref Vector3d dest) {
+    public vector3 getEulerAnglesXYZ(ref vector3 dest) {
         dest.x = Math.atan2(-m21, m22);
         dest.y = Math.atan2(m20, Math.sqrt(1.0 - m20 * m20));
         dest.z = Math.atan2(-m10, m00);

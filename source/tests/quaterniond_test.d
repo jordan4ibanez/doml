@@ -121,7 +121,7 @@ unittest {
 
     // testFromAxisAngle
     {
-        Vector3d axis = Vector3d(1.0, 0.0, 0.0);
+        vector3 axis = vector3(1.0, 0.0, 0.0);
         double angleDeg = 45.0;
         double angleRad = Math.toRadians(angleDeg);
         Quaterniond fromRad1 = Quaterniond().fromAxisAngleRad(axis, angleRad);
@@ -144,12 +144,12 @@ unittest {
             double y = (Math.random() * 2.0 - 1.0) * Math.PI;
             double z = (Math.random() * 2.0 - 1.0) * Math.PI;
             Quaterniond p = Quaterniond().rotateXYZ(x, y, z);
-            Vector3d a = p.getEulerAnglesXYZ(Vector3d());
+            vector3 a = p.getEulerAnglesXYZ(vector3());
             Quaterniond q = Quaterniond().rotateX(a.x).rotateY(a.y).rotateZ(a.z);
-            Vector3d v = Vector3d(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1);
-            Vector3d testunit = Vector3d();
-            Vector3d t1 = p.transform(v, testunit);
-            Vector3d t2 = q.transform(v, testunit);
+            vector3 v = vector3(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1);
+            vector3 testunit = vector3();
+            vector3 t1 = p.transform(v, testunit);
+            vector3 t2 = q.transform(v, testunit);
             if (!t1.equals(t2, 1E-10f))
                 failure++;
         }
@@ -172,12 +172,12 @@ unittest {
             double y = (Math.random() * 2.0 - 1.0) * Math.PI;
             double z = (Math.random() * 2.0 - 1.0) * Math.PI;
             Quaterniond p = Quaterniond().rotateZ(z).rotateX(x).rotateY(y);
-            Vector3d a = p.getEulerAnglesZXY(Vector3d());
+            vector3 a = p.getEulerAnglesZXY(vector3());
             Quaterniond q = Quaterniond().rotateZ(a.z).rotateX(a.x).rotateY(a.y);
-            Vector3d v = Vector3d(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1);
-            Vector3d testunit = Vector3d();
-            Vector3d t1 = p.transform(v, testunit);
-            Vector3d t2 = q.transform(v, testunit);
+            vector3 v = vector3(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1);
+            vector3 testunit = vector3();
+            vector3 t1 = p.transform(v, testunit);
+            vector3 t2 = q.transform(v, testunit);
             if (!t1.equals(t2, 1E-10f))
                 failure++;
         }
@@ -200,13 +200,13 @@ unittest {
             double y = (Math.random() * 2.0 - 1.0) * Math.PI;
             double z = (Math.random() * 2.0 - 1.0) * Math.PI;
 
-            Vector3d testunit = Vector3d();
+            vector3 testunit = vector3();
             Quaterniond p = Quaterniond().rotateY(y).rotateX(x).rotateZ(z);
-            Vector3d a = p.getEulerAnglesYXZ(Vector3d());
+            vector3 a = p.getEulerAnglesYXZ(vector3());
             Quaterniond q = Quaterniond().rotateY(a.y).rotateX(a.x).rotateZ(a.z);
-            Vector3d v = Vector3d(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1);
-            Vector3d t1 = p.transform(v, testunit);
-            Vector3d t2 = q.transform(v, testunit);
+            vector3 v = vector3(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1);
+            vector3 t1 = p.transform(v, testunit);
+            vector3 t2 = q.transform(v, testunit);
             if (!t1.equals(t2, 1E-10f))
                 failure++;
         }

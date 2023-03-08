@@ -152,11 +152,11 @@ struct Vector3i {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector3d} to round and copy the values from
+     *          the {@link vector3} to round and copy the values from
      * @param mode
      *          the {@link RoundingMode} to use
      */
-    this(Vector3d v, int mode) {
+    this(vector3 v, int mode) {
         this.x = Math.roundUsing(v.x, mode);
         this.y = Math.roundUsing(v.y, mode);
         this.z = Math.roundUsing(v.z, mode);
@@ -199,7 +199,7 @@ struct Vector3i {
      *          the vector to copy from
      * @return this
      */
-    ref public Vector3i set(Vector3d v) return {
+    ref public Vector3i set(vector3 v) return {
         this.x = cast(int) v.x;
         this.y = cast(int) v.y;
         this.z = cast(int) v.z;
@@ -218,7 +218,7 @@ struct Vector3i {
      *          the {@link RoundingMode} to use
      * @return this
      */
-    ref public Vector3i set(Vector3d v, int mode) return {
+    ref public Vector3i set(vector3 v, int mode) return {
         this.x = Math.roundUsing(v.x, mode);
         this.y = Math.roundUsing(v.y, mode);
         this.z = Math.roundUsing(v.z, mode);

@@ -35,8 +35,8 @@ import vector_3d;
  * <p>
  * This can be used to compute the eye-rays in simple software-based raycasting/raytracing.
  * <p>
- * To obtain the origin of the rays call {@link #origin(Vector3d)}.
- * Then to compute the directions of subsequent rays use {@link #dir(double, double, Vector3d)}.
+ * To obtain the origin of the rays call {@link #origin(vector3)}.
+ * Then to compute the directions of subsequent rays use {@link #dir(double, double, vector3)}.
  * 
  * @author Kai Burjack
  */
@@ -110,7 +110,7 @@ struct FrustumRayBuilder {
      *          will hold the perspective origin
      * @return the <code>origin</code> vector
      */
-    public Vector3d origin(Vector3d origin) {
+    public vector3 origin(vector3 origin) {
         origin.x = cx;
         origin.y = cy;
         origin.z = cz;
@@ -132,7 +132,7 @@ struct FrustumRayBuilder {
      *          will hold the normalized ray direction
      * @return the <code>dir</code> vector
      */
-    public Vector3d dir(double x, double y, Vector3d dir) {
+    public vector3 dir(double x, double y, vector3 dir) {
         double y1x = nxnyX + (nxpyX - nxnyX) * y;
         double y1y = nxnyY + (nxpyY - nxnyY) * y;
         double y1z = nxnyZ + (nxpyZ - nxnyZ) * y;

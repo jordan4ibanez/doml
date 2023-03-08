@@ -95,11 +95,11 @@ struct Vector4d {
      * given <code>v</code> and the given <code>w</code>.
      * 
      * @param v
-     *          the {@link Vector3d}
+     *          the {@link vector3}
      * @param w
      *          the w component
      */
-    this(Vector3d v, double w) {
+    this(vector3 v, double w) {
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;
@@ -240,12 +240,12 @@ struct Vector4d {
      * <code>v</code> and the w component to <code>w</code>.
      * 
      * @param v
-     *          the {@link Vector3d} to copy
+     *          the {@link vector3} to copy
      * @param w
      *          the w component
      * @return this
      */
-    ref public Vector4d set(Vector3d v, double w) return {
+    ref public Vector4d set(vector3 v, double w) return {
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;
@@ -810,7 +810,7 @@ struct Vector4d {
         return this;
     }
 
-    public Vector3d mulProject(Matrix4d mat, ref Vector3d dest) {
+    public vector3 mulProject(Matrix4d mat, ref vector3 dest) {
         double invW = 1.0 / Math.fma(mat.m03, x, Math.fma(mat.m13, y, Math.fma(mat.m23, z, mat.m33 * w)));
         double rx = Math.fma(mat.m00, x, Math.fma(mat.m10, y, Math.fma(mat.m20, z, mat.m30 * w))) * invW;
         double ry = Math.fma(mat.m01, x, Math.fma(mat.m11, y, Math.fma(mat.m21, z, mat.m31 * w))) * invW;

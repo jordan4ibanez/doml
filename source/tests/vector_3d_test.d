@@ -31,15 +31,15 @@ import Math = math;
  */
 
 /**
- * Test class for {@link Vector3d}.
+ * Test class for {@link vector3}.
  * @author Sebastian Fellner
  */
 unittest {
 
-    writeln("\nBEGIN GENERAL VECTOR3D TEST\n");
+    writeln("\nBEGIN GENERAL vector3 TEST\n");
 
-    Vector3d testVec1 = Vector3d(2, -9.37, 5.892);
-    Vector3d testVec2 = Vector3d();
+    vector3 testVec1 = vector3(2, -9.37, 5.892);
+    vector3 testVec2 = vector3();
     
     // angle(v, v) should give 0
     double angle = testVec1.angle(testVec1);

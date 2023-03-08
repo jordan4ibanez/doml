@@ -55,7 +55,7 @@ import vector_3d;
     * @param dest2
     *            will hold the second perpendicular vector
     */
-public static void perpendicular(double x, double y, double z, ref Vector3d dest1, ref Vector3d dest2) {
+public static void perpendicular(double x, double y, double z, ref vector3 dest1, ref vector3 dest2) {
     double magX = z * z + y * y;
     double magY = z * z + x * x;
     double magZ = y * y + x * x;
@@ -93,13 +93,13 @@ public static void perpendicular(double x, double y, double z, ref Vector3d dest
     * <code>dest2</code> form an orthonormal basis.
     * 
     * @param v
-    *            the {@link Vector3d#normalize() normalized} input vector
+    *            the {@link vector3#normalize() normalized} input vector
     * @param dest1
     *            will hold the first perpendicular vector
     * @param dest2
     *            will hold the second perpendicular vector
     */
-public static void perpendicular(ref Vector3d v, ref Vector3d dest1, ref Vector3d dest2) {
+public static void perpendicular(ref vector3 v, ref vector3 dest1, ref vector3 dest2) {
     perpendicular(v.x, v.y, v.z, dest1, dest2);
 }
 
@@ -115,7 +115,7 @@ public static void perpendicular(ref Vector3d v, ref Vector3d dest1, ref Vector3
     * @param dest
     *            will hold the result
     */
-public static void normal(Vector3d v0, Vector3d v1, Vector3d v2, ref Vector3d dest) {
+public static void normal(vector3 v0, vector3 v1, vector3 v2, ref vector3 dest) {
     normal(v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, dest);
 }
 
@@ -144,7 +144,7 @@ public static void normal(Vector3d v0, Vector3d v1, Vector3d v2, ref Vector3d de
     * @param dest
     *            will hold the result
     */
-public static void normal(double v0X, double v0Y, double v0Z, double v1X, double v1Y, double v1Z, double v2X, double v2Y, double v2Z, ref Vector3d dest) {
+public static void normal(double v0X, double v0Y, double v0Z, double v1X, double v1Y, double v1Z, double v2X, double v2Y, double v2Z, ref vector3 dest) {
     dest.x = ((v1Y - v0Y) * (v2Z - v0Z)) - ((v1Z - v0Z) * (v2Y - v0Y));
     dest.y = ((v1Z - v0Z) * (v2X - v0X)) - ((v1X - v0X) * (v2Z - v0Z));
     dest.z = ((v1X - v0X) * (v2Y - v0Y)) - ((v1Y - v0Y) * (v2X - v0X));
@@ -169,7 +169,7 @@ public static void normal(double v0X, double v0Y, double v0Z, double v1X, double
     * @param dest
     *            the tangent will be stored here
     */
-public static void tangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, ref Vector2d uv2, ref Vector3d v3, ref Vector2d uv3, ref Vector3d dest) {
+public static void tangent(ref vector3 v1, ref Vector2d uv1, ref vector3 v2, ref Vector2d uv2, ref vector3 v3, ref Vector2d uv3, ref vector3 dest) {
     double DeltaV1 = uv2.y - uv1.y;
     double DeltaV2 = uv3.y - uv1.y;
 
@@ -199,7 +199,7 @@ public static void tangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, r
     * @param dest
     *            the binormal will be stored here
     */
-public static void bitangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, ref Vector2d uv2, ref Vector3d v3, ref Vector2d uv3, ref Vector3d dest) {
+public static void bitangent(ref vector3 v1, ref Vector2d uv1, ref vector3 v2, ref Vector2d uv2, ref vector3 v3, ref Vector2d uv3, ref vector3 dest) {
     double DeltaU1 = uv2.x - uv1.x;
     double DeltaU2 = uv3.x - uv1.x;
 
@@ -231,7 +231,7 @@ public static void bitangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2,
     * @param destBitangent
     *            the bitangent will be stored here
     */
-public static void tangentBitangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, ref Vector2d uv2, ref Vector3d v3, ref Vector2d uv3, ref Vector3d destTangent, ref Vector3d destBitangent) {
+public static void tangentBitangent(ref vector3 v1, ref Vector2d uv1, ref vector3 v2, ref Vector2d uv2, ref vector3 v3, ref Vector2d uv3, ref vector3 destTangent, ref vector3 destBitangent) {
     double DeltaV1 = uv2.y - uv1.y;
     double DeltaV2 = uv3.y - uv1.y;
     double DeltaU1 = uv2.x - uv1.x;

@@ -52,8 +52,8 @@ unittest {
         /* Build some arbitrary viewport. */
         int[] viewport = [0, 0, 800, 800];
 
-        Vector3d expected = Vector3d(1.0f, 2.0f, -3.0f);
-        Vector3d actual = Vector3d();
+        vector3 expected = vector3(1.0f, 2.0f, -3.0f);
+        vector3 actual = vector3();
 
         /* Build a perspective projection and then project and unproject. */
         Matrix4d m = Matrix4d()
@@ -132,44 +132,44 @@ unittest {
 
     // testFrustumRay
     {
-        Vector3d dir = Vector3d();
+        vector3 dir = vector3();
         Matrix4d m = Matrix4d()
                 .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
                 .rotateY(cast(double) Math.toRadians(90));
-        Vector3d expectedDir;
+        vector3 expectedDir;
         m.frustumRayDir(0, 0, dir);
-        expectedDir = Vector3d(1, -1, -1).normalize();
-        assertVector3dEquals(expectedDir, dir, 1E-5f);
+        expectedDir = vector3(1, -1, -1).normalize();
+        assertvector3Equals(expectedDir, dir, 1E-5f);
         m.frustumRayDir(1, 0, dir);
-        expectedDir = Vector3d(1, -1, 1).normalize();
-        assertVector3dEquals(expectedDir, dir, 1E-5f);
+        expectedDir = vector3(1, -1, 1).normalize();
+        assertvector3Equals(expectedDir, dir, 1E-5f);
         m.frustumRayDir(0, 1, dir);
-        expectedDir = Vector3d(1, 1, -1).normalize();
-        assertVector3dEquals(expectedDir, dir, 1E-5f);
+        expectedDir = vector3(1, 1, -1).normalize();
+        assertvector3Equals(expectedDir, dir, 1E-5f);
         m.frustumRayDir(1, 1, dir);
-        expectedDir = Vector3d(1, 1, 1).normalize();
-        assertVector3dEquals(expectedDir, dir, 1E-5f);
+        expectedDir = vector3(1, 1, 1).normalize();
+        assertvector3Equals(expectedDir, dir, 1E-5f);
     }
 
     // testFrustumRay2
     {
-        Vector3d dir = Vector3d();
+        vector3 dir = vector3();
         Matrix4d m = Matrix4d()
                 .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
                 .rotateZ(cast(double) Math.toRadians(45));
-        Vector3d expectedDir;
+        vector3 expectedDir;
         m.frustumRayDir(0, 0, dir);
-        expectedDir = Vector3d(-cast(double)Math.sqrt(2), 0, -1).normalize();
-        assertVector3dEquals(expectedDir, dir, 1E-5f);
+        expectedDir = vector3(-cast(double)Math.sqrt(2), 0, -1).normalize();
+        assertvector3Equals(expectedDir, dir, 1E-5f);
         m.frustumRayDir(1, 0, dir);
-        expectedDir = Vector3d(0, -cast(double)Math.sqrt(2), -1).normalize();
-        assertVector3dEquals(expectedDir, dir, 1E-5f);
+        expectedDir = vector3(0, -cast(double)Math.sqrt(2), -1).normalize();
+        assertvector3Equals(expectedDir, dir, 1E-5f);
         m.frustumRayDir(0, 1, dir);
-        expectedDir = Vector3d(0, cast(double)Math.sqrt(2), -1).normalize();
-        assertVector3dEquals(expectedDir, dir, 1E-5f);
+        expectedDir = vector3(0, cast(double)Math.sqrt(2), -1).normalize();
+        assertvector3Equals(expectedDir, dir, 1E-5f);
         m.frustumRayDir(1, 1, dir);
-        expectedDir = Vector3d(cast(double)Math.sqrt(2), 0, -1).normalize();
-        assertVector3dEquals(expectedDir, dir, 1E-5f);
+        expectedDir = vector3(cast(double)Math.sqrt(2), 0, -1).normalize();
+        assertvector3Equals(expectedDir, dir, 1E-5f);
     }
 
     // testMatrix4dTranspose
@@ -209,120 +209,120 @@ unittest {
 
     // testPositiveXRotateY
     {
-        Vector3d dir = Vector3d();
+        vector3 dir = vector3();
         Matrix4d m = Matrix4d();
         m.rotateY(Math.toRadians(90));
         m.positiveX(dir);
-        Vector3d testUnit = Vector3d(0, 0, 1);
-        assertVector3dEquals(testUnit, dir, 1E-7f);
+        vector3 testUnit = vector3(0, 0, 1);
+        assertvector3Equals(testUnit, dir, 1E-7f);
     }
 
     // testPositiveYRotateX
     {
-        Vector3d dir = Vector3d();
+        vector3 dir = vector3();
         Matrix4d m = Matrix4d()
                 .rotateX(cast(double) Math.toRadians(90));
         m.positiveY(dir);
-        assertVector3dEquals(Vector3d(0, 0, -1), dir, 1E-7f);
+        assertvector3Equals(vector3(0, 0, -1), dir, 1E-7f);
     }
 
     // testPositiveZRotateX
     {
-        Vector3d dir = Vector3d();
+        vector3 dir = vector3();
         Matrix4d m = Matrix4d()
                 .rotateX(cast(double) Math.toRadians(90));
         m.positiveZ(dir);
-        assertVector3dEquals(Vector3d(0, 1, 0), dir, 1E-7f);
+        assertvector3Equals(vector3(0, 1, 0), dir, 1E-7f);
     }
 
     // testPositiveXRotateXY
     {
-        Vector3d dir = Vector3d();
+        vector3 dir = vector3();
         Matrix4d m = Matrix4d()
                 .rotateY(cast(double) Math.toRadians(90)).rotateX(cast(double) Math.toRadians(45));
         m.positiveX(dir);
-        assertVector3dEquals(Vector3d(0, 1, 1).normalize(), dir, 1E-7f);
+        assertvector3Equals(vector3(0, 1, 1).normalize(), dir, 1E-7f);
     }
 
     // testPositiveXPerspectiveRotateY
     {
-        Vector3d dir = Vector3d();
+        vector3 dir = vector3();
         Matrix4d m = Matrix4d()
                 .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
                 .rotateY(cast(double) Math.toRadians(90));
         m.positiveX(dir);
-        assertVector3dEquals(Vector3d(0, 0, -1), dir, 1E-7f);
+        assertvector3Equals(vector3(0, 0, -1), dir, 1E-7f);
     }
 
     // testPositiveXPerspectiveRotateXY
     {
-        Vector3d dir = Vector3d();
+        vector3 dir = vector3();
         Matrix4d m = Matrix4d()
                 .perspective(cast(double) Math.toRadians(90), 1.0f, 0.1f, 100.0f)
                 .rotateY(cast(double) Math.toRadians(90)).rotateX(cast(double) Math.toRadians(45));
         m.positiveX(dir);
-        assertVector3dEquals(Vector3d(0, -1, -1).normalize(), dir, 1E-7f);
+        assertvector3Equals(vector3(0, -1, -1).normalize(), dir, 1E-7f);
     }
 
     // testPositiveXYZLookAt
     {
-        Vector3d dir = Vector3d();
+        vector3 dir = vector3();
         Matrix4d m = Matrix4d()
                 .lookAt(0, 0, 0, -1, 0, 0, 0, 1, 0);
         m.positiveX(dir);
-        assertVector3dEquals(Vector3d(0, 0, -1).normalize(), dir, 1E-7f);
+        assertvector3Equals(vector3(0, 0, -1).normalize(), dir, 1E-7f);
         m.positiveY(dir);
-        assertVector3dEquals(Vector3d(0, 1, 0).normalize(), dir, 1E-7f);
+        assertvector3Equals(vector3(0, 1, 0).normalize(), dir, 1E-7f);
         m.positiveZ(dir);
-        assertVector3dEquals(Vector3d(1, 0, 0).normalize(), dir, 1E-7f);
+        assertvector3Equals(vector3(1, 0, 0).normalize(), dir, 1E-7f);
     }
 
     // testPositiveXYZSameAsInvert
     {
-        Vector3d dir = Vector3d();
-        Vector3d dir2 = Vector3d();
+        vector3 dir = vector3();
+        vector3 dir2 = vector3();
         Matrix4d m = Matrix4d().rotateXYZ(0.12f, 1.25f, -2.56f);
         Matrix4d inv = Matrix4d(m).invert();
         m.positiveX(dir);
         dir2.set(1, 0, 0);
         inv.transformDirection(dir2);
-        assertVector3dEquals(dir2, dir, 1E-6f);
+        assertvector3Equals(dir2, dir, 1E-6f);
         m.positiveY(dir);
         dir2.set(0, 1, 0);
         inv.transformDirection(dir2);
-        assertVector3dEquals(dir2, dir, 1E-6f);
+        assertvector3Equals(dir2, dir, 1E-6f);
         m.positiveZ(dir);
         dir2.set(0, 0, 1);
         inv.transformDirection(dir2);
-        assertVector3dEquals(dir2, dir, 1E-6f);
+        assertvector3Equals(dir2, dir, 1E-6f);
     }
 
     // testFrustumCornerIdentity
     {
         Matrix4d m = Matrix4d();
-        Vector3d corner = Vector3d();
+        vector3 corner = vector3();
         m.frustumCorner(Matrix4d.CORNER_NXNYNZ, corner); // left, bottom, near
-        assertVector3dEquals(Vector3d(-1, -1, -1), corner, 1E-6f);
+        assertvector3Equals(vector3(-1, -1, -1), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_PXNYNZ, corner); // right, bottom, near
-        assertVector3dEquals(Vector3d(1, -1, -1), corner, 1E-6f);
+        assertvector3Equals(vector3(1, -1, -1), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_PXNYPZ, corner); // right, bottom, far
-        assertVector3dEquals(Vector3d(1, -1, 1), corner, 1E-6f);
+        assertvector3Equals(vector3(1, -1, 1), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_NXPYPZ, corner); // left, top, far
-        assertVector3dEquals(Vector3d(-1, 1, 1), corner, 1E-6f);
+        assertvector3Equals(vector3(-1, 1, 1), corner, 1E-6f);
     }
 
     // testFrustumCornerOrthoWide
     {
         Matrix4d m = Matrix4d().ortho2D(-2, 2, -1, 1);
-        Vector3d corner = Vector3d();
+        vector3 corner = vector3();
         m.frustumCorner(Matrix4d.CORNER_NXNYNZ, corner); // left, bottom, near
-        assertVector3dEquals(Vector3d(-2, -1, 1), corner, 1E-6f);
+        assertvector3Equals(vector3(-2, -1, 1), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_PXNYNZ, corner); // right, bottom, near
-        assertVector3dEquals(Vector3d(2, -1, 1), corner, 1E-6f);
+        assertvector3Equals(vector3(2, -1, 1), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_PXNYPZ, corner); // right, bottom, far
-        assertVector3dEquals(Vector3d(2, -1, -1), corner, 1E-6f);
+        assertvector3Equals(vector3(2, -1, -1), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_NXPYPZ, corner); // left, top, far
-        assertVector3dEquals(Vector3d(-2, 1, -1), corner, 1E-6f);
+        assertvector3Equals(vector3(-2, 1, -1), corner, 1E-6f);
     }
 
     // testFrustumCorner
@@ -332,13 +332,13 @@ unittest {
         .lookAt(0, 0, 10,
                 0, 0,  0, 
                 0, 1,  0);
-        Vector3d corner = Vector3d();
+        vector3 corner = vector3();
         m.frustumCorner(Matrix4d.CORNER_NXNYNZ, corner); // left, bottom, near
-        assertVector3dEquals(Vector3d(-0.1f, -0.1f, 10 - 0.1f), corner, 1E-6f);
+        assertvector3Equals(vector3(-0.1f, -0.1f, 10 - 0.1f), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_PXNYNZ, corner); // right, bottom, near
-        assertVector3dEquals(Vector3d(0.1f, -0.1f, 10 - 0.1f), corner, 1E-6f);
+        assertvector3Equals(vector3(0.1f, -0.1f, 10 - 0.1f), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_PXNYPZ, corner); // right, bottom, far
-        assertVector3dEquals(Vector3d(100.0f, -100, 10 - 100f), corner, 1E-3f);
+        assertvector3Equals(vector3(100.0f, -100, 10 - 100f), corner, 1E-3f);
     }
 
     // testFrustumCornerWide
@@ -348,13 +348,13 @@ unittest {
         .lookAt(0, 0, 10,
                 0, 0,  0, 
                 0, 1,  0);
-        Vector3d corner = Vector3d();
+        vector3 corner = vector3();
         m.frustumCorner(Matrix4d.CORNER_NXNYNZ, corner); // left, bottom, near
-        assertVector3dEquals(Vector3d(-0.2f, -0.1f, 10 - 0.1f), corner, 1E-5f);
+        assertvector3Equals(vector3(-0.2f, -0.1f, 10 - 0.1f), corner, 1E-5f);
         m.frustumCorner(Matrix4d.CORNER_PXNYNZ, corner); // right, bottom, near
-        assertVector3dEquals(Vector3d(0.2f, -0.1f, 10 - 0.1f), corner, 1E-5f);
+        assertvector3Equals(vector3(0.2f, -0.1f, 10 - 0.1f), corner, 1E-5f);
         m.frustumCorner(Matrix4d.CORNER_PXNYPZ, corner); // right, bottom, far
-        assertVector3dEquals(Vector3d(200.0f, -100, 10 - 100f), corner, 1E-3f);
+        assertvector3Equals(vector3(200.0f, -100, 10 - 100f), corner, 1E-3f);
     }
 
     // testFrustumCornerRotate
@@ -364,13 +364,13 @@ unittest {
         .lookAt(10, 0, 0, 
                  0, 0, 0, 
                  0, 1, 0);
-        Vector3d corner = Vector3d();
+        vector3 corner = vector3();
         m.frustumCorner(Matrix4d.CORNER_NXNYNZ, corner); // left, bottom, near
-        assertVector3dEquals(Vector3d(10 - 0.1f, -0.1f, 0.1f), corner, 1E-6f);
+        assertvector3Equals(vector3(10 - 0.1f, -0.1f, 0.1f), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_PXNYNZ, corner); // right, bottom, near
-        assertVector3dEquals(Vector3d(10 - 0.1f, -0.1f, -0.1f), corner, 1E-6f);
+        assertvector3Equals(vector3(10 - 0.1f, -0.1f, -0.1f), corner, 1E-6f);
         m.frustumCorner(Matrix4d.CORNER_PXNYPZ, corner); // right, bottom, far
-        assertVector3dEquals(Vector3d(-100.0f + 10, -100, -100f), corner, 1E-3f);
+        assertvector3Equals(vector3(-100.0f + 10, -100, -100f), corner, 1E-3f);
     }
 
     // testPerspectiveOrigin
@@ -381,9 +381,9 @@ unittest {
         .lookAt(6, 0, 1, 
                 0, 0, 0, 
                 0, 1, 0);
-        Vector3d origin = Vector3d();
+        vector3 origin = vector3();
         m.perspectiveOrigin(origin);
-        assertVector3dEquals(Vector3d(6, 0, 1), origin, 1E-5f);
+        assertvector3Equals(vector3(6, 0, 1), origin, 1E-5f);
 
         // test symmetric frustum with some modelview translation and rotation
         m = Matrix4d()
@@ -392,7 +392,7 @@ unittest {
                 0, 1, 0, 
                 0, 1, 0);
         m.perspectiveOrigin(origin);
-        assertVector3dEquals(Vector3d(-5, 2, 1), origin, 1E-5f);
+        assertvector3Equals(vector3(-5, 2, 1), origin, 1E-5f);
 
         // test asymmetric frustum
         m = Matrix4d()
@@ -401,7 +401,7 @@ unittest {
                 0, 1, 0, 
                 0, 1, 0);
         m.perspectiveOrigin(origin);
-        assertVector3dEquals(Vector3d(-5, 2, 1), origin, 1E-5f);
+        assertvector3Equals(vector3(-5, 2, 1), origin, 1E-5f);
     }
 
     // testPerspectiveFov
@@ -435,12 +435,12 @@ unittest {
         Matrix4d invm = Matrix4d();
         Matrix4d m = Matrix4d();
         m.rotateX(1.2f).rotateY(0.2f).rotateZ(0.1f).translate(1, 2, 3).invertAffine(invm);
-        Vector3d orig = Vector3d(4, -6, 8);
-        Vector3d v = Vector3d();
-        Vector3d w = Vector3d();
+        vector3 orig = vector3(4, -6, 8);
+        vector3 v = vector3();
+        vector3 w = vector3();
         m.transformPosition(orig, v);
         invm.transformPosition(v, w);
-        assertVector3dEquals(orig, w, 1E-6f);
+        assertvector3Equals(orig, w, 1E-6f);
         invm.invertAffine();
         assertMatrix4dEquals(m, invm, 1E-6f);
     }
@@ -532,7 +532,7 @@ unittest {
         Matrix4d crop = Matrix4d();
         Matrix4d fin = Matrix4d();
         Matrix4d().ortho2D(-1, 1, -1, 1).invertAffine().orthoCrop(lightView, crop).mulOrthoAffine(lightView, fin);
-        Vector3d p = Vector3d();
+        vector3 p = vector3();
         fin.transformProject(p.set(1, -1, -1));
         assertEquals(+1.0f, p.x, 1E-6f);
         assertEquals(-1.0f, p.y, 1E-6f);
@@ -552,7 +552,7 @@ unittest {
         Matrix4d crop = Matrix4d();
         Matrix4d fin = Matrix4d();
         Matrix4d().perspective(cast(double) Math.toRadians(90), 1.0f, 5, 10).invertPerspective().orthoCrop(lightView, crop).mulOrthoAffine(lightView, fin);
-        Vector3d p = Vector3d();
+        vector3 p = vector3();
         fin.transformProject(p.set(0, 0, -5));
         assertEquals(+0.0f, p.x, 1E-6f);
         assertEquals(-1.0f, p.y, 1E-6f);
@@ -569,16 +569,16 @@ unittest {
 
     // testRotateTowardsXY
     {
-        Vector3d v = Vector3d(1, 1, 0).normalize();
+        vector3 v = vector3(1, 1, 0).normalize();
         Matrix4d testUnit = Matrix4d();
-        Matrix4d m1 = Matrix4d().rotateZ(v.angle(Vector3d(1, 0, 0)), testUnit);
+        Matrix4d m1 = Matrix4d().rotateZ(v.angle(vector3(1, 0, 0)), testUnit);
         Matrix4d testUnit2 = Matrix4d();
         Matrix4d m2 = Matrix4d().rotateTowardsXY(v.x, v.y, testUnit2);
         assertMatrix4dEquals(m1, m2, 1E-13);
-        Vector3d testUnit3 = Vector3d(0, 1, 0);
-        Vector3d t = m1.transformDirection(testUnit3);
-        Vector3d testUnit4 = Vector3d(-1, 1, 0).normalize();
-        assertVector3dEquals(testUnit4, t, 1E-6f);
+        vector3 testUnit3 = vector3(0, 1, 0);
+        vector3 t = m1.transformDirection(testUnit3);
+        vector3 testUnit4 = vector3(-1, 1, 0).normalize();
+        assertvector3Equals(testUnit4, t, 1E-6f);
     }
 
     // testTestPoint

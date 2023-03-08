@@ -42,7 +42,7 @@ void assertEquals(AxisAngle4d a, AxisAngle4d b) {
     assert(a.equals(b));
 }*/
 
-void assertEquals(Vector3d a, Vector3d b) {
+void assertEquals(vector3 a, vector3 b) {
     if (verbose) {
         writeln("X1 = ", a.x, " | X2 = ", b.x);
         writeln("Y1 = ", a.y, " | Y2 = ", b.y);
@@ -329,7 +329,7 @@ public static void assertVector4dEquals(Vector4d expected, Vector4d actual, doub
     * @param actual
     * @param delta
     */
-public static void assertVector3dEquals(Vector3d expected, Vector3d actual, double delta) {
+public static void assertvector3Equals(vector3 expected, vector3 actual, double delta) {
     assertEquals(expected.x, actual.x, delta);
     assertEquals(expected.y, actual.y, delta);
     assertEquals(expected.z, actual.z, delta);
