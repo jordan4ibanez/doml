@@ -1,4 +1,4 @@
-module vector_3d;
+module vector3;
 
 import Math = math;
 
