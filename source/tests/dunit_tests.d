@@ -197,37 +197,6 @@ public static int doubleCompare(double a, double b, double precision) {
         return -1;
 }
 
-/**
-    * Return whether two double-precision doubleing point numbers are equal. They are considered equal when their difference is 
-    * less than or equal to the precision.
-    * @param a the first number
-    * @param b the second number
-    * @param precision if abs(a - b) <= precision, a and b are considered equal
-    * @return whether a and b are equal
-    * @see #doubleCompare(double, double, double)
-    */
-public static bool doubleEqual(double a, double b, double precision) {
-    return Math.abs(a - b) <= precision;
-}
-
-/**
-    * Compare two double-precision doubleing point numbers. They are considered equal when their difference is 
-    * less than or equal to the precision.
-    * @param a the first number
-    * @param b the second number
-    * @param precision if abs(a - b) <= precision, a and b are considered equal
-    * @return 0 if a == b, 1 if a > b, -1 if a < b
-    * @see #doubleEqual(double, double, double)
-    */
-public static int doubleCompare(double a, double b, double precision) {
-    if (Math.abs(a - b) <= precision)
-        return 0;
-    else if (a > b)
-        return 1;
-    else
-        return -1;
-}
-
 
 /**
     * Return whether two quaternions are equal. They are considered equal when their difference is 
