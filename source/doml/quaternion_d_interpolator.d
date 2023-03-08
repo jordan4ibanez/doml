@@ -1,3 +1,10 @@
+/**
+ * Computes the weighted average of multiple rotations represented as {@link Quaterniond} instances.
+ * <p>
+ * Instances of this class are <i>not</i> thread-safe.
+ * 
+ * @author Kai Burjack
+ */
 module doml.quaternion_d_interpolator;
 
 import Math = doml.math;

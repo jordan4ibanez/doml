@@ -1,3 +1,8 @@
+/**
+ * Rounding modes.
+ * 
+ * @author Kai Burjack
+ */
 module doml.rounding_mode;
 
 /*
@@ -30,7 +35,6 @@ module doml.rounding_mode;
  * 
  * @author Kai Burjack
  */
- 
 enum RoundingMode {
     /**
      * Discards the fractional part.

@@ -1,3 +1,8 @@
+/**
+ * Contains various interpolation functions.
+ * 
+ * @author Kai Burjack
+ */
 module doml.interpolation_d;
 
 import doml.vector_2d;

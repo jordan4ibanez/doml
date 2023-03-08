@@ -1,3 +1,9 @@
+/**
+ * Useful geometry methods.
+ * 
+ * @author Kai Burjack
+ * @author Richard Greenlees
+ */
 module doml.geometry_utils;
 
 import Math = doml.math;

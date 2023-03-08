@@ -1,3 +1,13 @@
+/**
+ * Provides methods to compute rays through an arbitrary perspective transformation defined by a {@link Matrix4d}.
+ * <p>
+ * This can be used to compute the eye-rays in simple software-based raycasting/raytracing.
+ * <p>
+ * To obtain the origin of the rays call {@link #origin(Vector3d)}.
+ * Then to compute the directions of subsequent rays use {@link #dir(double, double, Vector3d)}.
+ * 
+ * @author Kai Burjack
+ */
 module doml.frustum_ray_builder;
 
 import Math = doml.math;

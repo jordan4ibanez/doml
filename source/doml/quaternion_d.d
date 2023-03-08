@@ -1,3 +1,9 @@
+/**
+ * Quaternion of 4 double-precision doubles which can represent rotation and uniform scaling.
+ *
+ * @author Richard Greenlees
+ * @author Kai Burjack
+ */
 module doml.quaternion_d;
 
 import Math = doml.math;

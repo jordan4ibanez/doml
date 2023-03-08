@@ -1,3 +1,14 @@
+/**
+ * Contains the definition of an affine 4x3 matrix (4 columns, 3 rows) of doubles, and associated functions to transform
+ * it. The matrix is column-major to match OpenGL's interpretation, and it looks like this:
+ * <p>
+ *      m00  m10  m20  m30<br>
+ *      m01  m11  m21  m31<br>
+ *      m02  m12  m22  m32<br>
+ * 
+ * @author Richard Greenlees
+ * @author Kai Burjack
+ */
 module doml.matrix_4x3d;
 
 import Math = doml.math;

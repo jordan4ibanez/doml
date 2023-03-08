@@ -1,3 +1,14 @@
+/**
+ * Contains the definition of a 3x3 matrix of doubles, and associated functions to transform
+ * it. The matrix is column-major to match OpenGL's interpretation, and it looks like this:
+ * <p>
+ *      m00  m10  m20<br>
+ *      m01  m11  m21<br>
+ *      m02  m12  m22<br>
+ * 
+ * @author Richard Greenlees
+ * @author Kai Burjack
+ */
 module doml.matrix_3d;
 
 import Math = doml.math;

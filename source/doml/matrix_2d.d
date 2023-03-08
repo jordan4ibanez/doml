@@ -1,3 +1,12 @@
+/**
+ * Contains the definition of a 2x2 matrix of doubles, and associated functions to transform
+ * it. The matrix is column-major to match OpenGL's interpretation, and it looks like this:
+ * <p>
+ *      m00  m10<br>
+ *      m01  m11<br>
+ *
+ * @author Joseph Burton
+ */
 module doml.matrix_2d;
 
 import Math = doml.math;

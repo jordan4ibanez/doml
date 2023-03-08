@@ -1,3 +1,8 @@
+/**
+* Contains intersection and distance tests for some 2D and 3D geometric primitives.
+* 
+* @author Kai Burjack
+*/
 module doml.intersection_d;
 
 import std.math: isNaN;

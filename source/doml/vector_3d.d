@@ -1,3 +1,11 @@
+/**
+ * Contains the definition of a Vector comprising 3 doubles and associated
+ * transformations.
+ *
+ * @author Richard Greenlees
+ * @author Kai Burjack
+ * @author F. Neurath
+ */
 module doml.vector_3d;
 
 import Math = doml.math;

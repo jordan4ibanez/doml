@@ -1,3 +1,19 @@
+/**
+ * Contains fast approximations of some {@link java.lang.Math} operations.
+ * <p>
+ * By default, {@link java.lang.Math} methods will be used by all other DOML classes. In order to use the approximations in this class, start the JVM with the parameter <code>-DDOML.fastmath</code>.
+ * <p>
+ * There are two algorithms for approximating sin/cos:
+ * <ol>
+ * <li>arithmetic <a href="http://www.java-gaming.org/topics/DOML-1-8-0-release/37491/msg/361815/view.html#msg361815">polynomial approximation</a> contributed by roquendm 
+ * <li>theagentd's <a href="http://www.java-gaming.org/topics/extremely-fast-sine-cosine/36469/msg/346213/view.html#msg346213">linear interpolation</a> variant of Riven's algorithm from
+ * <a href="http://www.java-gaming.org/topics/extremely-fast-sine-cosine/36469/view.html">http://www.java-gaming.org/</a>
+ * </ol>
+ * By default, the first algorithm is being used. In order to use the second one, start the JVM with <code>-DDOML.sinLookup</code>. The lookup table bit length of the second algorithm can also be adjusted
+ * for improved accuracy via <code>-DDOML.sinLookup.bits=&lt;n&gt;</code>, where &lt;n&gt; is the number of bits of the lookup table.
+ * 
+ * @author Kai Burjack
+ */
 module doml.math;
 
 import doml.options;
@@ -62,23 +78,6 @@ import doml.rounding_mode;
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- */
-
-/**
- * Contains fast approximations of some {@link java.lang.Math} operations.
- * <p>
- * By default, {@link java.lang.Math} methods will be used by all other DOML classes. In order to use the approximations in this class, start the JVM with the parameter <code>-DDOML.fastmath</code>.
- * <p>
- * There are two algorithms for approximating sin/cos:
- * <ol>
- * <li>arithmetic <a href="http://www.java-gaming.org/topics/DOML-1-8-0-release/37491/msg/361815/view.html#msg361815">polynomial approximation</a> contributed by roquendm 
- * <li>theagentd's <a href="http://www.java-gaming.org/topics/extremely-fast-sine-cosine/36469/msg/346213/view.html#msg346213">linear interpolation</a> variant of Riven's algorithm from
- * <a href="http://www.java-gaming.org/topics/extremely-fast-sine-cosine/36469/view.html">http://www.java-gaming.org/</a>
- * </ol>
- * By default, the first algorithm is being used. In order to use the second one, start the JVM with <code>-DDOML.sinLookup</code>. The lookup table bit length of the second algorithm can also be adjusted
- * for improved accuracy via <code>-DDOML.sinLookup.bits=&lt;n&gt;</code>, where &lt;n&gt; is the number of bits of the lookup table.
- * 
- * @author Kai Burjack
  */
 
 /*

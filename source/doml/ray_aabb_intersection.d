@@ -1,3 +1,14 @@
+/**
+ * This is an implementation of the <a
+ * href="http://www.cg.cs.tu-bs.de/media/publications/fast-rayaxis-aligned-bounding-box-overlap-tests-using-ray-slopes.pdf">Fast Ray/Axis-Aligned Bounding Box
+ * Overlap Tests using Ray Slopes</a> paper.
+ * <p>
+ * It is an efficient implementation when testing many axis-aligned boxes against the same ray.
+ * <p>
+ * This class is thread-safe and can be used in a multithreaded environment when testing many axis-aligned boxes against the same ray concurrently.
+ * 
+ * @author Kai Burjack
+ */
 module doml.ray_aabb_intersection;
 
 import Math = doml.math;

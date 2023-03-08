@@ -1,3 +1,11 @@
+/**
+ * Contains the definition of a Vector comprising 3 ints and associated
+ * transformations.
+ *
+ * @author Richard Greenlees
+ * @author Kai Burjack
+ * @author Hans Uhlig
+ */
 module doml.vector_3i;
 
 import Math = doml.math;

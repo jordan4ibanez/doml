@@ -1,3 +1,10 @@
+/**
+ * Represents a 2D vector with integral-precision.
+ *
+ * @author RGreenlees
+ * @author Kai Burjack
+ * @author Hans Uhlig
+ */
 module doml.vector_2i;
 
 import Math = doml.math;
@@ -31,7 +38,7 @@ import doml.vector_2d;
  */
 
 /**
- * Represents a 2D vector with single-precision.
+ * Represents a 2D vector with integer-precision.
  *
  * @author RGreenlees
  * @author Kai Burjack

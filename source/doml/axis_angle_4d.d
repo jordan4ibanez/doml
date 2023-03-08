@@ -1,3 +1,11 @@
+/**
+ * Represents a 3D rotation of a given radians about an axis represented as an
+ * unit 3D vector.
+ * <p>
+ * This class uses double-precision components.
+ * 
+ * @author Kai Burjack
+ */
 module doml.axis_angle_4d;
 
 import Math = doml.math;

@@ -1,3 +1,8 @@
+/**
+* Utility class for reading system properties.
+* 
+* @author Kai Burjack
+*/
 module doml.options;
 
 /*
@@ -34,7 +39,6 @@ module doml.options;
 * 
 * @author Kai Burjack
 */
-
 public static struct Options {
     /**
     * Whether certain debugging checks should be made, such as that only direct NIO Buffers are used when Unsafe is active,

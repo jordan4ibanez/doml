@@ -1,3 +1,10 @@
+/**
+ * Represents a 2D vector with double-precision.
+ *
+ * @author RGreenlees
+ * @author Kai Burjack
+ * @author F. Neurath
+ */
 module doml.vector_2d;
 
 import Math = doml.math;

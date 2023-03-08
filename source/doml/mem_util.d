@@ -1,3 +1,11 @@
+/**
+* Helper class to do efficient memory operations on all DOML objects, NIO buffers and primitive arrays.
+* This class is used internally throughout DOML, is undocumented and is subject to change.
+* Use with extreme caution!
+* 
+* @author The LWJGL authors
+* @author Kai Burjack
+*/
 module doml.mem_util;
 
 import doml.vector_2d;
@@ -50,9 +58,6 @@ import doml.matrix_4x3d;
 * @author The LWJGL authors
 * @author Kai Burjack
 */
-
-
-
 public double get(Matrix4d m, int column, int row) {
     switch (column) {
     case 0:

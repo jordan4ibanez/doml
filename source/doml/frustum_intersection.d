@@ -1,3 +1,10 @@
+/**
+ * Efficiently performs frustum intersection tests by caching the frustum planes of an arbitrary transformation {@link Matrix4d matrix}.
+ * <p>
+ * This class is preferred over the frustum intersection methods in {@link Matrix4d} when many objects need to be culled by the same static frustum.
+ * 
+ * @author Kai Burjack
+ */
 module doml.frustum_intersection;
 
 import Math = doml.math;
