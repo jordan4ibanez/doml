@@ -204,19 +204,6 @@ struct Vector4d {
         this.w = xyzw[3];
     }
 
-    /**
-     * Create a new {@link Vector4d} and initialize its four components from the first
-     * four elements of the given array.
-     * 
-     * @param xyzw
-     *          the array containing at least four elements
-     */
-    this(double[] xyzw) {
-        this.x = xyzw[0];
-        this.y = xyzw[1];
-        this.z = xyzw[2];
-        this.w = xyzw[3];
-    }
 
     /**
      * Set this {@link Vector4d} to the values of the given <code>v</code>.
@@ -394,20 +381,6 @@ struct Vector4d {
         return this;
     }
 
-    /**
-     * Set the four components of this vector to the first four elements of the given array.
-     * 
-     * @param xyzw
-     *          the array containing at least four elements
-     * @return this
-     */
-    ref public Vector4d set(double[] xyzw) return {
-        this.x = xyzw[0];
-        this.y = xyzw[1];
-        this.z = xyzw[2];
-        this.w = xyzw[3];
-        return this;
-    }
 
     /**
      * Set the value of the specified component of this vector.
