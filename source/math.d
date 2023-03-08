@@ -118,7 +118,7 @@ math_signum(T)(in T x) {
 double longbits(long a) {
     return *cast(double*) &a;
 }
-int floatToRawIntBits(float a) {
+int doubleToRawIntBits(double a) {
     return *cast(int*) &a;
 }
 long doubleToLongBits(double a) {
