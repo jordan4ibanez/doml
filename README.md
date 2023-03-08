@@ -22,3 +22,6 @@ There are a few missing elements, they will (hopefully) be translated in later o
 You should be able to follow a LWJGL tutorial (mostly, remember it's structs now) and get a functioning OpenGL/Vulkan/Metal/DirectX/Software Rendering program.
 
 Also hi.
+
+Todo:
+- Make EVERYTHING gettable as a raw array!
