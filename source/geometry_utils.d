@@ -55,11 +55,11 @@ import vector_3d;
     * @param dest2
     *            will hold the second perpendicular vector
     */
-public static void perpendicular(float x, float y, float z, ref Vector3d dest1, ref Vector3d dest2) {
-    float magX = z * z + y * y;
-    float magY = z * z + x * x;
-    float magZ = y * y + x * x;
-    float mag;
+public static void perpendicular(double x, double y, double z, ref Vector3d dest1, ref Vector3d dest2) {
+    double magX = z * z + y * y;
+    double magY = z * z + x * x;
+    double magZ = y * y + x * x;
+    double mag;
     if (magX > magY && magX > magZ) {
         dest1.x = 0;
         dest1.y = z;
@@ -76,7 +76,7 @@ public static void perpendicular(float x, float y, float z, ref Vector3d dest1, 
         dest1.z = 0;
         mag = magZ;
     }
-    float len = Math.invsqrt(mag);
+    double len = Math.invsqrt(mag);
     dest1.x *= len;
     dest1.y *= len;
     dest1.z *= len;
@@ -144,7 +144,7 @@ public static void normal(Vector3d v0, Vector3d v1, Vector3d v2, ref Vector3d de
     * @param dest
     *            will hold the result
     */
-public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y, float v1Z, float v2X, float v2Y, float v2Z, ref Vector3d dest) {
+public static void normal(double v0X, double v0Y, double v0Z, double v1X, double v1Y, double v1Z, double v2X, double v2Y, double v2Z, ref Vector3d dest) {
     dest.x = ((v1Y - v0Y) * (v2Z - v0Z)) - ((v1Z - v0Z) * (v2Y - v0Y));
     dest.y = ((v1Z - v0Z) * (v2X - v0X)) - ((v1X - v0X) * (v2Z - v0Z));
     dest.z = ((v1X - v0X) * (v2Y - v0Y)) - ((v1Y - v0Y) * (v2X - v0X));
@@ -170,10 +170,10 @@ public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y,
     *            the tangent will be stored here
     */
 public static void tangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, ref Vector2d uv2, ref Vector3d v3, ref Vector2d uv3, ref Vector3d dest) {
-    float DeltaV1 = uv2.y - uv1.y;
-    float DeltaV2 = uv3.y - uv1.y;
+    double DeltaV1 = uv2.y - uv1.y;
+    double DeltaV2 = uv3.y - uv1.y;
 
-    float f = 1.0f / ((uv2.x - uv1.x) * DeltaV2 - (uv3.x - uv1.x) * DeltaV1);
+    double f = 1.0f / ((uv2.x - uv1.x) * DeltaV2 - (uv3.x - uv1.x) * DeltaV1);
 
     dest.x = f * (DeltaV2 * (v2.x - v1.x) - DeltaV1 * (v3.x - v1.x));
     dest.y = f * (DeltaV2 * (v2.y - v1.y) - DeltaV1 * (v3.y - v1.y));
@@ -200,10 +200,10 @@ public static void tangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, r
     *            the binormal will be stored here
     */
 public static void bitangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, ref Vector2d uv2, ref Vector3d v3, ref Vector2d uv3, ref Vector3d dest) {
-    float DeltaU1 = uv2.x - uv1.x;
-    float DeltaU2 = uv3.x - uv1.x;
+    double DeltaU1 = uv2.x - uv1.x;
+    double DeltaU2 = uv3.x - uv1.x;
 
-    float f = 1.0f / (DeltaU1 * (uv3.y - uv1.y) - DeltaU2 * (uv2.y - uv1.y));
+    double f = 1.0f / (DeltaU1 * (uv3.y - uv1.y) - DeltaU2 * (uv2.y - uv1.y));
 
     dest.x = f * (-DeltaU2 * (v2.x - v1.x) + DeltaU1 * (v3.x - v1.x));
     dest.y = f * (-DeltaU2 * (v2.y - v1.y) + DeltaU1 * (v3.y - v1.y));
@@ -232,12 +232,12 @@ public static void bitangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2,
     *            the bitangent will be stored here
     */
 public static void tangentBitangent(ref Vector3d v1, ref Vector2d uv1, ref Vector3d v2, ref Vector2d uv2, ref Vector3d v3, ref Vector2d uv3, ref Vector3d destTangent, ref Vector3d destBitangent) {
-    float DeltaV1 = uv2.y - uv1.y;
-    float DeltaV2 = uv3.y - uv1.y;
-    float DeltaU1 = uv2.x - uv1.x;
-    float DeltaU2 = uv3.x - uv1.x;
+    double DeltaV1 = uv2.y - uv1.y;
+    double DeltaV2 = uv3.y - uv1.y;
+    double DeltaU1 = uv2.x - uv1.x;
+    double DeltaU2 = uv3.x - uv1.x;
 
-    float f = 1.0f / (DeltaU1 * DeltaV2 - DeltaU2 * DeltaV1);
+    double f = 1.0f / (DeltaU1 * DeltaV2 - DeltaU2 * DeltaV1);
 
     destTangent.x = f * (DeltaV2 * (v2.x - v1.x) - DeltaV1 * (v3.x - v1.x));
     destTangent.y = f * (DeltaV2 * (v2.y - v1.y) - DeltaV1 * (v3.y - v1.y));
